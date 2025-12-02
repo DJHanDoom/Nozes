@@ -1,0 +1,227 @@
+{
+  "project": {
+    "name": "Xylopia do RJ",
+    "description": "Chave interativa para identificação de espécies do gênero Xylopia (Annonaceae) ocorrentes no estado do Rio de Janeiro, com foco em caracteres vegetativos.",
+    "authors": "Antigravity AI (Simulated Biologist)",
+    "version": "1.0",
+    "geographic_scope": "Rio de Janeiro, Brasil",
+    "taxonomic_scope": "Xylopia (Annonaceae)",
+    "language": "pt-BR",
+    "complexity": "Expert"
+  },
+  "features": [
+    {
+      "id": "f1",
+      "name": "Indumento dos ramos jovens",
+      "description": "Presença e tipo de tricomas nos ramos terminais (jovens).",
+      "type": "categorical",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Xylopia_aromatica_branch.jpg/640px-Xylopia_aromatica_branch.jpg",
+      "states": [
+        {
+          "id": "s1",
+          "name": "Glabros a glabrescentes",
+          "description": "Ramos sem pêlos ou com pêlos muito esparsos e caducos."
+        },
+        {
+          "id": "s2",
+          "name": "Pubescentes a tomentosos (ferrugíneos)",
+          "description": "Ramos cobertos por pêlos densos, geralmente de coloração ferrugínea ou acastanhada."
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "name": "Pilosidade da face abaxial da lâmina foliar",
+      "description": "Tipo de indumento presente na face inferior (abaxial) da folha.",
+      "type": "categorical",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Xylopia_sericea_leaves.jpg/640px-Xylopia_sericea_leaves.jpg",
+      "states": [
+        {
+          "id": "s3",
+          "name": "Glabra",
+          "description": "Face abaxial sem pêlos, superfície lisa."
+        },
+        {
+          "id": "s4",
+          "name": "Serícea (pêlos adpressos)",
+          "description": "Face abaxial coberta por pêlos deitados (adpressos), conferindo brilho sedoso (prateado ou dourado)."
+        },
+        {
+          "id": "s5",
+          "name": "Pubescente a velutina (pêlos eretos)",
+          "description": "Face abaxial com pêlos eretos, macios ao toque, não brilhantes."
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "name": "Tamanho da lâmina foliar (comprimento)",
+      "description": "Comprimento médio da lâmina foliar em folhas maduras.",
+      "type": "categorical",
+      "image": "",
+      "states": [
+        {
+          "id": "s6",
+          "name": "Pequenas (< 6 cm)",
+          "description": "Folhas predominantemente menores que 6 cm de comprimento."
+        },
+        {
+          "id": "s7",
+          "name": "Médias a Grandes (> 6 cm)",
+          "description": "Folhas predominantemente maiores que 6 cm de comprimento."
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "name": "Nervação secundária na face adaxial",
+      "description": "Visibilidade e relevo das nervuras secundárias na face superior (adaxial) da folha.",
+      "type": "categorical",
+      "image": "",
+      "states": [
+        {
+          "id": "s8",
+          "name": "Imersa / Inconspícua",
+          "description": "Nervuras secundárias não visíveis ou impressas sem relevo evidente."
+        },
+        {
+          "id": "s9",
+          "name": "Proeminente / Conspícua",
+          "description": "Nervuras secundárias bem visíveis e elevadas ou sulcadas distintamente."
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "name": "Forma do ápice foliar",
+      "description": "Morfologia da ponta (ápice) da lâmina foliar.",
+      "type": "categorical",
+      "image": "",
+      "states": [
+        {
+          "id": "s10",
+          "name": "Acuminado longo",
+          "description": "Ápice afilando-se gradualmente em uma ponta longa."
+        },
+        {
+          "id": "s11",
+          "name": "Agudo, obtuso ou emarginado",
+          "description": "Ápice terminando em ângulo agudo curto, arredondado ou com pequena reentrância."
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "e1",
+      "name": "Xylopia brasiliensis",
+      "author": "Spreng.",
+      "common_names": ["Pimenta-de-macaco", "Pindaíba"],
+      "description": "Árvore de grande porte. Folhas glabras, estreitas, com ápice longo-acuminado. Flores com pétalas externas alvo-amareladas. Frutos carpídios isolados.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Xylopia_brasiliensis.jpg/640px-Xylopia_brasiliensis.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11246",
+        "https://pt.wikipedia.org/wiki/Xylopia_brasiliensis"
+      ],
+      "states": ["s1", "s3", "s6", "s8", "s10"]
+    },
+    {
+      "id": "e2",
+      "name": "Xylopia sericea",
+      "author": "A.St.-Hil.",
+      "common_names": ["Pindaíba-vermelha", "Embira-vermelha"],
+      "description": "Árvore comum em matas secundárias. Caracteriza-se pela face abaxial das folhas com indumento seríceo dourado ou prateado e ramos ferrugíneos.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Xylopia_sericea_leaves.jpg/640px-Xylopia_sericea_leaves.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11268",
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:76060-1"
+      ],
+      "states": ["s2", "s4", "s7", "s8", "s10"]
+    },
+    {
+      "id": "e3",
+      "name": "Xylopia langsdorffiana",
+      "author": "A.St.-Hil. & Tul.",
+      "common_names": ["Pindaíba", "Pindaíba-branca"],
+      "description": "Árvore. Folhas geralmente mais largas, com pubescência esparsa na face abaxial. Flores maiores.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Xylopia_langsdorffiana.jpg/640px-Xylopia_langsdorffiana.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11255"
+      ],
+      "states": ["s2", "s5", "s7", "s9", "s11"]
+    },
+    {
+      "id": "e4",
+      "name": "Xylopia ochrantha",
+      "author": "Mart.",
+      "common_names": ["Pindaíba"],
+      "description": "Espécie com folhas maiores e coriáceas, indumento seríceo na face abaxial. Flores com pétalas densamente tomentosas.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Xylopia_ochrantha.jpg/640px-Xylopia_ochrantha.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11263"
+      ],
+      "states": ["s2", "s4", "s7", "s9", "s10"]
+    },
+    {
+      "id": "e5",
+      "name": "Xylopia frutescens",
+      "author": "Aubl.",
+      "common_names": ["Embira", "Pindaíba"],
+      "description": "Frequentemente arbustiva ou arvoreta. Folhas pequenas, estreitas, seríceas abaxialmente. Ramos jovens ferrugíneos.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Xylopia_frutescens.jpg/640px-Xylopia_frutescens.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11252"
+      ],
+      "states": ["s2", "s4", "s6", "s8", "s10"]
+    },
+    {
+      "id": "e6",
+      "name": "Xylopia emarginata",
+      "author": "Mart.",
+      "common_names": ["Pindaíba-do-brejo"],
+      "description": "Típica de áreas úmidas ou brejosas. Folhas glabras, coriáceas, com ápice frequentemente emarginado ou obtuso.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Xylopia_emarginata.jpg/640px-Xylopia_emarginata.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11251"
+      ],
+      "states": ["s1", "s3", "s6", "s8", "s11"]
+    },
+    {
+      "id": "e7",
+      "name": "Xylopia aromatica",
+      "author": "(Lam.) Mart.",
+      "common_names": ["Pimenta-de-macaco", "Pindaíba-do-campo"],
+      "description": "Espécie típica de Cerrado, mas ocorrente em áreas abertas do RJ. Folhas grandes, pubescentes abaxialmente. Frutos com odor picante.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Xylopia_aromatica_branch.jpg/640px-Xylopia_aromatica_branch.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11243",
+        "https://pt.wikipedia.org/wiki/Xylopia_aromatica"
+      ],
+      "states": ["s2", "s5", "s7", "s9", "s11"]
+    },
+    {
+      "id": "e8",
+      "name": "Xylopia laevigata",
+      "author": "(Mart.) R.E.Fr.",
+      "common_names": ["Pindaíba-lisa"],
+      "description": "Folhas totalmente glabras e brilhantes, cartáceas a subcoriáceas. Nervuras secundárias e terciárias proeminentes em ambas as faces.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Xylopia_laevigata.jpg/640px-Xylopia_laevigata.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11254"
+      ],
+      "states": ["s1", "s3", "s7", "s9", "s10"]
+    },
+    {
+      "id": "e9",
+      "name": "Xylopia ligustrifolia",
+      "author": "Dunal",
+      "common_names": ["Pindaíba-folha-de-alfeneiro"],
+      "description": "Folhas pequenas, estreitas, glabras. Ocorre preferencialmente em matas de restinga e encostas litorâneas.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Xylopia_ligustrifolia.jpg/640px-Xylopia_ligustrifolia.jpg",
+      "links": [
+        "http://reflora.jbrj.gov.br/reflora/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB11257"
+      ],
+      "states": ["s1", "s3", "s6", "s8", "s10"]
+    }
+  ]
+}
