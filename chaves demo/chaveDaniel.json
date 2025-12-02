@@ -1,0 +1,377 @@
+{
+  "project_name": "O gênero Inga Mill. (Leguminosae – Mimosoideae) no estado do Paraná, Brasil",
+  "description": "Chave de identificação matricial para as espécies do gênero Inga ocorrentes no estado do Paraná, baseada no tratamento taxonômico de Possette & Rodrigues (2010).",
+  "entities": [
+    {
+      "id": "inga_barbata",
+      "name": "Inga barbata Benth.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_edulis",
+      "name": "Inga edulis Mart.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_edwallii",
+      "name": "Inga edwallii (Harms) T.D. Penn.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_laurina",
+      "name": "Inga laurina (Sw.) Willd.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_lentiscifolia",
+      "name": "Inga lentiscifolia Benth.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_marginata",
+      "name": "Inga marginata Willd.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_sellowiana",
+      "name": "Inga sellowiana Benth.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_sessilis",
+      "name": "Inga sessilis (Vell.) Mart.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_striata",
+      "name": "Inga striata Benth.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_subnuda_luschnathiana",
+      "name": "Inga subnuda subsp. luschnathiana (Benth.) T.D. Penn.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_vera_affinis",
+      "name": "Inga vera subsp. affinis (DC.) T.D. Penn.",
+      "imageUrl": ""
+    },
+    {
+      "id": "inga_virescens",
+      "name": "Inga virescens Benth.",
+      "imageUrl": ""
+    }
+  ],
+  "features": [
+    {
+      "id": "indumento_ramos",
+      "name": "Indumento dos Ramos",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Glabros ou glabrescentes",
+        "Vilosos, velutinos, hirsutos ou tomentosos"
+      ]
+    },
+    {
+      "id": "forma_ala_raque",
+      "name": "Forma da Ala Terminal da Raque Foliar",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Cuneada",
+        "Obovada ou elíptica (não cuneada)"
+      ]
+    },
+    {
+      "id": "tipo_inflorescencia",
+      "name": "Tipo de Inflorescência",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Espiciforme (espiga)",
+        "Capituliforme",
+        "Umbeliforme",
+        "Racemosa"
+      ]
+    },
+    {
+      "id": "comprimento_calice",
+      "name": "Comprimento do Cálice",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "1,2 a 2,2 mm",
+        "Maior que 3 mm"
+      ]
+    },
+    {
+      "id": "tipo_nectario",
+      "name": "Tipo de Nectário Foliar",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Séssil",
+        "Estipitado ou curto-estipitado"
+      ]
+    },
+    {
+      "id": "forma_nectario",
+      "name": "Forma do Nectário Foliar",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Circular",
+        "Transversalmente comprimido",
+        "Cilíndrico"
+      ]
+    },
+    {
+      "id": "estipulas_persistencia",
+      "name": "Persistência das Estípulas",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Persistentes",
+        "Caducas"
+      ]
+    },
+    {
+      "id": "estipulas_forma",
+      "name": "Forma das Estípulas",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Lineares",
+        "Lanceoladas, oblongas ou ovaladas"
+      ]
+    },
+    {
+      "id": "lenticelas_ramos",
+      "name": "Tipo de Lenticelas nos Ramos",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Verrucosas",
+        "Não verrucosas (lisas/pouco proeminentes)"
+      ]
+    },
+    {
+      "id": "insercao_fruto",
+      "name": "Inserção do Fruto no Pedúnculo",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Central",
+        "Excêntrica"
+      ]
+    },
+    {
+      "id": "numero_foliolos",
+      "name": "Número de Pares de Folíolos",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "1 a 2 pares",
+        "2 a 3 pares",
+        "3 a 6 pares",
+        "5 a 8 pares"
+      ]
+    },
+    {
+      "id": "numero_carpelos",
+      "name": "Número de Carpelos (Gineceu)",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "1 carpelo",
+        "2 a 6 carpelos"
+      ]
+    },
+    {
+      "id": "comprimento_estipite_nectario",
+      "name": "Comprimento do Estípite do Nectário",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "3,5 a 7 mm (longo)",
+        "0,6 a 1,5 mm (curto)",
+        "2 a 3,5 mm (médio)"
+      ]
+    },
+    {
+      "id": "tipo_peciolo",
+      "name": "Tipo de Pecíolo",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Cilíndrico (ou alas vestigiais)",
+        "Alado"
+      ]
+    },
+    {
+      "id": "consistencia_forma_fruto",
+      "name": "Consistência e Forma do Fruto",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Coriáceo, linear ou torcido",
+        "Lenhoso, fortemente curvado"
+      ]
+    },
+    {
+      "id": "margem_foliolo",
+      "name": "Margem dos Folíolos",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Plana",
+        "Revoluta"
+      ]
+    },
+    {
+      "id": "estrias_estipula_calice",
+      "name": "Estrias Longitudinais (Estípulas/Cálice)",
+      "type": "categorical",
+      "imageUrl": "",
+      "values": [
+        "Presentes (estípulas e cálice estriados)",
+        "Ausentes"
+      ]
+    }
+  ],
+  "matrix": {
+    "inga_laurina": {
+      "indumento_ramos": "Glabros ou glabrescentes",
+      "forma_ala_raque": "Cuneada",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "1,2 a 2,2 mm",
+      "estipulas_persistencia": "Persistentes",
+      "estipulas_forma": "Lineares",
+      "insercao_fruto": "Excêntrica",
+      "numero_foliolos": "1 a 2 pares",
+      "numero_carpelos": "1 carpelo",
+      "tipo_nectario": "Séssil"
+    },
+    "inga_marginata": {
+      "indumento_ramos": "Glabros ou glabrescentes",
+      "forma_ala_raque": "Cuneada",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "1,2 a 2,2 mm",
+      "estipulas_persistencia": "Caducas",
+      "estipulas_forma": "Lanceoladas, oblongas ou ovaladas",
+      "insercao_fruto": "Central",
+      "numero_foliolos": "2 a 3 pares",
+      "numero_carpelos": "1 carpelo",
+      "tipo_nectario": "Séssil"
+    },
+    "inga_lentiscifolia": {
+      "indumento_ramos": "Glabros ou glabrescentes",
+      "forma_ala_raque": "Cuneada",
+      "tipo_inflorescencia": "Capituliforme",
+      "comprimento_calice": "1,2 a 2,2 mm",
+      "lenticelas_ramos": "Verrucosas",
+      "insercao_fruto": "Excêntrica",
+      "numero_foliolos": "2 a 3 pares",
+      "tipo_nectario": "Séssil"
+    },
+    "inga_sellowiana": {
+      "indumento_ramos": "Glabros ou glabrescentes",
+      "forma_ala_raque": "Cuneada",
+      "tipo_inflorescencia": "Umbeliforme",
+      "comprimento_calice": "1,2 a 2,2 mm",
+      "lenticelas_ramos": "Não verrucosas (lisas/pouco proeminentes)",
+      "insercao_fruto": "Central",
+      "numero_foliolos": "2 a 3 pares",
+      "tipo_nectario": "Séssil"
+    },
+    "inga_barbata": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Estipitado ou curto-estipitado",
+      "comprimento_estipite_nectario": "3,5 a 7 mm (longo)",
+      "numero_foliolos": "3 a 6 pares",
+      "numero_carpelos": "1 carpelo",
+      "forma_nectario": "Cilíndrico"
+    },
+    "inga_virescens": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Estipitado ou curto-estipitado",
+      "comprimento_estipite_nectario": "0,6 a 1,5 mm (curto)",
+      "numero_foliolos": "3 a 6 pares",
+      "numero_carpelos": "1 carpelo",
+      "forma_nectario": "Circular"
+    },
+    "inga_edwallii": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Racemosa",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Estipitado ou curto-estipitado",
+      "comprimento_estipite_nectario": "2 a 3,5 mm (médio)",
+      "numero_foliolos": "1 a 2 pares",
+      "numero_carpelos": "2 a 6 carpelos",
+      "forma_nectario": "Cilíndrico"
+    },
+    "inga_edulis": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Séssil",
+      "forma_nectario": "Transversalmente comprimido",
+      "tipo_peciolo": "Cilíndrico (ou alas vestigiais)",
+      "consistencia_forma_fruto": "Coriáceo, linear ou torcido",
+      "numero_foliolos": "3 a 6 pares"
+    },
+    "inga_sessilis": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Racemosa",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Séssil",
+      "forma_nectario": "Transversalmente comprimido",
+      "tipo_peciolo": "Alado",
+      "consistencia_forma_fruto": "Lenhoso, fortemente curvado",
+      "numero_foliolos": "5 a 8 pares"
+    },
+    "inga_subnuda_luschnathiana": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Séssil",
+      "forma_nectario": "Circular",
+      "margem_foliolo": "Revoluta",
+      "numero_foliolos": "3 a 6 pares"
+    },
+    "inga_striata": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Séssil",
+      "forma_nectario": "Circular",
+      "margem_foliolo": "Plana",
+      "estrias_estipula_calice": "Presentes (estípulas e cálice estriados)",
+      "numero_foliolos": "3 a 6 pares"
+    },
+    "inga_vera_affinis": {
+      "indumento_ramos": "Vilosos, velutinos, hirsutos ou tomentosos",
+      "forma_ala_raque": "Obovada ou elíptica (não cuneada)",
+      "tipo_inflorescencia": "Espiciforme (espiga)",
+      "comprimento_calice": "Maior que 3 mm",
+      "tipo_nectario": "Séssil",
+      "forma_nectario": "Circular",
+      "margem_foliolo": "Plana",
+      "estrias_estipula_calice": "Ausentes",
+      "numero_foliolos": "3 a 6 pares"
+    }
+  }
+}

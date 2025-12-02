@@ -1,0 +1,287 @@
+{
+  "id": "inga_parana_key",
+  "name": "Chave de Identificação: Inga (PR)",
+  "description": "Chave interativa para espécies de Inga no Paraná (Possette & Rodrigues, 2010).",
+  "features": [
+    {
+      "id": "f_indumento",
+      "name": "Indumento dos Ramos",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_glabro", "label": "Glabros ou glabrescentes" },
+        { "id": "s_piloso", "label": "Vilosos, tomentosos ou hirsutos" }
+      ]
+    },
+    {
+      "id": "f_ala",
+      "name": "Ala da Raque Foliar",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_ala_cuneada", "label": "Cuneada (forma de V)" },
+        { "id": "s_ala_obovada", "label": "Obovada/Elíptica (larga)" }
+      ]
+    },
+    {
+      "id": "f_inflorescencia",
+      "name": "Tipo de Inflorescência",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_inf_espiga", "label": "Espiga" },
+        { "id": "s_inf_capitulo", "label": "Capítulo (Glomérulo)" },
+        { "id": "s_inf_umbela", "label": "Umbela" },
+        { "id": "s_inf_racemo", "label": "Racemo" }
+      ]
+    },
+    {
+      "id": "f_estipula",
+      "name": "Persistência das Estípulas",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_est_pers", "label": "Persistente" },
+        { "id": "s_est_caduca", "label": "Caduca (cai cedo)" }
+      ]
+    },
+    {
+      "id": "f_nectario_ins",
+      "name": "Inserção do Nectário",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_nect_sessil", "label": "Séssil" },
+        { "id": "s_nect_estip", "label": "Estipitado (com haste)" }
+      ]
+    },
+    {
+      "id": "f_nectario_forma",
+      "name": "Forma do Nectário",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_nect_circ", "label": "Circular / Cilíndrico" },
+        { "id": "s_nect_comp", "label": "Transversalmente comprimido" }
+      ]
+    },
+    {
+      "id": "f_calice",
+      "name": "Tamanho do Cálice",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_cal_pq", "label": "Pequeno (1,2 - 2,2 mm)" },
+        { "id": "s_cal_gd", "label": "Grande (> 3 mm)" }
+      ]
+    },
+    {
+      "id": "f_lenticelas",
+      "name": "Tipo de Lenticelas",
+      "imageUrl": "",
+      "states": [
+        { "id": "s_lent_verru", "label": "Verrucosas (proeminentes)" },
+        { "id": "s_lent_lisas", "label": "Lisas / Pouco proeminentes" }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "e_laurina",
+      "name": "Inga laurina",
+      "description": "Ramos glabros, inflorescência em espiga, estípulas persistentes. Frutos inseridos excentricamente.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_glabro"],
+        "f_ala": ["s_ala_cuneada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_pers"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_pq"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_marginata",
+      "name": "Inga marginata",
+      "description": "Ramos glabros, espiga, estípulas caducas. Muito comum.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_glabro"],
+        "f_ala": ["s_ala_cuneada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_pq"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_lentiscifolia",
+      "name": "Inga lentiscifolia",
+      "description": "Ramos glabros, inflorescência em capítulo, lenticelas verrucosas.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_glabro"],
+        "f_ala": ["s_ala_cuneada"],
+        "f_inflorescencia": ["s_inf_capitulo"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_pq"],
+        "f_lenticelas": ["s_lent_verru"]
+      }
+    },
+    {
+      "id": "e_sellowiana",
+      "name": "Inga sellowiana",
+      "description": "Ramos glabros, inflorescência em umbela, flores perfumadas.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_glabro"],
+        "f_ala": ["s_ala_cuneada"],
+        "f_inflorescencia": ["s_inf_umbela"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_pq"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_barbata",
+      "name": "Inga barbata",
+      "description": "Ramos pilosos, nectário estipitado longo, estípula persistente.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_pers"],
+        "f_nectario_ins": ["s_nect_estip"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_virescens",
+      "name": "Inga virescens",
+      "description": "Ramos pilosos, nectário curto-estipitado, estípula caduca.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_estip"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_edwallii",
+      "name": "Inga edwallii",
+      "description": "Ramos pilosos, inflorescência racemosa, gineceu com múltiplos carpelos.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_racemo"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_estip"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_edulis",
+      "name": "Inga edulis",
+      "description": "Ingá-cipó. Nectário comprimido séssil. Fruto cilíndrico/torcido.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_comp"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_sessilis",
+      "name": "Inga sessilis",
+      "description": "Nectário comprimido. Fruto lenhoso curto e curvado. Pecíolo alado.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_racemo"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_comp"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_subnuda",
+      "name": "Inga subnuda subsp. luschnathiana",
+      "description": "Margens foliares revolutas. Nectário circular séssil.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_striata",
+      "name": "Inga striata",
+      "description": "Estípulas e cálice estriados. Estípula persistente. Fruto quadrado.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_pers"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    },
+    {
+      "id": "e_vera",
+      "name": "Inga vera subsp. affinis",
+      "description": "Sem estrias. Nectário séssil circular grande. Estípula caduca.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f_indumento": ["s_piloso"],
+        "f_ala": ["s_ala_obovada"],
+        "f_inflorescencia": ["s_inf_espiga"],
+        "f_estipula": ["s_est_caduca"],
+        "f_nectario_ins": ["s_nect_sessil"],
+        "f_nectario_forma": ["s_nect_circ"],
+        "f_calice": ["s_cal_gd"],
+        "f_lenticelas": ["s_lent_lisas"]
+      }
+    }
+  ]
+}

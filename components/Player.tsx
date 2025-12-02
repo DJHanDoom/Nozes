@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Project, Entity, Language } from '../types';
-import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink } from 'lucide-react';
+import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink, List, Grid } from 'lucide-react';
 
 interface PlayerProps {
   project: Project;
@@ -25,7 +25,8 @@ const t = {
     speciesDetails: "Species Details",
     morphology: "Morphology & Traits",
     close: "Close",
-    resources: "Resources"
+    resources: "Resources",
+    viewResults: "View Results"
   },
   pt: {
     player: "PLAYER",
@@ -43,7 +44,8 @@ const t = {
     speciesDetails: "Detalhes da Espécie",
     morphology: "Morfologia & Características",
     close: "Fechar",
-    resources: "Recursos Adicionais"
+    resources: "Recursos Adicionais",
+    viewResults: "Ver Resultados"
   }
 };
 
@@ -54,6 +56,9 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
   const [showDiscarded, setShowDiscarded] = useState(false);
   const [activeFeatureImage, setActiveFeatureImage] = useState<string | null>(null);
   const [viewingEntity, setViewingEntity] = useState<Entity | null>(null);
+  
+  // Mobile View State: 'FILTERS' (Features) or 'RESULTS' (Entities)
+  const [mobileTab, setMobileTab] = useState<'FILTERS' | 'RESULTS'>('FILTERS');
 
   const toggleSelection = (featureId: string, stateId: string) => {
     setSelections(prev => {
@@ -101,51 +106,94 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
     return { remaining: remainingEntities, discarded: discardedEntities };
   }, [project.entities, selections]);
 
+  // Count total active selections
+  const totalSelectionsCount = Object.values(selections).reduce((acc, curr) => acc + curr.length, 0);
+
   return (
-    <div className="flex flex-col h-full bg-slate-100 font-sans">
+    <div className="flex flex-col h-full bg-slate-100 font-sans absolute inset-0">
       {/* Header */}
-      <header className="bg-white border-b px-6 py-4 flex justify-between items-center shadow-sm z-10">
-        <div>
-          <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-            <span className="bg-emerald-600 text-white text-xs px-2 py-1 rounded">{strings.player}</span>
-            {project.name}
-          </h2>
-          <p className="text-sm text-slate-500 truncate max-w-md">{project.description}</p>
+      <header className="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm z-30 shrink-0">
+        <div className="flex items-center gap-3 overflow-hidden">
+          <button 
+            onClick={onBack}
+            className="md:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-full"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <div className="overflow-hidden">
+            <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 truncate">
+              <span className="hidden sm:inline-block bg-emerald-600 text-white text-xs px-2 py-1 rounded">{strings.player}</span>
+              <span className="truncate">{project.name}</span>
+            </h2>
+          </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2 shrink-0">
           <button 
             onClick={resetKey}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+            title={strings.restart}
           >
-            <RotateCcw size={16} /> <span className="hidden sm:inline">{strings.restart}</span>
+            <RotateCcw size={18} /> <span className="hidden sm:inline">{strings.restart}</span>
           </button>
           <button 
             onClick={onBack}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+            className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
           >
             <ArrowLeft size={16} /> {strings.exit}
           </button>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Mobile Tab Navigation (Visible only on small screens) */}
+      <div className="md:hidden flex border-b bg-white z-20 shrink-0">
+        <button 
+          onClick={() => setMobileTab('FILTERS')}
+          className={`flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 transition-colors relative ${
+            mobileTab === 'FILTERS' ? 'text-emerald-600' : 'text-slate-500 bg-slate-50'
+          }`}
+        >
+          <Filter size={16} /> 
+          {strings.features}
+          {totalSelectionsCount > 0 && (
+            <span className="bg-emerald-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">
+              {totalSelectionsCount}
+            </span>
+          )}
+          {mobileTab === 'FILTERS' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600"></div>}
+        </button>
+        <button 
+          onClick={() => setMobileTab('RESULTS')}
+          className={`flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 transition-colors relative ${
+            mobileTab === 'RESULTS' ? 'text-emerald-600' : 'text-slate-500 bg-slate-50'
+          }`}
+        >
+          <Grid size={16} /> 
+          {strings.matches}
+          <span className="bg-slate-200 text-slate-700 text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+            {remaining.length}
+          </span>
+          {mobileTab === 'RESULTS' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600"></div>}
+        </button>
+      </div>
+
+      {/* Main Content Area - Split View on Desktop, Swappable on Mobile */}
       <div className="flex-1 overflow-hidden flex flex-col md:flex-row relative">
         
-        {/* Features Panel (Left) */}
-        <div className="w-full md:w-1/3 lg:w-1/4 bg-white border-r flex flex-col h-1/2 md:h-full relative z-20">
-          <div className="p-4 border-b bg-slate-50">
+        {/* Features Panel (Left on Desktop / Tab 1 on Mobile) */}
+        <div className={`w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex flex-col h-full relative z-20 ${mobileTab === 'FILTERS' ? 'flex' : 'hidden md:flex'}`}>
+          <div className="hidden md:block p-4 border-b bg-slate-50">
             <h3 className="font-semibold text-slate-700 flex items-center gap-2">
               <Filter size={18} /> {strings.features}
             </h3>
           </div>
-          <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-20">
+          <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-24 md:pb-4 custom-scrollbar">
             {project.features.map(feature => {
               const currentSelections = selections[feature.id] || [];
               const hasSelection = currentSelections.length > 0;
 
               return (
                 <div key={feature.id} className="space-y-2 relative">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur-sm py-1 z-10">
                     <div className="flex items-center gap-2">
                       <h4 className={`font-medium ${hasSelection ? 'text-emerald-600' : 'text-slate-700'}`}>
                         {feature.name}
@@ -154,27 +202,13 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                          <>
                             <button 
                               className="text-slate-400 hover:text-emerald-500 transition-colors p-1"
-                              onMouseEnter={() => setActiveFeatureImage(feature.id)}
-                              onMouseLeave={() => setActiveFeatureImage(null)}
-                              onClick={() => setActiveFeatureImage(activeFeatureImage === feature.id ? null : feature.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveFeatureImage(activeFeatureImage === feature.id ? null : feature.id);
+                              }}
                             >
                                <ImageIcon size={14} />
                             </button>
-                            {/* Fixed Position Modal to escape overflow clipping */}
-                            {activeFeatureImage === feature.id && (
-                              <div 
-                                className="fixed z-50 w-64 p-3 bg-white rounded-xl shadow-2xl border border-slate-200 pointer-events-none animate-in fade-in zoom-in-95 duration-200"
-                                style={{ 
-                                  left: '340px', // Approximate width of sidebar + margin
-                                  top: '20%',
-                                }}
-                              >
-                                <div className="aspect-square bg-slate-100 rounded-lg overflow-hidden mb-2">
-                                  <img src={feature.imageUrl} alt={feature.name} className="w-full h-full object-cover" />
-                                </div>
-                                <p className="text-xs font-semibold text-slate-700 text-center">{feature.name}</p>
-                              </div>
-                            )}
                          </>
                       )}
                     </div>
@@ -184,21 +218,32 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                       </span>
                     )}
                   </div>
-                  <div className="space-y-1">
+                  
+                  {/* Inline Feature Image for Mobile/Desktop */}
+                  {activeFeatureImage === feature.id && feature.imageUrl && (
+                      <div className="mb-2 rounded-lg overflow-hidden border border-slate-200 shadow-sm animate-in fade-in zoom-in-95">
+                        <img src={feature.imageUrl} alt={feature.name} className="w-full h-32 object-cover" />
+                        <div className="bg-slate-50 p-1 text-center">
+                          <button onClick={() => setActiveFeatureImage(null)} className="text-xs text-slate-500 underline">Fechar</button>
+                        </div>
+                      </div>
+                  )}
+
+                  <div className="grid grid-cols-1 gap-1">
                     {feature.states.map(state => {
                       const isSelected = currentSelections.includes(state.id);
                       return (
                         <button
                           key={state.id}
                           onClick={() => toggleSelection(feature.id, state.id)}
-                          className={`w-full text-left px-3 py-2 text-sm rounded-md transition-all flex items-center justify-between group ${
+                          className={`w-full text-left px-3 py-3 md:py-2 text-sm rounded-lg transition-all flex items-center justify-between group active:scale-[0.98] touch-manipulation ${
                             isSelected 
                               ? 'bg-emerald-600 text-white shadow-md' 
-                              : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-transparent hover:border-slate-200'
+                              : 'bg-slate-50 text-slate-600 border border-transparent hover:bg-slate-100 hover:border-slate-200'
                           }`}
                         >
-                          <span>{state.label}</span>
-                          {isSelected && <Check size={14} />}
+                          <span className="leading-tight">{state.label}</span>
+                          {isSelected && <Check size={16} className="shrink-0" />}
                         </button>
                       );
                     })}
@@ -207,20 +252,30 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
               );
             })}
           </div>
+          
+          {/* Mobile Floating Button to Switch to Results */}
+          <div className="md:hidden absolute bottom-4 left-4 right-4 z-30">
+            <button 
+               onClick={() => setMobileTab('RESULTS')}
+               className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl shadow-lg shadow-slate-900/20 flex items-center justify-center gap-2 animate-in slide-in-from-bottom-5"
+            >
+               {strings.viewResults} ({remaining.length})
+            </button>
+          </div>
         </div>
 
-        {/* Entities Panel (Right) */}
-        <div className="flex-1 bg-slate-100 flex flex-col h-1/2 md:h-full overflow-hidden">
-          <div className="p-4 bg-white border-b flex justify-between items-center shadow-sm">
-            <div className="flex gap-4">
+        {/* Entities Panel (Right on Desktop / Tab 2 on Mobile) */}
+        <div className={`flex-1 bg-slate-100 flex-col h-full overflow-hidden ${mobileTab === 'RESULTS' ? 'flex' : 'hidden md:flex'}`}>
+          <div className="p-3 md:p-4 bg-white border-b flex justify-between items-center shadow-sm shrink-0">
+            <div className="flex gap-2 md:gap-4 w-full md:w-auto bg-slate-100 p-1 rounded-lg">
               <button 
-                className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${!showDiscarded ? 'bg-slate-800 text-white' : 'text-slate-500 hover:bg-slate-100'}`}
+                className={`flex-1 md:flex-none text-xs md:text-sm font-medium px-3 py-1.5 rounded-md transition-all ${!showDiscarded ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
                 onClick={() => setShowDiscarded(false)}
               >
                 {strings.matches} ({remaining.length})
               </button>
               <button 
-                className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${showDiscarded ? 'bg-slate-800 text-white' : 'text-slate-500 hover:bg-slate-100'}`}
+                className={`flex-1 md:flex-none text-xs md:text-sm font-medium px-3 py-1.5 rounded-md transition-all ${showDiscarded ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
                 onClick={() => setShowDiscarded(true)}
               >
                 {strings.discarded} ({discarded.length})
@@ -231,15 +286,15 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 md:p-6" onClick={() => setActiveFeatureImage(null)}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar" onClick={() => setActiveFeatureImage(null)}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-20 md:pb-0">
               {(showDiscarded ? discarded : remaining).map(entity => (
                 <div 
                   key={entity.id} 
                   onClick={() => setViewingEntity(entity)}
-                  className={`bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all border cursor-pointer ${showDiscarded ? 'opacity-60 grayscale' : ''}`}
+                  className={`bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border cursor-pointer active:scale-[0.98] touch-manipulation ${showDiscarded ? 'opacity-60 grayscale' : ''}`}
                 >
-                  <div className="h-40 bg-slate-200 relative group">
+                  <div className="h-48 md:h-40 bg-slate-200 relative group">
                     <img 
                       src={entity.imageUrl || "https://picsum.photos/400/300"} 
                       alt={entity.name}
@@ -247,7 +302,11 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-medium">
-                       <Eye size={20} /> Ver Detalhes
+                       <Eye size={20} /> <span className="hidden md:inline">Ver Detalhes</span>
+                    </div>
+                    {/* Mobile Only overlay icon */}
+                    <div className="md:hidden absolute bottom-2 right-2 bg-black/50 text-white p-1.5 rounded-full backdrop-blur-sm">
+                      <Eye size={16} />
                     </div>
                   </div>
                   <div className="p-4">
@@ -267,10 +326,16 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
               ))}
               
               {!showDiscarded && remaining.length === 0 && (
-                <div className="col-span-full flex flex-col items-center justify-center py-20 text-slate-400">
+                <div className="col-span-full flex flex-col items-center justify-center py-20 text-slate-400 px-4 text-center">
                   <Filter size={48} className="mb-4 opacity-50" />
-                  <p className="text-lg">{strings.noMatches}</p>
+                  <p className="text-lg font-medium text-slate-600">{strings.noMatches}</p>
                   <p className="text-sm">{strings.tryUnselecting}</p>
+                  <button 
+                    onClick={resetKey} 
+                    className="mt-6 px-6 py-2 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300"
+                  >
+                    {strings.restart}
+                  </button>
                 </div>
               )}
             </div>
@@ -280,11 +345,11 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
 
       {/* Species Detail Modal */}
       {viewingEntity && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 overflow-hidden">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-0 md:p-4 animate-in fade-in duration-200">
+          <div className="bg-white md:rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col h-full md:h-auto md:max-h-[90vh] overflow-hidden">
             
             {/* Header / Image */}
-            <div className="relative h-48 sm:h-64 shrink-0 bg-slate-800">
+            <div className="relative h-64 md:h-64 shrink-0 bg-slate-900">
                {viewingEntity.imageUrl ? (
                  <img src={viewingEntity.imageUrl} className="w-full h-full object-cover opacity-90" alt={viewingEntity.name} />
                ) : (
@@ -294,24 +359,24 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                )}
                <button 
                   onClick={() => setViewingEntity(null)}
-                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                  className="absolute top-4 right-4 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-colors z-10 backdrop-blur-sm"
                 >
-                  <X size={20} />
+                  <X size={24} />
                </button>
-               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <h2 className="text-3xl font-bold text-white shadow-sm">{viewingEntity.name}</h2>
+               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-12">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white shadow-sm leading-tight">{viewingEntity.name}</h2>
                </div>
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+            <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar bg-white">
                
                {/* Description */}
                <div>
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wide flex items-center gap-2 mb-2">
-                    <BookOpen size={16} /> {strings.speciesDetails}
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 mb-3">
+                    <BookOpen size={14} /> {strings.speciesDetails}
                   </h3>
-                  <p className="text-slate-700 leading-relaxed text-lg">
+                  <p className="text-slate-800 leading-relaxed text-base md:text-lg font-serif">
                     {viewingEntity.description}
                   </p>
                </div>
@@ -319,8 +384,8 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                {/* Additional Links */}
                {(viewingEntity.links && viewingEntity.links.length > 0) && (
                  <div>
-                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wide flex items-center gap-2 mb-3">
-                      <LinkIcon size={16} /> {strings.resources}
+                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 mb-3">
+                      <LinkIcon size={14} /> {strings.resources}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {viewingEntity.links.map((link, idx) => (
@@ -329,24 +394,24 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-emerald-300 transition-all group"
+                          className="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-emerald-300 transition-all group active:scale-[0.98]"
                         >
                           <div className="bg-white p-2 rounded-md shadow-sm text-slate-400 group-hover:text-emerald-600">
                              <ExternalLink size={16} />
                           </div>
-                          <span className="text-sm font-medium text-slate-700 group-hover:text-emerald-700 truncate">{link.label || link.url}</span>
+                          <span className="text-sm font-medium text-slate-700 group-hover:text-emerald-700 truncate flex-1">{link.label || link.url}</span>
                         </a>
                       ))}
                     </div>
                  </div>
                )}
 
-               <div className="border-t border-slate-100 my-4"></div>
+               <div className="border-t border-slate-100"></div>
 
                {/* Compiled Traits */}
                <div>
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wide flex items-center gap-2 mb-4">
-                    <Tag size={16} /> {strings.morphology}
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 mb-4">
+                    <Tag size={14} /> {strings.morphology}
                   </h3>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
@@ -363,8 +428,8 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
 
                       return (
                         <div key={feature.id} className="bg-slate-50 p-3 rounded-lg border border-slate-100 flex flex-col">
-                           <span className="text-xs font-semibold text-slate-500 uppercase mb-1">{feature.name}</span>
-                           <span className="text-sm font-medium text-slate-900">{stateLabels}</span>
+                           <span className="text-[10px] font-bold text-slate-400 uppercase mb-1">{feature.name}</span>
+                           <span className="text-sm font-semibold text-slate-800">{stateLabels}</span>
                         </div>
                       );
                     })}
@@ -377,7 +442,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
             </div>
 
             {/* Footer */}
-            <div className="p-4 border-t bg-slate-50 shrink-0">
+            <div className="p-4 border-t bg-slate-50 shrink-0 safe-area-bottom">
                <button 
                  onClick={() => setViewingEntity(null)}
                  className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg"
