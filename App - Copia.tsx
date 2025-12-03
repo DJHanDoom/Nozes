@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Load projects for modal
-    const saved = localStorage.getItem('nozesia_projects');
+    const saved = localStorage.getItem('lucidgen_projects');
     if (saved) {
       try {
         setSavedProjects(JSON.parse(saved));
@@ -26,7 +26,7 @@ const App: React.FC = () => {
     }
 
     // Load settings
-    const savedSettings = localStorage.getItem('nozesia_settings');
+    const savedSettings = localStorage.getItem('lucidgen_settings');
     if (savedSettings) {
       try {
         const settings = JSON.parse(savedSettings);
@@ -39,7 +39,7 @@ const App: React.FC = () => {
   const saveSettings = () => {
     const trimmedModel = aiModel.trim();
     const trimmedKey = apiKey.trim();
-    localStorage.setItem('nozesia_settings', JSON.stringify({ model: trimmedModel, apiKey: trimmedKey }));
+    localStorage.setItem('lucidgen_settings', JSON.stringify({ model: trimmedModel, apiKey: trimmedKey }));
     setShowSettingsModal(false);
   };
 
@@ -135,7 +135,7 @@ const App: React.FC = () => {
 
   const handleSaveProject = (project: Project) => {
     // 1. Persist to localStorage
-    const saved = localStorage.getItem('nozesia_projects');
+    const saved = localStorage.getItem('lucidgen_projects');
     let projectsList: Project[] = [];
     if (saved) {
       try {
@@ -147,7 +147,7 @@ const App: React.FC = () => {
 
     // Remove existing version of this project if exists, and add new one to top
     const updatedList = [project, ...projectsList.filter(p => p.id !== project.id)];
-    localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+    localStorage.setItem('lucidgen_projects', JSON.stringify(updatedList));
 
     // 2. Update State
     setSavedProjects(updatedList);

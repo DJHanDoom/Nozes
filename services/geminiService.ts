@@ -10,10 +10,10 @@ const repairTruncatedJson = (jsonStr: string): any => {
     return JSON.parse(jsonStr);
   } catch (e) {
     console.warn("JSON truncated. Attempting repair...");
-    
+
     // 1. Remove trailing comma if present
     let repaired = jsonStr.trim().replace(/,$/, '');
-    
+
     // 2. Check for unterminated string
     // Count quotes. If odd, add a closing quote.
     const quoteCount = (repaired.match(/"/g) || []).length;
@@ -34,10 +34,10 @@ const repairTruncatedJson = (jsonStr: string): any => {
         if (last === char) stack.pop();
       }
     }
-    
+
     // Append missing closures in reverse order
     repaired += stack.reverse().join('');
-    
+
     try {
       return JSON.parse(repaired);
     } catch (e2) {
@@ -96,7 +96,8 @@ const generationSchema: Schema = {
               properties: {
                 featureName: { type: Type.STRING, description: "Must match one of the feature names exactly" },
                 stateValue: { type: Type.STRING, description: "Must match one of the state values for that feature exactly" }
-              }
+              },
+              required: ["featureName", "stateValue"]
             }
           }
         },
@@ -126,10 +127,16 @@ const importSchema: Schema = {
           description: { type: Type.STRING },
           imageUrl: { type: Type.STRING, description: "URL if found, else empty." },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
-          // Optimization: Use array of strings "FeatureName: StateValue" instead of objects to save tokens
           traits: {
             type: Type.ARRAY,
-            items: { type: Type.STRING, description: "Format: 'Feature Name: State Value'" }
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                featureName: { type: Type.STRING, description: "Must match one of the feature names exactly" },
+                stateValue: { type: Type.STRING, description: "Must match one of the state values for that feature exactly" }
+              },
+              required: ["featureName", "stateValue"]
+            }
           }
         },
         required: ["name", "description", "traits"]
@@ -151,26 +158,26 @@ interface PromptData {
  * Useful for "Copy Prompt" functionality or preparing the request.
  */
 export const buildPromptData = (config: AIConfig): PromptData => {
-  const langInstruction = config.language === 'pt' 
+  const langInstruction = config.language === 'pt'
     ? "All content (Project Name, Description, Features, States, Entities, Descriptions) MUST be in Portuguese (Brazil)."
     : "All content must be in English.";
 
   // Shared Instructions
-  let speciesImageInstruction = config.includeSpeciesImages 
+  let speciesImageInstruction = config.includeSpeciesImages
     ? "For each entity, provide a valid, DIRECT public URL to an image file (must end in .jpg, .jpeg, or .png) representing the species. The URL must point directly to the image binary, not a landing page."
     : "Leave `imageUrl` empty for entities.";
 
   let featureImageInstruction = config.includeFeatureImages
     ? "For each feature, provide a valid, DIRECT public URL to an image file (must end in .jpg, .jpeg, or .png) illustrating the trait. The URL must point directly to the image binary, not a landing page."
     : "Leave `imageUrl` empty for features.";
-    
+
   let linkInstruction = config.includeLinks
     ? "For each entity, provide 1-2 reputable external links (e.g., Wikipedia, IUCN, GBIF, Flora e Funga do Brasil) in the 'links' array."
     : "Leave the 'links' array empty.";
 
   // 1. IMPORT MODE LOGIC
   if (config.importedFile) {
-    
+
     // Feature Focus Logic for Import
     let filterInstruction = "Extract ALL distinctive features found in the text.";
     if (config.featureFocus === 'vegetative') {
@@ -203,7 +210,8 @@ export const buildPromptData = (config: AIConfig): PromptData => {
          - External Links: ${linkInstruction}
       5. ${langInstruction}
       
-      **Format**: Return valid JSON. Use the "Feature: State" string format for traits to save space.
+      **Format**: Return valid JSON.
+      **IMPORTANT**: Do not include markdown code fences (\`\`\`json ... \`\`\`). Return raw JSON only. Ensure all keys and string values are properly escaped.
     `;
 
     const importPrompt = `
@@ -280,6 +288,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     4.  **Scientific Accuracy**: Ensure traits are factual.
 
     The response must be a structured JSON object.
+    **IMPORTANT**: Do not include markdown code fences (\`\`\`json ... \`\`\`). Return raw JSON only. Ensure all keys and string values are properly escaped.
   `;
 
   const prompt = `
@@ -306,14 +315,14 @@ export const buildPromptData = (config: AIConfig): PromptData => {
 };
 
 export const generateKeyFromTopic = async (
-  config: AIConfig, 
+  config: AIConfig,
   apiKey: string,
   onPromptGenerated?: (fullPrompt: string) => void
 ): Promise<Project> => {
   if (!apiKey) throw new Error("API Key is missing");
-  
+
   const ai = new GoogleGenAI({ apiKey: apiKey });
-  
+
   // Build the prompt using the extracted logic
   const { systemInstruction, prompt, parts, schema } = buildPromptData(config);
 
@@ -328,15 +337,29 @@ export const generateKeyFromTopic = async (
   return await callGemini(ai, config.model, contents, systemInstruction, schema);
 };
 
+export const generateKeyFromCustomPrompt = async (
+  customPrompt: string,
+  apiKey: string,
+  model: string = "gemini-2.5-flash"
+): Promise<Project> => {
+  if (!apiKey) throw new Error("API Key is missing");
+  const ai = new GoogleGenAI({ apiKey: apiKey });
+
+  // Use minimal system instruction as the user provides the full context
+  const systemInstruction = `You are an expert biologist. Return ONLY valid JSON matching the schema. Do not include markdown code fences.`;
+
+  return await callGemini(ai, model, customPrompt, systemInstruction, generationSchema);
+};
+
 // Unified Gemini Call function with Schema support
 async function callGemini(
-  ai: GoogleGenAI, 
-  modelName: string, 
-  contents: any, 
+  ai: GoogleGenAI,
+  modelName: string,
+  contents: any,
   systemInstruction: string,
   responseSchema: Schema
 ): Promise<Project> {
-  
+
   const generateContentWithFallback = async (currentModel: string): Promise<any> => {
     try {
       return await ai.models.generateContent({
@@ -347,15 +370,15 @@ async function callGemini(
           responseMimeType: "application/json",
           responseSchema: responseSchema,
           // CRITICAL FIX: Increase max output tokens to allow large JSON responses (e.g. 133 species)
-          maxOutputTokens: 65536, 
+          maxOutputTokens: 65536,
         }
       });
     } catch (error: any) {
       if (error.message?.includes("404") || error.message?.includes("NOT_FOUND")) {
         const fallbackModel = "gemini-2.5-flash";
         if (currentModel !== fallbackModel) {
-           console.warn(`Model ${currentModel} not found, falling back to ${fallbackModel}`);
-           return await generateContentWithFallback(fallbackModel);
+          console.warn(`Model ${currentModel} not found, falling back to ${fallbackModel}`);
+          return await generateContentWithFallback(fallbackModel);
         }
       }
       throw error;
@@ -367,20 +390,20 @@ async function callGemini(
     const response = await generateContentWithFallback(modelToUse);
     // Use repair function instead of straight JSON.parse
     const data = repairTruncatedJson(response.text || "{}");
-    
+
     if (!data.projectName) throw new Error("Invalid AI response");
 
     // Transform AI response to internal data model with IDs
     const features: Feature[] = data.features.map((f: any) => ({
       id: generateId(),
       name: f.name,
-      imageUrl: f.imageUrl || "", 
+      imageUrl: f.imageUrl || "",
       states: f.states.map((s: string) => ({ id: generateId(), label: s }))
     }));
 
     const entities: Entity[] = data.entities.map((e: any) => {
       const entityTraits: Record<string, string[]> = {};
-      
+
       e.traits.forEach((t: any) => {
         let fName: string = "";
         let sValue: string = "";
@@ -414,7 +437,7 @@ async function callGemini(
       // Simple URL validation
       const rawUrl = e.imageUrl ? e.imageUrl.trim() : "";
       const isValidUrl = rawUrl.startsWith("http");
-      
+
       const rawLinks = Array.isArray(e.links) ? e.links : [];
 
       return {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play } from 'lucide-react';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit } from 'lucide-react';
+import { utils, writeFile } from 'xlsx';
 
 interface BuilderProps {
   initialProject: Project | null;
@@ -23,8 +24,9 @@ const t = {
     exit: "Exit",
     save: "Save",
     open: "Open",
-    export: "Export",
-    import: "Import",
+    export: "Export Project",
+    exportXLSX: "Export XLSX",
+    import: "Import Project",
     general: "General",
     features: "Features",
     entities: "Entities",
@@ -96,8 +98,9 @@ const t = {
     exit: "Sair",
     save: "Salvar",
     open: "Abrir",
-    export: "Exportar",
-    import: "Importar",
+    export: "Exportar Projeto",
+    exportXLSX: "Exportar XLSX",
+    import: "Importar Projeto",
     general: "Geral",
     features: "Características",
     entities: "Entidades",
@@ -199,6 +202,12 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
 
+  // Prompt Editor State
+  const [showPromptEditor, setShowPromptEditor] = useState(false);
+  const [manualPrompt, setManualPrompt] = useState("");
+
+
+
 
   // Entity Trait Editor State
   const [editingEntityId, setEditingEntityId] = useState<string | null>(null);
@@ -245,6 +254,62 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+  };
+
+  const exportXLSX = () => {
+    const workbook = utils.book_new();
+
+    // 1. Entities Sheet
+    const entityRows = project.entities.map(e => ({
+      ID: e.id,
+      Name: e.name,
+      Description: e.description,
+      ImageURL: e.imageUrl,
+      LinkLabels: e.links?.map(l => l.label).join("; ") || "",
+      LinkURLs: e.links?.map(l => l.url).join("; ") || ""
+    }));
+    const wsEntities = utils.json_to_sheet(entityRows);
+    utils.book_append_sheet(workbook, wsEntities, "Entities");
+
+    // 2. Features Sheet
+    const featureRows = project.features.map(f => ({
+      ID: f.id,
+      Name: f.name,
+      ImageURL: f.imageUrl,
+      States: f.states.map(s => s.label).join("; ")
+    }));
+    const wsFeatures = utils.json_to_sheet(featureRows);
+    utils.book_append_sheet(workbook, wsFeatures, "Features");
+
+    // 3. Matrix Sheet
+    const matrixRows = project.entities.map(entity => {
+      const row: any = { Entity: entity.name };
+      project.features.forEach(feature => {
+        const traitIds = entity.traits[feature.id] || [];
+        const traitLabels = feature.states
+          .filter(s => traitIds.includes(s.id))
+          .map(s => s.label)
+          .join(", ");
+        row[feature.name] = traitLabels;
+      });
+      return row;
+    });
+    const wsMatrix = utils.json_to_sheet(matrixRows);
+    utils.book_append_sheet(workbook, wsMatrix, "Matrix");
+
+    // 4. Project Info Sheet
+    const projectRows = [{
+      Name: project.name,
+      Description: project.description,
+      ExportDate: new Date().toISOString().split('T')[0],
+      TotalEntities: project.entities.length,
+      TotalFeatures: project.features.length
+    }];
+    const wsProject = utils.json_to_sheet(projectRows);
+    utils.book_append_sheet(workbook, wsProject, "Project Info");
+
+    // Save file
+    writeFile(workbook, `${project.name.replace(/\s+/g, '_')}.xlsx`);
   };
 
   const importJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -328,7 +393,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
   };
 
-  const handleCopyPrompt = async () => {
+  const handleOpenPromptEditor = async () => {
     try {
       let config = { ...aiConfig };
 
@@ -350,11 +415,37 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       const { systemInstruction, prompt } = buildPromptData(config);
       const fullText = `SYSTEM:\n${systemInstruction}\n\nUSER PROMPT:\n${prompt}`;
 
-      await navigator.clipboard.writeText(fullText);
-      alert(strings.promptCopied);
+      setManualPrompt(fullText);
+      setShowPromptEditor(true);
+      setShowAiModal(false); // Close wizard, open editor
     } catch (e) {
-      console.error("Failed to copy prompt", e);
+      console.error("Failed to build prompt", e);
     }
+  };
+
+  const handleSendManualPrompt = async () => {
+    if (!apiKey) {
+      alert(strings.missingKey);
+      return;
+    }
+    setIsGenerating(true);
+    setShowPromptEditor(false);
+
+    try {
+      const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model);
+      setProject(generatedProject);
+      setActiveTab('MATRIX');
+    } catch (e) {
+      console.error(e);
+      alert(strings.errGen);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleClosePromptEditor = () => {
+    setShowPromptEditor(false);
+    setShowAiModal(true);
   };
 
   const addFeature = () => {
@@ -435,6 +526,9 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
             <button onClick={exportJSON} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.export}>
               <Download size={14} /> <span className="hidden sm:inline">{strings.export}</span>
             </button>
+            <button onClick={exportXLSX} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.exportXLSX}>
+              <FileSpreadsheet size={14} /> <span className="hidden sm:inline">{strings.exportXLSX}</span>
+            </button>
             <label className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white cursor-pointer" title={strings.import}>
               <Upload size={14} /> <span className="hidden sm:inline">{strings.import}</span>
               <input type="file" accept=".json" onChange={importJSON} className="hidden" />
@@ -472,6 +566,9 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           <button onClick={() => { exportJSON(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
             <Download size={18} /> {strings.export}
           </button>
+          <button onClick={() => { exportXLSX(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
+            <FileSpreadsheet size={18} /> {strings.exportXLSX}
+          </button>
           <label className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded cursor-pointer">
             <Upload size={18} /> {strings.import}
             <input type="file" accept=".json" onChange={importJSON} className="hidden" />
@@ -491,8 +588,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
             key={tab.id}
             onClick={() => setActiveTab(tab.id as Tab)}
             className={`flex items-center gap-2 px-4 py-3 md:py-4 text-xs md:text-sm font-medium transition-all border-b-2 relative top-[2px] min-w-fit ${activeTab === tab.id
-                ? 'border-emerald-600 text-emerald-600 bg-emerald-50/50 rounded-t-lg'
-                : 'border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50/50'
+              ? 'border-emerald-600 text-emerald-600 bg-emerald-50/50 rounded-t-lg'
+              : 'border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50/50'
               }`}
           >
             <tab.icon size={16} /> {tab.label}
@@ -810,8 +907,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                                 <button
                                   onClick={() => toggleTrait(entity.id, feature.id, state.id)}
                                   className={`w-8 h-8 md:w-8 md:h-8 rounded-md flex items-center justify-center transition-all duration-200 transform active:scale-95 touch-manipulation ${isChecked
-                                      ? 'bg-emerald-600 text-white shadow-sm'
-                                      : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
+                                    ? 'bg-emerald-600 text-white shadow-sm'
+                                    : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
                                     }`}
                                 >
                                   {isChecked && <CheckSquare size={16} strokeWidth={3} />}
@@ -867,8 +964,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                           key={state.id}
                           onClick={() => toggleTrait(editingEntityId!, feature.id, state.id)}
                           className={`text-sm px-3 py-3 md:py-2 rounded-lg border text-left flex items-center justify-between transition-all touch-manipulation active:scale-[0.98] ${isChecked
-                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                              : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300 hover:text-emerald-600'
+                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300 hover:text-emerald-600'
                             }`}
                         >
                           <span className="truncate mr-2 text-xs md:text-sm">{state.label}</span>
@@ -1052,8 +1149,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                         key={focus}
                         onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: focus }))}
                         className={`flex-1 py-2 rounded-md text-[10px] md:text-xs font-medium transition-all ${aiConfig.featureFocus === focus
-                            ? 'bg-white text-amber-600 shadow-sm'
-                            : 'text-slate-500 hover:text-slate-800'
+                          ? 'bg-white text-amber-600 shadow-sm'
+                          : 'text-slate-500 hover:text-slate-800'
                           }`}
                         disabled={isGenerating}
                       >
@@ -1173,14 +1270,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                 {strings.cancel}
               </button>
 
-              {/* Copy Prompt Button */}
               <button
-                onClick={handleCopyPrompt}
+                onClick={handleOpenPromptEditor}
                 className="w-auto px-3 py-2 text-xs bg-white border border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-amber-400 hover:text-amber-600 shadow-sm transition-all flex items-center justify-center gap-2"
                 disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile)}
-                title="Copy prompt without generating"
+                title="View and edit the prompt before sending"
               >
-                <Copy size={14} /> <span className="hidden sm:inline">{strings.copyPrompt}</span>
+                <Edit3 size={14} /> <span className="hidden sm:inline">View/Edit Prompt</span>
               </button>
 
               <button
@@ -1189,6 +1285,60 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                 disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile)}
               >
                 {strings.generate} <Wand2 size={16} className="opacity-70" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Prompt Editor Modal */}
+      {showPromptEditor && (
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col h-[80vh] max-h-[90vh] animate-in fade-in zoom-in-95 overflow-hidden">
+            <div className="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center text-white shrink-0">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <Edit3 size={18} className="text-amber-400" />
+                Prompt Editor
+              </h3>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(manualPrompt);
+                    alert(strings.promptCopied);
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white"
+                >
+                  <Copy size={12} /> {strings.copyPrompt}
+                </button>
+                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1">
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 p-2 bg-slate-100 min-h-0">
+              <textarea
+                value={manualPrompt}
+                onChange={(e) => setManualPrompt(e.target.value)}
+                className="w-full h-full p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
+                spellCheck="false"
+              />
+            </div>
+
+            <div className="p-4 border-t bg-slate-50 shrink-0 flex items-center justify-end gap-4">
+              <button
+                onClick={handleClosePromptEditor}
+                className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors"
+                disabled={isGenerating}
+              >
+                {strings.cancel}
+              </button>
+              <button
+                onClick={handleSendManualPrompt}
+                className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                disabled={isGenerating}
+              >
+                {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {strings.generating}</> : <>{strings.generate}</>}
               </button>
             </div>
           </div>
