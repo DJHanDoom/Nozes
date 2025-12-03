@@ -181,29 +181,104 @@ const App: React.FC = () => {
     }
   };
 
+  // Render Settings Modal globally (available in all views)
+  const renderSettingsModal = () => showSettingsModal && (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <Settings className="text-emerald-600" size={20} />
+            {strings.settings}
+          </h3>
+          <button onClick={() => setShowSettingsModal(false)} className="text-slate-400 hover:text-slate-600 p-2">
+            <X size={24} />
+          </button>
+        </div>
+
+        <div className="space-y-4 mb-6">
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="block text-sm font-semibold text-slate-700">{strings.apiKey}</label>
+              <a
+                href="https://aistudio.google.com/app/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-medium text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
+              >
+                {strings.getKey} <ExternalLink size={12} />
+              </a>
+            </div>
+            <div className="relative">
+              <KeyRound className="absolute left-3 top-2.5 text-slate-400" size={16} />
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                placeholder="AIzaSy..."
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">{strings.aiModel}</label>
+            <input
+              value={aiModel}
+              onChange={(e) => setAiModel(e.target.value)}
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+              placeholder="gemini-2.5-flash"
+            />
+            <p className="text-xs text-slate-400 mt-1">
+              Default: gemini-2.5-flash
+            </p>
+          </div>
+
+          <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
+            <p className="text-xs text-amber-700">
+              {strings.apiKeyNotice}
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={saveSettings}
+          className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2"
+        >
+          <Save size={16} /> {strings.save}
+        </button>
+      </div>
+    </div>
+  );
+
   if (view === 'PLAYER' && currentProject) {
     return (
-      <Player 
-        project={currentProject} 
-        onBack={() => setView('HOME')} 
-        language={language}
-        onOpenSaved={() => setShowLoadModal(true)}
-        onEditKey={() => setView('BUILDER')}
-      />
+      <>
+        <Player 
+          project={currentProject} 
+          onBack={() => setView('HOME')} 
+          language={language}
+          onOpenSaved={() => setShowLoadModal(true)}
+          onEditKey={() => setView('BUILDER')}
+        />
+        {renderSettingsModal()}
+      </>
     );
   }
 
   if (view === 'BUILDER') {
     return (
-      <Builder
-        initialProject={currentProject}
-        onSave={handleSaveProject}
-        onCancel={() => setView('HOME')}
-        language={language}
-        defaultModel={aiModel}
-        apiKey={apiKey}
-        onOpenSettings={() => setShowSettingsModal(true)}
-      />
+      <>
+        <Builder
+          initialProject={currentProject}
+          onSave={handleSaveProject}
+          onCancel={() => setView('HOME')}
+          language={language}
+          defaultModel={aiModel}
+          apiKey={apiKey}
+          onOpenSettings={() => setShowSettingsModal(true)}
+        />
+        {renderSettingsModal()}
+      </>
     );
   }
 

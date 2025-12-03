@@ -142,7 +142,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
       project.features.forEach(feature => {
         const entityStateIds = entity.traits[feature.id] || [];
         const stateNames = entityStateIds
-          .map(sid => feature.states.find(s => s.id === sid)?.name || '')
+          .map(sid => feature.states.find(s => s.id === sid)?.label || '')
           .filter(Boolean)
           .join(', ');
         row.push(stateNames);

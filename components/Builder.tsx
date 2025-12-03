@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 interface BuilderProps {
@@ -15,7 +15,8 @@ interface BuilderProps {
 }
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
-type AiMode = 'TOPIC' | 'IMPORT';
+type AiMode = 'TOPIC' | 'IMPORT' | 'REFINE' | 'MERGE';
+type RefineAction = 'EXPAND' | 'REFINE' | 'CLEAN' | 'PHOTOS';
 
 const t = {
   en: {
@@ -90,7 +91,52 @@ const t = {
     editTraits: "Edit Characteristics",
     traitEditor: "Trait Editor",
     copyPrompt: "Copy",
-    missingKey: "Missing API Key. Please configure it in the main menu Settings."
+    missingKey: "Missing API Key. Please configure it in the main menu Settings.",
+    modeRefine: "Expand/Refine",
+    refineTitle: "Enhance Current Key",
+    refineDesc: "Use AI to expand or refine your existing identification key.",
+    actionExpand: "Expand Entities",
+    actionExpandDesc: "Add new species/entities similar to existing ones",
+    actionRefine: "Refine Features",
+    actionRefineDesc: "Improve feature descriptions and add discriminating traits",
+    actionClean: "Clean & Optimize",
+    actionCleanDesc: "Remove redundant features, fix inconsistencies",
+    expandCount: "# New Entities to Add",
+    keepExisting: "Preserve existing entities",
+    addFeatures: "Add new discriminating features",
+    improveDescriptions: "Improve descriptions",
+    fillGaps: "Fill missing trait data",
+    removeRedundant: "Remove redundant features",
+    fixInconsistencies: "Fix inconsistencies",
+    currentProject: "Current Project",
+    noProjectLoaded: "No project loaded. Create or load a project first.",
+    entitiesCount: "entities",
+    featuresCount: "features",
+    completePhotos: "Complete Photo Collection",
+    completePhotosDesc: "Fill missing images with valid URLs",
+    photoTargetEntities: "Entity Images",
+    photoTargetFeatures: "Feature Images",
+    photoTargetBoth: "Both",
+    actionPhotos: "Complete Photos",
+    actionPhotosDesc: "Fill all missing images with real URLs",
+    photosActionDesc: "Select which images to complete with valid URLs",
+    modeMerge: "Merge Keys",
+    mergeTitle: "Combine Two Keys",
+    mergeDesc: "Import two JSON keys and merge them into one optimized key.",
+    mergeKey1: "First Key (JSON)",
+    mergeKey2: "Second Key (JSON)",
+    uploadKey1: "Upload Key 1 (JSON)",
+    uploadKey2: "Upload Key 2 (JSON)",
+    mergeStrategy: "Merge Strategy",
+    strategyUnion: "Union (All-inclusive)",
+    strategyUnionDesc: "Include all features and entities from both keys",
+    strategyIntersection: "Intersection (Common)",
+    strategyIntersectionDesc: "Focus on shared characteristics between keys",
+    strategyPrimary: "Primary (Key 1 base)",
+    strategyPrimaryDesc: "Use Key 1 as base, add unique elements from Key 2",
+    remove: "Remove",
+    mergeAction: "Merge Keys",
+    mergeLoaded: "loaded"
   },
   pt: {
     builder: "Construtor",
@@ -164,7 +210,52 @@ const t = {
     editTraits: "Editar Características",
     traitEditor: "Editor de Características",
     copyPrompt: "Copiar",
-    missingKey: "Falta a Chave da API. Configure-a nas Configurações do menu principal."
+    missingKey: "Falta a Chave da API. Configure-a nas Configurações do menu principal.",
+    modeRefine: "Expandir/Refinar",
+    refineTitle: "Aprimorar Chave Atual",
+    refineDesc: "Use IA para expandir ou refinar sua chave de identificação existente.",
+    actionExpand: "Expandir Entidades",
+    actionExpandDesc: "Adicionar novas espécies/entidades similares às existentes",
+    actionRefine: "Refinar Características",
+    actionRefineDesc: "Melhorar descrições e adicionar características discriminantes",
+    actionClean: "Limpar & Otimizar",
+    actionCleanDesc: "Remover características redundantes, corrigir inconsistências",
+    expandCount: "# Novas Entidades a Adicionar",
+    keepExisting: "Preservar entidades existentes",
+    addFeatures: "Adicionar novas características discriminantes",
+    improveDescriptions: "Melhorar descrições",
+    fillGaps: "Preencher dados de características faltantes",
+    removeRedundant: "Remover características redundantes",
+    fixInconsistencies: "Corrigir inconsistências",
+    currentProject: "Projeto Atual",
+    noProjectLoaded: "Nenhum projeto carregado. Crie ou carregue um projeto primeiro.",
+    entitiesCount: "entidades",
+    featuresCount: "características",
+    completePhotos: "Completar Acervo Fotográfico",
+    completePhotosDesc: "Preencher imagens faltantes com URLs válidas",
+    photoTargetEntities: "Imagens de Entidades",
+    photoTargetFeatures: "Imagens de Características",
+    photoTargetBoth: "Ambos",
+    actionPhotos: "Completar Fotos",
+    actionPhotosDesc: "Preencher todas as imagens faltantes com URLs reais",
+    photosActionDesc: "Selecione quais imagens completar com URLs válidas",
+    modeMerge: "Combinar",
+    mergeTitle: "Combinar Duas Chaves",
+    mergeDesc: "Importe dois JSONs e combine-os em uma chave otimizada.",
+    mergeKey1: "Primeira Chave (JSON)",
+    mergeKey2: "Segunda Chave (JSON)",
+    uploadKey1: "Carregar Chave 1 (JSON)",
+    uploadKey2: "Carregar Chave 2 (JSON)",
+    mergeStrategy: "Estratégia de Combinação",
+    strategyUnion: "União (Tudo incluído)",
+    strategyUnionDesc: "Incluir todas as características e entidades de ambas as chaves",
+    strategyIntersection: "Interseção (Comum)",
+    strategyIntersectionDesc: "Focar nas características compartilhadas entre as chaves",
+    strategyPrimary: "Primária (Base Chave 1)",
+    strategyPrimaryDesc: "Usar Chave 1 como base, adicionar elementos únicos da Chave 2",
+    remove: "Remover",
+    mergeAction: "Combinar Chaves",
+    mergeLoaded: "carregado"
   }
 };
 
@@ -202,6 +293,25 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [savedProjects, setSavedProjects] = useState<Project[]>([]);
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
+
+  // Refine Mode State
+  const [refineAction, setRefineAction] = useState<RefineAction>('EXPAND');
+  const [refineOptions, setRefineOptions] = useState({
+    expandCount: 10,
+    keepExisting: true,
+    addFeatures: true,
+    improveDescriptions: true,
+    fillGaps: true,
+    removeRedundant: false,
+    fixInconsistencies: true,
+    completePhotos: false,
+    photoTarget: 'both' as 'entities' | 'features' | 'both'
+  });
+
+  // Merge Mode State
+  const [mergeKey1, setMergeKey1] = useState<Project | null>(null);
+  const [mergeKey2, setMergeKey2] = useState<Project | null>(null);
+  const [mergeStrategy, setMergeStrategy] = useState<'union' | 'intersection' | 'primary'>('union');
 
   // Prompt Editor State
   const [showPromptEditor, setShowPromptEditor] = useState(false);
@@ -455,8 +565,346 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
   };
 
+  // Build refine prompt based on current settings
+  const buildRefinePrompt = () => {
+    const projectJson = JSON.stringify({
+      name: project.name,
+      description: project.description,
+      features: project.features.map(f => ({
+        name: f.name,
+        imageUrl: f.imageUrl || '',
+        states: f.states.map(s => s.label)
+      })),
+      entities: project.entities.map(e => ({
+        name: e.name,
+        description: e.description,
+        imageUrl: e.imageUrl || '',
+        traits: Object.entries(e.traits).map(([fid, sids]) => {
+          const feature = project.features.find(f => f.id === fid);
+          return sids.map(sid => {
+            const state = feature?.states.find(s => s.id === sid);
+            return { featureName: feature?.name || '', stateValue: state?.label || '' };
+          });
+        }).flat()
+      }))
+    }, null, 2);
+
+    let refinePrompt = '';
+    
+    // PHOTOS action - dedicated photo completion prompt
+    if (refineAction === 'PHOTOS') {
+      const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
+      const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
+      
+      refinePrompt = `
+You are an expert biologist with access to scientific image databases.
+
+CURRENT KEY (JSON):
+${projectJson}
+
+TASK: Complete the photo collection for this identification key.
+
+YOUR ONLY TASK IS TO FIND AND ADD VALID IMAGE URLs. DO NOT CHANGE ANY OTHER DATA.
+
+CRITICAL REQUIREMENTS:
+${targetEntities ? `
+FOR ENTITIES (Species/Taxa):
+- Check each entity's imageUrl field
+- If empty or invalid, find a REAL, DIRECT image URL showing this species
+- Sources to use (in order of preference):
+  1. Wikimedia Commons (format: https://upload.wikimedia.org/wikipedia/commons/X/XX/Species_name.jpg)
+  2. Encyclopedia of Life (eol.org)
+  3. iNaturalist static images
+  4. GBIF image repository
+  5. Flora e Funga do Brasil (for Brazilian species)
+- The URL MUST end in .jpg, .jpeg, .png, or .webp
+- The URL MUST be a DIRECT link to the image binary, NOT a webpage
+- DO NOT use Google Images or Pinterest URLs
+` : ''}
+${targetFeatures ? `
+FOR FEATURES (Characteristics):
+- Check each feature's imageUrl field
+- If empty or invalid, find a REAL, DIRECT image URL illustrating this trait
+- Use botanical/zoological illustration databases or Wikipedia diagrams
+- The URL MUST end in .jpg, .jpeg, .png, or .webp
+- The URL MUST be a DIRECT link to the image binary
+` : ''}
+
+FALLBACK: If you absolutely cannot find a real image, use:
+https://picsum.photos/seed/[entity-or-feature-name-encoded]/400/300
+
+PRESERVE: Keep ALL existing data exactly as-is. Only add/update imageUrl fields.
+LANGUAGE: ${language === 'pt' ? 'Portuguese' : 'English'}
+
+OUTPUT: Return the complete JSON with all imageUrls filled in.
+`;
+    } else if (refineAction === 'EXPAND') {
+      refinePrompt = `
+You are an expert taxonomist. I have an existing identification key that I want to EXPAND with more entities.
+
+CURRENT KEY (JSON):
+${projectJson}
+
+TASK: Add ${refineOptions.expandCount} NEW entities (species/taxa) to this key.
+
+CRITICAL RULES:
+1. DO NOT repeat any of the existing ${project.entities.length} entities. Each new entity MUST be unique.
+2. New entities should be taxonomically related or similar to existing ones (same family/genus/habitat).
+3. ${refineOptions.keepExisting ? 'PRESERVE all existing entities in the output.' : 'Replace existing entities with new ones.'}
+4. ${refineOptions.addFeatures ? 'You MAY add 1-3 new discriminating features if needed to distinguish new species.' : 'Use ONLY the existing features.'}
+5. For each new entity, assign appropriate trait values using the existing feature states.
+6. Maintain the same level of detail and language (${language === 'pt' ? 'Portuguese' : 'English'}).
+
+OUTPUT: Return a complete JSON with the expanded key including all entities (existing + new).
+`;
+    } else if (refineAction === 'REFINE') {
+      refinePrompt = `
+You are an expert taxonomist. I have an existing identification key that I want to REFINE and improve.
+
+CURRENT KEY (JSON):
+${projectJson}
+
+TASK: Improve and refine this identification key.
+
+IMPROVEMENTS TO MAKE:
+${refineOptions.improveDescriptions ? '- Improve entity descriptions with more accurate biological information.' : ''}
+${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments.' : ''}
+${refineOptions.addFeatures ? '- Add 2-4 new discriminating features that help better distinguish between entities.' : ''}
+
+RULES:
+1. Keep all existing entities.
+2. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
+3. Ensure scientific accuracy.
+4. Make features more discriminating (each state should ideally apply to different subsets of entities).
+
+OUTPUT: Return the improved JSON key.
+`;
+    } else { // CLEAN
+      refinePrompt = `
+You are an expert taxonomist. I have an existing identification key that I want to CLEAN and optimize.
+
+CURRENT KEY (JSON):
+${projectJson}
+
+TASK: Clean and optimize this identification key.
+
+OPTIMIZATIONS TO MAKE:
+${refineOptions.removeRedundant ? '- Remove redundant features (features where all entities have the same state).' : ''}
+${refineOptions.fixInconsistencies ? '- Fix any inconsistencies in trait assignments.' : ''}
+- Ensure each feature has meaningful variation across entities.
+- Remove empty or meaningless states.
+
+RULES:
+1. Keep all entities.
+2. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
+3. Only remove features that provide no discriminating value.
+
+OUTPUT: Return the cleaned JSON key.
+`;
+    }
+    
+    return refinePrompt;
+  };
+
+  // Build merge prompt for combining two keys
+  const buildMergePrompt = () => {
+    if (!mergeKey1 || !mergeKey2) return '';
+
+    const key1Json = JSON.stringify({
+      name: mergeKey1.name,
+      description: mergeKey1.description,
+      features: mergeKey1.features.map(f => ({
+        name: f.name,
+        states: f.states.map(s => s.label)
+      })),
+      entities: mergeKey1.entities.map(e => ({
+        name: e.name,
+        description: e.description,
+        traits: Object.entries(e.traits).map(([fid, sids]) => {
+          const feature = mergeKey1.features.find(f => f.id === fid);
+          return sids.map(sid => {
+            const state = feature?.states.find(s => s.id === sid);
+            return { featureName: feature?.name || '', stateValue: state?.label || '' };
+          });
+        }).flat()
+      }))
+    }, null, 2);
+
+    const key2Json = JSON.stringify({
+      name: mergeKey2.name,
+      description: mergeKey2.description,
+      features: mergeKey2.features.map(f => ({
+        name: f.name,
+        states: f.states.map(s => s.label)
+      })),
+      entities: mergeKey2.entities.map(e => ({
+        name: e.name,
+        description: e.description,
+        traits: Object.entries(e.traits).map(([fid, sids]) => {
+          const feature = mergeKey2.features.find(f => f.id === fid);
+          return sids.map(sid => {
+            const state = feature?.states.find(s => s.id === sid);
+            return { featureName: feature?.name || '', stateValue: state?.label || '' };
+          });
+        }).flat()
+      }))
+    }, null, 2);
+
+    let strategyInstructions = '';
+    if (mergeStrategy === 'union') {
+      strategyInstructions = `
+MERGE STRATEGY: UNION (All-inclusive)
+- Include ALL features from BOTH keys
+- Include ALL entities from BOTH keys
+- Merge similar features where possible, keeping all unique states
+- For duplicate entities, combine traits from both sources`;
+    } else if (mergeStrategy === 'intersection') {
+      strategyInstructions = `
+MERGE STRATEGY: INTERSECTION (Common elements)
+- Keep only features that are present in BOTH keys (or semantically equivalent)
+- Include ALL entities from both keys, but focus on shared characteristics
+- Prioritize traits that appear in both keys for duplicate entities`;
+    } else {
+      strategyInstructions = `
+MERGE STRATEGY: PRIMARY (Key 1 priority)
+- Use KEY 1 as the primary structure base
+- Add entities from KEY 2 that don't exist in KEY 1
+- For duplicate entities, prefer KEY 1's trait assignments
+- Add features from KEY 2 only if they add discrimination value`;
+    }
+
+    return `
+You are an expert taxonomist specializing in identification key design and optimization.
+
+TASK: Merge two identification keys into ONE comprehensive, optimized key.
+
+KEY 1 (${mergeKey1.entities.length} entities, ${mergeKey1.features.length} features):
+${key1Json}
+
+KEY 2 (${mergeKey2.entities.length} entities, ${mergeKey2.features.length} features):
+${key2Json}
+
+${strategyInstructions}
+
+CRITICAL REQUIREMENTS:
+1. PRESERVE ALL ENTITIES from BOTH keys. The merged key must include every single species/entity.
+2. Create a unified feature set that can describe ALL entities
+3. Assign appropriate traits to every entity for every feature in the merged key
+4. Merge semantically similar features (e.g., "Leaf Shape" and "Leaf Form")
+5. Maintain language: ${language === 'pt' ? 'Portuguese' : 'English'}
+
+PROCESS:
+1. First, identify all unique entities from both keys
+2. Analyze features from both keys for similarities
+3. Create unified feature set based on merge strategy
+4. Map all entities to the new feature set
+5. Ensure every entity has trait assignments for every feature
+
+OUTPUT: Return a single merged JSON identification key with:
+- Combined name and description
+- Unified feature set
+- ALL entities from both keys with complete trait mappings
+`;
+  };
+
+  // Handle merge key file upload
+  const handleMergeKeyUpload = (keyNumber: 1 | 2) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        
+        // Validate it's a valid project structure
+        if (!parsed.features || !parsed.entities) {
+          alert(language === 'pt' ? 'JSON inválido. Deve conter features e entities.' : 'Invalid JSON. Must contain features and entities.');
+          return;
+        }
+        
+        if (keyNumber === 1) {
+          setMergeKey1(parsed as Project);
+        } else {
+          setMergeKey2(parsed as Project);
+        }
+      } catch (err) {
+        alert(language === 'pt' ? 'Erro ao ler arquivo JSON.' : 'Error reading JSON file.');
+      }
+    };
+    input.click();
+  };
+
+  // Handle merge generation
+  const handleMergeGenerate = async () => {
+    if (!apiKey) {
+      alert(strings.missingKey);
+      return;
+    }
+    if (!mergeKey1 || !mergeKey2) {
+      alert(language === 'pt' ? 'Carregue ambas as chaves JSON primeiro.' : 'Load both JSON keys first.');
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const mergePrompt = buildMergePrompt();
+      const generatedProject = await generateKeyFromCustomPrompt(mergePrompt, apiKey, aiConfig.model);
+      
+      setProject(generatedProject);
+      setShowAiModal(false);
+      setActiveTab('MATRIX');
+    } catch (e) {
+      console.error(e);
+      alert(strings.errGen);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleRefineGenerate = async () => {
+    if (!apiKey) {
+      alert(strings.missingKey);
+      return;
+    }
+    if (project.entities.length === 0) {
+      alert(language === 'pt' ? 'Carregue um projeto primeiro.' : 'Load a project first.');
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const refinePrompt = buildRefinePrompt();
+
+      const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model);
+      
+      setProject(generatedProject);
+      setShowAiModal(false);
+      setActiveTab('MATRIX');
+    } catch (e) {
+      console.error(e);
+      alert(strings.errGen);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   const handleOpenPromptEditor = async () => {
     try {
+      // Handle REFINE mode
+      if (aiMode === 'REFINE') {
+        if (project.entities.length === 0) {
+          alert(language === 'pt' ? 'Carregue um projeto primeiro.' : 'Load a project first.');
+          return;
+        }
+        const refinePrompt = buildRefinePrompt();
+        setManualPrompt(refinePrompt);
+        setShowPromptEditor(true);
+        setShowAiModal(false);
+        return;
+      }
+
       let config = { ...aiConfig };
 
       if (aiMode === 'IMPORT' && importedFile) {
@@ -479,7 +927,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
       setManualPrompt(fullText);
       setShowPromptEditor(true);
-      setShowAiModal(false); // Close wizard, open editor
+      setShowAiModal(false);
     } catch (e) {
       console.error("Failed to build prompt", e);
     }
@@ -1229,15 +1677,27 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
             <div className="flex border-b border-slate-200 bg-slate-50 shrink-0">
               <button
                 onClick={() => setAiMode('TOPIC')}
-                className={`flex-1 py-3 text-sm font-bold transition-colors border-b-2 ${aiMode === 'TOPIC' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
+                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'TOPIC' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
               >
-                <span className="flex items-center justify-center gap-2"><Wand2 size={16} /> {strings.modeTopic}</span>
+                <span className="flex items-center justify-center gap-1"><Wand2 size={14} /> <span className="hidden sm:inline">{strings.modeTopic}</span><span className="sm:hidden">Gerar</span></span>
               </button>
               <button
                 onClick={() => setAiMode('IMPORT')}
-                className={`flex-1 py-3 text-sm font-bold transition-colors border-b-2 ${aiMode === 'IMPORT' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
+                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'IMPORT' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
               >
-                <span className="flex items-center justify-center gap-2"><FileSearch size={16} /> {strings.modeImport}</span>
+                <span className="flex items-center justify-center gap-1"><FileSearch size={14} /> <span className="hidden sm:inline">{strings.modeImport}</span><span className="sm:hidden">Importar</span></span>
+              </button>
+              <button
+                onClick={() => setAiMode('REFINE')}
+                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'REFINE' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
+              >
+                <span className="flex items-center justify-center gap-1"><Sparkles size={14} /> <span className="hidden sm:inline">{strings.modeRefine}</span><span className="sm:hidden">Refinar</span></span>
+              </button>
+              <button
+                onClick={() => setAiMode('MERGE')}
+                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'MERGE' ? 'border-amber-500 text-amber-600 bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
+              >
+                <span className="flex items-center justify-center gap-1"><Combine size={14} /> <span className="hidden sm:inline">{strings.modeMerge}</span><span className="sm:hidden">Combinar</span></span>
               </button>
             </div>
 
@@ -1280,7 +1740,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                     </div>
                   </div>
                 </>
-              ) : (
+              ) : aiMode === 'IMPORT' ? (
                 /* IMPORT MODE INPUTS */
                 <div className="flex flex-col gap-4">
                   <div className="text-center space-y-2 mb-2">
@@ -1318,9 +1778,376 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                     )}
                   </div>
                 </div>
+              ) : aiMode === 'REFINE' ? (
+                /* REFINE MODE INPUTS */
+                <div className="flex flex-col gap-4">
+                  {/* Current Project Info */}
+                  <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200">
+                    <h5 className="text-xs font-bold text-emerald-700 uppercase mb-2">{strings.currentProject}</h5>
+                    {project.entities.length > 0 || project.features.length > 0 ? (
+                      <div className="flex items-center gap-4">
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800 truncate">{project.name}</p>
+                          <p className="text-xs text-slate-500">
+                            {project.entities.length} {strings.entitiesCount} • {project.features.length} {strings.featuresCount}
+                          </p>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded">
+                            {project.entities.length}
+                          </span>
+                          <span className="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-1 rounded">
+                            {project.features.length}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-amber-600 italic">{strings.noProjectLoaded}</p>
+                    )}
+                  </div>
+
+                  {/* Action Selector */}
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => setRefineAction('EXPAND')}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'EXPAND' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${refineAction === 'EXPAND' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <ListPlus size={20} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800">{strings.actionExpand}</p>
+                          <p className="text-xs text-slate-500">{strings.actionExpandDesc}</p>
+                        </div>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => setRefineAction('REFINE')}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'REFINE' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${refineAction === 'REFINE' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <Target size={20} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800">{strings.actionRefine}</p>
+                          <p className="text-xs text-slate-500">{strings.actionRefineDesc}</p>
+                        </div>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => setRefineAction('CLEAN')}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'CLEAN' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${refineAction === 'CLEAN' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <Eraser size={20} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800">{strings.actionClean}</p>
+                          <p className="text-xs text-slate-500">{strings.actionCleanDesc}</p>
+                        </div>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => setRefineAction('PHOTOS')}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'PHOTOS' ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${refineAction === 'PHOTOS' ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <Camera size={20} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800">{strings.actionPhotos}</p>
+                          <p className="text-xs text-slate-500">{strings.actionPhotosDesc}</p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+
+                  {/* Action-specific options */}
+                  {refineAction === 'EXPAND' && (
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
+                      <div>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.expandCount}</label>
+                          <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.expandCount}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="5"
+                          max="50"
+                          step="5"
+                          value={refineOptions.expandCount}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, expandCount: parseInt(e.target.value) }))}
+                          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                          disabled={isGenerating}
+                        />
+                      </div>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.keepExisting}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, keepExisting: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.keepExisting}</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.addFeatures}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.addFeatures}</span>
+                      </label>
+                    </div>
+                  )}
+
+                  {refineAction === 'REFINE' && (
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.improveDescriptions}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, improveDescriptions: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.improveDescriptions}</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.fillGaps}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, fillGaps: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.fillGaps}</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.addFeatures}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.addFeatures}</span>
+                      </label>
+                    </div>
+                  )}
+
+                  {refineAction === 'CLEAN' && (
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.removeRedundant}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, removeRedundant: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.removeRedundant}</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={refineOptions.fixInconsistencies}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, fixInconsistencies: e.target.checked }))}
+                          className="w-4 h-4 accent-amber-500"
+                        />
+                        <span className="text-sm text-slate-700">{strings.fixInconsistencies}</span>
+                      </label>
+                    </div>
+                  )}
+
+                  {refineAction === 'PHOTOS' && (
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-3">
+                      <p className="text-sm text-blue-700">{strings.photosActionDesc}</p>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'entities' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetEntities}
+                        </button>
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'features' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetFeatures}
+                        </button>
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'both' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetBoth}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Photo Completion Option - Available for EXPAND, REFINE, CLEAN actions */}
+                  {refineAction !== 'PHOTOS' && (
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-3">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={refineOptions.completePhotos}
+                        onChange={(e) => setRefineOptions(prev => ({ ...prev, completePhotos: e.target.checked }))}
+                        className="w-4 h-4 accent-blue-500"
+                      />
+                      <div className="flex-1">
+                        <span className="text-sm font-semibold text-blue-800">{strings.completePhotos}</span>
+                        <p className="text-xs text-blue-600">{strings.completePhotosDesc}</p>
+                      </div>
+                      <ImageIcon size={20} className="text-blue-400" />
+                    </label>
+                    
+                    {refineOptions.completePhotos && (
+                      <div className="flex gap-2 pl-6">
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'entities' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetEntities}
+                        </button>
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'features' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetFeatures}
+                        </button>
+                        <button
+                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
+                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                            refineOptions.photoTarget === 'both' 
+                              ? 'bg-blue-500 text-white shadow-sm' 
+                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                          }`}
+                        >
+                          {strings.photoTargetBoth}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  )}
+                </div>
+              ) : null}
+              
+              {aiMode === 'MERGE' && (
+                /* MERGE MODE INPUTS */
+                <div className="flex flex-col gap-4">
+                  <div className="text-center space-y-2 mb-2">
+                    <h4 className="font-bold text-slate-800 text-lg">{strings.mergeTitle}</h4>
+                    <p className="text-slate-500 text-sm">{strings.mergeDesc}</p>
+                  </div>
+
+                  {/* Key 1 Upload */}
+                  <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey1 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
+                    {mergeKey1 ? (
+                      <div className="flex flex-col items-center gap-2 w-full">
+                        <FileText size={32} className="text-amber-600" />
+                        <span className="font-bold text-slate-800 text-sm text-center">{mergeKey1.name || 'Key 1'}</span>
+                        <span className="text-xs text-slate-500">{mergeKey1.entities?.length || 0} {strings.entities} • {mergeKey1.features?.length || 0} {strings.features}</span>
+                        <button
+                          onClick={() => setMergeKey1(null)}
+                          className="text-xs text-red-500 hover:text-red-700 underline"
+                        >
+                          {strings.remove}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleMergeKeyUpload(1)}
+                        className="flex flex-col items-center gap-2 p-2 w-full"
+                      >
+                        <Upload size={32} className="text-slate-400" />
+                        <span className="text-sm font-medium text-slate-600">{strings.uploadKey1}</span>
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Key 2 Upload */}
+                  <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey2 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
+                    {mergeKey2 ? (
+                      <div className="flex flex-col items-center gap-2 w-full">
+                        <FileText size={32} className="text-amber-600" />
+                        <span className="font-bold text-slate-800 text-sm text-center">{mergeKey2.name || 'Key 2'}</span>
+                        <span className="text-xs text-slate-500">{mergeKey2.entities?.length || 0} {strings.entities} • {mergeKey2.features?.length || 0} {strings.features}</span>
+                        <button
+                          onClick={() => setMergeKey2(null)}
+                          className="text-xs text-red-500 hover:text-red-700 underline"
+                        >
+                          {strings.remove}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleMergeKeyUpload(2)}
+                        className="flex flex-col items-center gap-2 p-2 w-full"
+                      >
+                        <Upload size={32} className="text-slate-400" />
+                        <span className="text-sm font-medium text-slate-600">{strings.uploadKey2}</span>
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Merge Strategy */}
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                    <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.mergeStrategy}</label>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setMergeStrategy('union')}
+                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'union' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <p className="font-bold text-slate-800 text-sm">{strings.strategyUnion}</p>
+                        <p className="text-xs text-slate-500">{strings.strategyUnionDesc}</p>
+                      </button>
+                      <button
+                        onClick={() => setMergeStrategy('intersection')}
+                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'intersection' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <p className="font-bold text-slate-800 text-sm">{strings.strategyIntersection}</p>
+                        <p className="text-xs text-slate-500">{strings.strategyIntersectionDesc}</p>
+                      </button>
+                      <button
+                        onClick={() => setMergeStrategy('primary')}
+                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'primary' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <p className="font-bold text-slate-800 text-sm">{strings.strategyPrimary}</p>
+                        <p className="text-xs text-slate-500">{strings.strategyPrimaryDesc}</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               )}
 
-              {/* SHARED CONFIGURATION SECTION */}
+              {/* SHARED CONFIGURATION SECTION - Only for TOPIC and IMPORT modes */}
+              {(aiMode === 'TOPIC' || aiMode === 'IMPORT') && (
               <div className="pt-4 border-t border-slate-100 space-y-5">
                 <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                   <Settings2 size={12} /> {strings.configSettings}
@@ -1466,6 +2293,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                   </label>
                 </div>
               </div>
+              )}
 
               {isGenerating && (
                 <div className="bg-amber-50 text-amber-700 p-3 rounded-lg text-sm flex items-center justify-center gap-2">
@@ -1486,12 +2314,29 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
               <button
                 onClick={handleOpenPromptEditor}
                 className="w-auto px-3 py-2 text-xs bg-white border border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-amber-400 hover:text-amber-600 shadow-sm transition-all flex items-center justify-center gap-2"
-                disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile)}
+                disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile) || (aiMode === 'REFINE' && project.entities.length === 0) || (aiMode === 'MERGE' && (!mergeKey1 || !mergeKey2))}
                 title="View and edit the prompt before sending"
               >
                 <Edit3 size={14} /> <span className="hidden sm:inline">View/Edit Prompt</span>
               </button>
 
+              {aiMode === 'REFINE' ? (
+              <button
+                onClick={handleRefineGenerate}
+                className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+                disabled={isGenerating || project.entities.length === 0}
+              >
+                {refineAction === 'EXPAND' ? strings.actionExpand : refineAction === 'REFINE' ? strings.actionRefine : refineAction === 'CLEAN' ? strings.actionClean : strings.actionPhotos} <Sparkles size={16} className="opacity-70" />
+              </button>
+              ) : aiMode === 'MERGE' ? (
+              <button
+                onClick={handleMergeGenerate}
+                className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+                disabled={isGenerating || !mergeKey1 || !mergeKey2}
+              >
+                {strings.mergeAction} <Combine size={16} className="opacity-70" />
+              </button>
+              ) : (
               <button
                 onClick={handleAiGenerate}
                 className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
@@ -1499,6 +2344,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
               >
                 {strings.generate} <Wand2 size={16} className="opacity-70" />
               </button>
+              )}
             </div>
           </div>
         </div>
