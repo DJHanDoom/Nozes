@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 interface BuilderProps {
@@ -11,7 +11,9 @@ interface BuilderProps {
   language: Language;
   defaultModel: string;
   apiKey: string;
-  onOpenSettings?: () => void;
+  onOpenSettings?: (returnToAi?: boolean) => void;
+  reopenAiModal?: boolean;
+  onAiModalOpened?: () => void;
 }
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
@@ -93,7 +95,7 @@ const t = {
     copyPrompt: "Copy",
     missingKey: "Missing API Key. Please configure it in the main menu Settings.",
     apiKeyWarning: "Configure your API Key to use AI features",
-    clickGear: "Click the gear icon above",
+    clickGear: "Click the key icon above",
     modeRefine: "Expand/Refine",
     refineTitle: "Enhance Current Key",
     refineDesc: "Use AI to expand or refine your existing identification key.",
@@ -220,7 +222,7 @@ const t = {
     copyPrompt: "Copiar",
     missingKey: "Falta a Chave da API. Configure-a nas Configurações do menu principal.",
     apiKeyWarning: "Configure sua Chave de API para usar a IA",
-    clickGear: "Clique na engrenagem acima",
+    clickGear: "Clique na chave acima",
     modeRefine: "Expandir/Refinar",
     refineTitle: "Aprimorar Chave Atual",
     refineDesc: "Use IA para expandir ou refinar sua chave de identificação existente.",
@@ -275,7 +277,7 @@ const t = {
   }
 };
 
-export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings }) => {
+export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened }) => {
   const strings = t[language];
   // State
   const [project, setProject] = useState<Project>(initialProject || {
@@ -393,6 +395,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   useEffect(() => {
     setAiConfig(prev => ({ ...prev, language }));
   }, [language]);
+
+  // Reopen AI modal when returning from settings
+  useEffect(() => {
+    if (reopenAiModal) {
+      setShowAiModal(true);
+      onAiModalOpened?.();
+    }
+  }, [reopenAiModal, onAiModalOpened]);
 
   // Update model if defaultModel prop changes
   useEffect(() => {
@@ -1738,11 +1748,11 @@ OUTPUT: Return a single merged JSON identification key with:
                 <h3 className="text-xl md:text-2xl font-bold flex-1">{strings.aiTitle}</h3>
                 {onOpenSettings && (
                   <button
-                    onClick={() => { setShowAiModal(false); onOpenSettings(); }}
+                    onClick={() => { setShowAiModal(false); onOpenSettings(true); }}
                     className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
                     title={language === 'pt' ? 'Configurar Chave de API' : 'Configure API Key'}
                   >
-                    <Settings2 size={18} className="text-white" />
+                    <KeyRound size={18} className="text-white" />
                   </button>
                 )}
               </div>
@@ -1752,7 +1762,7 @@ OUTPUT: Return a single merged JSON identification key with:
               {/* API Key Warning - only show if no API key configured */}
               {!apiKey && onOpenSettings && (
                 <div className="mt-3 flex items-center gap-2 bg-red-500/30 backdrop-blur-sm px-3 py-2 rounded-lg border border-red-300/50 animate-pulse">
-                  <Settings2 size={16} className="text-yellow-200" />
+                  <KeyRound size={16} className="text-yellow-200" />
                   <div className="flex-1">
                     <p className="text-yellow-100 text-xs font-bold">{strings.apiKeyWarning}</p>
                     <p className="text-yellow-200/80 text-[10px]">{strings.clickGear}</p>

@@ -11,6 +11,7 @@ const App: React.FC = () => {
   const [savedProjects, setSavedProjects] = useState<Project[]>([]);
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [returnToAiModal, setReturnToAiModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [helpTab, setHelpTab] = useState<'ABOUT' | 'HELP'>('ABOUT');
   const [aiModel, setAiModel] = useState<string>("gemini-2.5-flash");
@@ -41,6 +42,7 @@ const App: React.FC = () => {
     const trimmedKey = apiKey.trim();
     localStorage.setItem('nozesia_settings', JSON.stringify({ model: trimmedModel, apiKey: trimmedKey }));
     setShowSettingsModal(false);
+    // returnToAiModal is handled automatically by the reopenAiModal prop
   };
 
   // Sample seed data
@@ -277,7 +279,12 @@ const App: React.FC = () => {
           language={language}
           defaultModel={aiModel}
           apiKey={apiKey}
-          onOpenSettings={() => setShowSettingsModal(true)}
+          onOpenSettings={(returnToAi) => {
+            setReturnToAiModal(returnToAi || false);
+            setShowSettingsModal(true);
+          }}
+          reopenAiModal={returnToAiModal && !showSettingsModal}
+          onAiModalOpened={() => setReturnToAiModal(false)}
         />
         {renderSettingsModal()}
       </>
