@@ -10,16 +10,59 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f5f9;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 3px;
+  border-radius: 4px;
+  border: 2px solid #f1f5f9;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+::-webkit-scrollbar-corner {
+  background: #f1f5f9;
+}
+
+/* Smooth scrolling for matrix */
+.custom-scrollbar {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* Improve vertical text readability */
+@supports (writing-mode: vertical-rl) {
+  [style*="writing-mode: vertical-rl"] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Sticky header enhancement - add shadow when scrolled */
+.matrix-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.matrix-sticky-header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.matrix-scrolled .matrix-sticky-header::after {
+  opacity: 1;
 }

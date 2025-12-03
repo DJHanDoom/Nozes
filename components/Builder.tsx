@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 interface BuilderProps {
@@ -206,11 +206,47 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [showPromptEditor, setShowPromptEditor] = useState(false);
   const [manualPrompt, setManualPrompt] = useState("");
 
-
-
-
   // Entity Trait Editor State
   const [editingEntityId, setEditingEntityId] = useState<string | null>(null);
+
+  // Matrix Feature Expansion State
+  const [expandedFeatureId, setExpandedFeatureId] = useState<string | null>(
+    project.features.length > 0 ? project.features[0].id : null
+  );
+  const matrixScrollRef = React.useRef<HTMLDivElement>(null);
+  const [isMatrixScrolled, setIsMatrixScrolled] = useState(false);
+
+  const toggleFeatureExpansion = (featureId: string) => {
+    setExpandedFeatureId(prev => prev === featureId ? null : featureId);
+
+    // Scroll to center the expanded feature after a brief delay
+    setTimeout(() => {
+      const featureElement = document.querySelector(`[data-feature-id="${featureId}"]`);
+      if (featureElement && matrixScrollRef.current) {
+        const container = matrixScrollRef.current;
+        const elementRect = featureElement.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        const scrollLeft = featureElement.getBoundingClientRect().left - containerRect.left + container.scrollLeft - (containerRect.width / 2) + (elementRect.width / 2);
+
+        container.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth'
+        });
+      }
+    }, 50);
+  };
+
+  const navigateFeature = (direction: 'prev' | 'next') => {
+    const currentIndex = project.features.findIndex(f => f.id === expandedFeatureId);
+    if (currentIndex === -1) return;
+
+    const newIndex = direction === 'prev'
+      ? (currentIndex - 1 + project.features.length) % project.features.length
+      : (currentIndex + 1) % project.features.length;
+
+    toggleFeatureExpansion(project.features[newIndex].id);
+  };
 
   // Update AI config language when prop changes
   useEffect(() => {
@@ -221,6 +257,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   useEffect(() => {
     setAiConfig(prev => ({ ...prev, model: defaultModel }));
   }, [defaultModel]);
+
+  // Monitor scroll position for sticky header visual effect
+  useEffect(() => {
+    const scrollContainer = matrixScrollRef.current;
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      setIsMatrixScrolled(scrollContainer.scrollTop > 0);
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+    return () => scrollContainer.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem('lucidgen_projects');
@@ -858,65 +907,319 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
           {activeTab === 'MATRIX' && (
             <div className="flex flex-col h-full bg-slate-50 min-h-[500px]">
-              <div className="p-4 border-b bg-white flex justify-between items-center">
-                <h3 className="font-semibold text-slate-700">{strings.scoringMatrix}</h3>
-                <span className="text-xs text-slate-400 hidden sm:inline">{strings.scoringMatrixDesc}</span>
-              </div>
-              <div className="overflow-auto custom-scrollbar flex-1 relative bg-slate-200/50">
-                <div className="inline-block min-w-full align-top">
-                  <div className="grid" style={{
-                    gridTemplateColumns: `minmax(150px, 250px) repeat(${project.features.reduce((acc, f) => acc + f.states.length, 0)}, minmax(50px, 1fr))`
-                  }}>
-
-                    {/* Header Row */}
-                    <div className="sticky top-0 left-0 z-30 bg-slate-800 text-white p-2 md:p-4 font-bold border-r border-slate-700 shadow-md flex items-end text-xs md:text-sm">
-                      {strings.taxaFeatures}
-                    </div>
-                    {project.features.map(feature => (
-                      <div key={feature.id} className="sticky top-0 z-20 bg-slate-800 text-white border-r border-slate-700 shadow-md text-center" style={{ gridColumn: `span ${feature.states.length}` }}>
-                        <div className="p-1 md:p-2 border-b border-slate-600 font-semibold truncate text-[10px] md:text-sm bg-slate-900/50">
-                          {feature.name}
-                        </div>
-                        <div className="flex">
-                          {feature.states.map(state => (
-                            <div key={state.id} className="flex-1 p-1 md:p-2 text-[10px] md:text-xs text-slate-300 border-r border-slate-700 last:border-0 h-full flex items-center justify-center min-w-[50px] break-words">
-                              {state.label}
-                            </div>
-                          ))}
-                        </div>
+              <div className="p-4 border-b bg-white">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="font-semibold text-slate-700">{strings.scoringMatrix}</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-slate-400 hidden sm:inline">{strings.scoringMatrixDesc}</span>
+                    {/* Navigation Arrows */}
+                    {project.features.length > 1 && (
+                      <div className="flex gap-1 border-l pl-2 ml-2">
+                        <button
+                          onClick={() => navigateFeature('prev')}
+                          className="p-1.5 hover:bg-slate-100 rounded transition-colors text-slate-600"
+                          title="Característica Anterior"
+                        >
+                          <ChevronLeft size={16} />
+                        </button>
+                        <button
+                          onClick={() => navigateFeature('next')}
+                          className="p-1.5 hover:bg-slate-100 rounded transition-colors text-slate-600"
+                          title="Próxima Característica"
+                        >
+                          <ChevronRight size={16} />
+                        </button>
                       </div>
-                    ))}
+                    )}
+                  </div>
+                </div>
+                {/* Feature Navigation Pills */}
+                <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                  {project.features.map((feature, idx) => (
+                    <button
+                      key={feature.id}
+                      onClick={() => toggleFeatureExpansion(feature.id)}
+                      className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                        expandedFeatureId === feature.id
+                          ? 'bg-emerald-600 text-white shadow-md'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      {feature.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex-1 flex flex-col overflow-hidden bg-slate-200/50">
+                {/* Sticky Header Row */}
+                <div className="sticky top-0 z-40 bg-slate-800 shadow-lg border-b-2 border-slate-700 flex-shrink-0">
+                  <div className="flex" style={{
+                    gridTemplateColumns: `minmax(150px, 220px) ${project.features.map(f =>
+                      expandedFeatureId === f.id
+                        ? `repeat(${f.states.length}, 80px)`
+                        : '60px'
+                    ).join(' ')}`
+                  }}>
+                    {/* Corner Cell */}
+                    <div className="flex-shrink-0 text-white p-3 font-bold border-r border-slate-700 flex items-end text-xs" style={{ width: '220px' }}>
+                      <span className="line-clamp-2 leading-tight">{strings.taxaFeatures}</span>
+                    </div>
+
+                    {/* Feature Headers */}
+                    <div className="flex flex-1">
+                      {project.features.map((feature, featureIdx) => {
+                        const isExpanded = expandedFeatureId === feature.id;
+                        const width = isExpanded ? `${feature.states.length * 80}px` : '60px';
+
+                        return (
+                          <div
+                            key={feature.id}
+                            data-feature-id={feature.id}
+                            className={`flex-shrink-0 text-white border-r transition-all duration-300 ${
+                              isExpanded
+                                ? 'bg-emerald-700 border-emerald-800'
+                                : 'bg-slate-700 hover:bg-slate-600 cursor-pointer border-slate-700'
+                            }`}
+                            style={{ width }}
+                            onClick={() => !isExpanded && toggleFeatureExpansion(feature.id)}
+                          >
+                            {/* Feature Name - Top Row */}
+                            <div className={`p-2 border-b font-semibold min-h-[2.5rem] flex items-center justify-center gap-2 ${
+                              isExpanded ? 'border-emerald-600 bg-emerald-800/50' : 'border-slate-600 bg-slate-800/50'
+                            }`}>
+                              {isExpanded && (
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setExpandedFeatureId(null);
+                                  }}
+                                  className="p-1 hover:bg-emerald-600 rounded transition-colors"
+                                  title="Colapsar"
+                                >
+                                  <X size={14} />
+                                </button>
+                              )}
+                              <div className={`leading-tight text-center ${isExpanded ? 'text-[10px] line-clamp-2' : 'text-[9px] line-clamp-3'}`} title={feature.name}>
+                                {feature.name}
+                              </div>
+                              {!isExpanded && (
+                                <div className="text-[8px] text-slate-400 mt-0.5">
+                                  ({feature.states.length})
+                                </div>
+                              )}
+                            </div>
+
+                            {/* State Labels */}
+                            {isExpanded ? (
+                              <div className="flex">
+                                {feature.states.map((state, stateIdx) => (
+                                  <div key={state.id} className="flex-1 border-r border-emerald-600 last:border-0 relative group/state" style={{ width: '80px' }}>
+                                    <div className="p-1.5 min-h-[4rem] max-h-[6rem] flex items-center justify-center">
+                                      <div
+                                        className="text-[9px] leading-snug text-emerald-100 font-medium text-center break-words hyphens-auto line-clamp-4"
+                                        style={{ wordBreak: 'break-word' }}
+                                        title={state.label}
+                                      >
+                                        {state.label}
+                                      </div>
+                                    </div>
+                                    {/* Tooltip */}
+                                    <div className="fixed z-50 px-3 py-2 bg-slate-900 text-white text-xs rounded-lg shadow-2xl opacity-0 invisible group-hover/state:opacity-100 group-hover/state:visible transition-all duration-200 pointer-events-none max-w-xs"
+                                         style={{
+                                           transform: 'translate(-50%, -100%)',
+                                           marginTop: '-0.5rem'
+                                         }}
+                                         onMouseEnter={(e) => {
+                                           const rect = e.currentTarget.parentElement?.getBoundingClientRect();
+                                           if (rect) {
+                                             e.currentTarget.style.left = `${rect.left + rect.width / 2}px`;
+                                             e.currentTarget.style.top = `${rect.top}px`;
+                                           }
+                                         }}>
+                                      {state.label}
+                                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-slate-900"></div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="min-h-[4rem] flex items-center justify-center p-2 bg-slate-800/30">
+                                <div className="text-[8px] text-slate-400 text-center">
+                                  Clique para expandir
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scrollable Body */}
+                <div ref={matrixScrollRef} className="flex-1 overflow-auto custom-scrollbar">
+                  <div className="inline-block min-w-full align-top">
+                    <div className="grid" style={{
+                      gridTemplateColumns: `minmax(150px, 220px) ${project.features.map(f =>
+                        expandedFeatureId === f.id
+                          ? `repeat(${f.states.length}, 80px)`
+                          : '60px'
+                      ).join(' ')}`
+                    }}>
+
+                    {/* Header Row - Frozen/Sticky */}
+                    <div className="matrix-sticky-header sticky top-0 left-0 z-40 bg-slate-800 text-white p-3 font-bold border-r border-b-2 border-slate-700 shadow-lg flex items-end text-xs">
+                      <span className="line-clamp-2 leading-tight">{strings.taxaFeatures}</span>
+                    </div>
+                    {project.features.map((feature, featureIdx) => {
+                      const isExpanded = expandedFeatureId === feature.id;
+                      const colSpan = isExpanded ? feature.states.length : 1;
+
+                      return (
+                        <div
+                          key={feature.id}
+                          data-feature-id={feature.id}
+                          className={`matrix-sticky-header sticky top-0 z-30 text-white border-r border-b-2 shadow-lg transition-all duration-300 ${
+                            isExpanded
+                              ? 'bg-emerald-700 border-emerald-800'
+                              : 'bg-slate-700 hover:bg-slate-600 cursor-pointer border-slate-700'
+                          }`}
+                          style={{ gridColumn: `span ${colSpan}` }}
+                          onClick={() => !isExpanded && toggleFeatureExpansion(feature.id)}
+                        >
+                          {/* Feature Name - Top Row */}
+                          <div className={`p-2 border-b font-semibold min-h-[2.5rem] flex items-center justify-center gap-2 ${
+                            isExpanded ? 'border-emerald-600 bg-emerald-800/50' : 'border-slate-600 bg-slate-800/50'
+                          }`}>
+                            {isExpanded && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setExpandedFeatureId(null);
+                                }}
+                                className="p-1 hover:bg-emerald-600 rounded transition-colors"
+                                title="Colapsar"
+                              >
+                                <X size={14} />
+                              </button>
+                            )}
+                            <div className={`leading-tight text-center ${isExpanded ? 'text-[10px] line-clamp-2' : 'text-[9px] line-clamp-3'}`} title={feature.name}>
+                              {feature.name}
+                            </div>
+                            {!isExpanded && (
+                              <div className="text-[8px] text-slate-400 mt-0.5">
+                                ({feature.states.length})
+                              </div>
+                            )}
+                          </div>
+
+                          {/* State Labels - Only show if expanded */}
+                          {isExpanded ? (
+                            <div className="flex">
+                              {feature.states.map((state, stateIdx) => (
+                                <div key={state.id} className="flex-1 border-r border-emerald-600 last:border-0 relative group/state w-20">
+                                  <div className="p-1.5 min-h-[4rem] max-h-[6rem] flex items-center justify-center">
+                                    <div
+                                      className="text-[9px] leading-snug text-emerald-100 font-medium text-center break-words hyphens-auto line-clamp-4"
+                                      style={{ wordBreak: 'break-word' }}
+                                      title={state.label}
+                                    >
+                                      {state.label}
+                                    </div>
+                                  </div>
+                                  {/* Tooltip on hover */}
+                                  <div className="fixed z-50 px-3 py-2 bg-slate-900 text-white text-xs rounded-lg shadow-2xl opacity-0 invisible group-hover/state:opacity-100 group-hover/state:visible transition-all duration-200 pointer-events-none max-w-xs"
+                                       style={{
+                                         transform: 'translate(-50%, -100%)',
+                                         marginTop: '-0.5rem'
+                                       }}
+                                       onMouseEnter={(e) => {
+                                         const rect = e.currentTarget.parentElement?.getBoundingClientRect();
+                                         if (rect) {
+                                           e.currentTarget.style.left = `${rect.left + rect.width / 2}px`;
+                                           e.currentTarget.style.top = `${rect.top}px`;
+                                         }
+                                       }}>
+                                    {state.label}
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-slate-900"></div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="min-h-[4rem] flex items-center justify-center p-2 bg-slate-800/30">
+                              <div className="text-[8px] text-slate-400 text-center">
+                                Clique para expandir
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
 
                     {/* Body Rows */}
                     {project.entities.map((entity, idx) => (
                       <React.Fragment key={entity.id}>
-                        {/* Entity Name Column */}
-                        <div className={`sticky left-0 z-10 bg-white p-2 md:p-3 border-r border-b border-slate-200 flex items-center gap-2 md:gap-3 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.1)] hover:bg-slate-50 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
+                        {/* Entity Name Column - Frozen Left */}
+                        <div className={`sticky left-0 z-20 p-2.5 border-r-2 border-b border-slate-200 flex items-center gap-2 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.1)] hover:bg-slate-50 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
                           <div className="w-6 h-6 md:w-8 md:h-8 rounded bg-slate-200 overflow-hidden flex-shrink-0">
-                            {entity.imageUrl && <img src={entity.imageUrl} className="w-full h-full object-cover" />}
+                            {entity.imageUrl && <img src={entity.imageUrl} className="w-full h-full object-cover" alt="" />}
                           </div>
-                          <span className="font-medium text-slate-700 text-xs md:text-sm group-hover:text-emerald-600 transition-colors truncate">{entity.name}</span>
+                          <span className="font-medium text-slate-700 text-xs leading-tight group-hover:text-emerald-600 transition-colors line-clamp-2" title={entity.name}>
+                            {entity.name}
+                          </span>
                         </div>
 
-                        {/* Checkboxes */}
-                        {project.features.map(feature => (
-                          feature.states.map(state => {
-                            const isChecked = entity.traits[feature.id]?.includes(state.id);
+                        {/* Feature Cells - Collapsed or Expanded */}
+                        {project.features.map(feature => {
+                          const isExpanded = expandedFeatureId === feature.id;
+                          const entityTraits = entity.traits[feature.id] || [];
+                          const selectedCount = entityTraits.length;
+
+                          if (isExpanded) {
+                            // Show all state checkboxes for expanded feature
+                            return feature.states.map(state => {
+                              const isChecked = entityTraits.includes(state.id);
+                              return (
+                                <div key={`${entity.id}-${state.id}`} className={`border-b border-r border-slate-100 flex items-center justify-center p-1.5 hover:bg-emerald-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
+                                  <button
+                                    onClick={() => toggleTrait(entity.id, feature.id, state.id)}
+                                    className={`w-7 h-7 md:w-8 md:h-8 rounded-md flex items-center justify-center transition-all duration-200 transform active:scale-95 touch-manipulation ${isChecked
+                                      ? 'bg-emerald-600 text-white shadow-sm'
+                                      : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
+                                      }`}
+                                    aria-label={`${entity.name} - ${feature.name}: ${state.label}`}
+                                  >
+                                    {isChecked && <CheckSquare size={16} strokeWidth={3} />}
+                                  </button>
+                                </div>
+                              );
+                            });
+                          } else {
+                            // Show summary indicator for collapsed feature
                             return (
-                              <div key={`${entity.id}-${state.id}`} className={`border-b border-r border-slate-100 flex items-center justify-center p-2 hover:bg-emerald-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
-                                <button
-                                  onClick={() => toggleTrait(entity.id, feature.id, state.id)}
-                                  className={`w-8 h-8 md:w-8 md:h-8 rounded-md flex items-center justify-center transition-all duration-200 transform active:scale-95 touch-manipulation ${isChecked
-                                    ? 'bg-emerald-600 text-white shadow-sm'
-                                    : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
-                                    }`}
-                                >
-                                  {isChecked && <CheckSquare size={16} strokeWidth={3} />}
-                                </button>
+                              <div
+                                key={`${entity.id}-${feature.id}-collapsed`}
+                                className={`border-b border-r border-slate-200 flex items-center justify-center p-2 cursor-pointer hover:bg-slate-100 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
+                                onClick={() => toggleFeatureExpansion(feature.id)}
+                                title={`${feature.name}: ${selectedCount} de ${feature.states.length} selecionado(s)`}
+                              >
+                                <div className="flex flex-col items-center gap-0.5">
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                                    selectedCount > 0
+                                      ? 'bg-emerald-100 text-emerald-700'
+                                      : 'bg-slate-100 text-slate-400'
+                                  }`}>
+                                    {selectedCount}
+                                  </div>
+                                  <div className="text-[7px] text-slate-400">
+                                    /{feature.states.length}
+                                  </div>
+                                </div>
                               </div>
                             );
-                          })
-                        ))}
+                          }
+                        })}
                       </React.Fragment>
                     ))}
 
