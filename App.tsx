@@ -254,6 +254,60 @@ const App: React.FC = () => {
     </div>
   );
 
+  // Render Load Modal globally (available in all views)
+  const renderLoadModal = () => showLoadModal && (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <FolderOpen className="text-emerald-600" size={20} />
+            {strings.openSaved}
+          </h3>
+          <button onClick={() => setShowLoadModal(false)} className="text-slate-400 hover:text-slate-600 p-1">
+            <X size={20} />
+          </button>
+        </div>
+        <div className="space-y-2 max-h-64 overflow-y-auto mb-4 custom-scrollbar">
+          {savedProjects.length === 0 ? (
+            <p className="text-slate-500 text-sm text-center py-8 border-2 border-dashed border-slate-200 rounded-lg">{strings.noSaved}</p>
+          ) : (
+            savedProjects.map(p => (
+              <div key={p.id} className="flex items-center gap-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (confirm(language === 'pt' ? `Excluir "${p.name}"?` : `Delete "${p.name}"?`)) {
+                      const updated = savedProjects.filter(proj => proj.id !== p.id);
+                      setSavedProjects(updated);
+                      localStorage.setItem('nozesia_projects', JSON.stringify(updated));
+                    }
+                  }}
+                  className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"
+                  title={language === 'pt' ? 'Excluir' : 'Delete'}
+                >
+                  <Trash2 size={16} />
+                </button>
+                <button
+                  onClick={() => loadFromLocal(p)}
+                  className="flex-1 text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all min-w-0"
+                >
+                  <div className="font-medium text-slate-800 group-hover:text-emerald-700 truncate">{p.name}</div>
+                  <div className="text-xs text-slate-400 truncate">{p.description || (language === 'pt' ? "Sem descrição" : "No description")}</div>
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+        <button
+          onClick={() => setShowLoadModal(false)}
+          className="w-full py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+        >
+          {strings.close}
+        </button>
+      </div>
+    </div>
+  );
+
   if (view === 'PLAYER' && currentProject) {
     return (
       <>
@@ -265,6 +319,7 @@ const App: React.FC = () => {
           onEditKey={() => setView('BUILDER')}
         />
         {renderSettingsModal()}
+        {renderLoadModal()}
       </>
     );
   }
@@ -582,59 +637,8 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Load Project Modal (Global) */}
-      {showLoadModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <FolderOpen className="text-emerald-600" size={20} />
-                {strings.openSaved}
-              </h3>
-              <button onClick={() => setShowLoadModal(false)} className="text-slate-400 hover:text-slate-600 p-1">
-                <X size={20} />
-              </button>
-            </div>
-            <div className="space-y-2 max-h-64 overflow-y-auto mb-4 custom-scrollbar">
-              {savedProjects.length === 0 ? (
-                <p className="text-slate-500 text-sm text-center py-8 border-2 border-dashed border-slate-200 rounded-lg">{strings.noSaved}</p>
-              ) : (
-                savedProjects.map(p => (
-                  <div key={p.id} className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (confirm(language === 'pt' ? `Excluir "${p.name}"?` : `Delete "${p.name}"?`)) {
-                          const updated = savedProjects.filter(proj => proj.id !== p.id);
-                          setSavedProjects(updated);
-                          localStorage.setItem('nozesia_projects', JSON.stringify(updated));
-                        }
-                      }}
-                      className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"
-                      title={language === 'pt' ? 'Excluir' : 'Delete'}
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                    <button
-                      onClick={() => loadFromLocal(p)}
-                      className="flex-1 text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all min-w-0"
-                    >
-                      <div className="font-medium text-slate-800 group-hover:text-emerald-700 truncate">{p.name}</div>
-                      <div className="text-xs text-slate-400 truncate">{p.description || (language === 'pt' ? "Sem descrição" : "No description")}</div>
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-            <button
-              onClick={() => setShowLoadModal(false)}
-              className="w-full py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
-            >
-              {strings.close}
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Load Project Modal - uses the shared renderLoadModal function */}
+      {renderLoadModal()}
 
     </div>
   );
