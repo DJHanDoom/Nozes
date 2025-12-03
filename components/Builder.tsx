@@ -120,6 +120,12 @@ const t = {
     actionPhotos: "Complete Photos",
     actionPhotosDesc: "Fill all missing images with real URLs",
     photosActionDesc: "Select which images to complete with valid URLs",
+    photoModeReplace: "Replace All",
+    photoModeReplaceDesc: "Clear existing and find new photos",
+    photoModeExpand: "Only Fill Missing",
+    photoModeExpandDesc: "Keep existing, fill empty only",
+    photoCustomSources: "Custom Sources (optional)",
+    photoCustomSourcesPlaceholder: "Paste URLs of image databases separated by newlines\ne.g., https://inaturalist.org\nhttps://floradobrasil.jbrj.gov.br",
     modeMerge: "Merge Keys",
     mergeTitle: "Combine Two Keys",
     mergeDesc: "Import two JSON keys and merge them into one optimized key.",
@@ -239,6 +245,12 @@ const t = {
     actionPhotos: "Completar Fotos",
     actionPhotosDesc: "Preencher todas as imagens faltantes com URLs reais",
     photosActionDesc: "Selecione quais imagens completar com URLs válidas",
+    photoModeReplace: "Substituir Todas",
+    photoModeReplaceDesc: "Limpar existentes e buscar novas",
+    photoModeExpand: "Apenas Preencher Faltantes",
+    photoModeExpandDesc: "Manter existentes, preencher vazias",
+    photoCustomSources: "Fontes Personalizadas (opcional)",
+    photoCustomSourcesPlaceholder: "Cole URLs de bancos de imagens separados por quebras de linha\nex: https://inaturalist.org\nhttps://floradobrasil.jbrj.gov.br",
     modeMerge: "Combinar",
     mergeTitle: "Combinar Duas Chaves",
     mergeDesc: "Importe dois JSONs e combine-os em uma chave otimizada.",
@@ -305,7 +317,9 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     removeRedundant: false,
     fixInconsistencies: true,
     completePhotos: false,
-    photoTarget: 'both' as 'entities' | 'features' | 'both'
+    photoTarget: 'both' as 'entities' | 'features' | 'both',
+    photoMode: 'expand' as 'replace' | 'expand',
+    photoCustomSources: ''
   });
 
   // Merge Mode State
@@ -591,52 +605,112 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
     let refinePrompt = '';
     
-    // PHOTOS action - dedicated photo completion prompt
+    // PHOTOS action - dedicated photo completion prompt (optimized: send only names, not full JSON)
     if (refineAction === 'PHOTOS') {
       const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
       const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
+      const replaceMode = refineOptions.photoMode === 'replace';
+      const customSources = refineOptions.photoCustomSources?.trim();
+      
+      // Build compact data: only names and optionally current URLs
+      let photoData: any = { name: project.name };
+      
+      if (targetEntities) {
+        photoData.entities = project.entities.map(e => ({
+          name: e.name,
+          currentUrl: replaceMode ? '' : (e.imageUrl || '')
+        })).filter(e => replaceMode || !e.currentUrl); // Only include items needing photos
+      }
+      
+      if (targetFeatures) {
+        photoData.features = project.features.map(f => ({
+          name: f.name,
+          currentUrl: replaceMode ? '' : (f.imageUrl || '')
+        })).filter(f => replaceMode || !f.currentUrl);
+      }
+      
+      const compactJson = JSON.stringify(photoData, null, 2);
+      
+      // Build source instructions
+      let sourceInstructions = '';
+      if (customSources) {
+        const sources = customSources.split('\n').filter(s => s.trim());
+        sourceInstructions = `
+USER-PREFERRED SOURCES (check these FIRST, in order):
+${sources.map((s, i) => `${i + 1}. ${s.trim()}`).join('\n')}
+
+If user sources don't have the image, then check these scientific databases:`;
+      } else {
+        sourceInstructions = `
+SCIENTIFIC IMAGE SOURCES (check in this order):`;
+      }
       
       refinePrompt = `
-You are an expert biologist with access to scientific image databases.
+# PHOTO COLLECTION TASK
 
-CURRENT KEY (JSON):
-${projectJson}
+You are an expert at finding HIGH-QUALITY, VALID image URLs from scientific databases.
 
-TASK: Complete the photo collection for this identification key.
+## PROJECT: "${project.name}"
+${project.description ? `Description: ${project.description}` : ''}
 
-YOUR ONLY TASK IS TO FIND AND ADD VALID IMAGE URLs. DO NOT CHANGE ANY OTHER DATA.
+## ITEMS NEEDING PHOTOS:
+${compactJson}
 
-CRITICAL REQUIREMENTS:
-${targetEntities ? `
-FOR ENTITIES (Species/Taxa):
-- Check each entity's imageUrl field
-- If empty or invalid, find a REAL, DIRECT image URL showing this species
-- Sources to use (in order of preference):
-  1. Wikimedia Commons (format: https://upload.wikimedia.org/wikipedia/commons/X/XX/Species_name.jpg)
-  2. Encyclopedia of Life (eol.org)
-  3. iNaturalist static images
-  4. GBIF image repository
-  5. Flora e Funga do Brasil (for Brazilian species)
-- The URL MUST end in .jpg, .jpeg, .png, or .webp
-- The URL MUST be a DIRECT link to the image binary, NOT a webpage
-- DO NOT use Google Images or Pinterest URLs
+## YOUR TASK:
+Find ONE valid, high-quality image URL for each item listed above.
+${replaceMode ? 'REPLACE ALL URLs - ignore any existing URLs and find new ones.' : 'ONLY FILL EMPTY URLs - skip items that already have a URL.'}
+
+## HOW TO FIND GOOD PHOTOS:
+${sourceInstructions}
+1. **iNaturalist** - Search: https://www.inaturalist.org/taxa/search?q=[species_name]
+   - Navigate to species page → Photos tab → Right-click image → Copy Image Address
+   - Valid format: https://inaturalist-open-data.s3.amazonaws.com/photos/[id]/medium.jpg
+
+2. **GBIF** - Search: https://www.gbif.org/species/search?q=[species_name]
+   - Go to species page → Gallery → Click image → Copy direct URL
+   
+3. **Flickr Commons** - Scientific/botanical photos with open licenses
+   - Valid format: https://live.staticflickr.com/[path].jpg
+
+4. **Biodiversity Heritage Library** - For historical botanical illustrations
+   - Valid format: https://www.biodiversitylibrary.org/pagethumb/[id]
+
+5. **Wikimedia Commons** - ONLY use if you know the EXACT filename exists
+   - Valid format: https://upload.wikimedia.org/wikipedia/commons/thumb/X/XX/Exact_Filename.jpg/400px-Exact_Filename.jpg
+
+${language === 'pt' ? `
+6. **Flora e Funga do Brasil** - Para espécies brasileiras
+   - https://floradobrasil.jbrj.gov.br
+
+7. **Species Link** - Rede de herbários brasileiros
+   - http://www.splink.org.br
 ` : ''}
-${targetFeatures ? `
-FOR FEATURES (Characteristics):
-- Check each feature's imageUrl field
-- If empty or invalid, find a REAL, DIRECT image URL illustrating this trait
-- Use botanical/zoological illustration databases or Wikipedia diagrams
-- The URL MUST end in .jpg, .jpeg, .png, or .webp
-- The URL MUST be a DIRECT link to the image binary
-` : ''}
 
-FALLBACK: If you absolutely cannot find a real image, use:
-https://picsum.photos/seed/[entity-or-feature-name-encoded]/400/300
+## CRITICAL RULES:
+1. ✅ URL MUST be a DIRECT image link ending in .jpg, .jpeg, .png, .gif, or .webp
+2. ✅ URL MUST work when opened directly in a browser (no login required)
+3. ❌ DO NOT use Google Images, Pinterest, or any search result pages
+4. ❌ DO NOT guess or make up URLs - only use URLs you are confident exist
+5. ❌ DO NOT use Wikimedia URLs unless you know the exact filename
 
-PRESERVE: Keep ALL existing data exactly as-is. Only add/update imageUrl fields.
-LANGUAGE: ${language === 'pt' ? 'Portuguese' : 'English'}
+## FALLBACK (only if no real photo found):
+Use placeholder: https://placehold.co/400x300/e2e8f0/64748b?text=[URL-encoded-name]
 
-OUTPUT: Return the complete JSON with all imageUrls filled in.
+## OUTPUT FORMAT:
+Return a JSON array with the results:
+\`\`\`json
+{
+  ${targetEntities ? `"entities": [
+    { "name": "Species Name", "imageUrl": "https://direct-image-url.jpg" }
+  ]${targetFeatures ? ',' : ''}` : ''}
+  ${targetFeatures ? `"features": [
+    { "name": "Feature Name", "imageUrl": "https://direct-image-url.jpg" }
+  ]` : ''}
+}
+\`\`\`
+
+Language: ${language === 'pt' ? 'Portuguese' : 'English'}
+Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0) + (targetFeatures ? photoData.features?.length || 0 : 0)}
 `;
     } else if (refineAction === 'EXPAND') {
       refinePrompt = `
@@ -1965,39 +2039,81 @@ OUTPUT: Return a single merged JSON identification key with:
                   )}
 
                   {refineAction === 'PHOTOS' && (
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-3">
-                      <p className="text-sm text-blue-700">{strings.photosActionDesc}</p>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'entities' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetEntities}
-                        </button>
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'features' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetFeatures}
-                        </button>
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'both' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetBoth}
-                        </button>
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-4">
+                      {/* Target Selection */}
+                      <div className="space-y-2">
+                        <p className="text-sm font-medium text-blue-800">{strings.photosActionDesc}</p>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
+                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                              refineOptions.photoTarget === 'entities' 
+                                ? 'bg-blue-500 text-white shadow-sm' 
+                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                            }`}
+                          >
+                            {strings.photoTargetEntities}
+                          </button>
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
+                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                              refineOptions.photoTarget === 'features' 
+                                ? 'bg-blue-500 text-white shadow-sm' 
+                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                            }`}
+                          >
+                            {strings.photoTargetFeatures}
+                          </button>
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
+                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                              refineOptions.photoTarget === 'both' 
+                                ? 'bg-blue-500 text-white shadow-sm' 
+                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                            }`}
+                          >
+                            {strings.photoTargetBoth}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      {/* Replace vs Expand Mode */}
+                      <div className="space-y-2">
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'expand' }))}
+                            className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                              refineOptions.photoMode === 'expand' 
+                                ? 'bg-emerald-500 text-white shadow-sm' 
+                                : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
+                            }`}
+                          >
+                            <div className="text-xs font-medium">{strings.photoModeExpand}</div>
+                            <div className="text-[10px] opacity-80">{strings.photoModeExpandDesc}</div>
+                          </button>
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'replace' }))}
+                            className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                              refineOptions.photoMode === 'replace' 
+                                ? 'bg-orange-500 text-white shadow-sm' 
+                                : 'bg-white text-orange-700 border border-orange-200 hover:bg-orange-50'
+                            }`}
+                          >
+                            <div className="text-xs font-medium">{strings.photoModeReplace}</div>
+                            <div className="text-[10px] opacity-80">{strings.photoModeReplaceDesc}</div>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      {/* Custom Sources */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-medium text-blue-700">{strings.photoCustomSources}</label>
+                        <textarea
+                          value={refineOptions.photoCustomSources || ''}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, photoCustomSources: e.target.value }))}
+                          placeholder={strings.photoCustomSourcesPlaceholder}
+                          className="w-full h-20 text-xs p-2 border border-blue-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
+                        />
                       </div>
                     </div>
                   )}
