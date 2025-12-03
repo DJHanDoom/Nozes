@@ -423,7 +423,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('lucidgen_projects');
+    const saved = localStorage.getItem('nozesia_projects');
     if (saved) {
       try {
         setSavedProjects(JSON.parse(saved));
@@ -437,7 +437,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const saveToLocal = () => {
     const updatedList = [project, ...savedProjects.filter(p => p.id !== project.id)];
     setSavedProjects(updatedList);
-    localStorage.setItem('lucidgen_projects', JSON.stringify(updatedList));
+    localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
     alert(strings.savedMsg);
   };
 
