@@ -11,6 +11,7 @@ interface BuilderProps {
   language: Language;
   defaultModel: string;
   apiKey: string;
+  onOpenSettings?: () => void;
 }
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
@@ -167,7 +168,7 @@ const t = {
   }
 };
 
-export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey }) => {
+export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings }) => {
   const strings = t[language];
   // State
   const [project, setProject] = useState<Project>(initialProject || {
@@ -217,24 +218,36 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [isMatrixScrolled, setIsMatrixScrolled] = useState(false);
 
   const toggleFeatureExpansion = (featureId: string) => {
+    const isExpanding = expandedFeatureId !== featureId;
     setExpandedFeatureId(prev => prev === featureId ? null : featureId);
 
-    // Scroll to center the expanded feature after a brief delay
-    setTimeout(() => {
-      const featureElement = document.querySelector(`[data-feature-id="${featureId}"]`);
-      if (featureElement && matrixScrollRef.current) {
+    // Auto-scroll to center the expanded feature
+    if (isExpanding && matrixScrollRef.current) {
+      setTimeout(() => {
         const container = matrixScrollRef.current;
-        const elementRect = featureElement.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-
-        const scrollLeft = featureElement.getBoundingClientRect().left - containerRect.left + container.scrollLeft - (containerRect.width / 2) + (elementRect.width / 2);
-
+        if (!container) return;
+        
+        // Calculate position of the feature column
+        const featureIndex = project.features.findIndex(f => f.id === featureId);
+        if (featureIndex === -1) return;
+        
+        // Calculate offset: entity column width (200px) + collapsed columns before this feature
+        let scrollTarget = 200; // Entity column width
+        for (let i = 0; i < featureIndex; i++) {
+          scrollTarget += 70; // Collapsed column width
+        }
+        
+        // Center the expanded section in the viewport
+        const containerWidth = container.clientWidth;
+        const expandedWidth = project.features[featureIndex].states.length * 90;
+        const centeredScroll = scrollTarget - (containerWidth / 2) + (expandedWidth / 2);
+        
         container.scrollTo({
-          left: scrollLeft,
+          left: Math.max(0, centeredScroll),
           behavior: 'smooth'
         });
-      }
-    }, 50);
+      }, 100);
+    }
   };
 
   const navigateFeature = (direction: 'prev' | 'next') => {
@@ -950,280 +963,168 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                   ))}
                 </div>
               </div>
-              <div className="flex-1 flex flex-col overflow-hidden bg-slate-200/50">
-                {/* Sticky Header Row */}
-                <div className="sticky top-0 z-40 bg-slate-800 shadow-lg border-b-2 border-slate-700 flex-shrink-0">
-                  <div className="flex" style={{
-                    gridTemplateColumns: `minmax(150px, 220px) ${project.features.map(f =>
-                      expandedFeatureId === f.id
-                        ? `repeat(${f.states.length}, 80px)`
-                        : '60px'
-                    ).join(' ')}`
-                  }}>
-                    {/* Corner Cell */}
-                    <div className="flex-shrink-0 text-white p-3 font-bold border-r border-slate-700 flex items-end text-xs" style={{ width: '220px' }}>
-                      <span className="line-clamp-2 leading-tight">{strings.taxaFeatures}</span>
-                    </div>
-
-                    {/* Feature Headers */}
-                    <div className="flex flex-1">
-                      {project.features.map((feature, featureIdx) => {
-                        const isExpanded = expandedFeatureId === feature.id;
-                        const width = isExpanded ? `${feature.states.length * 80}px` : '60px';
-
-                        return (
-                          <div
-                            key={feature.id}
-                            data-feature-id={feature.id}
-                            className={`flex-shrink-0 text-white border-r transition-all duration-300 ${
-                              isExpanded
-                                ? 'bg-emerald-700 border-emerald-800'
-                                : 'bg-slate-700 hover:bg-slate-600 cursor-pointer border-slate-700'
-                            }`}
-                            style={{ width }}
-                            onClick={() => !isExpanded && toggleFeatureExpansion(feature.id)}
-                          >
-                            {/* Feature Name - Top Row */}
-                            <div className={`p-2 border-b font-semibold min-h-[2.5rem] flex items-center justify-center gap-2 ${
-                              isExpanded ? 'border-emerald-600 bg-emerald-800/50' : 'border-slate-600 bg-slate-800/50'
-                            }`}>
-                              {isExpanded && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setExpandedFeatureId(null);
-                                  }}
-                                  className="p-1 hover:bg-emerald-600 rounded transition-colors"
-                                  title="Colapsar"
-                                >
-                                  <X size={14} />
-                                </button>
-                              )}
-                              <div className={`leading-tight text-center ${isExpanded ? 'text-[10px] line-clamp-2' : 'text-[9px] line-clamp-3'}`} title={feature.name}>
-                                {feature.name}
-                              </div>
-                              {!isExpanded && (
-                                <div className="text-[8px] text-slate-400 mt-0.5">
-                                  ({feature.states.length})
-                                </div>
-                              )}
-                            </div>
-
-                            {/* State Labels */}
-                            {isExpanded ? (
-                              <div className="flex">
-                                {feature.states.map((state, stateIdx) => (
-                                  <div key={state.id} className="flex-1 border-r border-emerald-600 last:border-0 relative group/state" style={{ width: '80px' }}>
-                                    <div className="p-1.5 min-h-[4rem] max-h-[6rem] flex items-center justify-center">
-                                      <div
-                                        className="text-[9px] leading-snug text-emerald-100 font-medium text-center break-words hyphens-auto line-clamp-4"
-                                        style={{ wordBreak: 'break-word' }}
-                                        title={state.label}
-                                      >
-                                        {state.label}
-                                      </div>
-                                    </div>
-                                    {/* Tooltip */}
-                                    <div className="fixed z-50 px-3 py-2 bg-slate-900 text-white text-xs rounded-lg shadow-2xl opacity-0 invisible group-hover/state:opacity-100 group-hover/state:visible transition-all duration-200 pointer-events-none max-w-xs"
-                                         style={{
-                                           transform: 'translate(-50%, -100%)',
-                                           marginTop: '-0.5rem'
-                                         }}
-                                         onMouseEnter={(e) => {
-                                           const rect = e.currentTarget.parentElement?.getBoundingClientRect();
-                                           if (rect) {
-                                             e.currentTarget.style.left = `${rect.left + rect.width / 2}px`;
-                                             e.currentTarget.style.top = `${rect.top}px`;
-                                           }
-                                         }}>
-                                      {state.label}
-                                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-slate-900"></div>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            ) : (
-                              <div className="min-h-[4rem] flex items-center justify-center p-2 bg-slate-800/30">
-                                <div className="text-[8px] text-slate-400 text-center">
-                                  Clique para expandir
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Scrollable Body */}
-                <div ref={matrixScrollRef} className="flex-1 overflow-auto custom-scrollbar">
-                  <div className="inline-block min-w-full align-top">
-                    <div className="grid" style={{
-                      gridTemplateColumns: `minmax(150px, 220px) ${project.features.map(f =>
-                        expandedFeatureId === f.id
-                          ? `repeat(${f.states.length}, 80px)`
-                          : '60px'
-                      ).join(' ')}`
-                    }}>
-
-                    {/* Header Row - Frozen/Sticky */}
-                    <div className="matrix-sticky-header sticky top-0 left-0 z-40 bg-slate-800 text-white p-3 font-bold border-r border-b-2 border-slate-700 shadow-lg flex items-end text-xs">
-                      <span className="line-clamp-2 leading-tight">{strings.taxaFeatures}</span>
-                    </div>
-                    {project.features.map((feature, featureIdx) => {
-                      const isExpanded = expandedFeatureId === feature.id;
-                      const colSpan = isExpanded ? feature.states.length : 1;
-
-                      return (
-                        <div
-                          key={feature.id}
-                          data-feature-id={feature.id}
-                          className={`matrix-sticky-header sticky top-0 z-30 text-white border-r border-b-2 shadow-lg transition-all duration-300 ${
-                            isExpanded
-                              ? 'bg-emerald-700 border-emerald-800'
-                              : 'bg-slate-700 hover:bg-slate-600 cursor-pointer border-slate-700'
-                          }`}
-                          style={{ gridColumn: `span ${colSpan}` }}
-                          onClick={() => !isExpanded && toggleFeatureExpansion(feature.id)}
+              <div className="flex-1 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 relative">
+                {/* Matrix Container */}
+                <div ref={matrixScrollRef} className="absolute inset-0 overflow-auto custom-scrollbar">
+                  <table className="border-collapse w-max">
+                    {/* Header */}
+                    <thead className="sticky top-0 z-40">
+                      {/* Row 1: Feature Names */}
+                      <tr className="bg-gradient-to-r from-slate-800 to-slate-900">
+                        <th 
+                          rowSpan={2} 
+                          className="sticky left-0 z-50 bg-gradient-to-br from-slate-800 to-slate-900 text-white px-3 py-2 font-bold border-r border-b border-slate-600 text-left align-bottom"
+                          style={{ minWidth: '180px', maxWidth: '180px' }}
                         >
-                          {/* Feature Name - Top Row */}
-                          <div className={`p-2 border-b font-semibold min-h-[2.5rem] flex items-center justify-center gap-2 ${
-                            isExpanded ? 'border-emerald-600 bg-emerald-800/50' : 'border-slate-600 bg-slate-800/50'
-                          }`}>
-                            {isExpanded && (
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setExpandedFeatureId(null);
-                                }}
-                                className="p-1 hover:bg-emerald-600 rounded transition-colors"
-                                title="Colapsar"
-                              >
-                                <X size={14} />
-                              </button>
-                            )}
-                            <div className={`leading-tight text-center ${isExpanded ? 'text-[10px] line-clamp-2' : 'text-[9px] line-clamp-3'}`} title={feature.name}>
-                              {feature.name}
-                            </div>
-                            {!isExpanded && (
-                              <div className="text-[8px] text-slate-400 mt-0.5">
-                                ({feature.states.length})
-                              </div>
-                            )}
-                          </div>
-
-                          {/* State Labels - Only show if expanded */}
-                          {isExpanded ? (
-                            <div className="flex">
-                              {feature.states.map((state, stateIdx) => (
-                                <div key={state.id} className="flex-1 border-r border-emerald-600 last:border-0 relative group/state w-20">
-                                  <div className="p-1.5 min-h-[4rem] max-h-[6rem] flex items-center justify-center">
-                                    <div
-                                      className="text-[9px] leading-snug text-emerald-100 font-medium text-center break-words hyphens-auto line-clamp-4"
-                                      style={{ wordBreak: 'break-word' }}
-                                      title={state.label}
-                                    >
-                                      {state.label}
-                                    </div>
-                                  </div>
-                                  {/* Tooltip on hover */}
-                                  <div className="fixed z-50 px-3 py-2 bg-slate-900 text-white text-xs rounded-lg shadow-2xl opacity-0 invisible group-hover/state:opacity-100 group-hover/state:visible transition-all duration-200 pointer-events-none max-w-xs"
-                                       style={{
-                                         transform: 'translate(-50%, -100%)',
-                                         marginTop: '-0.5rem'
-                                       }}
-                                       onMouseEnter={(e) => {
-                                         const rect = e.currentTarget.parentElement?.getBoundingClientRect();
-                                         if (rect) {
-                                           e.currentTarget.style.left = `${rect.left + rect.width / 2}px`;
-                                           e.currentTarget.style.top = `${rect.top}px`;
-                                         }
-                                       }}>
-                                    {state.label}
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-slate-900"></div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="min-h-[4rem] flex items-center justify-center p-2 bg-slate-800/30">
-                              <div className="text-[8px] text-slate-400 text-center">
-                                Clique para expandir
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-
-                    {/* Body Rows */}
-                    {project.entities.map((entity, idx) => (
-                      <React.Fragment key={entity.id}>
-                        {/* Entity Name Column - Frozen Left */}
-                        <div className={`sticky left-0 z-20 p-2.5 border-r-2 border-b border-slate-200 flex items-center gap-2 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.1)] hover:bg-slate-50 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
-                          <div className="w-6 h-6 md:w-8 md:h-8 rounded bg-slate-200 overflow-hidden flex-shrink-0">
-                            {entity.imageUrl && <img src={entity.imageUrl} className="w-full h-full object-cover" alt="" />}
-                          </div>
-                          <span className="font-medium text-slate-700 text-xs leading-tight group-hover:text-emerald-600 transition-colors line-clamp-2" title={entity.name}>
-                            {entity.name}
-                          </span>
-                        </div>
-
-                        {/* Feature Cells - Collapsed or Expanded */}
-                        {project.features.map(feature => {
+                          <span className="text-xs font-semibold tracking-wide">{strings.taxaFeatures}</span>
+                        </th>
+                        
+                        {project.features.map((feature) => {
                           const isExpanded = expandedFeatureId === feature.id;
-                          const entityTraits = entity.traits[feature.id] || [];
-                          const selectedCount = entityTraits.length;
-
-                          if (isExpanded) {
-                            // Show all state checkboxes for expanded feature
-                            return feature.states.map(state => {
-                              const isChecked = entityTraits.includes(state.id);
-                              return (
-                                <div key={`${entity.id}-${state.id}`} className={`border-b border-r border-slate-100 flex items-center justify-center p-1.5 hover:bg-emerald-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
+                          const colCount = isExpanded ? feature.states.length : 1;
+                          
+                          return (
+                            <th
+                              key={`header-${feature.id}`}
+                              colSpan={colCount}
+                              className={`px-1 py-1.5 font-semibold border-r border-b text-center align-middle cursor-pointer transition-all duration-200 ${
+                                isExpanded 
+                                  ? 'bg-gradient-to-br from-emerald-500 to-emerald-700 border-emerald-400 text-white shadow-lg' 
+                                  : 'bg-gradient-to-b from-slate-600 to-slate-700 border-slate-500 text-slate-100 hover:from-slate-500 hover:to-slate-600'
+                              }`}
+                              style={{ minWidth: isExpanded ? `${colCount * 80}px` : '60px' }}
+                              onClick={() => toggleFeatureExpansion(feature.id)}
+                              title={feature.name}
+                            >
+                              <div className="flex items-center justify-center gap-1">
+                                {isExpanded && (
                                   <button
-                                    onClick={() => toggleTrait(entity.id, feature.id, state.id)}
-                                    className={`w-7 h-7 md:w-8 md:h-8 rounded-md flex items-center justify-center transition-all duration-200 transform active:scale-95 touch-manipulation ${isChecked
-                                      ? 'bg-emerald-600 text-white shadow-sm'
-                                      : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
-                                      }`}
-                                    aria-label={`${entity.name} - ${feature.name}: ${state.label}`}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setExpandedFeatureId(null);
+                                    }}
+                                    className="p-0.5 hover:bg-emerald-400/50 rounded transition-colors flex-shrink-0"
                                   >
-                                    {isChecked && <CheckSquare size={16} strokeWidth={3} />}
+                                    <X size={12} />
                                   </button>
-                                </div>
-                              );
-                            });
-                          } else {
-                            // Show summary indicator for collapsed feature
-                            return (
-                              <div
-                                key={`${entity.id}-${feature.id}-collapsed`}
-                                className={`border-b border-r border-slate-200 flex items-center justify-center p-2 cursor-pointer hover:bg-slate-100 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
-                                onClick={() => toggleFeatureExpansion(feature.id)}
-                                title={`${feature.name}: ${selectedCount} de ${feature.states.length} selecionado(s)`}
+                                )}
+                                <span className={`font-semibold leading-tight ${isExpanded ? 'text-[10px]' : 'text-[9px]'}`}>
+                                  {feature.name}
+                                </span>
+                              </div>
+                            </th>
+                          );
+                        })}
+                      </tr>
+                      
+                      {/* Row 2: State Labels or Expand Info */}
+                      <tr>
+                        {project.features.map((feature) => {
+                          const isExpanded = expandedFeatureId === feature.id;
+                          
+                          if (isExpanded) {
+                            return feature.states.map((state) => (
+                              <th
+                                key={`state-${state.id}`}
+                                className="bg-gradient-to-b from-emerald-600 to-emerald-700 text-white px-1 py-1.5 border-r border-b border-emerald-500 text-center align-top"
+                                style={{ minWidth: '80px', maxWidth: '100px' }}
+                                title={state.label}
                               >
-                                <div className="flex flex-col items-center gap-0.5">
-                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                                <div className="text-[8px] font-medium leading-snug px-0.5 break-words" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                                  {state.label}
+                                </div>
+                              </th>
+                            ));
+                          } else {
+                            return (
+                              <th
+                                key={`expand-${feature.id}`}
+                                className="bg-gradient-to-b from-slate-500 to-slate-600 text-slate-200 px-1 py-1.5 border-r border-b border-slate-400 text-center cursor-pointer hover:from-slate-400 hover:to-slate-500 transition-all"
+                                style={{ minWidth: '60px', maxWidth: '60px' }}
+                                onClick={() => toggleFeatureExpansion(feature.id)}
+                              >
+                                <div className="flex flex-col items-center gap-0">
+                                  <span className="text-[8px] opacity-80">expandir</span>
+                                  <span className="text-[10px] font-bold">({feature.states.length})</span>
+                                </div>
+                              </th>
+                            );
+                          }
+                        })}
+                      </tr>
+                    </thead>
+                    
+                    {/* Body */}
+                    <tbody>
+                      {project.entities.map((entity, idx) => (
+                        <tr key={entity.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}>
+                          {/* Entity Name - Frozen Left */}
+                          <td 
+                            className={`sticky left-0 z-20 px-2 py-1.5 border-r-2 border-b border-slate-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
+                            style={{ minWidth: '180px', maxWidth: '180px', boxShadow: '2px 0 6px rgba(0,0,0,0.08)' }}
+                          >
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded bg-slate-200 overflow-hidden flex-shrink-0">
+                                {entity.imageUrl && <img src={entity.imageUrl} className="w-full h-full object-cover" alt="" />}
+                              </div>
+                              <span className="text-[11px] font-medium text-slate-700 line-clamp-2 leading-tight" title={entity.name}>
+                                {entity.name}
+                              </span>
+                            </div>
+                          </td>
+
+                          {/* Feature Cells */}
+                          {project.features.map(feature => {
+                            const isExpanded = expandedFeatureId === feature.id;
+                            const entityTraits = entity.traits[feature.id] || [];
+                            const selectedCount = entityTraits.length;
+
+                            if (isExpanded) {
+                              return feature.states.map(state => {
+                                const isChecked = entityTraits.includes(state.id);
+                                return (
+                                  <td 
+                                    key={`${entity.id}-${state.id}`} 
+                                    className={`border-b border-r border-slate-200 text-center hover:bg-emerald-50 transition-colors p-1 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}`}
+                                    style={{ minWidth: '80px', maxWidth: '100px' }}
+                                  >
+                                    <button
+                                      onClick={() => toggleTrait(entity.id, feature.id, state.id)}
+                                      className={`w-7 h-7 rounded-md flex items-center justify-center transition-all mx-auto ${
+                                        isChecked
+                                          ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-sm'
+                                          : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
+                                      }`}
+                                    >
+                                      {isChecked && <CheckSquare size={14} strokeWidth={2.5} />}
+                                    </button>
+                                  </td>
+                                );
+                              });
+                            } else {
+                              return (
+                                <td
+                                  key={`${entity.id}-${feature.id}-collapsed`}
+                                  className={`border-b border-r border-slate-200 text-center cursor-pointer hover:bg-slate-100 transition-colors p-1 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}`}
+                                  style={{ minWidth: '60px', maxWidth: '60px' }}
+                                  onClick={() => toggleFeatureExpansion(feature.id)}
+                                  title={`${selectedCount} de ${feature.states.length}`}
+                                >
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold mx-auto ${
                                     selectedCount > 0
-                                      ? 'bg-emerald-100 text-emerald-700'
+                                      ? 'bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-700'
                                       : 'bg-slate-100 text-slate-400'
                                   }`}>
                                     {selectedCount}
                                   </div>
-                                  <div className="text-[7px] text-slate-400">
-                                    /{feature.states.length}
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          }
-                        })}
-                      </React.Fragment>
-                    ))}
-
-                  </div>
+                                </td>
+                              );
+                            }
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -1308,7 +1209,16 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
                 <div className="p-2 bg-white/20 rounded-lg">
                   <Brain size={24} className="text-white" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold">{strings.aiTitle}</h3>
+                <h3 className="text-xl md:text-2xl font-bold flex-1">{strings.aiTitle}</h3>
+                {onOpenSettings && (
+                  <button
+                    onClick={() => { setShowAiModal(false); onOpenSettings(); }}
+                    className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                    title={language === 'pt' ? 'Configurar Chave de API' : 'Configure API Key'}
+                  >
+                    <Settings2 size={18} className="text-white" />
+                  </button>
+                )}
               </div>
               <p className="text-amber-50 text-xs md:text-sm font-medium drop-shadow-sm">
                 {strings.aiDesc}

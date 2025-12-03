@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { Project, Entity, Language } from '../types';
-import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink, List, Grid } from 'lucide-react';
+import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink, List, Grid, FolderOpen, Edit, Download, FileSpreadsheet } from 'lucide-react';
+import { utils, writeFile } from 'xlsx';
 
 interface PlayerProps {
   project: Project;
   onBack: () => void;
   language: Language;
+  onOpenSaved?: () => void;
+  onEditKey?: () => void;
 }
 
 const t = {
@@ -26,7 +29,11 @@ const t = {
     morphology: "Morphology & Traits",
     close: "Close",
     resources: "Resources",
-    viewResults: "View Results"
+    viewResults: "View Results",
+    openSaved: "Open",
+    editKey: "Edit",
+    exportJson: "JSON",
+    exportXlsx: "XLSX"
   },
   pt: {
     player: "PLAYER",
@@ -45,11 +52,15 @@ const t = {
     morphology: "Morfologia & Características",
     close: "Fechar",
     resources: "Recursos Adicionais",
-    viewResults: "Ver Resultados"
+    viewResults: "Ver Resultados",
+    openSaved: "Abrir",
+    editKey: "Editar",
+    exportJson: "JSON",
+    exportXlsx: "XLSX"
   }
 };
 
-export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => {
+export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpenSaved, onEditKey }) => {
   const strings = t[language];
   // Map of FeatureID -> Set of selected StateIDs
   const [selections, setSelections] = useState<Record<string, string[]>>({});
@@ -109,6 +120,43 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
   // Count total active selections
   const totalSelectionsCount = Object.values(selections).reduce((acc, curr) => acc + curr.length, 0);
 
+  // Export project as JSON
+  const exportJSON = () => {
+    const dataStr = JSON.stringify(project, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${project.name.replace(/\s+/g, '_')}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Export project as XLSX
+  const exportXLSX = () => {
+    const featureMap = new Map(project.features.map(f => [f.id, f]));
+    const headers = ['Entity', ...project.features.map(f => f.name)];
+    
+    const rows = project.entities.map(entity => {
+      const row: string[] = [entity.name];
+      project.features.forEach(feature => {
+        const entityStateIds = entity.traits[feature.id] || [];
+        const stateNames = entityStateIds
+          .map(sid => feature.states.find(s => s.id === sid)?.name || '')
+          .filter(Boolean)
+          .join(', ');
+        row.push(stateNames);
+      });
+      return row;
+    });
+
+    const wsData = [headers, ...rows];
+    const ws = utils.aoa_to_sheet(wsData);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, 'Matrix');
+    writeFile(wb, `${project.name.replace(/\s+/g, '_')}.xlsx`);
+  };
+
   return (
     <div className="flex flex-col h-full bg-slate-100 font-sans absolute inset-0">
       {/* Header */}
@@ -127,13 +175,50 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language }) => 
             </h2>
           </div>
         </div>
-        <div className="flex gap-2 shrink-0">
+        <div className="flex gap-1 sm:gap-2 shrink-0">
+          {/* Open saved key button */}
+          {onOpenSaved && (
+            <button 
+              onClick={onOpenSaved}
+              className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+              title={strings.openSaved}
+            >
+              <FolderOpen size={18} /> <span className="hidden lg:inline">{strings.openSaved}</span>
+            </button>
+          )}
+          {/* Edit key button */}
+          {onEditKey && (
+            <button 
+              onClick={onEditKey}
+              className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+              title={strings.editKey}
+            >
+              <Edit size={18} /> <span className="hidden lg:inline">{strings.editKey}</span>
+            </button>
+          )}
+          {/* Export JSON */}
+          <button 
+            onClick={exportJSON}
+            className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+            title={strings.exportJson}
+          >
+            <Download size={18} /> <span className="hidden lg:inline">{strings.exportJson}</span>
+          </button>
+          {/* Export XLSX */}
+          <button 
+            onClick={exportXLSX}
+            className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-green-600 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
+            title={strings.exportXlsx}
+          >
+            <FileSpreadsheet size={18} /> <span className="hidden lg:inline">{strings.exportXlsx}</span>
+          </button>
+          {/* Restart */}
           <button 
             onClick={resetKey}
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+            className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
             title={strings.restart}
           >
-            <RotateCcw size={18} /> <span className="hidden sm:inline">{strings.restart}</span>
+            <RotateCcw size={18} /> <span className="hidden lg:inline">{strings.restart}</span>
           </button>
           <button 
             onClick={onBack}

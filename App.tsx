@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewMode, Project, Language } from './types';
 import { Player } from './components/Player';
 import { Builder } from './components/Builder';
-import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink } from 'lucide-react';
+import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('HOME');
@@ -182,7 +182,15 @@ const App: React.FC = () => {
   };
 
   if (view === 'PLAYER' && currentProject) {
-    return <Player project={currentProject} onBack={() => setView('HOME')} language={language} />;
+    return (
+      <Player 
+        project={currentProject} 
+        onBack={() => setView('HOME')} 
+        language={language}
+        onOpenSaved={() => setShowLoadModal(true)}
+        onEditKey={() => setView('BUILDER')}
+      />
+    );
   }
 
   if (view === 'BUILDER') {
@@ -194,6 +202,7 @@ const App: React.FC = () => {
         language={language}
         defaultModel={aiModel}
         apiKey={apiKey}
+        onOpenSettings={() => setShowSettingsModal(true)}
       />
     );
   }
@@ -573,14 +582,29 @@ const App: React.FC = () => {
                 <p className="text-slate-500 text-sm text-center py-8 border-2 border-dashed border-slate-200 rounded-lg">{strings.noSaved}</p>
               ) : (
                 savedProjects.map(p => (
-                  <button
-                    key={p.id}
-                    onClick={() => loadFromLocal(p)}
-                    className="w-full text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all"
-                  >
-                    <div className="font-medium text-slate-800 group-hover:text-emerald-700">{p.name}</div>
-                    <div className="text-xs text-slate-400 truncate">{p.description || "No description"}</div>
-                  </button>
+                  <div key={p.id} className="flex items-center gap-2">
+                    <button
+                      onClick={() => loadFromLocal(p)}
+                      className="flex-1 text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all"
+                    >
+                      <div className="font-medium text-slate-800 group-hover:text-emerald-700">{p.name}</div>
+                      <div className="text-xs text-slate-400 truncate">{p.description || "No description"}</div>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (confirm(language === 'pt' ? `Excluir "${p.name}"?` : `Delete "${p.name}"?`)) {
+                          const updated = savedProjects.filter(proj => proj.id !== p.id);
+                          setSavedProjects(updated);
+                          localStorage.setItem('nozesia_projects', JSON.stringify(updated));
+                        }
+                      }}
+                      className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"
+                      title={language === 'pt' ? 'Excluir' : 'Delete'}
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
                 ))
               )}
             </div>
