@@ -92,6 +92,8 @@ const t = {
     traitEditor: "Trait Editor",
     copyPrompt: "Copy",
     missingKey: "Missing API Key. Please configure it in the main menu Settings.",
+    apiKeyWarning: "Configure your API Key to use AI features",
+    clickGear: "Click the gear icon above",
     modeRefine: "Expand/Refine",
     refineTitle: "Enhance Current Key",
     refineDesc: "Use AI to expand or refine your existing identification key.",
@@ -217,6 +219,8 @@ const t = {
     traitEditor: "Editor de Características",
     copyPrompt: "Copiar",
     missingKey: "Falta a Chave da API. Configure-a nas Configurações do menu principal.",
+    apiKeyWarning: "Configure sua Chave de API para usar a IA",
+    clickGear: "Clique na engrenagem acima",
     modeRefine: "Expandir/Refinar",
     refineTitle: "Aprimorar Chave Atual",
     refineDesc: "Use IA para expandir ou refinar sua chave de identificação existente.",
@@ -1745,6 +1749,16 @@ OUTPUT: Return a single merged JSON identification key with:
               <p className="text-amber-50 text-xs md:text-sm font-medium drop-shadow-sm">
                 {strings.aiDesc}
               </p>
+              {/* API Key Warning - only show if no API key configured */}
+              {!apiKey && onOpenSettings && (
+                <div className="mt-3 flex items-center gap-2 bg-red-500/30 backdrop-blur-sm px-3 py-2 rounded-lg border border-red-300/50 animate-pulse">
+                  <Settings2 size={16} className="text-yellow-200" />
+                  <div className="flex-1">
+                    <p className="text-yellow-100 text-xs font-bold">{strings.apiKeyWarning}</p>
+                    <p className="text-yellow-200/80 text-[10px]">{strings.clickGear}</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* AI Mode Tabs */}

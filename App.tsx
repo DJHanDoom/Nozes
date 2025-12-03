@@ -199,14 +199,6 @@ const App: React.FC = () => {
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="block text-sm font-semibold text-slate-700">{strings.apiKey}</label>
-              <a
-                href="https://aistudio.google.com/app/apikey"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-medium text-emerald-600 hover:text-emerald-700 hover:underline flex items-center gap-1"
-              >
-                {strings.getKey} <ExternalLink size={12} />
-              </a>
             </div>
             <div className="relative">
               <KeyRound className="absolute left-3 top-2.5 text-slate-400" size={16} />
@@ -218,6 +210,16 @@ const App: React.FC = () => {
                 placeholder="AIzaSy..."
               />
             </div>
+            {/* Highlighted link to get API key */}
+            <a
+              href="https://aistudio.google.com/app/apikey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-bold text-sm hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg"
+            >
+              <ExternalLink size={16} />
+              {strings.getKey} - Google AI Studio
+            </a>
           </div>
 
           <div>
