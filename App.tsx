@@ -602,13 +602,6 @@ const App: React.FC = () => {
                 savedProjects.map(p => (
                   <div key={p.id} className="flex items-center gap-2">
                     <button
-                      onClick={() => loadFromLocal(p)}
-                      className="flex-1 text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all"
-                    >
-                      <div className="font-medium text-slate-800 group-hover:text-emerald-700">{p.name}</div>
-                      <div className="text-xs text-slate-400 truncate">{p.description || "No description"}</div>
-                    </button>
-                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         if (confirm(language === 'pt' ? `Excluir "${p.name}"?` : `Delete "${p.name}"?`)) {
@@ -620,7 +613,14 @@ const App: React.FC = () => {
                       className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"
                       title={language === 'pt' ? 'Excluir' : 'Delete'}
                     >
-                      <Trash2 size={18} />
+                      <Trash2 size={16} />
+                    </button>
+                    <button
+                      onClick={() => loadFromLocal(p)}
+                      className="flex-1 text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all min-w-0"
+                    >
+                      <div className="font-medium text-slate-800 group-hover:text-emerald-700 truncate">{p.name}</div>
+                      <div className="text-xs text-slate-400 truncate">{p.description || (language === 'pt' ? "Sem descrição" : "No description")}</div>
                     </button>
                   </div>
                 ))
