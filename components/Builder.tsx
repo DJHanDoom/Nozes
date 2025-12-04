@@ -924,6 +924,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     setAiTypingComplete(true);
   };
 
+  // Close AI Modal and reset all generation state
+  const handleCloseAiModal = () => {
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
+      typingIntervalRef.current = null;
+    }
+    setIsGenerating(false);
+    setGeneratingMessage('');
+    setAiTypingText('');
+    setAiTypingComplete(false);
+    setShowAiModal(false);
+  };
+
   const handleAiGenerate = async () => {
     if (!apiKey) {
       alert(strings.missingKey);
@@ -960,9 +973,6 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         (fullPrompt) => {
           // Store prompt for viewing/editing
           setManualPrompt(fullPrompt);
-          navigator.clipboard.writeText(fullPrompt).then(() => {
-            console.log("Prompt copied");
-          }).catch(err => console.error("Could not copy prompt", err));
         },
         // Image fetch progress callback
         (current, total, entityName) => {
@@ -1537,6 +1547,15 @@ OUTPUT: Return a single merged JSON identification key with:
   };
 
   const handleClosePromptEditor = () => {
+    // Reset generation state when closing
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
+      typingIntervalRef.current = null;
+    }
+    setIsGenerating(false);
+    setGeneratingMessage('');
+    setAiTypingText('');
+    setAiTypingComplete(false);
     setShowPromptEditor(false);
     setShowAiModal(true);
   };
@@ -2991,9 +3010,8 @@ OUTPUT: Return a single merged JSON identification key with:
 
             <div className="p-4 bg-slate-50 border-t flex gap-3 shrink-0 safe-area-bottom">
               <button
-                onClick={() => setShowAiModal(false)}
+                onClick={handleCloseAiModal}
                 className="flex-none w-16 md:w-20 py-2.5 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors text-center text-xs md:text-sm"
-                disabled={isGenerating}
               >
                 {strings.cancel}
               </button>
@@ -3057,7 +3075,7 @@ OUTPUT: Return a single merged JSON identification key with:
                 >
                   <Copy size={12} /> {strings.copyPrompt}
                 </button>
-                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1" disabled={isGenerating}>
+                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1">
                   <X size={20} />
                 </button>
               </div>
@@ -3106,8 +3124,7 @@ OUTPUT: Return a single merged JSON identification key with:
               <div className="flex items-center gap-4 ml-auto">
                 <button
                   onClick={handleClosePromptEditor}
-                  className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors disabled:opacity-30"
-                  disabled={isGenerating}
+                  className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors"
                 >
                   {strings.cancel}
                 </button>
