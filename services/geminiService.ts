@@ -895,6 +895,60 @@ export const generateKeyFromTopic = async (
   // Generate the key structure (without reliable images yet)
   const project = await callGemini(ai, config.model, contents, systemInstruction, schema, config.language, config.includeLinks);
 
+  // CRITICAL: Ensure ALL required species are included in the project
+  // Even if the AI didn't include them, we add them with empty traits
+  if (config.requiredSpecies && config.requiredSpecies.length > 0) {
+    const existingNames = new Set(
+      project.entities.map(e => e.name.toLowerCase().trim())
+    );
+    
+    // Also check by scientific name similarity
+    const existingScientificNames = new Set(
+      project.entities.map(e => {
+        const sciName = (e as any).scientificName || extractScientificName(e.name) || '';
+        return sciName.toLowerCase().trim();
+      })
+    );
+    
+    for (const requiredSpecies of config.requiredSpecies) {
+      const speciesLower = requiredSpecies.toLowerCase().trim();
+      const speciesBinomial = extractBinomial(requiredSpecies).toLowerCase().trim();
+      
+      // Check if species already exists (by name or scientific name)
+      const alreadyExists = existingNames.has(speciesLower) || 
+                           existingNames.has(speciesBinomial) ||
+                           existingScientificNames.has(speciesLower) ||
+                           existingScientificNames.has(speciesBinomial) ||
+                           // Also check partial matches for cases like "Inga edulis Mart." vs "Inga edulis"
+                           Array.from(existingNames).some(n => n.includes(speciesBinomial) || speciesBinomial.includes(n)) ||
+                           Array.from(existingScientificNames).some(n => n.includes(speciesBinomial) || speciesBinomial.includes(n));
+      
+      if (!alreadyExists) {
+        // Add missing required species with placeholder data
+        const cleanName = extractBinomial(requiredSpecies) || requiredSpecies;
+        const newEntity: Entity = {
+          id: generateId(),
+          name: cleanName,
+          description: config.language === 'pt' 
+            ? `Espécie incluída da lista obrigatória. Dados a serem preenchidos.`
+            : `Species included from required list. Data to be filled.`,
+          imageUrl: getPlaceholderImage(cleanName),
+          links: config.includeLinks ? generateEntityLinks(cleanName, '', config.language) : [],
+          traits: {} // Empty traits - user can fill in later
+        };
+        
+        // Add scientificName for image fetching
+        (newEntity as any).scientificName = cleanName;
+        
+        project.entities.push(newEntity);
+        
+        // Update existing sets
+        existingNames.add(cleanName.toLowerCase().trim());
+        existingScientificNames.add(cleanName.toLowerCase().trim());
+      }
+    }
+  }
+
   // Now fetch real images from iNaturalist/Wikipedia APIs
   // Limit to first 100 entities to avoid very long wait times
   const MAX_IMAGE_FETCH = 100;
