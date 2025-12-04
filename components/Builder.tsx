@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -226,7 +226,7 @@ interface BuilderProps {
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
 type AiMode = 'TOPIC' | 'IMPORT' | 'REFINE' | 'MERGE';
-type RefineAction = 'EXPAND' | 'REFINE' | 'CLEAN' | 'PHOTOS';
+type RefineAction = 'EXPAND' | 'REFINE' | 'CLEAN' | 'PHOTOS' | 'VALIDATE';
 
 const t = {
   en: {
@@ -346,6 +346,22 @@ const t = {
     actionPhotos: "Complete Photos",
     actionPhotosDesc: "Fill all missing images with real URLs",
     photosActionDesc: "Select which images to complete with valid URLs",
+    actionValidate: "Validate Taxonomy",
+    actionValidateDesc: "Check species names, synonyms, and geographic distribution",
+    validateOptions: "Validation Options",
+    validateFixNames: "Correct invalid/outdated names",
+    validateFixNamesDesc: "Update names according to Flora do Brasil 2020 or other catalogs",
+    validateMergeSynonyms: "Merge synonyms",
+    validateMergeSynonymsDesc: "Combine synonymous species, preserving traits from both",
+    validateCheckGeography: "Check geographic distribution",
+    validateCheckGeographyDesc: "Remove species outside the defined geographic scope",
+    validateCheckTaxonomy: "Check taxonomic scope",
+    validateCheckTaxonomyDesc: "Remove species outside the defined family/genus",
+    validateReference: "Reference Catalog",
+    validateFloradobrasil: "Flora do Brasil 2020",
+    validateGbif: "GBIF Backbone",
+    validatePowo: "POWO (Kew)",
+    validateCustom: "Custom/Other",
     photoModeReplace: "Replace All",
     photoModeReplaceDesc: "Clear existing and find new photos",
     photoModeExpand: "Only Fill Missing",
@@ -487,6 +503,22 @@ const t = {
     actionPhotos: "Completar Fotos",
     actionPhotosDesc: "Preencher todas as imagens faltantes com URLs reais",
     photosActionDesc: "Selecione quais imagens completar com URLs válidas",
+    actionValidate: "Validar Taxonomia",
+    actionValidateDesc: "Verificar nomes de espécies, sinonímias e distribuição geográfica",
+    validateOptions: "Opções de Validação",
+    validateFixNames: "Corrigir nomes inválidos/desatualizados",
+    validateFixNamesDesc: "Atualizar nomes conforme Flora do Brasil 2020 ou outros catálogos",
+    validateMergeSynonyms: "Mesclar sinônimos",
+    validateMergeSynonymsDesc: "Combinar espécies sinônimas, preservando características de ambas",
+    validateCheckGeography: "Verificar distribuição geográfica",
+    validateCheckGeographyDesc: "Remover espécies fora do escopo geográfico definido",
+    validateCheckTaxonomy: "Verificar escopo taxonômico",
+    validateCheckTaxonomyDesc: "Remover espécies fora da família/gênero definido",
+    validateReference: "Catálogo de Referência",
+    validateFloradobrasil: "Flora do Brasil 2020",
+    validateGbif: "GBIF Backbone",
+    validatePowo: "POWO (Kew)",
+    validateCustom: "Personalizado/Outro",
     photoModeReplace: "Substituir Todas",
     photoModeReplaceDesc: "Limpar existentes e buscar novas",
     photoModeExpand: "Apenas Preencher Faltantes",
@@ -567,7 +599,18 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     completePhotos: false,
     photoTarget: 'both' as 'entities' | 'features' | 'both',
     photoMode: 'expand' as 'replace' | 'expand',
-    photoCustomSources: ''
+    photoCustomSources: '',
+    // Validate options
+    validateFixNames: true,
+    validateMergeSynonyms: true,
+    validateCheckGeography: true,
+    validateCheckTaxonomy: true,
+    validateReference: 'floradobrasil' as 'floradobrasil' | 'gbif' | 'powo' | 'custom',
+    validateFamily: '',
+    validateGenus: '',
+    validateBiome: '',
+    validateStateUF: '',
+    validateScope: 'national' as 'global' | 'national' | 'regional'
   });
 
   // Merge Mode State
@@ -1524,6 +1567,19 @@ OUTPUT: Return a single merged JSON identification key with:
       alert(language === 'pt' ? 'Carregue um projeto primeiro.' : 'Load a project first.');
       return;
     }
+    
+    // Validate action requires at least one validation option
+    if (refineAction === 'VALIDATE' && 
+        !refineOptions.validateFixNames && 
+        !refineOptions.validateMergeSynonyms && 
+        !refineOptions.validateCheckGeography && 
+        !refineOptions.validateCheckTaxonomy) {
+      alert(language === 'pt' 
+        ? 'Selecione pelo menos uma opção de validação.' 
+        : 'Select at least one validation option.');
+      return;
+    }
+    
     setIsGenerating(true);
     setGeneratingMessage('');
     
@@ -1604,6 +1660,94 @@ OUTPUT: Return a single merged JSON identification key with:
         await new Promise(resolve => setTimeout(resolve, 2000));
         
         setProject(updatedProject);
+        setShowPromptEditor(false);
+        setActiveTab('ENTITIES');
+        
+        return;
+      }
+
+      // VALIDATE action - Uses Gemini to validate taxonomy
+      if (refineAction === 'VALIDATE') {
+        startTypingEffect();
+        
+        // Build validation prompt
+        const entityList = project.entities.map(e => 
+          `- "${e.name}"${e.scientificName ? ` (${e.scientificName})` : ''}`
+        ).join('\n');
+        
+        const catalogName = refineOptions.validateReference === 'floradobrasil' 
+          ? 'Flora do Brasil 2020' 
+          : refineOptions.validateReference === 'gbif' 
+            ? 'GBIF Backbone Taxonomy'
+            : refineOptions.validateReference === 'powo'
+              ? 'Plants of the World Online (POWO)'
+              : 'current taxonomic literature';
+        
+        const validationTasks: string[] = [];
+        if (refineOptions.validateFixNames) {
+          validationTasks.push(`1. CORRECT NAMES: Check each species against ${catalogName}. If a name is outdated, misspelled, or refers to a non-existent species, provide the accepted name.`);
+        }
+        if (refineOptions.validateMergeSynonyms) {
+          validationTasks.push('2. MERGE SYNONYMS: Identify synonymous species in the list. When found, keep only the accepted name and merge trait data from both entries.');
+        }
+        if (refineOptions.validateCheckTaxonomy && (refineOptions.validateFamily || refineOptions.validateGenus)) {
+          const taxScope = refineOptions.validateFamily 
+            ? `family ${refineOptions.validateFamily}` 
+            : `genus ${refineOptions.validateGenus}`;
+          validationTasks.push(`3. CHECK TAXONOMY: Remove any species that do not belong to ${taxScope}.`);
+        }
+        if (refineOptions.validateCheckGeography && refineOptions.validateScope !== 'global') {
+          const geoScope = refineOptions.validateScope === 'national' 
+            ? 'Brazil' 
+            : (refineOptions.validateBiome || refineOptions.validateStateUF || 'the specified region');
+          validationTasks.push(`4. CHECK GEOGRAPHY: Remove species that do not occur in ${geoScope}${refineOptions.validateBiome ? ` (${refineOptions.validateBiome})` : ''}${refineOptions.validateStateUF ? ` (${refineOptions.validateStateUF})` : ''}.`);
+        }
+
+        const validatePrompt = `You are a taxonomic validation expert. Analyze the following species list and perform the requested validations.
+
+SPECIES LIST TO VALIDATE:
+${entityList}
+
+VALIDATION TASKS:
+${validationTasks.join('\n')}
+
+REFERENCE CATALOG: ${catalogName}
+
+IMPORTANT INSTRUCTIONS:
+- Return a JSON object with the full project structure
+- For each entity, preserve ALL existing data (traits, description, links, imageUrl)
+- Only modify: name, scientificName, and family fields when corrections are needed
+- When merging synonyms, combine traits from both entities (union of all trait values)
+- Add a "validationNotes" field to each entity explaining any changes made
+- If an entity should be removed, do NOT include it in the output
+- Keep the exact same feature definitions
+
+EXISTING PROJECT (preserve structure):
+${JSON.stringify(project, null, 2)}
+
+Return the validated project as a JSON object with the same structure.`;
+
+        setManualPrompt(validatePrompt);
+        
+        const generatedProject = await generateKeyFromCustomPrompt(validatePrompt, apiKey, aiConfig.model, language);
+        
+        // Count changes
+        const removedCount = project.entities.length - generatedProject.entities.length;
+        const changedCount = generatedProject.entities.filter(e => 
+          project.entities.find(orig => orig.id === e.id && (orig.name !== e.name || orig.scientificName !== e.scientificName))
+        ).length;
+        
+        // Stop typing effect and show summary
+        const summaryMsg = language === 'pt'
+          ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ VALIDAÇÃO CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resultado:\n   🔄 Nomes corrigidos: ${changedCount}\n   ❌ Espécies removidas: ${removedCount}\n   ✅ Espécies válidas: ${generatedProject.entities.length}\n\n⚠️ ATENÇÃO: Revise as alterações manualmente!\nOs dados da IA podem conter imprecisões.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
+          : `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ VALIDATION COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Result:\n   🔄 Names corrected: ${changedCount}\n   ❌ Species removed: ${removedCount}\n   ✅ Valid species: ${generatedProject.entities.length}\n\n⚠️ WARNING: Review changes manually!\nAI data may contain inaccuracies.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+        
+        stopTypingEffect(generatedProject);
+        setAiTypingText(prev => prev + summaryMsg);
+        
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        setProject(generatedProject);
         setShowPromptEditor(false);
         setActiveTab('ENTITIES');
         
@@ -2814,6 +2958,21 @@ OUTPUT: Return a single merged JSON identification key with:
                         </div>
                       </div>
                     </button>
+
+                    <button
+                      onClick={() => setRefineAction('VALIDATE')}
+                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'VALIDATE' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 hover:border-emerald-300'}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${refineAction === 'VALIDATE' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <ShieldCheck size={20} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-bold text-slate-800">{strings.actionValidate}</p>
+                          <p className="text-xs text-slate-500">{strings.actionValidateDesc}</p>
+                        </div>
+                      </div>
+                    </button>
                   </div>
 
                   {/* Action-specific options */}
@@ -2991,8 +3150,192 @@ OUTPUT: Return a single merged JSON identification key with:
                     </div>
                   )}
 
+                  {refineAction === 'VALIDATE' && (
+                    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200 space-y-4">
+                      <p className="text-sm font-medium text-emerald-800">{strings.validateOptions}</p>
+                      
+                      {/* Reference Catalog Selection */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-emerald-700 uppercase">{strings.validateReference}</label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {(['floradobrasil', 'gbif', 'powo', 'custom'] as const).map((ref) => (
+                            <button
+                              key={ref}
+                              onClick={() => setRefineOptions(prev => ({ ...prev, validateReference: ref }))}
+                              className={`py-2 px-3 text-xs font-medium rounded-lg transition-all ${
+                                refineOptions.validateReference === ref 
+                                  ? 'bg-emerald-600 text-white shadow-sm' 
+                                  : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
+                              }`}
+                            >
+                              {ref === 'floradobrasil' ? strings.validateFloradobrasil :
+                               ref === 'gbif' ? strings.validateGbif :
+                               ref === 'powo' ? strings.validatePowo : strings.validateCustom}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Validation Checkboxes */}
+                      <div className="space-y-2">
+                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.validateFixNames}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFixNames: e.target.checked }))}
+                            className="w-4 h-4 accent-emerald-500 mt-0.5"
+                          />
+                          <div>
+                            <span className="text-sm font-medium text-slate-800">{strings.validateFixNames}</span>
+                            <p className="text-xs text-slate-500">{strings.validateFixNamesDesc}</p>
+                          </div>
+                        </label>
+                        
+                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.validateMergeSynonyms}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateMergeSynonyms: e.target.checked }))}
+                            className="w-4 h-4 accent-emerald-500 mt-0.5"
+                          />
+                          <div>
+                            <span className="text-sm font-medium text-slate-800">{strings.validateMergeSynonyms}</span>
+                            <p className="text-xs text-slate-500">{strings.validateMergeSynonymsDesc}</p>
+                          </div>
+                        </label>
+                        
+                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.validateCheckGeography}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckGeography: e.target.checked }))}
+                            className="w-4 h-4 accent-emerald-500 mt-0.5"
+                          />
+                          <div>
+                            <span className="text-sm font-medium text-slate-800">{strings.validateCheckGeography}</span>
+                            <p className="text-xs text-slate-500">{strings.validateCheckGeographyDesc}</p>
+                          </div>
+                        </label>
+                        
+                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.validateCheckTaxonomy}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckTaxonomy: e.target.checked }))}
+                            className="w-4 h-4 accent-emerald-500 mt-0.5"
+                          />
+                          <div>
+                            <span className="text-sm font-medium text-slate-800">{strings.validateCheckTaxonomy}</span>
+                            <p className="text-xs text-slate-500">{strings.validateCheckTaxonomyDesc}</p>
+                          </div>
+                        </label>
+                      </div>
+
+                      {/* Taxonomic Scope (for validation) */}
+                      {refineOptions.validateCheckTaxonomy && (
+                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
+                          <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
+                            <Leaf size={12} /> {strings.taxonomyFilters}
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            <input
+                              value={refineOptions.validateFamily}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFamily: e.target.value }))}
+                              placeholder={strings.taxonomyFamily}
+                              className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                            />
+                            <input
+                              value={refineOptions.validateGenus}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateGenus: e.target.value }))}
+                              placeholder={strings.taxonomyGenus}
+                              className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Geographic Scope (for validation) */}
+                      {refineOptions.validateCheckGeography && (
+                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
+                          <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
+                            <Globe size={12} /> {strings.geographyFilters}
+                          </label>
+                          
+                          {/* Scope selector */}
+                          <div className="flex gap-2">
+                            {(['global', 'national', 'regional'] as const).map((scope) => (
+                              <button
+                                key={scope}
+                                onClick={() => setRefineOptions(prev => ({ ...prev, validateScope: scope }))}
+                                className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${
+                                  refineOptions.validateScope === scope 
+                                    ? 'bg-emerald-600 text-white' 
+                                    : 'bg-white text-slate-600 hover:bg-emerald-100 border border-slate-200'
+                                }`}
+                              >
+                                {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
+                              </button>
+                            ))}
+                          </div>
+
+                          {refineOptions.validateScope !== 'global' && (
+                            <div className="grid grid-cols-2 gap-2">
+                              <select
+                                value={refineOptions.validateBiome}
+                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateBiome: e.target.value }))}
+                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                              >
+                                <option value="">{strings.biome}</option>
+                                <option value="Amazônia">Amazônia</option>
+                                <option value="Mata Atlântica">Mata Atlântica</option>
+                                <option value="Cerrado">Cerrado</option>
+                                <option value="Caatinga">Caatinga</option>
+                                <option value="Pampa">Pampa</option>
+                                <option value="Pantanal">Pantanal</option>
+                              </select>
+                              <select
+                                value={refineOptions.validateStateUF}
+                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateStateUF: e.target.value }))}
+                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                              >
+                                <option value="">{strings.stateUF}</option>
+                                <option value="AC">Acre (AC)</option>
+                                <option value="AL">Alagoas (AL)</option>
+                                <option value="AP">Amapá (AP)</option>
+                                <option value="AM">Amazonas (AM)</option>
+                                <option value="BA">Bahia (BA)</option>
+                                <option value="CE">Ceará (CE)</option>
+                                <option value="DF">Distrito Federal (DF)</option>
+                                <option value="ES">Espírito Santo (ES)</option>
+                                <option value="GO">Goiás (GO)</option>
+                                <option value="MA">Maranhão (MA)</option>
+                                <option value="MT">Mato Grosso (MT)</option>
+                                <option value="MS">Mato Grosso do Sul (MS)</option>
+                                <option value="MG">Minas Gerais (MG)</option>
+                                <option value="PA">Pará (PA)</option>
+                                <option value="PB">Paraíba (PB)</option>
+                                <option value="PR">Paraná (PR)</option>
+                                <option value="PE">Pernambuco (PE)</option>
+                                <option value="PI">Piauí (PI)</option>
+                                <option value="RJ">Rio de Janeiro (RJ)</option>
+                                <option value="RN">Rio Grande do Norte (RN)</option>
+                                <option value="RS">Rio Grande do Sul (RS)</option>
+                                <option value="RO">Rondônia (RO)</option>
+                                <option value="RR">Roraima (RR)</option>
+                                <option value="SC">Santa Catarina (SC)</option>
+                                <option value="SP">São Paulo (SP)</option>
+                                <option value="SE">Sergipe (SE)</option>
+                                <option value="TO">Tocantins (TO)</option>
+                              </select>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {/* Photo Completion Option - Available for EXPAND, REFINE, CLEAN actions */}
-                  {refineAction !== 'PHOTOS' && (
+                  {refineAction !== 'PHOTOS' && refineAction !== 'VALIDATE' && (
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-3">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
@@ -3428,10 +3771,10 @@ OUTPUT: Return a single merged JSON identification key with:
               {aiMode === 'REFINE' ? (
               <button
                 onClick={handleRefineGenerate}
-                className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+                className={`flex-1 py-2.5 ${refineAction === 'VALIDATE' ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-900/20' : 'bg-amber-500 hover:bg-amber-600 shadow-amber-900/20'} text-white font-bold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm`}
                 disabled={isGenerating || project.entities.length === 0}
               >
-                {refineAction === 'EXPAND' ? strings.actionExpand : refineAction === 'REFINE' ? strings.actionRefine : refineAction === 'CLEAN' ? strings.actionClean : strings.actionPhotos} <Sparkles size={16} className="opacity-70" />
+                {refineAction === 'EXPAND' ? strings.actionExpand : refineAction === 'REFINE' ? strings.actionRefine : refineAction === 'CLEAN' ? strings.actionClean : refineAction === 'VALIDATE' ? strings.actionValidate : strings.actionPhotos} {refineAction === 'VALIDATE' ? <ShieldCheck size={16} className="opacity-70" /> : <Sparkles size={16} className="opacity-70" />}
               </button>
               ) : aiMode === 'MERGE' ? (
               <button
