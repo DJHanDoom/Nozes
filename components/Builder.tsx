@@ -1966,44 +1966,18 @@ OUTPUT: Return a single merged JSON identification key with:
       alert(language === 'pt' ? 'Carregue ambas as chaves JSON primeiro.' : 'Load both JSON keys first.');
       return;
     }
-    setIsGenerating(true);
-    
-    // Open prompt editor and start typing effect
-    setShowAiModal(false);
-    setShowPromptEditor(true);
-    startTypingEffect();
     
     try {
       const mergePrompt = buildMergePrompt();
       setManualPrompt(mergePrompt);
       
-      const generatedProject = await generateKeyFromCustomPrompt(mergePrompt, apiKey, aiConfig.model, language);
-      
-      // Stop typing effect and show summary
-      stopTypingEffect(generatedProject);
-      
-      // Wait a moment so user can see the summary
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
-      // Merge with both source keys to preserve images, links, and other data
-      let mergedProject = generatedProject;
-      if (mergeKey1) mergedProject = mergeProjectsPreservingData(mergedProject, mergeKey1);
-      if (mergeKey2) mergedProject = mergeProjectsPreservingData(mergedProject, mergeKey2);
-      setProject(mergedProject);
-      setShowPromptEditor(false);
-      setActiveTab('MATRIX');
+      // Open prompt editor - user can review/edit then click Generate to execute
+      setShowAiModal(false);
+      setShowPromptEditor(true);
+      // Don't execute automatically - let user review prompt and click Generate in the modal
     } catch (e) {
       console.error(e);
-      // Stop typing and show error
-      stopTypingEffect();
-      setAiTypingText(prev => prev + (language === 'pt' 
-        ? "\n\n❌ ERRO: Não foi possível mesclar as chaves."
-        : "\n\n❌ ERROR: Could not merge the keys."));
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      alert(strings.errGen);
-      setShowPromptEditor(false);
-    } finally {
-      setIsGenerating(false);
+      alert(language === 'pt' ? 'Erro ao gerar prompt.' : 'Error generating prompt.');
     }
   };
 
@@ -2238,56 +2212,26 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
 
         setManualPrompt(validatePrompt);
         
-        const generatedProject = await generateKeyFromCustomPrompt(validatePrompt, apiKey, aiConfig.model, language);
-        
-        // Count changes
-        const removedCount = project.entities.length - generatedProject.entities.length;
-        const changedCount = generatedProject.entities.filter(e => 
-          project.entities.find(orig => orig.id === e.id && (orig.name !== e.name || orig.scientificName !== e.scientificName))
-        ).length;
-        
-        // Stop typing effect and show summary
-        const summaryMsg = language === 'pt'
-          ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ VALIDAÇÃO CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resultado:\n   🔄 Nomes corrigidos: ${changedCount}\n   ❌ Espécies removidas: ${removedCount}\n   ✅ Espécies válidas: ${generatedProject.entities.length}\n\n⚠️ ATENÇÃO: Revise as alterações manualmente!\nOs dados da IA podem conter imprecisões.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
-          : `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ VALIDATION COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Result:\n   🔄 Names corrected: ${changedCount}\n   ❌ Species removed: ${removedCount}\n   ✅ Valid species: ${generatedProject.entities.length}\n\n⚠️ WARNING: Review changes manually!\nAI data may contain inaccuracies.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
-        
-        stopTypingEffect(generatedProject);
-        setAiTypingText(prev => prev + summaryMsg);
-        
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        
-        // Merge with existing project to preserve images, links, and other data
-        const mergedProject = mergeProjectsPreservingData(generatedProject, project);
-        setProject(mergedProject);
-        setShowPromptEditor(false);
-        setActiveTab('ENTITIES');
+        // Open prompt editor - user can review/edit then click Generate to execute
+        setShowAiModal(false);
+        setShowPromptEditor(true);
+        setIsGenerating(false);
+        // Don't execute automatically - let user review prompt and click Generate in the modal
         
         return;
       }
 
       // Other refine actions use Gemini - with typing effect
-      startTypingEffect();
       const refinePrompt = buildRefinePrompt();
       setManualPrompt(refinePrompt);
       
-      // Open prompt editor and start typing effect
+      // Open prompt editor - user can review/edit then click Generate to execute
       setShowAiModal(false);
       setShowPromptEditor(true);
-      startTypingEffect();
-
-      const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model, language);
-      
-      // Stop typing effect and show summary
-      stopTypingEffect(generatedProject);
-      
-      // Wait a moment so user can see the summary
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
-      // Merge with existing project to preserve images, links, and other data
-      const mergedProject = mergeProjectsPreservingData(generatedProject, project);
-      setProject(mergedProject);
-      setShowPromptEditor(false);
-      setActiveTab('MATRIX');
+      // Don't execute automatically - let user review prompt and click Generate in the modal
+      // The modal's Generate button calls handleSendManualPrompt which uses the (possibly edited) manualPrompt
+      setIsGenerating(false);
+      return;
     } catch (e) {
       console.error(e);
       // Stop typing and show error
