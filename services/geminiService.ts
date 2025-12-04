@@ -269,6 +269,71 @@ function getPlaceholderImage(entityName: string): string {
 }
 
 /**
+ * Generate reliable reference links for a biological entity
+ * Uses known URL patterns from reputable databases
+ */
+function generateEntityLinks(scientificName: string, family: string, language: string): Array<{id: string; label: string; url: string}> {
+  const links: Array<{id: string; label: string; url: string}> = [];
+  
+  if (!scientificName || scientificName.length < 3) return links;
+  
+  // Clean and encode the scientific name
+  const cleanName = scientificName.trim();
+  const encodedName = encodeURIComponent(cleanName);
+  const underscoreName = cleanName.replace(/\s+/g, '_');
+  
+  // 1. Wikipedia - always works as a search
+  const wikiLang = language === 'pt' ? 'pt' : 'en';
+  links.push({
+    id: generateId(),
+    label: 'Wikipedia',
+    url: `https://${wikiLang}.wikipedia.org/wiki/Special:Search?search=${encodedName}&go=Go`
+  });
+  
+  // 2. GBIF (Global Biodiversity Information Facility) - best for occurrence data
+  links.push({
+    id: generateId(),
+    label: 'GBIF',
+    url: `https://www.gbif.org/species/search?q=${encodedName}`
+  });
+  
+  // 3. iNaturalist - best for photos and observations
+  links.push({
+    id: generateId(),
+    label: 'iNaturalist',
+    url: `https://www.inaturalist.org/search?q=${encodedName}`
+  });
+  
+  // 4. Add Flora e Funga do Brasil for Portuguese/Brazilian species
+  if (language === 'pt') {
+    links.push({
+      id: generateId(),
+      label: 'Flora e Funga do Brasil',
+      url: `https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=${encodedName}`
+    });
+  }
+  
+  // 5. Biodiversity4All for Portuguese content
+  if (language === 'pt') {
+    links.push({
+      id: generateId(),
+      label: 'Biodiversity4All',
+      url: `https://www.biodiversity4all.org/search?q=${encodedName}`
+    });
+  }
+  
+  // 6. POWO (Plants of the World Online) - for plants
+  links.push({
+    id: generateId(),
+    label: 'POWO',
+    url: `https://powo.science.kew.org/results?q=${encodedName}`
+  });
+  
+  // Limit to 4 most relevant links
+  return links.slice(0, 4);
+}
+
+/**
  * Try to extract scientific name from entity name
  * Handles common patterns like "Entity (Scientific Name)" or "Scientific Name"
  */
@@ -451,9 +516,8 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     ? "For each feature, provide a valid, DIRECT public URL to an image file illustrating the trait if available."
     : "Leave `imageUrl` empty for features.";
 
-  let linkInstruction = config.includeLinks
-    ? "For each entity, provide 1-2 reputable external links (e.g., Wikipedia, IUCN, GBIF, Flora e Funga do Brasil) in the 'links' array."
-    : "Leave the 'links' array empty.";
+  // NOTE: Links are now generated programmatically from scientific names, so we tell the AI to leave them empty
+  const linkInstruction = "Leave the 'links' array empty (links will be generated automatically from scientific names).";
 
   // 1. IMPORT MODE LOGIC
   if (config.importedFile) {
@@ -618,7 +682,7 @@ export const generateKeyFromTopic = async (
   const contents = parts ? parts : prompt;
 
   // Generate the key structure (without reliable images yet)
-  const project = await callGemini(ai, config.model, contents, systemInstruction, schema);
+  const project = await callGemini(ai, config.model, contents, systemInstruction, schema, config.language, config.includeLinks);
 
   // Now fetch real images from iNaturalist/Wikipedia APIs
   if (config.includeSpeciesImages && project.entities.length > 0) {
@@ -650,7 +714,8 @@ export const generateKeyFromTopic = async (
 export const generateKeyFromCustomPrompt = async (
   customPrompt: string,
   apiKey: string,
-  model: string = "gemini-2.5-flash"
+  model: string = "gemini-2.5-flash",
+  language: string = 'pt'
 ): Promise<Project> => {
   if (!apiKey) throw new Error("API Key is missing");
   const ai = new GoogleGenAI({ apiKey: apiKey });
@@ -658,7 +723,7 @@ export const generateKeyFromCustomPrompt = async (
   // Use minimal system instruction as the user provides the full context
   const systemInstruction = `You are an expert biologist. Return ONLY valid JSON matching the schema. Do not include markdown code fences.`;
 
-  return await callGemini(ai, model, customPrompt, systemInstruction, generationSchema);
+  return await callGemini(ai, model, customPrompt, systemInstruction, generationSchema, language, true);
 };
 
 // Unified Gemini Call function with Schema support
@@ -667,7 +732,9 @@ async function callGemini(
   modelName: string,
   contents: any,
   systemInstruction: string,
-  responseSchema: Schema
+  responseSchema: Schema,
+  language: string = 'en',
+  includeLinks: boolean = true
 ): Promise<Project> {
 
   const generateContentWithFallback = async (currentModel: string): Promise<any> => {
@@ -751,7 +818,10 @@ async function callGemini(
       // Placeholder URL - will be replaced by real API fetched images in generateKeyFromTopic
       const placeholderUrl = getPlaceholderImage(e.name);
 
-      const rawLinks = Array.isArray(e.links) ? e.links : [];
+      // Generate reliable links programmatically instead of using AI-generated URLs
+      const entityLinks = includeLinks 
+        ? generateEntityLinks(scientificName, family, language)
+        : [];
 
       return {
         id: generateId(),
@@ -760,11 +830,7 @@ async function callGemini(
         family: family, // Taxonomic family
         description: e.description,
         imageUrl: placeholderUrl, // Will be replaced with real image
-        links: rawLinks.map((l: any) => ({
-          id: generateId(),
-          label: l.label || "Link",
-          url: l.url || "#"
-        })),
+        links: entityLinks,
         traits: entityTraits
       };
     });

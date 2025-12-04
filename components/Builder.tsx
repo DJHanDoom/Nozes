@@ -1361,7 +1361,7 @@ OUTPUT: Return a single merged JSON identification key with:
     setIsGenerating(true);
     try {
       const mergePrompt = buildMergePrompt();
-      const generatedProject = await generateKeyFromCustomPrompt(mergePrompt, apiKey, aiConfig.model);
+      const generatedProject = await generateKeyFromCustomPrompt(mergePrompt, apiKey, aiConfig.model, language);
       
       setProject(generatedProject);
       setShowAiModal(false);
@@ -1451,7 +1451,7 @@ OUTPUT: Return a single merged JSON identification key with:
       // Other refine actions use Gemini
       const refinePrompt = buildRefinePrompt();
 
-      const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model);
+      const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model, language);
       
       setProject(generatedProject);
       setShowAiModal(false);
@@ -1521,7 +1521,7 @@ OUTPUT: Return a single merged JSON identification key with:
     startTypingEffect();
 
     try {
-      const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model);
+      const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
       
       // Stop typing effect and show summary
       stopTypingEffect(generatedProject);
