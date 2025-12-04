@@ -1,0 +1,618 @@
+{
+  "id": "dz53cfm1i",
+  "name": "Chave de Identificação da Flora Vegetativa da Serra da Mantiqueira",
+  "description": "Esta chave de identificação interativa foi elaborada para auxiliar estudantes e entusiastas na distinção de espécies vegetais comuns na Serra da Mantiqueira (Mata Atlântica, RJ), com foco em características vegetativas como folhas, caules e hábitos de crescimento. As espécies selecionadas são nativas e ocorrem na região.",
+  "features": [
+    {
+      "id": "dhk8m8ay4",
+      "name": "Filotaxia (Disposição das Folhas)",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Leaf_arrangement.svg/1000px-Leaf_arrangement.svg.png",
+      "states": [
+        {
+          "id": "1unekaqxu",
+          "label": "Alterna"
+        },
+        {
+          "id": "4oyt9vfk5",
+          "label": "Oposta"
+        },
+        {
+          "id": "m7p8hfx27",
+          "label": "Em espiral"
+        }
+      ]
+    },
+    {
+      "id": "8bmiodltp",
+      "name": "Tipo de Folha",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Leaf_types.svg/1000px-Leaf_types.svg.png",
+      "states": [
+        {
+          "id": "408s6vyu3",
+          "label": "Simples"
+        },
+        {
+          "id": "wflxa1a8l",
+          "label": "Composta pinada"
+        },
+        {
+          "id": "lpip1litj",
+          "label": "Composta palmada"
+        }
+      ]
+    },
+    {
+      "id": "k6wx53m61",
+      "name": "Borda da Lâmina Foliar",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Leaf_margins.svg/1000px-Leaf_margins.svg.png",
+      "states": [
+        {
+          "id": "nlci95mj8",
+          "label": "Inteira"
+        },
+        {
+          "id": "gmvegmwfk",
+          "label": "Serrilhada"
+        }
+      ]
+    },
+    {
+      "id": "7uozegpjf",
+      "name": "Textura da Casca do Tronco",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Bark_patterns_examples.jpg/1280px-Bark_patterns_examples.jpg",
+      "states": [
+        {
+          "id": "ci0fexx6m",
+          "label": "Lisa"
+        },
+        {
+          "id": "b117zch2b",
+          "label": "Fissurada"
+        },
+        {
+          "id": "m5b93pvvb",
+          "label": "Escamosa"
+        },
+        {
+          "id": "28l137m8i",
+          "label": "Anelada"
+        },
+        {
+          "id": "dtncexx4f",
+          "label": "Rugosa"
+        }
+      ]
+    },
+    {
+      "id": "f6wr8gmnh",
+      "name": "Hábito de Crescimento",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Plant_habits.svg/1000px-Plant_habits.svg.png",
+      "states": [
+        {
+          "id": "kifviw7d2",
+          "label": "Arbóreo"
+        },
+        {
+          "id": "vb5mtocwd",
+          "label": "Arbustivo"
+        },
+        {
+          "id": "dcmpd5bhv",
+          "label": "Palmeira"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "fg8psobh7",
+      "name": "Araucária (Pinheiro-do-Paraná)",
+      "family": "Araucariaceae",
+      "description": "Árvore de grande porte, com copa piramidal ou colunar, e folhas perenes, duras, pontiagudas (aciculadas), dispostas em espiral. A casca é grossa e se desprende em placas.",
+      "imageUrl": "https://static.inaturalist.org/photos/16051886/medium.jpg",
+      "links": [
+        {
+          "id": "sdxc1a6k2",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Araucaria%20angustifolia&go=Go"
+        },
+        {
+          "id": "zu7604f0r",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Araucaria%20angustifolia"
+        },
+        {
+          "id": "agx11rhui",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Araucaria%20angustifolia"
+        },
+        {
+          "id": "t2j6n4brz",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Araucaria%20angustifolia"
+        },
+        {
+          "id": "xtmoqh7e2",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Araucaria%20angustifolia"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "m7p8hfx27"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "m5b93pvvb"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "10mk0uet9",
+      "name": "Quaresmeira",
+      "family": "Melastomataceae",
+      "description": "Árvore ornamental de médio porte, com folhas simples, opostas, com nervuras longitudinais bem marcadas e textura áspera. A casca é rugosa e fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/107244087/medium.jpeg",
+      "links": [
+        {
+          "id": "kn2qmbksh",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Tibouchina%20granulosa&go=Go"
+        },
+        {
+          "id": "gbgitb2h4",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Tibouchina%20granulosa"
+        },
+        {
+          "id": "vb7gpqoux",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Tibouchina%20granulosa"
+        },
+        {
+          "id": "akllwrv0e",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Tibouchina%20granulosa"
+        },
+        {
+          "id": "rhcp8dygg",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Tibouchina%20granulosa"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "4oyt9vfk5"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "dtncexx4f"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "ahmhuoway",
+      "name": "Ipê-branco",
+      "family": "Bignoniaceae",
+      "description": "Árvore de médio a grande porte, conhecida por suas folhas compostas palmadas, geralmente com 5-7 folíolos. A casca é fissurada longitudinalmente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/93558645/medium.jpeg",
+      "links": [
+        {
+          "id": "5l5kgjvex",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Handroanthus%20albus&go=Go"
+        },
+        {
+          "id": "2d7hdzi1f",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Handroanthus%20albus"
+        },
+        {
+          "id": "cci7tm2si",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Handroanthus%20albus"
+        },
+        {
+          "id": "xwhjd2ek1",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Handroanthus%20albus"
+        },
+        {
+          "id": "ecjq7bqxb",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Handroanthus%20albus"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "4oyt9vfk5"
+        ],
+        "8bmiodltp": [
+          "lpip1litj"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "b117zch2b"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "th69hoy89",
+      "name": "Jenipapo",
+      "family": "Rubiaceae",
+      "description": "Árvore de médio porte, com folhas simples, grandes, obovadas, opostas, com brilho na face superior. A casca é lisa a levemente fissurada.",
+      "imageUrl": "https://static.inaturalist.org/photos/169831616/medium.jpeg",
+      "links": [
+        {
+          "id": "iged01emi",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Genipa%20americana&go=Go"
+        },
+        {
+          "id": "hjfb43bfa",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Genipa%20americana"
+        },
+        {
+          "id": "gu6gry6nf",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Genipa%20americana"
+        },
+        {
+          "id": "qffjvfwuk",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Genipa%20americana"
+        },
+        {
+          "id": "7ommjv5hb",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Genipa%20americana"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "4oyt9vfk5"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "ci0fexx6m"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "sbn5wysqn",
+      "name": "Candeia",
+      "family": "Asteraceae",
+      "description": "Árvore de pequeno a médio porte, conhecida pela madeira nobre. Folhas simples, alternas, inteiras, com face inferior esbranquiçada. A casca é espessa e profundamente fissurada.",
+      "imageUrl": "https://static.inaturalist.org/photos/94151126/medium.jpeg",
+      "links": [
+        {
+          "id": "l6em21rgu",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Eremanthus%20erythropappus&go=Go"
+        },
+        {
+          "id": "w6yi0dg1a",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Eremanthus%20erythropappus"
+        },
+        {
+          "id": "erhcpb868",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Eremanthus%20erythropappus"
+        },
+        {
+          "id": "e5tazoul8",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Eremanthus%20erythropappus"
+        },
+        {
+          "id": "foixglykv",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Eremanthus%20erythropappus"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "1unekaqxu"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "b117zch2b"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "zu6ueek9d",
+      "name": "Aroeira-mansa",
+      "family": "Anacardiaceae",
+      "description": "Árvore ou arbusto com folhas compostas pinadas, alternas, com folíolos de borda serrilhada ou inteira. Produz frutos pequenos e vermelhos. A casca é fissurada e descamante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/57240422/medium.jpg",
+      "links": [
+        {
+          "id": "0yvxhkhtp",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Schinus%20terebinthifolia&go=Go"
+        },
+        {
+          "id": "flkazaadl",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Schinus%20terebinthifolia"
+        },
+        {
+          "id": "fl0bg4goa",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Schinus%20terebinthifolia"
+        },
+        {
+          "id": "wmo2mlvrw",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Schinus%20terebinthifolia"
+        },
+        {
+          "id": "ah0knkkug",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Schinus%20terebinthifolia"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "1unekaqxu"
+        ],
+        "8bmiodltp": [
+          "wflxa1a8l"
+        ],
+        "k6wx53m61": [
+          "gmvegmwfk"
+        ],
+        "7uozegpjf": [
+          "b117zch2b"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "33djw85ir",
+      "name": "Jerivá (Cocotero)",
+      "family": "Arecaceae",
+      "description": "Palmeira elegante de tronco único, com folhas grandes, pinadas, dispostas em espiral no topo do caule, formando uma coroa. O tronco é liso e anelado por cicatrizes das folhas caídas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/123453473/medium.jpg",
+      "links": [
+        {
+          "id": "cfmsvjmnd",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Syagrus%20romanzoffiana&go=Go"
+        },
+        {
+          "id": "r4mtnj2m2",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Syagrus%20romanzoffiana"
+        },
+        {
+          "id": "hr7oqiyh8",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Syagrus%20romanzoffiana"
+        },
+        {
+          "id": "5dm0iyk17",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Syagrus%20romanzoffiana"
+        },
+        {
+          "id": "ygkqiqtf8",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Syagrus%20romanzoffiana"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "m7p8hfx27"
+        ],
+        "8bmiodltp": [
+          "wflxa1a8l"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "28l137m8i"
+        ],
+        "f6wr8gmnh": [
+          "dcmpd5bhv"
+        ]
+      }
+    },
+    {
+      "id": "1nmws459v",
+      "name": "Figueira-branca",
+      "family": "Moraceae",
+      "description": "Árvore de grande porte, característica de matas ciliares. Produz látex abundante. Folhas simples, alternas, ovais a elípticas, com ápice acuminado. A casca é lisa e acinzentada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/99390683/medium.jpg",
+      "links": [
+        {
+          "id": "r3vtfg8gm",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Ficus%20insipida&go=Go"
+        },
+        {
+          "id": "hfwer3z2t",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Ficus%20insipida"
+        },
+        {
+          "id": "gdjzxd5u3",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Ficus%20insipida"
+        },
+        {
+          "id": "0wyt009qo",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Ficus%20insipida"
+        },
+        {
+          "id": "7r8smtkuf",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Ficus%20insipida"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "1unekaqxu"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "ci0fexx6m"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    },
+    {
+      "id": "my025gr72",
+      "name": "Vassourão-branco",
+      "family": "Asteraceae",
+      "description": "Arbusto a pequena árvore com folhas simples, alternas, com borda serrilhada e face inferior pubescente. A casca é lisa a levemente fissurada.",
+      "imageUrl": "https://static.inaturalist.org/photos/116775579/medium.jpg",
+      "links": [
+        {
+          "id": "rkk9degfd",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Piptocarpha%20angustifolia&go=Go"
+        },
+        {
+          "id": "5l35ptkhe",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Piptocarpha%20angustifolia"
+        },
+        {
+          "id": "6wrqssdyy",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Piptocarpha%20angustifolia"
+        },
+        {
+          "id": "5vtivfbit",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Piptocarpha%20angustifolia"
+        },
+        {
+          "id": "mez0oiftn",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Piptocarpha%20angustifolia"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "1unekaqxu"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "gmvegmwfk"
+        ],
+        "7uozegpjf": [
+          "ci0fexx6m"
+        ],
+        "f6wr8gmnh": [
+          "vb5mtocwd"
+        ]
+      }
+    },
+    {
+      "id": "b6l5gt79o",
+      "name": "Canela-branca",
+      "family": "Lauraceae",
+      "description": "Árvore de médio porte, com folhas simples, alternas, elípticas, de consistência coriácea e brilho na face superior. A casca é geralmente lisa e acinzentada, com odor característico quando raspada.",
+      "imageUrl": "https://static.inaturalist.org/photos/252154958/medium.jpeg",
+      "links": [
+        {
+          "id": "nnior0bef",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Ocotea%20pulchella&go=Go"
+        },
+        {
+          "id": "fjm1oi6i9",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Ocotea%20pulchella"
+        },
+        {
+          "id": "0sbdqqycd",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Ocotea%20pulchella"
+        },
+        {
+          "id": "36cpng2or",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Ocotea%20pulchella"
+        },
+        {
+          "id": "qqnovoe88",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Ocotea%20pulchella"
+        }
+      ],
+      "traits": {
+        "dhk8m8ay4": [
+          "1unekaqxu"
+        ],
+        "8bmiodltp": [
+          "408s6vyu3"
+        ],
+        "k6wx53m61": [
+          "nlci95mj8"
+        ],
+        "7uozegpjf": [
+          "ci0fexx6m"
+        ],
+        "f6wr8gmnh": [
+          "kifviw7d2"
+        ]
+      }
+    }
+  ]
+}

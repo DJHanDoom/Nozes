@@ -1,70 +1,67 @@
- {
-    2   "id": "sample-project-123",
-    3   "name": "Exemplo de Frutas",
-    4   "description": "Uma chave de identificação simples para algumas
-      frutas comuns.",
-    5   "features": [
-    6     {
-    7       "id": "f1",
-    8       "name": "Cor da Casca",
-    9       "imageUrl": "",
-   10       "states": [
-   11         { "id": "s1", "label": "Vermelho" },
-   12         { "id": "s2", "label": "Amarelo" },
-   13         { "id": "s3", "label": "Verde" }
-   14       ]
-   15     },
-   16     {
-   17       "id": "f2",
-   18       "name": "Formato",
-   19       "imageUrl": "",
-   20       "states": [
-   21         { "id": "s4", "label": "Redondo" },
-   22         { "id": "s5", "label": "Alongado" }
-   23       ]
-   24     }
-   25   ],
-   26   "entities": [
-   27     {
-   28       "id": "e1",
-   29       "name": "Maçã",
-   30       "scientificName": "Malus domestica",
-   31       "family": "Rosaceae",
-   32       "description": "Uma fruta popular, geralmente doce e       
-      crocante.",
-   33       "imageUrl": "",
-   34       "links": [],
-   35       "traits": {
-   36         "f1": ["s1", "s3"],
-   37         "f2": ["s4"]
-   38       }
-   39     },
-   40     {
-   41       "id": "e2",
-   42       "name": "Banana",
-   43       "scientificName": "Musa acuminata",
-   44       "family": "Musaceae",
-   45       "description": "Uma fruta tropical alongada com casca amare
-      quando madura.",
-   46       "imageUrl": "",
-   47       "links": [],
-   48       "traits": {
-   49         "f1": ["s2", "s3"],
-   50         "f2": ["s5"]
-   51       }
-   52     },
-   53     {
-   54       "id": "e3",
-   55       "name": "Uva",
-   56       "scientificName": "Vitis vinifera",
-   57       "family": "Vitaceae",
-   58       "description": "Pequenas bagas que crescem em cachos.",    
-   59       "imageUrl": "",
-   60       "links": [],
-   61       "traits": {
-   62         "f1": ["s1", "s3"],
-   63         "f2": ["s4"]
-   64       }
-   65     }
-   66   ]
-   67 }
+{
+  "id": "sample-project-123",
+  "name": "Exemplo de Frutas",
+  "description": "Uma chave de identificação simples para algumas frutas comuns.",
+  "features": [
+    {
+      "id": "f1",
+      "name": "Cor da Casca",
+      "imageUrl": "",
+      "states": [
+        { "id": "s1", "label": "Vermelho" },
+        { "id": "s2", "label": "Amarelo" },
+        { "id": "s3", "label": "Verde" }
+      ]
+    },
+    {
+      "id": "f2",
+      "name": "Formato",
+      "imageUrl": "",
+      "states": [
+        { "id": "s4", "label": "Redondo" },
+        { "id": "s5", "label": "Alongado" }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "e1",
+      "name": "Maçã",
+      "scientificName": "Malus domestica",
+      "family": "Rosaceae",
+      "description": "Uma fruta popular, geralmente doce e crocante.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f1": ["s1", "s3"],
+        "f2": ["s4"]
+      }
+    },
+    {
+      "id": "e2",
+      "name": "Banana",
+      "scientificName": "Musa acuminata",
+      "family": "Musaceae",
+      "description": "Uma fruta tropical alongada com casca amarela quando madura.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f1": ["s2", "s3"],
+        "f2": ["s5"]
+      }
+    },
+    {
+      "id": "e3",
+      "name": "Uva",
+      "scientificName": "Vitis vinifera",
+      "family": "Vitaceae",
+      "description": "Pequenas bagas que crescem em cachos.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "f1": ["s1", "s3"],
+        "f2": ["s4"]
+      }
+    }
+  ]
+}

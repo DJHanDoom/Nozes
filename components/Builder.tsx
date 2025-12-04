@@ -298,7 +298,7 @@ const t = {
     requiredSpeciesDesc: "Species that MUST be included (one per line)",
     requiredSpeciesPlaceholder: "Enter species names, one per line:\nInga edulis\nInga marginata\nInga vera",
     importSpeciesList: "Import species list",
-    importSpeciesFormats: "Supports: .txt, .csv, .xlsx, .doc, .json",
+    importSpeciesFormats: "Supports: .txt, .csv, .doc, .json",
     speciesCount: "species listed",
     clearList: "Clear list",
     generating: "Nozes IA is thinking... (15-45s)",
@@ -357,6 +357,9 @@ const t = {
     expandBiome: "Biome (optional)",
     expandStateUF: "State/UF (optional)",
     expandScope: "Geographic Scope",
+    expandRequiredSpecies: "Required Species to Add",
+    expandRequiredSpeciesDesc: "Species that MUST be added (one per line)",
+    expandRequiredSpeciesPlaceholder: "Enter species to add:\nInga edulis\nInga marginata",
     refineRequiredFeaturesTitle: "Required Features",
     refineRequiredFeaturesDesc: "Features that MUST be included in the key",
     addRequiredFeature: "Add feature...",
@@ -472,7 +475,7 @@ const t = {
     requiredSpeciesDesc: "Espécies que DEVEM ser incluídas (uma por linha)",
     requiredSpeciesPlaceholder: "Digite nomes de espécies, uma por linha:\nInga edulis\nInga marginata\nInga vera",
     importSpeciesList: "Importar lista de espécies",
-    importSpeciesFormats: "Suporta: .txt, .csv, .xlsx, .doc, .json",
+    importSpeciesFormats: "Suporta: .txt, .csv, .doc, .json",
     speciesCount: "espécies listadas",
     clearList: "Limpar lista",
     generating: "Nozes IA está pensando... (15-45s)",
@@ -531,6 +534,9 @@ const t = {
     expandBiome: "Bioma (opcional)",
     expandStateUF: "Estado/UF (opcional)",
     expandScope: "Escopo Geográfico",
+    expandRequiredSpecies: "Espécies Obrigatórias a Adicionar",
+    expandRequiredSpeciesDesc: "Espécies que DEVEM ser adicionadas (uma por linha)",
+    expandRequiredSpeciesPlaceholder: "Digite espécies a adicionar:\nInga edulis\nInga marginata",
     refineRequiredFeaturesTitle: "Características Obrigatórias",
     refineRequiredFeaturesDesc: "Características que DEVEM estar na chave",
     addRequiredFeature: "Adicionar característica...",
@@ -779,6 +785,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     expandBiome: '',
     expandStateUF: '',
     expandScope: 'national' as 'global' | 'national' | 'regional',
+    expandRequiredSpecies: '' as string, // Species that MUST be added
     // Refine required features
     refineRequiredFeatures: [] as string[],
     improveDescriptions: true,
@@ -1020,7 +1027,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   };
 
   const exportJSON = () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(project));
+    // Export with pretty formatting (2-space indent) for readability
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(project, null, 2));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", `${project.name.replace(/\s+/g, '_')}.json`);
@@ -1611,6 +1619,22 @@ Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0)
 
       const keepExistingEntities = refineOptions.keepExisting;
       
+      // Parse required species for EXPAND
+      const expandRequiredSpeciesList = refineOptions.expandRequiredSpecies
+        .split('\n')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+      
+      const requiredSpeciesInstr = expandRequiredSpeciesList.length > 0
+        ? `\n═══════════════════════════════════════════════════════════════════════
+⚠️ MANDATORY SPECIES TO ADD (${expandRequiredSpeciesList.length} species):
+═══════════════════════════════════════════════════════════════════════
+${expandRequiredSpeciesList.map((s, i) => `${i + 1}. "${s}"`).join('\n')}
+
+These species MUST be included among the new entities. They are NON-NEGOTIABLE.
+`
+        : '';
+      
       refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to EXPAND with more entities.
 
@@ -1618,13 +1642,14 @@ CURRENT KEY (JSON):
 ${projectJson}
 
 ${keepExistingEntities ? `═══════════════════════════════════════════════════════════════════════
-⚠️ CRITICAL: PRESERVE ALL ${project.entities.length} EXISTING ENTITIES + ADD ${refineOptions.expandCount} NEW ONES
+⚠️ CRITICAL: PRESERVE ALL ${project.entities.length} EXISTING ENTITIES + ADD NEW ONES
 ═══════════════════════════════════════════════════════════════════════
 
 EXISTING ENTITIES TO PRESERVE (count: ${project.entities.length}):
 ${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
 ` : ''}
-TASK: Add ${refineOptions.expandCount} NEW entities (species/taxa) to this key.
+${requiredSpeciesInstr}
+TASK: Add ${expandRequiredSpeciesList.length > 0 ? `at least ${Math.max(refineOptions.expandCount, expandRequiredSpeciesList.length)}` : refineOptions.expandCount} NEW entities (species/taxa) to this key.
 ${filterInstructions}
 CRITICAL RULES:
 1. DO NOT repeat any of the existing ${project.entities.length} entities. Each new entity MUST be unique.
@@ -1634,10 +1659,11 @@ CRITICAL RULES:
 5. For each new entity, assign appropriate trait values using the existing feature states.
 6. Maintain the same level of detail and language (${language === 'pt' ? 'Portuguese' : 'English'}).
 ${expandFilters.length > 0 ? '7. STRICTLY RESPECT all taxonomic and geographic filters above - do NOT add species outside the specified scope.' : ''}
+${expandRequiredSpeciesList.length > 0 ? `8. ⚠️ ALL ${expandRequiredSpeciesList.length} MANDATORY SPECIES listed above MUST be included. These are non-negotiable.` : ''}
 
-${keepExistingEntities ? `VERIFICATION: Your output MUST contain exactly ${project.entities.length + refineOptions.expandCount} entities (${project.entities.length} existing + ${refineOptions.expandCount} new). Count them before returning.` : ''}
+${keepExistingEntities ? `VERIFICATION: Your output MUST contain at least ${project.entities.length + Math.max(refineOptions.expandCount, expandRequiredSpeciesList.length)} entities. Count them before returning.` : ''}
 
-OUTPUT: Return a complete JSON with ${keepExistingEntities ? `ALL ${project.entities.length} existing entities + ${refineOptions.expandCount} new entities` : `${refineOptions.expandCount} new entities`}.
+OUTPUT: Return a complete JSON with ${keepExistingEntities ? `ALL ${project.entities.length} existing entities + new entities (including all mandatory species)` : `new entities (including all mandatory species)`}.
 `;
     } else if (refineAction === 'REFINE') {
       // Build required features instruction
@@ -1651,7 +1677,84 @@ For each required feature above:
 `
         : '';
       
-      refinePrompt = `
+      // Check if ONLY fillGaps is selected (specialized prompt for better results)
+      const onlyFillGaps = refineOptions.fillGaps && !refineOptions.improveDescriptions && !refineOptions.addFeatures && refineOptions.refineRequiredFeatures.length === 0;
+      
+      if (onlyFillGaps) {
+        // Build detailed gap analysis for focused prompt
+        const featureNames = project.features.map(f => f.name);
+        const entitiesWithGaps: { name: string; missingFeatures: string[] }[] = [];
+        
+        project.entities.forEach(entity => {
+          const missingFeatures: string[] = [];
+          project.features.forEach(feature => {
+            const hasTraits = entity.traits[feature.id] && entity.traits[feature.id].length > 0;
+            if (!hasTraits) {
+              missingFeatures.push(feature.name);
+            }
+          });
+          if (missingFeatures.length > 0) {
+            entitiesWithGaps.push({ name: entity.name, missingFeatures });
+          }
+        });
+        
+        if (entitiesWithGaps.length === 0) {
+          // No gaps found - inform user
+          refinePrompt = `No missing trait data found. All ${project.entities.length} entities have assignments for all ${project.features.length} features.`;
+        } else {
+          // Create focused prompt for filling gaps
+          refinePrompt = `
+You are an expert taxonomist. Your ONLY task is to FILL IN MISSING TRAIT DATA for entities in this identification key.
+
+═══════════════════════════════════════════════════════════════════════
+⚠️ FOCUSED TASK: FILL MISSING TRAITS ONLY
+═══════════════════════════════════════════════════════════════════════
+
+CURRENT KEY STRUCTURE:
+- Project: "${project.name}"
+- Total Entities: ${project.entities.length}
+- Total Features: ${project.features.length}
+- Features: ${featureNames.join(', ')}
+
+FEATURES WITH THEIR STATES:
+${project.features.map(f => `• ${f.name}: [${f.states.map(s => s.label).join(', ')}]`).join('\n')}
+
+═══════════════════════════════════════════════════════════════════════
+ENTITIES WITH MISSING DATA (${entitiesWithGaps.length} entities need fixes):
+═══════════════════════════════════════════════════════════════════════
+${entitiesWithGaps.map((e, i) => `${i + 1}. "${e.name}" → MISSING: ${e.missingFeatures.join(', ')}`).join('\n')}
+
+CURRENT KEY (JSON):
+${projectJson}
+
+═══════════════════════════════════════════════════════════════════════
+TASK: Fill in the missing trait assignments listed above.
+═══════════════════════════════════════════════════════════════════════
+
+For each entity with missing features:
+1. Research or infer the correct trait value based on the entity's taxonomy/biology
+2. Assign ONE OR MORE appropriate states from the feature's available states
+3. Use your taxonomic knowledge to make accurate assignments
+
+CRITICAL RULES:
+1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES exactly as they are
+2. ⚠️ PRESERVE ALL existing trait assignments - DO NOT change or remove any
+3. ONLY ADD new trait assignments where data is currently missing
+4. Use ONLY the existing states for each feature (do not create new states)
+5. Every entity MUST have at least one trait assigned for EVERY feature after this operation
+6. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
+
+VERIFICATION BEFORE RETURNING:
+- Count: exactly ${project.entities.length} entities
+- Each entity has traits for all ${project.features.length} features
+- No existing data was modified or removed
+
+OUTPUT: Return the complete JSON with ALL missing traits filled in.
+`;
+        }
+      } else {
+        // Standard REFINE prompt (multiple options selected)
+        refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to REFINE and improve.
 
 CURRENT KEY (JSON):
@@ -1668,7 +1771,7 @@ TASK: Improve and refine this identification key while PRESERVING ALL ENTITIES.
 ${requiredFeaturesInstr}
 IMPROVEMENTS TO MAKE:
 ${refineOptions.improveDescriptions ? '- Improve entity descriptions with more accurate biological information.' : ''}
-${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments.' : ''}
+${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments for certain features.' : ''}
 ${refineOptions.addFeatures ? '- Add 2-4 new discriminating features that help better distinguish between entities.' : ''}
 
 ABSOLUTE RULES (VIOLATION = FAILURE):
@@ -1683,6 +1786,7 @@ VERIFICATION: Your output MUST contain exactly ${project.entities.length} entiti
 
 OUTPUT: Return the improved JSON key with ALL ${project.entities.length} entities.
 `;
+      }
     } else { // CLEAN
       refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to CLEAN and optimize.
@@ -3276,7 +3380,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                           ref={speciesListInputRef}
                           type="file"
                           className="hidden"
-                          accept=".txt,.csv,.json,.xlsx,.xls,.doc,.docx"
+                          accept=".txt,.csv,.json,.doc,.docx"
                           onChange={handleSpeciesListImport}
                           disabled={isGenerating}
                         />
@@ -3573,6 +3677,37 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                             </button>
                           </div>
                         </div>
+                      </div>
+                      
+                      {/* Required Species to Add */}
+                      <div className="mt-4 pt-4 border-t border-slate-200">
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="block text-xs font-semibold text-amber-700 uppercase flex items-center gap-1">
+                            <List size={12} /> {strings.expandRequiredSpecies}
+                          </label>
+                          {refineOptions.expandRequiredSpecies.trim() && (
+                            <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">
+                              {refineOptions.expandRequiredSpecies.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-amber-600/80 mb-2">{strings.expandRequiredSpeciesDesc}</p>
+                        <textarea
+                          value={refineOptions.expandRequiredSpecies}
+                          onChange={(e) => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: e.target.value }))}
+                          placeholder={strings.expandRequiredSpeciesPlaceholder}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm bg-white resize-none h-20 font-mono"
+                          disabled={isGenerating}
+                        />
+                        {refineOptions.expandRequiredSpecies.trim() && (
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: '' }))}
+                            className="mt-2 text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
+                            disabled={isGenerating}
+                          >
+                            <Trash2 size={12} /> {strings.clearList}
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}
