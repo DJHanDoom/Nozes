@@ -629,6 +629,11 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
                       {entity.name}
                       <Info size={16} className="text-slate-300" />
                     </h3>
+                    {(entity.scientificName || entity.family) && (
+                      <p className="text-xs text-slate-400 italic mb-1">
+                        {entity.scientificName}{entity.scientificName && entity.family ? ' • ' : ''}{entity.family}
+                      </p>
+                    )}
                     <p className="text-slate-500 text-xs line-clamp-3">{entity.description}</p>
                     
                     {showDiscarded && (
@@ -680,6 +685,11 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
                </button>
                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-12">
                   <h2 className="text-2xl md:text-3xl font-bold text-white shadow-sm leading-tight">{viewingEntity.name}</h2>
+                  {(viewingEntity.scientificName || viewingEntity.family) && (
+                    <p className="text-white/80 italic text-sm md:text-base mt-1">
+                      {viewingEntity.scientificName}{viewingEntity.scientificName && viewingEntity.family ? ' • ' : ''}{viewingEntity.family}
+                    </p>
+                  )}
                </div>
             </div>
 

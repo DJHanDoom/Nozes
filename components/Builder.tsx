@@ -1722,6 +1722,37 @@ OUTPUT: Return a single merged JSON identification key with:
                           <Trash2 size={18} />
                         </button>
                       </div>
+                      
+                      {/* Scientific Name & Family Row */}
+                      <div className="flex gap-3 flex-wrap md:flex-nowrap">
+                        <div className="flex-1 min-w-[140px]">
+                          <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Nome Científico' : 'Scientific Name'}</label>
+                          <input
+                            value={entity.scientificName || ''}
+                            onChange={(e) => {
+                              const newEntities = [...project.entities];
+                              newEntities[eIdx].scientificName = e.target.value;
+                              setProject(p => ({ ...p, entities: newEntities }));
+                            }}
+                            placeholder={language === 'pt' ? 'Ex: Panthera leo' : 'e.g., Panthera leo'}
+                            className="text-sm italic text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-[120px]">
+                          <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Família' : 'Family'}</label>
+                          <input
+                            value={entity.family || ''}
+                            onChange={(e) => {
+                              const newEntities = [...project.entities];
+                              newEntities[eIdx].family = e.target.value;
+                              setProject(p => ({ ...p, entities: newEntities }));
+                            }}
+                            placeholder={language === 'pt' ? 'Ex: Felidae' : 'e.g., Felidae'}
+                            className="text-sm text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
+                          />
+                        </div>
+                      </div>
+
                       <textarea
                         value={entity.description}
                         onChange={(e) => {

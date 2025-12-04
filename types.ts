@@ -23,6 +23,8 @@ export interface ExternalLink {
 export interface Entity {
   id: string;
   name: string;
+  scientificName?: string;
+  family?: string;
   description: string;
   imageUrl?: string;
   links: ExternalLink[];

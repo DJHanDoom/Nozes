@@ -367,6 +367,7 @@ const generationSchema: Schema = {
         properties: {
           name: { type: Type.STRING, description: "Entity name (can be common name or scientific name)" },
           scientificName: { type: Type.STRING, description: "Scientific binomial name (e.g., 'Panthera leo'). REQUIRED for biological species." },
+          family: { type: Type.STRING, description: "Taxonomic family name (e.g., 'Felidae', 'Fabaceae'). REQUIRED for biological species." },
           description: { type: Type.STRING },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
           traits: {
@@ -405,6 +406,7 @@ const importSchema: Schema = {
         properties: {
           name: { type: Type.STRING, description: "Entity name as found in document" },
           scientificName: { type: Type.STRING, description: "Scientific binomial name if available (e.g., 'Panthera leo')" },
+          family: { type: Type.STRING, description: "Taxonomic family name if available (e.g., 'Felidae', 'Fabaceae')" },
           description: { type: Type.STRING },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
           traits: {
@@ -443,7 +445,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     : "All content must be in English.";
 
   // NOTE: Images are now fetched via APIs (iNaturalist, Wikipedia), so we don't ask the AI for URLs
-  const scientificNameInstruction = "For biological entities, ALWAYS provide the scientific binomial name (e.g., 'Panthera leo', 'Quercus robur'). This is REQUIRED for accurate image lookup.";
+  const scientificNameInstruction = "For biological entities, ALWAYS provide: 1) the scientific binomial name (e.g., 'Panthera leo', 'Quercus robur'), and 2) the taxonomic family (e.g., 'Felidae', 'Fabaceae'). Both are REQUIRED for accurate classification.";
 
   let featureImageInstruction = config.includeFeatureImages
     ? "For each feature, provide a valid, DIRECT public URL to an image file illustrating the trait if available."
@@ -742,8 +744,9 @@ async function callGemini(
         }
       });
 
-      // scientificName for later image fetching (not stored permanently in Entity)
+      // scientificName and family for taxonomy/image fetching
       const scientificName = e.scientificName || extractScientificName(e.name) || e.name;
+      const family = e.family || '';
 
       // Placeholder URL - will be replaced by real API fetched images in generateKeyFromTopic
       const placeholderUrl = getPlaceholderImage(e.name);
@@ -753,7 +756,8 @@ async function callGemini(
       return {
         id: generateId(),
         name: e.name,
-        scientificName: scientificName, // Store for image fetching
+        scientificName: scientificName, // Store for image fetching and taxonomy
+        family: family, // Taxonomic family
         description: e.description,
         imageUrl: placeholderUrl, // Will be replaced with real image
         links: rawLinks.map((l: any) => ({
