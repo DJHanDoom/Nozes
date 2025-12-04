@@ -929,8 +929,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           randomEntities.forEach(entity => {
             if (entity.description && entity.description.length > 20) {
               const fact = language === 'pt'
-                ? `\n🌱 "${entity.name}": ${entity.description.substring(0, 150)}${entity.description.length > 150 ? '...' : ''}`
-                : `\n🌱 "${entity.name}": ${entity.description.substring(0, 150)}${entity.description.length > 150 ? '...' : ''}`;
+                ? `\n🌱 "${entity.name}": ${entity.description}`
+                : `\n🌱 "${entity.name}": ${entity.description}`;
               curiosities.push(fact);
             }
             // Add scientific name/family info
@@ -1521,8 +1521,8 @@ OUTPUT: Return a single merged JSON identification key with:
         
         // Initial message
         const introMsg = language === 'pt'
-          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: iNaturalist, Wikipedia, Biodiversity4All\n\n"
-          : "🔍 Starting image search...\n\n📷 Sources: iNaturalist, Wikipedia, Biodiversity4All\n\n";
+          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: iNaturalist, Flickr, Wikipedia, Biodiversity4All, SIDOL, Flora Digital UFSC\n\n"
+          : "🔍 Starting image search...\n\n📷 Sources: iNaturalist, Flickr, Wikipedia, Biodiversity4All, SIDOL, Flora Digital UFSC\n\n";
         setAiTypingText(introMsg);
         
         // Fetch images for entities

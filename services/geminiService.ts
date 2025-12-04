@@ -53,6 +53,77 @@ async function fetchINaturalistImage(searchTerm: string): Promise<string | null>
 }
 
 /**
+ * Fetch image from Flickr using public search API
+ * Good for a wide variety of biological images
+ * https://www.flickr.com/
+ */
+async function fetchFlickrImage(searchTerm: string): Promise<string | null> {
+  try {
+    // Flickr public search (no API key needed for basic search)
+    // We use the public feed API which returns recent photos matching the tag
+    const encodedTerm = encodeURIComponent(searchTerm);
+    
+    // Try Flickr's public API with JSON callback
+    const response = await fetch(
+      `https://www.flickr.com/services/feeds/photos_public.gne?tags=${encodedTerm}&tagmode=all&format=json&nojsoncallback=1`
+    );
+    
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    
+    if (data.items && data.items.length > 0) {
+      // Get the first image with a valid media URL
+      for (const item of data.items) {
+        if (item.media?.m) {
+          // Convert from small to medium size (_m -> _z for 640px)
+          return item.media.m.replace('_m.jpg', '_z.jpg');
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`Flickr fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from Flora Digital UFSC
+ * Excellent source for Brazilian flora
+ * https://floradigital.ufsc.br/
+ */
+async function fetchFloraDigitalImage(searchTerm: string): Promise<string | null> {
+  try {
+    // Flora Digital doesn't have a public API, but we can try to construct
+    // a search URL and note it as a reference source
+    // For now, we return null as it requires scraping
+    // The site will be added as a reference link instead
+    return null;
+  } catch (error) {
+    console.warn(`Flora Digital UFSC fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from SIDOL (Sistema de Identificação Dendrológica Online)
+ * Excellent source for Brazilian tree species
+ * https://www.sidol.com.br/
+ */
+async function fetchSIDOLImage(searchTerm: string): Promise<string | null> {
+  try {
+    // SIDOL doesn't have a public API
+    // The site will be added as a reference link for manual search
+    return null;
+  } catch (error) {
+    console.warn(`SIDOL fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
  * Fetch image from Biodiversity4All (Portuguese iNaturalist network)
  * Great for Iberian/Portuguese biodiversity - uses iNaturalist API with place filter
  * https://www.biodiversity4all.org/
@@ -203,11 +274,15 @@ async function fetchEntityImage(
     const iNatImage = await fetchINaturalistImage(term);
     if (iNatImage) return iNatImage;
     
-    // 3. Try Wikipedia
+    // 3. Try Flickr (large public photo database - https://www.flickr.com/)
+    const flickrImage = await fetchFlickrImage(term);
+    if (flickrImage) return flickrImage;
+    
+    // 4. Try Wikipedia
     const wikiImage = await fetchWikipediaImage(term, language);
     if (wikiImage) return wikiImage;
     
-    // 4. Try Wikimedia Commons
+    // 5. Try Wikimedia Commons
     const commonsImage = await fetchWikimediaCommonsImage(term);
     if (commonsImage) return commonsImage;
   }
@@ -322,15 +397,40 @@ function generateEntityLinks(scientificName: string, family: string, language: s
     });
   }
   
-  // 6. POWO (Plants of the World Online) - for plants
+  // 6. SIDOL (Sistema de Identificação Dendrológica Online) - for Brazilian trees
+  if (language === 'pt') {
+    links.push({
+      id: generateId(),
+      label: 'SIDOL',
+      url: `https://www.sidol.com.br/busca?q=${encodedName}`
+    });
+  }
+  
+  // 7. Flora Digital UFSC - for Brazilian flora
+  if (language === 'pt') {
+    links.push({
+      id: generateId(),
+      label: 'Flora Digital UFSC',
+      url: `https://floradigital.ufsc.br/busca.php?q=${encodedName}`
+    });
+  }
+  
+  // 8. Flickr - large public photo database
+  links.push({
+    id: generateId(),
+    label: 'Flickr',
+    url: `https://www.flickr.com/search/?text=${encodedName}`
+  });
+  
+  // 9. POWO (Plants of the World Online) - for plants
   links.push({
     id: generateId(),
     label: 'POWO',
     url: `https://powo.science.kew.org/results?q=${encodedName}`
   });
   
-  // Limit to 4 most relevant links
-  return links.slice(0, 4);
+  // Limit to 5 most relevant links (increased from 4)
+  return links.slice(0, 5);
 }
 
 /**
