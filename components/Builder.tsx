@@ -1949,16 +1949,22 @@ For each entity with missing features:
 
 CRITICAL RULES:
 1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES exactly as they are
-2. ⚠️ PRESERVE ALL existing trait assignments - DO NOT change or remove any
-3. ONLY ADD new trait assignments where data is currently missing
-4. Use ONLY the existing states for each feature (do not create new states)
-5. Every entity MUST have at least one trait assigned for EVERY feature after this operation
-6. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
+2. ⚠️ PRESERVE ALL ${project.features.length} FEATURES exactly as they are - DO NOT create new features
+3. ⚠️ PRESERVE ALL existing trait assignments - DO NOT change or remove any
+4. ⚠️ PRESERVE ALL feature and state IDs exactly as they appear in the input JSON
+5. ONLY ADD new trait assignments where data is currently missing
+6. Use ONLY the existing states for each feature (do not create new states)
+7. Every entity MUST have at least one trait assigned for EVERY feature after this operation
+8. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
+
+⚠️ IMPORTANT: The output JSON must have EXACTLY the same features array as the input.
+Do NOT add, remove, or modify any features. Only modify the "traits" object inside each entity.
 
 VERIFICATION BEFORE RETURNING:
 - Count: exactly ${project.entities.length} entities
+- Count: exactly ${project.features.length} features (unchanged from input)
 - Each entity has traits for all ${project.features.length} features
-- No existing data was modified or removed
+- All feature IDs and state IDs are preserved from the original
 
 OUTPUT: Return the complete JSON with ALL missing traits filled in.
 `;
