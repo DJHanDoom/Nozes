@@ -1455,16 +1455,37 @@ OUTPUT: Return a single merged JSON identification key with:
       return;
     }
     setIsGenerating(true);
+    
+    // Open prompt editor and start typing effect
+    setShowAiModal(false);
+    setShowPromptEditor(true);
+    startTypingEffect();
+    
     try {
       const mergePrompt = buildMergePrompt();
+      setManualPrompt(mergePrompt);
+      
       const generatedProject = await generateKeyFromCustomPrompt(mergePrompt, apiKey, aiConfig.model, language);
       
+      // Stop typing effect and show summary
+      stopTypingEffect(generatedProject);
+      
+      // Wait a moment so user can see the summary
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      
       setProject(generatedProject);
-      setShowAiModal(false);
+      setShowPromptEditor(false);
       setActiveTab('MATRIX');
     } catch (e) {
       console.error(e);
+      // Stop typing and show error
+      stopTypingEffect();
+      setAiTypingText(prev => prev + (language === 'pt' 
+        ? "\n\n❌ ERRO: Não foi possível mesclar as chaves."
+        : "\n\n❌ ERROR: Could not merge the keys."));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       alert(strings.errGen);
+      setShowPromptEditor(false);
     } finally {
       setIsGenerating(false);
     }
@@ -1482,6 +1503,13 @@ OUTPUT: Return a single merged JSON identification key with:
     }
     setIsGenerating(true);
     setGeneratingMessage('');
+    
+    // Open prompt editor and start typing effect for all refine actions
+    setShowAiModal(false);
+    setShowPromptEditor(true);
+    setAiTypingText('');
+    setAiTypingComplete(false);
+    
     try {
       // PHOTOS action - Use direct API fetching instead of Gemini (much more reliable!)
       if (refineAction === 'PHOTOS') {
@@ -1490,6 +1518,12 @@ OUTPUT: Return a single merged JSON identification key with:
         const replaceMode = refineOptions.photoMode === 'replace';
         
         let updatedProject = { ...project };
+        
+        // Initial message
+        const introMsg = language === 'pt'
+          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: iNaturalist, Wikipedia, Biodiversity4All\n\n"
+          : "🔍 Starting image search...\n\n📷 Sources: iNaturalist, Wikipedia, Biodiversity4All\n\n";
+        setAiTypingText(introMsg);
         
         // Fetch images for entities
         if (targetEntities) {
@@ -1506,6 +1540,8 @@ OUTPUT: Return a single merged JSON identification key with:
                   ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
                   : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
                 setGeneratingMessage(msg);
+                // Update typing text with progress
+                setAiTypingText(prev => prev + `📷 ${entityName}...\n`);
               }
             );
             
@@ -1520,41 +1556,68 @@ OUTPUT: Return a single merged JSON identification key with:
         }
         
         // Note: Feature images are harder to fetch automatically as they're abstract concepts
-        // For now, we skip feature image fetching via API (would need specific image sources)
         if (targetFeatures) {
-          setGeneratingMessage(language === 'pt' 
-            ? '⚠️ Imagens de características não suportadas via API automática'
-            : '⚠️ Feature images not supported via automatic API');
+          const featureMsg = language === 'pt' 
+            ? '\n⚠️ Imagens de características não suportadas via API automática\n'
+            : '\n⚠️ Feature images not supported via automatic API\n';
+          setAiTypingText(prev => prev + featureMsg);
           await new Promise(r => setTimeout(r, 1500));
         }
         
-        setProject(updatedProject);
-        setShowAiModal(false);
-        setActiveTab('ENTITIES');
-        
+        // Show summary
         const foundCount = targetEntities 
           ? updatedProject.entities.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos')).length
           : 0;
         const totalCount = targetEntities ? project.entities.length : 0;
         
-        alert(language === 'pt' 
-          ? `✅ Busca concluída! ${foundCount}/${totalCount} imagens encontradas via iNaturalist/Wikipedia.`
-          : `✅ Search complete! ${foundCount}/${totalCount} images found via iNaturalist/Wikipedia.`);
+        const summaryMsg = language === 'pt'
+          ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ BUSCA CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resultado:\n   📷 Imagens encontradas: ${foundCount}/${totalCount}\n\n🎉 Fotos atualizadas com sucesso!`
+          : `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ SEARCH COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Result:\n   📷 Images found: ${foundCount}/${totalCount}\n\n🎉 Photos updated successfully!`;
+        
+        setAiTypingText(prev => prev + summaryMsg);
+        setAiTypingComplete(true);
+        
+        // Wait so user can see the summary
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        setProject(updatedProject);
+        setShowPromptEditor(false);
+        setActiveTab('ENTITIES');
         
         return;
       }
 
-      // Other refine actions use Gemini
+      // Other refine actions use Gemini - with typing effect
+      startTypingEffect();
       const refinePrompt = buildRefinePrompt();
+      setManualPrompt(refinePrompt);
+      
+      // Open prompt editor and start typing effect
+      setShowAiModal(false);
+      setShowPromptEditor(true);
+      startTypingEffect();
 
       const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model, language);
       
+      // Stop typing effect and show summary
+      stopTypingEffect(generatedProject);
+      
+      // Wait a moment so user can see the summary
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      
       setProject(generatedProject);
-      setShowAiModal(false);
+      setShowPromptEditor(false);
       setActiveTab('MATRIX');
     } catch (e) {
       console.error(e);
+      // Stop typing and show error
+      stopTypingEffect();
+      setAiTypingText(prev => prev + (language === 'pt' 
+        ? "\n\n❌ ERRO: Não foi possível refinar a chave."
+        : "\n\n❌ ERROR: Could not refine the key."));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       alert(strings.errGen);
+      setShowPromptEditor(false);
     } finally {
       setIsGenerating(false);
       setGeneratingMessage('');
