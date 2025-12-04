@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewMode, Project, Language } from './types';
 import { Player } from './components/Player';
 import { Builder } from './components/Builder';
-import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2, FileCode } from 'lucide-react';
+import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2, FileCode, Wand2, AlertTriangle, Layers } from 'lucide-react';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('HOME');
@@ -97,7 +97,11 @@ const App: React.FC = () => {
         importExportTitle: "4. Import & Export",
         importExportDesc: "Always save your work by clicking 'Export Project'. This downloads a .json file. To resume work later or on another device, use 'Import Project' and select that file. You can also export to Excel (XLSX) for spreadsheets.",
         htmlExportTitle: "5. HTML Export",
-        htmlExportDesc: "Export your key as a standalone HTML file that works offline! Click 'HTML' in the builder to generate a complete, self-contained webpage with all images embedded. Perfect for sharing with colleagues, publishing on websites, or using in field work without internet. The exported file includes the full Player interface with all filtering functionality."
+        htmlExportDesc: "Export your key as a standalone HTML file that works offline! Click 'HTML' in the builder to generate a complete, self-contained webpage with all images embedded. Perfect for sharing with colleagues, publishing on websites, or using in field work without internet. The exported file includes the full Player interface with all filtering functionality.",
+        aiToolsTitle: "6. Expand, Refine & Combine",
+        aiToolsDesc: "Use the 'Expand/Refine' tab in the AI modal to enhance your keys: EXPAND adds new species to an existing list; REFINE improves descriptions and fills gaps; PHOTOS automatically searches for images; VALIDATE checks names against taxonomic catalogs. You can also MERGE keys by importing a new JSON, combining species from multiple projects into one.",
+        warningTitle: "⚠️ Important Warning",
+        warningDesc: "AI-generated data may contain inaccuracies, outdated names, or incorrect trait assignments. ALWAYS review and verify all information before using or distributing identification keys. Cross-check scientific names with official catalogs (Flora do Brasil, GBIF, POWO) and validate geographic distributions. The user assumes full responsibility for the accuracy of the final content."
       }
     },
     pt: {
@@ -130,7 +134,11 @@ const App: React.FC = () => {
         importExportTitle: "4. Importar & Exportar",
         importExportDesc: "Sempre salve seu trabalho clicando em 'Exportar Projeto'. Isso baixa um arquivo .json. Para continuar depois ou em outro dispositivo, use 'Importar Projeto' e selecione esse arquivo. Você também pode exportar para Excel (XLSX).",
         htmlExportTitle: "5. Exportação HTML",
-        htmlExportDesc: "Exporte sua chave como um arquivo HTML autônomo que funciona offline! Clique em 'HTML' no construtor para gerar uma página web completa e independente com todas as imagens embutidas. Perfeito para compartilhar com colegas, publicar em sites ou usar em trabalho de campo sem internet. O arquivo exportado inclui a interface completa do Player com toda a funcionalidade de filtragem."
+        htmlExportDesc: "Exporte sua chave como um arquivo HTML autônomo que funciona offline! Clique em 'HTML' no construtor para gerar uma página web completa e independente com todas as imagens embutidas. Perfeito para compartilhar com colegas, publicar em sites ou usar em trabalho de campo sem internet. O arquivo exportado inclui a interface completa do Player com toda a funcionalidade de filtragem.",
+        aiToolsTitle: "6. Expandir, Refinar & Combinar",
+        aiToolsDesc: "Use a aba 'Expandir/Refinar' no modal de IA para aprimorar suas chaves: EXPANDIR adiciona novas espécies a uma lista existente; REFINAR melhora descrições e preenche lacunas; FOTOS busca imagens automaticamente; VALIDAR confere nomes com catálogos taxonômicos. Você também pode COMBINAR chaves importando um novo JSON, mesclando espécies de múltiplos projetos em um só.",
+        warningTitle: "⚠️ Aviso Importante",
+        warningDesc: "Dados gerados por IA podem conter imprecisões, nomes desatualizados ou atribuições incorretas de características. SEMPRE revise e verifique todas as informações antes de usar ou distribuir chaves de identificação. Confira nomes científicos em catálogos oficiais (Flora do Brasil, GBIF, POWO) e valide distribuições geográficas. O usuário assume total responsabilidade pela precisão do conteúdo final."
       }
     }
   }[language];
@@ -662,6 +670,24 @@ const App: React.FC = () => {
                       <div>
                         <h4 className="font-bold text-slate-900 text-base md:text-lg mb-1">{strings.helpContent.htmlExportTitle}</h4>
                         <p className="text-slate-600 text-xs md:text-sm leading-relaxed">{strings.helpContent.htmlExportDesc}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="bg-indigo-100 p-3 rounded-full h-fit text-indigo-600 shrink-0"><Layers size={24} /></div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 text-base md:text-lg mb-1">{strings.helpContent.aiToolsTitle}</h4>
+                        <p className="text-slate-600 text-xs md:text-sm leading-relaxed">{strings.helpContent.aiToolsDesc}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 bg-amber-50 border-2 border-amber-300 rounded-xl p-4">
+                      <div className="flex gap-4">
+                        <div className="bg-amber-200 p-3 rounded-full h-fit text-amber-700 shrink-0"><AlertTriangle size={24} /></div>
+                        <div>
+                          <h4 className="font-bold text-amber-800 text-base md:text-lg mb-1">{strings.helpContent.warningTitle}</h4>
+                          <p className="text-amber-700 text-xs md:text-sm leading-relaxed">{strings.helpContent.warningDesc}</p>
+                        </div>
                       </div>
                     </div>
                   </div>

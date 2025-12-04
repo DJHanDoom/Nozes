@@ -330,6 +330,16 @@ const t = {
     expandCount: "# New Entities to Add",
     keepExisting: "Preserve existing entities",
     addFeatures: "Add new discriminating features",
+    expandFilters: "Taxonomic & Geographic Filters",
+    expandFamily: "Family (optional)",
+    expandGenus: "Genus (optional)",
+    expandBiome: "Biome (optional)",
+    expandStateUF: "State/UF (optional)",
+    expandScope: "Geographic Scope",
+    refineRequiredFeaturesTitle: "Required Features",
+    refineRequiredFeaturesDesc: "Features that MUST be included in the key",
+    addRequiredFeature: "Add feature...",
+    customFeature: "Custom feature",
     improveDescriptions: "Improve descriptions",
     fillGaps: "Fill missing trait data",
     removeRedundant: "Remove redundant features",
@@ -487,6 +497,16 @@ const t = {
     expandCount: "# Novas Entidades a Adicionar",
     keepExisting: "Preservar entidades existentes",
     addFeatures: "Adicionar novas características discriminantes",
+    expandFilters: "Filtros Taxonômicos & Geográficos",
+    expandFamily: "Família (opcional)",
+    expandGenus: "Gênero (opcional)",
+    expandBiome: "Bioma (opcional)",
+    expandStateUF: "Estado/UF (opcional)",
+    expandScope: "Escopo Geográfico",
+    refineRequiredFeaturesTitle: "Características Obrigatórias",
+    refineRequiredFeaturesDesc: "Características que DEVEM estar na chave",
+    addRequiredFeature: "Adicionar característica...",
+    customFeature: "Característica personalizada",
     improveDescriptions: "Melhorar descrições",
     fillGaps: "Preencher dados de características faltantes",
     removeRedundant: "Remover características redundantes",
@@ -592,6 +612,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     expandCount: 10,
     keepExisting: true,
     addFeatures: true,
+    // Expand filters
+    expandFamily: '',
+    expandGenus: '',
+    expandBiome: '',
+    expandStateUF: '',
+    expandScope: 'national' as 'global' | 'national' | 'regional',
+    // Refine required features
+    refineRequiredFeatures: [] as string[],
     improveDescriptions: true,
     fillGaps: true,
     removeRedundant: false,
@@ -1316,6 +1344,30 @@ Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0) + (targetFeatures ? photoData.features?.length || 0 : 0)}
 `;
     } else if (refineAction === 'EXPAND') {
+      // Build geographic/taxonomic context for EXPAND
+      const expandFilters: string[] = [];
+      if (refineOptions.expandFamily) {
+        expandFilters.push(`FAMILY RESTRICTION: Only add species from family "${refineOptions.expandFamily}"`);
+      }
+      if (refineOptions.expandGenus) {
+        expandFilters.push(`GENUS RESTRICTION: Only add species from genus "${refineOptions.expandGenus}"`);
+      }
+      if (refineOptions.expandBiome) {
+        expandFilters.push(`BIOME RESTRICTION: Only add species that occur in "${refineOptions.expandBiome}" biome`);
+      }
+      if (refineOptions.expandStateUF) {
+        expandFilters.push(`STATE/UF RESTRICTION: Only add species that occur in "${refineOptions.expandStateUF}" state, Brazil`);
+      }
+      if (refineOptions.expandScope === 'national') {
+        expandFilters.push('GEOGRAPHIC SCOPE: Only add species native to or occurring in Brazil');
+      } else if (refineOptions.expandScope === 'regional' && (refineOptions.expandBiome || refineOptions.expandStateUF)) {
+        expandFilters.push('GEOGRAPHIC SCOPE: Strictly regional - species must occur in the specified biome/state');
+      }
+      
+      const filterInstructions = expandFilters.length > 0 
+        ? `\nTAXONOMIC & GEOGRAPHIC FILTERS (MANDATORY):\n${expandFilters.map((f, i) => `${i + 1}. ${f}`).join('\n')}\n`
+        : '';
+      
       refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to EXPAND with more entities.
 
@@ -1323,7 +1375,7 @@ CURRENT KEY (JSON):
 ${projectJson}
 
 TASK: Add ${refineOptions.expandCount} NEW entities (species/taxa) to this key.
-
+${filterInstructions}
 CRITICAL RULES:
 1. DO NOT repeat any of the existing ${project.entities.length} entities. Each new entity MUST be unique.
 2. New entities should be taxonomically related or similar to existing ones (same family/genus/habitat).
@@ -1331,10 +1383,22 @@ CRITICAL RULES:
 4. ${refineOptions.addFeatures ? 'You MAY add 1-3 new discriminating features if needed to distinguish new species.' : 'Use ONLY the existing features.'}
 5. For each new entity, assign appropriate trait values using the existing feature states.
 6. Maintain the same level of detail and language (${language === 'pt' ? 'Portuguese' : 'English'}).
+${expandFilters.length > 0 ? '7. STRICTLY RESPECT all taxonomic and geographic filters above - do NOT add species outside the specified scope.' : ''}
 
 OUTPUT: Return a complete JSON with the expanded key including all entities (existing + new).
 `;
     } else if (refineAction === 'REFINE') {
+      // Build required features instruction
+      const requiredFeaturesInstr = refineOptions.refineRequiredFeatures.length > 0
+        ? `\nREQUIRED FEATURES (MANDATORY - must be added if not present):
+${refineOptions.refineRequiredFeatures.map((f, i) => `${i + 1}. "${f}"`).join('\n')}
+
+For each required feature above:
+- If it already exists in the key, ensure it has appropriate states and all entities are assigned.
+- If it does NOT exist, ADD it as a new feature with relevant states and assign all entities accordingly.
+`
+        : '';
+      
       refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to REFINE and improve.
 
@@ -1342,7 +1406,7 @@ CURRENT KEY (JSON):
 ${projectJson}
 
 TASK: Improve and refine this identification key.
-
+${requiredFeaturesInstr}
 IMPROVEMENTS TO MAKE:
 ${refineOptions.improveDescriptions ? '- Improve entity descriptions with more accurate biological information.' : ''}
 ${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments.' : ''}
@@ -1353,6 +1417,7 @@ RULES:
 2. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
 3. Ensure scientific accuracy.
 4. Make features more discriminating (each state should ideally apply to different subsets of entities).
+${refineOptions.refineRequiredFeatures.length > 0 ? '5. ALL required features listed above MUST be present in the final output.' : ''}
 
 OUTPUT: Return the improved JSON key.
 `;
@@ -3078,6 +3143,105 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         />
                         <span className="text-sm text-slate-700">{strings.addFeatures}</span>
                       </label>
+                      
+                      {/* Taxonomic & Geographic Filters for EXPAND */}
+                      <div className="mt-4 pt-4 border-t border-slate-200">
+                        <p className="text-xs font-semibold text-slate-500 uppercase mb-3">{strings.expandFilters}</p>
+                        
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-xs text-slate-500 mb-1">{strings.expandFamily}</label>
+                            <input
+                              type="text"
+                              value={refineOptions.expandFamily}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandFamily: e.target.value }))}
+                              placeholder="Fabaceae"
+                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-slate-500 mb-1">{strings.expandGenus}</label>
+                            <input
+                              type="text"
+                              value={refineOptions.expandGenus}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandGenus: e.target.value }))}
+                              placeholder="Inga"
+                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-slate-500 mb-1">{strings.expandBiome}</label>
+                            <select
+                              value={refineOptions.expandBiome}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandBiome: e.target.value }))}
+                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                            >
+                              <option value="">--</option>
+                              <option value="Amazônia">Amazônia</option>
+                              <option value="Mata Atlântica">Mata Atlântica</option>
+                              <option value="Cerrado">Cerrado</option>
+                              <option value="Caatinga">Caatinga</option>
+                              <option value="Pantanal">Pantanal</option>
+                              <option value="Pampa">Pampa</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-slate-500 mb-1">{strings.expandStateUF}</label>
+                            <select
+                              value={refineOptions.expandStateUF}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandStateUF: e.target.value }))}
+                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                            >
+                              <option value="">--</option>
+                              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                              <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                              <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                              <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                              <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                              <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                              <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                            </select>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-3">
+                          <label className="block text-xs text-slate-500 mb-1">{strings.expandScope}</label>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'global' }))}
+                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
+                                refineOptions.expandScope === 'global' 
+                                  ? 'bg-amber-500 text-white shadow-sm' 
+                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                              }`}
+                            >
+                              {strings.scopeGlobal}
+                            </button>
+                            <button
+                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'national' }))}
+                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
+                                refineOptions.expandScope === 'national' 
+                                  ? 'bg-amber-500 text-white shadow-sm' 
+                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                              }`}
+                            >
+                              {strings.scopeNational}
+                            </button>
+                            <button
+                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'regional' }))}
+                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
+                                refineOptions.expandScope === 'regional' 
+                                  ? 'bg-amber-500 text-white shadow-sm' 
+                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                              }`}
+                            >
+                              {strings.scopeRegional}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   )}
 
@@ -3110,6 +3274,115 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         />
                         <span className="text-sm text-slate-700">{strings.addFeatures}</span>
                       </label>
+                      
+                      {/* Required Features Dropdown for REFINE */}
+                      {refineOptions.addFeatures && (
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                          <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{strings.refineRequiredFeaturesTitle}</p>
+                          <p className="text-xs text-slate-400 mb-3">{strings.refineRequiredFeaturesDesc}</p>
+                          
+                          {/* Selected features tags */}
+                          {refineOptions.refineRequiredFeatures.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {refineOptions.refineRequiredFeatures.map((feat, idx) => (
+                                <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">
+                                  {feat}
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({
+                                      ...prev,
+                                      refineRequiredFeatures: prev.refineRequiredFeatures.filter((_, i) => i !== idx)
+                                    }))}
+                                    className="hover:text-amber-600"
+                                  >
+                                    <X size={12} />
+                                  </button>
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          
+                          {/* Dropdown for suggested features */}
+                          <div className="relative">
+                            <button
+                              onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
+                              className="w-full px-3 py-2 text-sm text-left border border-slate-200 rounded-lg bg-white hover:border-amber-400 focus:ring-2 focus:ring-amber-400 focus:outline-none flex justify-between items-center"
+                            >
+                              <span className="text-slate-500">{strings.addRequiredFeature}</span>
+                              <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
+                            </button>
+                            
+                            {showRequiredFeaturesDropdown && (
+                              <div className="absolute z-20 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                {suggestedFeatures.map((category, catIdx) => (
+                                  <div key={catIdx}>
+                                    <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-0">
+                                      {category.category}
+                                    </div>
+                                    {category.items.map((item, itemIdx) => (
+                                      <button
+                                        key={itemIdx}
+                                        onClick={() => {
+                                          if (!refineOptions.refineRequiredFeatures.includes(item)) {
+                                            setRefineOptions(prev => ({
+                                              ...prev,
+                                              refineRequiredFeatures: [...prev.refineRequiredFeatures, item]
+                                            }));
+                                          }
+                                          setShowRequiredFeaturesDropdown(false);
+                                        }}
+                                        disabled={refineOptions.refineRequiredFeatures.includes(item)}
+                                        className={`w-full px-3 py-2 text-sm text-left hover:bg-amber-50 ${
+                                          refineOptions.refineRequiredFeatures.includes(item) ? 'text-slate-300' : 'text-slate-700'
+                                        }`}
+                                      >
+                                        {item}
+                                      </button>
+                                    ))}
+                                  </div>
+                                ))}
+                                
+                                {/* Custom feature input */}
+                                <div className="p-2 border-t border-slate-100">
+                                  <div className="flex gap-2">
+                                    <input
+                                      type="text"
+                                      value={customFeatureInput}
+                                      onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                      placeholder={strings.customFeature}
+                                      className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                      onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                          setRefineOptions(prev => ({
+                                            ...prev,
+                                            refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
+                                          }));
+                                          setCustomFeatureInput('');
+                                          setShowRequiredFeaturesDropdown(false);
+                                        }
+                                      }}
+                                    />
+                                    <button
+                                      onClick={() => {
+                                        if (customFeatureInput.trim()) {
+                                          setRefineOptions(prev => ({
+                                            ...prev,
+                                            refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
+                                          }));
+                                          setCustomFeatureInput('');
+                                          setShowRequiredFeaturesDropdown(false);
+                                        }
+                                      }}
+                                      className="px-3 py-1.5 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -3398,60 +3671,6 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         </div>
                       )}
                     </div>
-                  )}
-
-                  {/* Photo Completion Option - Available for EXPAND, REFINE, CLEAN actions */}
-                  {refineAction !== 'PHOTOS' && refineAction !== 'VALIDATE' && (
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-3">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={refineOptions.completePhotos}
-                        onChange={(e) => setRefineOptions(prev => ({ ...prev, completePhotos: e.target.checked }))}
-                        className="w-4 h-4 accent-blue-500"
-                      />
-                      <div className="flex-1">
-                        <span className="text-sm font-semibold text-blue-800">{strings.completePhotos}</span>
-                        <p className="text-xs text-blue-600">{strings.completePhotosDesc}</p>
-                      </div>
-                      <ImageIcon size={20} className="text-blue-400" />
-                    </label>
-                    
-                    {refineOptions.completePhotos && (
-                      <div className="flex gap-2 pl-6">
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'entities' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetEntities}
-                        </button>
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'features' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetFeatures}
-                        </button>
-                        <button
-                          onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
-                          className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                            refineOptions.photoTarget === 'both' 
-                              ? 'bg-blue-500 text-white shadow-sm' 
-                              : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                          }`}
-                        >
-                          {strings.photoTargetBoth}
-                        </button>
-                      </div>
-                    )}
-                  </div>
                   )}
                 </div>
               ) : null}
