@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewMode, Project, Language } from './types';
 import { Player } from './components/Player';
 import { Builder } from './components/Builder';
-import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2 } from 'lucide-react';
+import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2, FileCode } from 'lucide-react';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('HOME');
@@ -95,7 +95,9 @@ const App: React.FC = () => {
         step3Title: "3. The Player",
         step3Desc: "This is the end-user view. Select observed features to filter down the list of species until you identify your specimen.",
         importExportTitle: "4. Import & Export",
-        importExportDesc: "Always save your work by clicking 'Export Project'. This downloads a .json file. To resume work later or on another device, use 'Import Project' and select that file. You can also export to Excel (XLSX) for spreadsheets."
+        importExportDesc: "Always save your work by clicking 'Export Project'. This downloads a .json file. To resume work later or on another device, use 'Import Project' and select that file. You can also export to Excel (XLSX) for spreadsheets.",
+        htmlExportTitle: "5. HTML Export",
+        htmlExportDesc: "Export your key as a standalone HTML file that works offline! Click 'HTML' in the builder to generate a complete, self-contained webpage with all images embedded. Perfect for sharing with colleagues, publishing on websites, or using in field work without internet. The exported file includes the full Player interface with all filtering functionality."
       }
     },
     pt: {
@@ -126,7 +128,9 @@ const App: React.FC = () => {
         step3Title: "3. O Player",
         step3Desc: "Esta é a visão do usuário final. Selecione as características observadas para filtrar a lista de espécies até identificar seu espécime.",
         importExportTitle: "4. Importar & Exportar",
-        importExportDesc: "Sempre salve seu trabalho clicando em 'Exportar Projeto'. Isso baixa um arquivo .json. Para continuar depois ou em outro dispositivo, use 'Importar Projeto' e selecione esse arquivo. Você também pode exportar para Excel (XLSX)."
+        importExportDesc: "Sempre salve seu trabalho clicando em 'Exportar Projeto'. Isso baixa um arquivo .json. Para continuar depois ou em outro dispositivo, use 'Importar Projeto' e selecione esse arquivo. Você também pode exportar para Excel (XLSX).",
+        htmlExportTitle: "5. Exportação HTML",
+        htmlExportDesc: "Exporte sua chave como um arquivo HTML autônomo que funciona offline! Clique em 'HTML' no construtor para gerar uma página web completa e independente com todas as imagens embutidas. Perfeito para compartilhar com colegas, publicar em sites ou usar em trabalho de campo sem internet. O arquivo exportado inclui a interface completa do Player com toda a funcionalidade de filtragem."
       }
     }
   }[language];
@@ -650,6 +654,14 @@ const App: React.FC = () => {
                       <div>
                         <h4 className="font-bold text-slate-900 text-base md:text-lg mb-1">{strings.helpContent.importExportTitle}</h4>
                         <p className="text-slate-600 text-xs md:text-sm leading-relaxed">{strings.helpContent.importExportDesc}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="bg-rose-100 p-3 rounded-full h-fit text-rose-600 shrink-0"><FileCode size={24} /></div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 text-base md:text-lg mb-1">{strings.helpContent.htmlExportTitle}</h4>
+                        <p className="text-slate-600 text-xs md:text-sm leading-relaxed">{strings.helpContent.htmlExportDesc}</p>
                       </div>
                     </div>
                   </div>
