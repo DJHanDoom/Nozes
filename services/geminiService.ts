@@ -53,6 +53,46 @@ async function fetchINaturalistImage(searchTerm: string): Promise<string | null>
 }
 
 /**
+ * Fetch image from Biodiversity4All (Portuguese iNaturalist network)
+ * Great for Iberian/Portuguese biodiversity - uses iNaturalist API with place filter
+ * https://www.biodiversity4all.org/
+ */
+async function fetchBiodiversity4AllImage(searchTerm: string): Promise<string | null> {
+  try {
+    // Biodiversity4All uses the same iNaturalist API but we can filter by place
+    // Place ID 7122 = Portugal, 6854 = Iberian Peninsula
+    const params = new URLSearchParams({
+      q: searchTerm,
+      per_page: '3', // Get a few results to find best match
+      locale: 'pt',
+      preferred_place_id: '7122' // Portugal
+    });
+    
+    const response = await fetch(`https://api.inaturalist.org/v1/taxa?${params}`);
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      // Try to find an exact or close match
+      for (const taxon of data.results) {
+        if (taxon.default_photo?.medium_url) {
+          return taxon.default_photo.medium_url;
+        }
+        if (taxon.default_photo?.square_url) {
+          return taxon.default_photo.square_url.replace('/square.', '/medium.');
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`Biodiversity4All fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
  * Fetch image from Wikipedia using the pageimages API
  * Good for well-known species and general topics
  */
@@ -144,6 +184,7 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
 /**
  * Main function: Fetch a valid image URL using multi-source fallback strategy
  * Tries sources in order of reliability for biological/species content
+ * Order: Biodiversity4All → iNaturalist → Wikipedia → Wikimedia Commons
  */
 async function fetchEntityImage(
   entityName: string, 
@@ -154,15 +195,19 @@ async function fetchEntityImage(
   const searchTerms = [scientificName, entityName].filter(Boolean) as string[];
   
   for (const term of searchTerms) {
-    // 1. Try iNaturalist first (best for biodiversity)
+    // 1. Try Biodiversity4All first (Portuguese/Iberian biodiversity - https://www.biodiversity4all.org/)
+    const b4aImage = await fetchBiodiversity4AllImage(term);
+    if (b4aImage) return b4aImage;
+    
+    // 2. Try iNaturalist global (best for worldwide biodiversity)
     const iNatImage = await fetchINaturalistImage(term);
     if (iNatImage) return iNatImage;
     
-    // 2. Try Wikipedia
+    // 3. Try Wikipedia
     const wikiImage = await fetchWikipediaImage(term, language);
     if (wikiImage) return wikiImage;
     
-    // 3. Try Wikimedia Commons
+    // 4. Try Wikimedia Commons
     const commonsImage = await fetchWikimediaCommonsImage(term);
     if (commonsImage) return commonsImage;
   }
