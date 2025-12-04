@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -280,6 +280,13 @@ const t = {
     requiredFeaturesDesc: "Select features the AI must include",
     addCustomFeature: "Add custom feature...",
     selectedFeatures: "selected",
+    requiredSpecies: "Required Species List",
+    requiredSpeciesDesc: "Species that MUST be included (one per line)",
+    requiredSpeciesPlaceholder: "Enter species names, one per line:\nInga edulis\nInga marginata\nInga vera",
+    importSpeciesList: "Import species list",
+    importSpeciesFormats: "Supports: .txt, .csv, .xlsx, .doc, .json",
+    speciesCount: "species listed",
+    clearList: "Clear list",
     generating: "Nozes IA is thinking... (15-45s)",
     cancel: "Cancel",
     generate: "Generate Key",
@@ -447,6 +454,13 @@ const t = {
     requiredFeaturesDesc: "Selecione características que a IA deve incluir",
     addCustomFeature: "Adicionar característica...",
     selectedFeatures: "selecionadas",
+    requiredSpecies: "Lista de Espécies Obrigatórias",
+    requiredSpeciesDesc: "Espécies que DEVEM ser incluídas (uma por linha)",
+    requiredSpeciesPlaceholder: "Digite nomes de espécies, uma por linha:\nInga edulis\nInga marginata\nInga vera",
+    importSpeciesList: "Importar lista de espécies",
+    importSpeciesFormats: "Suporta: .txt, .csv, .xlsx, .doc, .json",
+    speciesCount: "espécies listadas",
+    clearList: "Limpar lista",
     generating: "Nozes IA está pensando... (15-45s)",
     cancel: "Cancelar",
     generate: "Gerar Chave",
@@ -650,6 +664,10 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [requiredFeatures, setRequiredFeatures] = useState<string[]>([]);
   const [showRequiredFeaturesDropdown, setShowRequiredFeaturesDropdown] = useState(false);
   const [customFeatureInput, setCustomFeatureInput] = useState('');
+  
+  // Required Species State (for TOPIC mode)
+  const [requiredSpeciesText, setRequiredSpeciesText] = useState('');
+  const speciesListInputRef = React.useRef<HTMLInputElement>(null);
   
   // Suggested features for dropdown (bilingual)
   const suggestedFeatures = language === 'pt' ? [
@@ -977,6 +995,76 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
   };
 
+  // Handle species list file import
+  const handleSpeciesListImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || !event.target.files[0]) return;
+    
+    const file = event.target.files[0];
+    const fileName = file.name.toLowerCase();
+    
+    try {
+      let speciesText = '';
+      
+      if (fileName.endsWith('.txt') || fileName.endsWith('.csv')) {
+        // Plain text or CSV
+        const text = await file.text();
+        // Split by newlines, commas, or semicolons and filter empty
+        const species = text
+          .split(/[\n\r,;]+/)
+          .map(s => s.trim())
+          .filter(s => s.length > 0 && !s.match(/^(species|especie|nome|name|#)/i)); // Filter headers
+        speciesText = species.join('\n');
+      } else if (fileName.endsWith('.json')) {
+        // JSON file - expect array or object with species
+        const text = await file.text();
+        const json = JSON.parse(text);
+        let species: string[] = [];
+        if (Array.isArray(json)) {
+          species = json.map(item => typeof item === 'string' ? item : item.name || item.species || item.especie || '').filter(Boolean);
+        } else if (json.species) {
+          species = Array.isArray(json.species) ? json.species : [json.species];
+        } else if (json.entities) {
+          species = json.entities.map((e: any) => e.name || '').filter(Boolean);
+        }
+        speciesText = species.join('\n');
+      } else if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
+        // Excel file - use SheetJS if available, otherwise show message
+        // For now, try to read as text (won't work for binary xlsx)
+        // We'll use a simpler approach: ask user to save as CSV
+        alert(language === 'pt' 
+          ? 'Para arquivos Excel, por favor salve como .csv ou .txt primeiro, ou copie e cole a lista diretamente.'
+          : 'For Excel files, please save as .csv or .txt first, or copy and paste the list directly.');
+        return;
+      } else if (fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
+        // Word file - similar limitation
+        alert(language === 'pt'
+          ? 'Para arquivos Word, por favor copie e cole a lista diretamente no campo de texto.'
+          : 'For Word files, please copy and paste the list directly into the text field.');
+        return;
+      }
+      
+      // Append to existing or replace
+      if (requiredSpeciesText.trim()) {
+        const existingSpecies = requiredSpeciesText.split('\n').filter(s => s.trim());
+        const newSpecies = speciesText.split('\n').filter(s => s.trim());
+        const combined = [...new Set([...existingSpecies, ...newSpecies])]; // Remove duplicates
+        setRequiredSpeciesText(combined.join('\n'));
+      } else {
+        setRequiredSpeciesText(speciesText);
+      }
+      
+      // Reset input
+      if (speciesListInputRef.current) {
+        speciesListInputRef.current.value = '';
+      }
+    } catch (error) {
+      console.error('Error importing species list:', error);
+      alert(language === 'pt' 
+        ? 'Erro ao importar arquivo. Verifique o formato.'
+        : 'Error importing file. Check the format.');
+    }
+  };
+
   const convertFileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -1141,7 +1229,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     startTypingEffect();
     
     try {
-      let config = { ...aiConfig, requiredFeatures };
+      // Parse required species from text input
+      const requiredSpeciesList = requiredSpeciesText
+        .split('\n')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+      
+      let config = { ...aiConfig, requiredFeatures, requiredSpecies: requiredSpeciesList };
 
       if (aiMode === 'IMPORT' && importedFile) {
         const base64Data = await convertFileToBase64(importedFile);
@@ -2961,6 +3055,54 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       />
                     </div>
                   </div>
+
+                  {/* Required Species List */}
+                  <div className="bg-purple-50/50 p-3 rounded-xl border border-purple-100">
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="block text-xs font-bold text-purple-700 uppercase flex items-center gap-1">
+                        <List size={12} /> {strings.requiredSpecies}
+                      </label>
+                      {requiredSpeciesText.trim() && (
+                        <span className="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-0.5 rounded">
+                          {requiredSpeciesText.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-purple-600/80 mb-2">{strings.requiredSpeciesDesc}</p>
+                    
+                    <textarea
+                      value={requiredSpeciesText}
+                      onChange={(e) => setRequiredSpeciesText(e.target.value)}
+                      placeholder={strings.requiredSpeciesPlaceholder}
+                      className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none text-sm bg-white resize-none h-24 font-mono"
+                      disabled={isGenerating}
+                    />
+                    
+                    <div className="flex items-center justify-between mt-2 gap-2">
+                      <label className="cursor-pointer flex items-center gap-2 text-xs text-purple-600 hover:text-purple-800 transition-colors">
+                        <Upload size={14} />
+                        <span className="font-medium">{strings.importSpeciesList}</span>
+                        <input
+                          ref={speciesListInputRef}
+                          type="file"
+                          className="hidden"
+                          accept=".txt,.csv,.json,.xlsx,.xls,.doc,.docx"
+                          onChange={handleSpeciesListImport}
+                          disabled={isGenerating}
+                        />
+                      </label>
+                      {requiredSpeciesText.trim() && (
+                        <button
+                          onClick={() => setRequiredSpeciesText('')}
+                          className="text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
+                          disabled={isGenerating}
+                        >
+                          <Trash2 size={12} /> {strings.clearList}
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-purple-400 mt-1">{strings.importSpeciesFormats}</p>
+                  </div>
                 </>
               ) : aiMode === 'IMPORT' ? (
                 /* IMPORT MODE INPUTS */
@@ -3380,6 +3522,51 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                                 </div>
                               </div>
                             )}
+                          </div>
+                          
+                          {/* Direct text input for multiple features */}
+                          <div className="mt-3">
+                            <label className="block text-xs text-slate-400 mb-1">
+                              {language === 'pt' ? 'Ou digite características manualmente (Enter para adicionar)' : 'Or type features manually (Enter to add)'}
+                            </label>
+                            <div className="flex gap-2">
+                              <input
+                                type="text"
+                                value={customFeatureInput}
+                                onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                placeholder={language === 'pt' ? 'ex: Tipo de tricoma, Forma do ovário...' : 'e.g. Trichome type, Ovary shape...'}
+                                className="flex-1 px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                    // Support comma-separated input
+                                    const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
+                                    setRefineOptions(prev => ({
+                                      ...prev,
+                                      refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
+                                    }));
+                                    setCustomFeatureInput('');
+                                  }
+                                }}
+                              />
+                              <button
+                                onClick={() => {
+                                  if (customFeatureInput.trim()) {
+                                    const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
+                                    setRefineOptions(prev => ({
+                                      ...prev,
+                                      refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
+                                    }));
+                                    setCustomFeatureInput('');
+                                  }
+                                }}
+                                className="px-3 py-2 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600 font-bold"
+                              >
+                                +
+                              </button>
+                            </div>
+                            <p className="text-[10px] text-slate-400 mt-1">
+                              {language === 'pt' ? 'Dica: separe múltiplas características com vírgula' : 'Tip: separate multiple features with comma'}
+                            </p>
                           </div>
                         </div>
                       )}

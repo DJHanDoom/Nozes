@@ -66,6 +66,7 @@ export interface AIConfig {
   model: string;
   detailLevel: number; // 1 = Simple, 2 = Balanced, 3 = Expert
   requiredFeatures?: string[]; // Features the AI must include
+  requiredSpecies?: string[]; // Species that MUST be included in the key
   importedFile?: ImportedFile;
 }
 

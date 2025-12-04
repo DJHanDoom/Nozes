@@ -776,6 +776,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
         - Feature Images: ${featureImageInstruction}
         - External Links: ${linkInstruction}
     ${config.requiredFeatures && config.requiredFeatures.length > 0 ? `10. **REQUIRED FEATURES**: You MUST include ALL of the following features in the key: ${config.requiredFeatures.join(', ')}. These are mandatory and must be among the features generated.` : ''}
+    ${config.requiredSpecies && config.requiredSpecies.length > 0 ? `11. **REQUIRED SPECIES**: You MUST include ALL of the following species in the key: ${config.requiredSpecies.slice(0, 10).join(', ')}${config.requiredSpecies.length > 10 ? ` (and ${config.requiredSpecies.length - 10} more)` : ''}. These species are MANDATORY. For species with incomplete data, include them anyway and fill what you can.` : ''}
 
     Output Requirements:
     1.  List of distinctive features. Each feature must have 2+ states.
@@ -790,6 +791,11 @@ export const buildPromptData = (config: AIConfig): PromptData => {
   // Build required features instruction for prompt
   const requiredFeaturesPrompt = config.requiredFeatures && config.requiredFeatures.length > 0
     ? `\n    MANDATORY FEATURES: The following features MUST be included in the key:\n    ${config.requiredFeatures.map((f, i) => `${i + 1}. ${f}`).join('\n    ')}\n`
+    : '';
+
+  // Build required species instruction for prompt
+  const requiredSpeciesPrompt = config.requiredSpecies && config.requiredSpecies.length > 0
+    ? `\n    MANDATORY SPECIES: The following species MUST be included in the key. Include them even if feature data is incomplete - fill in what you can:\n    ${config.requiredSpecies.map((s, i) => `${i + 1}. ${s}`).join('\n    ')}\n`
     : '';
 
   // Build geographic context from new fields
@@ -824,17 +830,18 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     - Language: ${config.language === 'pt' ? 'Portuguese' : 'English'}
     - Geographic Scope: ${buildGeographicContext()}
     - Taxonomic Context: ${buildTaxonomicContext()}
-    - Target Number of Entities: ${config.count}
+    - Target Number of Entities: ${config.count}${config.requiredSpecies && config.requiredSpecies.length > 0 ? ` (minimum - must include all required species plus additional if needed)` : ''}
     - Target Number of Features: ${config.featureCount}
     - Feature Focus: ${config.featureFocus}
     - Complexity Level: ${config.detailLevel}/3
-    ${requiredFeaturesPrompt}
+    ${requiredFeaturesPrompt}${requiredSpeciesPrompt}
     IMPORTANT: For each entity, you MUST provide the scientificName field with the correct binomial nomenclature (e.g., "Panthera leo" for Lion).
     ${config.taxonomyFamily ? `All entities MUST belong to the family ${config.taxonomyFamily}.` : ''}
     ${config.taxonomyGenus ? `All entities MUST belong to the genus ${config.taxonomyGenus}.` : ''}
     ${config.biome ? `All entities MUST occur in the ${config.biome} biome.` : ''}
     ${config.stateUF ? `All entities MUST occur in ${config.stateUF}, Brazil.` : ''}
     ${config.scope === 'national' ? 'All entities MUST occur in Brazil. Use Flora do Brasil 2020 as reference for valid names.' : ''}
+    ${config.requiredSpecies && config.requiredSpecies.length > 0 ? `\nCRITICAL: You MUST include ALL species from the MANDATORY SPECIES list above. For any species where you lack complete information, still include them and fill in what characteristics you can determine. These species are non-negotiable.` : ''}
 
     Ensure the features allow for effective separation of these entities.
   `;
