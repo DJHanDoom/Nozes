@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -267,6 +267,10 @@ const t = {
     taxonomy: "Taxonomy Filter",
     numEntities: "Approx. # of Entities",
     numFeatures: "Approx. # of Features",
+    requiredFeatures: "Required Features",
+    requiredFeaturesDesc: "Select features the AI must include",
+    addCustomFeature: "Add custom feature...",
+    selectedFeatures: "selected",
     generating: "Nozes IA is thinking... (15-45s)",
     cancel: "Cancel",
     generate: "Generate Key",
@@ -395,6 +399,10 @@ const t = {
     taxonomy: "Filtro Taxonômico",
     numEntities: "Aprox. # de Entidades",
     numFeatures: "Aprox. # de Características",
+    requiredFeatures: "Características Obrigatórias",
+    requiredFeaturesDesc: "Selecione características que a IA deve incluir",
+    addCustomFeature: "Adicionar característica...",
+    selectedFeatures: "selecionadas",
     generating: "Nozes IA está pensando... (15-45s)",
     cancel: "Cancelar",
     generate: "Gerar Chave",
@@ -543,6 +551,90 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [mergeKey1, setMergeKey1] = useState<Project | null>(null);
   const [mergeKey2, setMergeKey2] = useState<Project | null>(null);
   const [mergeStrategy, setMergeStrategy] = useState<'union' | 'intersection' | 'primary'>('union');
+
+  // Required Features State (for AI generation)
+  const [requiredFeatures, setRequiredFeatures] = useState<string[]>([]);
+  const [showRequiredFeaturesDropdown, setShowRequiredFeaturesDropdown] = useState(false);
+  const [customFeatureInput, setCustomFeatureInput] = useState('');
+  
+  // Suggested features for dropdown (bilingual)
+  const suggestedFeatures = language === 'pt' ? [
+    // Vegetative features
+    { category: 'Vegetativas', items: [
+      'Tipo de folha (simples/composta)',
+      'Filotaxia (alterna/oposta/verticilada)',
+      'Margem foliar',
+      'Forma da folha',
+      'Textura da folha',
+      'Presença de estípulas',
+      'Tipo de nervação',
+      'Forma do caule',
+      'Tipo de casca',
+      'Hábito de crescimento',
+      'Presença de espinhos/acúleos',
+      'Presença de látex',
+      'Tipo de raiz',
+      'Presença de tricomas/pelos',
+      'Domácias',
+    ]},
+    // Reproductive features
+    { category: 'Reprodutivas', items: [
+      'Tipo de inflorescência',
+      'Cor da flor',
+      'Número de pétalas',
+      'Simetria floral',
+      'Tipo de fruto',
+      'Cor do fruto',
+      'Tipo de semente',
+      'Deiscência do fruto',
+    ]},
+    // Ecological/Other
+    { category: 'Ecológicas', items: [
+      'Ambiente/habitat',
+      'Altitude',
+      'Fenologia',
+      'Polinizadores',
+      'Dispersão',
+    ]}
+  ] : [
+    // Vegetative features (English)
+    { category: 'Vegetative', items: [
+      'Leaf type (simple/compound)',
+      'Phyllotaxy (alternate/opposite/whorled)',
+      'Leaf margin',
+      'Leaf shape',
+      'Leaf texture',
+      'Stipule presence',
+      'Venation type',
+      'Stem shape',
+      'Bark type',
+      'Growth habit',
+      'Spine/prickle presence',
+      'Latex presence',
+      'Root type',
+      'Trichome/hair presence',
+      'Domatia',
+    ]},
+    // Reproductive features (English)
+    { category: 'Reproductive', items: [
+      'Inflorescence type',
+      'Flower color',
+      'Petal number',
+      'Floral symmetry',
+      'Fruit type',
+      'Fruit color',
+      'Seed type',
+      'Fruit dehiscence',
+    ]},
+    // Ecological/Other (English)
+    { category: 'Ecological', items: [
+      'Habitat/environment',
+      'Altitude',
+      'Phenology',
+      'Pollinators',
+      'Dispersal',
+    ]}
+  ];
 
   // Prompt Editor State
   const [showPromptEditor, setShowPromptEditor] = useState(false);
@@ -914,9 +1006,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       const withPhotos = resultProject.entities?.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos') && !e.imageUrl.includes('placehold.co')).length || 0;
       const withLinks = resultProject.entities?.filter(e => e.links && e.links.length > 0).length || 0;
       
+      const warningMsg = language === 'pt'
+        ? `\n\n⚠️ ATENÇÃO: REVISÃO NECESSÁRIA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOs dados gerados por IA podem conter:\n• Erros taxonômicos ou nomenclaturais\n• Características incorretas ou incompletas\n• Associações espécie-característica imprecisas\n• Fotos que não correspondem à espécie\n\n👉 REVISE E CORRIJA todos os dados antes\n   de utilizar esta chave para identificação.`
+        : `\n\n⚠️ WARNING: REVIEW REQUIRED!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nAI-generated data may contain:\n• Taxonomic or nomenclatural errors\n• Incorrect or incomplete features\n• Inaccurate species-trait associations\n• Photos that don't match the species\n\n👉 REVIEW AND CORRECT all data before\n   using this key for identification.`;
+      
       const summaryMsg = language === 'pt'
-        ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANÁLISE CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resumo da Geração:\n\n   🌿 Entidades: ${entitiesCount}\n   🔬 Características: ${featuresCount}\n   📋 Estados totais: ${statesCount}\n   📷 Com fotos: ${withPhotos}/${entitiesCount}\n   🔗 Com links: ${withLinks}/${entitiesCount}\n\n🎉 Sua chave de identificação está pronta!`
-        : `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANALYSIS COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Generation Summary:\n\n   🌿 Entities: ${entitiesCount}\n   🔬 Features: ${featuresCount}\n   📋 Total states: ${statesCount}\n   📷 With photos: ${withPhotos}/${entitiesCount}\n   🔗 With links: ${withLinks}/${entitiesCount}\n\n🎉 Your identification key is ready!`;
+        ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANÁLISE CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resumo da Geração:\n\n   🌿 Entidades: ${entitiesCount}\n   🔬 Características: ${featuresCount}\n   📋 Estados totais: ${statesCount}\n   📷 Com fotos: ${withPhotos}/${entitiesCount}\n   🔗 Com links: ${withLinks}/${entitiesCount}${warningMsg}`
+        : `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANALYSIS COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Generation Summary:\n\n   🌿 Entities: ${entitiesCount}\n   🔬 Features: ${featuresCount}\n   📋 Total states: ${statesCount}\n   📷 With photos: ${withPhotos}/${entitiesCount}\n   🔗 With links: ${withLinks}/${entitiesCount}${warningMsg}`;
       
       setAiTypingText(prev => prev + summaryMsg);
     }
@@ -951,7 +1047,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     startTypingEffect();
     
     try {
-      let config = { ...aiConfig };
+      let config = { ...aiConfig, requiredFeatures };
 
       if (aiMode === 'IMPORT' && importedFile) {
         const base64Data = await convertFileToBase64(importedFile);
@@ -2941,6 +3037,123 @@ OUTPUT: Return a single merged JSON identification key with:
                         className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
                         disabled={isGenerating}
                       />
+                    </div>
+
+                    {/* Required Features Dropdown */}
+                    <div className="relative">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.requiredFeatures}</label>
+                        {requiredFeatures.length > 0 && (
+                          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                            {requiredFeatures.length} {strings.selectedFeatures}
+                          </span>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
+                        className="w-full px-3 py-2 text-left text-sm bg-white border border-slate-200 rounded-lg hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-colors flex items-center justify-between"
+                        disabled={isGenerating}
+                      >
+                        <span className={requiredFeatures.length > 0 ? 'text-slate-700' : 'text-slate-400'}>
+                          {requiredFeatures.length > 0 
+                            ? requiredFeatures.slice(0, 2).join(', ') + (requiredFeatures.length > 2 ? ` +${requiredFeatures.length - 2}` : '')
+                            : strings.requiredFeaturesDesc}
+                        </span>
+                        <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {showRequiredFeaturesDropdown && (
+                        <div className="absolute z-50 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl max-h-64 overflow-y-auto custom-scrollbar">
+                          {/* Custom input */}
+                          <div className="sticky top-0 bg-white border-b p-2">
+                            <div className="flex gap-2">
+                              <input
+                                type="text"
+                                value={customFeatureInput}
+                                onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                placeholder={strings.addCustomFeature}
+                                className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:border-amber-400"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                    if (!requiredFeatures.includes(customFeatureInput.trim())) {
+                                      setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
+                                    }
+                                    setCustomFeatureInput('');
+                                  }
+                                }}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (customFeatureInput.trim() && !requiredFeatures.includes(customFeatureInput.trim())) {
+                                    setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
+                                    setCustomFeatureInput('');
+                                  }
+                                }}
+                                className="px-2 py-1 bg-amber-500 text-white rounded text-xs font-medium hover:bg-amber-600"
+                              >
+                                <Plus size={14} />
+                              </button>
+                            </div>
+                          </div>
+                          
+                          {/* Selected features (removable) */}
+                          {requiredFeatures.length > 0 && (
+                            <div className="p-2 border-b bg-emerald-50/50">
+                              <div className="text-xs font-semibold text-emerald-700 mb-1.5 uppercase">
+                                {language === 'pt' ? 'Selecionadas' : 'Selected'}
+                              </div>
+                              <div className="flex flex-wrap gap-1">
+                                {requiredFeatures.map((feature, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="inline-flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full"
+                                  >
+                                    {feature}
+                                    <button
+                                      type="button"
+                                      onClick={() => setRequiredFeatures(prev => prev.filter(f => f !== feature))}
+                                      className="hover:text-red-500"
+                                    >
+                                      <X size={12} />
+                                    </button>
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
+                          {/* Suggested features by category */}
+                          {suggestedFeatures.map((category, catIdx) => (
+                            <div key={catIdx}>
+                              <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-[52px]">
+                                {category.category}
+                              </div>
+                              {category.items.map((item, itemIdx) => {
+                                const isSelected = requiredFeatures.includes(item);
+                                return (
+                                  <button
+                                    key={itemIdx}
+                                    type="button"
+                                    onClick={() => {
+                                      if (isSelected) {
+                                        setRequiredFeatures(prev => prev.filter(f => f !== item));
+                                      } else {
+                                        setRequiredFeatures(prev => [...prev, item]);
+                                      }
+                                    }}
+                                    className={`w-full px-3 py-2 text-left text-sm hover:bg-amber-50 flex items-center justify-between transition-colors ${isSelected ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600'}`}
+                                  >
+                                    <span>{item}</span>
+                                    {isSelected && <Check size={14} className="text-emerald-500" />}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

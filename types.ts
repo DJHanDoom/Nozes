@@ -58,6 +58,7 @@ export interface AIConfig {
   includeLinks: boolean; // New field
   model: string;
   detailLevel: number; // 1 = Simple, 2 = Balanced, 3 = Expert
+  requiredFeatures?: string[]; // Features the AI must include
   importedFile?: ImportedFile;
 }
 

@@ -538,6 +538,11 @@ export const buildPromptData = (config: AIConfig): PromptData => {
       detailInstruction = "MAXIMIZE DETAIL. Keep all scientific terms, measurements, and nuances found in the text.";
     }
 
+    // Required features instruction for import mode
+    const requiredFeaturesImport = config.requiredFeatures && config.requiredFeatures.length > 0
+      ? `7. **REQUIRED FEATURES**: Prioritize extracting the following features if present in the document: ${config.requiredFeatures.join(', ')}. If the document doesn't mention them explicitly, still try to infer reasonable states for these features based on context.`
+      : '';
+
     const importSystemInstruction = `
       You are an expert biologist and data analyst.
       Your task is to analyze the provided document (PDF, Text, or Image) and extract a structured Matrix Identification Key.
@@ -553,6 +558,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
          - Feature Images: ${featureImageInstruction}
          - External Links: ${linkInstruction}
       6. ${langInstruction}
+      ${requiredFeaturesImport}
       
       **Format**: Return valid JSON.
       **IMPORTANT**: Do not include markdown code fences (\`\`\`json ... \`\`\`). Return raw JSON only. Ensure all keys and string values are properly escaped.
@@ -624,6 +630,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     9.  **MEDIA**: 
         - Feature Images: ${featureImageInstruction}
         - External Links: ${linkInstruction}
+    ${config.requiredFeatures && config.requiredFeatures.length > 0 ? `10. **REQUIRED FEATURES**: You MUST include ALL of the following features in the key: ${config.requiredFeatures.join(', ')}. These are mandatory and must be among the features generated.` : ''}
 
     Output Requirements:
     1.  List of distinctive features. Each feature must have 2+ states.
@@ -634,6 +641,11 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     The response must be a structured JSON object.
     **IMPORTANT**: Do not include markdown code fences (\`\`\`json ... \`\`\`). Return raw JSON only. Ensure all keys and string values are properly escaped.
   `;
+
+  // Build required features instruction for prompt
+  const requiredFeaturesPrompt = config.requiredFeatures && config.requiredFeatures.length > 0
+    ? `\n    MANDATORY FEATURES: The following features MUST be included in the key:\n    ${config.requiredFeatures.map((f, i) => `${i + 1}. ${f}`).join('\n    ')}\n`
+    : '';
 
   const prompt = `
     Create an identification key for: "${config.topic}".
@@ -646,7 +658,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     - Target Number of Features: ${config.featureCount}
     - Feature Focus: ${config.featureFocus}
     - Complexity Level: ${config.detailLevel}/3
-    
+    ${requiredFeaturesPrompt}
     IMPORTANT: For each entity, you MUST provide the scientificName field with the correct binomial nomenclature (e.g., "Panthera leo" for Lion).
 
     Ensure the features allow for effective separation of these entities.
