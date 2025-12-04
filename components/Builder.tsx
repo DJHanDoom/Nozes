@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
@@ -1208,7 +1208,8 @@ OUTPUT: Return a single merged JSON identification key with:
   };
 
   const handleRefineGenerate = async () => {
-    if (!apiKey) {
+    // PHOTOS action doesn't need API key (uses free public APIs)
+    if (refineAction !== 'PHOTOS' && !apiKey) {
       alert(strings.missingKey);
       return;
     }
@@ -1217,7 +1218,70 @@ OUTPUT: Return a single merged JSON identification key with:
       return;
     }
     setIsGenerating(true);
+    setGeneratingMessage('');
     try {
+      // PHOTOS action - Use direct API fetching instead of Gemini (much more reliable!)
+      if (refineAction === 'PHOTOS') {
+        const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
+        const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
+        const replaceMode = refineOptions.photoMode === 'replace';
+        
+        let updatedProject = { ...project };
+        
+        // Fetch images for entities
+        if (targetEntities) {
+          const entitiesToFetch = project.entities
+            .filter(e => replaceMode || !e.imageUrl || e.imageUrl.includes('picsum.photos') || e.imageUrl.includes('placehold.co'))
+            .map(e => ({ name: e.name, scientificName: e.name }));
+          
+          if (entitiesToFetch.length > 0) {
+            const imageMap = await fetchImagesForEntities(
+              entitiesToFetch,
+              language,
+              (current, total, entityName) => {
+                const msg = language === 'pt' 
+                  ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
+                  : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
+                setGeneratingMessage(msg);
+              }
+            );
+            
+            updatedProject.entities = project.entities.map(entity => {
+              const newUrl = imageMap.get(entity.name);
+              if (newUrl) {
+                return { ...entity, imageUrl: newUrl };
+              }
+              return entity;
+            });
+          }
+        }
+        
+        // Note: Feature images are harder to fetch automatically as they're abstract concepts
+        // For now, we skip feature image fetching via API (would need specific image sources)
+        if (targetFeatures) {
+          setGeneratingMessage(language === 'pt' 
+            ? '⚠️ Imagens de características não suportadas via API automática'
+            : '⚠️ Feature images not supported via automatic API');
+          await new Promise(r => setTimeout(r, 1500));
+        }
+        
+        setProject(updatedProject);
+        setShowAiModal(false);
+        setActiveTab('ENTITIES');
+        
+        const foundCount = targetEntities 
+          ? updatedProject.entities.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos')).length
+          : 0;
+        const totalCount = targetEntities ? project.entities.length : 0;
+        
+        alert(language === 'pt' 
+          ? `✅ Busca concluída! ${foundCount}/${totalCount} imagens encontradas via iNaturalist/Wikipedia.`
+          : `✅ Search complete! ${foundCount}/${totalCount} images found via iNaturalist/Wikipedia.`);
+        
+        return;
+      }
+
+      // Other refine actions use Gemini
       const refinePrompt = buildRefinePrompt();
 
       const generatedProject = await generateKeyFromCustomPrompt(refinePrompt, apiKey, aiConfig.model);
@@ -1230,6 +1294,7 @@ OUTPUT: Return a single merged JSON identification key with:
       alert(strings.errGen);
     } finally {
       setIsGenerating(false);
+      setGeneratingMessage('');
     }
   };
 
