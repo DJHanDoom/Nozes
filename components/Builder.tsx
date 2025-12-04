@@ -547,6 +547,10 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Prompt Editor State
   const [showPromptEditor, setShowPromptEditor] = useState(false);
   const [manualPrompt, setManualPrompt] = useState("");
+  const [aiTypingText, setAiTypingText] = useState(""); // Simulated AI typing response
+  const [aiTypingComplete, setAiTypingComplete] = useState(false); // Whether typing animation is complete
+  const typingIntervalRef = React.useRef<NodeJS.Timeout | null>(null);
+  const typingContainerRef = React.useRef<HTMLDivElement | null>(null); // Ref for auto-scroll
 
   // Entity Trait Editor State
   const [editingEntityId, setEditingEntityId] = useState<string | null>(null);
@@ -641,6 +645,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       } catch (e) { console.error("Failed to load local projects"); }
     }
   }, []);
+
+  // Auto-scroll typing container when new text is added
+  useEffect(() => {
+    if (typingContainerRef.current && aiTypingText) {
+      typingContainerRef.current.scrollTop = typingContainerRef.current.scrollHeight;
+    }
+  }, [aiTypingText]);
 
   // Handlers
   const updateProject = (updates: Partial<Project>) => setProject(p => ({ ...p, ...updates }));
@@ -794,6 +805,125 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     });
   };
 
+  // Generate random curiosities from saved projects for the typing effect
+  const generateCuriosities = (): string[] => {
+    const curiosities: string[] = [];
+    const introMessages = language === 'pt' ? [
+      "🔬 Analisando estrutura do documento...",
+      "🌿 Identificando características taxonômicas...",
+      "📊 Processando matriz de identificação...",
+      "🧬 Extraindo informações das espécies...",
+    ] : [
+      "🔬 Analyzing document structure...",
+      "🌿 Identifying taxonomic features...",
+      "📊 Processing identification matrix...",
+      "🧬 Extracting species information...",
+    ];
+    
+    // Add intro messages
+    curiosities.push(...introMessages);
+    
+    // Get curiosities from saved projects
+    if (savedProjects.length > 0) {
+      const headerMsg = language === 'pt' 
+        ? "\n💡 Enquanto isso, você sabia que..."
+        : "\n💡 Meanwhile, did you know that...";
+      curiosities.push(headerMsg);
+      
+      savedProjects.forEach(proj => {
+        // Random entity facts
+        if (proj.entities && proj.entities.length > 0) {
+          const randomEntities = [...proj.entities].sort(() => Math.random() - 0.5).slice(0, 3);
+          randomEntities.forEach(entity => {
+            if (entity.description && entity.description.length > 20) {
+              const fact = language === 'pt'
+                ? `\n🌱 "${entity.name}": ${entity.description.substring(0, 150)}${entity.description.length > 150 ? '...' : ''}`
+                : `\n🌱 "${entity.name}": ${entity.description.substring(0, 150)}${entity.description.length > 150 ? '...' : ''}`;
+              curiosities.push(fact);
+            }
+            // Add scientific name/family info
+            if (entity.scientificName || entity.family) {
+              const taxInfo = language === 'pt'
+                ? `\n   📚 ${entity.scientificName ? `Nome científico: ${entity.scientificName}` : ''}${entity.scientificName && entity.family ? ' | ' : ''}${entity.family ? `Família: ${entity.family}` : ''}`
+                : `\n   📚 ${entity.scientificName ? `Scientific name: ${entity.scientificName}` : ''}${entity.scientificName && entity.family ? ' | ' : ''}${entity.family ? `Family: ${entity.family}` : ''}`;
+              if (entity.scientificName || entity.family) curiosities.push(taxInfo);
+            }
+          });
+        }
+        
+        // Random feature facts
+        if (proj.features && proj.features.length > 0) {
+          const randomFeature = proj.features[Math.floor(Math.random() * proj.features.length)];
+          if (randomFeature.states && randomFeature.states.length > 1) {
+            const states = randomFeature.states.map(s => s.label).join(', ');
+            const fact = language === 'pt'
+              ? `\n🔍 A característica "${randomFeature.name}" pode ter os estados: ${states}`
+              : `\n🔍 The feature "${randomFeature.name}" can have states: ${states}`;
+            curiosities.push(fact);
+          }
+        }
+      });
+      
+      // Project stats
+      const totalEntities = savedProjects.reduce((sum, p) => sum + (p.entities?.length || 0), 0);
+      const totalFeatures = savedProjects.reduce((sum, p) => sum + (p.features?.length || 0), 0);
+      const statsMsg = language === 'pt'
+        ? `\n\n📈 Você já catalogou ${totalEntities} entidades e ${totalFeatures} características em ${savedProjects.length} chave(s)!`
+        : `\n\n📈 You have cataloged ${totalEntities} entities and ${totalFeatures} features across ${savedProjects.length} key(s)!`;
+      curiosities.push(statsMsg);
+    }
+    
+    return curiosities;
+  };
+
+  // Start the typing effect
+  const startTypingEffect = () => {
+    setAiTypingText("");
+    setAiTypingComplete(false);
+    
+    const curiosities = generateCuriosities();
+    const fullText = curiosities.join('\n');
+    let currentIndex = 0;
+    
+    // Clear any existing interval
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
+    }
+    
+    typingIntervalRef.current = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        // Type multiple characters at once for faster effect
+        const charsToAdd = Math.min(3, fullText.length - currentIndex);
+        setAiTypingText(prev => prev + fullText.substring(currentIndex, currentIndex + charsToAdd));
+        currentIndex += charsToAdd;
+      }
+    }, 30); // 30ms per batch of characters
+  };
+
+  // Stop the typing effect and show completion summary
+  const stopTypingEffect = (resultProject?: Project) => {
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
+      typingIntervalRef.current = null;
+    }
+    
+    if (resultProject) {
+      const entitiesCount = resultProject.entities?.length || 0;
+      const featuresCount = resultProject.features?.length || 0;
+      const statesCount = resultProject.features?.reduce((sum, f) => sum + (f.states?.length || 0), 0) || 0;
+      const withPhotos = resultProject.entities?.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos') && !e.imageUrl.includes('placehold.co')).length || 0;
+      const withLinks = resultProject.entities?.filter(e => e.links && e.links.length > 0).length || 0;
+      
+      const summaryMsg = language === 'pt'
+        ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANÁLISE CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resumo da Geração:\n\n   🌿 Entidades: ${entitiesCount}\n   🔬 Características: ${featuresCount}\n   📋 Estados totais: ${statesCount}\n   📷 Com fotos: ${withPhotos}/${entitiesCount}\n   🔗 Com links: ${withLinks}/${entitiesCount}\n\n🎉 Sua chave de identificação está pronta!`
+        : `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANALYSIS COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Generation Summary:\n\n   🌿 Entities: ${entitiesCount}\n   🔬 Features: ${featuresCount}\n   📋 Total states: ${statesCount}\n   📷 With photos: ${withPhotos}/${entitiesCount}\n   🔗 With links: ${withLinks}/${entitiesCount}\n\n🎉 Your identification key is ready!`;
+      
+      setAiTypingText(prev => prev + summaryMsg);
+    }
+    
+    setAiTypingComplete(true);
+  };
+
   const handleAiGenerate = async () => {
     if (!apiKey) {
       alert(strings.missingKey);
@@ -801,6 +931,12 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
     setIsGenerating(true);
     setGeneratingMessage(strings.generating);
+    
+    // Open prompt editor and start typing effect
+    setShowAiModal(false);
+    setShowPromptEditor(true);
+    startTypingEffect();
+    
     try {
       let config = { ...aiConfig };
 
@@ -822,6 +958,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         config, 
         apiKey, 
         (fullPrompt) => {
+          // Store prompt for viewing/editing
+          setManualPrompt(fullPrompt);
           navigator.clipboard.writeText(fullPrompt).then(() => {
             console.log("Prompt copied");
           }).catch(err => console.error("Could not copy prompt", err));
@@ -832,16 +970,35 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
             ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
             : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
           setGeneratingMessage(msg);
+          // Also update typing text with image progress
+          setAiTypingText(prev => {
+            const newLine = `\n📷 ${entityName}...`;
+            // Avoid duplicate entries
+            if (!prev.includes(newLine)) return prev + newLine;
+            return prev;
+          });
         }
       );
 
+      // Stop typing effect and show summary
+      stopTypingEffect(generatedProject);
+      
+      // Wait so user can see the summary
+      await new Promise(resolve => setTimeout(resolve, 2500));
+
       setProject(generatedProject);
-      setShowAiModal(false);
+      setShowPromptEditor(false);
       setActiveTab('MATRIX');
-      // Removed automatic alert here to be less intrusive since copying happens on button too
     } catch (e) {
       console.error(e);
+      // Stop typing and show error
+      stopTypingEffect();
+      setAiTypingText(prev => prev + (language === 'pt' 
+        ? "\n\n❌ ERRO: Não foi possível gerar a chave."
+        : "\n\n❌ ERROR: Could not generate the key."));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       alert(strings.errGen);
+      setShowPromptEditor(false);
     } finally {
       setIsGenerating(false);
       setGeneratingMessage('');
@@ -1347,14 +1504,32 @@ OUTPUT: Return a single merged JSON identification key with:
       return;
     }
     setIsGenerating(true);
-    setShowPromptEditor(false);
+    // Don't close the modal - keep it open to show typing effect
+    setShowPromptEditor(true);
+    
+    // Start the typing effect immediately
+    startTypingEffect();
 
     try {
       const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model);
+      
+      // Stop typing effect and show summary
+      stopTypingEffect(generatedProject);
+      
+      // Wait a moment so user can see the summary
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       setProject(generatedProject);
       setActiveTab('MATRIX');
+      setShowPromptEditor(false);
     } catch (e) {
       console.error(e);
+      // Stop typing and show error
+      stopTypingEffect();
+      setAiTypingText(prev => prev + (language === 'pt' 
+        ? "\n\n❌ ERRO: Não foi possível gerar a chave. Por favor, tente novamente."
+        : "\n\n❌ ERROR: Could not generate the key. Please try again."));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       alert(strings.errGen);
     } finally {
       setIsGenerating(false);
@@ -2878,39 +3053,72 @@ OUTPUT: Return a single merged JSON identification key with:
                     alert(strings.promptCopied);
                   }}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-xs hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white"
+                  disabled={isGenerating}
                 >
                   <Copy size={12} /> {strings.copyPrompt}
                 </button>
-                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1">
+                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1" disabled={isGenerating}>
                   <X size={20} />
                 </button>
               </div>
             </div>
 
-            <div className="flex-1 p-2 bg-slate-100 min-h-0">
-              <textarea
-                value={manualPrompt}
-                onChange={(e) => setManualPrompt(e.target.value)}
-                className="w-full h-full p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
-                spellCheck="false"
-              />
+            <div className="flex-1 p-2 bg-slate-100 min-h-0 flex flex-col gap-2">
+              {/* Prompt Textarea - Hidden during generation */}
+              {!isGenerating && (
+                <textarea
+                  value={manualPrompt}
+                  onChange={(e) => setManualPrompt(e.target.value)}
+                  className="w-full flex-1 p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
+                  spellCheck="false"
+                />
+              )}
+              
+              {/* AI Typing Effect Display - Shown during generation */}
+              {isGenerating && (
+                <div 
+                  ref={typingContainerRef}
+                  className="w-full flex-1 p-4 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 font-mono text-sm rounded-lg overflow-auto custom-scrollbar border-2 border-amber-500/30"
+                >
+                  <div className="whitespace-pre-wrap">
+                    {aiTypingText}
+                    {!aiTypingComplete && (
+                      <span className="inline-block w-2 h-4 bg-amber-400 animate-pulse ml-1 align-middle"></span>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="p-4 border-t bg-slate-50 shrink-0 flex items-center justify-end gap-4">
-              <button
-                onClick={handleClosePromptEditor}
-                className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors"
-                disabled={isGenerating}
-              >
-                {strings.cancel}
-              </button>
-              <button
-                onClick={handleSendManualPrompt}
-                className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
-                disabled={isGenerating}
-              >
-                {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
-              </button>
+            <div className="p-4 border-t bg-slate-50 shrink-0 flex items-center justify-between gap-4">
+              {/* Generation progress indicator */}
+              {isGenerating && (
+                <div className="flex items-center gap-2 text-amber-600">
+                  <div className="flex gap-1">
+                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  </div>
+                  <span className="text-sm font-medium">{language === 'pt' ? 'IA processando...' : 'AI processing...'}</span>
+                </div>
+              )}
+              
+              <div className="flex items-center gap-4 ml-auto">
+                <button
+                  onClick={handleClosePromptEditor}
+                  className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors disabled:opacity-30"
+                  disabled={isGenerating}
+                >
+                  {strings.cancel}
+                </button>
+                <button
+                  onClick={handleSendManualPrompt}
+                  className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                  disabled={isGenerating}
+                >
+                  {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
+                </button>
+              </div>
             </div>
           </div>
         </div>
