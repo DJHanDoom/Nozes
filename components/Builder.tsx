@@ -593,6 +593,95 @@ const t = {
   }
 };
 
+/**
+ * Merge generated project with existing project data to preserve:
+ * - Existing imageUrl (if not placeholder)
+ * - Existing links
+ * - Existing description (if new one is empty/placeholder)
+ * - Existing scientificName and family
+ * This prevents AI from overwriting valuable user data with mockups/placeholders
+ */
+const mergeProjectsPreservingData = (newProject: Project, existingProject: Project): Project => {
+  // Create lookup maps for existing data
+  const existingEntitiesById = new Map(existingProject.entities.map(e => [e.id, e]));
+  const existingEntitiesByName = new Map(existingProject.entities.map(e => [e.name.toLowerCase().trim(), e]));
+  const existingFeaturesById = new Map(existingProject.features.map(f => [f.id, f]));
+  const existingFeaturesByName = new Map(existingProject.features.map(f => [f.name.toLowerCase().trim(), f]));
+
+  // Helper to check if URL is a placeholder/mockup
+  const isPlaceholderUrl = (url: string | undefined): boolean => {
+    if (!url) return true;
+    const placeholderPatterns = [
+      'picsum.photos',
+      'placehold.co',
+      'placeholder.com',
+      'via.placeholder',
+      'dummyimage.com',
+      'fakeimg.pl',
+      'lorempixel.com'
+    ];
+    return placeholderPatterns.some(p => url.includes(p));
+  };
+
+  // Merge entities
+  const mergedEntities = newProject.entities.map(newEntity => {
+    // Try to find existing entity by ID first, then by name
+    const existingEntity = existingEntitiesById.get(newEntity.id) 
+      || existingEntitiesByName.get(newEntity.name.toLowerCase().trim());
+
+    if (!existingEntity) {
+      // New entity, keep as is
+      return newEntity;
+    }
+
+    // Merge: preserve existing data if new data is placeholder/empty
+    return {
+      ...newEntity,
+      // Preserve imageUrl if existing has a real image and new has placeholder
+      imageUrl: (!isPlaceholderUrl(existingEntity.imageUrl) && isPlaceholderUrl(newEntity.imageUrl))
+        ? existingEntity.imageUrl
+        : (newEntity.imageUrl || existingEntity.imageUrl),
+      // Preserve links if existing has them and new doesn't
+      links: (newEntity.links && newEntity.links.length > 0) 
+        ? newEntity.links 
+        : existingEntity.links,
+      // Preserve description if new is empty/generic
+      description: (newEntity.description && newEntity.description.length > 20)
+        ? newEntity.description
+        : (existingEntity.description || newEntity.description),
+      // Preserve taxonomic data
+      scientificName: newEntity.scientificName || existingEntity.scientificName,
+      family: newEntity.family || existingEntity.family,
+    };
+  });
+
+  // Merge features (similar logic)
+  const mergedFeatures = newProject.features.map(newFeature => {
+    const existingFeature = existingFeaturesById.get(newFeature.id)
+      || existingFeaturesByName.get(newFeature.name.toLowerCase().trim());
+
+    if (!existingFeature) {
+      return newFeature;
+    }
+
+    return {
+      ...newFeature,
+      // Preserve feature imageUrl if existing has real image
+      imageUrl: (!isPlaceholderUrl(existingFeature.imageUrl) && isPlaceholderUrl(newFeature.imageUrl))
+        ? existingFeature.imageUrl
+        : (newFeature.imageUrl || existingFeature.imageUrl),
+    };
+  });
+
+  return {
+    ...newProject,
+    // Preserve original project ID and metadata if they match
+    id: existingProject.id || newProject.id,
+    entities: mergedEntities,
+    features: mergedFeatures
+  };
+};
+
 export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened, onProjectImported }) => {
   const strings = t[language];
   // State
@@ -1717,7 +1806,11 @@ OUTPUT: Return a single merged JSON identification key with:
       // Wait a moment so user can see the summary
       await new Promise(resolve => setTimeout(resolve, 2500));
       
-      setProject(generatedProject);
+      // Merge with both source keys to preserve images, links, and other data
+      let mergedProject = generatedProject;
+      if (mergeKey1) mergedProject = mergeProjectsPreservingData(mergedProject, mergeKey1);
+      if (mergeKey2) mergedProject = mergeProjectsPreservingData(mergedProject, mergeKey2);
+      setProject(mergedProject);
       setShowPromptEditor(false);
       setActiveTab('MATRIX');
     } catch (e) {
@@ -1984,7 +2077,9 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
         
         await new Promise(resolve => setTimeout(resolve, 3000));
         
-        setProject(generatedProject);
+        // Merge with existing project to preserve images, links, and other data
+        const mergedProject = mergeProjectsPreservingData(generatedProject, project);
+        setProject(mergedProject);
         setShowPromptEditor(false);
         setActiveTab('ENTITIES');
         
@@ -2009,7 +2104,9 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
       // Wait a moment so user can see the summary
       await new Promise(resolve => setTimeout(resolve, 2500));
       
-      setProject(generatedProject);
+      // Merge with existing project to preserve images, links, and other data
+      const mergedProject = mergeProjectsPreservingData(generatedProject, project);
+      setProject(mergedProject);
       setShowPromptEditor(false);
       setActiveTab('MATRIX');
     } catch (e) {
@@ -2092,7 +2189,11 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
       // Wait a moment so user can see the summary
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      setProject(generatedProject);
+      // Merge with existing project to preserve images, links, and other data if editing
+      const mergedProject = project.entities.length > 0 
+        ? mergeProjectsPreservingData(generatedProject, project)
+        : generatedProject;
+      setProject(mergedProject);
       setActiveTab('MATRIX');
       setShowPromptEditor(false);
     } catch (e) {
