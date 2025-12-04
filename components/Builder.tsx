@@ -709,6 +709,85 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return undefined;
   };
 
+  // Map feature ID from new project to existing project ID
+  const mapFeatureId = (newFeatureId: string): string | null => {
+    // First check if it's already a valid existing ID
+    if (existingFeaturesById.has(newFeatureId)) {
+      return newFeatureId;
+    }
+    // Otherwise, find matching feature by ID in new project and map to existing
+    const newFeature = newProject.features.find(f => f.id === newFeatureId);
+    if (newFeature) {
+      const existingFeature = findMatchingFeature(newFeature);
+      if (existingFeature) {
+        return existingFeature.id;
+      }
+    }
+    return null;
+  };
+
+  // Map state ID from new project to existing project ID
+  const mapStateId = (newStateId: string, existingFeatureId: string): string | null => {
+    const existingFeature = existingFeaturesById.get(existingFeatureId);
+    if (!existingFeature) return null;
+    
+    // First check if state ID exists in existing feature
+    if (existingFeature.states.some(s => s.id === newStateId)) {
+      return newStateId;
+    }
+    
+    // Find the state in new project to get its label
+    const newFeature = newProject.features.find(f => f.states.some(s => s.id === newStateId));
+    if (newFeature) {
+      const newState = newFeature.states.find(s => s.id === newStateId);
+      if (newState) {
+        // Find matching state by label in existing feature
+        const matchingState = existingFeature.states.find(s => 
+          normalizeName(s.label) === normalizeName(newState.label)
+        );
+        if (matchingState) {
+          return matchingState.id;
+        }
+      }
+    }
+    return null;
+  };
+
+  // Merge traits from new entity to existing entity, mapping IDs correctly
+  const mergeTraits = (newTraits: Record<string, string[]>, existingTraits: Record<string, string[]>): Record<string, string[]> => {
+    const result = { ...existingTraits };
+    
+    for (const [newFeatureId, newStateIds] of Object.entries(newTraits)) {
+      const existingFeatureId = mapFeatureId(newFeatureId);
+      if (!existingFeatureId) {
+        console.warn(`[mergeTraits] Could not map feature ID: ${newFeatureId}`);
+        continue;
+      }
+      
+      // Map state IDs
+      const mappedStateIds: string[] = [];
+      for (const newStateId of newStateIds) {
+        const mappedStateId = mapStateId(newStateId, existingFeatureId);
+        if (mappedStateId) {
+          mappedStateIds.push(mappedStateId);
+        } else {
+          console.warn(`[mergeTraits] Could not map state ID: ${newStateId} for feature ${existingFeatureId}`);
+        }
+      }
+      
+      if (mappedStateIds.length > 0) {
+        // Only update if we have valid mapped states AND existing doesn't have data for this feature
+        // OR if existing has no traits for this feature (filling gaps)
+        if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
+          result[existingFeatureId] = mappedStateIds;
+          console.log(`[mergeTraits] Filled gap: feature ${existingFeatureId} with states [${mappedStateIds.join(', ')}]`);
+        }
+      }
+    }
+    
+    return result;
+  };
+
   // Merge entities from new project with existing data
   const mergedEntities = newProject.entities.map(newEntity => {
     const existingEntity = findMatchingEntity(newEntity);
@@ -744,8 +823,8 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       // Preserve taxonomic data
       scientificName: newEntity.scientificName || existingEntity.scientificName,
       family: newEntity.family || existingEntity.family,
-      // IMPORTANT: Merge traits - keep existing traits and only add/update from new
-      traits: { ...existingEntity.traits, ...newEntity.traits },
+      // IMPORTANT: Merge traits with proper ID mapping to fill gaps
+      traits: mergeTraits(newEntity.traits, existingEntity.traits),
     };
   });
 
