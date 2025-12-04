@@ -259,7 +259,7 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
  *   "Swartzia simplex (Sw.) Spreng." → "Swartzia simplex"
  *   "Andira fraxinifolia Benth." → "Andira fraxinifolia"
  */
-function extractBinomial(name: string): string {
+export function extractBinomial(name: string): string {
   if (!name) return '';
   
   // Remove any text in parentheses at the end (author abbreviations like "(Sw.)")

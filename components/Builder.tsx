@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
@@ -1216,6 +1216,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       if (targetEntities) {
         photoData.entities = project.entities.map(e => ({
           name: e.name,
+          searchName: extractBinomial(e.scientificName || e.name), // Use only genus+epithet for image search
           currentUrl: replaceMode ? '' : (e.imageUrl || '')
         })).filter(e => replaceMode || !e.currentUrl); // Only include items needing photos
       }
@@ -1259,8 +1260,12 @@ Find ONE valid, high-quality image URL for each item listed above.
 ${replaceMode ? 'REPLACE ALL URLs - ignore any existing URLs and find new ones.' : 'ONLY FILL EMPTY URLs - skip items that already have a URL.'}
 
 ## HOW TO FIND GOOD PHOTOS:
+
+⚠️ CRITICAL: For image searches, ALWAYS use the "searchName" field (genus + epithet only).
+NEVER use author names in image searches (e.g., search "Andira fraxinifolia", NOT "Andira fraxinifolia Benth.").
+
 ${sourceInstructions}
-1. **iNaturalist** - Search: https://www.inaturalist.org/taxa/search?q=[species_name]
+1. **iNaturalist** - Search: https://www.inaturalist.org/taxa/search?q=[searchName]
    - Navigate to species page → Photos tab → Right-click image → Copy Image Address
    - Valid format: https://inaturalist-open-data.s3.amazonaws.com/photos/[id]/medium.jpg
 
@@ -1671,61 +1676,120 @@ OUTPUT: Return a single merged JSON identification key with:
         startTypingEffect();
         
         // Build validation prompt
-        const entityList = project.entities.map(e => 
-          `- "${e.name}"${e.scientificName ? ` (${e.scientificName})` : ''}`
+        const entityList = project.entities.map((e, idx) => 
+          `${idx + 1}. "${e.name}"${e.scientificName ? ` [Scientific: ${e.scientificName}]` : ''} (ID: ${e.id})`
         ).join('\n');
         
         const catalogName = refineOptions.validateReference === 'floradobrasil' 
-          ? 'Flora do Brasil 2020' 
+          ? 'Flora do Brasil 2020 (https://floradobrasil.jbrj.gov.br)' 
           : refineOptions.validateReference === 'gbif' 
             ? 'GBIF Backbone Taxonomy'
             : refineOptions.validateReference === 'powo'
-              ? 'Plants of the World Online (POWO)'
+              ? 'Plants of the World Online (POWO - Kew)'
               : 'current taxonomic literature';
         
-        const validationTasks: string[] = [];
+        // Build strict validation rules
+        const validationRules: string[] = [];
+        const removalCriteria: string[] = [];
+        
         if (refineOptions.validateFixNames) {
-          validationTasks.push(`1. CORRECT NAMES: Check each species against ${catalogName}. If a name is outdated, misspelled, or refers to a non-existent species, provide the accepted name.`);
+          validationRules.push(`RULE 1 - NAME VALIDATION:
+   - Check each scientific name against ${catalogName}
+   - If the name is a SYNONYM → replace with the ACCEPTED name
+   - If the name is MISSPELLED → correct the spelling
+   - If the name DOES NOT EXIST in any taxonomic database → REMOVE the entity entirely
+   - Update the "scientificName" field with the correct binomial (Genus species Author)`);
         }
+        
         if (refineOptions.validateMergeSynonyms) {
-          validationTasks.push('2. MERGE SYNONYMS: Identify synonymous species in the list. When found, keep only the accepted name and merge trait data from both entries.');
+          validationRules.push(`RULE 2 - SYNONYM MERGING:
+   - If TWO OR MORE entities in the list are synonyms of each other → KEEP ONLY ONE (the accepted name)
+   - Merge their trait data: combine all trait values from both entities
+   - Merge their descriptions: combine relevant information
+   - Keep the best available imageUrl`);
         }
-        if (refineOptions.validateCheckTaxonomy && (refineOptions.validateFamily || refineOptions.validateGenus)) {
-          const taxScope = refineOptions.validateFamily 
-            ? `family ${refineOptions.validateFamily}` 
-            : `genus ${refineOptions.validateGenus}`;
-          validationTasks.push(`3. CHECK TAXONOMY: Remove any species that do not belong to ${taxScope}.`);
+        
+        if (refineOptions.validateCheckTaxonomy) {
+          if (refineOptions.validateGenus) {
+            removalCriteria.push(`GENUS FILTER: The species MUST belong to genus "${refineOptions.validateGenus}"`);
+            validationRules.push(`RULE 3 - GENUS RESTRICTION (STRICT):
+   - ONLY species of genus "${refineOptions.validateGenus}" are allowed
+   - The first word of the scientific name MUST be exactly "${refineOptions.validateGenus}"
+   - ANY species from a different genus MUST BE REMOVED - NO EXCEPTIONS
+   - Example: If genus is "Andira", then "Bowdichia virgilioides" must be REMOVED because "Bowdichia" ≠ "Andira"`);
+          }
+          if (refineOptions.validateFamily) {
+            removalCriteria.push(`FAMILY FILTER: The species MUST belong to family "${refineOptions.validateFamily}"`);
+            validationRules.push(`RULE 3B - FAMILY RESTRICTION (STRICT):
+   - ONLY species of family "${refineOptions.validateFamily}" are allowed
+   - Check the taxonomic classification of each species
+   - ANY species from a different family MUST BE REMOVED - NO EXCEPTIONS`);
+          }
         }
+        
         if (refineOptions.validateCheckGeography && refineOptions.validateScope !== 'global') {
-          const geoScope = refineOptions.validateScope === 'national' 
-            ? 'Brazil' 
-            : (refineOptions.validateBiome || refineOptions.validateStateUF || 'the specified region');
-          validationTasks.push(`4. CHECK GEOGRAPHY: Remove species that do not occur in ${geoScope}${refineOptions.validateBiome ? ` (${refineOptions.validateBiome})` : ''}${refineOptions.validateStateUF ? ` (${refineOptions.validateStateUF})` : ''}.`);
+          const geoDetails: string[] = [];
+          if (refineOptions.validateScope === 'national') {
+            geoDetails.push('Brazil (native or naturalized species only)');
+          }
+          if (refineOptions.validateBiome) {
+            geoDetails.push(`Biome: ${refineOptions.validateBiome}`);
+          }
+          if (refineOptions.validateStateUF) {
+            geoDetails.push(`State: ${refineOptions.validateStateUF}, Brazil`);
+          }
+          const geoScope = geoDetails.join(', ');
+          removalCriteria.push(`GEOGRAPHIC FILTER: The species MUST occur in ${geoScope}`);
+          validationRules.push(`RULE 4 - GEOGRAPHIC RESTRICTION (STRICT):
+   - ONLY species that NATURALLY OCCUR in ${geoScope} are allowed
+   - Check the species distribution according to ${catalogName}
+   - Species that DO NOT OCCUR in this geographic area MUST BE REMOVED
+   - Be strict: if uncertain about distribution, REMOVE the species`);
         }
 
-        const validatePrompt = `You are a taxonomic validation expert. Analyze the following species list and perform the requested validations.
+        const validatePrompt = `You are a strict taxonomic validation expert. Your task is to validate a species list and REMOVE any species that do not meet ALL criteria.
 
-SPECIES LIST TO VALIDATE:
+═══════════════════════════════════════════════════════════════════════
+SPECIES LIST TO VALIDATE (${project.entities.length} total):
+═══════════════════════════════════════════════════════════════════════
 ${entityList}
 
-VALIDATION TASKS:
-${validationTasks.join('\n')}
+═══════════════════════════════════════════════════════════════════════
+MANDATORY REMOVAL CRITERIA - Species MUST be REMOVED if they fail ANY:
+═══════════════════════════════════════════════════════════════════════
+${removalCriteria.length > 0 ? removalCriteria.map((c, i) => `${i + 1}. ${c}`).join('\n') : 'None specified'}
 
-REFERENCE CATALOG: ${catalogName}
+═══════════════════════════════════════════════════════════════════════
+VALIDATION RULES (apply in order):
+═══════════════════════════════════════════════════════════════════════
+${validationRules.join('\n\n')}
 
-IMPORTANT INSTRUCTIONS:
-- Return a JSON object with the full project structure
-- For each entity, preserve ALL existing data (traits, description, links, imageUrl)
-- Only modify: name, scientificName, and family fields when corrections are needed
-- When merging synonyms, combine traits from both entities (union of all trait values)
-- Add a "validationNotes" field to each entity explaining any changes made
-- If an entity should be removed, do NOT include it in the output
-- Keep the exact same feature definitions
+═══════════════════════════════════════════════════════════════════════
+REFERENCE: ${catalogName}
+═══════════════════════════════════════════════════════════════════════
 
-EXISTING PROJECT (preserve structure):
+CRITICAL INSTRUCTIONS:
+1. BE STRICT - When in doubt, REMOVE the species
+2. ${refineOptions.validateGenus ? `GENUS CHECK: Every species MUST have "${refineOptions.validateGenus}" as the first word of its scientific name. Remove ALL others.` : ''}
+3. ${refineOptions.validateFamily ? `FAMILY CHECK: Every species MUST belong to family "${refineOptions.validateFamily}". Remove ALL others.` : ''}
+4. DO NOT include species that fail ANY of the removal criteria
+5. Preserve ALL existing data for species that pass validation (traits, description, links, imageUrl)
+6. Return ONLY the entities that PASS ALL validation criteria
+
+OUTPUT FORMAT:
+Return a valid JSON object with this exact structure:
+{
+  "id": "${project.id}",
+  "name": "${project.name}",
+  "description": "${project.description}",
+  "features": <COPY EXACTLY FROM INPUT>,
+  "entities": <ONLY VALIDATED ENTITIES>
+}
+
+EXISTING PROJECT DATA:
 ${JSON.stringify(project, null, 2)}
 
-Return the validated project as a JSON object with the same structure.`;
+IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outside the JSON.`;
 
         setManualPrompt(validatePrompt);
         
