@@ -4,6 +4,21 @@ import { Project, Entity, Feature, AIConfig } from "../types";
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
+// Timeout wrapper for fetch requests
+const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeoutMs: number = 5000): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(timeoutId);
+    return response;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    throw error;
+  }
+};
+
 /**
  * ============================================================================
  * IMAGE FETCHING SYSTEM - Multi-source approach for maximum reliability
@@ -26,7 +41,7 @@ async function fetchINaturalistImage(searchTerm: string): Promise<string | null>
       locale: 'pt-BR'
     });
     
-    const response = await fetch(`https://api.inaturalist.org/v1/taxa?${params}`);
+    const response = await fetchWithTimeout(`https://api.inaturalist.org/v1/taxa?${params}`, {}, 5000);
     if (!response.ok) return null;
     
     const data = await response.json();
@@ -64,8 +79,10 @@ async function fetchFlickrImage(searchTerm: string): Promise<string | null> {
     const encodedTerm = encodeURIComponent(searchTerm);
     
     // Try Flickr's public API with JSON callback
-    const response = await fetch(
-      `https://www.flickr.com/services/feeds/photos_public.gne?tags=${encodedTerm}&tagmode=all&format=json&nojsoncallback=1`
+    const response = await fetchWithTimeout(
+      `https://www.flickr.com/services/feeds/photos_public.gne?tags=${encodedTerm}&tagmode=all&format=json&nojsoncallback=1`,
+      {},
+      5000
     );
     
     if (!response.ok) return null;
@@ -139,7 +156,7 @@ async function fetchBiodiversity4AllImage(searchTerm: string): Promise<string | 
       preferred_place_id: '7122' // Portugal
     });
     
-    const response = await fetch(`https://api.inaturalist.org/v1/taxa?${params}`);
+    const response = await fetchWithTimeout(`https://api.inaturalist.org/v1/taxa?${params}`, {}, 5000);
     if (!response.ok) return null;
     
     const data = await response.json();
@@ -184,7 +201,7 @@ async function fetchWikipediaImage(entityName: string, language: string = 'pt'):
         redirects: '1'
       });
       
-      const response = await fetch(`${wikiUrl}?${searchParams}`);
+      const response = await fetchWithTimeout(`${wikiUrl}?${searchParams}`, {}, 5000);
       if (!response.ok) continue;
       
       const data = await response.json();
@@ -229,7 +246,7 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
       origin: '*'
     });
     
-    const response = await fetch(`${commonsUrl}?${params}`);
+    const response = await fetchWithTimeout(`${commonsUrl}?${params}`, {}, 5000);
     if (!response.ok) return null;
     
     const data = await response.json();
@@ -879,8 +896,10 @@ export const generateKeyFromTopic = async (
   const project = await callGemini(ai, config.model, contents, systemInstruction, schema, config.language, config.includeLinks);
 
   // Now fetch real images from iNaturalist/Wikipedia APIs
+  // Limit to first 100 entities to avoid very long wait times
+  const MAX_IMAGE_FETCH = 100;
   if (config.includeSpeciesImages && project.entities.length > 0) {
-    const entitiesToFetch = project.entities.map(e => ({
+    const entitiesToFetch = project.entities.slice(0, MAX_IMAGE_FETCH).map(e => ({
       name: e.name,
       // Use scientificName from AI response (stored in entity), or try to extract from name
       scientificName: (e as any).scientificName || extractScientificName(e.name) || e.name
@@ -893,11 +912,15 @@ export const generateKeyFromTopic = async (
     );
     
     // Update entities with fetched images, remove temporary scientificName field
-    project.entities = project.entities.map(entity => {
+    project.entities = project.entities.map((entity, index) => {
       const { scientificName, ...cleanEntity } = entity as any;
+      // Only update image for entities we fetched (first MAX_IMAGE_FETCH)
+      const imageUrl = index < MAX_IMAGE_FETCH 
+        ? (imageMap.get(entity.name) || getPlaceholderImage(entity.name))
+        : getPlaceholderImage(entity.name);
       return {
         ...cleanEntity,
-        imageUrl: imageMap.get(entity.name) || getPlaceholderImage(entity.name)
+        imageUrl
       };
     });
   }
