@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [helpTab, setHelpTab] = useState<'ABOUT' | 'HELP'>('ABOUT');
   const [aiModel, setAiModel] = useState<string>("gemini-2.5-flash");
   const [apiKey, setApiKey] = useState<string>("");
+  const [openAiModalOnMount, setOpenAiModalOnMount] = useState(false);
 
   useEffect(() => {
     // Load settings on mount only
@@ -131,6 +132,13 @@ const App: React.FC = () => {
   }[language];
 
   const handleStartBuilder = () => {
+    setOpenAiModalOnMount(false);
+    setView('BUILDER');
+  };
+
+  const handleStartAiWizard = () => {
+    setOpenAiModalOnMount(true);
+    setCurrentProject(null);
     setView('BUILDER');
   };
 
@@ -342,8 +350,8 @@ const App: React.FC = () => {
             setReturnToAiModal(returnToAi || false);
             setShowSettingsModal(true);
           }}
-          reopenAiModal={returnToAiModal && !showSettingsModal}
-          onAiModalOpened={() => setReturnToAiModal(false)}
+          reopenAiModal={(returnToAiModal && !showSettingsModal) || openAiModalOnMount}
+          onAiModalOpened={() => { setReturnToAiModal(false); setOpenAiModalOnMount(false); }}
           onProjectImported={(project) => {
             // Update savedProjects state so load modals show the imported project
             setSavedProjects(prev => [project, ...prev.filter(p => p.id !== project.id)]);
@@ -430,6 +438,15 @@ const App: React.FC = () => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 pt-2">
+            {/* Nozes IA Button - Golden/Amber */}
+            <button
+              onClick={handleStartAiWizard}
+              className="col-span-1 sm:col-span-2 flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl font-bold transition-all shadow-xl shadow-amber-900/50 hover:scale-[1.02] text-lg border-t border-amber-300/30 active:scale-95 animate-pulse hover:animate-none"
+            >
+              <Brain className="w-6 h-6" />
+              {language === 'pt' ? 'Nozes IA' : 'Nozes AI'}
+            </button>
+
             <button
               onClick={handleStartBuilder}
               className="col-span-1 sm:col-span-2 flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all shadow-xl shadow-emerald-900/50 hover:scale-[1.02] text-lg border-t border-emerald-400/20 active:scale-95"

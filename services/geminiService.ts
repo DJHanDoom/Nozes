@@ -4,6 +4,241 @@ import { Project, Entity, Feature, AIConfig } from "../types";
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
+/**
+ * ============================================================================
+ * IMAGE FETCHING SYSTEM - Multi-source approach for maximum reliability
+ * ============================================================================
+ * Priority order:
+ * 1. iNaturalist API (best for biodiversity - has curated species photos)
+ * 2. Wikipedia/Wikimedia Commons (good general coverage)
+ * 3. Picsum placeholder (fallback with consistent seeded images)
+ */
+
+/**
+ * Fetch image from iNaturalist API - Best source for species/biodiversity
+ * Uses the taxa search endpoint which returns photos from research-grade observations
+ */
+async function fetchINaturalistImage(searchTerm: string): Promise<string | null> {
+  try {
+    const params = new URLSearchParams({
+      q: searchTerm,
+      per_page: '1',
+      locale: 'pt-BR'
+    });
+    
+    const response = await fetch(`https://api.inaturalist.org/v1/taxa?${params}`);
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      const taxon = data.results[0];
+      
+      // iNaturalist provides multiple photo sizes - use medium (500px max)
+      if (taxon.default_photo?.medium_url) {
+        return taxon.default_photo.medium_url;
+      }
+      // Fallback to square if medium not available
+      if (taxon.default_photo?.square_url) {
+        // Convert square to medium size
+        return taxon.default_photo.square_url.replace('/square.', '/medium.');
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`iNaturalist fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from Wikipedia using the pageimages API
+ * Good for well-known species and general topics
+ */
+async function fetchWikipediaImage(entityName: string, language: string = 'pt'): Promise<string | null> {
+  try {
+    const wikis = language === 'pt' ? ['pt', 'en'] : ['en', 'pt'];
+    
+    for (const lang of wikis) {
+      const wikiUrl = `https://${lang}.wikipedia.org/w/api.php`;
+      
+      const searchParams = new URLSearchParams({
+        action: 'query',
+        titles: entityName,
+        prop: 'pageimages',
+        pithumbsize: '400',
+        format: 'json',
+        origin: '*',
+        redirects: '1'
+      });
+      
+      const response = await fetch(`${wikiUrl}?${searchParams}`);
+      if (!response.ok) continue;
+      
+      const data = await response.json();
+      const pages = data.query?.pages;
+      
+      if (pages) {
+        const pageId = Object.keys(pages)[0];
+        const page = pages[pageId];
+        
+        if (page && !page.missing && page.thumbnail?.source) {
+          let imageUrl = page.thumbnail.source;
+          // Try to get larger version
+          imageUrl = imageUrl.replace(/\/\d+px-/, '/400px-');
+          return imageUrl;
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`Wikipedia fetch failed for "${entityName}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from Wikimedia Commons - good for scientific/biological content
+ */
+async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | null> {
+  try {
+    const commonsUrl = 'https://commons.wikimedia.org/w/api.php';
+    const params = new URLSearchParams({
+      action: 'query',
+      generator: 'search',
+      gsrsearch: `${searchTerm}`,
+      gsrnamespace: '6', // File namespace
+      gsrlimit: '3',
+      prop: 'imageinfo',
+      iiprop: 'url|mime',
+      iiurlwidth: '400',
+      format: 'json',
+      origin: '*'
+    });
+    
+    const response = await fetch(`${commonsUrl}?${params}`);
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    const pages = data.query?.pages;
+    
+    if (pages) {
+      // Find first valid image (prefer jpg/png)
+      for (const page of Object.values(pages) as any[]) {
+        const info = page?.imageinfo?.[0];
+        if (info?.thumburl && info?.mime?.startsWith('image/')) {
+          return info.thumburl;
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`Wikimedia Commons fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Main function: Fetch a valid image URL using multi-source fallback strategy
+ * Tries sources in order of reliability for biological/species content
+ */
+async function fetchEntityImage(
+  entityName: string, 
+  scientificName?: string,
+  language: string = 'pt'
+): Promise<string | null> {
+  // Build search terms - scientific name first (more precise), then common name
+  const searchTerms = [scientificName, entityName].filter(Boolean) as string[];
+  
+  for (const term of searchTerms) {
+    // 1. Try iNaturalist first (best for biodiversity)
+    const iNatImage = await fetchINaturalistImage(term);
+    if (iNatImage) return iNatImage;
+    
+    // 2. Try Wikipedia
+    const wikiImage = await fetchWikipediaImage(term, language);
+    if (wikiImage) return wikiImage;
+    
+    // 3. Try Wikimedia Commons
+    const commonsImage = await fetchWikimediaCommonsImage(term);
+    if (commonsImage) return commonsImage;
+  }
+  
+  return null;
+}
+
+/**
+ * Batch fetch images for multiple entities with progress callback
+ * Uses parallel requests with rate limiting to avoid API throttling
+ */
+export async function fetchImagesForEntities(
+  entities: Array<{ name: string; scientificName?: string }>,
+  language: string = 'pt',
+  onProgress?: (current: number, total: number, entityName: string) => void
+): Promise<Map<string, string>> {
+  const imageMap = new Map<string, string>();
+  const batchSize = 3; // Conservative to respect API limits
+  
+  for (let i = 0; i < entities.length; i += batchSize) {
+    const batch = entities.slice(i, i + batchSize);
+    
+    const promises = batch.map(async (entity) => {
+      const imageUrl = await fetchEntityImage(entity.name, entity.scientificName, language);
+      return { name: entity.name, url: imageUrl };
+    });
+    
+    const results = await Promise.all(promises);
+    
+    results.forEach(result => {
+      if (result.url) {
+        imageMap.set(result.name, result.url);
+      }
+    });
+    
+    if (onProgress) {
+      const current = Math.min(i + batchSize, entities.length);
+      const lastEntity = batch[batch.length - 1]?.name || '';
+      onProgress(current, entities.length, lastEntity);
+    }
+    
+    // Delay between batches (100ms to stay under 60 req/min for iNaturalist)
+    if (i + batchSize < entities.length) {
+      await new Promise(resolve => setTimeout(resolve, 150));
+    }
+  }
+  
+  return imageMap;
+}
+
+/**
+ * Generate a consistent placeholder URL based on entity name
+ * Uses Picsum with a seeded hash for reproducible results
+ */
+function getPlaceholderImage(entityName: string): string {
+  // Use a hash of the name as seed for consistent placeholder
+  const seed = encodeURIComponent(entityName.toLowerCase().replace(/\s+/g, '-'));
+  return `https://picsum.photos/seed/${seed}/400/300`;
+}
+
+/**
+ * Try to extract scientific name from entity name
+ * Handles common patterns like "Entity (Scientific Name)" or "Scientific Name"
+ */
+function extractScientificName(entityName: string): string | null {
+  // Check for pattern: "Common Name (Scientific Name)"
+  const parenMatch = entityName.match(/\(([A-Z][a-z]+ [a-z]+[^)]*)\)/);
+  if (parenMatch) return parenMatch[1];
+  
+  // Check if the name itself looks like a scientific name (Genus species)
+  const binomialPattern = /^([A-Z][a-z]+)\s+([a-z]+)(\s+.*)?$/;
+  if (binomialPattern.test(entityName)) return entityName.split(/\s+-\s+/)[0].trim();
+  
+  return null;
+}
+
 // Helper to attempt to repair truncated JSON
 const repairTruncatedJson = (jsonStr: string): any => {
   try {
@@ -85,9 +320,9 @@ const generationSchema: Schema = {
       items: {
         type: Type.OBJECT,
         properties: {
-          name: { type: Type.STRING },
+          name: { type: Type.STRING, description: "Entity name (can be common name or scientific name)" },
+          scientificName: { type: Type.STRING, description: "Scientific binomial name (e.g., 'Panthera leo'). REQUIRED for biological species." },
           description: { type: Type.STRING },
-          imageUrl: { type: Type.STRING, description: "URL for species image." },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
           traits: {
             type: Type.ARRAY,
@@ -123,9 +358,9 @@ const importSchema: Schema = {
       items: {
         type: Type.OBJECT,
         properties: {
-          name: { type: Type.STRING },
+          name: { type: Type.STRING, description: "Entity name as found in document" },
+          scientificName: { type: Type.STRING, description: "Scientific binomial name if available (e.g., 'Panthera leo')" },
           description: { type: Type.STRING },
-          imageUrl: { type: Type.STRING, description: "URL if found, else empty." },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
           traits: {
             type: Type.ARRAY,
@@ -162,13 +397,11 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     ? "All content (Project Name, Description, Features, States, Entities, Descriptions) MUST be in Portuguese (Brazil)."
     : "All content must be in English.";
 
-  // Shared Instructions
-  let speciesImageInstruction = config.includeSpeciesImages
-    ? "For each entity, provide a valid, DIRECT public URL to an image file (must end in .jpg, .jpeg, or .png) representing the species. The URL must point directly to the image binary, not a landing page."
-    : "Leave `imageUrl` empty for entities.";
+  // NOTE: Images are now fetched via APIs (iNaturalist, Wikipedia), so we don't ask the AI for URLs
+  const scientificNameInstruction = "For biological entities, ALWAYS provide the scientific binomial name (e.g., 'Panthera leo', 'Quercus robur'). This is REQUIRED for accurate image lookup.";
 
   let featureImageInstruction = config.includeFeatureImages
-    ? "For each feature, provide a valid, DIRECT public URL to an image file (must end in .jpg, .jpeg, or .png) illustrating the trait. The URL must point directly to the image binary, not a landing page."
+    ? "For each feature, provide a valid, DIRECT public URL to an image file illustrating the trait if available."
     : "Leave `imageUrl` empty for features.";
 
   let linkInstruction = config.includeLinks
@@ -204,11 +437,11 @@ export const buildPromptData = (config: AIConfig): PromptData => {
       1. You must extract **EVERY SINGLE** species/entity found in the text. DO NOT truncate the list.
       2. **FILTER**: ${filterInstruction}
       3. **DETAIL**: ${detailInstruction}
-      4. **MEDIA**: 
-         - Species Images: ${speciesImageInstruction}
+      4. **SCIENTIFIC NAMES**: ${scientificNameInstruction}
+      5. **MEDIA**: 
          - Feature Images: ${featureImageInstruction}
          - External Links: ${linkInstruction}
-      5. ${langInstruction}
+      6. ${langInstruction}
       
       **Format**: Return valid JSON.
       **IMPORTANT**: Do not include markdown code fences (\`\`\`json ... \`\`\`). Return raw JSON only. Ensure all keys and string values are properly escaped.
@@ -219,7 +452,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
       
       - Project Name: Derive from document title.
       - Description: Summary of content.
-      - Entities: Extract ALL entities found.
+      - Entities: Extract ALL entities found. Include scientific names for accurate image lookup.
       - Features: Extract distinctive traits based on the focus setting.
       - Matrix: Map traits to entities.
       
@@ -276,14 +509,14 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     5.  **Quantity**: Generate exactly or close to the requested number of entities and features.
     6.  **Focus**: ${focusInstruction}
     7.  **Detail Level**: ${detailInstruction}
-    8.  **Media**: 
-        - Species Images: ${speciesImageInstruction}
+    8.  **SCIENTIFIC NAMES**: ${scientificNameInstruction}
+    9.  **MEDIA**: 
         - Feature Images: ${featureImageInstruction}
         - External Links: ${linkInstruction}
 
     Output Requirements:
     1.  List of distinctive features. Each feature must have 2+ states.
-    2.  List of entities.
+    2.  List of entities with their scientific binomial names.
     3.  Matrix: Assign correct states.
     4.  **Scientific Accuracy**: Ensure traits are factual.
 
@@ -302,6 +535,8 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     - Target Number of Features: ${config.featureCount}
     - Feature Focus: ${config.featureFocus}
     - Complexity Level: ${config.detailLevel}/3
+    
+    IMPORTANT: For each entity, you MUST provide the scientificName field with the correct binomial nomenclature (e.g., "Panthera leo" for Lion).
 
     Ensure the features allow for effective separation of these entities.
   `;
@@ -317,7 +552,8 @@ export const buildPromptData = (config: AIConfig): PromptData => {
 export const generateKeyFromTopic = async (
   config: AIConfig,
   apiKey: string,
-  onPromptGenerated?: (fullPrompt: string) => void
+  onPromptGenerated?: (fullPrompt: string) => void,
+  onImageProgress?: (current: number, total: number, entityName: string) => void
 ): Promise<Project> => {
   if (!apiKey) throw new Error("API Key is missing");
 
@@ -334,7 +570,34 @@ export const generateKeyFromTopic = async (
   // Determine content payload (Simple text or Parts array for files)
   const contents = parts ? parts : prompt;
 
-  return await callGemini(ai, config.model, contents, systemInstruction, schema);
+  // Generate the key structure (without reliable images yet)
+  const project = await callGemini(ai, config.model, contents, systemInstruction, schema);
+
+  // Now fetch real images from iNaturalist/Wikipedia APIs
+  if (config.includeSpeciesImages && project.entities.length > 0) {
+    const entitiesToFetch = project.entities.map(e => ({
+      name: e.name,
+      // Use scientificName from AI response (stored in entity), or try to extract from name
+      scientificName: (e as any).scientificName || extractScientificName(e.name) || e.name
+    }));
+    
+    const imageMap = await fetchImagesForEntities(
+      entitiesToFetch,
+      config.language,
+      onImageProgress
+    );
+    
+    // Update entities with fetched images, remove temporary scientificName field
+    project.entities = project.entities.map(entity => {
+      const { scientificName, ...cleanEntity } = entity as any;
+      return {
+        ...cleanEntity,
+        imageUrl: imageMap.get(entity.name) || getPlaceholderImage(entity.name)
+      };
+    });
+  }
+
+  return project;
 };
 
 export const generateKeyFromCustomPrompt = async (
@@ -434,17 +697,20 @@ async function callGemini(
         }
       });
 
-      // Simple URL validation
-      const rawUrl = e.imageUrl ? e.imageUrl.trim() : "";
-      const isValidUrl = rawUrl.startsWith("http");
+      // scientificName for later image fetching (not stored permanently in Entity)
+      const scientificName = e.scientificName || extractScientificName(e.name) || e.name;
+
+      // Placeholder URL - will be replaced by real API fetched images in generateKeyFromTopic
+      const placeholderUrl = getPlaceholderImage(e.name);
 
       const rawLinks = Array.isArray(e.links) ? e.links : [];
 
       return {
         id: generateId(),
         name: e.name,
+        scientificName: scientificName, // Store for image fetching
         description: e.description,
-        imageUrl: isValidUrl ? rawUrl : `https://picsum.photos/seed/${encodeURIComponent(e.name)}/400/300`,
+        imageUrl: placeholderUrl, // Will be replaced with real image
         links: rawLinks.map((l: any) => ({
           id: generateId(),
           label: l.label || "Link",

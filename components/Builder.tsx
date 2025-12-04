@@ -515,6 +515,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     detailLevel: 2
   });
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generatingMessage, setGeneratingMessage] = useState<string>(''); // Progress message during generation
   const [showAiModal, setShowAiModal] = useState(false);
   const [aiMode, setAiMode] = useState<AiMode>('TOPIC');
   const [importedFile, setImportedFile] = useState<File | null>(null);
@@ -799,6 +800,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       return;
     }
     setIsGenerating(true);
+    setGeneratingMessage(strings.generating);
     try {
       let config = { ...aiConfig };
 
@@ -815,13 +817,23 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         config.importedFile = undefined;
       }
 
-      // Pass callback to receive prompt text and copy it
-      const generatedProject = await generateKeyFromTopic(config, apiKey, (fullPrompt) => {
-        navigator.clipboard.writeText(fullPrompt).then(() => {
-          // Optional: You could show a small toast here if desired
-          console.log("Prompt copied");
-        }).catch(err => console.error("Could not copy prompt", err));
-      });
+      // Pass callbacks to receive prompt text and image fetch progress
+      const generatedProject = await generateKeyFromTopic(
+        config, 
+        apiKey, 
+        (fullPrompt) => {
+          navigator.clipboard.writeText(fullPrompt).then(() => {
+            console.log("Prompt copied");
+          }).catch(err => console.error("Could not copy prompt", err));
+        },
+        // Image fetch progress callback
+        (current, total, entityName) => {
+          const msg = aiConfig.language === 'pt' 
+            ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
+            : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
+          setGeneratingMessage(msg);
+        }
+      );
 
       setProject(generatedProject);
       setShowAiModal(false);
@@ -832,6 +844,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       alert(strings.errGen);
     } finally {
       setIsGenerating(false);
+      setGeneratingMessage('');
     }
   };
 
@@ -2700,7 +2713,7 @@ OUTPUT: Return a single merged JSON identification key with:
 
               {isGenerating && (
                 <div className="bg-amber-50 text-amber-700 p-3 rounded-lg text-sm flex items-center justify-center gap-2">
-                  <Loader2 className="animate-spin" size={16} /> {aiMode === 'IMPORT' ? strings.analyzing : strings.generating}
+                  <Loader2 className="animate-spin" size={16} /> {generatingMessage || (aiMode === 'IMPORT' ? strings.analyzing : strings.generating)}
                 </div>
               )}
             </div>
@@ -2800,7 +2813,7 @@ OUTPUT: Return a single merged JSON identification key with:
                 className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
                 disabled={isGenerating}
               >
-                {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {strings.generating}</> : <>{strings.generate}</>}
+                {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
               </button>
             </div>
           </div>
