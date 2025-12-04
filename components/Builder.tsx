@@ -1891,16 +1891,47 @@ For each required feature above:
       // Check if ONLY fillGaps is selected (specialized prompt for better results)
       const onlyFillGaps = refineOptions.fillGaps && !refineOptions.improveDescriptions && !refineOptions.addFeatures && refineOptions.refineRequiredFeatures.length === 0;
       
+      // Helper to get valid state IDs for a feature
+      const getValidStateIds = (feature: Feature): Set<string> => new Set(feature.states.map(s => s.id));
+      
+      // Clean up invalid trait IDs from entities before processing
+      // This fixes issues where traits were saved with incorrect IDs from previous AI responses
+      const cleanedProject = {
+        ...project,
+        entities: project.entities.map(entity => {
+          const cleanedTraits: Record<string, string[]> = {};
+          for (const [featureId, stateIds] of Object.entries(entity.traits)) {
+            const feature = project.features.find(f => f.id === featureId);
+            if (feature) {
+              const validIds = getValidStateIds(feature);
+              const validTraits = stateIds.filter(sid => validIds.has(sid));
+              if (validTraits.length > 0) {
+                cleanedTraits[featureId] = validTraits;
+              }
+            }
+          }
+          return { ...entity, traits: cleanedTraits };
+        })
+      };
+      
+      // Use cleaned project for gap analysis
+      const projectForAnalysis = cleanedProject;
+      // Also use cleaned JSON for the prompt to avoid confusing the AI with invalid IDs
+      const cleanedProjectJson = JSON.stringify(cleanedProject, null, 2);
+
       if (onlyFillGaps) {
         // Build detailed gap analysis for focused prompt
-        const featureNames = project.features.map(f => f.name);
+        const featureNames = projectForAnalysis.features.map(f => f.name);
         const entitiesWithGaps: { name: string; missingFeatures: string[] }[] = [];
         
-        project.entities.forEach(entity => {
+        projectForAnalysis.entities.forEach(entity => {
           const missingFeatures: string[] = [];
-          project.features.forEach(feature => {
-            const hasTraits = entity.traits[feature.id] && entity.traits[feature.id].length > 0;
-            if (!hasTraits) {
+          projectForAnalysis.features.forEach(feature => {
+            const traitIds = entity.traits[feature.id] || [];
+            // Check if traits exist AND if at least one trait ID is a valid state ID for this feature
+            const validStateIds = feature.states.map(s => s.id);
+            const hasValidTraits = traitIds.length > 0 && traitIds.some(tid => validStateIds.includes(tid));
+            if (!hasValidTraits) {
               missingFeatures.push(feature.name);
             }
           });
@@ -1911,7 +1942,7 @@ For each required feature above:
         
         if (entitiesWithGaps.length === 0) {
           // No gaps found - inform user
-          refinePrompt = `No missing trait data found. All ${project.entities.length} entities have assignments for all ${project.features.length} features.`;
+          refinePrompt = `No missing trait data found. All ${projectForAnalysis.entities.length} entities have assignments for all ${projectForAnalysis.features.length} features.`;
         } else {
           // Create focused prompt for filling gaps
           refinePrompt = `
@@ -1922,21 +1953,21 @@ You are an expert taxonomist. Your ONLY task is to FILL IN MISSING TRAIT DATA fo
 ═══════════════════════════════════════════════════════════════════════
 
 CURRENT KEY STRUCTURE:
-- Project: "${project.name}"
-- Total Entities: ${project.entities.length}
-- Total Features: ${project.features.length}
+- Project: "${projectForAnalysis.name}"
+- Total Entities: ${projectForAnalysis.entities.length}
+- Total Features: ${projectForAnalysis.features.length}
 - Features: ${featureNames.join(', ')}
 
-FEATURES WITH THEIR STATES:
-${project.features.map(f => `• ${f.name}: [${f.states.map(s => s.label).join(', ')}]`).join('\n')}
+FEATURES WITH THEIR STATES (USE ONLY THESE STATE IDs):
+${projectForAnalysis.features.map(f => `• ${f.name} (ID: ${f.id}):\n${f.states.map(s => `    - "${s.label}" (ID: ${s.id})`).join('\n')}`).join('\n')}
 
 ═══════════════════════════════════════════════════════════════════════
 ENTITIES WITH MISSING DATA (${entitiesWithGaps.length} entities need fixes):
 ═══════════════════════════════════════════════════════════════════════
 ${entitiesWithGaps.map((e, i) => `${i + 1}. "${e.name}" → MISSING: ${e.missingFeatures.join(', ')}`).join('\n')}
 
-CURRENT KEY (JSON):
-${projectJson}
+CURRENT KEY (JSON - with invalid traits already removed):
+${cleanedProjectJson}
 
 ═══════════════════════════════════════════════════════════════════════
 TASK: Fill in the missing trait assignments listed above.
