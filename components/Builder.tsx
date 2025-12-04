@@ -601,12 +601,16 @@ const t = {
  * - Existing scientificName and family
  * This prevents AI from overwriting valuable user data with mockups/placeholders
  */
-const mergeProjectsPreservingData = (newProject: Project, existingProject: Project): Project => {
+const mergeProjectsPreservingData = (newProject: Project, existingProject: Project, preserveAllExisting: boolean = true): Project => {
   // Create lookup maps for existing data
   const existingEntitiesById = new Map(existingProject.entities.map(e => [e.id, e]));
   const existingEntitiesByName = new Map(existingProject.entities.map(e => [e.name.toLowerCase().trim(), e]));
   const existingFeaturesById = new Map(existingProject.features.map(f => [f.id, f]));
   const existingFeaturesByName = new Map(existingProject.features.map(f => [f.name.toLowerCase().trim(), f]));
+
+  // Track which existing entities were matched
+  const matchedExistingIds = new Set<string>();
+  const matchedExistingNames = new Set<string>();
 
   // Helper to check if URL is a placeholder/mockup
   const isPlaceholderUrl = (url: string | undefined): boolean => {
@@ -623,11 +627,17 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return placeholderPatterns.some(p => url.includes(p));
   };
 
-  // Merge entities
+  // Merge entities from new project with existing data
   const mergedEntities = newProject.entities.map(newEntity => {
     // Try to find existing entity by ID first, then by name
     const existingEntity = existingEntitiesById.get(newEntity.id) 
       || existingEntitiesByName.get(newEntity.name.toLowerCase().trim());
+
+    if (existingEntity) {
+      // Mark as matched
+      matchedExistingIds.add(existingEntity.id);
+      matchedExistingNames.add(existingEntity.name.toLowerCase().trim());
+    }
 
     if (!existingEntity) {
       // New entity, keep as is
@@ -655,10 +665,32 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     };
   });
 
+  // CRITICAL: Add back existing entities that were NOT included in new project
+  // This prevents data loss when AI truncates or omits entities
+  if (preserveAllExisting) {
+    const missingEntities = existingProject.entities.filter(e => 
+      !matchedExistingIds.has(e.id) && !matchedExistingNames.has(e.name.toLowerCase().trim())
+    );
+    
+    if (missingEntities.length > 0) {
+      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingEntities.length} entities. Re-adding them to prevent data loss.`);
+      mergedEntities.push(...missingEntities);
+    }
+  }
+
+  // Track matched features
+  const matchedFeatureIds = new Set<string>();
+  const matchedFeatureNames = new Set<string>();
+
   // Merge features (similar logic)
   const mergedFeatures = newProject.features.map(newFeature => {
     const existingFeature = existingFeaturesById.get(newFeature.id)
       || existingFeaturesByName.get(newFeature.name.toLowerCase().trim());
+
+    if (existingFeature) {
+      matchedFeatureIds.add(existingFeature.id);
+      matchedFeatureNames.add(existingFeature.name.toLowerCase().trim());
+    }
 
     if (!existingFeature) {
       return newFeature;
@@ -672,6 +704,18 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         : (newFeature.imageUrl || existingFeature.imageUrl),
     };
   });
+
+  // Add back missing features (for REFINE/CLEAN actions where features might be accidentally removed)
+  if (preserveAllExisting) {
+    const missingFeatures = existingProject.features.filter(f => 
+      !matchedFeatureIds.has(f.id) && !matchedFeatureNames.has(f.name.toLowerCase().trim())
+    );
+    
+    if (missingFeatures.length > 0) {
+      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingFeatures.length} features. Re-adding them to prevent data loss.`);
+      mergedFeatures.push(...missingFeatures);
+    }
+  }
 
   return {
     ...newProject,
@@ -1564,6 +1608,8 @@ Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0)
       const filterInstructions = expandFilters.length > 0 
         ? `\nTAXONOMIC & GEOGRAPHIC FILTERS (MANDATORY):\n${expandFilters.map((f, i) => `${i + 1}. ${f}`).join('\n')}\n`
         : '';
+
+      const keepExistingEntities = refineOptions.keepExisting;
       
       refinePrompt = `
 You are an expert taxonomist. I have an existing identification key that I want to EXPAND with more entities.
@@ -1571,18 +1617,27 @@ You are an expert taxonomist. I have an existing identification key that I want 
 CURRENT KEY (JSON):
 ${projectJson}
 
+${keepExistingEntities ? `═══════════════════════════════════════════════════════════════════════
+⚠️ CRITICAL: PRESERVE ALL ${project.entities.length} EXISTING ENTITIES + ADD ${refineOptions.expandCount} NEW ONES
+═══════════════════════════════════════════════════════════════════════
+
+EXISTING ENTITIES TO PRESERVE (count: ${project.entities.length}):
+${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
+` : ''}
 TASK: Add ${refineOptions.expandCount} NEW entities (species/taxa) to this key.
 ${filterInstructions}
 CRITICAL RULES:
 1. DO NOT repeat any of the existing ${project.entities.length} entities. Each new entity MUST be unique.
 2. New entities should be taxonomically related or similar to existing ones (same family/genus/habitat).
-3. ${refineOptions.keepExisting ? 'PRESERVE all existing entities in the output.' : 'Replace existing entities with new ones.'}
+3. ${keepExistingEntities ? `⚠️ PRESERVE ALL ${project.entities.length} existing entities in the output - MANDATORY.` : 'Replace existing entities with new ones.'}
 4. ${refineOptions.addFeatures ? 'You MAY add 1-3 new discriminating features if needed to distinguish new species.' : 'Use ONLY the existing features.'}
 5. For each new entity, assign appropriate trait values using the existing feature states.
 6. Maintain the same level of detail and language (${language === 'pt' ? 'Portuguese' : 'English'}).
 ${expandFilters.length > 0 ? '7. STRICTLY RESPECT all taxonomic and geographic filters above - do NOT add species outside the specified scope.' : ''}
 
-OUTPUT: Return a complete JSON with the expanded key including all entities (existing + new).
+${keepExistingEntities ? `VERIFICATION: Your output MUST contain exactly ${project.entities.length + refineOptions.expandCount} entities (${project.entities.length} existing + ${refineOptions.expandCount} new). Count them before returning.` : ''}
+
+OUTPUT: Return a complete JSON with ${keepExistingEntities ? `ALL ${project.entities.length} existing entities + ${refineOptions.expandCount} new entities` : `${refineOptions.expandCount} new entities`}.
 `;
     } else if (refineAction === 'REFINE') {
       // Build required features instruction
@@ -1602,21 +1657,31 @@ You are an expert taxonomist. I have an existing identification key that I want 
 CURRENT KEY (JSON):
 ${projectJson}
 
-TASK: Improve and refine this identification key.
+═══════════════════════════════════════════════════════════════════════
+⚠️ CRITICAL: THIS KEY HAS ${project.entities.length} ENTITIES - YOU MUST RETURN ALL ${project.entities.length} ENTITIES
+═══════════════════════════════════════════════════════════════════════
+
+ENTITY LIST (preserve ALL of these - count: ${project.entities.length}):
+${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
+
+TASK: Improve and refine this identification key while PRESERVING ALL ENTITIES.
 ${requiredFeaturesInstr}
 IMPROVEMENTS TO MAKE:
 ${refineOptions.improveDescriptions ? '- Improve entity descriptions with more accurate biological information.' : ''}
 ${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments.' : ''}
 ${refineOptions.addFeatures ? '- Add 2-4 new discriminating features that help better distinguish between entities.' : ''}
 
-RULES:
-1. Keep all existing entities.
-2. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
-3. Ensure scientific accuracy.
-4. Make features more discriminating (each state should ideally apply to different subsets of entities).
-${refineOptions.refineRequiredFeatures.length > 0 ? '5. ALL required features listed above MUST be present in the final output.' : ''}
+ABSOLUTE RULES (VIOLATION = FAILURE):
+1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES - Do NOT remove, skip, or omit ANY entity
+2. Every single entity from the input MUST appear in the output
+3. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
+4. Ensure scientific accuracy.
+5. Make features more discriminating (each state should ideally apply to different subsets of entities).
+${refineOptions.refineRequiredFeatures.length > 0 ? '6. ALL required features listed above MUST be present in the final output.' : ''}
 
-OUTPUT: Return the improved JSON key.
+VERIFICATION: Your output MUST contain exactly ${project.entities.length} entities. Count them before returning.
+
+OUTPUT: Return the improved JSON key with ALL ${project.entities.length} entities.
 `;
     } else { // CLEAN
       refinePrompt = `
@@ -1625,7 +1690,14 @@ You are an expert taxonomist. I have an existing identification key that I want 
 CURRENT KEY (JSON):
 ${projectJson}
 
-TASK: Clean and optimize this identification key.
+═══════════════════════════════════════════════════════════════════════
+⚠️ CRITICAL: THIS KEY HAS ${project.entities.length} ENTITIES - YOU MUST RETURN ALL ${project.entities.length} ENTITIES
+═══════════════════════════════════════════════════════════════════════
+
+ENTITY LIST (preserve ALL of these - count: ${project.entities.length}):
+${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
+
+TASK: Clean and optimize this identification key while PRESERVING ALL ENTITIES.
 
 OPTIMIZATIONS TO MAKE:
 ${refineOptions.removeRedundant ? '- Remove redundant features (features where all entities have the same state).' : ''}
@@ -1633,12 +1705,15 @@ ${refineOptions.fixInconsistencies ? '- Fix any inconsistencies in trait assignm
 - Ensure each feature has meaningful variation across entities.
 - Remove empty or meaningless states.
 
-RULES:
-1. Keep all entities.
-2. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
-3. Only remove features that provide no discriminating value.
+ABSOLUTE RULES (VIOLATION = FAILURE):
+1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES - Do NOT remove, skip, or omit ANY entity
+2. Every single entity from the input MUST appear in the output
+3. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
+4. Only remove features that provide no discriminating value (NOT entities).
 
-OUTPUT: Return the cleaned JSON key.
+VERIFICATION: Your output MUST contain exactly ${project.entities.length} entities. Count them before returning.
+
+OUTPUT: Return the cleaned JSON key with ALL ${project.entities.length} entities.
 `;
     }
     
