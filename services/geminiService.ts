@@ -253,6 +253,38 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
 }
 
 /**
+ * Extract genus and species epithet from a scientific name (removes author citation)
+ * Examples:
+ *   "Inga vera Willd." → "Inga vera"
+ *   "Swartzia simplex (Sw.) Spreng." → "Swartzia simplex"
+ *   "Andira fraxinifolia Benth." → "Andira fraxinifolia"
+ */
+function extractBinomial(name: string): string {
+  if (!name) return '';
+  
+  // Remove any text in parentheses at the end (author abbreviations like "(Sw.)")
+  let cleaned = name.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+  
+  // Split by spaces and take only the first two words (genus + epithet)
+  const parts = cleaned.split(/\s+/);
+  
+  // If we have at least 2 parts, return genus + epithet
+  if (parts.length >= 2) {
+    // Check if second part looks like a species epithet (lowercase, no punctuation)
+    const genus = parts[0];
+    const epithet = parts[1];
+    
+    // Return only if epithet looks valid (starts lowercase, no author-like patterns)
+    if (/^[a-z]/.test(epithet) && !epithet.includes('.')) {
+      return `${genus} ${epithet}`;
+    }
+  }
+  
+  // Fallback: return original if we can't parse it
+  return name;
+}
+
+/**
  * Main function: Fetch a valid image URL using multi-source fallback strategy
  * Tries sources in order of reliability for biological/species content
  * Order: Biodiversity4All → iNaturalist → Wikipedia → Wikimedia Commons
@@ -262,10 +294,23 @@ async function fetchEntityImage(
   scientificName?: string,
   language: string = 'pt'
 ): Promise<string | null> {
-  // Build search terms - scientific name first (more precise), then common name
-  const searchTerms = [scientificName, entityName].filter(Boolean) as string[];
+  // Build search terms - clean scientific name first (genus + epithet only), then common name
+  const cleanScientificName = scientificName ? extractBinomial(scientificName) : null;
+  const cleanEntityName = extractBinomial(entityName);
   
-  for (const term of searchTerms) {
+  // Prioritize clean binomial, then try original names as fallback
+  const searchTerms = [
+    cleanScientificName,
+    cleanEntityName,
+    // Fallback to original names if cleaning changed them significantly
+    scientificName !== cleanScientificName ? scientificName : null,
+    entityName !== cleanEntityName ? entityName : null
+  ].filter(Boolean) as string[];
+  
+  // Remove duplicates
+  const uniqueTerms = [...new Set(searchTerms)];
+  
+  for (const term of uniqueTerms) {
     // 1. Try Biodiversity4All first (Portuguese/Iberian biodiversity - https://www.biodiversity4all.org/)
     const b4aImage = await fetchBiodiversity4AllImage(term);
     if (b4aImage) return b4aImage;

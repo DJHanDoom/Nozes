@@ -1893,7 +1893,8 @@ Return the validated project as a JSON object with the same structure.`;
       imageUrl: "",
       states: [{ id: Math.random().toString(36).substr(2, 9), label: language === 'pt' ? "Estado 1" : "State 1" }]
     };
-    setProject(p => ({ ...p, features: [...p.features, newFeature] }));
+    // Add to the beginning of the list so user can see and edit immediately
+    setProject(p => ({ ...p, features: [newFeature, ...p.features] }));
   };
 
   const addEntity = () => {
@@ -1904,7 +1905,8 @@ Return the validated project as a JSON object with the same structure.`;
       links: [],
       traits: {}
     };
-    setProject(p => ({ ...p, entities: [...p.entities, newEntity] }));
+    // Add to the beginning of the list so user can see and edit immediately
+    setProject(p => ({ ...p, entities: [newEntity, ...p.entities] }));
   };
 
   const toggleTrait = (entityId: string, featureId: string, stateId: string) => {
