@@ -51,6 +51,13 @@ export interface AIConfig {
   featureCount: number;
   geography: string;
   taxonomy: string;
+  // New taxonomy filters
+  taxonomyFamily: string;
+  taxonomyGenus: string;
+  // New geography filters
+  biome: string;
+  stateUF: string;
+  scope: 'global' | 'national' | 'regional';
   language: Language;
   featureFocus: FeatureFocus;
   includeSpeciesImages: boolean;

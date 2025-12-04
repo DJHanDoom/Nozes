@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -263,8 +263,17 @@ const t = {
     aiDesc: "Generate or Extract keys using Gemini AI.",
     topic: "Key Topic / Subject",
     topicPlace: "e.g. Freshwater Fishes, Garden Weeds",
-    geography: "Geography / Biome",
-    taxonomy: "Taxonomy Filter",
+    geography: "Geographic Scope",
+    taxonomyFamily: "Family",
+    taxonomyGenus: "Genus",
+    biome: "Biome",
+    stateUF: "State/Region",
+    scopeLabel: "Scope",
+    scopeGlobal: "Global",
+    scopeNational: "National (Brazil)",
+    scopeRegional: "Regional",
+    taxonomyFilters: "Taxonomic Filters",
+    geographyFilters: "Geographic Filters",
     numEntities: "Approx. # of Entities",
     numFeatures: "Approx. # of Features",
     requiredFeatures: "Required Features",
@@ -395,8 +404,17 @@ const t = {
     aiDesc: "Gere ou Extraia chaves usando Gemini IA.",
     topic: "Tópico / Assunto",
     topicPlace: "ex: Peixes de Água Doce, Ervas Daninhas",
-    geography: "Geografia / Bioma",
-    taxonomy: "Filtro Taxonômico",
+    geography: "Escopo Geográfico",
+    taxonomyFamily: "Família",
+    taxonomyGenus: "Gênero",
+    biome: "Bioma",
+    stateUF: "Estado/UF",
+    scopeLabel: "Escopo",
+    scopeGlobal: "Global",
+    scopeNational: "Nacional (Brasil)",
+    scopeRegional: "Regional",
+    taxonomyFilters: "Filtros Taxonômicos",
+    geographyFilters: "Filtros Geográficos",
     numEntities: "Aprox. # de Entidades",
     numFeatures: "Aprox. # de Características",
     requiredFeatures: "Características Obrigatórias",
@@ -514,6 +532,11 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     featureCount: 5,
     geography: "",
     taxonomy: "",
+    taxonomyFamily: "",
+    taxonomyGenus: "",
+    biome: "",
+    stateUF: "",
+    scope: "national",
     language: language,
     featureFocus: 'general',
     includeSpeciesImages: true,
@@ -2540,24 +2563,125 @@ OUTPUT: Return a single merged JSON identification key with:
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-500 uppercase mb-1.5">{strings.geography}</label>
+                  {/* Taxonomic Filters */}
+                  <div className="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
+                    <label className="block text-xs font-bold text-emerald-700 uppercase mb-2 flex items-center gap-1">
+                      <Leaf size={12} /> {strings.taxonomyFilters}
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyFamily}</label>
+                        <input
+                          value={aiConfig.taxonomyFamily}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyFamily: e.target.value }))}
+                          placeholder={language === 'pt' ? "ex: Fabaceae" : "e.g. Fabaceae"}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white"
+                          disabled={isGenerating}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyGenus}</label>
+                        <input
+                          value={aiConfig.taxonomyGenus}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyGenus: e.target.value }))}
+                          placeholder={language === 'pt' ? "ex: Inga" : "e.g. Inga"}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white"
+                          disabled={isGenerating}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Geographic Filters */}
+                  <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                    <label className="block text-xs font-bold text-blue-700 uppercase mb-2 flex items-center gap-1">
+                      <Globe size={12} /> {strings.geographyFilters}
+                    </label>
+                    
+                    {/* Scope selector */}
+                    <div className="flex gap-2 mb-3">
+                      {(['global', 'national', 'regional'] as const).map((scope) => (
+                        <button
+                          key={scope}
+                          onClick={() => setAiConfig(prev => ({ ...prev, scope }))}
+                          className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${
+                            aiConfig.scope === scope 
+                              ? 'bg-blue-600 text-white' 
+                              : 'bg-white text-slate-600 hover:bg-blue-100 border border-slate-200'
+                          }`}
+                          disabled={isGenerating}
+                        >
+                          {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.biome}</label>
+                        <select
+                          value={aiConfig.biome}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, biome: e.target.value }))}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                          disabled={isGenerating}
+                        >
+                          <option value="">{language === 'pt' ? "Todos os biomas" : "All biomes"}</option>
+                          <option value="Amazônia">Amazônia</option>
+                          <option value="Mata Atlântica">Mata Atlântica</option>
+                          <option value="Cerrado">Cerrado</option>
+                          <option value="Caatinga">Caatinga</option>
+                          <option value="Pampa">Pampa</option>
+                          <option value="Pantanal">Pantanal</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.stateUF}</label>
+                        <select
+                          value={aiConfig.stateUF}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, stateUF: e.target.value }))}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                          disabled={isGenerating}
+                        >
+                          <option value="">{language === 'pt' ? "Todos os estados" : "All states"}</option>
+                          <option value="AC">Acre (AC)</option>
+                          <option value="AL">Alagoas (AL)</option>
+                          <option value="AP">Amapá (AP)</option>
+                          <option value="AM">Amazonas (AM)</option>
+                          <option value="BA">Bahia (BA)</option>
+                          <option value="CE">Ceará (CE)</option>
+                          <option value="DF">Distrito Federal (DF)</option>
+                          <option value="ES">Espírito Santo (ES)</option>
+                          <option value="GO">Goiás (GO)</option>
+                          <option value="MA">Maranhão (MA)</option>
+                          <option value="MT">Mato Grosso (MT)</option>
+                          <option value="MS">Mato Grosso do Sul (MS)</option>
+                          <option value="MG">Minas Gerais (MG)</option>
+                          <option value="PA">Pará (PA)</option>
+                          <option value="PB">Paraíba (PB)</option>
+                          <option value="PR">Paraná (PR)</option>
+                          <option value="PE">Pernambuco (PE)</option>
+                          <option value="PI">Piauí (PI)</option>
+                          <option value="RJ">Rio de Janeiro (RJ)</option>
+                          <option value="RN">Rio Grande do Norte (RN)</option>
+                          <option value="RS">Rio Grande do Sul (RS)</option>
+                          <option value="RO">Rondônia (RO)</option>
+                          <option value="RR">Roraima (RR)</option>
+                          <option value="SC">Santa Catarina (SC)</option>
+                          <option value="SP">São Paulo (SP)</option>
+                          <option value="SE">Sergipe (SE)</option>
+                          <option value="TO">Tocantins (TO)</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    {/* Free text geography field */}
+                    <div className="mt-3">
+                      <label className="block text-xs font-medium text-slate-500 mb-1">{language === 'pt' ? "Região específica (opcional)" : "Specific region (optional)"}</label>
                       <input
                         value={aiConfig.geography}
                         onChange={(e) => setAiConfig(prev => ({ ...prev, geography: e.target.value }))}
-                        placeholder="e.g. Amazon"
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm"
-                        disabled={isGenerating}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-500 uppercase mb-1.5">{strings.taxonomy}</label>
-                      <input
-                        value={aiConfig.taxonomy}
-                        onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomy: e.target.value }))}
-                        placeholder="e.g. Felidae"
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm"
+                        placeholder={language === 'pt' ? "ex: Serra do Mar, Bacia do Rio Doce" : "e.g. Amazon Basin, Andes"}
+                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
                         disabled={isGenerating}
                       />
                     </div>

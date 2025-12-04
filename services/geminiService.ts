@@ -747,19 +747,49 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     ? `\n    MANDATORY FEATURES: The following features MUST be included in the key:\n    ${config.requiredFeatures.map((f, i) => `${i + 1}. ${f}`).join('\n    ')}\n`
     : '';
 
+  // Build geographic context from new fields
+  const buildGeographicContext = () => {
+    const parts: string[] = [];
+    if (config.scope === 'global') {
+      parts.push('Global scope');
+    } else if (config.scope === 'national') {
+      parts.push('Brazil (national)');
+    } else if (config.scope === 'regional') {
+      parts.push('Regional focus');
+    }
+    if (config.biome) parts.push(`Biome: ${config.biome}`);
+    if (config.stateUF) parts.push(`State/UF: ${config.stateUF}`);
+    if (config.geography) parts.push(`Region: ${config.geography}`);
+    return parts.length > 0 ? parts.join(', ') : 'Global';
+  };
+
+  // Build taxonomic context from new fields
+  const buildTaxonomicContext = () => {
+    const parts: string[] = [];
+    if (config.taxonomyFamily) parts.push(`Family: ${config.taxonomyFamily}`);
+    if (config.taxonomyGenus) parts.push(`Genus: ${config.taxonomyGenus}`);
+    if (config.taxonomy) parts.push(config.taxonomy); // Legacy field for compatibility
+    return parts.length > 0 ? parts.join(', ') : 'General';
+  };
+
   const prompt = `
     Create an identification key for: "${config.topic}".
     
     Constraints:
     - Language: ${config.language === 'pt' ? 'Portuguese' : 'English'}
-    - Geographic Scope: ${config.geography || "Global"}
-    - Taxonomic Context: ${config.taxonomy || "General"}
+    - Geographic Scope: ${buildGeographicContext()}
+    - Taxonomic Context: ${buildTaxonomicContext()}
     - Target Number of Entities: ${config.count}
     - Target Number of Features: ${config.featureCount}
     - Feature Focus: ${config.featureFocus}
     - Complexity Level: ${config.detailLevel}/3
     ${requiredFeaturesPrompt}
     IMPORTANT: For each entity, you MUST provide the scientificName field with the correct binomial nomenclature (e.g., "Panthera leo" for Lion).
+    ${config.taxonomyFamily ? `All entities MUST belong to the family ${config.taxonomyFamily}.` : ''}
+    ${config.taxonomyGenus ? `All entities MUST belong to the genus ${config.taxonomyGenus}.` : ''}
+    ${config.biome ? `All entities MUST occur in the ${config.biome} biome.` : ''}
+    ${config.stateUF ? `All entities MUST occur in ${config.stateUF}, Brazil.` : ''}
+    ${config.scope === 'national' ? 'All entities MUST occur in Brazil. Use Flora do Brasil 2020 as reference for valid names.' : ''}
 
     Ensure the features allow for effective separation of these entities.
   `;
