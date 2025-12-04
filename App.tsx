@@ -88,7 +88,7 @@ const App: React.FC = () => {
       help: "About & Help",
       helpContent: {
         intro: "NOZES is an intelligent platform for creating and using matrix identification keys, designed for biologists, students, and nature enthusiasts.",
-        step1Title: "1. Nozes AI Wizard",
+        step1Title: "1. NUTS AI Wizard",
         step1Desc: "Use the 'Nuts AI' button in the builder to automatically generate a key. You can describe a topic (e.g., 'Brazilian Cerrado Trees') OR upload a PDF/Image reference. The AI will study the material and create species, features, and the scoring matrix for you.",
         step2Title: "2. The Builder",
         step2Desc: "Refine your key manually. You can add new features, upload images for species, and adjust the matrix relationships between taxa and traits. Use the 'Export Project' button to save your work as a JSON file, which is essential for backups.",
@@ -444,7 +444,7 @@ const App: React.FC = () => {
               className="col-span-1 sm:col-span-2 flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl font-bold transition-all shadow-xl shadow-amber-900/50 hover:scale-[1.02] text-lg border-t border-amber-300/30 active:scale-95 animate-pulse hover:animate-none"
             >
               <Brain className="w-6 h-6" />
-              {language === 'pt' ? 'Nozes IA' : 'Nozes AI'}
+              {language === 'pt' ? 'Nozes IA' : 'NUTS AI'}
             </button>
 
             <button
