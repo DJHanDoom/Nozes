@@ -33,14 +33,16 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
         restart: "Restart", noMatches: "No matches found.", tryUnselecting: "Try unselecting some features.",
         potential: "potential matches", identified: "1 Entity identified", close: "Close",
         speciesDetails: "Species Details", morphology: "Morphology & Traits", resources: "Resources",
-        createdWith: "Created with NOZESia", viewResults: "View Results", excluded: "Excluded by selection"
+        createdWith: "Created with NOZESia", viewResults: "View Results", excluded: "Excluded by selection",
+        scientificName: "Scientific Name", family: "Family", taxonomy: "Taxonomy"
       },
       pt: {
         features: "Características", selected: "selecionado(s)", matches: "Compatíveis", discarded: "Descartados",
         restart: "Reiniciar", noMatches: "Nenhum resultado.", tryUnselecting: "Tente remover seleções.",
         potential: "matches potenciais", identified: "1 Entidade identificada", close: "Fechar",
         speciesDetails: "Detalhes da Espécie", morphology: "Morfologia & Características", resources: "Recursos Adicionais",
-        createdWith: "Criado com NOZESia", viewResults: "Ver Resultados", excluded: "Excluído pela seleção"
+        createdWith: "Criado com NOZESia", viewResults: "Ver Resultados", excluded: "Excluído pela seleção",
+        scientificName: "Nome Científico", family: "Família", taxonomy: "Taxonomia"
       }
     };
     const strings = t[lang];
@@ -98,6 +100,13 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
           return stateLabels ? \`<div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">\${f.name}</span><span class="font-medium text-slate-800">\${stateLabels}</span></div>\` : '';
         }).join('');
         const linksHTML = e.links && e.links.length > 0 ? \`<div class="mt-6"><h4 class="font-semibold text-slate-700 mb-3">\${strings.resources}</h4><div class="space-y-2">\${e.links.map(l => \`<a href="\${l.url}" target="_blank" class="flex items-center gap-2 text-emerald-600 hover:underline text-sm"><span>🔗</span>\${l.label}</a>\`).join('')}</div></div>\` : '';
+        const taxonomyHTML = (e.scientificName || e.family) ? \`
+          <div class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+            <h4 class="font-semibold text-emerald-800 mb-2 text-sm flex items-center gap-1">🧬 \${strings.taxonomy}</h4>
+            \${e.scientificName ? \`<div class="flex justify-between py-1"><span class="text-emerald-600 text-sm">\${strings.scientificName}</span><span class="font-medium text-emerald-800 italic">\${e.scientificName}</span></div>\` : ''}
+            \${e.family ? \`<div class="flex justify-between py-1"><span class="text-emerald-600 text-sm">\${strings.family}</span><span class="font-medium text-emerald-800">\${e.family}</span></div>\` : ''}
+          </div>
+        \` : '';
         entityModalHTML = \`
           <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this)closeEntity()">
             <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
@@ -107,7 +116,10 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
               </div>
               <div class="p-6 overflow-y-auto custom-scrollbar">
                 <h2 class="text-2xl font-bold text-slate-800 mb-1">\${e.name}</h2>
+                \${e.scientificName && e.scientificName !== e.name ? \`<p class="text-slate-500 italic mb-2">\${e.scientificName}</p>\` : ''}
+                \${e.family ? \`<span class="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full mb-3">\${e.family}</span>\` : ''}
                 \${e.description ? \`<p class="text-slate-600 mb-4">\${e.description}</p>\` : ''}
+                \${taxonomyHTML}
                 <div class="mt-4"><h4 class="font-semibold text-slate-700 mb-2">\${strings.morphology}</h4><div class="text-sm">\${traitsHTML}</div></div>
                 \${linksHTML}
               </div>
@@ -140,9 +152,11 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
           <div class="h-32 bg-slate-100 relative">
             \${e.imageUrl ? \`<img src="\${e.imageUrl}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\\\'w-full h-full flex items-center justify-center text-slate-300 text-4xl\\\\'>🌿</div>'">\` : '<div class="w-full h-full flex items-center justify-center text-slate-300 text-4xl">🌿</div>'}
             \${isDiscarded ? '<div class="absolute inset-0 bg-red-500/20 flex items-center justify-center"><span class="bg-red-500 text-white text-xs px-2 py-1 rounded">✕</span></div>' : ''}
+            \${e.family ? \`<span class="absolute top-2 left-2 bg-emerald-600/90 text-white text-[10px] px-1.5 py-0.5 rounded">\${e.family}</span>\` : ''}
           </div>
           <div class="p-3">
             <h4 class="font-semibold text-slate-800 text-sm truncate">\${e.name}</h4>
+            \${e.scientificName && e.scientificName !== e.name ? \`<p class="text-xs text-slate-400 italic truncate">\${e.scientificName}</p>\` : ''}
             \${e.description ? \`<p class="text-xs text-slate-500 mt-1 line-clamp-2">\${e.description}</p>\` : ''}
           </div>
         </div>
