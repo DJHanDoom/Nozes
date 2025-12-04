@@ -518,39 +518,175 @@ const repairTruncatedJson = (jsonStr: string): any => {
   } catch (e) {
     console.warn("JSON truncated. Attempting repair...");
 
-    // 1. Remove trailing comma if present
-    let repaired = jsonStr.trim().replace(/,$/, '');
-
-    // 2. Check for unterminated string
-    // Count quotes. If odd, add a closing quote.
-    const quoteCount = (repaired.match(/"/g) || []).length;
-    if (quoteCount % 2 !== 0) {
-      repaired += '"';
-    }
-
-    // 3. Close open brackets/braces
-    // This is a naive stack approach
-    const stack = [];
-    for (const char of repaired) {
-      if (char === '{') stack.push('}');
-      else if (char === '[') stack.push(']');
-      else if (char === '}' || char === ']') {
-        // If we match the top, pop. If not, we might be in a string (already handled above roughly) 
-        // or structure is complex. This is heuristic.
-        const last = stack[stack.length - 1];
-        if (last === char) stack.pop();
+    let repaired = jsonStr.trim();
+    
+    // Remove any trailing incomplete data that might cause issues
+    // Find the last complete entity or feature by looking for patterns
+    
+    // 1. If we're in the middle of a string, truncate to last complete string
+    // Find last properly closed string value
+    const lastCompleteStringMatch = repaired.match(/^([\s\S]*"[^"]*")\s*[,\]\}]/);
+    
+    // 2. Try multiple repair strategies
+    const strategies = [
+      // Strategy 1: Simple bracket closing
+      () => {
+        let str = repaired;
+        // Remove trailing comma
+        str = str.replace(/,\s*$/, '');
+        
+        // If in middle of a string, close it
+        const quotes = (str.match(/"/g) || []).length;
+        if (quotes % 2 !== 0) {
+          str += '"';
+        }
+        
+        // If in middle of a property (after colon with no value), add empty string
+        if (str.match(/:\s*$/)) {
+          str += '""';
+        }
+        
+        // Count and close brackets
+        const stack: string[] = [];
+        let inString = false;
+        let escaped = false;
+        
+        for (let i = 0; i < str.length; i++) {
+          const char = str[i];
+          
+          if (escaped) {
+            escaped = false;
+            continue;
+          }
+          
+          if (char === '\\') {
+            escaped = true;
+            continue;
+          }
+          
+          if (char === '"') {
+            inString = !inString;
+            continue;
+          }
+          
+          if (!inString) {
+            if (char === '{') stack.push('}');
+            else if (char === '[') stack.push(']');
+            else if (char === '}' || char === ']') {
+              if (stack.length > 0 && stack[stack.length - 1] === char) {
+                stack.pop();
+              }
+            }
+          }
+        }
+        
+        str += stack.reverse().join('');
+        return JSON.parse(str);
+      },
+      
+      // Strategy 2: Truncate to last complete entity
+      () => {
+        let str = repaired;
+        
+        // Find the last complete "traits": {...} or the last complete entity
+        const lastTraitsEnd = str.lastIndexOf('}]');
+        if (lastTraitsEnd > 0) {
+          str = str.substring(0, lastTraitsEnd + 2);
+        }
+        
+        // Close remaining brackets
+        const stack: string[] = [];
+        let inString = false;
+        let escaped = false;
+        
+        for (let i = 0; i < str.length; i++) {
+          const char = str[i];
+          if (escaped) { escaped = false; continue; }
+          if (char === '\\') { escaped = true; continue; }
+          if (char === '"') { inString = !inString; continue; }
+          if (!inString) {
+            if (char === '{') stack.push('}');
+            else if (char === '[') stack.push(']');
+            else if ((char === '}' || char === ']') && stack.length > 0 && stack[stack.length - 1] === char) {
+              stack.pop();
+            }
+          }
+        }
+        
+        str += stack.reverse().join('');
+        return JSON.parse(str);
+      },
+      
+      // Strategy 3: Find last complete entity by looking for pattern
+      () => {
+        let str = repaired;
+        
+        // Pattern for end of an entity: "traits": { ... } }
+        // Look for the last occurrence of }}, }] or similar complete patterns
+        const patterns = [
+          /\}\s*\}\s*\]\s*\}\s*$/,  // End of traits, entity, entities array, root
+          /\}\s*\]\s*\}\s*$/,       // End of entity, entities array, root
+          /\]\s*\}\s*$/,            // End of array, root
+        ];
+        
+        for (const pattern of patterns) {
+          const match = str.match(pattern);
+          if (match) {
+            return JSON.parse(str);
+          }
+        }
+        
+        // Try to find the last complete entity (ends with }})
+        const entityEndPattern = /\}\s*,?\s*$/;
+        let lastGoodPos = str.length;
+        
+        // Walk backwards to find a good cutoff point
+        for (let i = str.length - 1; i > str.length / 2; i--) {
+          const substr = str.substring(0, i);
+          try {
+            // Add closing brackets and try to parse
+            let test = substr.replace(/,\s*$/, '');
+            const quotes = (test.match(/"/g) || []).length;
+            if (quotes % 2 !== 0) test += '"';
+            
+            const stack: string[] = [];
+            let inStr = false;
+            for (const c of test) {
+              if (c === '"') inStr = !inStr;
+              if (!inStr) {
+                if (c === '{') stack.push('}');
+                else if (c === '[') stack.push(']');
+                else if ((c === '}' || c === ']') && stack.length && stack[stack.length-1] === c) stack.pop();
+              }
+            }
+            test += stack.reverse().join('');
+            
+            const parsed = JSON.parse(test);
+            if (parsed.entities && parsed.entities.length > 0) {
+              return parsed;
+            }
+          } catch {
+            // Continue trying
+          }
+        }
+        
+        throw new Error("Could not repair JSON");
+      }
+    ];
+    
+    // Try each strategy
+    for (let i = 0; i < strategies.length; i++) {
+      try {
+        const result = strategies[i]();
+        console.log(`JSON repair successful with strategy ${i + 1}`);
+        return result;
+      } catch (err) {
+        // Continue to next strategy
       }
     }
-
-    // Append missing closures in reverse order
-    repaired += stack.reverse().join('');
-
-    try {
-      return JSON.parse(repaired);
-    } catch (e2) {
-      console.error("Repair failed", e2);
-      throw e; // Original error
-    }
+    
+    console.error("All repair strategies failed");
+    throw e; // Original error
   }
 };
 

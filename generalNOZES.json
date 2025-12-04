@@ -1,107 +1,70 @@
-{
-     2   "Page": [
-     3     "Home",
-     4     "Builder",
-     5     "Player"
-     6   ],
-     7   "Tab": [
-     8     "General",
-     9     "Features",
-    10     "Entities",
-    11     "Matrix",
-    12     "Filters",
-    13     "Results",
-    14     "Topic",
-    15     "Import",
-    16     "Refine",
-    17     "Merge",
-    18     "About",
-    19     "Help"
-    20   ],
-    21   "Action": [
-    22     "Save",
-    23     "Edit",
-    24     "Delete",
-    25     "Create",
-    26     "Import",
-    27     "Export",
-    28     "Generate",
-    29     "Play",
-    30     "Reset",
-    31     "Cancel",
-    32     "Open",
-    33     "Expand",
-    34     "Refine",
-    35     "Clean",
-    36     "Validate",
-    37     "Merge",
-    38     "Copy",
-    39     "Upload"
-    40   ],
-    41   "Tool": [
-    42     "Gemini AI",
-    43     "Nozes IA",
-    44     "AI Wizard",
-    45     "Image Fetcher",
-    46     "File Uploader",
-    47     "Excel Exporter",
-    48     "HTML Exporter",
-    49     "JSON Exporter",
-    50     "Taxonomy Validator",
-    51     "Prompt Editor"
-    52   ],
-    53   "DomainData": [
-    54     "Project",
-    55     "Key",
-    56     "Entity",
-    57     "Species",
-    58     "Taxon",
-    59     "Feature",
-    60     "Trait",
-    61     "State",
-    62     "Matrix",
-    63     "AIConfig",
-    64     "Prompt",
-    65     "Taxonomy",
-    66     "Geography",
-    67     "Biome",
-    68     "Family",
-    69     "Genus",
-    70     "ScientificName",
-    71     "FeatureFocus",
-    72     "Idioms"
-    73   ],
-    74   "UIElement": [
-    75     "Button",
-    76     "Modal",
-    77     "Input",
-    78     "Textarea",
-    79     "Tab",
-    80     "Dropdown",
-    81     "Checkbox",
-    82     "Card",
-    83     "Grid",
-    84     "List",
-    85     "Icon",
-    86     "Tooltip",
-    87     "Slider"
-    88   ],
-    89   "VerbAction": [
-    90     "render",
-    91     "fetch",
-    92     "generate",
-    93     "extract",
-    94     "validate",
-    95     "parse",
-    96     "build",
-    97     "update",
-    98     "toggle",
-    99     "add",
-   100     "remove",
-   101     "set",
-   102     "handle",
-   103     "load",
-   104     "save",
-   105     "export"
-   106   ]
-   107 }
+ {
+    2   "id": "sample-project-123",
+    3   "name": "Exemplo de Frutas",
+    4   "description": "Uma chave de identificação simples para algumas
+      frutas comuns.",
+    5   "features": [
+    6     {
+    7       "id": "f1",
+    8       "name": "Cor da Casca",
+    9       "imageUrl": "",
+   10       "states": [
+   11         { "id": "s1", "label": "Vermelho" },
+   12         { "id": "s2", "label": "Amarelo" },
+   13         { "id": "s3", "label": "Verde" }
+   14       ]
+   15     },
+   16     {
+   17       "id": "f2",
+   18       "name": "Formato",
+   19       "imageUrl": "",
+   20       "states": [
+   21         { "id": "s4", "label": "Redondo" },
+   22         { "id": "s5", "label": "Alongado" }
+   23       ]
+   24     }
+   25   ],
+   26   "entities": [
+   27     {
+   28       "id": "e1",
+   29       "name": "Maçã",
+   30       "scientificName": "Malus domestica",
+   31       "family": "Rosaceae",
+   32       "description": "Uma fruta popular, geralmente doce e       
+      crocante.",
+   33       "imageUrl": "",
+   34       "links": [],
+   35       "traits": {
+   36         "f1": ["s1", "s3"],
+   37         "f2": ["s4"]
+   38       }
+   39     },
+   40     {
+   41       "id": "e2",
+   42       "name": "Banana",
+   43       "scientificName": "Musa acuminata",
+   44       "family": "Musaceae",
+   45       "description": "Uma fruta tropical alongada com casca amare
+      quando madura.",
+   46       "imageUrl": "",
+   47       "links": [],
+   48       "traits": {
+   49         "f1": ["s2", "s3"],
+   50         "f2": ["s5"]
+   51       }
+   52     },
+   53     {
+   54       "id": "e3",
+   55       "name": "Uva",
+   56       "scientificName": "Vitis vinifera",
+   57       "family": "Vitaceae",
+   58       "description": "Pequenas bagas que crescem em cachos.",    
+   59       "imageUrl": "",
+   60       "links": [],
+   61       "traits": {
+   62         "f1": ["s1", "s3"],
+   63         "f2": ["s4"]
+   64       }
+   65     }
+   66   ]
+   67 }
