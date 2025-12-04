@@ -709,13 +709,20 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return undefined;
   };
 
+  // Build a map of new feature IDs to their names for trait mapping
+  const newFeatureIdToName = new Map<string, string>();
+  newProject.features.forEach(f => {
+    newFeatureIdToName.set(f.id, f.name);
+  });
+
   // Map feature ID from new project to existing project ID
   const mapFeatureId = (newFeatureId: string): string | null => {
     // First check if it's already a valid existing ID
     if (existingFeaturesById.has(newFeatureId)) {
       return newFeatureId;
     }
-    // Otherwise, find matching feature by ID in new project and map to existing
+    
+    // Try to find matching feature by ID in new project and map to existing by name
     const newFeature = newProject.features.find(f => f.id === newFeatureId);
     if (newFeature) {
       const existingFeature = findMatchingFeature(newFeature);
@@ -723,33 +730,82 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         return existingFeature.id;
       }
     }
+    
+    // If we have the feature name from our map, try to find existing feature by name
+    const featureName = newFeatureIdToName.get(newFeatureId);
+    if (featureName) {
+      for (const existingFeature of existingProject.features) {
+        if (namesMatch(featureName, existingFeature.name)) {
+          console.log(`[mapFeatureId] Matched by name: "${featureName}" -> "${existingFeature.name}" (ID ${existingFeature.id})`);
+          return existingFeature.id;
+        }
+      }
+    }
+    
     return null;
   };
 
   // Map state ID from new project to existing project ID
-  const mapStateId = (newStateId: string, existingFeatureId: string): string | null => {
+  const mapStateId = (newStateId: string, existingFeatureId: string, newFeatureId: string): string | null => {
     const existingFeature = existingFeaturesById.get(existingFeatureId);
     if (!existingFeature) return null;
     
-    // First check if state ID exists in existing feature
-    if (existingFeature.states.some(s => s.id === newStateId)) {
+    // First check if state ID already exists in existing feature (direct match)
+    const directMatch = existingFeature.states.find(s => s.id === newStateId);
+    if (directMatch) {
       return newStateId;
     }
     
-    // Find the state in new project to get its label
-    const newFeature = newProject.features.find(f => f.states.some(s => s.id === newStateId));
+    // Find the state in new project to get its label for matching
+    const newFeature = newProject.features.find(f => f.id === newFeatureId);
     if (newFeature) {
       const newState = newFeature.states.find(s => s.id === newStateId);
       if (newState) {
-        // Find matching state by label in existing feature
+        // Find matching state by normalized label in existing feature
         const matchingState = existingFeature.states.find(s => 
           normalizeName(s.label) === normalizeName(newState.label)
         );
         if (matchingState) {
+          console.log(`[mapStateId] Matched by label: "${newState.label}" -> ID ${matchingState.id}`);
+          return matchingState.id;
+        }
+        
+        // Try partial match (label contains or is contained)
+        const partialMatch = existingFeature.states.find(s => {
+          const existingNorm = normalizeName(s.label);
+          const newNorm = normalizeName(newState.label);
+          return existingNorm.includes(newNorm) || newNorm.includes(existingNorm);
+        });
+        if (partialMatch) {
+          console.log(`[mapStateId] Partial match: "${newState.label}" -> "${partialMatch.label}" (ID ${partialMatch.id})`);
+          return partialMatch.id;
+        }
+        
+        // Try matching by index position (if state order is preserved)
+        const newStateIndex = newFeature.states.findIndex(s => s.id === newStateId);
+        if (newStateIndex >= 0 && newStateIndex < existingFeature.states.length) {
+          const indexMatch = existingFeature.states[newStateIndex];
+          console.log(`[mapStateId] Index match: position ${newStateIndex} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
+          return indexMatch.id;
+        }
+      }
+    }
+    
+    // Last resort: try to find by label similarity across all new features
+    for (const nf of newProject.features) {
+      const foundState = nf.states.find(s => s.id === newStateId);
+      if (foundState) {
+        const matchingState = existingFeature.states.find(s => 
+          normalizeName(s.label) === normalizeName(foundState.label)
+        );
+        if (matchingState) {
+          console.log(`[mapStateId] Cross-feature label match: "${foundState.label}" -> ID ${matchingState.id}`);
           return matchingState.id;
         }
       }
     }
+    
+    console.warn(`[mapStateId] No match found for state ID: ${newStateId} in feature ${existingFeatureId}`);
     return null;
   };
 
@@ -767,17 +823,14 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       // Map state IDs
       const mappedStateIds: string[] = [];
       for (const newStateId of newStateIds) {
-        const mappedStateId = mapStateId(newStateId, existingFeatureId);
+        const mappedStateId = mapStateId(newStateId, existingFeatureId, newFeatureId);
         if (mappedStateId) {
           mappedStateIds.push(mappedStateId);
-        } else {
-          console.warn(`[mergeTraits] Could not map state ID: ${newStateId} for feature ${existingFeatureId}`);
         }
       }
       
       if (mappedStateIds.length > 0) {
-        // Only update if we have valid mapped states AND existing doesn't have data for this feature
-        // OR if existing has no traits for this feature (filling gaps)
+        // Only update if existing doesn't have data for this feature (filling gaps)
         if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
           result[existingFeatureId] = mappedStateIds;
           console.log(`[mergeTraits] Filled gap: feature ${existingFeatureId} with states [${mappedStateIds.join(', ')}]`);
