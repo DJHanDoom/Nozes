@@ -8,6 +8,10 @@
 
 > **NOZES** (ou *Nuts AI*) é uma plataforma moderna e responsiva para a criação, edição e visualização de chaves de identificação biológica (chaves matriciais).
 
+Usar em > https://djhandoom.github.io/Nozes/
+
+Ou seguir instruções abaixo para rodar offline.
+
 Impulsionado pelo **Google Gemini 2.5 Flash**, o NOZES permite que biólogos, taxonomistas, estudantes e entusiastas gerem chaves complexas de identificação de espécies em segundos, apenas descrevendo um tópico.
 
 ---
