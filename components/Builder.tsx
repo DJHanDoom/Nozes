@@ -1,8 +1,215 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
+
+// Generate standalone HTML file with embedded player
+const generateStandaloneHTML = (project: Project, lang: Language): string => {
+  const projectJSON = JSON.stringify(project);
+  
+  return `<!DOCTYPE html>
+<html lang="${lang}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${project.name} - NOZESia Key</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-100 font-sans">
+  <div id="app"></div>
+  <script>
+    const project = ${projectJSON};
+    const lang = "${lang}";
+    const t = {
+      en: {
+        features: "Features", selected: "selected", matches: "Matches", discarded: "Discarded",
+        restart: "Restart", noMatches: "No matches found.", tryUnselecting: "Try unselecting some features.",
+        potential: "potential matches", identified: "1 Entity identified", close: "Close",
+        speciesDetails: "Species Details", morphology: "Morphology & Traits", resources: "Resources",
+        createdWith: "Created with NOZESia", viewResults: "View Results", excluded: "Excluded by selection"
+      },
+      pt: {
+        features: "Características", selected: "selecionado(s)", matches: "Compatíveis", discarded: "Descartados",
+        restart: "Reiniciar", noMatches: "Nenhum resultado.", tryUnselecting: "Tente remover seleções.",
+        potential: "matches potenciais", identified: "1 Entidade identificada", close: "Fechar",
+        speciesDetails: "Detalhes da Espécie", morphology: "Morfologia & Características", resources: "Recursos Adicionais",
+        createdWith: "Criado com NOZESia", viewResults: "Ver Resultados", excluded: "Excluído pela seleção"
+      }
+    };
+    const strings = t[lang];
+    
+    let selections = {};
+    let showDiscarded = false;
+    let viewingEntity = null;
+    let mobileTab = 'FILTERS';
+    
+    function toggleSelection(featureId, stateId) {
+      if (!selections[featureId]) selections[featureId] = [];
+      const idx = selections[featureId].indexOf(stateId);
+      if (idx >= 0) {
+        selections[featureId].splice(idx, 1);
+        if (selections[featureId].length === 0) delete selections[featureId];
+      } else {
+        selections[featureId].push(stateId);
+      }
+      render();
+    }
+    
+    function resetKey() { selections = {}; render(); }
+    function setMobileTab(tab) { mobileTab = tab; render(); }
+    function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
+    function viewEntity(entity) { viewingEntity = entity; render(); }
+    function closeEntity() { viewingEntity = null; render(); }
+    
+    function getFilteredEntities() {
+      const remaining = [], discarded = [];
+      project.entities.forEach(entity => {
+        let isMatch = true;
+        for (const [fid, sids] of Object.entries(selections)) {
+          const entityStates = entity.traits[fid] || [];
+          if (!sids.some(id => entityStates.includes(id))) { isMatch = false; break; }
+        }
+        if (isMatch) remaining.push(entity); else discarded.push(entity);
+      });
+      return { remaining, discarded };
+    }
+    
+    function getTotalSelections() {
+      return Object.values(selections).reduce((a, c) => a + c.length, 0);
+    }
+    
+    function render() {
+      const { remaining, discarded } = getFilteredEntities();
+      const totalSel = getTotalSelections();
+      
+      let entityModalHTML = '';
+      if (viewingEntity) {
+        const e = viewingEntity;
+        const traitsHTML = project.features.map(f => {
+          const stateIds = e.traits[f.id] || [];
+          const stateLabels = stateIds.map(sid => f.states.find(s => s.id === sid)?.label).filter(Boolean).join(', ');
+          return stateLabels ? \`<div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">\${f.name}</span><span class="font-medium text-slate-800">\${stateLabels}</span></div>\` : '';
+        }).join('');
+        const linksHTML = e.links && e.links.length > 0 ? \`<div class="mt-6"><h4 class="font-semibold text-slate-700 mb-3">\${strings.resources}</h4><div class="space-y-2">\${e.links.map(l => \`<a href="\${l.url}" target="_blank" class="flex items-center gap-2 text-emerald-600 hover:underline text-sm"><span>🔗</span>\${l.label}</a>\`).join('')}</div></div>\` : '';
+        entityModalHTML = \`
+          <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this)closeEntity()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+              <div class="relative h-48 sm:h-64 bg-slate-200 shrink-0">
+                \${e.imageUrl ? \`<img src="\${e.imageUrl}" class="w-full h-full object-cover" onerror="this.style.display='none'">\` : '<div class="w-full h-full flex items-center justify-center text-slate-400 text-6xl">🌿</div>'}
+                <button onclick="closeEntity()" class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 text-white rounded-full p-2">✕</button>
+              </div>
+              <div class="p-6 overflow-y-auto custom-scrollbar">
+                <h2 class="text-2xl font-bold text-slate-800 mb-1">\${e.name}</h2>
+                \${e.description ? \`<p class="text-slate-600 mb-4">\${e.description}</p>\` : ''}
+                <div class="mt-4"><h4 class="font-semibold text-slate-700 mb-2">\${strings.morphology}</h4><div class="text-sm">\${traitsHTML}</div></div>
+                \${linksHTML}
+              </div>
+            </div>
+          </div>
+        \`;
+      }
+      
+      const featuresHTML = project.features.map(f => {
+        const selStates = selections[f.id] || [];
+        return \`
+          <div class="bg-slate-50 rounded-xl p-4">
+            <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+              \${f.imageUrl ? \`<img src="\${f.imageUrl}" class="w-6 h-6 rounded object-cover">\` : ''}
+              \${f.name}
+              \${selStates.length > 0 ? \`<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">\${selStates.length}</span>\` : ''}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              \${f.states.map(s => {
+                const isSel = selStates.includes(s.id);
+                return \`<button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>\`;
+              }).join('')}
+            </div>
+          </div>
+        \`;
+      }).join('');
+      
+      const entityCard = (e, isDiscarded = false) => \`
+        <div onclick="viewEntity(project.entities.find(x=>x.id==='\${e.id}'))" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden border \${isDiscarded ? 'border-red-200 opacity-60' : 'border-slate-200 hover:border-emerald-300'}">
+          <div class="h-32 bg-slate-100 relative">
+            \${e.imageUrl ? \`<img src="\${e.imageUrl}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\\\'w-full h-full flex items-center justify-center text-slate-300 text-4xl\\\\'>🌿</div>'">\` : '<div class="w-full h-full flex items-center justify-center text-slate-300 text-4xl">🌿</div>'}
+            \${isDiscarded ? '<div class="absolute inset-0 bg-red-500/20 flex items-center justify-center"><span class="bg-red-500 text-white text-xs px-2 py-1 rounded">✕</span></div>' : ''}
+          </div>
+          <div class="p-3">
+            <h4 class="font-semibold text-slate-800 text-sm truncate">\${e.name}</h4>
+            \${e.description ? \`<p class="text-xs text-slate-500 mt-1 line-clamp-2">\${e.description}</p>\` : ''}
+          </div>
+        </div>
+      \`;
+      
+      const remainingHTML = remaining.length > 0 
+        ? remaining.map(e => entityCard(e)).join('')
+        : \`<div class="col-span-full text-center py-12 text-slate-500"><div class="text-4xl mb-3">🔍</div><p class="font-medium">\${strings.noMatches}</p><p class="text-sm">\${strings.tryUnselecting}</p></div>\`;
+      
+      const discardedHTML = discarded.length > 0 && showDiscarded
+        ? \`<div class="mt-6 pt-6 border-t"><h4 class="font-semibold text-slate-500 mb-4 flex items-center gap-2">❌ \${strings.discarded} (\${discarded.length})</h4><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">\${discarded.map(e => entityCard(e, true)).join('')}</div></div>\`
+        : '';
+      
+      document.getElementById('app').innerHTML = \`
+        <div class="min-h-screen flex flex-col">
+          <header class="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3">
+              <span class="bg-emerald-600 text-white text-xs px-2 py-1 rounded font-bold">KEY</span>
+              <h1 class="text-lg font-bold text-slate-800 truncate">\${project.name}</h1>
+            </div>
+            <button onclick="resetKey()" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg">🔄 \${strings.restart}</button>
+          </header>
+          
+          <div class="md:hidden flex border-b bg-white">
+            <button onclick="setMobileTab('FILTERS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 \${mobileTab==='FILTERS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              🔍 \${strings.features} \${totalSel>0?\`<span class="bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">\${totalSel}</span>\`:''}
+            </button>
+            <button onclick="setMobileTab('RESULTS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 \${mobileTab==='RESULTS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              📋 \${strings.matches} <span class="bg-slate-200 text-slate-700 text-xs px-1.5 py-0.5 rounded-full">\${remaining.length}</span>
+            </button>
+          </div>
+          
+          <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <div class="w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex-col h-full \${mobileTab==='FILTERS'?'flex':'hidden md:flex'}">
+              <div class="hidden md:block p-4 border-b bg-slate-50">
+                <h3 class="font-semibold text-slate-700 flex items-center gap-2">🔍 \${strings.features}</h3>
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">\${featuresHTML}</div>
+            </div>
+            
+            <div class="flex-1 flex flex-col h-full \${mobileTab==='RESULTS'?'flex':'hidden md:flex'}">
+              <div class="p-4 border-b bg-slate-50 flex justify-between items-center">
+                <div>
+                  <span class="font-semibold text-slate-700">\${remaining.length === 1 ? strings.identified : remaining.length + ' ' + strings.potential}</span>
+                </div>
+                \${discarded.length > 0 ? \`<button onclick="toggleDiscarded()" class="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1">\${showDiscarded?'🔼':'🔽'} \${strings.discarded} (\${discarded.length})</button>\` : ''}
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">\${remainingHTML}</div>
+                \${discardedHTML}
+              </div>
+            </div>
+          </div>
+          
+          <footer class="bg-white border-t px-4 py-2 text-center text-xs text-slate-400">
+            \${strings.createdWith} • <a href="https://djhandoom.github.io/nozes/" target="_blank" class="text-emerald-600 hover:underline">djhandoom.github.io/nozes</a>
+          </footer>
+        </div>
+        \${entityModalHTML}
+      \`;
+    }
+    
+    render();
+  <\/script>
+</body>
+</html>`;
+};
 
 interface BuilderProps {
   initialProject: Project | null;
@@ -14,6 +221,7 @@ interface BuilderProps {
   onOpenSettings?: (returnToAi?: boolean) => void;
   reopenAiModal?: boolean;
   onAiModalOpened?: () => void;
+  onProjectImported?: (project: Project) => void;
 }
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
@@ -30,6 +238,7 @@ const t = {
     open: "Open",
     export: "Export Project",
     exportXLSX: "Export XLSX",
+    exportHTML: "Export HTML",
     import: "Import Project",
     general: "General",
     features: "Features",
@@ -157,6 +366,7 @@ const t = {
     open: "Abrir",
     export: "Exportar Projeto",
     exportXLSX: "Exportar XLSX",
+    exportHTML: "Exportar HTML",
     import: "Importar Projeto",
     general: "Geral",
     features: "Características",
@@ -277,7 +487,7 @@ const t = {
   }
 };
 
-export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened }) => {
+export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened, onProjectImported }) => {
   const strings = t[language];
   // State
   const [project, setProject] = useState<Project>(initialProject || {
@@ -512,6 +722,18 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     writeFile(workbook, `${project.name.replace(/\s+/g, '_')}.xlsx`);
   };
 
+  // Export as standalone HTML
+  const exportHTML = () => {
+    const htmlContent = generateStandaloneHTML(project, language);
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${project.name.replace(/\s+/g, '_')}.html`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   const importJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     if (event.target.files && event.target.files[0]) {
@@ -520,7 +742,27 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         try {
           const parsed = JSON.parse(e.target?.result as string);
           if (parsed.name && parsed.features && parsed.entities) {
+            // Set project in editor
             setProject(parsed);
+            
+            // Also save to localStorage so it appears in load modals
+            const saved = localStorage.getItem('nozesia_projects');
+            let projectsList: Project[] = [];
+            if (saved) {
+              try {
+                projectsList = JSON.parse(saved);
+              } catch (err) {
+                console.error("Failed to parse projects", err);
+              }
+            }
+            // Remove existing version if exists, add new one to top
+            const updatedList = [parsed, ...projectsList.filter((p: Project) => p.id !== parsed.id)];
+            localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+            
+            // Notify parent to update its state
+            if (onProjectImported) {
+              onProjectImported(parsed);
+            }
           } else {
             alert("Invalid project file format.");
           }
@@ -1127,6 +1369,9 @@ OUTPUT: Return a single merged JSON identification key with:
             <button onClick={exportXLSX} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.exportXLSX}>
               <FileSpreadsheet size={14} /> <span className="hidden sm:inline">{strings.exportXLSX}</span>
             </button>
+            <button onClick={exportHTML} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.exportHTML}>
+              <FileCode size={14} /> <span className="hidden sm:inline">{strings.exportHTML}</span>
+            </button>
             <label className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white cursor-pointer" title={strings.import}>
               <Upload size={14} /> <span className="hidden sm:inline">{strings.import}</span>
               <input type="file" accept=".json" onChange={importJSON} className="hidden" />
@@ -1154,7 +1399,7 @@ OUTPUT: Return a single merged JSON identification key with:
 
       {/* Mobile Menu Dropdown */}
       {showMobileMenu && (
-        <div className="md:hidden bg-slate-800 text-slate-200 border-b border-slate-700 p-2 grid grid-cols-4 gap-2 text-xs font-medium z-20">
+        <div className="md:hidden bg-slate-800 text-slate-200 border-b border-slate-700 p-2 grid grid-cols-5 gap-2 text-xs font-medium z-20">
           <button onClick={() => { saveToLocal(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
             <Save size={18} /> {strings.save}
           </button>
@@ -1162,12 +1407,15 @@ OUTPUT: Return a single merged JSON identification key with:
             <FolderOpen size={18} /> {strings.open}
           </button>
           <button onClick={() => { exportJSON(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
-            <Download size={18} /> {strings.export}
+            <Download size={18} /> JSON
           </button>
           <button onClick={() => { exportXLSX(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
-            <FileSpreadsheet size={18} /> {strings.exportXLSX}
+            <FileSpreadsheet size={18} /> XLSX
           </button>
-          <label className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded cursor-pointer">
+          <button onClick={() => { exportHTML(); setShowMobileMenu(false) }} className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded">
+            <FileCode size={18} /> HTML
+          </button>
+          <label className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded cursor-pointer col-span-5">
             <Upload size={18} /> {strings.import}
             <input type="file" accept=".json" onChange={importJSON} className="hidden" />
           </label>
@@ -1229,7 +1477,17 @@ OUTPUT: Return a single merged JSON identification key with:
             <div className="p-4 md:p-8">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-800">{strings.definedFeatures}</h3>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-slate-800">{strings.definedFeatures}</h3>
+                    <div className="flex gap-2">
+                      <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">
+                        {project.features.length} {language === 'pt' ? 'car.' : 'feat.'}
+                      </span>
+                      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                        {project.features.reduce((acc, f) => acc + f.states.length, 0)} {language === 'pt' ? 'estados' : 'states'}
+                      </span>
+                    </div>
+                  </div>
                   <p className="text-xs md:text-sm text-slate-500">{strings.definedFeaturesDesc}</p>
                 </div>
                 <button onClick={addFeature} className="flex items-center gap-2 text-sm bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 shadow-md transition-all">
@@ -1322,7 +1580,12 @@ OUTPUT: Return a single merged JSON identification key with:
             <div className="p-4 md:p-8">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-800">{strings.manageEntities}</h3>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-slate-800">{strings.manageEntities}</h3>
+                    <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">
+                      {project.entities.length} {language === 'pt' ? 'entidades' : 'entities'}
+                    </span>
+                  </div>
                   <p className="text-xs md:text-sm text-slate-500">{strings.manageEntitiesDesc}</p>
                 </div>
                 <button onClick={addEntity} className="flex items-center gap-2 text-sm bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 shadow-md transition-all">

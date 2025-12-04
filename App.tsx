@@ -18,15 +18,7 @@ const App: React.FC = () => {
   const [apiKey, setApiKey] = useState<string>("");
 
   useEffect(() => {
-    // Load projects for modal
-    const saved = localStorage.getItem('nozesia_projects');
-    if (saved) {
-      try {
-        setSavedProjects(JSON.parse(saved));
-      } catch (e) { console.error("Failed to load local projects"); }
-    }
-
-    // Load settings
+    // Load settings on mount only
     const savedSettings = localStorage.getItem('nozesia_settings');
     if (savedSettings) {
       try {
@@ -36,6 +28,18 @@ const App: React.FC = () => {
       } catch (e) { console.error("Failed to load settings"); }
     }
   }, []);
+
+  // Reload projects whenever view changes to HOME or PLAYER (or on mount)
+  useEffect(() => {
+    if (view === 'HOME' || view === 'PLAYER') {
+      const saved = localStorage.getItem('nozesia_projects');
+      if (saved) {
+        try {
+          setSavedProjects(JSON.parse(saved));
+        } catch (e) { console.error("Failed to load local projects"); }
+      }
+    }
+  }, [view]);
 
   const saveSettings = () => {
     const trimmedModel = aiModel.trim();
@@ -340,6 +344,10 @@ const App: React.FC = () => {
           }}
           reopenAiModal={returnToAiModal && !showSettingsModal}
           onAiModalOpened={() => setReturnToAiModal(false)}
+          onProjectImported={(project) => {
+            // Update savedProjects state so load modals show the imported project
+            setSavedProjects(prev => [project, ...prev.filter(p => p.id !== project.id)]);
+          }}
         />
         {renderSettingsModal()}
       </>
@@ -552,6 +560,13 @@ const App: React.FC = () => {
 
                     <h4 className="text-lg font-bold text-slate-800 mt-8 border-t pt-4">🔗 Links e Contatos</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-slate-800 p-3 rounded-lg border border-slate-700 hover:border-emerald-400 transition-colors col-span-full">
+                        <strong className="block text-sm text-emerald-400 mb-1">🐙 Projeto no GitHub</strong>
+                        <a href="https://github.com/DJHanDoom/Nozes" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-300 font-medium flex items-center gap-2">
+                          github.com/DJHanDoom/Nozes
+                          <ExternalLink size={14} />
+                        </a>
+                      </div>
                       <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 hover:border-emerald-200 transition-colors">
                         <strong className="block text-sm text-emerald-600 mb-1">🌿Identificação Botânica</strong>
                         <a href="https://go.hotmart.com/G103222293V" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">Curso Online na Hotmart</a>
