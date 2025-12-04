@@ -600,6 +600,46 @@ const t = {
 };
 
 /**
+ * Normalize name for matching: lowercase, trim, remove accents/diacritics, collapse spaces
+ */
+const normalizeName = (name: string): string => {
+  return name
+    .toLowerCase()
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .replace(/\s+/g, ' '); // Collapse multiple spaces
+};
+
+/**
+ * Check if two names are similar enough to be considered the same entity
+ * Uses substring matching for cases where AI shortens/expands names
+ */
+const namesMatch = (name1: string, name2: string): boolean => {
+  const n1 = normalizeName(name1);
+  const n2 = normalizeName(name2);
+  
+  // Exact match
+  if (n1 === n2) return true;
+  
+  // One contains the other (for cases like "Eugenia uniflora" vs "Eugenia uniflora L.")
+  if (n1.includes(n2) || n2.includes(n1)) return true;
+  
+  // First significant word matches (for species names)
+  const words1 = n1.split(' ').filter(w => w.length > 2);
+  const words2 = n2.split(' ').filter(w => w.length > 2);
+  if (words1.length > 0 && words2.length > 0 && words1[0] === words2[0]) {
+    // If first word matches and at least 2 words match, consider it a match
+    const matchingWords = words1.filter(w => words2.includes(w));
+    if (matchingWords.length >= 2 || (matchingWords.length === 1 && Math.min(words1.length, words2.length) === 1)) {
+      return true;
+    }
+  }
+  
+  return false;
+};
+
+/**
  * Merge generated project with existing project data to preserve:
  * - Existing imageUrl (if not placeholder)
  * - Existing links
@@ -608,15 +648,21 @@ const t = {
  * This prevents AI from overwriting valuable user data with mockups/placeholders
  */
 const mergeProjectsPreservingData = (newProject: Project, existingProject: Project, preserveAllExisting: boolean = true): Project => {
+  console.log(`[mergeProjectsPreservingData] Starting merge: new=${newProject.entities.length} entities, existing=${existingProject.entities.length} entities`);
+  
+  // CRITICAL SAFETY CHECK: If AI returned significantly fewer entities, something went wrong
+  // Keep ALL existing entities and only merge data for matching ones
+  const significantDataLoss = newProject.entities.length < existingProject.entities.length * 0.5;
+  if (significantDataLoss) {
+    console.warn(`[mergeProjectsPreservingData] CRITICAL: AI returned ${newProject.entities.length} entities but existing has ${existingProject.entities.length}. Preserving ALL existing data.`);
+  }
+
   // Create lookup maps for existing data
   const existingEntitiesById = new Map(existingProject.entities.map(e => [e.id, e]));
-  const existingEntitiesByName = new Map(existingProject.entities.map(e => [e.name.toLowerCase().trim(), e]));
   const existingFeaturesById = new Map(existingProject.features.map(f => [f.id, f]));
-  const existingFeaturesByName = new Map(existingProject.features.map(f => [f.name.toLowerCase().trim(), f]));
 
   // Track which existing entities were matched
   const matchedExistingIds = new Set<string>();
-  const matchedExistingNames = new Set<string>();
 
   // Helper to check if URL is a placeholder/mockup
   const isPlaceholderUrl = (url: string | undefined): boolean => {
@@ -633,16 +679,44 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return placeholderPatterns.some(p => url.includes(p));
   };
 
+  // Find matching existing entity using flexible matching
+  const findMatchingEntity = (newEntity: Entity): Entity | undefined => {
+    // Try by ID first
+    if (existingEntitiesById.has(newEntity.id)) {
+      return existingEntitiesById.get(newEntity.id);
+    }
+    // Try by name with flexible matching
+    for (const existingEntity of existingProject.entities) {
+      if (namesMatch(newEntity.name, existingEntity.name)) {
+        return existingEntity;
+      }
+    }
+    return undefined;
+  };
+
+  // Find matching existing feature using flexible matching
+  const findMatchingFeature = (newFeature: Feature): Feature | undefined => {
+    // Try by ID first
+    if (existingFeaturesById.has(newFeature.id)) {
+      return existingFeaturesById.get(newFeature.id);
+    }
+    // Try by name with flexible matching
+    for (const existingFeature of existingProject.features) {
+      if (namesMatch(newFeature.name, existingFeature.name)) {
+        return existingFeature;
+      }
+    }
+    return undefined;
+  };
+
   // Merge entities from new project with existing data
   const mergedEntities = newProject.entities.map(newEntity => {
-    // Try to find existing entity by ID first, then by name
-    const existingEntity = existingEntitiesById.get(newEntity.id) 
-      || existingEntitiesByName.get(newEntity.name.toLowerCase().trim());
+    const existingEntity = findMatchingEntity(newEntity);
 
     if (existingEntity) {
       // Mark as matched
       matchedExistingIds.add(existingEntity.id);
-      matchedExistingNames.add(existingEntity.name.toLowerCase().trim());
+      console.log(`[mergeProjectsPreservingData] Matched: "${newEntity.name}" -> "${existingEntity.name}"`);
     }
 
     if (!existingEntity) {
@@ -653,6 +727,8 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     // Merge: preserve existing data if new data is placeholder/empty
     return {
       ...newEntity,
+      // ALWAYS preserve existing ID to maintain consistency
+      id: existingEntity.id,
       // Preserve imageUrl if existing has a real image and new has placeholder
       imageUrl: (!isPlaceholderUrl(existingEntity.imageUrl) && isPlaceholderUrl(newEntity.imageUrl))
         ? existingEntity.imageUrl
@@ -668,34 +744,32 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       // Preserve taxonomic data
       scientificName: newEntity.scientificName || existingEntity.scientificName,
       family: newEntity.family || existingEntity.family,
+      // IMPORTANT: Merge traits - keep existing traits and only add/update from new
+      traits: { ...existingEntity.traits, ...newEntity.traits },
     };
   });
 
   // CRITICAL: Add back existing entities that were NOT included in new project
   // This prevents data loss when AI truncates or omits entities
   if (preserveAllExisting) {
-    const missingEntities = existingProject.entities.filter(e => 
-      !matchedExistingIds.has(e.id) && !matchedExistingNames.has(e.name.toLowerCase().trim())
-    );
+    const missingEntities = existingProject.entities.filter(e => !matchedExistingIds.has(e.id));
     
     if (missingEntities.length > 0) {
-      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingEntities.length} entities. Re-adding them to prevent data loss.`);
+      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingEntities.length} entities. Re-adding them to prevent data loss:`);
+      missingEntities.forEach(e => console.warn(`  - "${e.name}" (ID: ${e.id})`));
       mergedEntities.push(...missingEntities);
     }
   }
 
   // Track matched features
   const matchedFeatureIds = new Set<string>();
-  const matchedFeatureNames = new Set<string>();
 
   // Merge features (similar logic)
   const mergedFeatures = newProject.features.map(newFeature => {
-    const existingFeature = existingFeaturesById.get(newFeature.id)
-      || existingFeaturesByName.get(newFeature.name.toLowerCase().trim());
+    const existingFeature = findMatchingFeature(newFeature);
 
     if (existingFeature) {
       matchedFeatureIds.add(existingFeature.id);
-      matchedFeatureNames.add(existingFeature.name.toLowerCase().trim());
     }
 
     if (!existingFeature) {
@@ -704,24 +778,29 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
 
     return {
       ...newFeature,
+      // ALWAYS preserve existing ID
+      id: existingFeature.id,
       // Preserve feature imageUrl if existing has real image
       imageUrl: (!isPlaceholderUrl(existingFeature.imageUrl) && isPlaceholderUrl(newFeature.imageUrl))
         ? existingFeature.imageUrl
         : (newFeature.imageUrl || existingFeature.imageUrl),
+      // Preserve states from existing if new doesn't have them
+      states: newFeature.states.length > 0 ? newFeature.states : existingFeature.states,
     };
   });
 
   // Add back missing features (for REFINE/CLEAN actions where features might be accidentally removed)
   if (preserveAllExisting) {
-    const missingFeatures = existingProject.features.filter(f => 
-      !matchedFeatureIds.has(f.id) && !matchedFeatureNames.has(f.name.toLowerCase().trim())
-    );
+    const missingFeatures = existingProject.features.filter(f => !matchedFeatureIds.has(f.id));
     
     if (missingFeatures.length > 0) {
-      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingFeatures.length} features. Re-adding them to prevent data loss.`);
+      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingFeatures.length} features. Re-adding them to prevent data loss:`);
+      missingFeatures.forEach(f => console.warn(`  - "${f.name}" (ID: ${f.id})`));
       mergedFeatures.push(...missingFeatures);
     }
   }
+
+  console.log(`[mergeProjectsPreservingData] Final result: ${mergedEntities.length} entities, ${mergedFeatures.length} features`);
 
   return {
     ...newProject,
