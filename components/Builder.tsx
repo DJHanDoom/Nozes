@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
-import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List } from 'lucide-react';
+import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -372,6 +372,17 @@ const t = {
     noProjectLoaded: "No project loaded. Create or load a project first.",
     entitiesCount: "entities",
     featuresCount: "features",
+    // Entity/Matrix Filters
+    filterEntities: "Filter Entities",
+    filterByFamily: "Filter by family",
+    filterByGenus: "Filter by genus",
+    filterByName: "Filter by name",
+    searchPlaceholder: "Search...",
+    allFamilies: "All families",
+    allGenera: "All genera",
+    clearFilters: "Clear filters",
+    showingEntities: "Showing",
+    ofEntities: "of",
     completePhotos: "Complete Photo Collection",
     completePhotosDesc: "Fill missing images with valid URLs",
     photoTargetEntities: "Entity Images",
@@ -549,6 +560,17 @@ const t = {
     noProjectLoaded: "Nenhum projeto carregado. Crie ou carregue um projeto primeiro.",
     entitiesCount: "entidades",
     featuresCount: "características",
+    // Entity/Matrix Filters
+    filterEntities: "Filtrar Entidades",
+    filterByFamily: "Filtrar por família",
+    filterByGenus: "Filtrar por gênero",
+    filterByName: "Filtrar por nome",
+    searchPlaceholder: "Buscar...",
+    allFamilies: "Todas as famílias",
+    allGenera: "Todos os gêneros",
+    clearFilters: "Limpar filtros",
+    showingEntities: "Exibindo",
+    ofEntities: "de",
     completePhotos: "Completar Acervo Fotográfico",
     completePhotosDesc: "Preencher imagens faltantes com URLs válidas",
     photoTargetEntities: "Imagens de Entidades",
@@ -809,9 +831,36 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return null;
   };
 
+  // Helper to get valid state IDs for a feature
+  const getValidStateIdsForFeature = (featureId: string): Set<string> => {
+    const feature = existingFeaturesById.get(featureId);
+    if (!feature) return new Set();
+    return new Set(feature.states.map(s => s.id));
+  };
+
+  // Clean invalid trait IDs from existing traits
+  const cleanExistingTraits = (traits: Record<string, string[]>): Record<string, string[]> => {
+    const cleaned: Record<string, string[]> = {};
+    for (const [featureId, stateIds] of Object.entries(traits)) {
+      // Only keep if featureId exists in existing project
+      if (existingFeaturesById.has(featureId)) {
+        const validStateIds = getValidStateIdsForFeature(featureId);
+        const validTraits = stateIds.filter(sid => validStateIds.has(sid));
+        if (validTraits.length > 0) {
+          cleaned[featureId] = validTraits;
+        }
+      }
+    }
+    return cleaned;
+  };
+
   // Merge traits from new entity to existing entity, mapping IDs correctly
   const mergeTraits = (newTraits: Record<string, string[]>, existingTraits: Record<string, string[]>): Record<string, string[]> => {
-    const result = { ...existingTraits };
+    // IMPORTANT: First clean existing traits to remove invalid IDs from previous failed merges
+    const cleanedExistingTraits = cleanExistingTraits(existingTraits);
+    const result = { ...cleanedExistingTraits };
+    
+    console.log(`[mergeTraits] Starting with ${Object.keys(cleanedExistingTraits).length} valid existing features (was ${Object.keys(existingTraits).length})`);
     
     for (const [newFeatureId, newStateIds] of Object.entries(newTraits)) {
       const existingFeatureId = mapFeatureId(newFeatureId);
@@ -830,10 +879,12 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       }
       
       if (mappedStateIds.length > 0) {
-        // Only update if existing doesn't have data for this feature (filling gaps)
+        // Only update if existing doesn't have VALID data for this feature (filling gaps)
         if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
           result[existingFeatureId] = mappedStateIds;
           console.log(`[mergeTraits] Filled gap: feature ${existingFeatureId} with states [${mappedStateIds.join(', ')}]`);
+        } else {
+          console.log(`[mergeTraits] Skipping feature ${existingFeatureId} - already has valid data: [${result[existingFeatureId].join(', ')}]`);
         }
       }
     }
@@ -1025,6 +1076,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [mergeKey2, setMergeKey2] = useState<Project | null>(null);
   const [mergeStrategy, setMergeStrategy] = useState<'union' | 'intersection' | 'primary'>('union');
 
+  // Entity/Matrix Filter State
+  const [entityFilter, setEntityFilter] = useState({
+    searchText: '',
+    family: '',
+    genus: '',
+    scientificName: ''
+  });
+
   // Required Features State (for AI generation)
   const [requiredFeatures, setRequiredFeatures] = useState<string[]>([]);
   const [showRequiredFeaturesDropdown, setShowRequiredFeaturesDropdown] = useState(false);
@@ -1179,6 +1238,70 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   useEffect(() => {
     setAiConfig(prev => ({ ...prev, language }));
   }, [language]);
+
+  // Compute unique families and genera from entities
+  const uniqueFamilies = React.useMemo(() => {
+    const families = new Set<string>();
+    project.entities.forEach(e => {
+      if (e.family && e.family.trim()) {
+        families.add(e.family.trim());
+      }
+    });
+    return Array.from(families).sort();
+  }, [project.entities]);
+
+  const uniqueGenera = React.useMemo(() => {
+    const genera = new Set<string>();
+    project.entities.forEach(e => {
+      // Extract genus from scientificName or name (first word)
+      const name = e.scientificName || e.name || '';
+      const genus = name.split(' ')[0];
+      if (genus && genus.trim() && /^[A-Z][a-z]+$/.test(genus)) {
+        genera.add(genus.trim());
+      }
+    });
+    return Array.from(genera).sort();
+  }, [project.entities]);
+
+  // Filter entities based on current filter settings
+  const filteredEntities = React.useMemo(() => {
+    return project.entities.filter(entity => {
+      // Filter by search text (name or scientificName)
+      if (entityFilter.searchText) {
+        const searchLower = entityFilter.searchText.toLowerCase();
+        const nameMatch = entity.name?.toLowerCase().includes(searchLower);
+        const sciNameMatch = entity.scientificName?.toLowerCase().includes(searchLower);
+        if (!nameMatch && !sciNameMatch) return false;
+      }
+      
+      // Filter by family
+      if (entityFilter.family) {
+        if (entity.family?.toLowerCase() !== entityFilter.family.toLowerCase()) return false;
+      }
+      
+      // Filter by genus (first word of scientificName or name)
+      if (entityFilter.genus) {
+        const name = entity.scientificName || entity.name || '';
+        const genus = name.split(' ')[0];
+        if (genus?.toLowerCase() !== entityFilter.genus.toLowerCase()) return false;
+      }
+      
+      return true;
+    });
+  }, [project.entities, entityFilter]);
+
+  // Clear all filters
+  const clearEntityFilters = () => {
+    setEntityFilter({
+      searchText: '',
+      family: '',
+      genus: '',
+      scientificName: ''
+    });
+  };
+
+  // Check if any filter is active
+  const hasActiveFilters = entityFilter.searchText || entityFilter.family || entityFilter.genus;
 
   // Reopen AI modal when returning from settings
   useEffect(() => {
@@ -2887,12 +3010,15 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
 
           {activeTab === 'ENTITIES' && (
             <div className="p-4 md:p-8">
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <div>
                   <div className="flex items-center gap-3">
                     <h3 className="text-lg font-semibold text-slate-800">{strings.manageEntities}</h3>
                     <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">
-                      {project.entities.length} {language === 'pt' ? 'entidades' : 'entities'}
+                      {hasActiveFilters 
+                        ? `${filteredEntities.length} ${strings.ofEntities} ${project.entities.length}`
+                        : `${project.entities.length} ${language === 'pt' ? 'entidades' : 'entities'}`
+                      }
                     </span>
                   </div>
                   <p className="text-xs md:text-sm text-slate-500">{strings.manageEntitiesDesc}</p>
@@ -2901,8 +3027,69 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                   <Plus size={16} /> <span className="hidden sm:inline">{strings.addEntity}</span>
                 </button>
               </div>
+              
+              {/* Filter Bar */}
+              <div className="mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* Search */}
+                  <div className="flex-1 min-w-[200px]">
+                    <div className="relative">
+                      <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        value={entityFilter.searchText}
+                        onChange={(e) => setEntityFilter(prev => ({ ...prev, searchText: e.target.value }))}
+                        placeholder={strings.searchPlaceholder}
+                        className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Family Filter */}
+                  {uniqueFamilies.length > 0 && (
+                    <select
+                      value={entityFilter.family}
+                      onChange={(e) => setEntityFilter(prev => ({ ...prev, family: e.target.value }))}
+                      className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-emerald-500 outline-none min-w-[150px]"
+                    >
+                      <option value="">{strings.allFamilies}</option>
+                      {uniqueFamilies.map(family => (
+                        <option key={family} value={family}>{family}</option>
+                      ))}
+                    </select>
+                  )}
+                  
+                  {/* Genus Filter */}
+                  {uniqueGenera.length > 0 && (
+                    <select
+                      value={entityFilter.genus}
+                      onChange={(e) => setEntityFilter(prev => ({ ...prev, genus: e.target.value }))}
+                      className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-emerald-500 outline-none min-w-[150px]"
+                    >
+                      <option value="">{strings.allGenera}</option>
+                      {uniqueGenera.map(genus => (
+                        <option key={genus} value={genus}>{genus}</option>
+                      ))}
+                    </select>
+                  )}
+                  
+                  {/* Clear Filters */}
+                  {hasActiveFilters && (
+                    <button
+                      onClick={clearEntityFilters}
+                      className="flex items-center gap-1 px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition-colors"
+                    >
+                      <X size={14} />
+                      {strings.clearFilters}
+                    </button>
+                  )}
+                </div>
+              </div>
+
               <div className="space-y-4">
-                {project.entities.map((entity, eIdx) => (
+                {filteredEntities.map((entity) => {
+                  const eIdx = project.entities.findIndex(e => e.id === entity.id);
+                  return (
                   <div key={entity.id} className="flex flex-col sm:flex-row gap-6 items-start border border-slate-200 p-4 md:p-6 rounded-xl bg-white hover:shadow-md transition-shadow">
                     <div className="w-full sm:w-48 space-y-2 flex-shrink-0">
                       <div className="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
@@ -3052,7 +3239,8 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -3061,7 +3249,14 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
             <div className="flex flex-col h-full bg-slate-50 min-h-[500px]">
               <div className="p-4 border-b bg-white">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-semibold text-slate-700">{strings.scoringMatrix}</h3>
+                  <div className="flex items-center gap-3">
+                    <h3 className="font-semibold text-slate-700">{strings.scoringMatrix}</h3>
+                    {hasActiveFilters && (
+                      <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">
+                        {filteredEntities.length} {strings.ofEntities} {project.entities.length}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-slate-400 hidden sm:inline">{strings.scoringMatrixDesc}</span>
                     {/* Navigation Arrows */}
@@ -3085,6 +3280,61 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     )}
                   </div>
                 </div>
+                
+                {/* Entity Filter Bar for Matrix */}
+                <div className="flex flex-wrap items-center gap-2 mb-3 pb-3 border-b border-slate-100">
+                  {/* Search */}
+                  <div className="relative flex-1 min-w-[150px] max-w-[250px]">
+                    <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={entityFilter.searchText}
+                      onChange={(e) => setEntityFilter(prev => ({ ...prev, searchText: e.target.value }))}
+                      placeholder={strings.searchPlaceholder}
+                      className="w-full pl-8 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:border-emerald-500 outline-none"
+                    />
+                  </div>
+                  
+                  {/* Family Filter */}
+                  {uniqueFamilies.length > 0 && (
+                    <select
+                      value={entityFilter.family}
+                      onChange={(e) => setEntityFilter(prev => ({ ...prev, family: e.target.value }))}
+                      className="px-2 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:border-emerald-500 outline-none"
+                    >
+                      <option value="">{strings.allFamilies}</option>
+                      {uniqueFamilies.map(family => (
+                        <option key={family} value={family}>{family}</option>
+                      ))}
+                    </select>
+                  )}
+                  
+                  {/* Genus Filter */}
+                  {uniqueGenera.length > 0 && (
+                    <select
+                      value={entityFilter.genus}
+                      onChange={(e) => setEntityFilter(prev => ({ ...prev, genus: e.target.value }))}
+                      className="px-2 py-1.5 text-xs border border-slate-200 rounded-lg bg-white focus:border-emerald-500 outline-none"
+                    >
+                      <option value="">{strings.allGenera}</option>
+                      {uniqueGenera.map(genus => (
+                        <option key={genus} value={genus}>{genus}</option>
+                      ))}
+                    </select>
+                  )}
+                  
+                  {/* Clear Filters */}
+                  {hasActiveFilters && (
+                    <button
+                      onClick={clearEntityFilters}
+                      className="flex items-center gap-1 px-2 py-1.5 text-xs text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+                    >
+                      <X size={12} />
+                      {strings.clearFilters}
+                    </button>
+                  )}
+                </div>
+                
                 {/* Feature Navigation Pills */}
                 <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
                   {project.features.map((feature, idx) => (
@@ -3195,7 +3445,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     
                     {/* Body */}
                     <tbody>
-                      {project.entities.map((entity, idx) => (
+                      {filteredEntities.map((entity, idx) => (
                         <tr key={entity.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}>
                           {/* Entity Name - Frozen Left */}
                           <td 

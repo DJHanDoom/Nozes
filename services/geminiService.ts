@@ -1175,48 +1175,99 @@ async function callGemini(
     // Use repair function instead of straight JSON.parse
     const data = repairTruncatedJson(response.text || "{}");
 
-    if (!data.projectName) throw new Error("Invalid AI response");
+    if (!data.projectName) throw new Error("Invalid AI response: missing projectName");
+    if (!data.features || !Array.isArray(data.features)) {
+      console.error("[parseAIResponse] Invalid features:", data.features);
+      throw new Error("Invalid AI response: features must be an array");
+    }
+    if (!data.entities || !Array.isArray(data.entities)) {
+      console.error("[parseAIResponse] Invalid entities:", data.entities);
+      throw new Error("Invalid AI response: entities must be an array");
+    }
 
     // Transform AI response to internal data model with IDs
-    const features: Feature[] = data.features.map((f: any) => ({
-      id: generateId(),
-      name: f.name,
-      imageUrl: f.imageUrl || "",
-      states: f.states.map((s: string) => ({ id: generateId(), label: s }))
-    }));
+    const features: Feature[] = data.features.map((f: any) => {
+      if (!f || typeof f !== 'object') {
+        console.warn("[parseAIResponse] Skipping invalid feature:", f);
+        return null;
+      }
+      // Handle states in different formats:
+      // 1. Array of strings: ["State1", "State2"]
+      // 2. Array of objects: [{id: "xxx", label: "State1"}] (from REFINE)
+      const states = (f.states || []).map((s: any) => {
+        if (typeof s === 'string') {
+          return { id: generateId(), label: s };
+        } else if (typeof s === 'object' && s !== null) {
+          // Preserve existing ID if present, otherwise generate new one
+          return { id: s.id || generateId(), label: s.label || s };
+        }
+        return { id: generateId(), label: String(s) };
+      });
+      
+      return {
+        id: f.id || generateId(), // Preserve existing ID if present
+        name: f.name || "Unnamed Feature",
+        imageUrl: f.imageUrl || "",
+        states
+      };
+    }).filter((f: Feature | null): f is Feature => f !== null);
 
     const entities: Entity[] = data.entities.map((e: any) => {
+      if (!e || typeof e !== 'object') {
+        console.warn("[parseAIResponse] Skipping invalid entity:", e);
+        return null;
+      }
       const entityTraits: Record<string, string[]> = {};
 
-      e.traits.forEach((t: any) => {
-        let fName: string = "";
-        let sValue: string = "";
+      // Handle different trait formats:
+      // 1. Array of objects: [{featureName, stateValue}] or strings "Feature:State"
+      // 2. Object/Record: {featureId: [stateIds]} (from REFINE operations)
+      // 3. undefined/null - just use empty traits
+      
+      if (e.traits === undefined || e.traits === null) {
+        // No traits provided, leave entityTraits empty
+        console.log(`[parseAIResponse] Entity "${e.name}" has no traits defined`);
+      } else if (Array.isArray(e.traits)) {
+        // Format 1: Array of traits
+        e.traits.forEach((t: any) => {
+          let fName: string = "";
+          let sValue: string = "";
 
-        // Hybrid Parsing: Support both Object {featureName, stateValue} and String "Feature:State"
-        if (typeof t === 'string') {
-          const splitIndex = t.indexOf(':');
-          if (splitIndex > -1) {
-            fName = t.substring(0, splitIndex).trim();
-            sValue = t.substring(splitIndex + 1).trim();
+          // Hybrid Parsing: Support both Object {featureName, stateValue} and String "Feature:State"
+          if (typeof t === 'string') {
+            const splitIndex = t.indexOf(':');
+            if (splitIndex > -1) {
+              fName = t.substring(0, splitIndex).trim();
+              sValue = t.substring(splitIndex + 1).trim();
+            }
+          } else if (typeof t === 'object' && t !== null) {
+            fName = t.featureName;
+            sValue = t.stateValue;
           }
-        } else if (typeof t === 'object' && t !== null) {
-          fName = t.featureName;
-          sValue = t.stateValue;
-        }
 
-        if (fName && sValue) {
-          // Fuzzy match feature name to be robust against minor AI hallucinations (case/trim)
-          const feature = features.find(f => f.name.toLowerCase() === fName.toLowerCase());
-          if (feature) {
-            // Fuzzy match state
-            const state = feature.states.find(s => s.label.toLowerCase() === sValue.toLowerCase());
-            if (state) {
-              if (!entityTraits[feature.id]) entityTraits[feature.id] = [];
-              entityTraits[feature.id].push(state.id);
+          if (fName && sValue) {
+            // Fuzzy match feature name to be robust against minor AI hallucinations (case/trim)
+            const feature = features.find(f => f.name.toLowerCase() === fName.toLowerCase());
+            if (feature) {
+              // Fuzzy match state
+              const state = feature.states.find(s => s.label.toLowerCase() === sValue.toLowerCase());
+              if (state) {
+                if (!entityTraits[feature.id]) entityTraits[feature.id] = [];
+                entityTraits[feature.id].push(state.id);
+              }
             }
           }
+        });
+      } else if (typeof e.traits === 'object' && e.traits !== null) {
+        // Format 2: Object/Record {featureId: [stateIds]} - pass through directly
+        // This format comes from REFINE operations where IDs are preserved
+        for (const [featureId, stateIds] of Object.entries(e.traits)) {
+          if (Array.isArray(stateIds)) {
+            entityTraits[featureId] = stateIds as string[];
+          }
         }
-      });
+      }
+      // If e.traits is undefined or null, entityTraits remains empty {}
 
       // scientificName and family for taxonomy/image fetching
       const scientificName = e.scientificName || extractScientificName(e.name) || e.name;
@@ -1231,21 +1282,21 @@ async function callGemini(
         : [];
 
       return {
-        id: generateId(),
-        name: e.name,
+        id: e.id || generateId(), // Preserve existing ID if present (from REFINE)
+        name: e.name || "Unnamed Entity",
         scientificName: scientificName, // Store for image fetching and taxonomy
         family: family, // Taxonomic family
-        description: e.description,
-        imageUrl: placeholderUrl, // Will be replaced with real image
-        links: entityLinks,
+        description: e.description || "",
+        imageUrl: e.imageUrl || placeholderUrl, // Preserve existing image if present
+        links: e.links || entityLinks, // Preserve existing links if present
         traits: entityTraits
       };
-    });
+    }).filter((e: Entity | null): e is Entity => e !== null);
 
     return {
-      id: generateId(),
-      name: data.projectName,
-      description: data.projectDescription,
+      id: data.id || generateId(), // Preserve project ID if present
+      name: data.projectName || data.name,
+      description: data.projectDescription || data.description,
       features,
       entities
     };
