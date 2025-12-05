@@ -672,12 +672,47 @@ const namesMatch = (name1: string, name2: string): boolean => {
 const mergeProjectsPreservingData = (newProject: Project, existingProject: Project, preserveAllExisting: boolean = true): Project => {
   console.log(`[mergeProjectsPreservingData] Starting merge: new=${newProject.entities.length} entities, existing=${existingProject.entities.length} entities`);
   
-  // CRITICAL SAFETY CHECK: If AI returned significantly fewer entities, something went wrong
-  // Keep ALL existing entities and only merge data for matching ones
-  const significantDataLoss = newProject.entities.length < existingProject.entities.length * 0.5;
-  if (significantDataLoss) {
-    console.warn(`[mergeProjectsPreservingData] CRITICAL: AI returned ${newProject.entities.length} entities but existing has ${existingProject.entities.length}. Preserving ALL existing data.`);
+  // ═══════════════════════════════════════════════════════════════════════════════
+  // CRITICAL SAFETY CHECKS: Detect AI failures that could cause data loss
+  // ═══════════════════════════════════════════════════════════════════════════════
+  
+  // Check 1: Empty or near-empty AI response
+  if (!newProject.entities || newProject.entities.length === 0) {
+    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned EMPTY project! Preserving original.`);
+    return existingProject;
   }
+  
+  // Check 2: Significant entity count reduction (AI probably failed)
+  if (newProject.entities.length < existingProject.entities.length * 0.5) {
+    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned only ${newProject.entities.length} of ${existingProject.entities.length} entities! Preserving original.`);
+    return existingProject;
+  }
+  
+  // Check 3: AI returned entities but NO features (corrupt response)
+  if (!newProject.features || newProject.features.length === 0) {
+    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned NO features! Preserving original.`);
+    return existingProject;
+  }
+  
+  // Check 4: Count total traits in new vs existing to detect mass data loss
+  const countTotalTraits = (proj: Project): number => {
+    return proj.entities.reduce((sum, e) => {
+      return sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0);
+    }, 0);
+  };
+  
+  const existingTotalTraits = countTotalTraits(existingProject);
+  const newTotalTraits = countTotalTraits(newProject);
+  
+  // If existing had traits but new has very few (less than 10% of original), something went wrong
+  if (existingTotalTraits > 10 && newTotalTraits < existingTotalTraits * 0.1) {
+    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned only ${newTotalTraits} traits vs ${existingTotalTraits} existing! Preserving original.`);
+    return existingProject;
+  }
+  
+  console.log(`[mergeProjectsPreservingData] Trait count - existing: ${existingTotalTraits}, new: ${newTotalTraits}`);
+  
+  // ═══════════════════════════════════════════════════════════════════════════════
 
   // Create lookup maps for existing data
   const existingEntitiesById = new Map(existingProject.entities.map(e => [e.id, e]));
@@ -770,64 +805,94 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   // Map state ID from new project to existing project ID
   const mapStateId = (newStateId: string, existingFeatureId: string, newFeatureId: string): string | null => {
     const existingFeature = existingFeaturesById.get(existingFeatureId);
-    if (!existingFeature) return null;
+    if (!existingFeature) {
+      console.warn(`[mapStateId] No existing feature found for ID: ${existingFeatureId}`);
+      return null;
+    }
     
     // First check if state ID already exists in existing feature (direct match)
     const directMatch = existingFeature.states.find(s => s.id === newStateId);
     if (directMatch) {
+      console.log(`[mapStateId] Direct match for state ${newStateId}`);
       return newStateId;
     }
     
-    // Find the state in new project to get its label for matching
+    // Try to find state label from new project
+    let newStateLabel: string | null = null;
+    
+    // Method 1: Find in the specified new feature
     const newFeature = newProject.features.find(f => f.id === newFeatureId);
     if (newFeature) {
       const newState = newFeature.states.find(s => s.id === newStateId);
       if (newState) {
-        // Find matching state by normalized label in existing feature
-        const matchingState = existingFeature.states.find(s => 
-          normalizeName(s.label) === normalizeName(newState.label)
-        );
-        if (matchingState) {
-          console.log(`[mapStateId] Matched by label: "${newState.label}" -> ID ${matchingState.id}`);
-          return matchingState.id;
-        }
-        
-        // Try partial match (label contains or is contained)
-        const partialMatch = existingFeature.states.find(s => {
-          const existingNorm = normalizeName(s.label);
-          const newNorm = normalizeName(newState.label);
-          return existingNorm.includes(newNorm) || newNorm.includes(existingNorm);
-        });
-        if (partialMatch) {
-          console.log(`[mapStateId] Partial match: "${newState.label}" -> "${partialMatch.label}" (ID ${partialMatch.id})`);
-          return partialMatch.id;
-        }
-        
-        // Try matching by index position (if state order is preserved)
-        const newStateIndex = newFeature.states.findIndex(s => s.id === newStateId);
-        if (newStateIndex >= 0 && newStateIndex < existingFeature.states.length) {
-          const indexMatch = existingFeature.states[newStateIndex];
-          console.log(`[mapStateId] Index match: position ${newStateIndex} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
-          return indexMatch.id;
+        newStateLabel = newState.label;
+      }
+    }
+    
+    // Method 2: If not found, search in all new features
+    if (!newStateLabel) {
+      for (const nf of newProject.features) {
+        const foundState = nf.states.find(s => s.id === newStateId);
+        if (foundState) {
+          newStateLabel = foundState.label;
+          console.log(`[mapStateId] Found state label "${newStateLabel}" in different feature "${nf.name}"`);
+          break;
         }
       }
     }
     
-    // Last resort: try to find by label similarity across all new features
-    for (const nf of newProject.features) {
-      const foundState = nf.states.find(s => s.id === newStateId);
-      if (foundState) {
-        const matchingState = existingFeature.states.find(s => 
-          normalizeName(s.label) === normalizeName(foundState.label)
-        );
-        if (matchingState) {
-          console.log(`[mapStateId] Cross-feature label match: "${foundState.label}" -> ID ${matchingState.id}`);
-          return matchingState.id;
-        }
+    // Method 3: Try to find by ID pattern - some IDs might have the label encoded
+    if (!newStateLabel && newStateId.includes('_')) {
+      // Try to extract label from ID (some generators use name_timestamp pattern)
+      const potentialLabel = newStateId.split('_').slice(0, -1).join('_').replace(/-/g, ' ');
+      if (potentialLabel.length > 2) {
+        newStateLabel = potentialLabel;
+        console.log(`[mapStateId] Extracted potential label from ID: "${newStateLabel}"`);
       }
     }
     
-    console.warn(`[mapStateId] No match found for state ID: ${newStateId} in feature ${existingFeatureId}`);
+    if (newStateLabel) {
+      // Find matching state by normalized label in existing feature
+      const matchingState = existingFeature.states.find(s => 
+        normalizeName(s.label) === normalizeName(newStateLabel!)
+      );
+      if (matchingState) {
+        console.log(`[mapStateId] Matched by label: "${newStateLabel}" -> ID ${matchingState.id}`);
+        return matchingState.id;
+      }
+      
+      // Try partial match (label contains or is contained)
+      const partialMatch = existingFeature.states.find(s => {
+        const existingNorm = normalizeName(s.label);
+        const newNorm = normalizeName(newStateLabel!);
+        return existingNorm.includes(newNorm) || newNorm.includes(existingNorm);
+      });
+      if (partialMatch) {
+        console.log(`[mapStateId] Partial match: "${newStateLabel}" -> "${partialMatch.label}" (ID ${partialMatch.id})`);
+        return partialMatch.id;
+      }
+    }
+    
+    // Method 4: Try matching by index position (if state order is preserved)
+    if (newFeature) {
+      const newStateIndex = newFeature.states.findIndex(s => s.id === newStateId);
+      if (newStateIndex >= 0 && newStateIndex < existingFeature.states.length) {
+        const indexMatch = existingFeature.states[newStateIndex];
+        console.log(`[mapStateId] Index match: position ${newStateIndex} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
+        return indexMatch.id;
+      }
+    }
+    
+    // Method 5: If the state ID looks like a number (0, 1, 2...) use it as index
+    const stateIdAsNumber = parseInt(newStateId, 10);
+    if (!isNaN(stateIdAsNumber) && stateIdAsNumber >= 0 && stateIdAsNumber < existingFeature.states.length) {
+      const indexMatch = existingFeature.states[stateIdAsNumber];
+      console.log(`[mapStateId] Numeric ID as index: ${stateIdAsNumber} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
+      return indexMatch.id;
+    }
+    
+    console.warn(`[mapStateId] No match found for state ID: ${newStateId} in feature ${existingFeatureId} (label: ${newStateLabel || 'unknown'})`);
+    console.warn(`[mapStateId] Available states: ${existingFeature.states.map(s => `"${s.label}" (${s.id})`).join(', ')}`);
     return null;
   };
 
@@ -959,16 +1024,18 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       return newFeature;
     }
 
+    // CRITICAL: Use existing feature's ID and states to maintain consistency with mapped traits
+    // The traits were mapped using existingFeature.states IDs, so we MUST use those same states
     return {
-      ...newFeature,
-      // ALWAYS preserve existing ID
-      id: existingFeature.id,
+      ...existingFeature, // Start with existing feature to preserve all IDs
+      // Update name if new has a better one
+      name: newFeature.name || existingFeature.name,
       // Preserve feature imageUrl if existing has real image
       imageUrl: (!isPlaceholderUrl(existingFeature.imageUrl) && isPlaceholderUrl(newFeature.imageUrl))
         ? existingFeature.imageUrl
         : (newFeature.imageUrl || existingFeature.imageUrl),
-      // Preserve states from existing if new doesn't have them
-      states: newFeature.states.length > 0 ? newFeature.states : existingFeature.states,
+      // ALWAYS use existing states to maintain ID consistency with mapped traits
+      states: existingFeature.states,
     };
   });
 
@@ -985,11 +1052,49 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
 
   console.log(`[mergeProjectsPreservingData] Final result: ${mergedEntities.length} entities, ${mergedFeatures.length} features`);
 
+  // Build a map of valid state IDs for each feature in the FINAL merged features
+  const finalFeaturesMap = new Map<string, Set<string>>();
+  mergedFeatures.forEach(f => {
+    finalFeaturesMap.set(f.id, new Set(f.states.map(s => s.id)));
+  });
+
+  // FINAL SANITIZATION: Ensure all trait IDs in entities are valid for final features
+  const sanitizedEntities = mergedEntities.map(entity => {
+    const sanitizedTraits: Record<string, string[]> = {};
+    let hadInvalidTraits = false;
+    
+    for (const [featureId, stateIds] of Object.entries(entity.traits)) {
+      const validStateIds = finalFeaturesMap.get(featureId);
+      if (validStateIds) {
+        const validTraits = stateIds.filter(sid => validStateIds.has(sid));
+        if (validTraits.length > 0) {
+          sanitizedTraits[featureId] = validTraits;
+        }
+        if (validTraits.length !== stateIds.length) {
+          hadInvalidTraits = true;
+          console.warn(`[SANITIZE] Entity "${entity.name}" feature ${featureId}: removed ${stateIds.length - validTraits.length} invalid state IDs`);
+        }
+      } else {
+        // Feature ID doesn't exist in final features - this is a bigger problem
+        hadInvalidTraits = true;
+        console.warn(`[SANITIZE] Entity "${entity.name}": removed traits for non-existent feature ${featureId}`);
+      }
+    }
+    
+    if (hadInvalidTraits) {
+      console.log(`[SANITIZE] Entity "${entity.name}" sanitized: ${Object.keys(entity.traits).length} -> ${Object.keys(sanitizedTraits).length} features with valid traits`);
+    }
+    
+    return { ...entity, traits: sanitizedTraits };
+  });
+
+  console.log(`[mergeProjectsPreservingData] Sanitization complete.`);
+
   return {
     ...newProject,
     // Preserve original project ID and metadata if they match
     id: existingProject.id || newProject.id,
-    entities: mergedEntities,
+    entities: sanitizedEntities,
     features: mergedFeatures
   };
 };
@@ -2677,6 +2782,45 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
     try {
       const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
       
+      // ═══════════════════════════════════════════════════════════════════════════════
+      // VALIDATION: Check if AI response is valid before proceeding
+      // ═══════════════════════════════════════════════════════════════════════════════
+      const isValidResponse = generatedProject && 
+        generatedProject.entities && 
+        generatedProject.entities.length > 0 &&
+        generatedProject.features &&
+        generatedProject.features.length > 0;
+      
+      if (!isValidResponse) {
+        console.error("[handleSendManualPrompt] AI returned invalid/empty response:", generatedProject);
+        stopTypingEffect();
+        const errorMsg = language === 'pt' 
+          ? "\n\n❌ ERRO: A IA retornou uma resposta vazia ou inválida. Os dados originais foram preservados. Tente novamente."
+          : "\n\n❌ ERROR: AI returned empty or invalid response. Original data preserved. Please try again.";
+        setAiTypingText(prev => prev + errorMsg);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        setShowPromptEditor(false);
+        return;
+      }
+      
+      // Check for significant data loss when refining
+      if (project.entities.length > 0) {
+        const existingTraitCount = project.entities.reduce((sum, e) => 
+          sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
+        const newTraitCount = generatedProject.entities.reduce((sum, e) => 
+          sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
+        
+        // If we had traits and new has very few, warn user
+        if (existingTraitCount > 10 && newTraitCount < existingTraitCount * 0.3) {
+          console.warn(`[handleSendManualPrompt] WARNING: Significant trait loss detected! Existing: ${existingTraitCount}, New: ${newTraitCount}`);
+          const warningMsg = language === 'pt'
+            ? `\n\n⚠️ AVISO: Detectada possível perda de dados (${existingTraitCount} → ${newTraitCount} traits). Preservando dados originais.`
+            : `\n\n⚠️ WARNING: Possible data loss detected (${existingTraitCount} → ${newTraitCount} traits). Preserving original data.`;
+          setAiTypingText(prev => prev + warningMsg);
+        }
+      }
+      // ═══════════════════════════════════════════════════════════════════════════════
+      
       // Stop typing effect and show summary
       stopTypingEffect(generatedProject);
       
@@ -2687,6 +2831,16 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
       const mergedProject = project.entities.length > 0 
         ? mergeProjectsPreservingData(generatedProject, project)
         : generatedProject;
+      
+      // Final safety check: if merge returned original project (due to data protection), inform user
+      if (mergedProject === project) {
+        const preservedMsg = language === 'pt'
+          ? "\n\n🛡️ Dados originais foram preservados devido a resposta incompleta da IA."
+          : "\n\n🛡️ Original data was preserved due to incomplete AI response.";
+        setAiTypingText(prev => prev + preservedMsg);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+      
       setProject(mergedProject);
       setActiveTab('MATRIX');
       setShowPromptEditor(false);
