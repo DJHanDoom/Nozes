@@ -1047,6 +1047,8 @@ const generationSchema: Schema = {
         type: Type.OBJECT,
         properties: {
           name: { type: Type.STRING, description: "Entity name (can be common name or scientific name)" },
+          id: { type: Type.STRING, description: "Preserve original ID if available" },
+          imageUrl: { type: Type.STRING, description: "Preserve original image URL if available" },
           scientificName: { type: Type.STRING, description: "Scientific binomial name (e.g., 'Panthera leo'). REQUIRED for biological species." },
           family: { type: Type.STRING, description: "Taxonomic family name (e.g., 'Felidae', 'Fabaceae'). REQUIRED for biological species." },
           description: { type: Type.STRING },
@@ -1553,18 +1555,57 @@ export const refineExistingProject = async (
   const entityById = new Map(existingProject.entities.map(e => [e.id, e]));
 
   // Choose schema based on mode
-  const schema = mode === 'fillGaps' ? fillGapsSchema : refineSchema;
+  const schema = mode === 'fillGaps' ? fillGapsSchema : (mode === 'clean' ? generationSchema : refineSchema);
   
-  const systemInstruction = mode === 'fillGaps'
-    ? `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
+  let systemInstruction = '';
+  
+  if (mode === 'fillGaps') {
+    systemInstruction = `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
 CRITICAL: Use ONLY the exact IDs provided in the input. Return ONLY the entityId and the NEW traits being added.
-Format for filledTraits: JSON string like {"featureId": ["stateId"]}`
-    : `You are an expert taxonomist. Your task is to improve an identification key while preserving all IDs.
+Format for filledTraits: JSON string like {"featureId": ["stateId"]}`;
+  } else if (mode === 'clean') {
+    systemInstruction = `You are an expert taxonomist and data cleaner.
+Your task is to CLEAN and OPTIMIZE the provided identification key.
+1. MERGE redundant features (e.g., "Habit" and "Life Form" if they overlap).
+2. MERGE redundant states (e.g., "Tree" and "Tree (Phanerophyte)").
+3. REMOVE useless features (e.g., "Health", "Date", "Collector").
+4. STANDARDIZE feature and state names.
+5. PRESERVE all entities, their IDs, names, descriptions, and images.
+6. RE-MAP the entities to the NEW optimized features.
+CRITICAL: Return a FULL project structure with 'features' and 'entities'.
+For entities, you MUST preserve the 'id' and 'imageUrl' fields exactly as they are in the input.`;
+  } else {
+    systemInstruction = `You are an expert taxonomist. Your task is to improve an identification key while preserving all IDs.
 CRITICAL: Every entity MUST have its original "id" field preserved exactly.
 Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
+  }
 
   try {
-    const response = await callGeminiRaw(ai, model, prompt, systemInstruction, schema);
+    // For CLEAN mode, we need to pass the full project structure to allow feature rewriting
+    // For other modes, we might want to be more conservative, but passing full project is generally safe
+    // We serialize the project to JSON for the prompt
+    const projectContext = JSON.stringify({
+      features: existingProject.features,
+      entities: existingProject.entities.map(e => ({
+        id: e.id,
+        name: e.name,
+        scientificName: e.scientificName,
+        family: e.family,
+        description: e.description,
+        imageUrl: e.imageUrl, // Explicitly include imageUrl so AI can return it
+        traits: e.traits
+      }))
+    }, null, 2);
+
+    const fullPrompt = `${prompt}\n\nCURRENT PROJECT DATA:\n${projectContext}`;
+
+    // Use callGemini for CLEAN mode (to handle full generation schema parsing)
+    // Use callGeminiRaw for others (to handle partial updates/traitsMap)
+    if (mode === 'clean') {
+       return await callGemini(ai, model, fullPrompt, systemInstruction, schema, language, true);
+    }
+
+    const response = await callGeminiRaw(ai, model, fullPrompt, systemInstruction, schema);
     
     // CRITICAL: Safely parse response, default to empty object if parsing fails
     let data: any = {};
@@ -1714,9 +1755,9 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
         }
       }
       
-      // For REFINE/CLEAN mode, ALSO preserve any entities that weren't returned by AI
+      // For REFINE mode, ALSO preserve any entities that weren't returned by AI
       // This is CRITICAL to prevent data loss when AI omits some entities
-      if (mode === 'refine' || mode === 'clean') {
+      if (mode === 'refine') {
         const missingEntities: Entity[] = [];
         for (const entity of existingProject.entities) {
           if (!seenIds.has(entity.id)) {

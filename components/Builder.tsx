@@ -3,7 +3,6 @@ import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFil
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
-// @ts-ignore
 import iconSrc from '../assets/icon.png';
 
 // Generate standalone HTML file with embedded player
@@ -1762,6 +1761,64 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     link.download = `${cleanedProject.name.replace(/\s+/g, '_')}.html`;
     link.click();
     URL.revokeObjectURL(url);
+  };
+
+  const [optimizeNervura, setOptimizeNervura] = useState(false);
+
+  const handleNervuraImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileReader = new FileReader();
+    if (event.target.files && event.target.files[0]) {
+      fileReader.readAsText(event.target.files[0], "UTF-8");
+      fileReader.onload = async e => {
+        try {
+          const parsed = JSON.parse(e.target?.result as string);
+          if (parsed.name && parsed.features && parsed.entities) {
+            
+            if (optimizeNervura) {
+              setIsGenerating(true);
+              try {
+                const optimizedProject = await refineExistingProject(
+                  "Clean and optimize this imported key.",
+                  parsed,
+                  apiKey,
+                  defaultModel,
+                  language,
+                  'clean'
+                );
+                setProject(optimizedProject);
+                alert(language === 'pt' ? 'Chave importada e otimizada com sucesso!' : 'Key imported and optimized successfully!');
+              } catch (err) {
+                console.error(err);
+                alert("Erro na otimização. Carregando original.");
+                setProject(parsed);
+              } finally {
+                setIsGenerating(false);
+                setShowAiModal(false);
+              }
+            } else {
+              setProject(parsed);
+              setShowAiModal(false);
+              
+              const saved = localStorage.getItem('nozesia_projects');
+              let projectsList: Project[] = [];
+              if (saved) {
+                try { projectsList = JSON.parse(saved); } catch (err) {}
+              }
+              const updatedList = [parsed, ...projectsList.filter((p: Project) => p.id !== parsed.id)];
+              localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+              
+              if (onProjectImported) onProjectImported(parsed);
+              
+              alert(language === 'pt' ? 'Chave Nervura importada com sucesso!' : 'Nervura Key imported successfully!');
+            }
+          } else {
+            alert("Formato inválido. Certifique-se que é um JSON do Nervura/Nozes.");
+          }
+        } catch (error) {
+          alert("Erro ao ler o arquivo JSON.");
+        }
+      };
+    }
   };
 
   const importJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -4723,6 +4780,48 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         />
                       </label>
                     )}
+                  </div>
+
+                  {/* Nervura Import Option */}
+                  <div className="mt-2 pt-4 border-t border-slate-200">
+                    <div className="flex items-center justify-center mb-3">
+                      <label className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 hover:text-emerald-600 transition-colors">
+                        <input 
+                          type="checkbox" 
+                          checked={optimizeNervura} 
+                          onChange={(e) => setOptimizeNervura(e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                        />
+                        <span className="font-medium">
+                          {language === 'pt' ? 'Otimizar e Padronizar com IA' : 'Optimize & Standardize with AI'}
+                        </span>
+                      </label>
+                    </div>
+
+                    <label className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer transition-colors border ${
+                      optimizeNervura 
+                        ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 hover:border-emerald-300' 
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-200 hover:border-slate-300'
+                    }`}>
+                      {optimizeNervura ? <Sparkles size={18} /> : <FileCode size={18} />}
+                      <span className="font-bold text-sm">
+                        {language === 'pt' 
+                          ? (optimizeNervura ? 'Importar e Otimizar JSON' : 'Importar JSON Nervura (Fiel)') 
+                          : (optimizeNervura ? 'Import & Optimize JSON' : 'Import Nervura JSON (Faithful)')}
+                      </span>
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept=".json"
+                        onChange={handleNervuraImport}
+                        disabled={isGenerating}
+                      />
+                    </label>
+                    <p className="text-[10px] text-center text-slate-400 mt-2">
+                      {language === 'pt' 
+                        ? (optimizeNervura ? 'A IA irá padronizar características e remover redundâncias.' : 'Carrega a chave exatamente como no arquivo, sem alterações da IA.') 
+                        : (optimizeNervura ? 'AI will standardize features and remove redundancies.' : 'Loads the key exactly as in the file, without AI modifications.')}
+                    </p>
                   </div>
                 </div>
               ) : aiMode === 'REFINE' ? (
