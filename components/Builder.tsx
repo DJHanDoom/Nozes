@@ -1276,6 +1276,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [savedProjects, setSavedProjects] = useState<Project[]>([]);
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
+  const [pendingImportProject, setPendingImportProject] = useState<Project | null>(null); // For confirming optimized imports
   
   // State Image Modal
   const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
@@ -1775,25 +1776,63 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           if (parsed.name && parsed.features && parsed.entities) {
             
             if (optimizeNervura) {
+              // Show the prompt editor/typing view
+              setShowPromptEditor(true);
               setIsGenerating(true);
+              setAiTypingText(""); // Reset typing text
+              setAiTypingComplete(false);
+              
+              // Simulate typing effect for the "thinking" phase
+              const thinkingText = language === 'pt' 
+                ? "Analisando estrutura da chave...\nIdentificando redundâncias...\nOtimizando características e estados...\n" 
+                : "Analyzing key structure...\nIdentifying redundancies...\nOptimizing features and states...\n";
+              
+              let charIndex = 0;
+              const typingInterval = setInterval(() => {
+                if (charIndex < thinkingText.length) {
+                  setAiTypingText(prev => prev + thinkingText.charAt(charIndex));
+                  charIndex++;
+                } else {
+                  clearInterval(typingInterval);
+                }
+              }, 30);
+
               try {
+                // Explicit language instruction
+                const prompt = language === 'pt' 
+                  ? "Limpe e otimize esta chave importada. Mantenha o idioma em Português. Padronize nomes e descrições."
+                  : "Clean and optimize this imported key. Ensure the language is English. Standardize names and descriptions.";
+
                 const optimizedProject = await refineExistingProject(
-                  "Clean and optimize this imported key.",
+                  prompt,
                   parsed,
                   apiKey,
                   defaultModel,
                   language,
                   'clean'
                 );
-                setProject(optimizedProject);
-                alert(language === 'pt' ? 'Chave importada e otimizada com sucesso!' : 'Key imported and optimized successfully!');
+                
+                // Store for confirmation instead of setting immediately
+                setPendingImportProject(optimizedProject);
+                
+                // Add completion message to typing text
+                const completionText = language === 'pt'
+                  ? "\n\n✅ Otimização concluída! Por favor, revise e confirme a importação abaixo."
+                  : "\n\n✅ Optimization complete! Please review and confirm the import below.";
+                
+                setAiTypingText(prev => prev + completionText);
+                setAiTypingComplete(true);
+                
               } catch (err) {
                 console.error(err);
+                setAiTypingText(prev => prev + "\n\n❌ Error: " + (err as Error).message);
                 alert("Erro na otimização. Carregando original.");
                 setProject(parsed);
-              } finally {
-                setIsGenerating(false);
                 setShowAiModal(false);
+              } finally {
+                clearInterval(typingInterval);
+                setIsGenerating(false);
+                // Do NOT close modal here - wait for user confirmation
               }
             } else {
               setProject(parsed);
@@ -4240,7 +4279,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                   <X size={24} />
                 </button>
 
-                <img src="/assets/icon.png" className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
+                <img src={iconSrc} className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">Nozes IA</h2>
                 <p className="text-slate-500 text-center mb-8">
                   {language === 'pt' ? 'O que você deseja identificar hoje?' : 'What do you want to identify today?'}
@@ -6177,13 +6216,38 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                 >
                   {strings.cancel}
                 </button>
-                <button
-                  onClick={handleSendManualPrompt}
-                  className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
-                  disabled={isGenerating}
-                >
-                  {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
-                </button>
+                
+                {pendingImportProject ? (
+                  <button
+                    onClick={() => {
+                      setProject(pendingImportProject);
+                      setPendingImportProject(null);
+                      setShowPromptEditor(false);
+                      setShowAiModal(false);
+                      
+                      // Also save to localStorage logic if needed (copied from original import)
+                      const saved = localStorage.getItem('nozesia_projects');
+                      let projectsList: Project[] = [];
+                      if (saved) { try { projectsList = JSON.parse(saved); } catch (err) {} }
+                      const updatedList = [pendingImportProject, ...projectsList.filter((p: Project) => p.id !== pendingImportProject.id)];
+                      localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+                      if (onProjectImported) onProjectImported(pendingImportProject);
+                      
+                      alert(language === 'pt' ? 'Chave importada e otimizada com sucesso!' : 'Key imported and optimized successfully!');
+                    }}
+                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 flex items-center gap-2"
+                  >
+                    {language === 'pt' ? 'Confirmar Importação' : 'Confirm Import'} <Check size={16} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSendManualPrompt}
+                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
+                  </button>
+                )}
               </div>
             </div>
           </div>
