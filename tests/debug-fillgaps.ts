@@ -214,7 +214,7 @@ function simulateFillGapsLogic(existingProject: any, aiResponse: any): any {
         continue;
       }
 
-      const validStateIds = feature.states.map((s: any) => s.id);
+      const validStateIds = (feature as any).states.map((s: any) => s.id);
       const validNewStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
       
       if (validNewStates.length > 0) {

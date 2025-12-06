@@ -48,6 +48,7 @@ export interface ImportedFile {
 
 export interface AIConfig {
   topic: string;
+  category: 'FLORA' | 'FAUNA' | 'OTHER';
   count: number;
   featureCount: number;
   geography: string;

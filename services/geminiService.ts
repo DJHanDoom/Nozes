@@ -606,7 +606,8 @@ export function extractBinomial(name: string): string {
 async function fetchEntityImage(
   entityName: string, 
   scientificName?: string,
-  language: string = 'pt'
+  language: string = 'pt',
+  category: 'FLORA' | 'FAUNA' | 'OTHER' = 'FLORA'
 ): Promise<string | null> {
   // Build search terms - clean scientific name first (genus + epithet only), then common name
   const cleanScientificName = scientificName ? extractBinomial(scientificName) : null;
@@ -625,13 +626,15 @@ async function fetchEntityImage(
   const uniqueTerms = [...new Set(searchTerms)];
   
   for (const term of uniqueTerms) {
-    // 1. Try Biodiversity4All first (Portuguese/Iberian biodiversity - https://www.biodiversity4all.org/)
-    const b4aImage = await fetchBiodiversity4AllImage(term);
-    if (b4aImage) return b4aImage;
-    
-    // 2. Try iNaturalist global (best for worldwide biodiversity)
-    const iNatImage = await fetchINaturalistImage(term);
-    if (iNatImage) return iNatImage;
+    if (category === 'FLORA' || category === 'FAUNA') {
+      // 1. Try Biodiversity4All first (Portuguese/Iberian biodiversity - https://www.biodiversity4all.org/)
+      const b4aImage = await fetchBiodiversity4AllImage(term);
+      if (b4aImage) return b4aImage;
+      
+      // 2. Try iNaturalist global (best for worldwide biodiversity)
+      const iNatImage = await fetchINaturalistImage(term);
+      if (iNatImage) return iNatImage;
+    }
     
     // 3. Try Flickr (large public photo database - https://www.flickr.com/)
     const flickrImage = await fetchFlickrImage(term);
@@ -641,21 +644,25 @@ async function fetchEntityImage(
     const wikiImage = await fetchWikipediaImage(term, language);
     if (wikiImage) return wikiImage;
     
-    // 5. Try Plant Illustrations / BHL (excellent botanical illustrations)
-    const illustrationImage = await fetchPlantIllustrationsImage(term);
-    if (illustrationImage) return illustrationImage;
+    if (category === 'FLORA') {
+      // 5. Try Plant Illustrations / BHL (excellent botanical illustrations)
+      const illustrationImage = await fetchPlantIllustrationsImage(term);
+      if (illustrationImage) return illustrationImage;
+    }
     
     // 6. Try Wikimedia Commons
     const commonsImage = await fetchWikimediaCommonsImage(term);
     if (commonsImage) return commonsImage;
     
-    // 7. Try PlantNet (AI plant identification with extensive photo database)
-    const plantNetImage = await fetchPlantNetImage(term);
-    if (plantNetImage) return plantNetImage;
-    
-    // 8. Try POWO (Plants of the World Online) - last resort for botanical specimens/exsicatas
-    const powoImage = await fetchPOWOImage(term);
-    if (powoImage) return powoImage;
+    if (category === 'FLORA') {
+      // 7. Try PlantNet (AI plant identification with extensive photo database)
+      const plantNetImage = await fetchPlantNetImage(term);
+      if (plantNetImage) return plantNetImage;
+      
+      // 8. Try POWO (Plants of the World Online) - last resort for botanical specimens/exsicatas
+      const powoImage = await fetchPOWOImage(term);
+      if (powoImage) return powoImage;
+    }
   }
   
   return null;
@@ -668,7 +675,8 @@ async function fetchEntityImage(
 export async function fetchImagesForEntities(
   entities: Array<{ name: string; scientificName?: string }>,
   language: string = 'pt',
-  onProgress?: (current: number, total: number, entityName: string) => void
+  onProgress?: (current: number, total: number, entityName: string) => void,
+  category: 'FLORA' | 'FAUNA' | 'OTHER' = 'FLORA'
 ): Promise<Map<string, string>> {
   const imageMap = new Map<string, string>();
   const batchSize = 3; // Conservative to respect API limits
@@ -677,7 +685,7 @@ export async function fetchImagesForEntities(
     const batch = entities.slice(i, i + batchSize);
     
     const promises = batch.map(async (entity) => {
-      const imageUrl = await fetchEntityImage(entity.name, entity.scientificName, language);
+      const imageUrl = await fetchEntityImage(entity.name, entity.scientificName, language, category);
       return { name: entity.name, url: imageUrl };
     });
     
@@ -1181,8 +1189,21 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     ? "All content (Project Name, Description, Features, States, Entities, Descriptions) MUST be in Portuguese (Brazil)."
     : "All content must be in English.";
 
-  // NOTE: Images are now fetched via APIs (iNaturalist, Wikipedia), so we don't ask the AI for URLs
-  const scientificNameInstruction = "For biological entities, ALWAYS provide: 1) the scientific binomial name (e.g., 'Panthera leo', 'Quercus robur'), and 2) the taxonomic family (e.g., 'Felidae', 'Fabaceae'). Both are REQUIRED for accurate classification.";
+  // Category-specific instructions
+  let categoryInstruction = "";
+  let scientificNameInstruction = "";
+  
+  if (config.category === 'FAUNA') {
+    categoryInstruction = "Focus on zoological characteristics. Use appropriate terminology for animals (morphology, behavior, habitat).";
+    scientificNameInstruction = "For biological entities, ALWAYS provide: 1) the scientific binomial name (e.g., 'Panthera leo', 'Ara macao'), and 2) the taxonomic family (e.g., 'Felidae', 'Psittacidae'). Both are REQUIRED for accurate classification.";
+  } else if (config.category === 'OTHER') {
+    categoryInstruction = "Focus on the specific domain of the topic. Use appropriate terminology for the subject matter.";
+    scientificNameInstruction = "For non-biological entities, provide the most precise and standard name available. If applicable, provide the creator/author/origin in the description. Scientific name field can be used for original title or subtitle if applicable, or left empty.";
+  } else {
+    // FLORA (Default)
+    categoryInstruction = "Focus on botanical characteristics. Use appropriate terminology for plants.";
+    scientificNameInstruction = "For biological entities, ALWAYS provide: 1) the scientific binomial name (e.g., 'Panthera leo', 'Quercus robur'), and 2) the taxonomic family (e.g., 'Felidae', 'Fabaceae'). Both are REQUIRED for accurate classification.";
+  }
 
   let featureImageInstruction = config.includeFeatureImages
     ? "For each feature, provide a valid, DIRECT public URL to an image file illustrating the trait if available."
@@ -1292,18 +1313,19 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     
     Constraints:
     1.  **Language**: ${langInstruction}
-    2.  **Topic**: The general subject.
-    3.  **Geography**: Restrict entities to this region/biome.
-    4.  **Taxonomy**: Restrict to this Family/Genus/Order if specified.
-    5.  **Quantity**: Generate exactly or close to the requested number of entities and features.
-    6.  **Focus**: ${focusInstruction}
-    7.  **Detail Level**: ${detailInstruction}
-    8.  **SCIENTIFIC NAMES**: ${scientificNameInstruction}
-    9.  **MEDIA**: 
+    2.  **Category**: ${categoryInstruction}
+    3.  **Topic**: The general subject.
+    4.  **Geography**: Restrict entities to this region/biome.
+    5.  **Taxonomy**: Restrict to this Family/Genus/Order if specified.
+    6.  **Quantity**: Generate exactly or close to the requested number of entities and features.
+    7.  **Focus**: ${focusInstruction}
+    8.  **Detail Level**: ${detailInstruction}
+    9.  **SCIENTIFIC NAMES**: ${scientificNameInstruction}
+    10. **MEDIA**: 
         - Feature Images: ${featureImageInstruction}
         - External Links: ${linkInstruction}
-    ${config.requiredFeatures && config.requiredFeatures.length > 0 ? `10. **REQUIRED FEATURES**: You MUST include ALL of the following features in the key: ${config.requiredFeatures.join(', ')}. These are mandatory and must be among the features generated.` : ''}
-    ${config.requiredSpecies && config.requiredSpecies.length > 0 ? `11. **REQUIRED SPECIES**: You MUST include ALL of the following species in the key: ${config.requiredSpecies.slice(0, 10).join(', ')}${config.requiredSpecies.length > 10 ? ` (and ${config.requiredSpecies.length - 10} more)` : ''}. These species are MANDATORY. For species with incomplete data, include them anyway and fill what you can.` : ''}
+    ${config.requiredFeatures && config.requiredFeatures.length > 0 ? `11. **REQUIRED FEATURES**: You MUST include ALL of the following features in the key: ${config.requiredFeatures.join(', ')}. These are mandatory and must be among the features generated.` : ''}
+    ${config.requiredSpecies && config.requiredSpecies.length > 0 ? `12. **REQUIRED SPECIES**: You MUST include ALL of the following species in the key: ${config.requiredSpecies.slice(0, 10).join(', ')}${config.requiredSpecies.length > 10 ? ` (and ${config.requiredSpecies.length - 10} more)` : ''}. These species are MANDATORY. For species with incomplete data, include them anyway and fill what you can.` : ''}
 
     Output Requirements:
     1.  List of distinctive features. Each feature must have 2+ states.
@@ -1472,7 +1494,8 @@ export const generateKeyFromTopic = async (
     const imageMap = await fetchImagesForEntities(
       entitiesToFetch,
       config.language,
-      onImageProgress
+      onImageProgress,
+      config.category
     );
     
     // Update entities with fetched images, remove temporary scientificName field
