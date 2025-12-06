@@ -5,6 +5,7 @@ export type FeatureFocus = 'general' | 'reproductive' | 'vegetative';
 export interface FeatureState {
   id: string;
   label: string;
+  imageUrl?: string;
 }
 
 export interface Feature {

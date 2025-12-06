@@ -24,9 +24,13 @@ const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeoutM
  * IMAGE FETCHING SYSTEM - Multi-source approach for maximum reliability
  * ============================================================================
  * Priority order:
- * 1. iNaturalist API (best for biodiversity - has curated species photos)
- * 2. Wikipedia/Wikimedia Commons (good general coverage)
- * 3. Picsum placeholder (fallback with consistent seeded images)
+ * 1. Biodiversity4All (Portuguese/Iberian biodiversity via iNaturalist API)
+ * 2. iNaturalist API (best for biodiversity - has curated species photos)
+ * 3. Flickr (disabled due to CORS - included as reference link only)
+ * 4. Wikipedia/Wikimedia Commons (good general coverage)
+ * 5. Wikimedia Commons direct search
+ * 6. PlantNet (AI-powered plant identification with extensive photo database)
+ * 7. POWO - Plants of the World Online (Kew Gardens - herbarium specimens/exsicatas)
  */
 
 /**
@@ -69,41 +73,14 @@ async function fetchINaturalistImage(searchTerm: string): Promise<string | null>
 
 /**
  * Fetch image from Flickr using public search API
- * Good for a wide variety of biological images
+ * DISABLED: Flickr's public API has CORS restrictions that prevent browser calls
  * https://www.flickr.com/
  */
 async function fetchFlickrImage(searchTerm: string): Promise<string | null> {
-  try {
-    // Flickr public search (no API key needed for basic search)
-    // We use the public feed API which returns recent photos matching the tag
-    const encodedTerm = encodeURIComponent(searchTerm);
-    
-    // Try Flickr's public API with JSON callback
-    const response = await fetchWithTimeout(
-      `https://www.flickr.com/services/feeds/photos_public.gne?tags=${encodedTerm}&tagmode=all&format=json&nojsoncallback=1`,
-      {},
-      5000
-    );
-    
-    if (!response.ok) return null;
-    
-    const data = await response.json();
-    
-    if (data.items && data.items.length > 0) {
-      // Get the first image with a valid media URL
-      for (const item of data.items) {
-        if (item.media?.m) {
-          // Convert from small to medium size (_m -> _z for 640px)
-          return item.media.m.replace('_m.jpg', '_z.jpg');
-        }
-      }
-    }
-    
-    return null;
-  } catch (error) {
-    console.warn(`Flickr fetch failed for "${searchTerm}":`, error);
-    return null;
-  }
+  // Flickr's public API blocks CORS requests from browsers
+  // This function is disabled to prevent console errors
+  // Flickr is still included as a reference link in generateEntityLinks()
+  return null;
 }
 
 /**
@@ -228,6 +205,251 @@ async function fetchWikipediaImage(entityName: string, language: string = 'pt'):
 }
 
 /**
+ * Fetch image from Plant Illustrations - excellent source for botanical illustrations
+ * http://plantillustrations.org/ - extensive collection of scientific botanical art
+ */
+async function fetchPlantIllustrationsImage(searchTerm: string): Promise<string | null> {
+  try {
+    // Plant Illustrations has a search API that returns illustrations
+    // The site uses a simple search interface
+    const searchUrl = `https://plantillustrations.org/api.php?action=opensearch&search=${encodeURIComponent(searchTerm)}&limit=5&format=json`;
+    
+    // Try alternative approach: direct search page scraping approach won't work,
+    // so we use a pattern-based URL construction for known species
+    // The site structure: plantillustrations.org/illustration.php?id_illustration=XXXXX
+    
+    // Try the Biodiversity Heritage Library API which indexes many botanical illustrations
+    const bhlUrl = `https://www.biodiversitylibrary.org/api3?op=PublicationSearch&searchterm=${encodeURIComponent(searchTerm)}&searchtype=F&page=1&apikey=&format=json`;
+    
+    // Alternative: Use the BHL name search which often has botanical illustrations
+    const bhlNameUrl = `https://www.biodiversitylibrary.org/api3?op=NameSearch&name=${encodeURIComponent(searchTerm)}&format=json`;
+    
+    const response = await fetchWithTimeout(bhlNameUrl, {}, 5000);
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    
+    // BHL returns name records which may have associated illustrations
+    if (data.Result && data.Result.length > 0) {
+      const nameRecord = data.Result[0];
+      if (nameRecord.BHLTITLE) {
+        // Try to get illustrations from the title
+        const titleUrl = `https://www.biodiversitylibrary.org/api3?op=GetTitleMetadata&id=${nameRecord.TitleID}&items=t&format=json`;
+        const titleResponse = await fetchWithTimeout(titleUrl, {}, 5000);
+        if (titleResponse.ok) {
+          const titleData = await titleResponse.json();
+          // Look for items with illustrations
+          if (titleData.Result?.Items) {
+            for (const item of titleData.Result.Items) {
+              if (item.ThumbnailUrl) {
+                return item.ThumbnailUrl;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`Plant Illustrations/BHL fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from PlantNet - AI-powered plant identification platform
+ * Has extensive crowdsourced photo database for plants worldwide
+ * https://identify.plantnet.org/
+ */
+async function fetchPlantNetImage(searchTerm: string): Promise<string | null> {
+  try {
+    // PlantNet has a species API that can return images
+    // The API endpoint for species search
+    const encodedTerm = encodeURIComponent(searchTerm);
+    
+    // Try PlantNet's species API (public endpoint)
+    const response = await fetchWithTimeout(
+      `https://api.plantnet.org/v1/species?q=${encodedTerm}&limit=1`,
+      { 
+        headers: { 
+          'Accept': 'application/json'
+        } 
+      },
+      5000
+    );
+    
+    if (!response.ok) {
+      // PlantNet's public API may have restrictions
+      // Try alternative: my-api.plantnet.org (public species search)
+      const altResponse = await fetchWithTimeout(
+        `https://my-api.plantnet.org/v2/species/search?q=${encodedTerm}&lang=pt`,
+        { headers: { 'Accept': 'application/json' } },
+        5000
+      );
+      
+      if (!altResponse.ok) return null;
+      
+      const altData = await altResponse.json();
+      if (altData.results && altData.results.length > 0) {
+        const species = altData.results[0];
+        // Check for images in the result
+        if (species.images && species.images.length > 0) {
+          const img = species.images[0];
+          if (img.url?.m) return img.url.m; // medium size
+          if (img.url?.s) return img.url.s; // small size
+          if (img.url?.o) return img.url.o; // original
+        }
+      }
+      return null;
+    }
+    
+    const data = await response.json();
+    
+    // PlantNet returns species with images array
+    if (data.results && data.results.length > 0) {
+      for (const species of data.results) {
+        // Check for images
+        if (species.images && species.images.length > 0) {
+          const img = species.images[0];
+          // PlantNet images have different size URLs
+          if (img.url?.m) return img.url.m; // medium
+          if (img.url?.s) return img.url.s; // small  
+          if (img.url?.o) return img.url.o; // original
+          if (typeof img.url === 'string') return img.url;
+        }
+        
+        // Some responses have defaultImage
+        if (species.defaultImage) {
+          if (species.defaultImage.m) return species.defaultImage.m;
+          if (species.defaultImage.s) return species.defaultImage.s;
+        }
+      }
+    }
+    
+    // Direct species lookup if search didn't return images
+    if (data.species) {
+      if (data.species.images && data.species.images.length > 0) {
+        const img = data.species.images[0];
+        if (img.url?.m) return img.url.m;
+        if (img.url?.s) return img.url.s;
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`PlantNet fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch image from POWO (Plants of the World Online) - Kew Gardens
+ * Excellent source for herbarium specimen images (exsicatas) and botanical illustrations
+ * Uses the public Kew API to search for plant images
+ * https://powo.science.kew.org/
+ */
+async function fetchPOWOImage(searchTerm: string): Promise<string | null> {
+  try {
+    // POWO uses Kew's public API for plant name lookups
+    // First, search for the species in POWO
+    const searchParams = new URLSearchParams({
+      q: searchTerm,
+      f: 'accepted_names' // Only accepted names
+    });
+    
+    const searchResponse = await fetchWithTimeout(
+      `https://powo.science.kew.org/api/2/search?${searchParams}`,
+      { headers: { 'Accept': 'application/json' } },
+      5000
+    );
+    
+    if (!searchResponse.ok) {
+      // Try alternative endpoint: IPNI (International Plant Names Index)
+      const ipniParams = new URLSearchParams({
+        q: searchTerm,
+        perPage: '1'
+      });
+      
+      const ipniResponse = await fetchWithTimeout(
+        `https://www.ipni.org/api/1/search?${ipniParams}`,
+        { headers: { 'Accept': 'application/json' } },
+        5000
+      );
+      
+      if (!ipniResponse.ok) return null;
+      
+      const ipniData = await ipniResponse.json();
+      if (ipniData.results && ipniData.results.length > 0) {
+        const firstResult = ipniData.results[0];
+        // IPNI links to POWO - construct the image URL if available
+        if (firstResult.fqId) {
+          const powoUrl = `https://powo.science.kew.org/taxon/${firstResult.fqId}`;
+          // Return a thumbnail placeholder - POWO doesn't have direct image API
+          // This signals to fetch from POWO page directly
+          return null; // We can't get direct images from IPNI/POWO without scraping
+        }
+      }
+      return null;
+    }
+    
+    const data = await searchResponse.json();
+    
+    // POWO search results contain image URLs for some species
+    if (data.results && data.results.length > 0) {
+      for (const result of data.results) {
+        // Check for image in the result
+        if (result.images && result.images.length > 0) {
+          const image = result.images[0];
+          // POWO images typically come from various herbarium collections
+          if (image.url) {
+            return image.url;
+          }
+          if (image.thumbnail) {
+            return image.thumbnail;
+          }
+        }
+        
+        // If no image in search results, try to get taxon details
+        if (result.fqId) {
+          try {
+            const taxonResponse = await fetchWithTimeout(
+              `https://powo.science.kew.org/api/2/taxon/${result.fqId}`,
+              { headers: { 'Accept': 'application/json' } },
+              5000
+            );
+            
+            if (taxonResponse.ok) {
+              const taxonData = await taxonResponse.json();
+              
+              // Check for images in taxon details
+              if (taxonData.images && taxonData.images.length > 0) {
+                const img = taxonData.images[0];
+                if (img.url) return img.url;
+                if (img.thumbnail) return img.thumbnail;
+              }
+              
+              // Check for distribution/specimen images
+              if (taxonData.distribution?.images?.length > 0) {
+                const distImg = taxonData.distribution.images[0];
+                if (distImg.url) return distImg.url;
+              }
+            }
+          } catch (e) {
+            // Taxon lookup failed, continue to next result
+          }
+        }
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn(`POWO fetch failed for "${searchTerm}":`, error);
+    return null;
+  }
+}
+
+/**
  * Fetch image from Wikimedia Commons - good for scientific/biological content
  */
 async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | null> {
@@ -238,7 +460,7 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
       generator: 'search',
       gsrsearch: `${searchTerm}`,
       gsrnamespace: '6', // File namespace
-      gsrlimit: '3',
+      gsrlimit: '5', // Get more results to filter through
       prop: 'imageinfo',
       iiprop: 'url|mime',
       iiurlwidth: '400',
@@ -252,12 +474,71 @@ async function fetchWikimediaCommonsImage(searchTerm: string): Promise<string | 
     const data = await response.json();
     const pages = data.query?.pages;
     
+    // URLs/patterns to reject - these are not species-specific photos
+    const rejectedPatterns = [
+      // Book covers and historical publications
+      /Flora_Brasiliensis/i,           // Flora Brasiliensis book covers
+      /Flora_Fluminensis/i,            // Flora Fluminensis book covers
+      /Systema_Naturae/i,              // Systema Naturae covers
+      /Species_Plantarum/i,            // Species Plantarum covers
+      /Genera_Plantarum/i,             // Genera Plantarum covers
+      /Prodromus_Systematis/i,         // Prodromus covers
+      /Historia_Naturalis/i,           // Historia Naturalis covers
+      /\/page\d+-\d+px-/i,             // DjVu page thumbnails (book scans)
+      /\.djvu\//i,                     // DjVu files (usually book scans)
+      /Volume_\d+/i,                   // Volume indicators (book covers)
+      /Part_\d+/i,                     // Part indicators combined with Volume
+      /Book_cover/i,                   // Explicit book covers
+      /Title_page/i,                   // Title pages
+      /Frontispiece/i,                 // Frontispieces
+      /Index_page/i,                   // Index pages
+      /Table_of_contents/i,            // Table of contents
+      /Herbarium_sheet_only/i,         // Generic herbarium references
+      
+      // Maps and geographic content
+      /\.svg\//i,                      // SVG files (usually maps, diagrams, logos)
+      /Municip[io_]/i,                 // Municipality maps (Municipio, Municip_)
+      /Microregion/i,                  // Microregion maps
+      /Mesoregion/i,                   // Mesoregion maps
+      /Locator_map/i,                  // Locator maps
+      /_location/i,                    // Location maps
+      /_map\./i,                       // Generic maps
+      /_in_Brazil/i,                   // "X in Brazil" location maps
+      /_in_South_America/i,            // South America location maps
+      /Brazil_location/i,              // Brazil location maps
+      /Estado_de_/i,                   // State maps
+      /Bandeira_de_/i,                 // Flags
+      /Brasao_de_/i,                   // Coats of arms
+      /Coat_of_arms/i,                 // Coats of arms (English)
+      /Flag_of_/i,                     // Flags (English)
+      
+      // Diagrams, charts, and non-photographic content (but NOT botanical illustrations)
+      /Phylogenetic_tree/i,            // Phylogenetic tree diagrams
+      /Cladogram/i,                    // Cladograms (abstract diagrams)
+      /Distribution_map/i,             // Distribution maps
+      /Range_map/i,                    // Range maps
+      /Logo[_\-]/i,                    // Logos
+      /Icon[_\-]/i,                    // Icons
+      /Stamp_of_/i,                    // Postage stamps
+      /Coin_of_/i,                     // Coins
+      /Infographic/i,                  // Infographics
+    ];
+    
     if (pages) {
-      // Find first valid image (prefer jpg/png)
+      // Find first valid image (prefer jpg/png), filtering out rejected patterns
       for (const page of Object.values(pages) as any[]) {
         const info = page?.imageinfo?.[0];
         if (info?.thumburl && info?.mime?.startsWith('image/')) {
-          return info.thumburl;
+          const url = info.thumburl;
+          
+          // Check if URL matches any rejected pattern
+          const isRejected = rejectedPatterns.some(pattern => pattern.test(url));
+          if (isRejected) {
+            console.log(`[Wikimedia] Rejected generic image: ${url.substring(0, 100)}...`);
+            continue; // Skip this image, try next
+          }
+          
+          return url;
         }
       }
     }
@@ -282,6 +563,12 @@ export function extractBinomial(name: string): string {
   // Remove any text in parentheses at the end (author abbreviations like "(Sw.)")
   let cleaned = name.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
   
+  // Check if this looks like a family name (ends in -aceae, -idae, -ales, etc.)
+  // Family names should NOT be used for image search - return empty to skip
+  if (/^[A-Z][a-z]+(aceae|idae|ales|ineae|oidea|iformes)$/i.test(cleaned)) {
+    return ''; // Return empty for family names
+  }
+  
   // Split by spaces and take only the first two words (genus + epithet)
   const parts = cleaned.split(/\s+/);
   
@@ -291,14 +578,24 @@ export function extractBinomial(name: string): string {
     const genus = parts[0];
     const epithet = parts[1];
     
+    // Skip if epithet looks like a family suffix
+    if (/^(aceae|idae|ales|ineae|oidea|iformes)$/i.test(epithet)) {
+      return genus; // Return just the genus
+    }
+    
     // Return only if epithet looks valid (starts lowercase, no author-like patterns)
     if (/^[a-z]/.test(epithet) && !epithet.includes('.')) {
       return `${genus} ${epithet}`;
     }
   }
   
-  // Fallback: return original if we can't parse it
-  return name;
+  // If single word and not a family name, return as-is (could be genus)
+  if (parts.length === 1 && !/aceae|idae|ales$/i.test(parts[0])) {
+    return parts[0];
+  }
+  
+  // Fallback: return original if we can't parse it (but not family names)
+  return cleaned;
 }
 
 /**
@@ -344,9 +641,21 @@ async function fetchEntityImage(
     const wikiImage = await fetchWikipediaImage(term, language);
     if (wikiImage) return wikiImage;
     
-    // 5. Try Wikimedia Commons
+    // 5. Try Plant Illustrations / BHL (excellent botanical illustrations)
+    const illustrationImage = await fetchPlantIllustrationsImage(term);
+    if (illustrationImage) return illustrationImage;
+    
+    // 6. Try Wikimedia Commons
     const commonsImage = await fetchWikimediaCommonsImage(term);
     if (commonsImage) return commonsImage;
+    
+    // 7. Try PlantNet (AI plant identification with extensive photo database)
+    const plantNetImage = await fetchPlantNetImage(term);
+    if (plantNetImage) return plantNetImage;
+    
+    // 8. Try POWO (Plants of the World Online) - last resort for botanical specimens/exsicatas
+    const powoImage = await fetchPOWOImage(term);
+    if (powoImage) return powoImage;
   }
   
   return null;
@@ -397,12 +706,13 @@ export async function fetchImagesForEntities(
 
 /**
  * Generate a consistent placeholder URL based on entity name
- * Uses Picsum with a seeded hash for reproducible results
+ * DEPRECATED: Now returns empty string to avoid mockup images
+ * Real images should come from API searches only
  */
 function getPlaceholderImage(entityName: string): string {
-  // Use a hash of the name as seed for consistent placeholder
-  const seed = encodeURIComponent(entityName.toLowerCase().replace(/\s+/g, '-'));
-  return `https://picsum.photos/seed/${seed}/400/300`;
+  // Return empty string - no more mockup/placeholder images
+  // This ensures only real images are displayed
+  return '';
 }
 
 /**
@@ -791,6 +1101,70 @@ const importSchema: Schema = {
   required: ["projectName", "projectDescription", "features", "entities"]
 };
 
+// Schema for REFINE operations - preserves ID format to avoid complex remapping
+// Uses the SAME ID format as the project: traits = { featureId: [stateId, stateId, ...] }
+const refineSchema: Schema = {
+  type: Type.OBJECT,
+  properties: {
+    entities: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: { type: Type.STRING, description: "REQUIRED: The exact entity ID from the input - MUST preserve original ID exactly" },
+          name: { type: Type.STRING, description: "Entity name - MUST preserve original name if not explicitly changing" },
+          scientificName: { type: Type.STRING, description: "Scientific binomial name - MUST preserve original if present" },
+          family: { type: Type.STRING, description: "Taxonomic family name - MUST preserve original if present" },
+          description: { type: Type.STRING, description: "Entity description - can be enhanced" },
+          traitsMap: { 
+            type: Type.STRING, 
+            description: "JSON string of traits object in format {\"featureId\": [\"stateId\", ...]} - MUST use exact IDs from input"
+          }
+        },
+        required: ["id", "name", "traitsMap"]
+      }
+    },
+    stats: {
+      type: Type.OBJECT,
+      properties: {
+        processedCount: { type: Type.NUMBER, description: "Number of entities processed" },
+        modifiedCount: { type: Type.NUMBER, description: "Number of entities with added/changed traits" },
+        skippedCount: { type: Type.NUMBER, description: "Number of entities skipped (no changes needed)" }
+      }
+    }
+  },
+  required: ["entities"]
+};
+
+// Schema for fillGaps - minimal output, just entity ID + traits that were filled
+const fillGapsSchema: Schema = {
+  type: Type.OBJECT,
+  properties: {
+    filledEntities: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          entityId: { type: Type.STRING, description: "The exact entity ID from input" },
+          filledTraits: { 
+            type: Type.STRING, 
+            description: "JSON string: only the NEW traits being added, format {\"featureId\": [\"stateId\"]}" 
+          }
+        },
+        required: ["entityId", "filledTraits"]
+      }
+    },
+    stats: {
+      type: Type.OBJECT,
+      properties: {
+        entitiesWithGaps: { type: Type.NUMBER },
+        traitsAdded: { type: Type.NUMBER }
+      }
+    }
+  },
+  required: ["filledEntities"]
+};
+
 interface PromptData {
   systemInstruction: string;
   prompt: string;
@@ -1133,6 +1507,276 @@ export const generateKeyFromCustomPrompt = async (
   return await callGemini(ai, model, customPrompt, systemInstruction, generationSchema, language, true);
 };
 
+/**
+ * Specialized function for REFINE/EXPAND/CLEAN operations.
+ * Uses a schema that preserves entity IDs and trait format to avoid complex remapping.
+ * Returns partial data (only modified entities) to reduce token usage and processing time.
+ */
+export const refineExistingProject = async (
+  prompt: string,
+  existingProject: Project,
+  apiKey: string,
+  model: string = "gemini-2.5-flash",
+  language: string = 'pt',
+  mode: 'fillGaps' | 'refine' | 'expand' | 'clean' = 'refine'
+): Promise<Project> => {
+  if (!apiKey) throw new Error("API Key is missing");
+  const ai = new GoogleGenAI({ apiKey: apiKey });
+
+  // Build ID lookup maps for fast access
+  const featureById = new Map(existingProject.features.map(f => [f.id, f]));
+  const stateById = new Map<string, string>(); // stateId -> featureId
+  existingProject.features.forEach(f => f.states.forEach(s => stateById.set(s.id, f.id)));
+  const entityById = new Map(existingProject.entities.map(e => [e.id, e]));
+
+  // Choose schema based on mode
+  const schema = mode === 'fillGaps' ? fillGapsSchema : refineSchema;
+  
+  const systemInstruction = mode === 'fillGaps'
+    ? `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
+CRITICAL: Use ONLY the exact IDs provided in the input. Return ONLY the entityId and the NEW traits being added.
+Format for filledTraits: JSON string like {"featureId": ["stateId"]}`
+    : `You are an expert taxonomist. Your task is to improve an identification key while preserving all IDs.
+CRITICAL: Every entity MUST have its original "id" field preserved exactly.
+Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
+
+  try {
+    const response = await callGeminiRaw(ai, model, prompt, systemInstruction, schema);
+    
+    // CRITICAL: Safely parse response, default to empty object if parsing fails
+    let data: any = {};
+    try {
+      data = repairTruncatedJson(response) || {};
+    } catch (parseError) {
+      console.error('[refineExistingProject] Failed to parse AI response:', parseError);
+      console.log('[refineExistingProject] Returning original project due to parse failure');
+      return existingProject; // ALWAYS preserve original on parse failure
+    }
+    
+    // Debug log to understand what we received
+    console.log(`[refineExistingProject] Mode: ${mode}, Response type: ${typeof data}, Response keys:`, Object.keys(data || {}));
+    console.log(`[refineExistingProject] Raw response preview:`, response?.substring(0, 500));
+
+    if (mode === 'fillGaps') {
+      // fillGaps mode: merge only the new traits into existing project
+      // CRITICAL: Check multiple possible response formats
+      const filledEntities = data?.filledEntities || data?.entities || [];
+      
+      console.log(`[refineExistingProject] fillGaps - found ${filledEntities.length} filled entities of ${existingProject.entities.length} total`);
+      
+      if (!Array.isArray(filledEntities) || filledEntities.length === 0) {
+        console.log('[refineExistingProject] No valid filled entities found, returning original project INTACT');
+        return existingProject; // ALWAYS preserve original
+      }
+
+      // Create a map of filled traits by entity ID
+      const filledTraitsMap = new Map<string, Record<string, string[]>>();
+      for (const item of filledEntities) {
+        try {
+          // Handle different response formats
+          const entityId = item.entityId || item.id;
+          const traitsData = item.filledTraits || item.traitsMap || item.traits;
+          
+          const traits = typeof traitsData === 'string' 
+            ? JSON.parse(traitsData) 
+            : traitsData;
+            
+          if (entityId && traits) {
+            filledTraitsMap.set(entityId, traits);
+          }
+        } catch (e) {
+          console.warn(`Failed to parse traits for entity ${item.entityId || item.id}`);
+        }
+      }
+
+      // Merge filled traits into existing entities
+      const mergedEntities = existingProject.entities.map(entity => {
+        const newTraits = filledTraitsMap.get(entity.id);
+        if (!newTraits) return entity; // No changes for this entity
+
+        // Validate and merge new traits
+        const validatedTraits = { ...entity.traits };
+        for (const [featureId, stateIds] of Object.entries(newTraits)) {
+          const feature = featureById.get(featureId);
+          if (!feature) continue; // Skip invalid feature IDs
+
+          const validStateIds = feature.states.map(s => s.id);
+          const validNewStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
+          
+          if (validNewStates.length > 0) {
+            // Merge with existing (don't replace)
+            const existing = validatedTraits[featureId] || [];
+            const combined = [...new Set([...existing, ...validNewStates])];
+            validatedTraits[featureId] = combined;
+          }
+        }
+
+        return { ...entity, traits: validatedTraits };
+      });
+
+      // CRITICAL SAFETY CHECK: Ensure we never lose entities in fillGaps
+      if (mergedEntities.length !== existingProject.entities.length) {
+        console.error(`[refineExistingProject] CRITICAL: Entity count mismatch! Original: ${existingProject.entities.length}, Merged: ${mergedEntities.length}`);
+        console.log('[refineExistingProject] Returning original project to prevent data loss');
+        return existingProject;
+      }
+
+      console.log(`[refineExistingProject] fillGaps SUCCESS: ${filledTraitsMap.size} entities updated, ${mergedEntities.length} total entities preserved`);
+      return { ...existingProject, entities: mergedEntities };
+    } else {
+      // refine/expand/clean mode: full entity update
+      const responseEntities = data.entities || [];
+      if (responseEntities.length === 0) {
+        console.warn('[refineExistingProject] AI returned no entities, preserving original');
+        return existingProject;
+      }
+
+      // Process each returned entity
+      const processedEntities: Entity[] = [];
+      const seenIds = new Set<string>();
+
+      for (const item of responseEntities) {
+        // Try to match to existing entity
+        const existingEntity = entityById.get(item.id);
+        
+        // Parse traitsMap
+        let traits: Record<string, string[]> = {};
+        try {
+          traits = typeof item.traitsMap === 'string' 
+            ? JSON.parse(item.traitsMap) 
+            : (item.traitsMap || {});
+        } catch (e) {
+          console.warn(`Failed to parse traitsMap for entity ${item.name}`);
+          traits = existingEntity?.traits || {};
+        }
+
+        // Validate trait IDs
+        const validatedTraits: Record<string, string[]> = {};
+        for (const [featureId, stateIds] of Object.entries(traits)) {
+          const feature = featureById.get(featureId);
+          if (!feature) continue;
+
+          const validStateIds = feature.states.map(s => s.id);
+          const validStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
+          
+          if (validStates.length > 0) {
+            validatedTraits[featureId] = validStates;
+          }
+        }
+
+        // Build entity, preserving existing data where not provided
+        const entityId = item.id || existingEntity?.id || generateId();
+        if (seenIds.has(entityId)) continue; // Skip duplicates
+        seenIds.add(entityId);
+
+        processedEntities.push({
+          id: entityId,
+          name: item.name || existingEntity?.name || 'Unknown',
+          scientificName: item.scientificName || existingEntity?.scientificName,
+          family: item.family || existingEntity?.family,
+          description: item.description || existingEntity?.description || '',
+          imageUrl: existingEntity?.imageUrl || '', // Always preserve existing image
+          links: existingEntity?.links || [],
+          traits: Object.keys(validatedTraits).length > 0 ? validatedTraits : (existingEntity?.traits || {})
+        });
+      }
+
+      // For EXPAND mode, also include any existing entities not in response
+      if (mode === 'expand') {
+        for (const entity of existingProject.entities) {
+          if (!seenIds.has(entity.id)) {
+            processedEntities.push(entity);
+            seenIds.add(entity.id);
+          }
+        }
+      }
+      
+      // For REFINE/CLEAN mode, ALSO preserve any entities that weren't returned by AI
+      // This is CRITICAL to prevent data loss when AI omits some entities
+      if (mode === 'refine' || mode === 'clean') {
+        const missingEntities: Entity[] = [];
+        for (const entity of existingProject.entities) {
+          if (!seenIds.has(entity.id)) {
+            missingEntities.push(entity);
+            processedEntities.push(entity);
+            seenIds.add(entity.id);
+          }
+        }
+        if (missingEntities.length > 0) {
+          console.warn(`[refineExistingProject] AI omitted ${missingEntities.length} entities - PRESERVING them to prevent data loss:`);
+          missingEntities.forEach(e => console.warn(`  - ${e.name} (${e.id})`));
+        }
+      }
+
+      // Safety check: if we lost too many entities, return original
+      if (processedEntities.length < existingProject.entities.length * 0.5) {
+        console.warn(`[refineExistingProject] Too many entities lost (${processedEntities.length} vs ${existingProject.entities.length}), preserving original`);
+        return existingProject;
+      }
+
+      return {
+        ...existingProject,
+        entities: processedEntities,
+        features: existingProject.features // Always preserve features
+      };
+    }
+  } catch (error) {
+    console.error('[refineExistingProject] Error:', error);
+    throw error;
+  }
+};
+
+// Raw Gemini call that returns text (used by refineExistingProject)
+async function callGeminiRaw(
+  ai: GoogleGenAI,
+  modelName: string,
+  contents: string,
+  systemInstruction: string,
+  responseSchema: Schema
+): Promise<string> {
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  const fallbackModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+  
+  const generate = async (model: string, retryCount: number = 0): Promise<string> => {
+    const maxRetries = 3;
+    try {
+      const response = await ai.models.generateContent({
+        model: model.trim(),
+        contents: contents,
+        config: {
+          systemInstruction,
+          responseMimeType: "application/json",
+          responseSchema,
+          maxOutputTokens: 65536,
+        }
+      });
+      return response.text || "{}";
+    } catch (error: any) {
+      const errorMessage = error.message || '';
+      const errorCode = error.status || 0;
+
+      // Handle 503/429 with retry
+      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount < maxRetries) {
+        const waitTime = Math.pow(2, retryCount) * 2000;
+        console.warn(`Retrying ${model} in ${waitTime/1000}s (attempt ${retryCount + 1})`);
+        await delay(waitTime);
+        return generate(model, retryCount + 1);
+      }
+
+      // Try fallback model
+      const currentIndex = fallbackModels.indexOf(model);
+      if (currentIndex < fallbackModels.length - 1) {
+        console.warn(`Falling back from ${model} to ${fallbackModels[currentIndex + 1]}`);
+        return generate(fallbackModels[currentIndex + 1], 0);
+      }
+
+      throw error;
+    }
+  };
+
+  return generate(modelName || "gemini-2.5-flash");
+}
+
 // Unified Gemini Call function with Schema support
 async function callGemini(
   ai: GoogleGenAI,
@@ -1144,7 +1788,13 @@ async function callGemini(
   includeLinks: boolean = true
 ): Promise<Project> {
 
-  const generateContentWithFallback = async (currentModel: string): Promise<any> => {
+  // Helper to wait with exponential backoff
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const generateContentWithFallback = async (currentModel: string, retryCount: number = 0): Promise<any> => {
+    const maxRetries = 3;
+    const fallbackModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+    
     try {
       return await ai.models.generateContent({
         model: currentModel.trim(),
@@ -1158,13 +1808,37 @@ async function callGemini(
         }
       });
     } catch (error: any) {
-      if (error.message?.includes("404") || error.message?.includes("NOT_FOUND")) {
-        const fallbackModel = "gemini-2.5-flash";
-        if (currentModel !== fallbackModel) {
-          console.warn(`Model ${currentModel} not found, falling back to ${fallbackModel}`);
-          return await generateContentWithFallback(fallbackModel);
+      const errorMessage = error.message || '';
+      const errorCode = error.status || (errorMessage.includes('503') ? 503 : errorMessage.includes('429') ? 429 : 0);
+      
+      // Handle model not found - try fallback models
+      if (errorMessage.includes("404") || errorMessage.includes("NOT_FOUND")) {
+        const currentIndex = fallbackModels.indexOf(currentModel);
+        const nextModel = fallbackModels[currentIndex + 1] || fallbackModels[0];
+        if (nextModel !== currentModel) {
+          console.warn(`Model ${currentModel} not found, falling back to ${nextModel}`);
+          return await generateContentWithFallback(nextModel, 0);
         }
       }
+      
+      // Handle overloaded (503) or rate limit (429) - retry with exponential backoff
+      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded') || errorMessage.includes('UNAVAILABLE')) && retryCount < maxRetries) {
+        const waitTime = Math.pow(2, retryCount) * 2000; // 2s, 4s, 8s
+        console.warn(`Model ${currentModel} is overloaded (attempt ${retryCount + 1}/${maxRetries}). Retrying in ${waitTime/1000}s...`);
+        await delay(waitTime);
+        return await generateContentWithFallback(currentModel, retryCount + 1);
+      }
+      
+      // If max retries exceeded for current model, try next fallback model
+      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount >= maxRetries) {
+        const currentIndex = fallbackModels.indexOf(currentModel);
+        const nextModel = fallbackModels[currentIndex + 1];
+        if (nextModel) {
+          console.warn(`Model ${currentModel} still overloaded after ${maxRetries} retries. Trying ${nextModel}...`);
+          return await generateContentWithFallback(nextModel, 0);
+        }
+      }
+      
       throw error;
     }
   };

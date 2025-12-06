@@ -1,0 +1,6563 @@
+{
+  "id": "2srcxy9la",
+  "name": "Chave Vegetativa BR319",
+  "description": "Uma chave de identificação botânica focada em características vegetativas para espécies comuns encontradas ao longo da BR-319, na Amazônia brasileira. Destinada a estudantes e entusiastas da flora amazônica.",
+  "features": [
+    {
+      "id": "c7l44hpeh",
+      "name": "Hábito de Crescimento",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "p4otg7rjz",
+          "label": "Árvore"
+        },
+        {
+          "id": "ynku19u2r",
+          "label": "Arbusto"
+        },
+        {
+          "id": "ruletn6mc",
+          "label": "Trepadeira"
+        },
+        {
+          "id": "9cxvelzo8",
+          "label": "Erva"
+        },
+        {
+          "id": "71a6kn0ti",
+          "label": "Palma"
+        },
+        {
+          "id": "q6aibzt64",
+          "label": "Hemi-epífita"
+        }
+      ]
+    },
+    {
+      "id": "jtw6itucz",
+      "name": "Exsudato do Caule",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "d0ckvte1v",
+          "label": "Ausente"
+        },
+        {
+          "id": "u5etkzxnv",
+          "label": "Leitoso"
+        },
+        {
+          "id": "53wzrt2sz",
+          "label": "Resinoso"
+        },
+        {
+          "id": "qryjwnkep",
+          "label": "Aquoso/Translúcido"
+        }
+      ]
+    },
+    {
+      "id": "q6u5zxfnn",
+      "name": "Filotaxia",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xl49v02oz",
+          "label": "Alterna"
+        },
+        {
+          "id": "uney0569g",
+          "label": "Oposta"
+        },
+        {
+          "id": "zc0xikpzx",
+          "label": "Verticilada"
+        },
+        {
+          "id": "lm5esghdv",
+          "label": "Rosulada"
+        }
+      ]
+    },
+    {
+      "id": "iusbdp02p",
+      "name": "Tipo de Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vxpk5sx2a",
+          "label": "Simples"
+        },
+        {
+          "id": "3yxjf6ugx",
+          "label": "Composta Pinada"
+        },
+        {
+          "id": "9klj96qoh",
+          "label": "Composta Bipinada"
+        },
+        {
+          "id": "vs6mmqwet",
+          "label": "Composta Palmada"
+        },
+        {
+          "id": "0e3c4mihr",
+          "label": "Composta Trifoliolada"
+        }
+      ]
+    },
+    {
+      "id": "psk8ko3pt",
+      "name": "Borda da Lâmina Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "5ui9fcqxe",
+          "label": "Inteira"
+        },
+        {
+          "id": "9djccykh9",
+          "label": "Serrilhada/Dentada"
+        },
+        {
+          "id": "0im8w9drs",
+          "label": "Crenada"
+        }
+      ]
+    },
+    {
+      "id": "aipndtp00",
+      "name": "Presença de Estípulas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "yi4ce1kn1",
+          "label": "Ausentes"
+        },
+        {
+          "id": "haazzus3a",
+          "label": "Presentes"
+        }
+      ]
+    },
+    {
+      "id": "2tubl57rs",
+      "name": "Indumento (Pilosidade) da Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "7lvn7f87g",
+          "label": "Glabro"
+        },
+        {
+          "id": "8j9bjws5h",
+          "label": "Pubescente/Tomentoso"
+        },
+        {
+          "id": "y21q55o33",
+          "label": "Escamoso"
+        },
+        {
+          "id": "i5u7zxh5s",
+          "label": "Híspido"
+        }
+      ]
+    },
+    {
+      "id": "wlv3sbiqp",
+      "name": "Forma da Base da Lâmina Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "w1shu0m95",
+          "label": "Atenuada/Cuneada"
+        },
+        {
+          "id": "11dafcb4y",
+          "label": "Arredondada/Obtusa"
+        },
+        {
+          "id": "ebu9x50jm",
+          "label": "Cordada"
+        },
+        {
+          "id": "f7m3o9xca",
+          "label": "Assimétrica"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "lf38myqgk",
+      "name": "Cajueiro",
+      "scientificName": "Anacardium occidentale L.",
+      "family": "Anacardiaceae",
+      "description": "Árvore de porte médio, conhecida por suas folhas simples e coriáceas, e pela produção do caju. Possui seiva resinosa, podendo ser cáustica.",
+      "imageUrl": "https://static.inaturalist.org/photos/118369068/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "vr3jbdov6",
+      "name": "Tapirira guianensis",
+      "scientificName": "Tapirira guianensis Aubl.",
+      "family": "Anacardiaceae",
+      "description": "Árvore comum na Amazônia, com folhas compostas pinadas e frutos pequenos. A seiva pode ser levemente resinosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/35141799/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "w287w00vn",
+      "name": "Tapirira retusa",
+      "scientificName": "Tapirira retusa Ducke",
+      "family": "Anacardiaceae",
+      "description": "Árvore amazônica, similar a T. guianensis, distinguindo-se por detalhes foliares e distribuição geográfica. Possui folhas compostas pinadas.",
+      "imageUrl": "https://static.inaturalist.org/photos/288329438/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "aelx8hll6",
+      "name": "Thyrsodium spruceanum",
+      "scientificName": "Thyrsodium spruceanum Benth.",
+      "family": "Anacardiaceae",
+      "description": "Árvore da família do caju, encontrada na Amazônia. Possui folhas compostas e geralmente um exsudato resinoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/41563/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ymk4swugn",
+      "name": "Annona montana",
+      "scientificName": "Annona montana Macfad.",
+      "family": "Annonaceae",
+      "description": "Árvore ou arbusto com folhas simples e grandes, frequentemente cultivada pelos seus frutos. O caule não apresenta exsudato marcante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26847764/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "7yufzv64b",
+      "name": "Annona neoinsignis",
+      "scientificName": "Annona neoinsignis H.Rainer",
+      "family": "Annonaceae",
+      "description": "Espécie de Annona da Amazônia, arbustiva ou arbórea, com folhas simples. Similar a outras annonas, mas com características distintivas na flor e fruto.",
+      "imageUrl": "https://static.inaturalist.org/photos/488654727/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "10i5ilu6r",
+      "name": "Guatteria punctata",
+      "scientificName": "Guatteria punctata (Aubl.) R.A.Howard",
+      "family": "Annonaceae",
+      "description": "Árvore ou arbusto amazônico da família Annonaceae, com folhas simples e sem exsudato evidente no caule. Seus ramos são frequentemente pubescentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/493122144/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "0wxx73opd",
+      "name": "Xylopia calophylla",
+      "scientificName": "Xylopia calophylla R.E.Fr.",
+      "family": "Annonaceae",
+      "description": "Árvore amazônica da família Annonaceae, conhecida por suas folhas simples e por vezes com indumento denso. Não possui exsudato significativo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/32140486/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "raitqfxnt",
+      "name": "Couma macrocarpa",
+      "scientificName": "Couma macrocarpa Barb.Rodr.",
+      "family": "Apocynaceae",
+      "description": "Árvore de grande porte, conhecida como Sorva ou Cumá. Possui folhas verticiladas e um látex abundante e leitoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/48029519/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "zc0xikpzx"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "tc9wsx6tv",
+      "name": "Couma utilis",
+      "scientificName": "Couma utilis (Mart.) Müll.Arg.",
+      "family": "Apocynaceae",
+      "description": "Conhecida como Sorva, é uma árvore da Amazônia com exsudato leitoso característico e folhas verticiladas. Seus frutos são comestíveis.",
+      "imageUrl": "https://static.inaturalist.org/photos/255444271/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "zc0xikpzx"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "iz8a0g4sg",
+      "name": "Himatanthus articulatus",
+      "scientificName": "Himatanthus articulatus (Vahl) Woodson",
+      "family": "Apocynaceae",
+      "description": "Árvore com látex branco abundante, folhas simples e caducas em algumas estações. Muito comum em áreas abertas e savanas amazônicas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/177344903/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ar6qs6z94",
+      "name": "Lacmellea arborescens",
+      "scientificName": "Lacmellea arborescens (Müll.Arg.) Monach.",
+      "family": "Apocynaceae",
+      "description": "Árvore pequena a média, característica da floresta amazônica, com folhas simples e exsudato leitoso.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/APOCYNACEAE_Lacmellea_arborescens_%28M%C3%BCll.Arg.%29_Markgr.%2C_MPEG_%28MG035269%29.pdf/page1-400px-APOCYNACEAE_Lacmellea_arborescens_%28M%C3%BCll.Arg.%29_Markgr.%2C_MPEG_%28MG035269%29.pdf.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "2xy01adl8",
+      "name": "Mandevilla pavonii",
+      "scientificName": "Mandevilla pavonii (A.DC.) Woodson",
+      "family": "Apocynaceae",
+      "description": "Trepadeira com folhas simples e brilhantes, característica de florestas tropicais. Apresenta látex leitoso em seus ramos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/334899480/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "owefvl5zj",
+      "name": "Parahancornia amara",
+      "scientificName": "Parahancornia amara (Markgr.) Monach.",
+      "family": "Apocynaceae",
+      "description": "Árvore ou arbusto com folhas simples, elípticas e exsudato leitoso. O fruto é uma baga comestível, mas geralmente amarga, dando nome à espécie.",
+      "imageUrl": "https://picsum.photos/seed/parahancornia-amara/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "9sq0ykp6i",
+      "name": "Parahancornia krukovii",
+      "scientificName": "Parahancornia krukovii Monach.",
+      "family": "Apocynaceae",
+      "description": "Árvore da Amazônia pertencente à família Apocynaceae, caracterizada por folhas simples e a presença de látex leitoso. Seus frutos são comestíveis.",
+      "imageUrl": "https://picsum.photos/seed/parahancornia-krukovii/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "qcrv41i7o",
+      "name": "Rhigospira quadrangularis",
+      "scientificName": "Rhigospira quadrangularis (Müll.Arg.) Miers",
+      "family": "Apocynaceae",
+      "description": "Árvore ou arbusto com folhas simples e exsudato leitoso, comum em áreas de floresta úmida. O nome faz referência aos ramos quadrangulares.",
+      "imageUrl": "https://static.inaturalist.org/photos/46996640/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "dxx26we33",
+      "name": "Ananas ananassoides",
+      "scientificName": "Ananas ananassoides (Baker) L.B.Sm.",
+      "family": "Bromeliaceae",
+      "description": "Espécie silvestre de abacaxi, uma erva terrestre com folhas rígidas, espinhosas e dispostas em roseta, sem exsudato no caule, mas com acúmulo de água nas bainhas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/228903736/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "yog8j6nh3",
+      "name": "Montrichardia arborescens",
+      "scientificName": "Montrichardia arborescens (L.) Schott",
+      "family": "Araceae",
+      "description": "Planta aquática ou palustre, herbácea a subarbustiva, com caule espinhoso e folhas grandes em forma de seta. Exsudato leitoso presente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/1450398/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "fquos2p30",
+      "name": "Philodendron fragrantissimum",
+      "scientificName": "Philodendron fragrantissimum (Hook.) G.Don",
+      "family": "Araceae",
+      "description": "Hemi-epífita com folhas grandes, frequentemente lobadas ou profundamente divididas. Exsudato ausente ou aquoso. Atinge grandes tamanhos no dossel amazônico.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11668086/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "76xy8js1n",
+      "name": "Philodendron hylaeae",
+      "scientificName": "Philodendron hylaeae G.S. Bunting",
+      "family": "Araceae",
+      "description": "Espécie de Philodendron hemi-epífita da Amazônia, com folhas simples, grandes e geralmente cordadas na base. Exsudato aquoso/translúcido ou ausente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/259489155/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "1lvc24wj5",
+      "name": "Philodendron imbe",
+      "scientificName": "Philodendron imbe Schott",
+      "family": "Araceae",
+      "description": "Philodendron popular, cultivado como ornamental, é uma hemi-epífita com folhas brilhantes e base cordada. Exsudato aquoso ou ausente.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Philodendron_imbe.jpg/400px-Philodendron_imbe.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "9fjwtwpf9",
+      "name": "Philodendron sp.nov.",
+      "scientificName": "Philodendron sp.nov.",
+      "family": "Araceae",
+      "description": "Espécie nova de Philodendron ainda não formalmente descrita, com características típicas do gênero: hemi-epífita, folhas simples, geralmente grandes, e sem exsudato leitoso.",
+      "imageUrl": "https://picsum.photos/seed/philodendron-sp.nov./400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "zthqfiafc",
+      "name": "Tucumã",
+      "scientificName": "Astrocaryum aculeatum G.Mey.",
+      "family": "Arecaceae",
+      "description": "Palma com tronco e folhas densamente armados com espinhos. Frutos comestíveis, ricos em óleo. Folhas compostas pinadas em roseta apical.",
+      "imageUrl": "https://static.inaturalist.org/photos/48749262/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "7kcm0bcol",
+      "name": "Maripa",
+      "scientificName": "Attalea maripa (Aubl.) Mart.",
+      "family": "Arecaceae",
+      "description": "Palmeira grande e robusta com folhas pinadas e frutos grandes, comestíveis. Comum em florestas úmidas da Amazônia.",
+      "imageUrl": "https://static.inaturalist.org/photos/339374581/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "szlenmbs1",
+      "name": "Babaçu",
+      "scientificName": "Attalea speciosa Mart. ex Spreng.",
+      "family": "Arecaceae",
+      "description": "Palmeira de grande importância econômica na Amazônia, com tronco colunar e folhas muito grandes, pinadas. Os frutos fornecem óleo e alimento.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/445166192/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "q8drhc2c1",
+      "name": "Bactris hirta",
+      "scientificName": "Bactris hirta Mart.",
+      "family": "Arecaceae",
+      "description": "Pequena palma ou arbusto de palmeira, geralmente com múltiplos caules e espinhos. As folhas são pinadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/32750200/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "01xqx8k05",
+      "name": "Açaí-da-mata",
+      "scientificName": "Euterpe precatoria Mart.",
+      "family": "Arecaceae",
+      "description": "Palmeira alta e elegante, com tronco único e folhas pinadas longas. Produz frutos pequenos e arroxeados, fonte do açaí consumido. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/1477243/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "cz6cv5npe",
+      "name": "Buriti",
+      "scientificName": "Mauritia flexuosa L.f.",
+      "family": "Arecaceae",
+      "description": "Palmeira imponente de áreas alagadas ou úmidas (buritizais), com folhas grandes, palmadas e frutos ricos em óleo. Exsudato ausente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/54264643/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "fu6oow47q",
+      "name": "Caranaí",
+      "scientificName": "Mauritiella aculeata (Kunth) Burret",
+      "family": "Arecaceae",
+      "description": "Palmeira de áreas pantanosas, com tronco espinhoso e folhas palmadas. É menor que o buriti e forma touceiras. Exsudato ausente.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Asparagus_racemosus_Willd._%285780788233%29.jpg/500px-Asparagus_racemosus_Willd._%285780788233%29.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "71a6kn0ti"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "42p4gx5xx",
+      "name": "Adenocalymma moringifolium",
+      "scientificName": "Adenocalymma moringifolium (DC.) L.G.Lohmann",
+      "family": "Bignoniaceae",
+      "description": "Trepadeira lenhosa com folhas compostas trifolioladas, comum em bordas de florestas. Geralmente sem exsudato marcante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/332204452/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "0e3c4mihr"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "4u0yua4y7",
+      "name": "Handroanthus obscurus",
+      "scientificName": "Handroanthus obscurus (Bureau & K.Schum.) Mattos",
+      "family": "Bignoniaceae",
+      "description": "Árvore de porte médio a grande, conhecida por suas flores vistosas. Possui folhas palmadas e geralmente não apresenta exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/227492160/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "lueimy85i",
+      "name": "Pariri / Jacarandá-copaia",
+      "scientificName": "Jacaranda copaia (Aubl.) D.Don.",
+      "family": "Bignoniaceae",
+      "description": "Árvore de grande porte, muito comum na Amazônia, com folhas bipinadas grandes e característico cheiro quando as folhas são maceradas. Ausência de exsudato.",
+      "imageUrl": "https://picsum.photos/seed/pariri-%2F-jacarand%C3%A1-copaia/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "aezuxkdgw",
+      "name": "Trattinnickia burserifolia",
+      "scientificName": "Trattinnickia burserifolia Mart.",
+      "family": "Burseraceae",
+      "description": "Árvore amazônica com folhas compostas pinadas e exsudato resinoso, típico da família Burseraceae, que libera cheiro característico ao ser cortado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/427992223/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "g43h2kotd",
+      "name": "Trema micrantha",
+      "scientificName": "Trema micrantha (L.) Blume",
+      "family": "Cannabaceae",
+      "description": "Pioneira comum em áreas perturbadas, é uma árvore pequena a arbusto com folhas simples, borda serrilhada e base assimétrica. Sem exsudato marcante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/204998634/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "i5u7zxh5s"
+        ],
+        "wlv3sbiqp": [
+          "f7m3o9xca"
+        ]
+      }
+    },
+    {
+      "id": "gzybcy5uk",
+      "name": "Caryocar glabrum subsp. parviflorum",
+      "scientificName": "Caryocar glabrum subsp. parviflorum (A.C.Sm.) Prance & M.F.Silva",
+      "family": "Caryocaraceae",
+      "description": "Subespécie de uma árvore produtora de pequi, com folhas trifolioladas e sem exsudato. Encontrada em florestas amazônicas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/10641714/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "0e3c4mihr"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "qg1zl6zra",
+      "name": "Acioa edulis",
+      "scientificName": "Acioa edulis Prance",
+      "family": "Chrysobalanaceae",
+      "description": "Árvore amazônica, com folhas simples. Não apresenta exsudato notável. Seus frutos são comestíveis e apreciados localmente.",
+      "imageUrl": "https://picsum.photos/seed/acioa-edulis/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ktpkqi93x",
+      "name": "Hymenopus latifolius",
+      "scientificName": "Hymenopus latifolius (Benth. ex Hook.f.) Sothers & Prance",
+      "family": "Chrysobalanaceae",
+      "description": "Árvore amazônica com folhas simples e grandes, típica da família Chrysobalanaceae. Exsudato ausente e superfície da folha geralmente glabra.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/221300386/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "1xhivhwf7",
+      "name": "Leptobalanus sprucei",
+      "scientificName": "Leptobalanus sprucei (Hook.f.) Sothers & Prance",
+      "family": "Chrysobalanaceae",
+      "description": "Árvore da Amazônia, com folhas simples e sem exsudato leitoso ou resinoso. Folhas geralmente glabras e com margem inteira.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Flora_Brasiliensis_Volume_14_Part_2.djvu/page1-400px-Flora_Brasiliensis_Volume_14_Part_2.djvu.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "5v33nqqoq",
+      "name": "Clusia grandiflora",
+      "scientificName": "Clusia grandiflora Splitg.",
+      "family": "Clusiaceae",
+      "description": "Árvore ou arbusto com folhas coriáceas, simples e exsudato amarelado ou incolor. Frequentemente hemi-epífita em estágios jovens.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/300846181/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "fkxlzoe0t",
+      "name": "Clusia insignis",
+      "scientificName": "Clusia insignis Mart.",
+      "family": "Clusiaceae",
+      "description": "Árvore ou arbusto com folhas grandes, coriáceas e exsudato amarelado a incolor. Comum em florestas úmidas. Pode iniciar como hemi-epífita.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/249403396/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "dbsh56xdz",
+      "name": "Clusia lopezii",
+      "scientificName": "Clusia lopezii Maguire",
+      "family": "Clusiaceae",
+      "description": "Espécie de Clusia, arbórea ou arbustiva, com folhas simples e brilhantes. Característica pela presença de um látex que pode ser amarelo ou incolor, mas é resinoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/249404370/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "uvmsou71d",
+      "name": "Clusia panapanari",
+      "scientificName": "Clusia panapanari (Aubl.) Choisy",
+      "family": "Clusiaceae",
+      "description": "Árvore ou arbusto com folhas coriáceas, simples, e um exsudato resinoso, geralmente amarelado, que é característico do gênero.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/263286229/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "mit8ezhxp",
+      "name": "Cochlospermum orinocense",
+      "scientificName": "Cochlospermum orinocense (Kunth) Steud.",
+      "family": "Cochlospermaceae",
+      "description": "Árvore com tronco fissurado, folhas palmadas e caducas, e flores grandes e amarelas. Exsudato ausente ou aquoso.",
+      "imageUrl": "https://static.inaturalist.org/photos/32835990/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "0v49dukkv",
+      "name": "Scleria cf. melaleuca",
+      "scientificName": "Scleria cf. melaleuca",
+      "family": "Cyperaceae",
+      "description": "Planta herbácea, graminoide, com caules triangulares e folhas lineares. A 'Scleria cf. melaleuca' indica semelhança com a espécie, mas sem confirmação taxonômica.",
+      "imageUrl": "https://picsum.photos/seed/scleria-cf.-melaleuca/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "0xsxxr9p6",
+      "name": "Scleria cyperina",
+      "scientificName": "Scleria cyperina Willd.",
+      "family": "Cyperaceae",
+      "description": "Erva da família Cyperaceae, com caules triangulares e folhas longas e estreitas. Sem exsudato. Comum em áreas úmidas e abertas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/64446549/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "fb3cmseuu",
+      "name": "Davilla nitida",
+      "scientificName": "Davilla nitida (Vahl) Kubitzki",
+      "family": "Dilleniaceae",
+      "description": "Trepadeira lenhosa ou subarbusto com folhas simples, ásperas e frequentemente com bordas serrilhadas. Exsudato ausente. Típica da Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/260726986/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "i5u7zxh5s"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "0sam1oisg",
+      "name": "Doliocarpus dasyanthus",
+      "scientificName": "Doliocarpus dasyanthus Kubitzki",
+      "family": "Dilleniaceae",
+      "description": "Trepadeira lenhosa amazônica com folhas simples e sem exsudato. Os ramos e folhas podem ser pubescentes, e a borda foliar inteira ou levemente crenada.",
+      "imageUrl": "https://picsum.photos/seed/doliocarpus-dasyanthus/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "duhdgdm37",
+      "name": "Doliocarpus dentatus subsp. latifolius",
+      "scientificName": "Doliocarpus dentatus subsp. latifolius Kubitzki",
+      "family": "Dilleniaceae",
+      "description": "Subespécie de trepadeira lenhosa, encontrada na Amazônia. Possui folhas simples e sem exsudato, e o indumento pode variar. A borda foliar é comumente dentada.",
+      "imageUrl": "https://static.inaturalist.org/photos/30524182/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "5iumil1e1",
+      "name": "Dioscorea chondrocarpa",
+      "scientificName": "Dioscorea chondrocarpa Griseb.",
+      "family": "Dioscoreaceae",
+      "description": "Trepadeira herbácea do gênero inhame, com folhas simples e nervuras proeminentes. Exsudato ausente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/214936682/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "ht8nd5vnx",
+      "name": "Alchornea discolor",
+      "scientificName": "Alchornea discolor Poepp.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore de médio porte, com folhas simples e frequentemente discolor. Exsudato ausente, mas seiva pode ser levemente aquosa. Comum em florestas de terra firme.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/193842040/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "kw3pqbjay",
+      "name": "Aparisthmium cordatum",
+      "scientificName": "Aparisthmium cordatum (A.Juss.) Baill.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore pequena a média da Amazônia, com folhas simples e cordadas na base. Exsudato ausente ou aquoso. O pecíolo é longo e pode ter glândulas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/263358064/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "qziyrwxbe",
+      "name": "Conceveiba guianensis",
+      "scientificName": "Conceveiba guianensis Aubl.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore amazônica, com folhas simples e sem exsudato notável. Frequentemente com pequenos tricomas e nervuras bem marcadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/218973650/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "zphbsioco",
+      "name": "Croton matourensis",
+      "scientificName": "Croton matourensis Aubl.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore ou arbusto com folhas simples, frequentemente com indumento estrelado característico. Pode apresentar um exsudato aquoso ou resinoso em pequena quantidade.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60097306/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "vp3pwsdca",
+      "name": "Mabea nitida",
+      "scientificName": "Mabea nitida Spruce ex Benth.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore ou arbusto com folhas simples e brilhantes, sem exsudato marcante. Comum em florestas de terra firme da Amazônia.",
+      "imageUrl": "https://static.inaturalist.org/photos/486192525/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "mcn6o867w",
+      "name": "Mabea subsessilis",
+      "scientificName": "Mabea subsessilis Pax & K.Hoffm.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore ou arbusto amazônico com folhas simples e sem exsudato. Distingue-se por ter pecíolos muito curtos, quase sésseis.",
+      "imageUrl": "https://static.inaturalist.org/photos/57103359/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "m2q1nb97v",
+      "name": "Abarema jupunba",
+      "scientificName": "Abarema jupunba (Willd.) Britton",
+      "family": "Fabaceae",
+      "description": "Árvore de médio porte, comum em florestas de várzea na Amazônia. Possui folhas bipinadas grandes e geralmente sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/1539855/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ycjpae5ua",
+      "name": "Andira surinamensis",
+      "scientificName": "Andira surinamensis (Bondt) Splitg. ex Amshoff",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia, com folhas compostas imparipinadas e sem exsudato. Madeira de boa qualidade, utilizada na região.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/548608634/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "nkbmdnpr8",
+      "name": "Bowdichia virgilioides",
+      "scientificName": "Bowdichia virgilioides Kunth.",
+      "family": "Fabaceae",
+      "description": "Árvore conhecida como Sucupira-preta, com folhas compostas pinadas. Flores roxas vistosas. Ocorre em áreas de cerrado e transição na Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/237309193/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "hqi9rdg8c",
+      "name": "Clathrotropis nitida",
+      "scientificName": "Clathrotropis nitida (Benth.) Harms",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, nativa da Amazônia. Apresenta folhas compostas imparipinadas e geralmente sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/clathrotropis-nitida/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "4tyrac0jz",
+      "name": "Diplotropis purpurea",
+      "scientificName": "Diplotropis purpurea (Rich.) Amshoff",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia, conhecida pela madeira dura. Folhas compostas imparipinadas e sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/6692004/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "q15gu9kdo",
+      "name": "Diplotropis rodriguesii",
+      "scientificName": "Diplotropis rodriguesii H.C.Lima",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica, com folhas compostas pinadas. Sem exsudato. É uma espécie arbórea de porte médio a grande.",
+      "imageUrl": "https://picsum.photos/seed/diplotropis-rodriguesii/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "oir2s9uri",
+      "name": "Hydrochorea corymbosa",
+      "scientificName": "Hydrochorea corymbosa (Rich.) Barneby & J.W. Grimes",
+      "family": "Fabaceae",
+      "description": "Árvore pequena a média, com folhas bipinadas, frequentemente encontrada em margens de rios e áreas de várzea. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/227802712/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "dfk4ae03m",
+      "name": "Hymenolobium excelsum",
+      "scientificName": "Hymenolobium excelsum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, da Amazônia, com folhas compostas pinadas e estípulas presentes. Sem exsudato.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Falta_imagem_aves.svg/400px-Falta_imagem_aves.svg.png",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "icx3z3xd4",
+      "name": "Hymenolobium heterocarpum",
+      "scientificName": "Hymenolobium heterocarpum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica com folhas compostas pinadas. Sem exsudato. É uma espécie arbórea robusta.",
+      "imageUrl": "https://picsum.photos/seed/hymenolobium-heterocarpum/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "vgzoxem9q",
+      "name": "Hymenolobium pulcherrimum",
+      "scientificName": "Hymenolobium pulcherrimum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, comum na Amazônia. Possui folhas compostas pinadas, estípulas e geralmente sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/277539875/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "vvk6kl6fl",
+      "name": "Hymenolobium sericeum",
+      "scientificName": "Hymenolobium sericeum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia com folhas compostas pinadas, e uma pilosidade sedosa. Sem exsudato. Valorizada pela madeira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/253920932/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "s67u3omuz",
+      "name": "Inga alba",
+      "scientificName": "Inga alba (Sw.) Willd.",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica, muitas vezes encontrada em áreas de várzea. Folhas compostas pinadas, com glândulas no raque, e estípulas presentes. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/360299049/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "p9nylqjf7",
+      "name": "Inga edulis",
+      "scientificName": "Inga edulis Mart.",
+      "family": "Fabaceae",
+      "description": "Conhecido como Ingá-cipó ou ingazeiro, é uma árvore ou arbusto com folhas compostas pinadas e estípulas. Seus frutos são comestíveis. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/32845019/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "i5a4wzho8",
+      "name": "Inga lateriflora",
+      "scientificName": "Inga lateriflora Miq.",
+      "family": "Fabaceae",
+      "description": "Árvore ou arbusto de Inga, encontrado na Amazônia, com folhas compostas pinadas e estípulas. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/217210351/medium.png",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "g615mflx0",
+      "name": "Inga laurina",
+      "scientificName": "Inga laurina (Sw.) Willd.",
+      "family": "Fabaceae",
+      "description": "Árvore ou arbusto com folhas compostas pinadas e estípulas. Encontrada em várias formações vegetais, inclusive na Amazônia. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/29354517/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "4cysfdtec",
+      "name": "Inga suaveolens",
+      "scientificName": "Inga suaveolens Ducke",
+      "family": "Fabaceae",
+      "description": "Espécie de Inga da Amazônia, com folhas compostas pinadas e estípulas. Seus folíolos podem ser ligeiramente pubescentes.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/BrugmansiaFromBelow.jpg/500px-BrugmansiaFromBelow.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "lqexvdkj0",
+      "name": "Leptolobium nitens",
+      "scientificName": "Leptolobium nitens Vogel",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia, com folhas compostas imparipinadas. Sem exsudato. Frequentemente com folíolos brilhantes.",
+      "imageUrl": "https://static.inaturalist.org/photos/119932670/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "rtm2xqbi6",
+      "name": "Machaerium caudatum",
+      "scientificName": "Machaerium caudatum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica, com folhas compostas pinadas e sem exsudato. Muitas espécies do gênero apresentam acúleos nos ramos.",
+      "imageUrl": "https://picsum.photos/seed/machaerium-caudatum/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "9eb855g4c",
+      "name": "Machaerium quinata",
+      "scientificName": "Machaerium quinata (Aubl.) Sandwith",
+      "family": "Fabaceae",
+      "description": "Árvore ou trepadeira lenhosa, com folhas compostas pinadas. Pode apresentar acúleos. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/335399709/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "2zxpacvet",
+      "name": "Mimosa rufescens",
+      "scientificName": "Mimosa rufescens Benth.",
+      "family": "Fabaceae",
+      "description": "Arbusto ou subarbusto espinhoso, com folhas bipinadas e folíolos pequenos, que podem se fechar ao toque. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/mimosa-rufescens/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ony3j5iqm",
+      "name": "Parkia panurensis",
+      "scientificName": "Parkia panurensis Benth. ex H.C.Hopkins",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, da Amazônia, com folhas bipinadas grandes e folíolos numerosos. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60008380/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "k21antirf",
+      "name": "Pterocarpus amazonum",
+      "scientificName": "Pterocarpus amazonum (Mart. ex Benth.) Amshoff",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica, com folhas compostas imparipinadas. Possui exsudato resinoso avermelhado ('sangue de drago') em algumas espécies do gênero.",
+      "imageUrl": "https://static.inaturalist.org/photos/105077663/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "kyrqt76h1",
+      "name": "Schnella confertiflora",
+      "scientificName": "Schnella confertiflora (Benth.) Wunderlin",
+      "family": "Fabaceae",
+      "description": "Trepadeira ou arbusto com folhas simples, bilobadas (em forma de casco de boi), e sem exsudato. Comum em áreas de capoeira ou floresta secundária.",
+      "imageUrl": "https://picsum.photos/seed/schnella-confertiflora/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "86i33x0a5",
+      "name": "Senegalia altiscandens",
+      "scientificName": "Senegalia altiscandens (Ducke) Seigler & Ebinger",
+      "family": "Fabaceae",
+      "description": "Trepadeira lenhosa com acúleos e folhas bipinadas, frequentemente escandente. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/senegalia-altiscandens/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "dk6x5zqom",
+      "name": "Stryphnodendron foreroi",
+      "scientificName": "Stryphnodendron foreroi E.M.O.Martins",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia, com folhas bipinadas. A casca pode ser utilizada medicinalmente. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/stryphnodendron-foreroi/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ry4n0colo",
+      "name": "Stryphnodendron pulcherrimum",
+      "scientificName": "Stryphnodendron pulcherrimum (Willd.) Hochr.",
+      "family": "Fabaceae",
+      "description": "Árvore de porte médio, com folhas bipinadas e folíolos pequenos. Sem exsudato. Casca é adstringente, usada medicinalmente.",
+      "imageUrl": "https://static.inaturalist.org/photos/58628947/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "zlq97ms4t",
+      "name": "Swartzia tomentifera",
+      "scientificName": "Swartzia tomentifera (Ducke) Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore ou arbusto com folhas compostas pinadas, frequentemente com indumento tomentoso. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/swartzia-tomentifera/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "l6fh782sr",
+      "name": "Tachigali chrysophylla",
+      "scientificName": "Tachigali chrysophylla (Poepp.) Zarucchi & Herend.",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia com folhas compostas pinadas, e uma característica pilosidade dourada na face inferior dos folíolos. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/565203627/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "o14fq58g0",
+      "name": "Tachigali glauca",
+      "scientificName": "Tachigali glauca Tul.",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica de porte médio a grande, com folhas compostas pinadas, geralmente com a face inferior dos folíolos glauca (azul-esverdeada). Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/591367491/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "o5gwui1hd",
+      "name": "Tachigali micropetala",
+      "scientificName": "Tachigali micropetala (Ducke) Zarucchi & Pipoly",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica de folhas compostas pinadas. Sem exsudato. Distingue-se por ter pétalas pequenas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/277653355/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "58vepi42l",
+      "name": "Tachigali poeppigiana",
+      "scientificName": "Tachigali poeppigiana Tul.",
+      "family": "Fabaceae",
+      "description": "Árvore de porte médio a grande, com folhas compostas pinadas. Sem exsudato. Ocorre em várias regiões da Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/205271065/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "mj59pn2o8",
+      "name": "Tachigali setifera",
+      "scientificName": "Tachigali setifera (Ducke) Zarucchi & Herend.",
+      "family": "Fabaceae",
+      "description": "Árvore amazônica, com folhas compostas pinadas e frequentemente com indumento setoso (pelos rígidos). Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/205132172/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "i5u7zxh5s"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "kv9h5md3a",
+      "name": "Tachigali tinctoria",
+      "scientificName": "Tachigali tinctoria (Benth.) Zarucchi & Herend.",
+      "family": "Fabaceae",
+      "description": "Árvore da Amazônia, com folhas compostas pinadas. A espécie pode ser usada como corante. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/tachigali-tinctoria/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "1si34nrn9",
+      "name": "Vatairea guianensis",
+      "scientificName": "Vatairea guianensis Aubl.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, com folhas compostas imparipinadas. Sem exsudato. Madeira valorizada na Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/38033337/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "aovuk9w6v",
+      "name": "Goupia glabra",
+      "scientificName": "Goupia glabra Aubl.",
+      "family": "Goupiaceae",
+      "description": "Árvore de grande porte, uma das madeiras mais valorizadas da Amazônia. Folhas simples, borda inteira, sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/6928521/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "e3y6pod2q",
+      "name": "Heliconia acuminata",
+      "scientificName": "Heliconia acuminata L.C.Rich.",
+      "family": "Heliconiaceae",
+      "description": "Erva de grande porte, com folhas simples e grandes, parecidas com as da bananeira. Sem exsudato. Floração vistosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/358939632/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "v65co2oqb",
+      "name": "Roucheria elata",
+      "scientificName": "Roucheria elata Ducke",
+      "family": "Humiriaceae",
+      "description": "Árvore amazônica de porte médio a grande, com folhas simples e sem exsudato. Frequentemente com estípulas interpeciolares.",
+      "imageUrl": "https://picsum.photos/seed/roucheria-elata/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "q2wbewcf3",
+      "name": "Endopleura uchi",
+      "scientificName": "Endopleura uchi (Huber) Cuatrec.",
+      "family": "Humiriaceae",
+      "description": "Uxi. Árvore de grande porte com folhas simples e sem exsudato. Frutos comestíveis e saborosos, amplamente consumidos na Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/209850828/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "10nb1oe9q",
+      "name": "Humiria balsamifera",
+      "scientificName": "Humiria balsamifera (Aubl.) A.St.-Hil.",
+      "family": "Humiriaceae",
+      "description": "Árvore ou arbusto com folhas simples, coriáceas, e com glândulas pontuadas. O exsudato é resinoso e aromático, usado em bálsamos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60685/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "yjr5afrzi",
+      "name": "Sacoglottis mattogrossensis",
+      "scientificName": "Sacoglottis mattogrossensis Malme",
+      "family": "Humiriaceae",
+      "description": "Árvore amazônica, com folhas simples e exsudato resinoso. Madeira dura e valorizada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/300538677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "hg7dkqwd1",
+      "name": "Sacoglottis mattogrossensis var. subintegra",
+      "scientificName": "Sacoglottis mattogrossensis var. subintegra (Ducke) Cuatrec.",
+      "family": "Humiriaceae",
+      "description": "Variedade de Sacoglottis mattogrossensis, com folhas simples e exsudato resinoso. Caracteriza-se por ter a borda da folha subinteira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/300538677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "poqx6gjje",
+      "name": "Vismia cayennensis",
+      "scientificName": "Vismia cayennensis (Jacq.) Pers.",
+      "family": "Hypericaceae",
+      "description": "Árvore ou arbusto com folhas simples e exsudato amarelado a avermelhado em cortes. Comum em áreas perturbadas e secundárias.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/308616810/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "o7tjg0p1h",
+      "name": "Vismia japurensis",
+      "scientificName": "Vismia japurensis Reichardt",
+      "family": "Hypericaceae",
+      "description": "Árvore ou arbusto com folhas simples e exsudato alaranjado-avermelhado ao cortar. Comum em bordas de florestas e capoeiras amazônicas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/49335013/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "wb7kp3juv",
+      "name": "Licaria guianensis",
+      "scientificName": "Licaria guianensis Aubl.",
+      "family": "Lauraceae",
+      "description": "Árvore de médio porte, nativa da Amazônia, com folhas simples. Sem exsudato visível. Flores perfumadas e frutos pequenos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Licaria_guianensis_Aublet_1775_pl_121.jpg/500px-Licaria_guianensis_Aublet_1775_pl_121.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "47x8jeuvn",
+      "name": "Nectandra cuspidata",
+      "scientificName": "Nectandra cuspidata Nees & Mart.",
+      "family": "Lauraceae",
+      "description": "Árvore de porte médio, com folhas simples, elípticas e sem exsudato. Madeira utilizada localmente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/298689154/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "qa9pu9d6i",
+      "name": "Ocotea cernua",
+      "scientificName": "Ocotea cernua (Nees) Mez",
+      "family": "Lauraceae",
+      "description": "Árvore amazônica de folhas simples. Sem exsudato. Uma das muitas espécies de Ocotea com importância ecológica na floresta.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/199504618/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "b342amlod",
+      "name": "Ocotea guianensis",
+      "scientificName": "Ocotea guianensis Aubl.",
+      "family": "Lauraceae",
+      "description": "Árvore de médio porte, com folhas simples e sem exsudato. Comum em florestas de terra firme. Importante para a fauna local.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45133125/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "tclokikl4",
+      "name": "Ocotea scabrella",
+      "scientificName": "Ocotea scabrella van der Werff",
+      "family": "Lauraceae",
+      "description": "Árvore amazônica, com folhas simples e pecíolos avermelhados. O nome 'scabrella' refere-se à textura levemente áspera. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/ocotea-scabrella/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "zyb1efwlx",
+      "name": "Castanheira-do-Brasil",
+      "scientificName": "Bertholletia excelsa Bonpl.",
+      "family": "Lecythidaceae",
+      "description": "Árvore de grande porte, emblemática da Amazônia. Folhas simples, grandes, e sem exsudato. Seus frutos são a castanha-do-pará.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/MatoGrosso_Municip_Castanheira.svg/500px-MatoGrosso_Municip_Castanheira.svg.png",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "wk91vbet7",
+      "name": "Cariniana domestica",
+      "scientificName": "Cariniana domestica (Mart.) Miers",
+      "family": "Lecythidaceae",
+      "description": "Árvore amazônica, com folhas simples e pecíolos longos. Sem exsudato. É uma madeira valorizada na região.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/323943061/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "55vbqls2h",
+      "name": "Eschweilera sp.1",
+      "scientificName": "Eschweilera sp.1",
+      "family": "Lecythidaceae",
+      "description": "Espécie de Eschweilera, árvore comum na Amazônia. Possui folhas simples e geralmente coriáceas, sem exsudato. Uma das madeiras mais comuns da região.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Eschweilera_sp.%2C_Lecythidaceae%2C_Atlantic_forest%2C_northern_littoral_of_Bahia%2C_Brazil_%2816529371860%29.jpg/500px-Eschweilera_sp.%2C_Lecythidaceae%2C_Atlantic_forest%2C_northern_littoral_of_Bahia%2C_Brazil_%2816529371860%29.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "7wbneega1",
+      "name": "Lecythis chartacea",
+      "scientificName": "Lecythis chartacea O.Berg.",
+      "family": "Lecythidaceae",
+      "description": "Árvore amazônica da família da castanheira, com folhas simples e sem exsudato. Seus frutos são capsulares e duros, semelhantes a panelinhas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/405913108/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "62qye7m8i",
+      "name": "Bonyunia magnifica",
+      "scientificName": "Bonyunia magnifica J.R.Grant",
+      "family": "Lythraceae",
+      "description": "Árvore amazônica com folhas simples e glabras. Sem exsudato. Ocorre em florestas de terra firme.",
+      "imageUrl": "https://picsum.photos/seed/bonyunia-magnifica/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "3k5jj8hqa",
+      "name": "Bonyunia venusta",
+      "scientificName": "Bonyunia venusta J.R.Grant",
+      "family": "Lythraceae",
+      "description": "Árvore amazônica, similar a B. magnifica, com folhas simples e glabras. Sem exsudato. De porte médio.",
+      "imageUrl": "https://picsum.photos/seed/bonyunia-venusta/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "25gd9k2ly",
+      "name": "Lafoensia vandelliana",
+      "scientificName": "Lafoensia vandelliana Cham. & Schltdl.",
+      "family": "Lythraceae",
+      "description": "Árvore de médio porte, com folhas simples e pecíolos avermelhados. Sem exsudato. Ocorre em áreas de cerrado e transição na Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28893769/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "thkah1xfu",
+      "name": "Byrsonima japurensis",
+      "scientificName": "Byrsonima japurensis A.Juss",
+      "family": "Malpighiaceae",
+      "description": "Árvore ou arbusto com folhas simples, frequentemente coriáceas, e indumento sedoso ou tomentoso. Sem exsudato.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Flora_Brasiliensis_Volume_12_Part_1.djvu/page1-400px-Flora_Brasiliensis_Volume_12_Part_1.djvu.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "531e5cw47",
+      "name": "Byrsonima linguifera",
+      "scientificName": "Byrsonima linguifera Cuatrec.",
+      "family": "Malpighiaceae",
+      "description": "Árvore ou arbusto amazônico com folhas simples, frequentemente com indumento característico e estípulas. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/byrsonima-linguifera/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "fsudll7p3",
+      "name": "Sumaúma",
+      "scientificName": "Ceiba pentandra (L.) Gaertn.",
+      "family": "Malvaceae",
+      "description": "Árvore gigantesca, com tronco muitas vezes esbranquiçado e esporos na base (sapopemas). Folhas palmadas. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/32279278/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "hq0muat6n",
+      "name": "Eriotheca cf. longitubulosa",
+      "scientificName": "Eriotheca cf. longitubulosa",
+      "family": "Malvaceae",
+      "description": "Árvore da Amazônia, com folhas palmadas, sem exsudato. 'cf.' indica semelhança com a espécie, mas não é uma identificação definitiva.",
+      "imageUrl": "https://picsum.photos/seed/eriotheca-cf.-longitubulosa/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "hjlq4eh9q",
+      "name": "Eriotheca globosa",
+      "scientificName": "Eriotheca globosa (Aubl.) A.Robyns",
+      "family": "Malvaceae",
+      "description": "Árvore amazônica de folhas palmadas e sem exsudato. Frequente em áreas de terra firme.",
+      "imageUrl": "https://static.inaturalist.org/photos/125972652/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "o0l44e1nr",
+      "name": "Eriotheca surinamensis",
+      "scientificName": "Eriotheca surinamensis (Uittien) A.Robyns",
+      "family": "Malvaceae",
+      "description": "Árvore de médio a grande porte com folhas palmadas e sem exsudato. Ocorre em florestas tropicais da Amazônia.",
+      "imageUrl": "https://picsum.photos/seed/eriotheca-surinamensis/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "z1zrxg1wr",
+      "name": "Pachira duckei",
+      "scientificName": "Pachira duckei (A.Robyns) Fern.Alonso",
+      "family": "Malvaceae",
+      "description": "Árvore da Amazônia, com folhas palmadas e sem exsudato. Uma espécie do gênero popularmente conhecido como Monguba.",
+      "imageUrl": "https://picsum.photos/seed/pachira-duckei/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "3o283gdub",
+      "name": "Marantaceae sp.1",
+      "scientificName": "Marantaceae sp.1",
+      "family": "Marantaceae",
+      "description": "Planta herbácea, rizomatosa, com folhas simples e grandes, frequentemente com padrões distintos de nervação ou coloração. Sem exsudato. Uma espécie indeterminada do gênero.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Goeppertia_sp._nov.%2C_Marantaceae%2C_Atlantic_forest%2C_northeastern_Bahia%2C_Brazil_%2810781281963%29.jpg/500px-Goeppertia_sp._nov.%2C_Marantaceae%2C_Atlantic_forest%2C_northeastern_Bahia%2C_Brazil_%2810781281963%29.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "xir0cna1x",
+      "name": "Bellucia grossularioides",
+      "scientificName": "Bellucia grossularioides (L.) Triana",
+      "family": "Melastomataceae",
+      "description": "Árvore ou arbusto com folhas simples, tricomas estrelados e nervuras proeminentes. Sem exsudato. Frutos comestíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/13465202/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "oa9ytozvp",
+      "name": "Meriania urceolata",
+      "scientificName": "Meriania urceolata Triana",
+      "family": "Melastomataceae",
+      "description": "Árvore ou arbusto amazônico com folhas simples, sem exsudato. Frequentemente com uma folha menor na mesma axila. Indumento pode ser denso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/30507272/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "b8l5t2qxm",
+      "name": "Miconia cuspidata",
+      "scientificName": "Miconia cuspidata Naudin",
+      "family": "Melastomataceae",
+      "description": "Arbusto ou árvore pequena com folhas simples e tricomas estrelados. Sem exsudato. Comum em áreas de capoeira ou floresta secundária.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/34305136/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "m4qobfisg",
+      "name": "Miconia dispar",
+      "scientificName": "Miconia dispar Benth.",
+      "family": "Melastomataceae",
+      "description": "Árvore ou arbusto com folhas simples, que podem ter densa pilosidade na face inferior. Sem exsudato. Comum em florestas tropicais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/570128074/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "u26hgj14l",
+      "name": "Miconia lepidota",
+      "scientificName": "Miconia lepidota DC.",
+      "family": "Melastomataceae",
+      "description": "Arbusto ou árvore pequena com folhas simples e densamente escamosas ou pubescentes na face inferior, dando um aspecto prateado. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/28944147/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "mydz50f0t",
+      "name": "Miconia poeppigii",
+      "scientificName": "Miconia poeppigii Triana.",
+      "family": "Melastomataceae",
+      "description": "Árvore ou arbusto com folhas simples e indumento denso. Sem exsudato. Comum em florestas úmidas da Amazônia.",
+      "imageUrl": "https://static.inaturalist.org/photos/37901830/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "yfeusb47l",
+      "name": "Tococa guianensis",
+      "scientificName": "Tococa guianensis Aubl.",
+      "family": "Melastomataceae",
+      "description": "Arbusto ou árvore pequena, notável por suas folhas com bolsas (domácias) na base do pecíolo, que servem de abrigo para formigas. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11522031/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "f126qc3rp",
+      "name": "Tococa stephanotricha",
+      "scientificName": "Tococa stephanotricha Naudin",
+      "family": "Melastomataceae",
+      "description": "Arbusto ou árvore pequena com folhas simples e bolsas para formigas. O indumento pode ser estrelado. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/tococa-stephanotricha/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "jmur1n8p0",
+      "name": "Carapa guianensis",
+      "scientificName": "Carapa guianensis Aubl.",
+      "family": "Meliaceae",
+      "description": "Andiroba. Árvore de grande porte, com folhas compostas pinadas grandes e sem exsudato. Produz sementes oleaginosas, de onde se extrai óleo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/211579196/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ajotxpgxf",
+      "name": "Abuta grandifolia",
+      "scientificName": "Abuta grandifolia (Mart.) Sandwith",
+      "family": "Menispermaceae",
+      "description": "Trepadeira lenhosa com folhas simples, grandes e cordadas na base. Sem exsudato. Conhecida por suas propriedades medicinais.",
+      "imageUrl": "https://static.inaturalist.org/photos/37321715/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "sjgf9pxm0",
+      "name": "Abuta sandwithiana",
+      "scientificName": "Abuta sandwithiana Krukoff & Barneby",
+      "family": "Menispermaceae",
+      "description": "Trepadeira lenhosa amazônica com folhas simples e base cordada. Sem exsudato. Similar a outras espécies de Abuta.",
+      "imageUrl": "https://picsum.photos/seed/abuta-sandwithiana/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "viygobpxs",
+      "name": "Ficus broadwayi",
+      "scientificName": "Ficus broadwayi Urb.",
+      "family": "Moraceae",
+      "description": "Figueira de médio porte, que pode ser hemi-epífita. Possui folhas simples e látex leitoso em todos os tecidos.",
+      "imageUrl": "https://static.inaturalist.org/photos/2569696/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "yu63mm2qa",
+      "name": "Ficus duckeana",
+      "scientificName": "Ficus duckeana C.C.Berg & J.E.L.S.Ribeiro",
+      "family": "Moraceae",
+      "description": "Figueira amazônica, que pode ser uma hemi-epífita ou árvore independente. Folhas simples e látex leitoso em abundância.",
+      "imageUrl": "https://picsum.photos/seed/ficus-duckeana/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "ss2i81sfz",
+      "name": "Ficus eximia",
+      "scientificName": "Ficus eximia Schott",
+      "family": "Moraceae",
+      "description": "Figueira com folhas simples e látex branco. Pode ser árvore ou hemi-epífita, com frutos (figos) comestíveis para a fauna.",
+      "imageUrl": "https://static.inaturalist.org/photos/69340658/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "zs73jr1gp",
+      "name": "Ficus maxima",
+      "scientificName": "Ficus maxima Mill.",
+      "family": "Moraceae",
+      "description": "Figueira com folhas simples e látex branco, que pode ser hemi-epífita ou árvore. Comum em florestas úmidas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/68115982/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "q6aibzt64"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "ke6qid5vv",
+      "name": "Ficus nymphaeifolia",
+      "scientificName": "Ficus nymphaeifolia Mill.",
+      "family": "Moraceae",
+      "description": "Figueira de folhas simples, grandes e ovais, com látex branco. Pode ser árvore ou hemi-epífita e é amplamente distribuída na Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/360885784/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "1zt3u9fo5",
+      "name": "Helicostylis tomentosa",
+      "scientificName": "Helicostylis tomentosa (Poepp. & Endl.) Rusby",
+      "family": "Moraceae",
+      "description": "Árvore da Amazônia, com folhas simples e densamente pubescentes. Possui látex leitoso em todos os seus tecidos.",
+      "imageUrl": "https://static.inaturalist.org/photos/57100095/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "u5etkzxnv"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "9tozrxpy3",
+      "name": "Virola calophylla",
+      "scientificName": "Virola calophylla Warb.",
+      "family": "Myristicaceae",
+      "description": "Árvore amazônica, com folhas simples e exsudato avermelhado (resinoso) quando o caule é cortado. Folhas grandes e verdes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/55530552/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "s9t72d02z",
+      "name": "Virola multinervia",
+      "scientificName": "Virola multinervia Ducke",
+      "family": "Myristicaceae",
+      "description": "Árvore de grande porte, com folhas simples e numerosas nervuras secundárias. Exsudato avermelhado em cortes. Comum em florestas de terra firme.",
+      "imageUrl": "https://static.inaturalist.org/photos/406484324/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "nvkhhh6cc",
+      "name": "Virola pavonis",
+      "scientificName": "Virola pavonis (A.DC.) A.C.Sm.",
+      "family": "Myristicaceae",
+      "description": "Árvore amazônica, com folhas simples e exsudato resinoso avermelhado. Frequentemente com uma coloração característica na face inferior das folhas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/322626863/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "53wzrt2sz"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "y21q55o33"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "21nmjuy1k",
+      "name": "Eugenia sp.1",
+      "scientificName": "Eugenia sp.1",
+      "family": "Myrtaceae",
+      "description": "Espécie indeterminada do gênero Eugenia, arbusto ou árvore pequena com folhas simples, frequentemente coriáceas. Sem exsudato. Muitas espécies com folhas aromáticas.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Palacio_Real_de_Olite%2C_Navarra%2C_Espa%C3%B1a%2C_2015-01-06%2C_DD_07-09_HDR.JPG/500px-Palacio_Real_de_Olite%2C_Navarra%2C_Espa%C3%B1a%2C_2015-01-06%2C_DD_07-09_HDR.JPG",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "1euu2np33",
+      "name": "Myrcia splendens",
+      "scientificName": "Myrcia splendens (Sw.) DC.",
+      "family": "Myrtaceae",
+      "description": "Árvore ou arbusto com folhas simples, brilhantes e sem exsudato. Frequentemente com pontos translúcidos nas folhas. Comum em áreas perturbadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/3101925/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "jb77pdmjb",
+      "name": "Psidium guineense",
+      "scientificName": "Psidium guineense Sw.",
+      "family": "Myrtaceae",
+      "description": "Goiaba-do-campo. Arbusto ou árvore pequena com folhas simples e pubescentes. Sem exsudato. Frutos comestíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/145544535/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "yb18dexwj",
+      "name": "Ouratea engleri",
+      "scientificName": "Ouratea engleri Tiegh.",
+      "family": "Ochnaceae",
+      "description": "Árvore ou arbusto com folhas simples e frequentemente coriáceas. Sem exsudato. Flores amarelas vistosas.",
+      "imageUrl": "https://picsum.photos/seed/ouratea-engleri/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "3izybcvn9",
+      "name": "Ancistrothyrsus tessmannii",
+      "scientificName": "Ancistrothyrsus tessmannii Harms",
+      "family": "Passifloraceae",
+      "description": "Trepadeira lenhosa com folhas simples e grandes, base cordada. Presença de gavinhas no caule. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/ancistrothyrsus-tessmannii/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "5tzmwfp5i",
+      "name": "Passiflora quadriglandulosa",
+      "scientificName": "Passiflora quadriglandulosa Rodschied.",
+      "family": "Passifloraceae",
+      "description": "Maracujá-do-mato. Trepadeira lenhosa com folhas simples, grandes e base cordada. Glandulas na base das folhas. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/566780024/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ruletn6mc"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "qwg84gcf3",
+      "name": "Pera decipiens",
+      "scientificName": "Pera decipiens (Müll. Arg.) Müll. Arg.",
+      "family": "Peraceae",
+      "description": "Árvore amazônica de folhas simples e sem exsudato. Frequentemente confundida com outras espécies devido à variação foliar.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/425284550/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "yxpiwy4uc",
+      "name": "Pera tomentosa",
+      "scientificName": "Pera tomentosa (Benth.) Müll.Arg.",
+      "family": "Peraceae",
+      "description": "Árvore ou arbusto amazônico com folhas simples e densamente tomentosas. Sem exsudato. Comum em florestas de terra firme.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/2015_Kwiatostan_gruszy_pospolitej.jpg/500px-2015_Kwiatostan_gruszy_pospolitej.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "3n0o6rart",
+      "name": "Amanoa oblongifolia",
+      "scientificName": "Amanoa oblongifolia Müll.Arg.",
+      "family": "Phyllanthaceae",
+      "description": "Árvore da família Phyllanthaceae, com folhas simples e alongadas. Sem exsudato. Ocorre em florestas da Amazônia.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Flora_Brasiliensis_Volume_11_Part_2.djvu/page1-400px-Flora_Brasiliensis_Volume_11_Part_2.djvu.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "1gvphc9t1",
+      "name": "Piper peltatum",
+      "scientificName": "Piper peltatum L.",
+      "family": "Piperaceae",
+      "description": "Erva com folhas grandes e peltadas (pecíolo inserido no centro da lâmina foliar). Sem exsudato. Comum em áreas úmidas e sombrias.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/2105288/medium.JPG",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "n7iaffbw6",
+      "name": "Piresia macrophylla",
+      "scientificName": "Piresia macrophylla Soderstr.",
+      "family": "Poaceae",
+      "description": "Erva bambusoide com folhas simples e grandes, típica do sub-bosque da Amazônia. Sem exsudato.",
+      "imageUrl": "https://picsum.photos/seed/piresia-macrophylla/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "lhr1uvw00",
+      "name": "Piresia sympodica",
+      "scientificName": "Piresia sympodica (Döll) Swallen",
+      "family": "Poaceae",
+      "description": "Erva amazônica, similar a P. macrophylla, com folhas simples e sem exsudato. Cresce em ambientes sombrios e úmidos.",
+      "imageUrl": "https://picsum.photos/seed/piresia-sympodica/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "4y1fgwz46",
+      "name": "Coccoloba acuminata",
+      "scientificName": "Coccoloba acuminata Kunth",
+      "family": "Polygonaceae",
+      "description": "Árvore ou arbusto com folhas simples, grandes e muitas vezes com nervuras avermelhadas. A bainha ocreada é característica da família. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67373432/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "59pw1i37h",
+      "name": "Sterigmapetalum obovatum",
+      "scientificName": "Sterigmapetalum obovatum Kuhlm.",
+      "family": "Rhizophoraceae",
+      "description": "Árvore amazônica de pequeno a médio porte, com folhas simples e sem exsudato. Frequentemente com folhas obovadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/452923843/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "k67t8lxwr",
+      "name": "Amaioua guianensis",
+      "scientificName": "Amaioua guianensis Aubl",
+      "family": "Rubiaceae",
+      "description": "Árvore ou arbusto com folhas simples e glabra, sem exsudato. Frutos comestíveis para a fauna. Comum em florestas tropicais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/251054998/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "km7orbfwf",
+      "name": "Calycophyllum spruceanum",
+      "scientificName": "Calycophyllum spruceanum (Benth.) Hook.f.",
+      "family": "Rubiaceae",
+      "description": "Muiratinga. Árvore de médio a grande porte, com folhas simples. Sem exsudato. Caracteriza-se por sua casca que descasca em finas lâminas.",
+      "imageUrl": "https://static.inaturalist.org/photos/237718462/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "173k7ri84",
+      "name": "Coussarea hirticalyx",
+      "scientificName": "Coussarea hirticalyx Standl.",
+      "family": "Rubiaceae",
+      "description": "Árvore ou arbusto com folhas simples, densamente pubescentes e estípulas interpeciolares. Sem exsudato. Comum em florestas de terra firme.",
+      "imageUrl": "https://picsum.photos/seed/coussarea-hirticalyx/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "a99jbvfg4",
+      "name": "Jenipapo",
+      "scientificName": "Genipa americana L.",
+      "family": "Rubiaceae",
+      "description": "Árvore de médio porte, com folhas simples, glabras e lustrosas. Sem exsudato. Produz frutos comestíveis usados para bebidas e tinturas.",
+      "imageUrl": "https://static.inaturalist.org/photos/169831616/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "i1hx50u90",
+      "name": "Isertia hypoleuca",
+      "scientificName": "Isertia hypoleuca Benth.",
+      "family": "Rubiaceae",
+      "description": "Árvore ou arbusto com folhas simples e geralmente com a face inferior esbranquiçada (hipoleuca). Sem exsudato. Flores tubulares alaranjadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/48828324/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "bjtkc6p7t",
+      "name": "Palicourea colorata",
+      "scientificName": "Palicourea colorata (Willd. ex Roem. & Schult.) Delprete & J.H.Kirkbr.",
+      "family": "Rubiaceae",
+      "description": "Arbusto ou subarbusto com folhas simples e estípulas interpeciolares. Sem exsudato. Brácteas coloridas vistosas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14296486/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "ce9emclvi",
+      "name": "Palicourea dichotoma",
+      "scientificName": "Palicourea dichotoma (Rudge) Delprete & J.H.Kirkbr.",
+      "family": "Rubiaceae",
+      "description": "Arbusto ou subarbusto com folhas simples e estípulas. Sem exsudato. Inflorescências bifurcadas características.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90364179/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "7tze8bgmw",
+      "name": "Palicourea guianensis",
+      "scientificName": "Palicourea guianensis Aubl.",
+      "family": "Rubiaceae",
+      "description": "Arbusto comum na Amazônia, com folhas simples e estípulas interpeciolares. Sem exsudato. Flores amarelas e frutos azuis/pretos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/111318506/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "15qkhnw8z",
+      "name": "Palicourea marcgravii",
+      "scientificName": "Palicourea marcgravii A.St.-Hil.",
+      "family": "Rubiaceae",
+      "description": "Arbusto ou árvore pequena com folhas simples e estípulas interpeciolares. Sem exsudato. Distribuição ampla na Amazônia.",
+      "imageUrl": "https://static.inaturalist.org/photos/70814153/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "nb9j3ij7f",
+      "name": "Palicourea tomentosa",
+      "scientificName": "Palicourea tomentosa (Aubl.) Borhidi",
+      "family": "Rubiaceae",
+      "description": "Arbusto ou subarbusto com folhas simples e densamente tomentosas. Sem exsudato. Ocorre em áreas de floresta e bordas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/77137502/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "11dafcb4y"
+        ]
+      }
+    },
+    {
+      "id": "debclq8ln",
+      "name": "Platycarpum duckei",
+      "scientificName": "Platycarpum duckei Steyerm.",
+      "family": "Rubiaceae",
+      "description": "Árvore de porte médio a grande, com folhas simples e sem exsudato. Distingue-se por ter frutos achatados e alados.",
+      "imageUrl": "https://picsum.photos/seed/platycarpum-duckei/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "5kdg2bf6y",
+      "name": "Simira rubescens",
+      "scientificName": "Simira rubescens (Benth.) Bremek. ex Steyerm.",
+      "family": "Rubiaceae",
+      "description": "Árvore amazônica, com folhas simples e estípulas interpeciolares. Sem exsudato. O nome rubescens refere-se à coloração avermelhada de algumas partes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/1539642/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "oo0ytm48c",
+      "name": "Warszewiczia coccinea",
+      "scientificName": "Warszewiczia coccinea (Vahl) Klotzsch",
+      "family": "Rubiaceae",
+      "description": "Árvore ou arbusto com folhas simples e uma sépala petalóide vermelha muito vistosa, típica da espécie. Sem exsudato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/347521007/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "jvpl84eu4",
+      "name": "Casearia arborea",
+      "scientificName": "Casearia arborea (Rich.) Urb.",
+      "family": "Salicaceae",
+      "description": "Árvore ou arbusto com folhas simples, frequentemente com pontos translúcidos e borda serrilhada. Sem exsudato. Comum em florestas tropicais.",
+      "imageUrl": "https://static.inaturalist.org/photos/146516884/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "2f08lt5cv",
+      "name": "Simarouba amara",
+      "scientificName": "Simarouba amara Aubl.",
+      "family": "Simaroubaceae",
+      "description": "Marupá. Árvore de médio a grande porte, com folhas compostas pinadas. Possui casca amarga. Sem exsudato.",
+      "imageUrl": "https://static.inaturalist.org/photos/1497482/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "3yxjf6ugx"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "oqf8li49n",
+      "name": "Phenakospermum guyannense",
+      "scientificName": "Phenakospermum guyannense (Rich.) Endl. ex Miq.",
+      "family": "Strelitziaceae",
+      "description": "Erva gigante, similar à bananeira ou helicônia, com folhas simples e grandes. Sem exsudato. Comum em áreas abertas e capoeiras.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/18587099/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "5o6h68ior",
+      "name": "Triplophyllum funestum",
+      "scientificName": "Triplophyllum funestum (Kunze) Holttum",
+      "family": "Tectariaceae",
+      "description": "Feto terrestre de grande porte, com folhas divididas (frondes). Sem exsudato e estípulas. Encontrado em florestas tropicais úmidas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14296317/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "9cxvelzo8"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "lm5esghdv"
+        ],
+        "iusbdp02p": [
+          "9klj96qoh"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "yi4ce1kn1"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "y13m98k8g",
+      "name": "Embaúba-prateada",
+      "scientificName": "Cecropia concolor Willd.",
+      "family": "Urticaceae",
+      "description": "Árvore de crescimento rápido, com folhas palmadas, grandes e com a face inferior prateada. Possui exsudato aquoso ou levemente leitoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9723595/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "qryjwnkep"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "ec8nclsf1",
+      "name": "Cecropia membranacea",
+      "scientificName": "Cecropia membranacea Trécul",
+      "family": "Urticaceae",
+      "description": "Embaúba com folhas palmadas e membranáceas, frequentemente com exsudato aquoso e base da folha cordada. Comum em áreas de capoeira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/64438364/medium.jpg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "qryjwnkep"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "e4re2388l",
+      "name": "Cecropia sciadophylla",
+      "scientificName": "Cecropia sciadophylla Mart.",
+      "family": "Urticaceae",
+      "description": "Embaúba de folhas palmadas, grandes e coriáceas, com exsudato aquoso. Comum em florestas de terra firme. Presença de domácias para formigas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/248278638/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "qryjwnkep"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "2zk2fozjt",
+      "name": "Pourouma myrmecophila",
+      "scientificName": "Pourouma myrmecophila Ducke",
+      "family": "Urticaceae",
+      "description": "Árvore ou arbusto com folhas simples, palmadas ou lobadas, e exsudato aquoso. O pecíolo é oco e abriga formigas, daí o nome 'myrmecophila'.",
+      "imageUrl": "https://picsum.photos/seed/pourouma-myrmecophila/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "qryjwnkep"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "441r3avgx",
+      "name": "Pourouma persecta",
+      "scientificName": "Pourouma persecta (C.C. Berg & Heusden) Gaglioti & Romaniuc",
+      "family": "Urticaceae",
+      "description": "Árvore ou arbusto com folhas profundamente lobadas ou palmadas, e exsudato aquoso. Comum em florestas amazônicas.",
+      "imageUrl": "https://picsum.photos/seed/pourouma-persecta/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "qryjwnkep"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vs6mmqwet"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "8j9bjws5h"
+        ],
+        "wlv3sbiqp": [
+          "ebu9x50jm"
+        ]
+      }
+    },
+    {
+      "id": "fhtvobt7r",
+      "name": "Rinorea macrocarpa",
+      "scientificName": "Rinorea macrocarpa (Mart. ex Eichler) Kuntze",
+      "family": "Violaceae",
+      "description": "Arbusto ou árvore pequena com folhas simples e sem exsudato. Flores pequenas. Ocorre em sub-bosque de florestas tropicais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/44964647/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "ynku19u2r"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "xl49v02oz"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "9djccykh9"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "th6ga6jj0",
+      "name": "Qualea acuminata",
+      "scientificName": "Qualea acuminata Spruce ex Warm.",
+      "family": "Vochysiaceae",
+      "description": "Árvore de grande porte, com folhas simples e sem exsudato. Uma das muitas espécies de Qualea, comumente encontradas em florestas amazônicas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/470502711/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "81oz5pser",
+      "name": "Qualea amoena",
+      "scientificName": "Qualea amoena Ducke",
+      "family": "Vochysiaceae",
+      "description": "Árvore da Amazônia, com folhas simples e sem exsudato. Uma espécie do gênero Qualea, com flores geralmente vistosas.",
+      "imageUrl": "https://picsum.photos/seed/qualea-amoena/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "vtbuyvn0q",
+      "name": "Qualea cf. schomburgkiana",
+      "scientificName": "Qualea cf. schomburgkiana",
+      "family": "Vochysiaceae",
+      "description": "Árvore amazônica, com folhas simples e sem exsudato. 'cf.' indica semelhança com a espécie, mas sem confirmação taxonômica.",
+      "imageUrl": "https://picsum.photos/seed/qualea-cf.-schomburgkiana/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "xxs7y6al9",
+      "name": "Ruizterania retusa",
+      "scientificName": "Ruizterania retusa (Spruce ex Warm.) Marc.-Berti",
+      "family": "Vochysiaceae",
+      "description": "Árvore de porte médio a grande, com folhas simples e sem exsudato. Endêmica da Amazônia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/80853479/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "b425nfw0o",
+      "name": "Vochysia fontellae",
+      "scientificName": "Vochysia fontellae Paula",
+      "family": "Vochysiaceae",
+      "description": "Árvore amazônica com folhas simples e sem exsudato. Uma das muitas espécies de Vochysia, com flores frequentemente amarelas.",
+      "imageUrl": "https://picsum.photos/seed/vochysia-fontellae/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "hiizetv14",
+      "name": "Vochysia saccata",
+      "scientificName": "Vochysia saccata Stafleu.",
+      "family": "Vochysiaceae",
+      "description": "Árvore amazônica, com folhas simples e sem exsudato. Conhecida por suas flores com esporão característico ('saccata').",
+      "imageUrl": "https://picsum.photos/seed/vochysia-saccata/400/300",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    },
+    {
+      "id": "556gaskf6",
+      "name": "Vochysia vismiifolia",
+      "scientificName": "Vochysia vismiifolia Spruce ex Warm.",
+      "family": "Vochysiaceae",
+      "description": "Árvore de porte médio, com folhas simples e sem exsudato. Ocorre em florestas de terra firme. Folhas semelhantes às do gênero Vismia.",
+      "imageUrl": "https://static.inaturalist.org/photos/493294591/medium.jpeg",
+      "links": [],
+      "traits": {
+        "c7l44hpeh": [
+          "p4otg7rjz"
+        ],
+        "jtw6itucz": [
+          "d0ckvte1v"
+        ],
+        "q6u5zxfnn": [
+          "uney0569g"
+        ],
+        "iusbdp02p": [
+          "vxpk5sx2a"
+        ],
+        "psk8ko3pt": [
+          "5ui9fcqxe"
+        ],
+        "aipndtp00": [
+          "haazzus3a"
+        ],
+        "2tubl57rs": [
+          "7lvn7f87g"
+        ],
+        "wlv3sbiqp": [
+          "w1shu0m95"
+        ]
+      }
+    }
+  ]
+}

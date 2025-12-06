@@ -50,6 +50,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     let selections = {};
     let showDiscarded = false;
     let viewingEntity = null;
+    let viewingStateImage = null;
     let mobileTab = 'FILTERS';
     
     function toggleSelection(featureId, stateId) {
@@ -69,6 +70,8 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
     function viewEntity(entity) { viewingEntity = entity; render(); }
     function closeEntity() { viewingEntity = null; render(); }
+    function viewStateImage(url, label, featureName) { viewingStateImage = {url, label, featureName}; render(); }
+    function closeStateImage() { viewingStateImage = null; render(); }
     
     function getFilteredEntities() {
       const remaining = [], discarded = [];
@@ -128,6 +131,25 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
         \`;
       }
       
+      // State Image Modal
+      let stateImageModalHTML = '';
+      if (viewingStateImage) {
+        stateImageModalHTML = \`
+          <div class="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4" onclick="if(event.target===this)closeStateImage()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden" onclick="event.stopPropagation()">
+              <div class="relative">
+                <img src="\${viewingStateImage.url}" alt="\${viewingStateImage.label}" class="w-full max-h-[60vh] object-contain bg-slate-100">
+                <button onclick="closeStateImage()" class="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors">✕</button>
+              </div>
+              <div class="p-4 bg-white">
+                <h4 class="font-semibold text-slate-800">\${viewingStateImage.label}</h4>
+                <p class="text-sm text-slate-500">\${viewingStateImage.featureName}</p>
+              </div>
+            </div>
+          </div>
+        \`;
+      }
+      
       const featuresHTML = project.features.map(f => {
         const selStates = selections[f.id] || [];
         return \`
@@ -140,7 +162,11 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
             <div class="flex flex-wrap gap-2">
               \${f.states.map(s => {
                 const isSel = selStates.includes(s.id);
-                return \`<button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>\`;
+                const hasImg = s.imageUrl ? true : false;
+                return \`<div class="flex items-center gap-1">
+                  \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
+                  <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
+                </div>\`;
               }).join('')}
             </div>
           </div>
@@ -216,6 +242,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
           </footer>
         </div>
         \${entityModalHTML}
+        \${stateImageModalHTML}
       \`;
     }
     
@@ -291,6 +318,9 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
   const [showDiscarded, setShowDiscarded] = useState(false);
   const [activeFeatureImage, setActiveFeatureImage] = useState<string | null>(null);
   const [viewingEntity, setViewingEntity] = useState<Entity | null>(null);
+  
+  // State Image Modal
+  const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
   
   // Mobile View State: 'FILTERS' (Features) or 'RESULTS' (Entities)
   const [mobileTab, setMobileTab] = useState<'FILTERS' | 'RESULTS'>('FILTERS');
@@ -562,18 +592,32 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
                     {feature.states.map(state => {
                       const isSelected = currentSelections.includes(state.id);
                       return (
-                        <button
-                          key={state.id}
-                          onClick={() => toggleSelection(feature.id, state.id)}
-                          className={`w-full text-left px-3 py-3 md:py-2 text-sm rounded-lg transition-all flex items-center justify-between group active:scale-[0.98] touch-manipulation ${
-                            isSelected 
-                              ? 'bg-emerald-600 text-white shadow-md' 
-                              : 'bg-slate-50 text-slate-600 border border-transparent hover:bg-slate-100 hover:border-slate-200'
-                          }`}
-                        >
-                          <span className="leading-tight">{state.label}</span>
-                          {isSelected && <Check size={16} className="shrink-0" />}
-                        </button>
+                        <div key={state.id} className="flex items-center gap-1">
+                          {/* State image thumbnail - small and subtle */}
+                          {state.imageUrl && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setExpandedStateImage({url: state.imageUrl!, label: state.label, featureName: feature.name});
+                              }}
+                              className="w-8 h-8 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0"
+                              title={language === 'pt' ? 'Ver imagem' : 'View image'}
+                            >
+                              <img src={state.imageUrl} alt={state.label} className="w-full h-full object-cover" />
+                            </button>
+                          )}
+                          <button
+                            onClick={() => toggleSelection(feature.id, state.id)}
+                            className={`flex-1 text-left px-3 py-3 md:py-2 text-sm rounded-lg transition-all flex items-center justify-between group active:scale-[0.98] touch-manipulation ${
+                              isSelected 
+                                ? 'bg-emerald-600 text-white shadow-md' 
+                                : 'bg-slate-50 text-slate-600 border border-transparent hover:bg-slate-100 hover:border-slate-200'
+                            }`}
+                          >
+                            <span className="leading-tight">{state.label}</span>
+                            {isSelected && <Check size={16} className="shrink-0" />}
+                          </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -790,6 +834,37 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
                </button>
             </div>
 
+          </div>
+        </div>
+      )}
+      
+      {/* State Image Viewer Modal */}
+      {expandedStateImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+          onClick={() => setExpandedStateImage(null)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in zoom-in-95"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="relative">
+              <img 
+                src={expandedStateImage.url} 
+                alt={expandedStateImage.label}
+                className="w-full max-h-[60vh] object-contain bg-slate-100"
+              />
+              <button 
+                onClick={() => setExpandedStateImage(null)}
+                className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="p-4 bg-white">
+              <h4 className="font-semibold text-slate-800">{expandedStateImage.label}</h4>
+              <p className="text-sm text-slate-500">{expandedStateImage.featureName}</p>
+            </div>
           </div>
         </div>
       )}

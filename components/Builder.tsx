@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
@@ -50,6 +50,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     let selections = {};
     let showDiscarded = false;
     let viewingEntity = null;
+    let viewingStateImage = null; // {url, label, featureName}
     let mobileTab = 'FILTERS';
     
     function toggleSelection(featureId, stateId) {
@@ -68,6 +69,8 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     function setMobileTab(tab) { mobileTab = tab; render(); }
     function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
     function viewEntity(entity) { viewingEntity = entity; render(); }
+    function viewStateImage(url, label, featureName) { viewingStateImage = {url, label, featureName}; render(); }
+    function closeStateImage() { viewingStateImage = null; render(); }
     function closeEntity() { viewingEntity = null; render(); }
     
     function getFilteredEntities() {
@@ -128,6 +131,25 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
         \`;
       }
       
+      // State Image Modal
+      let stateImageModalHTML = '';
+      if (viewingStateImage) {
+        stateImageModalHTML = \`
+          <div class="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4" onclick="if(event.target===this)closeStateImage()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden" onclick="event.stopPropagation()">
+              <div class="relative">
+                <img src="\${viewingStateImage.url}" alt="\${viewingStateImage.label}" class="w-full max-h-[60vh] object-contain bg-slate-100">
+                <button onclick="closeStateImage()" class="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors">✕</button>
+              </div>
+              <div class="p-4 bg-white">
+                <h4 class="font-semibold text-slate-800">\${viewingStateImage.label}</h4>
+                <p class="text-sm text-slate-500">\${viewingStateImage.featureName}</p>
+              </div>
+            </div>
+          </div>
+        \`;
+      }
+      
       const featuresHTML = project.features.map(f => {
         const selStates = selections[f.id] || [];
         return \`
@@ -140,7 +162,11 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
             <div class="flex flex-wrap gap-2">
               \${f.states.map(s => {
                 const isSel = selStates.includes(s.id);
-                return \`<button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>\`;
+                const hasImg = s.imageUrl ? true : false;
+                return \`<div class="flex items-center gap-1">
+                  \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
+                  <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
+                </div>\`;
               }).join('')}
             </div>
           </div>
@@ -216,6 +242,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
           </footer>
         </div>
         \${entityModalHTML}
+        \${stateImageModalHTML}
       \`;
     }
     
@@ -368,6 +395,11 @@ const t = {
     fillGaps: "Fill missing trait data",
     removeRedundant: "Remove redundant features",
     fixInconsistencies: "Fix inconsistencies",
+    featureTypeLabel: "Feature Type",
+    featureTypeVegetative: "Vegetative only",
+    featureTypeReproductive: "Reproductive only",
+    featureTypeBoth: "Both (vegetative + reproductive)",
+    featureTypeDesc: "Focus on vegetative characters (leaves, stems, bark) or reproductive (flowers, fruits, seeds)",
     currentProject: "Current Project",
     noProjectLoaded: "No project loaded. Create or load a project first.",
     entitiesCount: "entities",
@@ -381,6 +413,8 @@ const t = {
     allFamilies: "All families",
     allGenera: "All genera",
     clearFilters: "Clear filters",
+    onlyWithGaps: "Only with gaps",
+    onlyWithGapsDesc: "Show only entities with missing traits",
     showingEntities: "Showing",
     ofEntities: "of",
     completePhotos: "Complete Photo Collection",
@@ -429,7 +463,11 @@ const t = {
     strategyPrimaryDesc: "Use Key 1 as base, add unique elements from Key 2",
     remove: "Remove",
     mergeAction: "Merge Keys",
-    mergeLoaded: "loaded"
+    mergeLoaded: "loaded",
+    stateImage: "State image",
+    addStateImage: "Add image",
+    viewImage: "View image",
+    closeImage: "Close"
   },
   pt: {
     builder: "Construtor",
@@ -556,6 +594,11 @@ const t = {
     fillGaps: "Preencher dados de características faltantes",
     removeRedundant: "Remover características redundantes",
     fixInconsistencies: "Corrigir inconsistências",
+    featureTypeLabel: "Tipo de Característica",
+    featureTypeVegetative: "Apenas vegetativas",
+    featureTypeReproductive: "Apenas reprodutivas",
+    featureTypeBoth: "Ambas (vegetativas + reprodutivas)",
+    featureTypeDesc: "Foco em caracteres vegetativos (folhas, caules, cascas) ou reprodutivos (flores, frutos, sementes)",
     currentProject: "Projeto Atual",
     noProjectLoaded: "Nenhum projeto carregado. Crie ou carregue um projeto primeiro.",
     entitiesCount: "entidades",
@@ -569,6 +612,8 @@ const t = {
     allFamilies: "Todas as famílias",
     allGenera: "Todos os gêneros",
     clearFilters: "Limpar filtros",
+    onlyWithGaps: "Apenas com lacunas",
+    onlyWithGapsDesc: "Mostrar apenas entidades com características faltantes",
     showingEntities: "Exibindo",
     ofEntities: "de",
     completePhotos: "Completar Acervo Fotográfico",
@@ -617,7 +662,11 @@ const t = {
     strategyPrimaryDesc: "Usar Chave 1 como base, adicionar elementos únicos da Chave 2",
     remove: "Remover",
     mergeAction: "Combinar Chaves",
-    mergeLoaded: "carregado"
+    mergeLoaded: "carregado",
+    stateImage: "Imagem do estado",
+    addStateImage: "Adicionar imagem",
+    viewImage: "Ver imagem",
+    closeImage: "Fechar"
   }
 };
 
@@ -676,16 +725,17 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   // CRITICAL SAFETY CHECKS: Detect AI failures that could cause data loss
   // ═══════════════════════════════════════════════════════════════════════════════
   
-  // Check 1: Empty or near-empty AI response
+  // Check 1: Empty or near-empty AI response - ONLY reject if truly empty
   if (!newProject.entities || newProject.entities.length === 0) {
     console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned EMPTY project! Preserving original.`);
     return existingProject;
   }
   
-  // Check 2: Significant entity count reduction (AI probably failed)
-  if (newProject.entities.length < existingProject.entities.length * 0.5) {
-    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned only ${newProject.entities.length} of ${existingProject.entities.length} entities! Preserving original.`);
-    return existingProject;
+  // Check 2: Partial response - AI returned fewer entities
+  // Instead of rejecting, we'll merge what we got and keep the rest
+  const isPartialResponse = newProject.entities.length < existingProject.entities.length;
+  if (isPartialResponse) {
+    console.warn(`[mergeProjectsPreservingData] PARTIAL RESPONSE: AI returned ${newProject.entities.length} of ${existingProject.entities.length} entities. Will merge available data and preserve remaining entities.`);
   }
   
   // Check 3: AI returned entities but NO features (corrupt response)
@@ -694,7 +744,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return existingProject;
   }
   
-  // Check 4: Count total traits in new vs existing to detect mass data loss
+  // Log trait counts for debugging (no longer used to reject)
   const countTotalTraits = (proj: Project): number => {
     return proj.entities.reduce((sum, e) => {
       return sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0);
@@ -703,13 +753,6 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   
   const existingTotalTraits = countTotalTraits(existingProject);
   const newTotalTraits = countTotalTraits(newProject);
-  
-  // If existing had traits but new has very few (less than 10% of original), something went wrong
-  if (existingTotalTraits > 10 && newTotalTraits < existingTotalTraits * 0.1) {
-    console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned only ${newTotalTraits} traits vs ${existingTotalTraits} existing! Preserving original.`);
-    return existingProject;
-  }
-  
   console.log(`[mergeProjectsPreservingData] Trait count - existing: ${existingTotalTraits}, new: ${newTotalTraits}`);
   
   // ═══════════════════════════════════════════════════════════════════════════════
@@ -772,6 +815,9 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     newFeatureIdToName.set(f.id, f.name);
   });
 
+  // Counters for summary logging (instead of per-item logs)
+  let mappingStats = { featureMatches: 0, stateMatches: 0, stateMisses: 0, traitsFilled: 0, traitsSkipped: 0 };
+
   // Map feature ID from new project to existing project ID
   const mapFeatureId = (newFeatureId: string): string | null => {
     // First check if it's already a valid existing ID
@@ -784,6 +830,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     if (newFeature) {
       const existingFeature = findMatchingFeature(newFeature);
       if (existingFeature) {
+        mappingStats.featureMatches++;
         return existingFeature.id;
       }
     }
@@ -793,7 +840,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     if (featureName) {
       for (const existingFeature of existingProject.features) {
         if (namesMatch(featureName, existingFeature.name)) {
-          console.log(`[mapFeatureId] Matched by name: "${featureName}" -> "${existingFeature.name}" (ID ${existingFeature.id})`);
+          mappingStats.featureMatches++;
           return existingFeature.id;
         }
       }
@@ -802,18 +849,15 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return null;
   };
 
-  // Map state ID from new project to existing project ID
+  // Map state ID from new project to existing project ID (optimized - no per-item logs)
   const mapStateId = (newStateId: string, existingFeatureId: string, newFeatureId: string): string | null => {
     const existingFeature = existingFeaturesById.get(existingFeatureId);
-    if (!existingFeature) {
-      console.warn(`[mapStateId] No existing feature found for ID: ${existingFeatureId}`);
-      return null;
-    }
+    if (!existingFeature) return null;
     
     // First check if state ID already exists in existing feature (direct match)
     const directMatch = existingFeature.states.find(s => s.id === newStateId);
     if (directMatch) {
-      console.log(`[mapStateId] Direct match for state ${newStateId}`);
+      mappingStats.stateMatches++;
       return newStateId;
     }
     
@@ -835,7 +879,6 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         const foundState = nf.states.find(s => s.id === newStateId);
         if (foundState) {
           newStateLabel = foundState.label;
-          console.log(`[mapStateId] Found state label "${newStateLabel}" in different feature "${nf.name}"`);
           break;
         }
       }
@@ -843,32 +886,30 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     
     // Method 3: Try to find by ID pattern - some IDs might have the label encoded
     if (!newStateLabel && newStateId.includes('_')) {
-      // Try to extract label from ID (some generators use name_timestamp pattern)
       const potentialLabel = newStateId.split('_').slice(0, -1).join('_').replace(/-/g, ' ');
       if (potentialLabel.length > 2) {
         newStateLabel = potentialLabel;
-        console.log(`[mapStateId] Extracted potential label from ID: "${newStateLabel}"`);
       }
     }
     
     if (newStateLabel) {
       // Find matching state by normalized label in existing feature
+      const normalizedNewLabel = normalizeName(newStateLabel);
       const matchingState = existingFeature.states.find(s => 
-        normalizeName(s.label) === normalizeName(newStateLabel!)
+        normalizeName(s.label) === normalizedNewLabel
       );
       if (matchingState) {
-        console.log(`[mapStateId] Matched by label: "${newStateLabel}" -> ID ${matchingState.id}`);
+        mappingStats.stateMatches++;
         return matchingState.id;
       }
       
       // Try partial match (label contains or is contained)
       const partialMatch = existingFeature.states.find(s => {
         const existingNorm = normalizeName(s.label);
-        const newNorm = normalizeName(newStateLabel!);
-        return existingNorm.includes(newNorm) || newNorm.includes(existingNorm);
+        return existingNorm.includes(normalizedNewLabel) || normalizedNewLabel.includes(existingNorm);
       });
       if (partialMatch) {
-        console.log(`[mapStateId] Partial match: "${newStateLabel}" -> "${partialMatch.label}" (ID ${partialMatch.id})`);
+        mappingStats.stateMatches++;
         return partialMatch.id;
       }
     }
@@ -877,22 +918,19 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     if (newFeature) {
       const newStateIndex = newFeature.states.findIndex(s => s.id === newStateId);
       if (newStateIndex >= 0 && newStateIndex < existingFeature.states.length) {
-        const indexMatch = existingFeature.states[newStateIndex];
-        console.log(`[mapStateId] Index match: position ${newStateIndex} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
-        return indexMatch.id;
+        mappingStats.stateMatches++;
+        return existingFeature.states[newStateIndex].id;
       }
     }
     
     // Method 5: If the state ID looks like a number (0, 1, 2...) use it as index
     const stateIdAsNumber = parseInt(newStateId, 10);
     if (!isNaN(stateIdAsNumber) && stateIdAsNumber >= 0 && stateIdAsNumber < existingFeature.states.length) {
-      const indexMatch = existingFeature.states[stateIdAsNumber];
-      console.log(`[mapStateId] Numeric ID as index: ${stateIdAsNumber} -> "${indexMatch.label}" (ID ${indexMatch.id})`);
-      return indexMatch.id;
+      mappingStats.stateMatches++;
+      return existingFeature.states[stateIdAsNumber].id;
     }
     
-    console.warn(`[mapStateId] No match found for state ID: ${newStateId} in feature ${existingFeatureId} (label: ${newStateLabel || 'unknown'})`);
-    console.warn(`[mapStateId] Available states: ${existingFeature.states.map(s => `"${s.label}" (${s.id})`).join(', ')}`);
+    mappingStats.stateMisses++;
     return null;
   };
 
@@ -919,39 +957,46 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     return cleaned;
   };
 
-  // Merge traits from new entity to existing entity, mapping IDs correctly
+  // Merge traits from new entity to existing entity, mapping IDs correctly (optimized - no per-item logs)
   const mergeTraits = (newTraits: Record<string, string[]>, existingTraits: Record<string, string[]>): Record<string, string[]> => {
     // IMPORTANT: First clean existing traits to remove invalid IDs from previous failed merges
     const cleanedExistingTraits = cleanExistingTraits(existingTraits);
     const result = { ...cleanedExistingTraits };
     
-    console.log(`[mergeTraits] Starting with ${Object.keys(cleanedExistingTraits).length} valid existing features (was ${Object.keys(existingTraits).length})`);
+    // Build a set of new feature IDs for quick lookup
+    const newFeatureIds = new Set(newProject.features.map(f => f.id));
     
     for (const [newFeatureId, newStateIds] of Object.entries(newTraits)) {
       const existingFeatureId = mapFeatureId(newFeatureId);
-      if (!existingFeatureId) {
-        console.warn(`[mergeTraits] Could not map feature ID: ${newFeatureId}`);
-        continue;
-      }
       
-      // Map state IDs
-      const mappedStateIds: string[] = [];
-      for (const newStateId of newStateIds) {
-        const mappedStateId = mapStateId(newStateId, existingFeatureId, newFeatureId);
-        if (mappedStateId) {
-          mappedStateIds.push(mappedStateId);
+      if (existingFeatureId) {
+        // Feature exists in both - map state IDs
+        const mappedStateIds: string[] = [];
+        for (const newStateId of newStateIds) {
+          const mappedStateId = mapStateId(newStateId, existingFeatureId, newFeatureId);
+          if (mappedStateId) {
+            mappedStateIds.push(mappedStateId);
+          }
+        }
+        
+        if (mappedStateIds.length > 0) {
+          // Only update if existing doesn't have VALID data for this feature (filling gaps)
+          if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
+            result[existingFeatureId] = mappedStateIds;
+            mappingStats.traitsFilled++;
+          } else {
+            mappingStats.traitsSkipped++;
+          }
+        }
+      } else if (newFeatureIds.has(newFeatureId)) {
+        // NEW FEATURE: This feature doesn't exist in existing project but is a valid new feature
+        // Keep the trait data as-is since the IDs are from the new feature
+        if (newStateIds.length > 0) {
+          result[newFeatureId] = [...newStateIds];
+          mappingStats.traitsFilled++;
         }
       }
-      
-      if (mappedStateIds.length > 0) {
-        // Only update if existing doesn't have VALID data for this feature (filling gaps)
-        if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
-          result[existingFeatureId] = mappedStateIds;
-          console.log(`[mergeTraits] Filled gap: feature ${existingFeatureId} with states [${mappedStateIds.join(', ')}]`);
-        } else {
-          console.log(`[mergeTraits] Skipping feature ${existingFeatureId} - already has valid data: [${result[existingFeatureId].join(', ')}]`);
-        }
-      }
+      // If feature doesn't exist in either, skip it (orphaned data)
     }
     
     return result;
@@ -964,7 +1009,6 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     if (existingEntity) {
       // Mark as matched
       matchedExistingIds.add(existingEntity.id);
-      console.log(`[mergeProjectsPreservingData] Matched: "${newEntity.name}" -> "${existingEntity.name}"`);
     }
 
     if (!existingEntity) {
@@ -1003,14 +1047,24 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     const missingEntities = existingProject.entities.filter(e => !matchedExistingIds.has(e.id));
     
     if (missingEntities.length > 0) {
-      console.warn(`[mergeProjectsPreservingData] AI omitted ${missingEntities.length} entities. Re-adding them to prevent data loss:`);
-      missingEntities.forEach(e => console.warn(`  - "${e.name}" (ID: ${e.id})`));
+      console.warn(`[mergeProjectsPreservingData] ═══════════════════════════════════════════════════════════`);
+      console.warn(`[mergeProjectsPreservingData] PARTIAL MERGE SUMMARY:`);
+      console.warn(`[mergeProjectsPreservingData]   ✓ Updated: ${matchedExistingIds.size} entities with new AI data`);
+      console.warn(`[mergeProjectsPreservingData]   ⟳ Preserved: ${missingEntities.length} entities (not in AI response)`);
+      console.warn(`[mergeProjectsPreservingData]   Total: ${matchedExistingIds.size + missingEntities.length} entities`);
+      console.warn(`[mergeProjectsPreservingData] ═══════════════════════════════════════════════════════════`);
+      console.log(`[mergeProjectsPreservingData] Preserved entities (user can re-run for these):`);
+      missingEntities.slice(0, 10).forEach(e => console.log(`  - "${e.name}"`));
+      if (missingEntities.length > 10) {
+        console.log(`  ... and ${missingEntities.length - 10} more`);
+      }
       mergedEntities.push(...missingEntities);
     }
   }
 
   // Track matched features
   const matchedFeatureIds = new Set<string>();
+  const newFeaturesList: string[] = [];
 
   // Merge features (similar logic)
   const mergedFeatures = newProject.features.map(newFeature => {
@@ -1021,6 +1075,8 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     }
 
     if (!existingFeature) {
+      // This is a NEW feature from AI - keep it with its IDs
+      newFeaturesList.push(newFeature.name);
       return newFeature;
     }
 
@@ -1039,6 +1095,12 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     };
   });
 
+  // Log new features added by AI
+  if (newFeaturesList.length > 0) {
+    console.log(`[mergeProjectsPreservingData] ✨ AI added ${newFeaturesList.length} NEW features:`);
+    newFeaturesList.forEach(name => console.log(`  + "${name}"`));
+  }
+
   // Add back missing features (for REFINE/CLEAN actions where features might be accidentally removed)
   if (preserveAllExisting) {
     const missingFeatures = existingProject.features.filter(f => !matchedFeatureIds.has(f.id));
@@ -1050,7 +1112,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     }
   }
 
-  console.log(`[mergeProjectsPreservingData] Final result: ${mergedEntities.length} entities, ${mergedFeatures.length} features`);
+  console.log(`[mergeProjectsPreservingData] Final result: ${mergedEntities.length} entities, ${mergedFeatures.length} features (${newFeaturesList.length} new, ${matchedFeatureIds.size} updated, ${mergedFeatures.length - newFeaturesList.length - matchedFeatureIds.size} preserved)`);
 
   // Build a map of valid state IDs for each feature in the FINAL merged features
   const finalFeaturesMap = new Map<string, Set<string>>();
@@ -1058,10 +1120,12 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     finalFeaturesMap.set(f.id, new Set(f.states.map(s => s.id)));
   });
 
-  // FINAL SANITIZATION: Ensure all trait IDs in entities are valid for final features
+  // FINAL SANITIZATION: Ensure all trait IDs in entities are valid for final features (optimized - batch processing)
+  let sanitizeStats = { entitiesProcessed: 0, invalidTraitsRemoved: 0, entitiesWithIssues: 0 };
+  
   const sanitizedEntities = mergedEntities.map(entity => {
     const sanitizedTraits: Record<string, string[]> = {};
-    let hadInvalidTraits = false;
+    let entityHadIssues = false;
     
     for (const [featureId, stateIds] of Object.entries(entity.traits)) {
       const validStateIds = finalFeaturesMap.get(featureId);
@@ -1071,44 +1135,111 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
           sanitizedTraits[featureId] = validTraits;
         }
         if (validTraits.length !== stateIds.length) {
-          hadInvalidTraits = true;
-          console.warn(`[SANITIZE] Entity "${entity.name}" feature ${featureId}: removed ${stateIds.length - validTraits.length} invalid state IDs`);
+          entityHadIssues = true;
+          sanitizeStats.invalidTraitsRemoved += (stateIds.length - validTraits.length);
         }
       } else {
-        // Feature ID doesn't exist in final features - this is a bigger problem
-        hadInvalidTraits = true;
-        console.warn(`[SANITIZE] Entity "${entity.name}": removed traits for non-existent feature ${featureId}`);
+        entityHadIssues = true;
+        sanitizeStats.invalidTraitsRemoved += stateIds.length;
       }
     }
     
-    if (hadInvalidTraits) {
-      console.log(`[SANITIZE] Entity "${entity.name}" sanitized: ${Object.keys(entity.traits).length} -> ${Object.keys(sanitizedTraits).length} features with valid traits`);
-    }
+    sanitizeStats.entitiesProcessed++;
+    if (entityHadIssues) sanitizeStats.entitiesWithIssues++;
     
     return { ...entity, traits: sanitizedTraits };
   });
 
-  console.log(`[mergeProjectsPreservingData] Sanitization complete.`);
+  // Single summary log instead of per-entity logs
+  console.log(`[mergeProjectsPreservingData] ═══════════════════════════════════════════════════════════`);
+  console.log(`[mergeProjectsPreservingData] MERGE COMPLETE SUMMARY:`);
+  console.log(`[mergeProjectsPreservingData]   • Entities: ${sanitizedEntities.length} total (${matchedExistingIds.size} matched, ${sanitizedEntities.length - matchedExistingIds.size} preserved/new)`);
+  console.log(`[mergeProjectsPreservingData]   • Features: ${mergedFeatures.length} total`);
+  console.log(`[mergeProjectsPreservingData]   • Mapping: ${mappingStats.featureMatches} features, ${mappingStats.stateMatches} states matched, ${mappingStats.stateMisses} state misses`);
+  console.log(`[mergeProjectsPreservingData]   • Traits: ${mappingStats.traitsFilled} gaps filled, ${mappingStats.traitsSkipped} skipped (already had data)`);
+  if (sanitizeStats.invalidTraitsRemoved > 0) {
+    console.warn(`[mergeProjectsPreservingData]   • Sanitization: ${sanitizeStats.invalidTraitsRemoved} invalid trait IDs removed from ${sanitizeStats.entitiesWithIssues} entities`);
+  }
+  console.log(`[mergeProjectsPreservingData] ═══════════════════════════════════════════════════════════`);
+
+  // DEDUPLICATION: Ensure no duplicate entity IDs (can happen with merge edge cases)
+  const seenEntityIds = new Set<string>();
+  const deduplicatedEntities = sanitizedEntities.filter(entity => {
+    if (seenEntityIds.has(entity.id)) {
+      console.warn(`[mergeProjectsPreservingData] Removing duplicate entity ID: ${entity.id} (${entity.name})`);
+      return false;
+    }
+    seenEntityIds.add(entity.id);
+    return true;
+  });
+
+  // DEDUPLICATION: Ensure no duplicate feature IDs
+  const seenFeatureIds = new Set<string>();
+  const deduplicatedFeatures = mergedFeatures.filter(feature => {
+    if (seenFeatureIds.has(feature.id)) {
+      console.warn(`[mergeProjectsPreservingData] Removing duplicate feature ID: ${feature.id} (${feature.name})`);
+      return false;
+    }
+    seenFeatureIds.add(feature.id);
+    return true;
+  });
+
+  if (deduplicatedEntities.length !== sanitizedEntities.length || deduplicatedFeatures.length !== mergedFeatures.length) {
+    console.warn(`[mergeProjectsPreservingData] Deduplication removed ${sanitizedEntities.length - deduplicatedEntities.length} entity and ${mergedFeatures.length - deduplicatedFeatures.length} feature duplicates`);
+  }
 
   return {
     ...newProject,
     // Preserve original project ID and metadata if they match
     id: existingProject.id || newProject.id,
-    entities: sanitizedEntities,
-    features: mergedFeatures
+    entities: deduplicatedEntities,
+    features: deduplicatedFeatures
   };
 };
 
 export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened, onProjectImported }) => {
   const strings = t[language];
+  
+  // Helper to ensure unique IDs in project (prevents React key warnings)
+  const ensureUniqueIds = (proj: Project): Project => {
+    const seenEntityIds = new Set<string>();
+    const seenFeatureIds = new Set<string>();
+    
+    const uniqueEntities = proj.entities.filter(e => {
+      if (seenEntityIds.has(e.id)) return false;
+      seenEntityIds.add(e.id);
+      return true;
+    });
+    
+    const uniqueFeatures = proj.features.filter(f => {
+      if (seenFeatureIds.has(f.id)) return false;
+      seenFeatureIds.add(f.id);
+      return true;
+    });
+    
+    if (uniqueEntities.length !== proj.entities.length || uniqueFeatures.length !== proj.features.length) {
+      return { ...proj, entities: uniqueEntities, features: uniqueFeatures };
+    }
+    return proj;
+  };
+  
   // State
-  const [project, setProject] = useState<Project>(initialProject || {
+  const [project, setProjectRaw] = useState<Project>(ensureUniqueIds(initialProject || {
     id: Math.random().toString(36).substr(2, 9),
     name: language === 'pt' ? "Nova Chave" : "New Key",
     description: "",
     features: [],
     entities: []
-  });
+  }));
+  
+  // Wrapper for setProject that ensures unique IDs
+  const setProject = (newProject: Project | ((prev: Project) => Project)) => {
+    setProjectRaw(prev => {
+      const updated = typeof newProject === 'function' ? newProject(prev) : newProject;
+      return ensureUniqueIds(updated);
+    });
+  };
+  
   const [activeTab, setActiveTab] = useState<Tab>('GENERAL');
 
   // AI Generation State
@@ -1136,12 +1267,17 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [showAiModal, setShowAiModal] = useState(false);
   const [aiMode, setAiMode] = useState<AiMode>('TOPIC');
   const [importedFile, setImportedFile] = useState<File | null>(null);
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
   const [savedProjects, setSavedProjects] = useState<Project[]>([]);
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
+  
+  // State Image Modal
+  const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
 
   // Refine Mode State
   const [refineAction, setRefineAction] = useState<RefineAction>('EXPAND');
+  const [currentRefineMode, setCurrentRefineMode] = useState<'fillGaps' | 'refine' | 'expand' | 'clean' | null>(null);
   const [refineOptions, setRefineOptions] = useState({
     expandCount: 10,
     keepExisting: true,
@@ -1155,6 +1291,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     expandRequiredSpecies: '' as string, // Species that MUST be added
     // Refine required features
     refineRequiredFeatures: [] as string[],
+    featureType: 'both' as 'vegetative' | 'reproductive' | 'both', // Feature type filter
     improveDescriptions: true,
     fillGaps: true,
     removeRedundant: false,
@@ -1186,7 +1323,8 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     searchText: '',
     family: '',
     genus: '',
-    scientificName: ''
+    scientificName: '',
+    onlyWithGaps: false
   });
 
   // Required Features State (for AI generation)
@@ -1391,9 +1529,18 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         if (genus?.toLowerCase() !== entityFilter.genus.toLowerCase()) return false;
       }
       
+      // Filter by gaps (entities with missing traits)
+      if (entityFilter.onlyWithGaps) {
+        const hasGaps = project.features.some(feature => {
+          const traitIds = entity.traits[feature.id] || [];
+          return traitIds.length === 0;
+        });
+        if (!hasGaps) return false;
+      }
+      
       return true;
     });
-  }, [project.entities, entityFilter]);
+  }, [project.entities, project.features, entityFilter]);
 
   // Clear all filters
   const clearEntityFilters = () => {
@@ -1401,12 +1548,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       searchText: '',
       family: '',
       genus: '',
-      scientificName: ''
+      scientificName: '',
+      onlyWithGaps: false
     });
   };
 
   // Check if any filter is active
-  const hasActiveFilters = entityFilter.searchText || entityFilter.family || entityFilter.genus;
+  const hasActiveFilters = entityFilter.searchText || entityFilter.family || entityFilter.genus || entityFilter.onlyWithGaps;
 
   // Reopen AI modal when returning from settings
   useEffect(() => {
@@ -1453,8 +1601,41 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Handlers
   const updateProject = (updates: Partial<Project>) => setProject(p => ({ ...p, ...updates }));
 
+  // Helper to check if URL is a placeholder/mockup - for cleaning data
+  const isPlaceholderImageUrl = (url: string | undefined): boolean => {
+    if (!url) return true;
+    const placeholderPatterns = [
+      'picsum.photos',
+      'placehold.co',
+      'placeholder.com',
+      'via.placeholder',
+      'dummyimage.com',
+      'fakeimg.pl',
+      'lorempixel.com',
+      'placekitten.com',
+      'loremflickr.com'
+    ];
+    return placeholderPatterns.some(p => url.toLowerCase().includes(p));
+  };
+
+  // Clean project data by removing all placeholder/mockup URLs
+  const cleanProjectForExport = (proj: Project): Project => {
+    return {
+      ...proj,
+      entities: proj.entities.map(e => ({
+        ...e,
+        imageUrl: isPlaceholderImageUrl(e.imageUrl) ? '' : e.imageUrl
+      })),
+      features: proj.features.map(f => ({
+        ...f,
+        imageUrl: isPlaceholderImageUrl(f.imageUrl) ? '' : f.imageUrl
+      }))
+    };
+  };
+
   const saveToLocal = () => {
-    const updatedList = [project, ...savedProjects.filter(p => p.id !== project.id)];
+    const cleanedProject = cleanProjectForExport(project);
+    const updatedList = [cleanedProject, ...savedProjects.filter(p => p.id !== project.id)];
     setSavedProjects(updatedList);
     localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
     alert(strings.savedMsg);
@@ -1466,8 +1647,10 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   };
 
   const exportJSON = () => {
+    // Clean project data before export - remove all placeholder URLs
+    const cleanedProject = cleanProjectForExport(project);
     // Export with pretty formatting (2-space indent) for readability
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(project, null, 2));
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cleanedProject, null, 2));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", `${project.name.replace(/\s+/g, '_')}.json`);
@@ -1477,10 +1660,12 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   };
 
   const exportXLSX = () => {
+    // Clean project data before export - remove all placeholder URLs
+    const cleanedProject = cleanProjectForExport(project);
     const workbook = utils.book_new();
 
     // 1. Entities Sheet
-    const entityRows = project.entities.map(e => ({
+    const entityRows = cleanedProject.entities.map(e => ({
       ID: e.id,
       Name: e.name,
       Description: e.description,
@@ -1492,19 +1677,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     utils.book_append_sheet(workbook, wsEntities, "Entities");
 
     // 2. Features Sheet
-    const featureRows = project.features.map(f => ({
+    const featureRows = cleanedProject.features.map(f => ({
       ID: f.id,
       Name: f.name,
-      ImageURL: f.imageUrl,
+      ImageURL: isPlaceholderImageUrl(f.imageUrl) ? '' : f.imageUrl,
       States: f.states.map(s => s.label).join("; ")
     }));
     const wsFeatures = utils.json_to_sheet(featureRows);
     utils.book_append_sheet(workbook, wsFeatures, "Features");
 
     // 3. Matrix Sheet
-    const matrixRows = project.entities.map(entity => {
+    const matrixRows = cleanedProject.entities.map(entity => {
       const row: any = { Entity: entity.name };
-      project.features.forEach(feature => {
+      cleanedProject.features.forEach(feature => {
         const traitIds = entity.traits[feature.id] || [];
         const traitLabels = feature.states
           .filter(s => traitIds.includes(s.id))
@@ -1519,27 +1704,29 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
     // 4. Project Info Sheet
     const projectRows = [{
-      Name: project.name,
-      Description: project.description,
+      Name: cleanedProject.name,
+      Description: cleanedProject.description,
       ExportDate: new Date().toISOString().split('T')[0],
-      TotalEntities: project.entities.length,
-      TotalFeatures: project.features.length
+      TotalEntities: cleanedProject.entities.length,
+      TotalFeatures: cleanedProject.features.length
     }];
     const wsProject = utils.json_to_sheet(projectRows);
     utils.book_append_sheet(workbook, wsProject, "Project Info");
 
     // Save file
-    writeFile(workbook, `${project.name.replace(/\s+/g, '_')}.xlsx`);
+    writeFile(workbook, `${cleanedProject.name.replace(/\s+/g, '_')}.xlsx`);
   };
 
   // Export as standalone HTML
   const exportHTML = () => {
-    const htmlContent = generateStandaloneHTML(project, language);
+    // Clean project data before export - remove all placeholder URLs
+    const cleanedProject = cleanProjectForExport(project);
+    const htmlContent = generateStandaloneHTML(cleanedProject, language);
     const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `${project.name.replace(/\s+/g, '_')}.html`;
+    link.download = `${cleanedProject.name.replace(/\s+/g, '_')}.html`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -1586,6 +1773,43 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setImportedFile(event.target.files[0]);
+    }
+  };
+
+  // Drag and drop handlers for file import
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      // Validate file type
+      const validTypes = ['application/pdf', 'text/plain', 'image/jpeg', 'image/png', 'image/jpg'];
+      const validExtensions = ['.pdf', '.txt', '.jpg', '.jpeg', '.png'];
+      const fileName = file.name.toLowerCase();
+      const isValidType = validTypes.includes(file.type) || validExtensions.some(ext => fileName.endsWith(ext));
+      
+      if (isValidType) {
+        setImportedFile(file);
+      } else {
+        alert(language === 'pt' 
+          ? 'Tipo de arquivo não suportado. Use PDF, TXT, JPG ou PNG.'
+          : 'Unsupported file type. Use PDF, TXT, JPG or PNG.');
+      }
     }
   };
 
@@ -1895,32 +2119,32 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
   // Build refine prompt based on current settings
   const buildRefinePrompt = () => {
-    const projectJson = JSON.stringify({
-      name: project.name,
-      description: project.description,
-      features: project.features.map(f => ({
-        name: f.name,
-        imageUrl: f.imageUrl || '',
-        states: f.states.map(s => s.label)
-      })),
-      entities: project.entities.map(e => ({
-        name: e.name,
-        description: e.description,
-        imageUrl: e.imageUrl || '',
-        traits: Object.entries(e.traits).map(([fid, sids]) => {
-          const feature = project.features.find(f => f.id === fid);
-          return sids.map(sid => {
-            const state = feature?.states.find(s => s.id === sid);
-            return { featureName: feature?.name || '', stateValue: state?.label || '' };
-          });
-        }).flat()
-      }))
-    }, null, 2);
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // OPTIMIZED: Use ID-based format for traits to avoid complex remapping
+    // ═══════════════════════════════════════════════════════════════════════════════
+    
+    // Build compact ID reference for features and states
+    const featuresRef = project.features.map(f => ({
+      id: f.id,
+      name: f.name,
+      states: f.states.map(s => ({ id: s.id, label: s.label }))
+    }));
+    
+    // Build entity data with ID-based traits (traitsMap format)
+    const entitiesRef = project.entities.map(e => ({
+      id: e.id,
+      name: e.name,
+      scientificName: e.scientificName || '',
+      family: e.family || '',
+      description: e.description || '',
+      traitsMap: JSON.stringify(e.traits) // {featureId: [stateIds]} as JSON string
+    }));
 
     let refinePrompt = '';
     
     // PHOTOS action - dedicated photo completion prompt (optimized: send only names, not full JSON)
     if (refineAction === 'PHOTOS') {
+      setCurrentRefineMode(null); // PHOTOS doesn't use refine mode
       const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
       const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
       const replaceMode = refineOptions.photoMode === 'replace';
@@ -2011,9 +2235,11 @@ ${language === 'pt' ? `
 3. ❌ DO NOT use Google Images, Pinterest, or any search result pages
 4. ❌ DO NOT guess or make up URLs - only use URLs you are confident exist
 5. ❌ DO NOT use Wikimedia URLs unless you know the exact filename
+6. ❌ NEVER use placeholder, mockup, picsum, placehold.co, or any fake/generated images
 
-## FALLBACK (only if no real photo found):
-Use placeholder: https://placehold.co/400x300/e2e8f0/64748b?text=[URL-encoded-name]
+## IF NO REAL PHOTO FOUND:
+Leave the imageUrl as empty string "" - DO NOT use any placeholder or fake URLs.
+It's better to have no image than a fake/mockup image.
 
 ## OUTPUT FORMAT:
 Return a JSON array with the results:
@@ -2065,44 +2291,32 @@ Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0)
         .filter(s => s.length > 0);
       
       const requiredSpeciesInstr = expandRequiredSpeciesList.length > 0
-        ? `\n═══════════════════════════════════════════════════════════════════════
-⚠️ MANDATORY SPECIES TO ADD (${expandRequiredSpeciesList.length} species):
-═══════════════════════════════════════════════════════════════════════
-${expandRequiredSpeciesList.map((s, i) => `${i + 1}. "${s}"`).join('\n')}
-
-These species MUST be included among the new entities. They are NON-NEGOTIABLE.
-`
+        ? `\nMANDATORY SPECIES TO ADD: ${expandRequiredSpeciesList.join(', ')}`
         : '';
       
+      // Set refine mode for optimized processing
+      setCurrentRefineMode('expand');
+      
+      // Use ID-based format for EXPAND
       refinePrompt = `
-You are an expert taxonomist. I have an existing identification key that I want to EXPAND with more entities.
+EXPAND IDENTIFICATION KEY
 
-CURRENT KEY (JSON):
-${projectJson}
+FEATURES (use these IDs):
+${JSON.stringify(featuresRef, null, 2)}
 
-${keepExistingEntities ? `═══════════════════════════════════════════════════════════════════════
-⚠️ CRITICAL: PRESERVE ALL ${project.entities.length} EXISTING ENTITIES + ADD NEW ONES
-═══════════════════════════════════════════════════════════════════════
+EXISTING ENTITIES (${project.entities.length} - ${keepExistingEntities ? 'PRESERVE ALL' : 'may replace'}):
+${JSON.stringify(entitiesRef, null, 2)}
 
-EXISTING ENTITIES TO PRESERVE (count: ${project.entities.length}):
-${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
-` : ''}
-${requiredSpeciesInstr}
-TASK: Add ${expandRequiredSpeciesList.length > 0 ? `at least ${Math.max(refineOptions.expandCount, expandRequiredSpeciesList.length)}` : refineOptions.expandCount} NEW entities (species/taxa) to this key.
+TASK: Add ${refineOptions.expandCount} NEW entities.${requiredSpeciesInstr}
 ${filterInstructions}
-CRITICAL RULES:
-1. DO NOT repeat any of the existing ${project.entities.length} entities. Each new entity MUST be unique.
-2. New entities should be taxonomically related or similar to existing ones (same family/genus/habitat).
-3. ${keepExistingEntities ? `⚠️ PRESERVE ALL ${project.entities.length} existing entities in the output - MANDATORY.` : 'Replace existing entities with new ones.'}
-4. ${refineOptions.addFeatures ? 'You MAY add 1-3 new discriminating features if needed to distinguish new species.' : 'Use ONLY the existing features.'}
-5. For each new entity, assign appropriate trait values using the existing feature states.
-6. Maintain the same level of detail and language (${language === 'pt' ? 'Portuguese' : 'English'}).
-${expandFilters.length > 0 ? '7. STRICTLY RESPECT all taxonomic and geographic filters above - do NOT add species outside the specified scope.' : ''}
-${expandRequiredSpeciesList.length > 0 ? `8. ⚠️ ALL ${expandRequiredSpeciesList.length} MANDATORY SPECIES listed above MUST be included. These are non-negotiable.` : ''}
+RULES:
+1. ${keepExistingEntities ? 'PRESERVE all existing entities with their IDs' : 'Replace existing entities'}
+2. For NEW entities, generate new unique IDs
+3. Return traitsMap as JSON string: {"featureId": ["stateId1", "stateId2"]}
+4. Use ONLY existing feature and state IDs from the FEATURES list above
+5. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 
-${keepExistingEntities ? `VERIFICATION: Your output MUST contain at least ${project.entities.length + Math.max(refineOptions.expandCount, expandRequiredSpeciesList.length)} entities. Count them before returning.` : ''}
-
-OUTPUT: Return a complete JSON with ${keepExistingEntities ? `ALL ${project.entities.length} existing entities + new entities (including all mandatory species)` : `new entities (including all mandatory species)`}.
+OUTPUT: Return JSON with "entities" array. Each entity needs: id, name, scientificName, family, description, traitsMap
 `;
     } else if (refineAction === 'REFINE') {
       // Build required features instruction
@@ -2144,156 +2358,118 @@ For each required feature above:
       
       // Use cleaned project for gap analysis
       const projectForAnalysis = cleanedProject;
-      // Also use cleaned JSON for the prompt to avoid confusing the AI with invalid IDs
-      const cleanedProjectJson = JSON.stringify(cleanedProject, null, 2);
 
       if (onlyFillGaps) {
-        // Build detailed gap analysis for focused prompt
-        const featureNames = projectForAnalysis.features.map(f => f.name);
-        const entitiesWithGaps: { name: string; missingFeatures: string[] }[] = [];
+        // Build detailed gap analysis - identify which entities need which features filled
+        const entitiesWithGaps: { id: string; name: string; missingFeatureIds: string[] }[] = [];
         
         projectForAnalysis.entities.forEach(entity => {
-          const missingFeatures: string[] = [];
+          const missingFeatureIds: string[] = [];
           projectForAnalysis.features.forEach(feature => {
             const traitIds = entity.traits[feature.id] || [];
-            // Check if traits exist AND if at least one trait ID is a valid state ID for this feature
             const validStateIds = feature.states.map(s => s.id);
             const hasValidTraits = traitIds.length > 0 && traitIds.some(tid => validStateIds.includes(tid));
             if (!hasValidTraits) {
-              missingFeatures.push(feature.name);
+              missingFeatureIds.push(feature.id);
             }
           });
-          if (missingFeatures.length > 0) {
-            entitiesWithGaps.push({ name: entity.name, missingFeatures });
+          if (missingFeatureIds.length > 0) {
+            entitiesWithGaps.push({ id: entity.id, name: entity.name, missingFeatureIds });
           }
         });
         
         if (entitiesWithGaps.length === 0) {
-          // No gaps found - inform user
+          setCurrentRefineMode(null);
           refinePrompt = `No missing trait data found. All ${projectForAnalysis.entities.length} entities have assignments for all ${projectForAnalysis.features.length} features.`;
         } else {
-          // Create focused prompt for filling gaps
+          // Set refine mode for optimized processing
+          setCurrentRefineMode('fillGaps');
+          
+          // Create compact prompt for fillGaps - only send what's needed
           refinePrompt = `
-You are an expert taxonomist. Your ONLY task is to FILL IN MISSING TRAIT DATA for entities in this identification key.
+FILL MISSING TRAITS
 
-═══════════════════════════════════════════════════════════════════════
-⚠️ FOCUSED TASK: FILL MISSING TRAITS ONLY
-═══════════════════════════════════════════════════════════════════════
+FEATURES (use these IDs for traits):
+${JSON.stringify(featuresRef, null, 2)}
 
-CURRENT KEY STRUCTURE:
-- Project: "${projectForAnalysis.name}"
-- Total Entities: ${projectForAnalysis.entities.length}
-- Total Features: ${projectForAnalysis.features.length}
-- Features: ${featureNames.join(', ')}
+ENTITIES NEEDING DATA (${entitiesWithGaps.length} of ${projectForAnalysis.entities.length}):
+${entitiesWithGaps.map(e => `- ${e.id}: "${e.name}" needs: ${e.missingFeatureIds.map(fid => {
+  const f = projectForAnalysis.features.find(feat => feat.id === fid);
+  return f ? f.name : fid;
+}).join(', ')}`).join('\n')}
 
-FEATURES WITH THEIR STATES (USE ONLY THESE STATE IDs):
-${projectForAnalysis.features.map(f => `• ${f.name} (ID: ${f.id}):\n${f.states.map(s => `    - "${s.label}" (ID: ${s.id})`).join('\n')}`).join('\n')}
+TASK: For each entity above, determine the correct trait values for the missing features.
 
-═══════════════════════════════════════════════════════════════════════
-ENTITIES WITH MISSING DATA (${entitiesWithGaps.length} entities need fixes):
-═══════════════════════════════════════════════════════════════════════
-${entitiesWithGaps.map((e, i) => `${i + 1}. "${e.name}" → MISSING: ${e.missingFeatures.join(', ')}`).join('\n')}
+OUTPUT FORMAT (use fillGapsSchema):
+Return "filledEntities" array with:
+- entityId: the entity ID from above
+- filledTraits: JSON string like {"featureId": ["stateId"]} - ONLY the new traits being added
 
-CURRENT KEY (JSON - with invalid traits already removed):
-${cleanedProjectJson}
-
-═══════════════════════════════════════════════════════════════════════
-TASK: Fill in the missing trait assignments listed above.
-═══════════════════════════════════════════════════════════════════════
-
-For each entity with missing features:
-1. Research or infer the correct trait value based on the entity's taxonomy/biology
-2. Assign ONE OR MORE appropriate states from the feature's available states
-3. Use your taxonomic knowledge to make accurate assignments
-
-CRITICAL RULES:
-1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES exactly as they are
-2. ⚠️ PRESERVE ALL ${project.features.length} FEATURES exactly as they are - DO NOT create new features
-3. ⚠️ PRESERVE ALL existing trait assignments - DO NOT change or remove any
-4. ⚠️ PRESERVE ALL feature and state IDs exactly as they appear in the input JSON
-5. ONLY ADD new trait assignments where data is currently missing
-6. Use ONLY the existing states for each feature (do not create new states)
-7. Every entity MUST have at least one trait assigned for EVERY feature after this operation
-8. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
-
-⚠️ IMPORTANT: The output JSON must have EXACTLY the same features array as the input.
-Do NOT add, remove, or modify any features. Only modify the "traits" object inside each entity.
-
-VERIFICATION BEFORE RETURNING:
-- Count: exactly ${project.entities.length} entities
-- Count: exactly ${project.features.length} features (unchanged from input)
-- Each entity has traits for all ${project.features.length} features
-- All feature IDs and state IDs are preserved from the original
-
-OUTPUT: Return the complete JSON with ALL missing traits filled in.
+RULES:
+1. Use ONLY the state IDs from FEATURES list above
+2. Return ONLY entities that have gaps (those listed above)
+3. Do NOT include existing traits - only NEW ones
+4. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 `;
         }
       } else {
         // Standard REFINE prompt (multiple options selected)
+        setCurrentRefineMode('refine');
+        
+        // Feature type instruction
+        const featureTypeInstr = refineOptions.featureType === 'vegetative'
+          ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on VEGETATIVE characters (leaves, stems, bark, branching, stipules, etc.). Do NOT add reproductive characters (flowers, fruits, seeds).`
+          : refineOptions.featureType === 'reproductive'
+          ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on REPRODUCTIVE characters (flowers, inflorescences, fruits, seeds, pods, etc.). Do NOT add vegetative characters.`
+          : ''; // 'both' - no restriction
+        
         refinePrompt = `
-You are an expert taxonomist. I have an existing identification key that I want to REFINE and improve.
+REFINE IDENTIFICATION KEY
 
-CURRENT KEY (JSON):
-${projectJson}
+FEATURES (use these IDs):
+${JSON.stringify(featuresRef, null, 2)}
 
-═══════════════════════════════════════════════════════════════════════
-⚠️ CRITICAL: THIS KEY HAS ${project.entities.length} ENTITIES - YOU MUST RETURN ALL ${project.entities.length} ENTITIES
-═══════════════════════════════════════════════════════════════════════
+ENTITIES (${project.entities.length} - PRESERVE ALL):
+${JSON.stringify(entitiesRef, null, 2)}
 
-ENTITY LIST (preserve ALL of these - count: ${project.entities.length}):
-${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
+TASK: Improve this key.
+${requiredFeaturesInstr}${featureTypeInstr}
+IMPROVEMENTS:
+${refineOptions.improveDescriptions ? '- Improve descriptions' : ''}
+${refineOptions.fillGaps ? '- Fill missing traits' : ''}
+${refineOptions.addFeatures ? '- Add 2-4 new features (assign traits to ALL entities)' : ''}
 
-TASK: Improve and refine this identification key while PRESERVING ALL ENTITIES.
-${requiredFeaturesInstr}
-IMPROVEMENTS TO MAKE:
-${refineOptions.improveDescriptions ? '- Improve entity descriptions with more accurate biological information.' : ''}
-${refineOptions.fillGaps ? '- Fill in missing trait data where entities lack assignments for certain features.' : ''}
-${refineOptions.addFeatures ? '- Add 2-4 new discriminating features that help better distinguish between entities.' : ''}
+RULES:
+1. PRESERVE all ${project.entities.length} entity IDs
+2. Return traitsMap as JSON string: {"featureId": ["stateId1"]}
+3. Use existing feature/state IDs
+4. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 
-ABSOLUTE RULES (VIOLATION = FAILURE):
-1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES - Do NOT remove, skip, or omit ANY entity
-2. Every single entity from the input MUST appear in the output
-3. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
-4. Ensure scientific accuracy.
-5. Make features more discriminating (each state should ideally apply to different subsets of entities).
-${refineOptions.refineRequiredFeatures.length > 0 ? '6. ALL required features listed above MUST be present in the final output.' : ''}
-
-VERIFICATION: Your output MUST contain exactly ${project.entities.length} entities. Count them before returning.
-
-OUTPUT: Return the improved JSON key with ALL ${project.entities.length} entities.
+OUTPUT: Return JSON with "entities" array. Each needs: id, name, scientificName, family, description, traitsMap
 `;
       }
     } else { // CLEAN
+      setCurrentRefineMode('clean');
+      
       refinePrompt = `
-You are an expert taxonomist. I have an existing identification key that I want to CLEAN and optimize.
+CLEAN IDENTIFICATION KEY
 
-CURRENT KEY (JSON):
-${projectJson}
+FEATURES:
+${JSON.stringify(featuresRef, null, 2)}
 
-═══════════════════════════════════════════════════════════════════════
-⚠️ CRITICAL: THIS KEY HAS ${project.entities.length} ENTITIES - YOU MUST RETURN ALL ${project.entities.length} ENTITIES
-═══════════════════════════════════════════════════════════════════════
+ENTITIES (${project.entities.length}):
+${JSON.stringify(entitiesRef.map(e => ({ id: e.id, name: e.name })), null, 2)}
 
-ENTITY LIST (preserve ALL of these - count: ${project.entities.length}):
-${project.entities.map((e, i) => `${i + 1}. "${e.name}"`).join('\n')}
+TASK: Optimize this key.
+${refineOptions.removeRedundant ? '- Remove redundant features (all entities have same state)' : ''}
+${refineOptions.fixInconsistencies ? '- Fix trait inconsistencies' : ''}
 
-TASK: Clean and optimize this identification key while PRESERVING ALL ENTITIES.
+RULES:
+1. PRESERVE all ${project.entities.length} entity IDs
+2. Return traitsMap as JSON string
+3. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 
-OPTIMIZATIONS TO MAKE:
-${refineOptions.removeRedundant ? '- Remove redundant features (features where all entities have the same state).' : ''}
-${refineOptions.fixInconsistencies ? '- Fix any inconsistencies in trait assignments.' : ''}
-- Ensure each feature has meaningful variation across entities.
-- Remove empty or meaningless states.
-
-ABSOLUTE RULES (VIOLATION = FAILURE):
-1. ⚠️ PRESERVE ALL ${project.entities.length} ENTITIES - Do NOT remove, skip, or omit ANY entity
-2. Every single entity from the input MUST appear in the output
-3. Maintain the same language (${language === 'pt' ? 'Portuguese' : 'English'}).
-4. Only remove features that provide no discriminating value (NOT entities).
-
-VERIFICATION: Your output MUST contain exactly ${project.entities.length} entities. Count them before returning.
-
-OUTPUT: Return the cleaned JSON key with ALL ${project.entities.length} entities.
+OUTPUT: Return JSON with "entities" array with: id, name, traitsMap
 `;
     }
     
@@ -2500,8 +2676,8 @@ OUTPUT: Return a single merged JSON identification key with:
         
         // Initial message
         const introMsg = language === 'pt'
-          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: iNaturalist, Flickr, Wikipedia, Biodiversity4All, SIDOL, Flora Digital UFSC\n\n"
-          : "🔍 Starting image search...\n\n📷 Sources: iNaturalist, Flickr, Wikipedia, Biodiversity4All, SIDOL, Flora Digital UFSC\n\n";
+          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: Biodiversity4All, iNaturalist, Wikipedia, Wikimedia Commons, PlantNet, POWO (Kew)\n\n"
+          : "🔍 Starting image search...\n\n📷 Sources: Biodiversity4All, iNaturalist, Wikipedia, Wikimedia Commons, PlantNet, POWO (Kew)\n\n";
         setAiTypingText(introMsg);
         
         // Fetch images for entities
@@ -2780,79 +2956,128 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
     startTypingEffect();
 
     try {
-      const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
+      let resultProject: Project;
       
       // ═══════════════════════════════════════════════════════════════════════════════
-      // VALIDATION: Check if AI response is valid before proceeding
+      // Use optimized refine function when in refine mode
       // ═══════════════════════════════════════════════════════════════════════════════
-      const isValidResponse = generatedProject && 
-        generatedProject.entities && 
-        generatedProject.entities.length > 0 &&
-        generatedProject.features &&
-        generatedProject.features.length > 0;
-      
-      if (!isValidResponse) {
-        console.error("[handleSendManualPrompt] AI returned invalid/empty response:", generatedProject);
-        stopTypingEffect();
-        const errorMsg = language === 'pt' 
-          ? "\n\n❌ ERRO: A IA retornou uma resposta vazia ou inválida. Os dados originais foram preservados. Tente novamente."
-          : "\n\n❌ ERROR: AI returned empty or invalid response. Original data preserved. Please try again.";
-        setAiTypingText(prev => prev + errorMsg);
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        setShowPromptEditor(false);
-        return;
-      }
-      
-      // Check for significant data loss when refining
-      if (project.entities.length > 0) {
-        const existingTraitCount = project.entities.reduce((sum, e) => 
-          sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
-        const newTraitCount = generatedProject.entities.reduce((sum, e) => 
-          sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
+      if (currentRefineMode && project.entities.length > 0) {
+        // Use the new optimized refine function
+        resultProject = await refineExistingProject(
+          manualPrompt, 
+          project, 
+          apiKey, 
+          aiConfig.model, 
+          language, 
+          currentRefineMode
+        );
         
-        // If we had traits and new has very few, warn user
-        if (existingTraitCount > 10 && newTraitCount < existingTraitCount * 0.3) {
-          console.warn(`[handleSendManualPrompt] WARNING: Significant trait loss detected! Existing: ${existingTraitCount}, New: ${newTraitCount}`);
-          const warningMsg = language === 'pt'
-            ? `\n\n⚠️ AVISO: Detectada possível perda de dados (${existingTraitCount} → ${newTraitCount} traits). Preservando dados originais.`
-            : `\n\n⚠️ WARNING: Possible data loss detected (${existingTraitCount} → ${newTraitCount} traits). Preserving original data.`;
-          setAiTypingText(prev => prev + warningMsg);
+        // Show success message
+        const successMsg = language === 'pt'
+          ? `\n\n✅ Operação concluída! ${resultProject.entities.length} entidades processadas.`
+          : `\n\n✅ Operation complete! ${resultProject.entities.length} entities processed.`;
+        setAiTypingText(prev => prev + successMsg);
+        
+        // Clear refine mode
+        setCurrentRefineMode(null);
+      } else {
+        // Standard generation (new key or non-refine operation)
+        const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
+        
+        // VALIDATION: Check if AI response is valid
+        const isValidResponse = generatedProject && 
+          generatedProject.entities && 
+          generatedProject.entities.length > 0 &&
+          generatedProject.features &&
+          generatedProject.features.length > 0;
+        
+        if (!isValidResponse) {
+          console.error("[handleSendManualPrompt] AI returned invalid/empty response:", generatedProject);
+          stopTypingEffect();
+          const errorMsg = language === 'pt' 
+            ? "\n\n❌ ERRO: A IA retornou uma resposta vazia ou inválida. Os dados originais foram preservados. Tente novamente."
+            : "\n\n❌ ERROR: AI returned empty or invalid response. Original data preserved. Please try again.";
+          setAiTypingText(prev => prev + errorMsg);
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          setShowPromptEditor(false);
+          return;
+        }
+        
+        // Check for significant data loss when refining
+        if (project.entities.length > 0) {
+          const existingTraitCount = project.entities.reduce((sum, e) => 
+            sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
+          const newTraitCount = generatedProject.entities.reduce((sum, e) => 
+            sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
+          
+          if (existingTraitCount > 10 && newTraitCount < existingTraitCount * 0.3) {
+            console.warn(`[handleSendManualPrompt] WARNING: Significant trait loss detected! Existing: ${existingTraitCount}, New: ${newTraitCount}`);
+            const warningMsg = language === 'pt'
+              ? `\n\n⚠️ AVISO: Detectada possível perda de dados (${existingTraitCount} → ${newTraitCount} traits). Preservando dados originais.`
+              : `\n\n⚠️ WARNING: Possible data loss detected (${existingTraitCount} → ${newTraitCount} traits). Preserving original data.`;
+            setAiTypingText(prev => prev + warningMsg);
+          }
+        }
+        
+        // Merge with existing project to preserve images, links, and other data
+        resultProject = project.entities.length > 0 
+          ? mergeProjectsPreservingData(generatedProject, project)
+          : generatedProject;
+        
+        // Safety check: if merge returned original project, inform user
+        if (resultProject === project) {
+          const preservedMsg = language === 'pt'
+            ? "\n\n🛡️ Dados originais foram preservados devido a resposta incompleta da IA."
+            : "\n\n🛡️ Original data was preserved due to incomplete AI response.";
+          setAiTypingText(prev => prev + preservedMsg);
         }
       }
-      // ═══════════════════════════════════════════════════════════════════════════════
       
       // Stop typing effect and show summary
-      stopTypingEffect(generatedProject);
+      stopTypingEffect(resultProject);
       
       // Wait a moment so user can see the summary
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Merge with existing project to preserve images, links, and other data if editing
-      const mergedProject = project.entities.length > 0 
-        ? mergeProjectsPreservingData(generatedProject, project)
-        : generatedProject;
-      
-      // Final safety check: if merge returned original project (due to data protection), inform user
-      if (mergedProject === project) {
-        const preservedMsg = language === 'pt'
-          ? "\n\n🛡️ Dados originais foram preservados devido a resposta incompleta da IA."
-          : "\n\n🛡️ Original data was preserved due to incomplete AI response.";
-        setAiTypingText(prev => prev + preservedMsg);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
-      
-      setProject(mergedProject);
+      setProject(resultProject);
       setActiveTab('MATRIX');
       setShowPromptEditor(false);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      // Stop typing and show error
+      // Stop typing and show error with specific message based on error type
       stopTypingEffect();
-      setAiTypingText(prev => prev + (language === 'pt' 
-        ? "\n\n❌ ERRO: Não foi possível gerar a chave. Por favor, tente novamente."
-        : "\n\n❌ ERROR: Could not generate the key. Please try again."));
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      alert(strings.errGen);
+      
+      // Clear refine mode on error
+      setCurrentRefineMode(null);
+      
+      const errorMessage = e?.message || String(e);
+      let userErrorMessage: string;
+      
+      if (errorMessage.includes('503') || errorMessage.includes('overloaded') || errorMessage.includes('UNAVAILABLE')) {
+        userErrorMessage = language === 'pt'
+          ? "\n\n❌ ERRO: O serviço de IA está sobrecarregado no momento. Por favor, aguarde alguns minutos e tente novamente."
+          : "\n\n❌ ERROR: AI service is currently overloaded. Please wait a few minutes and try again.";
+      } else if (errorMessage.includes('429') || errorMessage.includes('quota') || errorMessage.includes('rate')) {
+        userErrorMessage = language === 'pt'
+          ? "\n\n❌ ERRO: Limite de requisições atingido. Por favor, aguarde um momento e tente novamente."
+          : "\n\n❌ ERROR: Rate limit reached. Please wait a moment and try again.";
+      } else if (errorMessage.includes('401') || errorMessage.includes('API key') || errorMessage.includes('authentication')) {
+        userErrorMessage = language === 'pt'
+          ? "\n\n❌ ERRO: Chave de API inválida ou expirada. Por favor, verifique sua chave nas configurações."
+          : "\n\n❌ ERROR: Invalid or expired API key. Please check your key in settings.";
+      } else if (errorMessage.includes('network') || errorMessage.includes('fetch') || errorMessage.includes('connection')) {
+        userErrorMessage = language === 'pt'
+          ? "\n\n❌ ERRO: Falha na conexão. Verifique sua internet e tente novamente."
+          : "\n\n❌ ERROR: Connection failed. Check your internet and try again.";
+      } else {
+        userErrorMessage = language === 'pt'
+          ? "\n\n❌ ERRO: Não foi possível gerar a chave. Por favor, tente novamente."
+          : "\n\n❌ ERROR: Could not generate the key. Please try again.";
+      }
+      
+      setAiTypingText(prev => prev + userErrorMessage);
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Don't show alert - the error is already displayed in the typing area
     } finally {
       setIsGenerating(false);
     }
@@ -3122,27 +3347,70 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     <div className="space-y-2 pl-3 border-l-2 border-slate-100">
                       <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">{strings.states}</label>
                       {feature.states.map((state, sIdx) => (
-                        <div key={state.id} className="flex items-center gap-2 group/state">
-                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-focus-within/state:bg-emerald-400"></div>
-                          <input
-                            value={state.label}
-                            onChange={(e) => {
-                              const newFeatures = [...project.features];
-                              newFeatures[fIdx].states[sIdx].label = e.target.value;
-                              setProject(p => ({ ...p, features: newFeatures }));
-                            }}
-                            className="text-sm bg-transparent outline-none w-full text-slate-600 focus:text-slate-900 focus:font-medium"
-                          />
-                          <button
-                            onClick={() => {
-                              const newFeatures = [...project.features];
-                              newFeatures[fIdx].states = newFeatures[fIdx].states.filter(s => s.id !== state.id);
-                              setProject(p => ({ ...p, features: newFeatures }));
-                            }}
-                            className="text-slate-300 hover:text-red-400 md:opacity-0 group-hover/state:opacity-100 transition-opacity"
-                          >
-                            <X size={12} />
-                          </button>
+                        <div key={state.id} className="group/state">
+                          <div className="flex items-center gap-2">
+                            {/* State image thumbnail - subtle, only shows if has image */}
+                            {state.imageUrl ? (
+                              <button
+                                onClick={() => setExpandedStateImage({url: state.imageUrl!, label: state.label, featureName: feature.name})}
+                                className="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0"
+                                title={strings.viewImage}
+                              >
+                                <img src={state.imageUrl} alt={state.label} className="w-full h-full object-cover" />
+                              </button>
+                            ) : (
+                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-focus-within/state:bg-emerald-400 shrink-0"></div>
+                            )}
+                            <input
+                              value={state.label}
+                              onChange={(e) => {
+                                const newFeatures = [...project.features];
+                                newFeatures[fIdx].states[sIdx].label = e.target.value;
+                                setProject(p => ({ ...p, features: newFeatures }));
+                              }}
+                              className="text-sm bg-transparent outline-none flex-1 text-slate-600 focus:text-slate-900 focus:font-medium"
+                            />
+                            {/* Image toggle button - subtle, shows on hover */}
+                            <button
+                              onClick={() => {
+                                const url = state.imageUrl ? '' : prompt(strings.stateImage + ' URL:', '');
+                                if (url !== null) {
+                                  const newFeatures = [...project.features];
+                                  newFeatures[fIdx].states[sIdx].imageUrl = url || undefined;
+                                  setProject(p => ({ ...p, features: newFeatures }));
+                                }
+                              }}
+                              className={`${state.imageUrl ? 'text-emerald-500' : 'text-slate-300 hover:text-slate-500'} md:opacity-0 group-hover/state:opacity-100 transition-opacity`}
+                              title={state.imageUrl ? strings.stateImage : strings.addStateImage}
+                            >
+                              <ImageIcon size={12} />
+                            </button>
+                            <button
+                              onClick={() => {
+                                const newFeatures = [...project.features];
+                                newFeatures[fIdx].states = newFeatures[fIdx].states.filter(s => s.id !== state.id);
+                                setProject(p => ({ ...p, features: newFeatures }));
+                              }}
+                              className="text-slate-300 hover:text-red-400 md:opacity-0 group-hover/state:opacity-100 transition-opacity"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                          {/* Image URL input - only shows when state has image, inline editing */}
+                          {state.imageUrl && (
+                            <div className="ml-8 mt-1">
+                              <input
+                                value={state.imageUrl}
+                                onChange={(e) => {
+                                  const newFeatures = [...project.features];
+                                  newFeatures[fIdx].states[sIdx].imageUrl = e.target.value || undefined;
+                                  setProject(p => ({ ...p, features: newFeatures }));
+                                }}
+                                className="text-[10px] w-full text-slate-400 bg-slate-50 rounded px-2 py-0.5 outline-none focus:bg-white focus:text-slate-600 border border-transparent focus:border-slate-200"
+                                placeholder="URL..."
+                              />
+                            </div>
+                          )}
                         </div>
                       ))}
                       <button
@@ -3225,6 +3493,26 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         <option key={genus} value={genus}>{genus}</option>
                       ))}
                     </select>
+                  )}
+                  
+                  {/* Only With Gaps Filter */}
+                  {project.features.length > 0 && (
+                    <label 
+                      className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg cursor-pointer transition-colors ${
+                        entityFilter.onlyWithGaps 
+                          ? 'bg-amber-50 border-amber-300 text-amber-700' 
+                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}
+                      title={strings.onlyWithGapsDesc}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={entityFilter.onlyWithGaps}
+                        onChange={(e) => setEntityFilter(prev => ({ ...prev, onlyWithGaps: e.target.checked }))}
+                        className="w-4 h-4 text-amber-500 border-slate-300 rounded focus:ring-amber-500"
+                      />
+                      <span className="whitespace-nowrap">{strings.onlyWithGaps}</span>
+                    </label>
                   )}
                   
                   {/* Clear Filters */}
@@ -3475,6 +3763,26 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         <option key={genus} value={genus}>{genus}</option>
                       ))}
                     </select>
+                  )}
+                  
+                  {/* Only With Gaps Filter */}
+                  {project.features.length > 0 && (
+                    <label 
+                      className={`flex items-center gap-1.5 px-2 py-1.5 text-xs border rounded-lg cursor-pointer transition-colors ${
+                        entityFilter.onlyWithGaps 
+                          ? 'bg-amber-50 border-amber-300 text-amber-700' 
+                          : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                      }`}
+                      title={strings.onlyWithGapsDesc}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={entityFilter.onlyWithGaps}
+                        onChange={(e) => setEntityFilter(prev => ({ ...prev, onlyWithGaps: e.target.checked }))}
+                        className="w-3.5 h-3.5 text-amber-500 border-slate-300 rounded focus:ring-amber-500"
+                      />
+                      <span className="whitespace-nowrap">{strings.onlyWithGaps}</span>
+                    </label>
                   )}
                   
                   {/* Clear Filters */}
@@ -3946,6 +4254,49 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     </div>
                   </div>
 
+                  {/* Feature Type Selector */}
+                  <div className="bg-amber-50/50 p-3 rounded-xl border border-amber-100">
+                    <label className="block text-xs font-bold text-amber-700 uppercase mb-2 flex items-center gap-1">
+                      🌿 {strings.featureTypeLabel}
+                    </label>
+                    <p className="text-xs text-amber-600/80 mb-2">{strings.featureTypeDesc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
+                        className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                          aiConfig.featureFocus === 'vegetative'
+                            ? 'bg-emerald-500 text-white border-emerald-500'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
+                        }`}
+                        disabled={isGenerating}
+                      >
+                        🌿 {strings.featureTypeVegetative}
+                      </button>
+                      <button
+                        onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
+                        className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                          aiConfig.featureFocus === 'reproductive'
+                            ? 'bg-pink-500 text-white border-pink-500'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
+                        }`}
+                        disabled={isGenerating}
+                      >
+                        🌸 {strings.featureTypeReproductive}
+                      </button>
+                      <button
+                        onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
+                        className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                          aiConfig.featureFocus === 'general'
+                            ? 'bg-amber-500 text-white border-amber-500'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                        }`}
+                        disabled={isGenerating}
+                      >
+                        🌱 {strings.featureTypeBoth}
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Required Species List */}
                   <div className="bg-purple-50/50 p-3 rounded-xl border border-purple-100">
                     <div className="flex items-center justify-between mb-2">
@@ -4002,7 +4353,13 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     <p className="text-slate-500 text-sm">{strings.uploadDesc}</p>
                   </div>
 
-                  <div className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center transition-all bg-slate-50 ${importedFile ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400'}`}>
+                  <div 
+                    className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center transition-all ${isDraggingFile ? 'border-amber-500 bg-amber-100 scale-[1.02]' : importedFile ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}
+                    onDragOver={handleDragOver}
+                    onDragEnter={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                  >
                     {importedFile ? (
                       <div className="flex flex-col items-center gap-3">
                         <FileText size={48} className="text-amber-600" />
@@ -4017,10 +4374,10 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       </div>
                     ) : (
                       <label className="cursor-pointer flex flex-col items-center gap-3 w-full h-full">
-                        <div className="p-4 bg-white rounded-full shadow-sm">
-                          <Upload size={24} className="text-amber-500" />
+                        <div className={`p-4 bg-white rounded-full shadow-sm transition-transform ${isDraggingFile ? 'scale-110' : ''}`}>
+                          <Upload size={24} className={`${isDraggingFile ? 'text-amber-600' : 'text-amber-500'}`} />
                         </div>
-                        <span className="font-bold text-slate-600">{strings.dropFile}</span>
+                        <span className="font-bold text-slate-600">{isDraggingFile ? (language === 'pt' ? 'Solte o arquivo aqui!' : 'Drop file here!') : strings.dropFile}</span>
                         <span className="text-xs text-slate-400">{strings.supportedFormats}</span>
                         <input
                           type="file"
@@ -4310,6 +4667,44 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
 
                   {refineAction === 'REFINE' && (
                     <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                      {/* Feature Type Selector */}
+                      <div className="pb-3 border-b border-slate-200">
+                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.featureTypeLabel}</label>
+                        <p className="text-xs text-slate-400 mb-2">{strings.featureTypeDesc}</p>
+                        <div className="flex flex-wrap gap-2">
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                              refineOptions.featureType === 'vegetative'
+                                ? 'bg-emerald-500 text-white border-emerald-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
+                            }`}
+                          >
+                            🌿 {strings.featureTypeVegetative}
+                          </button>
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                              refineOptions.featureType === 'reproductive'
+                                ? 'bg-pink-500 text-white border-pink-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
+                            }`}
+                          >
+                            🌸 {strings.featureTypeReproductive}
+                          </button>
+                          <button
+                            onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+                              refineOptions.featureType === 'both'
+                                ? 'bg-amber-500 text-white border-amber-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                            }`}
+                          >
+                            🌱 {strings.featureTypeBoth}
+                          </button>
+                        </div>
+                      </div>
+                      
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
                           type="checkbox"
@@ -5272,6 +5667,37 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                   {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* State Image Viewer Modal */}
+      {expandedStateImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setExpandedStateImage(null)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in zoom-in-95"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="relative">
+              <img 
+                src={expandedStateImage.url} 
+                alt={expandedStateImage.label}
+                className="w-full max-h-[60vh] object-contain bg-slate-100"
+              />
+              <button 
+                onClick={() => setExpandedStateImage(null)}
+                className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="p-4 bg-white">
+              <h4 className="font-semibold text-slate-800">{expandedStateImage.label}</h4>
+              <p className="text-sm text-slate-500">{expandedStateImage.featureName}</p>
             </div>
           </div>
         </div>
