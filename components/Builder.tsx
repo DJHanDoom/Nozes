@@ -3,7 +3,6 @@ import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFil
 import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
-import iconSrc from '../assets/icon.png';
 
 // Generate standalone HTML file with embedded player
 const generateStandaloneHTML = (project: Project, lang: Language): string => {
@@ -4279,7 +4278,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                   <X size={24} />
                 </button>
 
-                <img src={iconSrc} className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
+                <img src="./assets/icon.png" className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">Nozes IA</h2>
                 <p className="text-slate-500 text-center mb-8">
                   {language === 'pt' ? 'O que você deseja identificar hoje?' : 'What do you want to identify today?'}
@@ -4344,7 +4343,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                 <h3 className="text-xl md:text-2xl font-bold flex-1">{strings.aiTitle}</h3>
                 
                 {/* Icon in Header */}
-                <img src={iconSrc} className="w-12 h-12 drop-shadow-sm opacity-90" alt="Nozes" />
+                <img src="./assets/icon.png" className="w-12 h-12 drop-shadow-sm opacity-90" alt="Nozes" />
 
                 {onOpenSettings && (
                   <button
