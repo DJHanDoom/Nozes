@@ -1,0 +1,263 @@
+﻿Passo;Diagnose;Identificação / Próximo Passo
+1.;Folha/inflorescência na bifurcação;Boraginaceae (Cordia)
+;Sem esta característica;Ir para 2
+2.;Nó do ramo engrossado;Piperaceae
+;Sem engrossamento do nó;Ir para 3
+3.;Filotaxia dística;Ir para 4
+;Filotaxia espiralada;Ir para 35
+;Filotaxia congesta;Ir para 105
+4.;Espinhos na base da folha;Ir para 5
+;Ausência de espinhos no ramo;Ir para 7
+5.;Planta lactescente;Moraceae (Maclura)
+;Planta não-lactescente;Ir para 6
+6.;Lâmina trinervada;Cannabaceae (Celtis)
+;Lâmina peninérvia;Rhamnaceae (Ziziphus)
+7.;Bordo aculeado (todo limbo);Phytolaccaceae (Seguieria)
+;Bordo liso, crenado, serreado;Ir para 10 (Nota: A chave original salta numeração ou direciona para 8 dependendo do contexto. Segue sequência lógica de diagnóstico)
+8.;Presença de látex (não abundante);Moraceae (Sorocea)
+;Ausência de látex;Ir para 9
+9.;Ramos cilíndricos, estípula presente;Fabaceae (Zollernia)
+;Ramos achatados, sem estípula;Celastraceae (Maytenus)
+10.;Presença de látex;Ir para 11
+;Ausência de látex;Ir para 18
+11.;Látex incolor ou avermelhado;Ir para 12
+;Látex branco;Ir para 13
+12.;Folhas > 10 cm;Myristicaceae (Virola)
+;Folhas < 10 cm;Euphorbiaceae (Maprounea)
+13.;Bordo liso;Ir para 14
+;Bordo serreado a aculeado;Ir para 15
+14.;Estípulas ausentes;Sapotaceae (Chrysophyllum, Micropholis, Diploon), Olacaceae
+;Estípulas presentes;Moraceae (Brosimum, Pseudolmedia)
+15.;Bordo aculeado, estípula terminal;Moraceae (Sorocea)
+;Bordo serrilhado a serreado;Ir para 16
+16.;Mancha avermelhada no limbo;Euphorbiaceae (Mabea)
+;Ausência desta característica;Ir para 17
+17.;Florestal (com/sem espinho);Euphorbiaceae (Actinostemon, Sebastiania)
+;Savânica (sem espinho);Euphorbiaceae (Mabea piriri)
+18.;Três a cinco nervuras da base;Moraceae (Brosimum), Cannabaceae (Trema), Celastraceae (Goupia), Malvaceae (Guazuma, Luehea), Salicaceae (Banara)
+;Outro tipo de nervação;Ir para 19
+19.;Duas glândulas na base imersas;Ir para 20
+;Ausência desta característica;Ir para 21
+20.;Pecíolo curto, glândulas presentes;Rosaceae (Prunus)
+;Pecíolo longo, glândulas variadas;Euphorbiaceae (Maprounea)
+21.;Pontoações translúcidas imersas;Annonaceae (Xylopia), Salicaceae (Casearia)
+;Sem essa característica;Ir para 22
+22.;Nervuras arqueadas;Ochnaceae (Ouratea)
+;Nervuras peninérveas ou ascendentes;Ir para 23
+23.;Presença de estípula;Ir para 24
+;Ausência ou inconspícuas;Ir para 30
+24.;Estípulas foliáceas;Salicaceae (Prockia), Solanaceae
+;Estípula com outro formato;Ir para 25
+25.;Estípula encobrindo gema;Lacistemataceae (Lacistema)
+;Estípula de outra forma;Ir para 26
+26.;Bordo serreado;Ir para 27
+;Bordo liso;Ir para 28
+27.;Estípula encobrindo gema apical;Lacistemataceae (Lacistema)
+;Par de estípulas não encobrindo;Salicaceae (Casearia)
+28.;Presença de ócrea;Polygonaceae
+;Estípula de outro formato;Ir para 29
+29.;Abaxial verde-oliva, ramentas;Erythroxylaceae (Erythroxylum)
+;Abaxial concolor/discolor, estípulas fimbriadas;Chrysobalanaceae (Hirtella, Licania, Parinari)
+30.;Folhas geminadas;Solanaceae
+;Sem esta característica;Ir para 31
+31.;Presença de embira;Annonaceae, Lecythidaceae (Cariniana, Eschweilera, Lecythis)
+;Sem esta característica;Ir para 32
+32.;Ramos novos achatados;Celastraceae (Maytenus)
+;Sem estas características;Ir para 33
+33.;Ritidoma liso esbranquiçado;Phyllanthaceae (Savia)
+;Sem esta característica;Ir para 34
+34.;Folhas concolores;Annonaceae, Capparaceae, Celastraceae, Ebenaceae, Euphorbiaceae, Humiriaceae, Lecythidaceae, Myristicaceae, Olacaceae, Opiliaceae
+;Folhas discolores;Annonaceae, Myristicaceae, Solanaceae
+35.;Folha assimétrica, bordo liso/serreado;Theaceae (Laplacea)
+;Sem esta característica;Ir para 36
+36.;Folha cartacea muito áspera;Ir para 37
+;Consistência variada, não áspera;Ir para 38
+37.;Limbo > 15cm, ondulado;Dilleniaceae (Curatella)
+;Limbo < 15cm, liso/ondulado;Dilleniaceae (Davilla)
+38.;Ramos tomentosos, espinhos;Solanaceae (Solanum lycocarpum)
+;Sem estas características;Ir para 39
+39.;Bordo liso;Ir para 40
+;Bordo crenado, serreado ou serrilhado;Ir para 87
+;Bordo aculeado;Ir para 100
+40.;Presença de látex branco;Ir para 41
+;Ausência de látex;Ir para 45
+41.;Estípulas presentes;Ir para 42
+;Estípulas ausentes;Ir para 43
+42.;Estípulas encobrindo gema;Moraceae (Ficus, Helicostylis), Urticaceae (Coussapoa)
+;Outro local;Euphorbiaceae
+43.;Folhas sésseis, látex amarelo;Calophyllaceae (Kielmeyera)
+;Folhas pecioladas, látex branco;Ir para 44
+44.;Lenticelas nos ramos jovens;Apocynaceae (Aspidosperma, Geissospermum, Himatanthus)
+;Ausência de lenticelas;Apocynaceae, Calophyllaceae, Euphorbiaceae, Sapotaceae
+45.;Nervuras arqueadas;Ir para 46
+;Sem esta característica;Ir para 47
+46.;Embira nos ramos;Thymelaeaceae (Daphnopsis)
+;Sem esta característica;Ochnaceae (Ouratea)
+47.;Acúleos/espinhos presentes;Ir para 48
+;Sem esta característica;Ir para 52
+48.;Espinhos < 3 cm;Ir para 49
+;Espinhos > 3 cm;Ir para 51
+49.;Espinhos na base;Olacaceae (Ximenia americana)
+;Espinhos base e ápice;Olacaceae (Ximenia coriacea)
+50.;Espinhos apenas na base;Rhamnaceae (Ziziphus)
+;Nervação trinervada;Asteraceae (Dasyphyllum)
+;Nervação peninérvia;Nyctaginaceae (Bougainvillea), Phytolaccaceae (Seguieria)
+51.;Ramos com odor terebintina;Anacardiaceae (Schinopsis)
+52.;Estípulas presentes;Ir para 53
+;Estípulas ausentes;Ir para 63
+53.;Presença de ócrea;Polygonaceae
+;Sem esta característica;Ir para 54
+54.;Pelos estrelados;Euphorbiaceae (Croton)
+;Sem esta característica;Ir para 55
+55.;Glândulas imersas/pedunculadas base;Chrysobalanaceae (Exellodendron), Euphorbiaceae
+;Sem glândulas;Ir para 56
+56.;Estípulas filiformes;Ir para 57
+;Estípulas outros formatos;Ir para 59
+57.;Duas estipelas no ápice do pecíolo;Fabaceae (Cyclolobium)
+;Sem esta característica;Ir para 58
+58.;3-5 nervuras da base;Fabaceae (Bauhinia), Malvaceae (Basiloxylon, Cavanillesia)
+;Nervação peninérvia;Achariaceae, Chrysobalanaceae, Dichapetalaceae, Fabaceae, Malvaceae, Rhamnaceae
+59.;Estípula em ramentas;Erythroxylaceae (Erythroxylum)
+;Outros tipos;Ir para 60
+60.;Estípula foliácea;Solanaceae
+;Ausência desta característica;Ir para 61
+61.;Cicatriz linear no pecíolo;Magnoliaceae
+;Ausência de cicatriz;Ir para 62
+62.;Estípula terminal;Malvaceae, Urticaceae
+;Estípula de outro formato;Araliaceae, Bixaceae, Euphorbiaceae, Malvaceae
+63.;Folhas discolores;Ir para 64
+;Folhas concolores;Ir para 69
+64.;Multinervadas, cordiformes;Ir para 65
+;Uma nervura principal;Ir para 66
+65.;3 nervuras, pelos estrelados;Euphorbiaceae (Croton urucurana)
+;> 3 nervuras, pelos simples;Malvaceae (Bastardiopsis)
+66.;Abaxial ferrugínea, traços escuros;Primulaceae
+;Sem esta característica;Ir para 67
+67.;Glabra, abaxial esbranquiçada;Winteraceae (Drimys)
+;Outro tipo;Ir para 68
+68.;Ascendente, aromáticos (safrol);Lauraceae
+;Sem essas características;Asteraceae, Combretaceae, Solanaceae, Styracaceae
+69.;Ramos aromáticos;Ir para 70
+;Ramos não aromáticos;Ir para 74
+70.;Odor de alho;Phytolaccaceae (Gallesia)
+;Sem esta característica;Ir para 71
+71.;Odor de tempero de carne;Proteaceae (Roupala)
+;Sem esta característica;Ir para 72
+72.;Safrol, secundárias interligadas;Lauraceae (Cinnamomum, Ocotea)
+;Outro aspecto;Ir para 73
+73.;Ascendente, safrol/lenticelas;Lauraceae
+;Terebintina;Anacardiaceae, Burseraceae
+74.;Canais resiníferos;Ir para 75
+;Sem canais;Ir para 76
+75.;Pontos translúcidos;Canellaceae, Primulaceae
+;Pontos escuros;Rutaceae
+76.;Folhas lanceoladas/espatuladas;Ir para 77
+;Folhas outros formatos;Ir para 78
+77.;Presença de embira;Thymelaeaceae
+;Sem embira;Asteraceae, Sapindaceae, Sapotaceae
+78.;Base revoluta;Peraceae (Pera)
+;Sem base reflexa;Ir para 79
+79.;Curvinérvia, central conspícua;Hernandiaceae
+;Sem esta característica;Ir para 80
+80.;Glândulas base limbo/ápice pecíolo;Combretaceae, Euphorbiaceae
+;Sem glândulas;Ir para 81
+81.;Cicatriz linear no pecíolo;Magnoliaceae
+;Sem cicatriz;Ir para 82
+82.;Cordiforme, seca vermelha;Euphorbiaceae (Croton urucurana)
+;Outro formato;Ir para 83
+83.;Apícolo no ápice;Ericaceae
+;Sem esta característica;Ir para 84
+84.;Lâmina decorrente no pecíolo;Opiliaceae
+;Sem esta característica;Ir para 85
+85.;"Gema com catafilos (""cebola"")";Ebenaceae
+;Sem esta característica;Ir para 86
+86.;Gema subulada e curva;Symplocaceae
+;Gema ereta a arredondada;Asteraceae, Boraginaceae, Brassicaceae, Calophyllaceae, Cardiopteridaceae, Celastraceae, Combretaceae, Ericaceae, Euphorbiaceae, Griseliniaceae, Humiriaceae, Icacinaceae, Lecythidaceae, Metteniusaceae, Nyctaginaceae, Olacaceae, Phyllanthaceae, Phytolaccaceae, Putranjivaceae, Solanaceae, Styracaceae
+87.;Espinho na base ou ápice;Cannabaceae, Salicaceae, Euphorbiaceae
+;Sem estas características;Ir para 88
+88.;3 a 5 nervuras da base;Ir para 89
+;Folhas peninérvias;Ir para 90
+89.;Folhas ovais;Euphorbiaceae, Malvaceae
+;Folhas elípticas;Proteaceae, Rhamnaceae
+90.;Glândula no ápice do pecíolo;Ir para 91
+;Ausência de glândula;Ir para 92
+91.;Látex abundante;Euphorbiaceae (Hura, Sapium)
+;Látex ausente/inconspícuo;Euphorbiaceae
+92.;Nervuras arqueadas;Ochnaceae
+;Sem esta característica;Ir para 93
+93.;Estípulas fimbriadas, pecíolo intumescido;Achariaceae
+;Sem estas características;Ir para 94
+94.;Apícolos;Clethraceae
+;Sem esta característica;Ir para 95
+95.;Razão Pecíolo/Limbo > 1/3;Celastraceae (Plenckia)
+;Razão menor que 1/3;Ir para 96
+96.;Base ou bordo revoluto;Ir para 97
+;Sem estas características;Ir para 98
+97.;Base revoluta, serreado;Asteraceae, Lecythidaceae
+;Bordo fino, serrilhado;Escalloniaceae
+98.;Espinho no ápice do ramo;Anacardiaceae (Schinus polygamus)
+;Ausência desta característica;Ir para 99
+99.;Limbo < 15cm;Aquifoliaceae, Asteraceae, Boraginaceae, Humiriaceae, Rhamnaceae, Styracaceae, Symplocaceae
+;Limbo > 15cm;Boraginaceae, Sabiaceae
+100.;Lactescente;Ir para 101
+;Não lactescente;Ir para 103
+101.;Folhas > 15cm;Euphorbiaceae (Pachystroma)
+;Folhas < 15cm;Ir para 102
+102.;Presença de espinhos;Euphorbiaceae (Cnidoscolus)
+;Ausência de espinhos;Moraceae (Sorocea)
+103.;Formato romboédrico;Santalaceae (Jodina)
+;Outros formatos;Ir para 104
+104.;Presença de estípula;Fabaceae (Zollernia)
+;Ausência de estípula;Celastraceae, Proteaceae
+105.;Presença de látex;Ir para 106
+;Ausência de látex;Ir para 110
+106.;Acúleos/espinhos;Ir para 107
+;Sem esta característica;Ir para 108
+107.;Folhas inteiras, espinhos ápice;Sapotaceae (Sideroxylon)
+;Folhas com lobos, espinhos base;Euphorbiaceae (Cnidoscolus)
+108.;Sésseis, látex amarelo;Calophyllaceae (Kielmeyera)
+;Pecioladas, látex branco;Ir para 109
+109.;Lenticelas no ramo;Apocynaceae, Sapotaceae
+;Ausência de lenticelas;Apocynaceae, Calophyllaceae, Euphorbiaceae, Sapotaceae
+110.;Cartácea muito áspera;Dilleniaceae (Curatella)
+;Sem estas características;Ir para 111
+111.;Presença de estípula;Ir para 112
+;Ausência de estípula;Ir para 118
+112.;Estípula em ócrea;Polygonaceae
+;Sem esta característica;Ir para 113
+113.;Ramentas;Erythroxylaceae
+;Sem esta característica;Ir para 114
+114.;Intra-peciolar;Malpighiaceae
+;Estípula fimbriada ou estreita;Ir para 115
+115.;Limbo obovado e peninérvia;Araliaceae
+;Sem esta característica;Ir para 116
+116.;Cordiforme;Malvaceae
+;Outro formato;Ir para 117
+117.;Pecíolo intumescido;Elaeocarpaceae
+;Pecíolo não intumescido;Phyllanthaceae
+118.;Bordo liso;Ir para 119
+;Bordo serreado a aculeado;Ir para 126
+119.;Ascendente, safrol;Lauraceae
+;Sem estas características;Ir para 120
+120.;Odor terebintina;Anacardiaceae
+;Sem esta característica;Ir para 121
+121.;Folha séssil;Marcgraviaceae
+;Folha peciolada;Ir para 122
+122.;Nervação impressa;Primulaceae
+;Nervação saliente;Ir para 123
+123.;Canais resiníferos, gema verde;Combretaceae
+;Ausência, gema ferrugínea;Nyctaginaceae
+124.;3+ nervuras da base;Hernandiaceae
+;Peninérvias;Ir para 125
+125.;Pontos translúcidos;Rutaceae
+;Sem pontos;Boraginaceae, Combretaceae, Lecythidaceae, Sabiaceae
+126.;Serreado terço superior;Boraginaceae
+;Sem esta característica;Ir para 127
+127.;Bordo aculeado;Celastraceae (Maytenus ilicifolia)
+;Bordo crenado, serreado;Ir para 128
+128.;Limbo > 15 cm;Sabiaceae
+;Limbo < 15 cm;Ir para 129
+129.;Crenas espaçadas;Violaceae
+;Bordo serrilhado;Ir para 130
+130.;Peniparalelinérvia;Bonnetiaceae
+;Nervuras expandem (apícolo);Clethraceae

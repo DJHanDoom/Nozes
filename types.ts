@@ -33,12 +33,36 @@ export interface Entity {
   traits: Record<string, string[]>; 
 }
 
+export interface SubKeyReference {
+  id: string;
+  name: string; // e.g., "Chave A", "Chave B"
+  description: string; // e.g., "Principais famílias de ervas e bambús terrícolas"
+  projectId?: string; // ID of the linked sub-project if loaded
+}
+
 export interface Project {
   id: string;
   name: string;
   description: string;
   features: Feature[];
   entities: Entity[];
+  // For hierarchical/linked keys
+  subKeys?: SubKeyReference[]; // References to other keys this one links to
+  parentKeyId?: string; // If this is a sub-key, reference to parent key
+  isSubKey?: boolean; // Flag to indicate this is part of a larger key system
+}
+
+export interface ProjectCollection {
+  id: string;
+  name: string; // e.g., "Chave Dendrológica POLISEL"
+  description: string;
+  mainKey: Project; // The main/general key (hub)
+  subKeys: Project[]; // All linked sub-keys
+  metadata?: {
+    source?: string; // e.g., "POLISEL 2024"
+    author?: string;
+    region?: string;
+  };
 }
 
 export interface ImportedFile {

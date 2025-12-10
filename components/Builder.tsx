@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial, convertDichotomousKey } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
-import { utils, writeFile } from 'xlsx';
+import { utils, writeFile, read } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
 const generateStandaloneHTML = (project: Project, lang: Language): string => {
@@ -150,28 +150,49 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
         \`;
       }
       
-      const featuresHTML = project.features.map(f => {
-        const selStates = selections[f.id] || [];
-        return \`
-          <div class="bg-slate-50 rounded-xl p-4">
-            <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
-              \${f.imageUrl ? \`<img src="\${f.imageUrl}" class="w-6 h-6 rounded object-cover">\` : ''}
-              \${f.name}
-              \${selStates.length > 0 ? \`<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">\${selStates.length}</span>\` : ''}
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              \${f.states.map(s => {
-                const isSel = selStates.includes(s.id);
-                const hasImg = s.imageUrl ? true : false;
-                return \`<div class="flex items-center gap-1">
-                  \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
-                  <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
-                </div>\`;
-              }).join('')}
+      // Filter features and states based on hideEmptyFeatures
+      const featuresHTML = project.features
+        .map(f => {
+          // Get all state IDs that are present in remaining entities
+          const usedStateIds = new Set();
+          if (hideEmptyFeatures) {
+            remaining.forEach(entity => {
+              const entityStates = entity.traits[f.id] || [];
+              entityStates.forEach(stateId => usedStateIds.add(stateId));
+            });
+
+            // If no states are used, skip this feature
+            if (usedStateIds.size === 0) return '';
+          }
+
+          // Filter states to only show those that are used (when hideEmptyFeatures is true)
+          const visibleStates = hideEmptyFeatures
+            ? f.states.filter(s => usedStateIds.has(s.id))
+            : f.states;
+
+          const selStates = selections[f.id] || [];
+          return \`
+            <div class="bg-slate-50 rounded-xl p-4">
+              <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                \${f.imageUrl ? \`<img src="\${f.imageUrl}" class="w-6 h-6 rounded object-cover">\` : ''}
+                \${f.name}
+                \${selStates.length > 0 ? \`<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">\${selStates.length}</span>\` : ''}
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                \${visibleStates.map(s => {
+                  const isSel = selStates.includes(s.id);
+                  const hasImg = s.imageUrl ? true : false;
+                  return \`<div class="flex items-center gap-1">
+                    \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
+                    <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
+                  </div>\`;
+                }).join('')}
+              </div>
             </div>
-          </div>
-        \`;
-      }).join('');
+          \`;
+        })
+        .filter(html => html !== '')
+        .join('');
       
       const entityCard = (e, isDiscarded = false) => \`
         <div onclick="viewEntity(project.entities.find(x=>x.id==='\${e.id}'))" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden border \${isDiscarded ? 'border-red-200 opacity-60' : 'border-slate-200 hover:border-emerald-300'}">
@@ -1276,6 +1297,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [showLoadModal, setShowLoadModal] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
   const [pendingImportProject, setPendingImportProject] = useState<Project | null>(null); // For confirming optimized imports
+  const [pendingNervuraFile, setPendingNervuraFile] = useState<Project | null>(null); // For staging Nervura JSON before import
   
   // State Image Modal
   const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
@@ -1320,6 +1342,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
   // Merge Mode State
   const [mergeKey1, setMergeKey1] = useState<Project | null>(null);
+
+  // Spreadsheet import states
+  const [showFormatModal, setShowFormatModal] = useState(false);
+  const [detectedFormat, setDetectedFormat] = useState<{ format: KeyFormat; confidence: number; description: string } | null>(null);
+  const [pendingSpreadsheetData, setPendingSpreadsheetData] = useState<{ data: any[][]; fileName: string } | null>(null);
+  const [isConvertingWithAI, setIsConvertingWithAI] = useState(false);
+  const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
+  const [showMultiFileModal, setShowMultiFileModal] = useState(false);
   const [mergeKey2, setMergeKey2] = useState<Project | null>(null);
   const [mergeStrategy, setMergeStrategy] = useState<'union' | 'intersection' | 'primary'>('union');
 
@@ -1765,90 +1795,339 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
   const [optimizeNervura, setOptimizeNervura] = useState(false);
 
+  // Update the message when optimize mode changes and there's a pending Nervura file
+  useEffect(() => {
+    if (pendingNervuraFile && !isGenerating && !pendingImportProject) {
+      const numStates = pendingNervuraFile.features?.reduce((sum: number, f: Feature) => sum + (f.states?.length || 0), 0) || 0;
+      
+      const fileInfo = language === 'pt' 
+        ? `📁 Projeto: "${pendingNervuraFile.name}"\n📊 ${pendingNervuraFile.entities?.length || 0} entidades • ${pendingNervuraFile.features?.length || 0} características • ${numStates} estados\n\n${optimizeNervura ? '🔧 Modo: Otimizar com IA\n\n⬇️ Clique no botão amarelo abaixo para iniciar a importação.' : '📥 Modo: Importação Fiel\n\n⬇️ Clique no botão amarelo abaixo para confirmar a importação.'}`
+        : `📁 Project: "${pendingNervuraFile.name}"\n📊 ${pendingNervuraFile.entities?.length || 0} entities • ${pendingNervuraFile.features?.length || 0} features • ${numStates} states\n\n${optimizeNervura ? '🔧 Mode: Optimize with AI\n\n⬇️ Click the yellow button below to start import.' : '📥 Mode: Faithful Import\n\n⬇️ Click the yellow button below to confirm import.'}`;
+      
+      setAiTypingText(fileInfo);
+    }
+  }, [optimizeNervura, pendingNervuraFile, isGenerating, pendingImportProject, language]);
+
+  // Generate curiosities from existing user projects
+  const generateCuriositiesFromProjects = (): string[] => {
+    const saved = localStorage.getItem('nozesia_projects');
+    if (!saved) return [];
+    
+    try {
+      const projects: Project[] = JSON.parse(saved);
+      if (projects.length === 0) return [];
+      
+      const curiosities: string[] = [];
+      
+      // Collect statistics from all projects
+      const totalEntities = projects.reduce((sum, p) => sum + (p.entities?.length || 0), 0);
+      const totalFeatures = projects.reduce((sum, p) => sum + (p.features?.length || 0), 0);
+      
+      // Get unique entity names from all projects
+      const allEntities = projects.flatMap(p => p.entities?.map(e => e.name) || []);
+      const uniqueEntityNames = [...new Set(allEntities)];
+      
+      // Get unique feature names from all projects
+      const allFeatures = projects.flatMap(p => p.features?.map(f => f.name) || []);
+      const uniqueFeatureNames = [...new Set(allFeatures)];
+      
+      // Generate curiosities based on the data
+      if (language === 'pt') {
+        if (projects.length > 0) {
+          curiosities.push(`📚 Você possui ${projects.length} chave${projects.length > 1 ? 's' : ''} salva${projects.length > 1 ? 's' : ''} no banco de dados`);
+        }
+        if (totalEntities > 0) {
+          curiosities.push(`🌿 Ao todo, suas chaves contêm ${totalEntities} entidades catalogadas`);
+        }
+        if (totalFeatures > 0) {
+          curiosities.push(`🔬 ${totalFeatures} características morfológicas registradas em seu acervo`);
+        }
+        
+        // Pick random entities to highlight
+        if (uniqueEntityNames.length > 0) {
+          const randomEntities = uniqueEntityNames.sort(() => Math.random() - 0.5).slice(0, 3);
+          curiosities.push(`🌱 Algumas espécies em suas chaves: ${randomEntities.join(', ')}`);
+        }
+        
+        // Pick random features to highlight
+        if (uniqueFeatureNames.length > 0) {
+          const randomFeatures = uniqueFeatureNames.sort(() => Math.random() - 0.5).slice(0, 3);
+          curiosities.push(`🔍 Características utilizadas: ${randomFeatures.join(', ')}`);
+        }
+        
+        // Most recent project
+        if (projects.length > 0) {
+          const recentProject = projects[0];
+          curiosities.push(`📖 Sua chave mais recente: "${recentProject.name}"`);
+        }
+        
+        // Project with most entities
+        if (projects.length > 1) {
+          const largestProject = projects.reduce((max, p) => 
+            (p.entities?.length || 0) > (max.entities?.length || 0) ? p : max
+          , projects[0]);
+          if (largestProject.entities?.length > 0) {
+            curiosities.push(`🏆 Maior chave: "${largestProject.name}" com ${largestProject.entities.length} entidades`);
+          }
+        }
+      } else {
+        if (projects.length > 0) {
+          curiosities.push(`📚 You have ${projects.length} key${projects.length > 1 ? 's' : ''} saved in your database`);
+        }
+        if (totalEntities > 0) {
+          curiosities.push(`🌿 In total, your keys contain ${totalEntities} catalogued entities`);
+        }
+        if (totalFeatures > 0) {
+          curiosities.push(`🔬 ${totalFeatures} morphological features recorded in your collection`);
+        }
+        
+        if (uniqueEntityNames.length > 0) {
+          const randomEntities = uniqueEntityNames.sort(() => Math.random() - 0.5).slice(0, 3);
+          curiosities.push(`🌱 Some species in your keys: ${randomEntities.join(', ')}`);
+        }
+        
+        if (uniqueFeatureNames.length > 0) {
+          const randomFeatures = uniqueFeatureNames.sort(() => Math.random() - 0.5).slice(0, 3);
+          curiosities.push(`🔍 Features used: ${randomFeatures.join(', ')}`);
+        }
+        
+        if (projects.length > 0) {
+          const recentProject = projects[0];
+          curiosities.push(`📖 Your most recent key: "${recentProject.name}"`);
+        }
+        
+        if (projects.length > 1) {
+          const largestProject = projects.reduce((max, p) => 
+            (p.entities?.length || 0) > (max.entities?.length || 0) ? p : max
+          , projects[0]);
+          if (largestProject.entities?.length > 0) {
+            curiosities.push(`🏆 Largest key: "${largestProject.name}" with ${largestProject.entities.length} entities`);
+          }
+        }
+      }
+      
+      return curiosities;
+    } catch (err) {
+      console.error("Error generating curiosities:", err);
+      return [];
+    }
+  };
+
+  // Format Nervura project with standardized name and description
+  const formatNervuraProject = (parsed: Project): Project => {
+    const numSpecies = parsed.entities?.length || 0;
+    const numFeatures = parsed.features?.length || 0;
+    
+    // Count total states across all features
+    const numStates = parsed.features?.reduce((sum, f) => sum + (f.states?.length || 0), 0) || 0;
+    
+    // Detect language from content
+    const isPortuguese = parsed.description?.includes('Chave de identificação') || 
+                         parsed.features?.some(f => f.name === 'Forma de Vida' || f.name === 'Filotaxia') ||
+                         language === 'pt';
+    const langCode = isPortuguese ? 'PTBR' : 'EN';
+    
+    // Generate version number (v1 for new imports)
+    const version = 'v1';
+    
+    // Standardized name: "NervuraColetora PTBR v1 (14sp / 49crc)"
+    const standardName = `NervuraColetora ${langCode} ${version} (${numSpecies}sp / ${numFeatures}crc)`;
+    
+    // Extract metadata from original description if available
+    let collector = isPortuguese ? 'Coletor não especificado' : 'Collector not specified';
+    let collectionDates = '';
+    let exportDate = '';
+    let collectionStates = '';
+    let families: string[] = [];
+    let genera: string[] = [];
+    let lifeFormsText = '';
+    
+    if (parsed.description) {
+      // Extract collector
+      const collectorMatch = parsed.description.match(/pelo coletor[:\s]+([^\n.]+)/i) ||
+                             parsed.description.match(/by collector[:\s]+([^\n.]+)/i);
+      if (collectorMatch) {
+        collector = collectorMatch[1].trim();
+      }
+      
+      // Extract dates
+      const dateMatch = parsed.description.match(/Data de coleta[:\s]+([^\n]+)/i) ||
+                        parsed.description.match(/Collection date[:\s]+([^\n]+)/i);
+      if (dateMatch) {
+        collectionDates = dateMatch[1].trim();
+      }
+      
+      const exportMatch = parsed.description.match(/Data de exportação[:\s]+([^\n]+)/i) ||
+                          parsed.description.match(/Export date[:\s]+([^\n]+)/i);
+      if (exportMatch) {
+        exportDate = exportMatch[1].trim();
+      }
+      
+      // Extract states
+      const statesMatch = parsed.description.match(/Estados de coleta[:\s]+([^\n]+)/i) ||
+                          parsed.description.match(/Collection states[:\s]+([^\n]+)/i);
+      if (statesMatch) {
+        collectionStates = statesMatch[1].trim();
+      }
+      
+      // Extract families
+      const familiesMatch = parsed.description.match(/FAMÍLIAS[:\s]*\n([^\n]+)/i) ||
+                            parsed.description.match(/FAMILIES[:\s]*\n([^\n]+)/i);
+      if (familiesMatch) {
+        families = familiesMatch[1].split(',').map(f => f.trim()).filter(f => f);
+      }
+      
+      // Extract genera
+      const generaMatch = parsed.description.match(/GÊNEROS[:\s]*\n([^\n]+)/i) ||
+                          parsed.description.match(/GENERA[:\s]*\n([^\n]+)/i);
+      if (generaMatch) {
+        genera = generaMatch[1].split(',').map(g => g.trim()).filter(g => g);
+      }
+      
+      // Extract life forms
+      const lifeFormsMatch = parsed.description.match(/FORMAS DE VIDA[:\s]*\n([^\n]+)/i) ||
+                             parsed.description.match(/LIFE FORMS[:\s]*\n([^\n]+)/i);
+      if (lifeFormsMatch) {
+        lifeFormsText = lifeFormsMatch[1].trim();
+      }
+    }
+    
+    // If no data extracted from description, try to infer from entities
+    if (families.length === 0 && parsed.entities) {
+      const extractedFamilies = new Set<string>();
+      const extractedGenera = new Set<string>();
+      
+      parsed.entities.forEach(entity => {
+        // Try to extract family from description
+        const famMatch = entity.description?.match(/Família[:\s]+([A-Za-z]+)/i);
+        if (famMatch) extractedFamilies.add(famMatch[1]);
+        
+        // Extract genus from species name (first word)
+        const genusMatch = entity.name?.match(/^([A-Z][a-z]+)/);
+        if (genusMatch) extractedGenera.add(genusMatch[1]);
+      });
+      
+      families = Array.from(extractedFamilies);
+      genera = Array.from(extractedGenera);
+    }
+    
+    // Build standardized description
+    let newDescription = '';
+    
+    if (isPortuguese) {
+      newDescription = `🌿 Chave de identificação produzida com dados coletados no NervuraColetora pelo coletor: ${collector}.\n\n`;
+      
+      if (collectionDates) {
+        newDescription += `📅 Data de coleta: ${collectionDates}\n`;
+      }
+      if (exportDate) {
+        newDescription += `📅 Data de exportação: ${exportDate}\n`;
+      } else {
+        newDescription += `📅 Data de importação: ${new Date().toLocaleDateString('pt-BR')}\n`;
+      }
+      
+      newDescription += `\n📊 ESTATÍSTICAS:\n`;
+      newDescription += `• Número de espécies/entidades: ${numSpecies}\n`;
+      newDescription += `• Número de características morfológicas: ${numFeatures}\n`;
+      newDescription += `• Número total de estados: ${numStates}\n`;
+      
+      if (families.length > 0) {
+        newDescription += `• Número de famílias: ${families.length}\n`;
+      }
+      if (genera.length > 0) {
+        newDescription += `• Número de gêneros: ${genera.length}\n`;
+      }
+      if (collectionStates) {
+        newDescription += `• Estados de coleta: ${collectionStates}\n`;
+      }
+      
+      if (lifeFormsText) {
+        newDescription += `\n🌳 FORMAS DE VIDA:\n${lifeFormsText}\n`;
+      }
+      
+      if (families.length > 0) {
+        newDescription += `\n👨‍👩‍👧‍👦 FAMÍLIAS:\n${families.join(', ')}\n`;
+      }
+      
+      if (genera.length > 0) {
+        newDescription += `\n🧬 GÊNEROS:\n${genera.join(', ')}`;
+      }
+    } else {
+      newDescription = `🌿 Identification key produced with data collected in NervuraColetora by collector: ${collector}.\n\n`;
+      
+      if (collectionDates) {
+        newDescription += `📅 Collection date: ${collectionDates}\n`;
+      }
+      if (exportDate) {
+        newDescription += `📅 Export date: ${exportDate}\n`;
+      } else {
+        newDescription += `📅 Import date: ${new Date().toLocaleDateString('en-US')}\n`;
+      }
+      
+      newDescription += `\n📊 STATISTICS:\n`;
+      newDescription += `• Number of species/entities: ${numSpecies}\n`;
+      newDescription += `• Number of morphological features: ${numFeatures}\n`;
+      newDescription += `• Total number of states: ${numStates}\n`;
+      
+      if (families.length > 0) {
+        newDescription += `• Number of families: ${families.length}\n`;
+      }
+      if (genera.length > 0) {
+        newDescription += `• Number of genera: ${genera.length}\n`;
+      }
+      if (collectionStates) {
+        newDescription += `• Collection states: ${collectionStates}\n`;
+      }
+      
+      if (lifeFormsText) {
+        newDescription += `\n🌳 LIFE FORMS:\n${lifeFormsText}\n`;
+      }
+      
+      if (families.length > 0) {
+        newDescription += `\n👨‍👩‍👧‍👦 FAMILIES:\n${families.join(', ')}\n`;
+      }
+      
+      if (genera.length > 0) {
+        newDescription += `\n🧬 GENERA:\n${genera.join(', ')}`;
+      }
+    }
+    
+    return {
+      ...parsed,
+      name: standardName,
+      description: newDescription
+    };
+  };
+
+  // Handle Nervura file selection - stages the file, doesn't run immediately
   const handleNervuraImport = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     if (event.target.files && event.target.files[0]) {
       fileReader.readAsText(event.target.files[0], "UTF-8");
-      fileReader.onload = async e => {
+      fileReader.onload = e => {
         try {
           const parsed = JSON.parse(e.target?.result as string);
           if (parsed.name && parsed.features && parsed.entities) {
+            // Format the project with standardized name and description
+            const formattedProject = formatNervuraProject(parsed);
             
-            if (optimizeNervura) {
-              // Show the prompt editor/typing view
-              setShowPromptEditor(true);
-              setIsGenerating(true);
-              setAiTypingText(""); // Reset typing text
-              setAiTypingComplete(false);
-              
-              // Simulate typing effect for the "thinking" phase
-              const thinkingText = language === 'pt' 
-                ? "Analisando estrutura da chave...\nIdentificando redundâncias...\nOtimizando características e estados...\n" 
-                : "Analyzing key structure...\nIdentifying redundancies...\nOptimizing features and states...\n";
-              
-              let charIndex = 0;
-              const typingInterval = setInterval(() => {
-                if (charIndex < thinkingText.length) {
-                  setAiTypingText(prev => prev + thinkingText.charAt(charIndex));
-                  charIndex++;
-                } else {
-                  clearInterval(typingInterval);
-                }
-              }, 30);
-
-              try {
-                // Explicit language instruction
-                const prompt = language === 'pt' 
-                  ? "Limpe e otimize esta chave importada. Mantenha o idioma em Português. Padronize nomes e descrições."
-                  : "Clean and optimize this imported key. Ensure the language is English. Standardize names and descriptions.";
-
-                const optimizedProject = await refineExistingProject(
-                  prompt,
-                  parsed,
-                  apiKey,
-                  defaultModel,
-                  language,
-                  'clean'
-                );
-                
-                // Store for confirmation instead of setting immediately
-                setPendingImportProject(optimizedProject);
-                
-                // Add completion message to typing text
-                const completionText = language === 'pt'
-                  ? "\n\n✅ Otimização concluída! Por favor, revise e confirme a importação abaixo."
-                  : "\n\n✅ Optimization complete! Please review and confirm the import below.";
-                
-                setAiTypingText(prev => prev + completionText);
-                setAiTypingComplete(true);
-                
-              } catch (err) {
-                console.error(err);
-                setAiTypingText(prev => prev + "\n\n❌ Error: " + (err as Error).message);
-                alert("Erro na otimização. Carregando original.");
-                setProject(parsed);
-                setShowAiModal(false);
-              } finally {
-                clearInterval(typingInterval);
-                setIsGenerating(false);
-                // Do NOT close modal here - wait for user confirmation
-              }
-            } else {
-              setProject(parsed);
-              setShowAiModal(false);
-              
-              const saved = localStorage.getItem('nozesia_projects');
-              let projectsList: Project[] = [];
-              if (saved) {
-                try { projectsList = JSON.parse(saved); } catch (err) {}
-              }
-              const updatedList = [parsed, ...projectsList.filter((p: Project) => p.id !== parsed.id)];
-              localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
-              
-              if (onProjectImported) onProjectImported(parsed);
-              
-              alert(language === 'pt' ? 'Chave Nervura importada com sucesso!' : 'Nervura Key imported successfully!');
-            }
+            // Stage the formatted file for confirmation - don't run immediately
+            setPendingNervuraFile(formattedProject);
+            
+            // Show the prompt editor with info about the staged file
+            setShowPromptEditor(true);
+            setAiTypingText(""); 
+            setAiTypingComplete(false);
+            
+            const numStates = parsed.features?.reduce((sum: number, f: Feature) => sum + (f.states?.length || 0), 0) || 0;
+            
+            const fileInfo = language === 'pt' 
+              ? `📁 Arquivo carregado: "${parsed.name}"\n\n🏷️ Nome padronizado: "${formattedProject.name}"\n📊 ${parsed.entities.length} entidades • ${parsed.features.length} características • ${numStates} estados\n\n${optimizeNervura ? '🔧 Modo: Otimizar com IA\n\n⬇️ Clique no botão amarelo abaixo para iniciar a importação.' : '📥 Modo: Importação Fiel\n\n⬇️ Clique no botão amarelo abaixo para confirmar a importação.'}`
+              : `📁 File loaded: "${parsed.name}"\n\n🏷️ Standardized name: "${formattedProject.name}"\n📊 ${parsed.entities.length} entities • ${parsed.features.length} features • ${numStates} states\n\n${optimizeNervura ? '🔧 Mode: Optimize with AI\n\n⬇️ Click the yellow button below to start import.' : '📥 Mode: Faithful Import\n\n⬇️ Click the yellow button below to confirm import.'}`;
+            
+            setAiTypingText(fileInfo);
+            setAiTypingComplete(true);
+            
           } else {
             alert("Formato inválido. Certifique-se que é um JSON do Nervura/Nozes.");
           }
@@ -1859,42 +2138,536 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
   };
 
+  // Execute the actual Nervura import (called when user confirms)
+  const executeNervuraImport = async () => {
+    if (!pendingNervuraFile) return;
+    
+    const parsed = pendingNervuraFile;
+    
+    // Get curiosities from existing projects
+    const curiosities = generateCuriositiesFromProjects();
+    
+    if (optimizeNervura) {
+      // Show the typing view for optimization
+      setIsGenerating(true);
+      setAiTypingText(""); // Reset typing text
+      setAiTypingComplete(false);
+      
+      // Simulate typing effect for the "thinking" phase
+      const thinkingText = language === 'pt' 
+        ? "🔄 Analisando estrutura da chave...\n🔍 Identificando redundâncias...\n✨ Otimizando características e estados...\n" 
+        : "🔄 Analyzing key structure...\n🔍 Identifying redundancies...\n✨ Optimizing features and states...\n";
+      
+      // Add curiosities section
+      const curiositiesText = curiosities.length > 0 
+        ? (language === 'pt' ? "\n📖 Curiosidades do seu acervo:\n" : "\n📖 Curiosities from your collection:\n") + 
+          curiosities.map(c => `   ${c}`).join('\n') + "\n"
+        : "";
+      
+      const fullThinkingText = thinkingText + curiositiesText;
+      
+      let charIndex = 0;
+      const typingInterval = setInterval(() => {
+        if (charIndex < fullThinkingText.length) {
+          setAiTypingText(prev => prev + fullThinkingText.charAt(charIndex));
+          charIndex++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 30);
+
+      try {
+        // Explicit language instruction
+        const prompt = language === 'pt' 
+          ? "Limpe e otimize esta chave importada. MANTENHA TODO O CONTEÚDO EM PORTUGUÊS. Padronize nomes de características e estados. Remova redundâncias."
+          : "Clean and optimize this imported key. KEEP ALL CONTENT IN ENGLISH. Standardize feature and state names. Remove redundancies.";
+
+        const optimizedProject = await refineExistingProject(
+          prompt,
+          parsed,
+          apiKey,
+          defaultModel,
+          language,
+          'clean'
+        );
+        
+        // Store for confirmation instead of setting immediately
+        setPendingImportProject(optimizedProject);
+        setPendingNervuraFile(null); // Clear the staged file
+        
+        // Add completion message to typing text
+        const completionText = language === 'pt'
+          ? `\n\n✅ Otimização concluída!\n📊 ${optimizedProject.entities.length} entidades • ${optimizedProject.features.length} características\n\n⬇️ Clique no botão amarelo para confirmar a importação.`
+          : `\n\n✅ Optimization complete!\n📊 ${optimizedProject.entities.length} entities • ${optimizedProject.features.length} features\n\n⬇️ Click the yellow button to confirm import.`;
+        
+        setAiTypingText(prev => prev + completionText);
+        setAiTypingComplete(true);
+        
+      } catch (err) {
+        console.error(err);
+        const errorText = language === 'pt'
+          ? `\n\n❌ Erro na otimização: ${(err as Error).message}\n\n💡 Você pode tentar novamente ou importar sem otimização.`
+          : `\n\n❌ Optimization error: ${(err as Error).message}\n\n💡 You can try again or import without optimization.`;
+        setAiTypingText(prev => prev + errorText);
+        setAiTypingComplete(true);
+      } finally {
+        clearInterval(typingInterval);
+        setIsGenerating(false);
+        // Do NOT close modal here - wait for user confirmation
+      }
+    } else {
+      // Faithful import - no AI processing, but show confirmation
+      setAiTypingText(prev => prev + (language === 'pt' 
+        ? "\n\n🔄 Processando importação...\n" 
+        : "\n\n🔄 Processing import...\n"));
+      
+      // Small delay for visual feedback
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Store for confirmation
+      setPendingImportProject(parsed);
+      setPendingNervuraFile(null);
+      
+      const successText = language === 'pt'
+        ? `\n✅ Arquivo processado!\n\n⬇️ Clique no botão amarelo para confirmar a importação.`
+        : `\n✅ File processed!\n\n⬇️ Click the yellow button to confirm import.`;
+      
+      setAiTypingText(prev => prev + successText);
+      setAiTypingComplete(true);
+    }
+  };
+
+  // Detect spreadsheet format type
+  type KeyFormat = 'matrix' | 'dichotomous_sequential' | 'indented' | 'synoptic' | 'linked_hub' | 'unknown';
+
+  const detectSpreadsheetFormat = (data: any[][]): { format: KeyFormat; confidence: number; description: string } => {
+    if (!data || data.length < 2) {
+      return { format: 'unknown', confidence: 0, description: 'Empty or invalid data' };
+    }
+
+    const headers = data[0].map((h: any) => h?.toString().toLowerCase().trim() || '');
+    const firstDataRow = data[1]?.map((cell: any) => cell?.toString() || '');
+
+    // 1. Check for LINKED/HUB KEY (references to other keys)
+    // Format: Contains references like "Chave A", "Chave B", "Key A", etc.
+    const allCellsText = data.map(row => row.join(' ')).join(' ').toLowerCase();
+    const keyReferencePatterns = [
+      /chave\s+[a-h]/gi, // "Chave A", "Chave B"
+      /key\s+[a-h]/gi,   // "Key A", "Key B"
+      /\bchave\s+\d+/gi, // "Chave 1", "Chave 2"
+    ];
+
+    let keyReferences = 0;
+    keyReferencePatterns.forEach(pattern => {
+      const matches = allCellsText.match(pattern);
+      if (matches) keyReferences += matches.length;
+    });
+
+    // Check if this appears to be a hub/general key that links to multiple sub-keys
+    if (keyReferences >= 3) {
+      return {
+        format: 'linked_hub',
+        confidence: 0.95,
+        description: language === 'pt'
+          ? 'Chave Hub com Referências (sistema de chaves interligadas)'
+          : 'Hub Key with References (linked key system)'
+      };
+    }
+
+    // 2. Check for DICHOTOMOUS SEQUENTIAL KEY
+    // Format: Passo | Diagnose | Identificação/Próximo Passo
+    const dichotomousPatterns = ['passo', 'diagnose', 'identificação', 'próximo', 'step', 'diagnosis', 'result', 'next', 'couplet'];
+    const dichotomousMatch = headers.filter((h: string) =>
+      dichotomousPatterns.some(pattern => h.includes(pattern))
+    ).length;
+
+    if (dichotomousMatch >= 2) {
+      return {
+        format: 'dichotomous_sequential',
+        confidence: 0.9,
+        description: language === 'pt'
+          ? 'Chave Dicotômica Sequencial (passos numerados com diagnoses)'
+          : 'Sequential Dichotomous Key (numbered steps with diagnoses)'
+      };
+    }
+
+    // 2. Check for INDENTED/BRACKETED KEY
+    // Format: Text with indentation levels or brackets
+    const hasIndentation = data.some(row =>
+      row[0]?.toString().startsWith('  ') || row[0]?.toString().startsWith('\t')
+    );
+    const hasBrackets = data.some(row =>
+      row[0]?.toString().match(/^\d+\s*\(/) || row[0]?.toString().match(/^[a-z]\)/)
+    );
+
+    if (hasIndentation || hasBrackets) {
+      return {
+        format: 'indented',
+        confidence: 0.8,
+        description: language === 'pt'
+          ? 'Chave Indentada (estrutura hierárquica)'
+          : 'Indented Key (hierarchical structure)'
+      };
+    }
+
+    // 3. Check for SYNOPTIC KEY
+    // Format: Comparative table with main characteristics
+    const synopticPatterns = ['comparison', 'comparação', 'vs', 'versus', 'character', 'característica'];
+    const synopticMatch = headers.filter((h: string) =>
+      synopticPatterns.some(pattern => h.includes(pattern))
+    ).length;
+
+    if (synopticMatch >= 1 && headers.length >= 3) {
+      return {
+        format: 'synoptic',
+        confidence: 0.7,
+        description: language === 'pt'
+          ? 'Chave Sinóptica (tabela comparativa)'
+          : 'Synoptic Key (comparative table)'
+      };
+    }
+
+    // 4. Check for MATRIX FORMAT
+    // Format: Entities in rows, Features in columns
+    // Should have entity names in first column and consistent feature data
+    const hasEntityColumn = firstDataRow && firstDataRow[0]?.length > 0;
+    const hasMultipleFeatures = headers.length >= 3;
+    const hasConsistentData = data.slice(1).every(row =>
+      row.length >= headers.length * 0.5 // At least 50% of cells have data
+    );
+
+    if (hasEntityColumn && hasMultipleFeatures && hasConsistentData) {
+      return {
+        format: 'matrix',
+        confidence: 0.85,
+        description: language === 'pt'
+          ? 'Matriz de Características (entidades × características)'
+          : 'Character Matrix (entities × features)'
+      };
+    }
+
+    return {
+      format: 'unknown',
+      confidence: 0,
+      description: language === 'pt'
+        ? 'Formato não reconhecido automaticamente'
+        : 'Format not automatically recognized'
+    };
+  };
+
+  // Convert spreadsheet data to Project format (Matrix format)
+  const convertSpreadsheetToProject = (fileName: string, data: any[][]): Project | null => {
+    if (!data || data.length < 2) {
+      alert(language === 'pt' ? 'Planilha vazia ou inválida.' : 'Empty or invalid spreadsheet.');
+      return null;
+    }
+
+    const headers = data[0];
+    const entityColumnIndex = 0; // First column is entity name
+
+    // Extract feature names from headers (skip first column which is entity name)
+    const featureNames = headers.slice(1).filter(h => h && h.trim());
+
+    if (featureNames.length === 0) {
+      alert(language === 'pt' ? 'Nenhuma característica encontrada na planilha.' : 'No features found in spreadsheet.');
+      return null;
+    }
+
+    // Create features with states
+    const featuresMap = new Map<string, Set<string>>();
+    const entitiesData: Array<{name: string, traits: Record<string, string>}> = [];
+
+    // Process each row (skip header)
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      const entityName = row[entityColumnIndex]?.toString().trim();
+
+      if (!entityName) continue;
+
+      const traits: Record<string, string> = {};
+
+      // Process each feature column
+      for (let j = 1; j < headers.length; j++) {
+        const featureName = headers[j]?.toString().trim();
+        if (!featureName) continue;
+
+        const cellValue = row[j]?.toString().trim();
+        if (!cellValue) continue;
+
+        // Split by comma if multiple states
+        const states = cellValue.split(/[,;]/).map(s => s.trim()).filter(Boolean);
+
+        states.forEach(state => {
+          if (!featuresMap.has(featureName)) {
+            featuresMap.set(featureName, new Set());
+          }
+          featuresMap.get(featureName)!.add(state);
+        });
+
+        traits[featureName] = cellValue;
+      }
+
+      entitiesData.push({ name: entityName, traits });
+    }
+
+    // Build features array
+    const features: Feature[] = Array.from(featuresMap.entries()).map(([featureName, statesSet], index) => {
+      const featureId = `f-${Date.now()}-${index}`;
+      const states = Array.from(statesSet).map((stateName, sIdx) => ({
+        id: `s-${Date.now()}-${index}-${sIdx}`,
+        label: stateName
+      }));
+
+      return {
+        id: featureId,
+        name: featureName,
+        states
+      };
+    });
+
+    // Build entities array with mapped trait IDs
+    const entities: Entity[] = entitiesData.map((entityData, index) => {
+      const traits: Record<string, string[]> = {};
+
+      features.forEach(feature => {
+        const cellValue = entityData.traits[feature.name];
+        if (!cellValue) return;
+
+        // cellValue is already a string, split it
+        const stateNames = cellValue.split(/[,;]/).map(s => s.trim()).filter(Boolean);
+        const stateIds = stateNames
+          .map(stateName => feature.states.find(s => s.label === stateName)?.id)
+          .filter((id): id is string => id !== undefined);
+
+        if (stateIds.length > 0) {
+          traits[feature.id] = stateIds;
+        }
+      });
+
+      return {
+        id: `e-${Date.now()}-${index}`,
+        name: entityData.name,
+        description: '',
+        traits,
+        links: []
+      };
+    });
+
+    // Create project
+    const projectName = fileName.replace(/\.(xlsx|csv|xls)$/i, '');
+    const project: Project = {
+      id: `proj-${Date.now()}`,
+      name: projectName,
+      description: language === 'pt'
+        ? `Chave importada de ${fileName}`
+        : `Key imported from ${fileName}`,
+      features,
+      entities
+    };
+
+    return project;
+  };
+
   const importJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const fileName = file.name.toLowerCase();
     const fileReader = new FileReader();
-    if (event.target.files && event.target.files[0]) {
-      fileReader.readAsText(event.target.files[0], "UTF-8");
+
+    // Handle XLSX/CSV files
+    if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls') || fileName.endsWith('.csv')) {
+      fileReader.readAsArrayBuffer(file);
       fileReader.onload = e => {
         try {
-          const parsed = JSON.parse(e.target?.result as string);
-          if (parsed.name && parsed.features && parsed.entities) {
-            // Set project in editor
-            setProject(parsed);
-            
-            // Also save to localStorage so it appears in load modals
-            const saved = localStorage.getItem('nozesia_projects');
-            let projectsList: Project[] = [];
-            if (saved) {
-              try {
-                projectsList = JSON.parse(saved);
-              } catch (err) {
-                console.error("Failed to parse projects", err);
-              }
+          const data = new Uint8Array(e.target?.result as ArrayBuffer);
+          const workbook = read(data, { type: 'array' });
+
+          // Get first sheet
+          const firstSheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[firstSheetName];
+
+          // Convert to 2D array
+          const sheetData: any[][] = utils.sheet_to_json(worksheet, { header: 1 });
+
+          // Detect format
+          const formatInfo = detectSpreadsheetFormat(sheetData);
+
+          // If it's a linked hub key, suggest importing multiple files
+          if (formatInfo.format === 'linked_hub') {
+            setPendingSpreadsheetData({ data: sheetData, fileName: file.name });
+            setDetectedFormat(formatInfo);
+            setShowFormatModal(true);
+            return;
+          }
+
+          // For other formats, check if we need AI conversion
+          if (formatInfo.format === 'dichotomous_sequential' || formatInfo.format === 'indented' || formatInfo.format === 'synoptic') {
+            setPendingSpreadsheetData({ data: sheetData, fileName: file.name });
+            setDetectedFormat(formatInfo);
+            setShowFormatModal(true);
+            return;
+          }
+
+          // Matrix format - direct conversion
+          const project = convertSpreadsheetToProject(file.name, sheetData);
+          if (!project) return;
+
+          // Set project in editor
+          setProject(project);
+
+          // Save to localStorage
+          const saved = localStorage.getItem('nozesia_projects');
+          let projectsList: Project[] = [];
+          if (saved) {
+            try {
+              projectsList = JSON.parse(saved);
+            } catch (err) {
+              console.error("Failed to parse projects", err);
             }
-            // Remove existing version if exists, add new one to top
-            const updatedList = [parsed, ...projectsList.filter((p: Project) => p.id !== parsed.id)];
-            localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
-            
-            // Notify parent to update its state
-            if (onProjectImported) {
-              onProjectImported(parsed);
-            }
-          } else {
-            alert("Invalid project file format.");
+          }
+          const updatedList = [project, ...projectsList.filter((p: Project) => p.id !== project.id)];
+          localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+
+          if (onProjectImported) {
+            onProjectImported(project);
           }
         } catch (error) {
-          alert("Error parsing JSON file.");
+          console.error(error);
+          alert(language === 'pt' ? 'Erro ao processar planilha.' : 'Error processing spreadsheet.');
         }
       };
+      return;
+    }
+
+    // Handle JSON files
+    fileReader.readAsText(file, "UTF-8");
+    fileReader.onload = e => {
+      try {
+        const parsed = JSON.parse(e.target?.result as string);
+        if (parsed.name && parsed.features && parsed.entities) {
+          // Set project in editor
+          setProject(parsed);
+
+          // Also save to localStorage so it appears in load modals
+          const saved = localStorage.getItem('nozesia_projects');
+          let projectsList: Project[] = [];
+          if (saved) {
+            try {
+              projectsList = JSON.parse(saved);
+            } catch (err) {
+              console.error("Failed to parse projects", err);
+            }
+          }
+          // Remove existing version if exists, add new one to top
+          const updatedList = [parsed, ...projectsList.filter((p: Project) => p.id !== parsed.id)];
+          localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+
+          // Notify parent to update its state
+          if (onProjectImported) {
+            onProjectImported(parsed);
+          }
+        } else {
+          alert(language === 'pt' ? 'Formato de arquivo inválido.' : 'Invalid project file format.');
+        }
+      } catch (error) {
+        alert(language === 'pt' ? 'Erro ao processar arquivo JSON.' : 'Error parsing JSON file.');
+      }
+    };
+  };
+
+  // Handle multiple file selection for linked keys
+  const handleMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const filesArray = Array.from(event.target.files);
+      setMultipleFiles(filesArray);
+      setShowMultiFileModal(true);
+    }
+  };
+
+  // Process multiple files to create linked key collection
+  const processMultipleFilesWithAI = async (files: File[], mainFileIndex: number) => {
+    if (!aiConfig.model || files.length === 0) {
+      alert(language === 'pt' ? 'Configure a API Key primeiro' : 'Configure API Key first');
+      return;
+    }
+
+    setIsConvertingWithAI(true);
+    setShowMultiFileModal(false);
+
+    try {
+      const allProjects: Project[] = [];
+
+      // Process each file
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        setGeneratingMessage(language === 'pt'
+          ? `Processando ${i + 1}/${files.length}: ${file.name}...`
+          : `Processing ${i + 1}/${files.length}: ${file.name}...`
+        );
+
+        const fileData = await file.arrayBuffer();
+        const workbook = read(new Uint8Array(fileData), { type: 'array' });
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const sheetData: any[][] = utils.sheet_to_json(worksheet, { header: 1 });
+
+        // Use AI to convert
+        const project = await convertDichotomousKey(
+          aiConfig.model,
+          sheetData,
+          file.name,
+          language
+        );
+
+        // Mark as sub-key if not the main file
+        if (i !== mainFileIndex) {
+          project.isSubKey = true;
+          project.parentKeyId = `main-${Date.now()}`;
+        }
+
+        allProjects.push(project);
+      }
+
+      // Create the main project with references to sub-keys
+      const mainProject = allProjects[mainFileIndex];
+      mainProject.subKeys = allProjects
+        .filter((_, idx) => idx !== mainFileIndex)
+        .map(p => ({
+          id: p.id,
+          name: p.name,
+          description: p.description,
+          projectId: p.id
+        }));
+
+      // Set main project
+      setProject(mainProject);
+
+      // Save all projects to localStorage
+      const saved = localStorage.getItem('nozesia_projects');
+      let projectsList: Project[] = saved ? JSON.parse(saved) : [];
+
+      // Add all projects
+      allProjects.forEach(proj => {
+        projectsList = [proj, ...projectsList.filter(p => p.id !== proj.id)];
+      });
+
+      localStorage.setItem('nozesia_projects', JSON.stringify(projectsList));
+
+      if (onProjectImported) {
+        onProjectImported(mainProject);
+      }
+
+      alert(language === 'pt'
+        ? `${allProjects.length} chaves importadas com sucesso!`
+        : `${allProjects.length} keys imported successfully!`
+      );
+
+    } catch (error) {
+      console.error('Multi-file import error:', error);
+      alert(language === 'pt' ? 'Erro ao processar arquivos' : 'Error processing files');
+    } finally {
+      setIsConvertingWithAI(false);
+      setGeneratingMessage('');
     }
   };
 
@@ -3284,6 +4057,8 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
     setAiTypingText('');
     setAiTypingComplete(false);
     setShowPromptEditor(false);
+    setPendingNervuraFile(null); // Clear staged Nervura file
+    setPendingImportProject(null); // Clear pending import
     setShowAiModal(true);
   };
 
@@ -3375,7 +4150,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
             </button>
             <label className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white cursor-pointer" title={strings.import}>
               <Upload size={14} /> <span className="hidden sm:inline">{strings.import}</span>
-              <input type="file" accept=".json" onChange={importJSON} className="hidden" />
+              <input type="file" accept=".json,.xlsx,.xls,.csv" onChange={importJSON} className="hidden" />
             </label>
           </div>
         </div>
@@ -3418,7 +4193,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
           </button>
           <label className="flex flex-col items-center gap-1 p-2 hover:bg-slate-700 rounded cursor-pointer col-span-5">
             <Upload size={18} /> {strings.import}
-            <input type="file" accept=".json" onChange={importJSON} className="hidden" />
+            <input type="file" accept=".json,.xlsx,.xls,.csv" onChange={importJSON} className="hidden" />
           </label>
         </div>
       )}
@@ -4822,30 +5597,10 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
 
                   {/* Nervura Import Option */}
                   <div className="mt-2 pt-4 border-t border-slate-200">
-                    <div className="flex items-center justify-center mb-3">
-                      <label className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 hover:text-emerald-600 transition-colors">
-                        <input 
-                          type="checkbox" 
-                          checked={optimizeNervura} 
-                          onChange={(e) => setOptimizeNervura(e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
-                        />
-                        <span className="font-medium">
-                          {language === 'pt' ? 'Otimizar e Padronizar com IA' : 'Optimize & Standardize with AI'}
-                        </span>
-                      </label>
-                    </div>
-
-                    <label className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer transition-colors border ${
-                      optimizeNervura 
-                        ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 hover:border-emerald-300' 
-                        : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-200 hover:border-slate-300'
-                    }`}>
-                      {optimizeNervura ? <Sparkles size={18} /> : <FileCode size={18} />}
+                    <label className="w-full flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer transition-colors border bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 text-emerald-700 border-emerald-200 hover:border-emerald-300">
+                      <img src="./assets/nervura.png" alt="Nervura" className="w-5 h-5 object-contain" />
                       <span className="font-bold text-sm">
-                        {language === 'pt' 
-                          ? (optimizeNervura ? 'Importar e Otimizar JSON' : 'Importar JSON Nervura (Fiel)') 
-                          : (optimizeNervura ? 'Import & Optimize JSON' : 'Import Nervura JSON (Faithful)')}
+                        {language === 'pt' ? 'Ficha Morfológica NervuraColetora' : 'NervuraColetora Morphological Sheet'}
                       </span>
                       <input
                         type="file"
@@ -4857,8 +5612,8 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     </label>
                     <p className="text-[10px] text-center text-slate-400 mt-2">
                       {language === 'pt' 
-                        ? (optimizeNervura ? 'A IA irá padronizar características e remover redundâncias.' : 'Carrega a chave exatamente como no arquivo, sem alterações da IA.') 
-                        : (optimizeNervura ? 'AI will standardize features and remove redundancies.' : 'Loads the key exactly as in the file, without AI modifications.')}
+                        ? 'Selecione um arquivo JSON exportado do NervuraColetora.' 
+                        : 'Select a JSON file exported from NervuraColetora.'}
                     </p>
                   </div>
                 </div>
@@ -4979,7 +5734,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         <input
                           type="range"
                           min="5"
-                          max="50"
+                          max="100"
                           step="5"
                           value={refineOptions.expandCount}
                           onChange={(e) => setRefineOptions(prev => ({ ...prev, expandCount: parseInt(e.target.value) }))}
@@ -5886,7 +6641,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       <input
                         type="range"
                         min="3"
-                        max="30"
+                        max="100"
                         step="1"
                         value={aiConfig.count}
                         onChange={(e) => setAiConfig(prev => ({ ...prev, count: parseInt(e.target.value) }))}
@@ -6169,29 +6924,66 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
             </div>
 
             <div className="flex-1 p-2 bg-slate-100 min-h-0 flex flex-col gap-2">
-              {/* Prompt Textarea - Hidden during generation */}
-              {!isGenerating && (
+              {/* Import Mode Toggle - Shown when pendingNervuraFile is present */}
+              {pendingNervuraFile && !isGenerating && !pendingImportProject && (
+                <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                  <p className="text-xs font-bold text-slate-500 uppercase mb-3 text-center">
+                    {language === 'pt' ? 'Modo de Importação' : 'Import Mode'}
+                  </p>
+                  <div className="flex rounded-xl overflow-hidden border-2 border-slate-200">
+                    <button
+                      onClick={() => setOptimizeNervura(false)}
+                      className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${
+                        !optimizeNervura 
+                          ? 'bg-slate-800 text-white' 
+                          : 'bg-white text-slate-500 hover:bg-slate-50'
+                      }`}
+                    >
+                      <FileCode size={18} />
+                      <div className="text-left">
+                        <div className="font-bold text-sm">{language === 'pt' ? 'Fiel' : 'Faithful'}</div>
+                        <div className="text-[10px] opacity-70">{language === 'pt' ? 'Sem alterações' : 'No changes'}</div>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => setOptimizeNervura(true)}
+                      className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${
+                        optimizeNervura 
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white' 
+                          : 'bg-white text-slate-500 hover:bg-slate-50'
+                      }`}
+                    >
+                      <Sparkles size={18} />
+                      <div className="text-left">
+                        <div className="font-bold text-sm">{language === 'pt' ? 'Otimizar' : 'Optimize'}</div>
+                        <div className="text-[10px] opacity-70">{language === 'pt' ? 'IA padroniza' : 'AI cleans'}</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+              
+              {/* AI Typing Effect Display - Shown during generation OR when showing import status */}
+              {(isGenerating || pendingNervuraFile || pendingImportProject || aiTypingText) ? (
+                <div 
+                  ref={typingContainerRef}
+                  className="w-full flex-1 p-4 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 font-mono text-sm rounded-lg overflow-auto custom-scrollbar border-2 border-amber-500/30"
+                >
+                  <div className="whitespace-pre-wrap">
+                    {aiTypingText || (language === 'pt' ? 'Aguardando...' : 'Waiting...')}
+                    {isGenerating && !aiTypingComplete && (
+                      <span className="inline-block w-2 h-4 bg-amber-400 animate-pulse ml-1 align-middle"></span>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* Prompt Textarea - Only shown when NOT in import mode */
                 <textarea
                   value={manualPrompt}
                   onChange={(e) => setManualPrompt(e.target.value)}
                   className="w-full flex-1 p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
                   spellCheck="false"
                 />
-              )}
-              
-              {/* AI Typing Effect Display - Shown during generation */}
-              {isGenerating && (
-                <div 
-                  ref={typingContainerRef}
-                  className="w-full flex-1 p-4 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 font-mono text-sm rounded-lg overflow-auto custom-scrollbar border-2 border-amber-500/30"
-                >
-                  <div className="whitespace-pre-wrap">
-                    {aiTypingText}
-                    {!aiTypingComplete && (
-                      <span className="inline-block w-2 h-4 bg-amber-400 animate-pulse ml-1 align-middle"></span>
-                    )}
-                  </div>
-                </div>
               )}
             </div>
 
@@ -6221,6 +7013,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                     onClick={() => {
                       setProject(pendingImportProject);
                       setPendingImportProject(null);
+                      setPendingNervuraFile(null);
                       setShowPromptEditor(false);
                       setShowAiModal(false);
                       
@@ -6232,11 +7025,23 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
                       if (onProjectImported) onProjectImported(pendingImportProject);
                       
-                      alert(language === 'pt' ? 'Chave importada e otimizada com sucesso!' : 'Key imported and optimized successfully!');
+                      alert(language === 'pt' ? 'Chave importada com sucesso!' : 'Key imported successfully!');
                     }}
                     className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 flex items-center gap-2"
                   >
                     {language === 'pt' ? 'Confirmar Importação' : 'Confirm Import'} <Check size={16} />
+                  </button>
+                ) : pendingNervuraFile ? (
+                  <button
+                    onClick={executeNervuraImport}
+                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? (
+                      <><Loader2 className="animate-spin" size={16} /> {language === 'pt' ? 'Processando...' : 'Processing...'}</>
+                    ) : (
+                      <>{optimizeNervura ? (language === 'pt' ? 'Otimizar e Importar' : 'Optimize & Import') : (language === 'pt' ? 'Importar Chave' : 'Import Key')} <Wand2 size={16} /></>
+                    )}
                   </button>
                 ) : (
                   <button
@@ -6279,6 +7084,185 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
             <div className="p-4 bg-white">
               <h4 className="font-semibold text-slate-800">{expandedStateImage.label}</h4>
               <p className="text-sm text-slate-500">{expandedStateImage.featureName}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Format Detection Modal */}
+      {showFormatModal && detectedFormat && pendingSpreadsheetData && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 animate-in fade-in zoom-in-95">
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <FileSearch className="text-emerald-600" size={20} />
+              {language === 'pt' ? 'Formato Detectado' : 'Format Detected'}
+            </h3>
+
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">🔍</span>
+                <div>
+                  <p className="font-semibold text-emerald-900">{detectedFormat.description}</p>
+                  <p className="text-sm text-emerald-700">
+                    {language === 'pt' ? 'Confiança' : 'Confidence'}: {Math.round(detectedFormat.confidence * 100)}%
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {detectedFormat.format === 'linked_hub' && (
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                <p className="text-sm text-amber-900 mb-2">
+                  <strong>🔗 {language === 'pt' ? 'Chave com Múltiplas Referências Detectada!' : 'Linked Key System Detected!'}</strong>
+                </p>
+                <p className="text-sm text-amber-800 mb-3">
+                  {language === 'pt'
+                    ? 'Esta chave referencia outras chaves (ex: Chave A, Chave B, etc). Para melhor experiência, recomendamos importar TODOS os arquivos relacionados.'
+                    : 'This key references other keys (e.g., Key A, Key B, etc). For best experience, we recommend importing ALL related files.'}
+                </p>
+                <label className="block">
+                  <div className="border-2 border-dashed border-amber-300 rounded-lg p-4 text-center hover:border-amber-400 hover:bg-amber-100 transition-colors cursor-pointer">
+                    <Upload className="mx-auto mb-2 text-amber-600" size={32} />
+                    <p className="text-sm font-medium text-amber-900">
+                      {language === 'pt' ? 'Selecionar Múltiplos Arquivos' : 'Select Multiple Files'}
+                    </p>
+                    <p className="text-xs text-amber-700 mt-1">
+                      {language === 'pt' ? 'Use Ctrl/Cmd para selecionar vários' : 'Use Ctrl/Cmd to select multiple'}
+                    </p>
+                  </div>
+                  <input
+                    type="file"
+                    multiple
+                    accept=".xlsx,.xls,.csv"
+                    onChange={handleMultipleFiles}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            )}
+
+            <div className="space-y-2 mb-4">
+              <button
+                onClick={async () => {
+                  if (!aiConfig.model) {
+                    alert(language === 'pt' ? 'Configure a API Key primeiro' : 'Configure API Key first');
+                    return;
+                  }
+                  setShowFormatModal(false);
+                  setIsConvertingWithAI(true);
+                  try {
+                    const project = await convertDichotomousKey(
+                      aiConfig.model,
+                      pendingSpreadsheetData.data,
+                      pendingSpreadsheetData.fileName,
+                      language
+                    );
+                    setProject(project);
+                    const saved = localStorage.getItem('nozesia_projects');
+                    let projectsList: Project[] = saved ? JSON.parse(saved) : [];
+                    projectsList = [project, ...projectsList.filter(p => p.id !== project.id)];
+                    localStorage.setItem('nozesia_projects', JSON.stringify(projectsList));
+                    if (onProjectImported) onProjectImported(project);
+                  } catch (error) {
+                    alert(language === 'pt' ? 'Erro na conversão' : 'Conversion error');
+                  } finally {
+                    setIsConvertingWithAI(false);
+                    setPendingSpreadsheetData(null);
+                  }
+                }}
+                className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold hover:from-amber-400 hover:to-orange-400 transition-all flex items-center justify-center gap-2"
+              >
+                <Brain size={18} />
+                {language === 'pt' ? 'Converter com IA (Somente este arquivo)' : 'Convert with AI (This file only)'}
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowFormatModal(false);
+                  setPendingSpreadsheetData(null);
+                }}
+                className="w-full py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+              >
+                {language === 'pt' ? 'Cancelar' : 'Cancel'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Multiple Files Selection Modal */}
+      {showMultiFileModal && multipleFiles.length > 0 && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 animate-in fade-in zoom-in-95">
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <Layers className="text-emerald-600" size={20} />
+              {language === 'pt' ? 'Importar Chaves Interligadas' : 'Import Linked Keys'}
+            </h3>
+
+            <p className="text-sm text-slate-600 mb-4">
+              {language === 'pt'
+                ? `${multipleFiles.length} arquivos selecionados. Escolha qual é a chave principal (hub):`
+                : `${multipleFiles.length} files selected. Choose which is the main key (hub):`}
+            </p>
+
+            <div className="space-y-2 max-h-96 overflow-y-auto mb-4 custom-scrollbar">
+              {multipleFiles.map((file, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+                >
+                  <input
+                    type="radio"
+                    name="mainKey"
+                    id={`file-${idx}`}
+                    defaultChecked={idx === 0}
+                    className="w-4 h-4 text-emerald-600"
+                  />
+                  <label htmlFor={`file-${idx}`} className="flex-1 cursor-pointer">
+                    <div className="font-medium text-slate-800 text-sm">{file.name}</div>
+                    <div className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</div>
+                  </label>
+                  {file.name.toLowerCase().includes('geral') && (
+                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">
+                      {language === 'pt' ? 'Sugerido' : 'Suggested'}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+              <p className="text-xs text-blue-900">
+                <strong>ℹ️ {language === 'pt' ? 'Como funciona:' : 'How it works:'}</strong>
+                <br />
+                {language === 'pt'
+                  ? 'A IA irá processar cada chave e criar links automáticos entre elas. A chave principal será carregada no editor e as sub-chaves ficarão acessíveis via navegação.'
+                  : 'AI will process each key and create automatic links between them. The main key will be loaded in the editor and sub-keys will be accessible via navigation.'}
+              </p>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  const selectedIndex = Array.from(document.querySelectorAll('input[name="mainKey"]'))
+                    .findIndex((input: any) => input.checked);
+                  processMultipleFilesWithAI(multipleFiles, selectedIndex);
+                }}
+                className="flex-1 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-bold hover:from-emerald-400 hover:to-teal-400 transition-all flex items-center justify-center gap-2"
+              >
+                <Sparkles size={18} />
+                {language === 'pt' ? 'Processar com IA' : 'Process with AI'}
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowMultiFileModal(false);
+                  setMultipleFiles([]);
+                }}
+                className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+              >
+                {language === 'pt' ? 'Cancelar' : 'Cancel'}
+              </button>
             </div>
           </div>
         </div>

@@ -1116,6 +1116,32 @@ const importSchema: Schema = {
 const refineSchema: Schema = {
   type: Type.OBJECT,
   properties: {
+    features: {
+      type: Type.ARRAY,
+      description: "Optional: new features to add. If not adding features, can be omitted or empty array.",
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: { type: Type.STRING, description: "Generate a new unique ID for new features (9 random chars)" },
+          name: { type: Type.STRING, description: "Feature name" },
+          imageUrl: { type: Type.STRING, description: "Optional image URL for the feature" },
+          states: {
+            type: Type.ARRAY,
+            description: "At least 2 states required",
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                id: { type: Type.STRING, description: "Generate a new unique ID for each state (9 random chars)" },
+                label: { type: Type.STRING, description: "State label/value" },
+                imageUrl: { type: Type.STRING, description: "Optional image URL for this state" }
+              },
+              required: ["id", "label"]
+            }
+          }
+        },
+        required: ["id", "name", "states"]
+      }
+    },
     entities: {
       type: Type.ARRAY,
       items: {
@@ -1128,7 +1154,7 @@ const refineSchema: Schema = {
           description: { type: Type.STRING, description: "Entity description - can be enhanced" },
           traitsMap: { 
             type: Type.STRING, 
-            description: "JSON string of traits object in format {\"featureId\": [\"stateId\", ...]} - MUST use exact IDs from input"
+            description: "JSON string of traits object in format {\"featureId\": [\"stateId\", ...]} - MUST use exact IDs from input AND new feature IDs if adding features"
           }
         },
         required: ["id", "name", "traitsMap"]
@@ -1139,7 +1165,8 @@ const refineSchema: Schema = {
       properties: {
         processedCount: { type: Type.NUMBER, description: "Number of entities processed" },
         modifiedCount: { type: Type.NUMBER, description: "Number of entities with added/changed traits" },
-        skippedCount: { type: Type.NUMBER, description: "Number of entities skipped (no changes needed)" }
+        skippedCount: { type: Type.NUMBER, description: "Number of entities skipped (no changes needed)" },
+        featuresAdded: { type: Type.NUMBER, description: "Number of new features added" }
       }
     }
   },
@@ -1778,10 +1805,50 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
         return existingProject;
       }
 
+      // Process new features if returned by AI (for REFINE mode with addFeatures option)
+      let finalFeatures = existingProject.features;
+      if (mode === 'refine' && data.features && Array.isArray(data.features) && data.features.length > 0) {
+        console.log(`[refineExistingProject] AI returned ${data.features.length} new features`);
+        
+        // Validate and add new features
+        const newFeatures: Feature[] = [];
+        for (const newFeature of data.features) {
+          if (!newFeature.id || !newFeature.name || !newFeature.states || newFeature.states.length < 2) {
+            console.warn(`Skipping invalid feature:`, newFeature);
+            continue;
+          }
+          
+          // Check if feature already exists by name
+          const existingFeature = existingProject.features.find(f => 
+            f.name.toLowerCase() === newFeature.name.toLowerCase()
+          );
+          if (existingFeature) {
+            console.warn(`Feature "${newFeature.name}" already exists, skipping`);
+            continue;
+          }
+          
+          newFeatures.push({
+            id: newFeature.id,
+            name: newFeature.name,
+            imageUrl: newFeature.imageUrl || '',
+            states: newFeature.states.map((s: any) => ({
+              id: s.id,
+              label: s.label,
+              imageUrl: s.imageUrl || ''
+            }))
+          });
+        }
+        
+        if (newFeatures.length > 0) {
+          finalFeatures = [...existingProject.features, ...newFeatures];
+          console.log(`[refineExistingProject] Added ${newFeatures.length} new features to the key`);
+        }
+      }
+      
       return {
         ...existingProject,
         entities: processedEntities,
-        features: existingProject.features // Always preserve features
+        features: finalFeatures
       };
     }
   } catch (error) {
@@ -2041,6 +2108,153 @@ async function callGemini(
 
   } catch (error) {
     console.error("Gemini Generation Error:", error);
+    throw error;
+  }
+}
+
+/**
+ * Convert dichotomous key from spreadsheet to NOZESia matrix format
+ */
+export const convertDichotomousKey = async (
+  apiKey: string,
+  spreadsheetData: any[][],
+  fileName: string,
+  language: 'pt' | 'en' = 'pt'
+): Promise<Project> => {
+  if (!apiKey) {
+    throw new Error(language === 'pt' ? 'Chave de API necessária' : 'API key required');
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+
+  // Convert spreadsheet to text format for analysis
+  const keyText = spreadsheetData.map(row => row.join(' | ')).join('\n');
+
+  const prompt = language === 'pt'
+    ? `Você é um especialista em taxonomia e chaves de identificação. Analise esta chave dicotômica e extraia:
+
+1. TODAS as entidades (famílias, gêneros ou espécies) mencionadas
+2. TODAS as características diagnósticas mencionadas
+3. Mapeie quais características cada entidade possui
+
+CHAVE DICOTÔMICA:
+${keyText}
+
+Retorne um JSON no seguinte formato:
+{
+  "projectName": "Nome da chave",
+  "projectDescription": "Descrição breve",
+  "features": [
+    {
+      "name": "Nome da característica",
+      "states": ["Estado 1", "Estado 2"]
+    }
+  ],
+  "entities": [
+    {
+      "name": "Nome da entidade",
+      "scientificName": "Nome científico se aplicável",
+      "family": "Família se aplicável",
+      "description": "Breve descrição",
+      "characteristics": {
+        "Nome da característica": ["Estados que a entidade possui"]
+      }
+    }
+  ]
+}
+
+IMPORTANTE:
+- Extraia TODAS as características mencionadas (presença de látex, tipo de folha, nervação, etc)
+- Para cada entidade, liste TODAS as características que a levam à identificação
+- Se uma característica não foi mencionada para uma entidade, não inclua
+- Agrupe características similares (ex: "látex branco" e "látex amarelo" = característica "Cor do látex")
+- Use os nomes científicos completos quando mencionados
+- Crie estados binários quando apropriado (ex: "presente"/"ausente")`
+    : `You are an expert in taxonomy and identification keys. Analyze this dichotomous key and extract:
+
+1. ALL entities (families, genera, or species) mentioned
+2. ALL diagnostic characteristics mentioned
+3. Map which characteristics each entity possesses
+
+DICHOTOMOUS KEY:
+${keyText}
+
+Return a JSON in the following format:
+{
+  "projectName": "Key name",
+  "projectDescription": "Brief description",
+  "features": [
+    {
+      "name": "Feature name",
+      "states": ["State 1", "State 2"]
+    }
+  ],
+  "entities": [
+    {
+      "name": "Entity name",
+      "scientificName": "Scientific name if applicable",
+      "family": "Family if applicable",
+      "description": "Brief description",
+      "characteristics": {
+        "Feature name": ["States that the entity has"]
+      }
+    }
+  ]
+}
+
+IMPORTANT:
+- Extract ALL mentioned characteristics (presence of latex, leaf type, venation, etc)
+- For each entity, list ALL characteristics that lead to identification
+- If a characteristic wasn't mentioned for an entity, don't include it
+- Group similar characteristics (e.g., "white latex" and "yellow latex" = "Latex color" feature)
+- Use complete scientific names when mentioned
+- Create binary states when appropriate (e.g., "present"/"absent")`;
+
+  try {
+    const schema: Schema = {
+      type: Type.OBJECT,
+      properties: {
+        projectName: { type: Type.STRING },
+        projectDescription: { type: Type.STRING },
+        features: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              name: { type: Type.STRING },
+              states: {
+                type: Type.ARRAY,
+                items: { type: Type.STRING }
+              }
+            }
+          }
+        },
+        entities: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              name: { type: Type.STRING },
+              scientificName: { type: Type.STRING },
+              family: { type: Type.STRING },
+              description: { type: Type.STRING },
+              characteristics: {
+                type: Type.OBJECT
+              }
+            }
+          }
+        }
+      },
+      required: ['projectName', 'features', 'entities']
+    };
+
+    const project = await callGemini(ai, "gemini-2.0-flash-exp", prompt, "", schema, language, false);
+
+    // Return the project directly since callGemini already structures it correctly
+    return project;
+
+  } catch (error) {
+    console.error("Dichotomous key conversion error:", error);
     throw error;
   }
 }

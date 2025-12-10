@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import { Project, Entity, Language } from '../types';
-import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink, List, Grid, FolderOpen, Edit, Download, FileSpreadsheet, FileCode } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Project, Entity, Language, SubKeyReference } from '../types';
+import { RotateCcw, Check, X, Filter, Image as ImageIcon, Eye, ArrowLeft, Info, BookOpen, Tag, Link as LinkIcon, ExternalLink, List, Grid, FolderOpen, Edit, Download, FileSpreadsheet, FileCode, ChevronDown, Layers } from 'lucide-react';
 import { utils, writeFile } from 'xlsx';
 
 // Generate standalone HTML file with embedded player
@@ -52,6 +52,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     let viewingEntity = null;
     let viewingStateImage = null;
     let mobileTab = 'FILTERS';
+    let hideEmptyFeatures = true;
     
     function toggleSelection(featureId, stateId) {
       if (!selections[featureId]) selections[featureId] = [];
@@ -68,6 +69,7 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     function resetKey() { selections = {}; render(); }
     function setMobileTab(tab) { mobileTab = tab; render(); }
     function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
+    function toggleHideEmpty() { hideEmptyFeatures = !hideEmptyFeatures; render(); }
     function viewEntity(entity) { viewingEntity = entity; render(); }
     function closeEntity() { viewingEntity = null; render(); }
     function viewStateImage(url, label, featureName) { viewingStateImage = {url, label, featureName}; render(); }
@@ -88,6 +90,13 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
     
     function getTotalSelections() {
       return Object.values(selections).reduce((a, c) => a + c.length, 0);
+    }
+
+    function hasRemainingEntitiesForFeature(featureId, remainingEntities) {
+      return remainingEntities.some(entity => {
+        const entityStates = entity.traits[featureId] || [];
+        return entityStates.length > 0;
+      });
     }
     
     function render() {
@@ -150,28 +159,49 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
         \`;
       }
       
-      const featuresHTML = project.features.map(f => {
-        const selStates = selections[f.id] || [];
-        return \`
-          <div class="bg-slate-50 rounded-xl p-4">
-            <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
-              \${f.imageUrl ? \`<img src="\${f.imageUrl}" class="w-6 h-6 rounded object-cover">\` : ''}
-              \${f.name}
-              \${selStates.length > 0 ? \`<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">\${selStates.length}</span>\` : ''}
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              \${f.states.map(s => {
-                const isSel = selStates.includes(s.id);
-                const hasImg = s.imageUrl ? true : false;
-                return \`<div class="flex items-center gap-1">
-                  \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
-                  <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
-                </div>\`;
-              }).join('')}
+      // Filter features and states based on hideEmptyFeatures
+      const featuresHTML = project.features
+        .map(f => {
+          // Get all state IDs that are present in remaining entities
+          const usedStateIds = new Set();
+          if (hideEmptyFeatures) {
+            remaining.forEach(entity => {
+              const entityStates = entity.traits[f.id] || [];
+              entityStates.forEach(stateId => usedStateIds.add(stateId));
+            });
+
+            // If no states are used, skip this feature
+            if (usedStateIds.size === 0) return '';
+          }
+
+          // Filter states to only show those that are used (when hideEmptyFeatures is true)
+          const visibleStates = hideEmptyFeatures
+            ? f.states.filter(s => usedStateIds.has(s.id))
+            : f.states;
+
+          const selStates = selections[f.id] || [];
+          return \`
+            <div class="bg-slate-50 rounded-xl p-4">
+              <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                \${f.imageUrl ? \`<img src="\${f.imageUrl}" class="w-6 h-6 rounded object-cover">\` : ''}
+                \${f.name}
+                \${selStates.length > 0 ? \`<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">\${selStates.length}</span>\` : ''}
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                \${visibleStates.map(s => {
+                  const isSel = selStates.includes(s.id);
+                  const hasImg = s.imageUrl ? true : false;
+                  return \`<div class="flex items-center gap-1">
+                    \${hasImg ? \`<button onclick="viewStateImage('\${s.imageUrl}', '\${s.label.replace(/'/g, "\\\\'")}', '\${f.name.replace(/'/g, "\\\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="\${s.imageUrl}" class="w-full h-full object-cover"></button>\` : ''}
+                    <button onclick="toggleSelection('\${f.id}','\${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all \${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">\${s.label}</button>
+                  </div>\`;
+                }).join('')}
+              </div>
             </div>
-          </div>
-        \`;
-      }).join('');
+          \`;
+        })
+        .filter(html => html !== '')
+        .join('');
       
       const entityCard = (e, isDiscarded = false) => \`
         <div onclick="viewEntity(project.entities.find(x=>x.id==='\${e.id}'))" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden border \${isDiscarded ? 'border-red-200 opacity-60' : 'border-slate-200 hover:border-emerald-300'}">
@@ -218,7 +248,12 @@ const generateStandaloneHTML = (project: Project, lang: Language): string => {
           <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
             <div class="w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex-col h-full \${mobileTab==='FILTERS'?'flex':'hidden md:flex'}">
               <div class="hidden md:block p-4 border-b bg-slate-50">
-                <h3 class="font-semibold text-slate-700 flex items-center gap-2">🔍 \${strings.features}</h3>
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold text-slate-700 flex items-center gap-2">🔍 \${strings.features}</h3>
+                  <button onclick="toggleHideEmpty()" class="flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-lg transition-all \${hideEmptyFeatures ? 'bg-emerald-100 text-emerald-700' : 'text-slate-600 bg-slate-100 hover:bg-slate-200'}" title="\${hideEmptyFeatures ? 'Mostrar todas' : 'Ocultar vazias'}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="\${hideEmptyFeatures ? 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' : 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21'}"></path></svg>
+                  </button>
+                </div>
               </div>
               <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">\${featuresHTML}</div>
             </div>
@@ -318,12 +353,52 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
   const [showDiscarded, setShowDiscarded] = useState(false);
   const [activeFeatureImage, setActiveFeatureImage] = useState<string | null>(null);
   const [viewingEntity, setViewingEntity] = useState<Entity | null>(null);
-  
+
   // State Image Modal
   const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
-  
+
   // Mobile View State: 'FILTERS' (Features) or 'RESULTS' (Entities)
   const [mobileTab, setMobileTab] = useState<'FILTERS' | 'RESULTS'>('FILTERS');
+
+  // Hide empty features toggle
+  const [hideEmptyFeatures, setHideEmptyFeatures] = useState(true);
+
+  // Sub-keys navigation
+  const [currentProject, setCurrentProject] = useState<Project>(project);
+  const [showSubKeysDropdown, setShowSubKeysDropdown] = useState(false);
+  const [subKeysCache, setSubKeysCache] = useState<Record<string, Project>>({});
+
+  // Load sub-key from localStorage
+  const loadSubKey = (subKeyRef: SubKeyReference) => {
+    // Check cache first
+    if (subKeysCache[subKeyRef.id]) {
+      setCurrentProject(subKeysCache[subKeyRef.id]);
+      setSelections({});
+      return;
+    }
+
+    // Load from localStorage
+    const saved = localStorage.getItem('nozesia_projects');
+    if (saved) {
+      try {
+        const projects: Project[] = JSON.parse(saved);
+        const subKey = projects.find(p => p.id === subKeyRef.projectId);
+        if (subKey) {
+          setSubKeysCache(prev => ({ ...prev, [subKeyRef.id]: subKey }));
+          setCurrentProject(subKey);
+          setSelections({});
+        }
+      } catch (error) {
+        console.error('Failed to load sub-key:', error);
+      }
+    }
+  };
+
+  // Return to main key
+  const returnToMainKey = () => {
+    setCurrentProject(project);
+    setSelections({});
+  };
 
   const toggleSelection = (featureId: string, stateId: string) => {
     setSelections(prev => {
@@ -352,12 +427,12 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
     const remainingEntities: Entity[] = [];
     const discardedEntities: Entity[] = [];
 
-    project.entities.forEach(entity => {
+    currentProject.entities.forEach(entity => {
       let isMatch = true;
       for (const [featureId, selectedStateIds] of Object.entries(selections)) {
         const entityStates = entity.traits[featureId] || [];
         const hasOverlap = (selectedStateIds as string[]).some(id => entityStates.includes(id));
-        
+
         if (!hasOverlap) {
           isMatch = false;
           break;
@@ -369,10 +444,35 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
     });
 
     return { remaining: remainingEntities, discarded: discardedEntities };
-  }, [project.entities, selections]);
+  }, [currentProject.entities, selections]);
 
   // Count total active selections
   const totalSelectionsCount = Object.values(selections).reduce((acc, curr) => acc + curr.length, 0);
+
+  // Filter features and states based on hideEmptyFeatures toggle
+  const visibleFeatures = useMemo(() => {
+    if (!hideEmptyFeatures) return currentProject.features;
+
+    return currentProject.features
+      .map(feature => {
+        // Get all state IDs that are present in remaining entities
+        const usedStateIds = new Set<string>();
+        remaining.forEach(entity => {
+          const entityStates = entity.traits[feature.id] || [];
+          entityStates.forEach(stateId => usedStateIds.add(stateId));
+        });
+
+        // If no states are used, filter out the entire feature
+        if (usedStateIds.size === 0) return null;
+
+        // Filter states to only show those that are used
+        return {
+          ...feature,
+          states: feature.states.filter(state => usedStateIds.has(state.id))
+        };
+      })
+      .filter((feature): feature is typeof currentProject.features[0] => feature !== null);
+  }, [currentProject.features, hideEmptyFeatures, remaining]);
 
   // Export project as JSON
   const exportJSON = () => {
@@ -428,7 +528,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
       {/* Header */}
       <header className="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm z-30 shrink-0">
         <div className="flex items-center gap-3 overflow-hidden">
-          <button 
+          <button
             onClick={onBack}
             className="md:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-full"
           >
@@ -437,11 +537,85 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
           <div className="overflow-hidden">
             <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 truncate">
               <span className="hidden sm:inline-block bg-emerald-600 text-white text-xs px-2 py-1 rounded">{strings.player}</span>
-              <span className="truncate">{project.name}</span>
+              <span className="truncate">{currentProject.name}</span>
             </h2>
+            {/* Breadcrumb for sub-keys */}
+            {currentProject.isSubKey && (
+              <div className="flex items-center gap-1 text-xs text-slate-500 mt-1">
+                <button
+                  onClick={returnToMainKey}
+                  className="hover:text-emerald-600 transition-colors"
+                >
+                  {project.name}
+                </button>
+                <span>→</span>
+                <span className="text-emerald-600">{currentProject.name}</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex gap-1 sm:gap-2 shrink-0">
+          {/* Sub-keys navigation dropdown */}
+          {project.subKeys && project.subKeys.length > 0 && !currentProject.isSubKey && (
+            <div className="relative">
+              <button
+                onClick={() => setShowSubKeysDropdown(!showSubKeysDropdown)}
+                className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-lg transition-all"
+                title={language === 'pt' ? 'Sub-chaves' : 'Sub-keys'}
+              >
+                <Layers size={18} />
+                <span className="hidden lg:inline">
+                  {language === 'pt' ? 'Sub-chaves' : 'Sub-keys'}
+                </span>
+                <ChevronDown size={14} />
+              </button>
+
+              {showSubKeysDropdown && (
+                <>
+                  <div
+                    className="fixed inset-0 z-30"
+                    onClick={() => setShowSubKeysDropdown(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-slate-200 z-40 max-h-96 overflow-y-auto">
+                    <div className="p-2">
+                      {project.subKeys.map(subKey => (
+                        <button
+                          key={subKey.id}
+                          onClick={() => {
+                            loadSubKey(subKey);
+                            setShowSubKeysDropdown(false);
+                          }}
+                          className="w-full text-left p-3 hover:bg-emerald-50 rounded-lg transition-colors group"
+                        >
+                          <div className="font-medium text-slate-800 group-hover:text-emerald-700 text-sm">
+                            {subKey.name}
+                          </div>
+                          <div className="text-xs text-slate-500 mt-1 line-clamp-2">
+                            {subKey.description}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Return to main key button (shown when viewing sub-key) */}
+          {currentProject.isSubKey && (
+            <button
+              onClick={returnToMainKey}
+              className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 rounded-lg transition-all"
+              title={language === 'pt' ? 'Voltar à chave principal' : 'Return to main key'}
+            >
+              <ArrowLeft size={18} />
+              <span className="hidden lg:inline">
+                {language === 'pt' ? 'Chave Principal' : 'Main Key'}
+              </span>
+            </button>
+          )}
+
           {/* Open saved key button */}
           {onOpenSaved && (
             <button 
@@ -487,7 +661,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
             <FileCode size={18} /> <span className="hidden lg:inline">{strings.exportHtml}</span>
           </button>
           {/* Restart */}
-          <button 
+          <button
             onClick={resetKey}
             className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
             title={strings.restart}
@@ -541,12 +715,25 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
         {/* Features Panel (Left on Desktop / Tab 1 on Mobile) */}
         <div className={`w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex flex-col h-full relative z-20 ${mobileTab === 'FILTERS' ? 'flex' : 'hidden md:flex'}`}>
           <div className="hidden md:block p-4 border-b bg-slate-50">
-            <h3 className="font-semibold text-slate-700 flex items-center gap-2">
-              <Filter size={18} /> {strings.features}
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-slate-700 flex items-center gap-2">
+                <Filter size={18} /> {strings.features}
+              </h3>
+              <button
+                onClick={() => setHideEmptyFeatures(!hideEmptyFeatures)}
+                className={`flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-lg transition-all ${
+                  hideEmptyFeatures
+                    ? 'bg-emerald-100 text-emerald-700'
+                    : 'text-slate-600 bg-slate-100 hover:bg-slate-200'
+                }`}
+                title={hideEmptyFeatures ? "Mostrar todas" : "Ocultar vazias"}
+              >
+                <Eye size={16} />
+              </button>
+            </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-24 md:pb-4 custom-scrollbar">
-            {project.features.map(feature => {
+            {visibleFeatures.map(feature => {
               const currentSelections = selections[feature.id] || [];
               const hasSelection = currentSelections.length > 0;
 
