@@ -1152,9 +1152,16 @@ const fillGapsSchema: Schema = {
         properties: {
           entityId: { type: Type.STRING, description: "The exact entity ID from input" },
           filledTraits: { 
-            type: Type.OBJECT, 
-            description: "Object with featureId keys and array of stateIds values: {\"featureId\": [\"stateId\"]}",
-            nullable: true
+            type: Type.ARRAY, 
+            description: "List of traits to add",
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                featureId: { type: Type.STRING },
+                stateIds: { type: Type.ARRAY, items: { type: Type.STRING } }
+              },
+              required: ["featureId", "stateIds"]
+            }
           }
         },
         required: ["entityId", "filledTraits"]
@@ -1580,7 +1587,7 @@ export const refineExistingProject = async (
   if (mode === 'fillGaps') {
     systemInstruction = `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
 CRITICAL: Use ONLY the exact IDs provided in the input. Return ONLY the entityId and the NEW traits being added.
-Format for filledTraits: Object like {"featureId": ["stateId"]}`;
+Format for filledTraits: Array of objects like [{"featureId": "f1", "stateIds": ["s1"]}]`;
   } else if (mode === 'clean') {
     systemInstruction = `You are an expert taxonomist and data cleaner.
 Your task is to CLEAN and OPTIMIZE the provided identification key.
@@ -1659,12 +1666,27 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
           const entityId = item.entityId || item.id;
           const traitsData = item.filledTraits || item.traitsMap || item.traits;
           
-          // Schema now returns object directly, but handle string legacy case just in case
-          const traits = typeof traitsData === 'string' 
+          // Schema now returns array of objects, but handle string/legacy object cases
+          const rawTraits = typeof traitsData === 'string' 
             ? repairTruncatedJson(traitsData) 
             : traitsData;
             
-          if (entityId && traits) {
+          // Normalize to Object format {featureId: [stateIds]}
+          const traits: Record<string, string[]> = {};
+          
+          if (Array.isArray(rawTraits)) {
+            // New format: [{featureId, stateIds}]
+            rawTraits.forEach((t: any) => {
+              if (t.featureId && Array.isArray(t.stateIds)) {
+                traits[t.featureId] = t.stateIds;
+              }
+            });
+          } else if (typeof rawTraits === 'object' && rawTraits !== null) {
+            // Legacy format: {featureId: [stateIds]}
+            Object.assign(traits, rawTraits);
+          }
+            
+          if (entityId && Object.keys(traits).length > 0) {
             filledTraitsMap.set(entityId, traits);
           }
         } catch (e) {
