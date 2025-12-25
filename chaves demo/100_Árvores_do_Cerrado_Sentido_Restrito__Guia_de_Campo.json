@@ -1,0 +1,1745 @@
+{
+  "id": "hbzvhhxe8",
+  "name": "100 Árvores do Cerrado Sentido Restrito: Guia de Campo",
+  "description": "Este guia de campo apresenta 100 espécies de árvores do Cerrado sentido restrito, com foco na identificação através de características dendrológicas vegetativas simples e de fácil visualização. O livro inclui descrições atualizadas e ilustrações para auxiliar estudantes e pesquisadores no reconhecimento da flora do bioma Cerrado no Brasil Central. As espécies são organizadas em grupos com base na filotaxia e composição foliar, em ordem alfabética de gênero dentro de cada família.",
+  "features": [
+    {
+      "id": "69nnsnc0a",
+      "name": "Filotaxia e Composição Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ywmxr3en9",
+          "label": "Folhas Simples Alternas"
+        },
+        {
+          "id": "nred6c7zf",
+          "label": "Folhas Simples Opostas ou Verticiladas"
+        },
+        {
+          "id": "4p8x2zl0j",
+          "label": "Folhas Compostas Digitadas Alternas"
+        },
+        {
+          "id": "b83ats2e0",
+          "label": "Folhas Compostas Digitadas ou Trifolioladas Opostas"
+        },
+        {
+          "id": "uf91wicxq",
+          "label": "Folhas Compostas Pinadas ou Bipinadas Alternas"
+        }
+      ]
+    },
+    {
+      "id": "rrfl0ws8y",
+      "name": "Exsudação ao Destacar as Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "scdtddux5",
+          "label": "Com exsudação"
+        },
+        {
+          "id": "nuohm7qqm",
+          "label": "Sem exsudação"
+        },
+        {
+          "id": "2vrfk9fcu",
+          "label": "Exsudação pouco leitosa"
+        },
+        {
+          "id": "nfh2cng9l",
+          "label": "Exsudação leitosa"
+        },
+        {
+          "id": "kh8zopn5o",
+          "label": "Exsudação abundante"
+        },
+        {
+          "id": "ykfqs51ke",
+          "label": "Exsudação escassa"
+        }
+      ]
+    },
+    {
+      "id": "zhudt73sd",
+      "name": "Odor das Folhas Amassadas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "z1s4c709m",
+          "label": "Odor característico de \"manga\""
+        }
+      ]
+    },
+    {
+      "id": "96dev1ft8",
+      "name": "Pilosidade das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jhn4bm875",
+          "label": "Folhas glabras"
+        },
+        {
+          "id": "gtnip9e40",
+          "label": "Folhas pilosas"
+        }
+      ]
+    },
+    {
+      "id": "szduvig19",
+      "name": "Aspecto e Brilho das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "34j8pxty4",
+          "label": "Opacas"
+        },
+        {
+          "id": "hsbnt7z5m",
+          "label": "Lustrosas"
+        }
+      ]
+    },
+    {
+      "id": "73dzqvzi0",
+      "name": "Agrupamento das Folhas nos Ramos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xzk4k8yis",
+          "label": "Agrupadas nos ápices dos ramos"
+        },
+        {
+          "id": "jxusk6dk7",
+          "label": "Folhas em densas espirais acumuladas nos ápices dos ramos"
+        },
+        {
+          "id": "k4ih0o8sq",
+          "label": "Folhas espaçadas nos ápices dos ramos"
+        }
+      ]
+    },
+    {
+      "id": "n14azothv",
+      "name": "Forma das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ncbur32q3",
+          "label": "Obovadas a estreito-obovadas"
+        },
+        {
+          "id": "704qoeme1",
+          "label": "Largo-obovadas"
+        }
+      ]
+    },
+    {
+      "id": "2pr9mjq8c",
+      "name": "Base das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "t646nodu8",
+          "label": "Cuneadas a decurrentes"
+        },
+        {
+          "id": "gdowl6wmr",
+          "label": "Agudas"
+        }
+      ]
+    },
+    {
+      "id": "dyavfmit0",
+      "name": "Nervação das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ouzdsgmia",
+          "label": "Craspedódroma simples"
+        },
+        {
+          "id": "u1xll25kj",
+          "label": "Broquidódroma"
+        }
+      ]
+    },
+    {
+      "id": "bfs9o14o1",
+      "name": "Gemmas Terminais",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9415vwz30",
+          "label": "Protegidas por escamas"
+        },
+        {
+          "id": "okf3ow5as",
+          "label": "Sem escamas"
+        }
+      ]
+    },
+    {
+      "id": "z14u89mqi",
+      "name": "Ritidoma do Tronco",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "hefzztjwg",
+          "label": "Sem fissuras"
+        },
+        {
+          "id": "oxuxy54h2",
+          "label": "Com fissuras"
+        },
+        {
+          "id": "v3lkro9v0",
+          "label": "Reticulado"
+        },
+        {
+          "id": "tsmk1dsf4",
+          "label": "Fissurado, aspecto contorcido"
+        }
+      ]
+    },
+    {
+      "id": "ol63aeo3q",
+      "name": "Margem das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "oifol20wz",
+          "label": "Margens inteiras"
+        },
+        {
+          "id": "a20dko2ch",
+          "label": "Margens serreadas"
+        },
+        {
+          "id": "wgk6xhvvx",
+          "label": "Margens não espessadas"
+        }
+      ]
+    },
+    {
+      "id": "dz0jqav15",
+      "name": "Pecíolo das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "hxkjoxhg5",
+          "label": "Sésseis a curto-pecioladas"
+        },
+        {
+          "id": "gd2gl4kyu",
+          "label": "Peciolares"
+        },
+        {
+          "id": "d08ji5f4i",
+          "label": "Pecíolos longos"
+        }
+      ]
+    },
+    {
+      "id": "3mw98o6di",
+      "name": "Ramos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "mbekvwfon",
+          "label": "Sem remanescentes da floração anterior"
+        },
+        {
+          "id": "24qqytel2",
+          "label": "Com remanescentes da floração anterior"
+        }
+      ]
+    },
+    {
+      "id": "7mivjqica",
+      "name": "Domácias na Face Inferior",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "gywxh6zxf",
+          "label": "Presente, na junção das nervuras 1ª e 2ª"
+        }
+      ]
+    },
+    {
+      "id": "ftzjo6o0s",
+      "name": "Nervuras da Face Inferior (Proeminência e Cor)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "wz9qe7wpo",
+          "label": "1ª e 2ª salientes na face inferior"
+        },
+        {
+          "id": "xb5noh3yg",
+          "label": "1ª, 2ª, 3ª e 4ª salientes na face inferior"
+        },
+        {
+          "id": "uu08wg2pm",
+          "label": "Nervuras amareladas"
+        },
+        {
+          "id": "6f0ip8ay9",
+          "label": "Nervuras mais claras que a lâmina"
+        }
+      ]
+    },
+    {
+      "id": "cexefgo57",
+      "name": "Posição das Folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "magqc6ls7",
+          "label": "Folhas pendentes"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "ol2fj3nag",
+      "name": "Anacardium occidentale L.",
+      "family": "Anacardiaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, caracterizada por folhas simples alternas com exsudação leitosa e odor de manga ao serem amassadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/172607463/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "rrfl0ws8y": [
+          "scdtddux5",
+          "2vrfk9fcu"
+        ],
+        "zhudt73sd": [
+          "z1s4c709m"
+        ],
+        "96dev1ft8": [
+          "jhn4bm875"
+        ],
+        "73dzqvzi0": [
+          "xzk4k8yis"
+        ],
+        "7mivjqica": [
+          "gywxh6zxf"
+        ]
+      }
+    },
+    {
+      "id": "wvf2bvkyd",
+      "name": "Annona coriacea Mart.",
+      "family": "Annonaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/101199524/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "r6g2tln56",
+      "name": "Annona crassiflora Mart.",
+      "family": "Annonaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/31005875/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "nadz2ad7l",
+      "name": "Xylopia aromatica (Lam.) Mart.",
+      "family": "Annonaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/29355178/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "mpf9dzmlp",
+      "name": "Aspidosperma macrocarpon Mart.",
+      "family": "Apocynaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26964486/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "bksz6g6zv",
+      "name": "Aspidosperma tomentosum Mart.",
+      "family": "Apocynaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, com folhas simples alternas, sésseis a curto-pecioladas, pilosas e opacas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/102042479/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "rrfl0ws8y": [
+          "scdtddux5",
+          "nfh2cng9l",
+          "ykfqs51ke"
+        ],
+        "73dzqvzi0": [
+          "xzk4k8yis"
+        ],
+        "dz0jqav15": [
+          "hxkjoxhg5"
+        ],
+        "ftzjo6o0s": [
+          "uu08wg2pm"
+        ],
+        "96dev1ft8": [
+          "gtnip9e40"
+        ],
+        "szduvig19": [
+          "34j8pxty4"
+        ],
+        "n14azothv": [
+          "ncbur32q3"
+        ],
+        "2pr9mjq8c": [
+          "t646nodu8"
+        ],
+        "dyavfmit0": [
+          "ouzdsgmia"
+        ],
+        "bfs9o14o1": [
+          "9415vwz30"
+        ]
+      }
+    },
+    {
+      "id": "z64fc32un",
+      "name": "Himatanthus obovatus (Müell.Arg.) Woodson",
+      "family": "Apocynaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, distinguida por folhas simples alternas glabras e lustrosas, com exsudação abundante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/30346298/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "rrfl0ws8y": [
+          "scdtddux5",
+          "nfh2cng9l",
+          "kh8zopn5o"
+        ],
+        "96dev1ft8": [
+          "jhn4bm875"
+        ],
+        "szduvig19": [
+          "hsbnt7z5m"
+        ],
+        "n14azothv": [
+          "704qoeme1"
+        ],
+        "2pr9mjq8c": [
+          "gdowl6wmr"
+        ],
+        "dyavfmit0": [
+          "u1xll25kj"
+        ],
+        "ftzjo6o0s": [
+          "6f0ip8ay9"
+        ],
+        "bfs9o14o1": [
+          "okf3ow5as"
+        ]
+      }
+    },
+    {
+      "id": "mfjbzhr9l",
+      "name": "Eremanthus glomerulatus Less.",
+      "family": "Asteraceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/41383607/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "ux1ofgm29",
+      "name": "Piptocarpha rotundifolia (Less.) Baker",
+      "family": "Asteraceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/58824914/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "wt5mtf2pg",
+      "name": "Kielmeyera coriacea Mart. & Zucc.",
+      "family": "Calophyllaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/170370208/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "clm26f6cg",
+      "name": "Kielmeyera speciosa A.St.-Hil.",
+      "family": "Calophyllaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/70601409/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "ptzxw60t7",
+      "name": "Plenckia populnea Reissek",
+      "family": "Celastraceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, com ritidoma com fissuras, margens das folhas serreadas, pecíolos longos e folhas pendentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26549088/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "z14u89mqi": [
+          "oxuxy54h2"
+        ],
+        "ol63aeo3q": [
+          "a20dko2ch"
+        ],
+        "dz0jqav15": [
+          "d08ji5f4i"
+        ],
+        "cexefgo57": [
+          "magqc6ls7"
+        ]
+      }
+    },
+    {
+      "id": "3mob6vsyq",
+      "name": "Salacia crassiflora (Mart. ex Schult.) G. Don.",
+      "family": "Celastraceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "35c10jd1j",
+      "name": "Couepia grandiflora (Mart. & Zucc.) Benth.",
+      "family": "Chrysobalanaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/215711039/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "nen4skjzx",
+      "name": "Hirtella gracilipes (Hook.f.) Prance",
+      "family": "Chrysobalanaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/186733138/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "evxiaue3u",
+      "name": "Terminalia argentea Mart.",
+      "family": "Combretaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28111316/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "pivcmew32",
+      "name": "Terminalia fagifolia Mart.",
+      "family": "Combretaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/29523167/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "gzs15gnyo",
+      "name": "Curatella americana L.",
+      "family": "Dilleniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/558290802/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "0fma9vlwe",
+      "name": "Davilla elliptica A.St.-Hil.",
+      "family": "Dilleniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/69024177/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "63lzxbxvv",
+      "name": "Diospyros burchellii Hiern",
+      "family": "Ebenaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26974653/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "lvdn5g5zz",
+      "name": "Erythroxylum deciduum A.St.-Hil.",
+      "family": "Erythroxylaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/29623321/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "dcf2bfi93",
+      "name": "Erythroxylum suberosum A.St.-Hil.",
+      "family": "Erythroxylaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/102488040/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "w3j5dfd9n",
+      "name": "Erythroxylum tortuosum Mart.",
+      "family": "Erythroxylaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/24308182/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "1mtrputsi",
+      "name": "Eschweilera nana (O.Berg) Miers",
+      "family": "Lecythidaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/174987516/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "avexge99b",
+      "name": "Norantea adamantium Cambess.",
+      "family": "Marcgraviaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/40670757/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "1mi7tu0wd",
+      "name": "Norantea guianensis Aubl.",
+      "family": "Marcgraviaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/114148646/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "kz834ocs1",
+      "name": "Brosimum gaudichaudii Trécul",
+      "family": "Moraceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/70546664/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "v9e1v33qq",
+      "name": "Ouratea hexasperma (A.St.-Hil.) Baill.",
+      "family": "Ochnaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/317078893/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "maqx5kt6s",
+      "name": "Agonandra brasiliensis Miers ex Benth. & Hook.f.",
+      "family": "Opilaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/97312358/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "fisl36bxj",
+      "name": "Rapanea guianensis Aubl.",
+      "family": "Primulaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/111421325/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "r5jrltgy8",
+      "name": "Roupala montana Aubl.",
+      "family": "Proteaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/69637149/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "86vf1t2ij",
+      "name": "Casearia sylvestris Sw.",
+      "family": "Salicaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/12994032/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "bkyjow161",
+      "name": "Pouteria ramiflora (Mart.) Radlk.",
+      "family": "Sapotaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, com ritidoma reticulado e nervação broquidódroma.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/305949253/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "rrfl0ws8y": [
+          "scdtddux5",
+          "nfh2cng9l",
+          "ykfqs51ke"
+        ],
+        "dz0jqav15": [
+          "gd2gl4kyu"
+        ],
+        "ftzjo6o0s": [
+          "uu08wg2pm",
+          "wz9qe7wpo"
+        ],
+        "73dzqvzi0": [
+          "jxusk6dk7"
+        ],
+        "z14u89mqi": [
+          "v3lkro9v0"
+        ],
+        "dyavfmit0": [
+          "u1xll25kj"
+        ],
+        "ol63aeo3q": [
+          "wgk6xhvvx"
+        ],
+        "3mw98o6di": [
+          "mbekvwfon"
+        ]
+      }
+    },
+    {
+      "id": "i6hbvyn3x",
+      "name": "Pouteria torta (Mart.) Radlk.",
+      "family": "Sapotaceae",
+      "description": "Esta espécie é uma das 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo, com ritidoma fissurado e aspecto contorcido, e ramos com remanescentes da floração anterior.",
+      "imageUrl": "https://static.inaturalist.org/photos/331104009/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ],
+        "rrfl0ws8y": [
+          "scdtddux5",
+          "nfh2cng9l",
+          "ykfqs51ke"
+        ],
+        "dz0jqav15": [
+          "gd2gl4kyu"
+        ],
+        "ftzjo6o0s": [
+          "uu08wg2pm",
+          "xb5noh3yg"
+        ],
+        "73dzqvzi0": [
+          "jxusk6dk7"
+        ],
+        "z14u89mqi": [
+          "tsmk1dsf4"
+        ],
+        "dyavfmit0": [
+          "u1xll25kj"
+        ],
+        "3mw98o6di": [
+          "24qqytel2"
+        ]
+      }
+    },
+    {
+      "id": "pczdcyio8",
+      "name": "Solanum lycocarpum A.St.-Hil.",
+      "family": "Solanaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/240293072/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "qhv91tt38",
+      "name": "Styrax ferrugineus Ness. & Mart.",
+      "family": "Styracaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/291014546/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "edrvf6s81",
+      "name": "Symplocos rhamnifolia A.DC.",
+      "family": "Symplocaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/d3424bc4d42f4638297aac8ec095fdd2.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "ywmxr3en9"
+        ]
+      }
+    },
+    {
+      "id": "7bjtijdyv",
+      "name": "Hancornia speciosa Gomes",
+      "family": "Apocynaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11592001/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "karj4zc5w",
+      "name": "Aegiphila lhotskiana Cham.",
+      "family": "Lamiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/61397987/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "pv0hvqewg",
+      "name": "Strychnos pseudoquina A.St.-Hil.",
+      "family": "Loganiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/85566037/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "m0hd7t6vo",
+      "name": "Lafoensia pacari A.St.-Hil.",
+      "family": "Lythraceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/246538629/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "n9ja5txyc",
+      "name": "Byrsonima coccolobifolia Kunth",
+      "family": "Malpighiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11592716/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "2mb76at8g",
+      "name": "Byrsonima pachyphylla A.Juss.",
+      "family": "Malpighiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11252244/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "rmvp8l5vp",
+      "name": "Byrsonima verbascifolia (L.) DC.",
+      "family": "Malpighiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/135784217/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "oza9vb66i",
+      "name": "Heteropterys byrsonimiifolia A.Juss.",
+      "family": "Malpighiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "2wstthhhp",
+      "name": "Miconia burchellii Triana",
+      "family": "Melastomataceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/53883071/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "do2pwu7mn",
+      "name": "Miconia ferruginata DC.",
+      "family": "Melastomataceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/297582213/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "nw92gfn2p",
+      "name": "Miconia leucocarpa DC.",
+      "family": "Melastomataceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/238106817/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "ap711gi85",
+      "name": "Blepharocalyx salicifolius (Kunth) O.Berg",
+      "family": "Myrtaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/106718024/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "xfqfx5swd",
+      "name": "Eugenia dysenterica DC.",
+      "family": "Myrtaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/225008337/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "c4gs5k6lh",
+      "name": "Psidium laruotteanum Cambess.",
+      "family": "Myrtaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45708257/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "oj1c43cin",
+      "name": "Psidium myrsinites DC.",
+      "family": "Myrtaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/27571937/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "0l1zvsrww",
+      "name": "Guapira graciliflora (Mart. ex Schimidt) Lundell",
+      "family": "Nyctaginaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/170373443/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "4mj8fn2zs",
+      "name": "Guapira noxia (Netto) Lundell",
+      "family": "Nyctaginaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/50144023/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "6m11y8uup",
+      "name": "Neea theifera Oerst.",
+      "family": "Nyctaginaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/299619301/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "gqthgs0ac",
+      "name": "Ferdinandusa elliptica (Pohl) Pohl",
+      "family": "Rubiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/298634342/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "ekjysplc5",
+      "name": "Palicourea rigida Kunth",
+      "family": "Rubiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/454025756/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "1qaiypoft",
+      "name": "Tocoyena formosa (Cham. & Schltdl.) K. Schum.",
+      "family": "Rubiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/102435693/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "qws13h23z",
+      "name": "Qualea grandiflora Mart.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28525609/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "jpezzkptc",
+      "name": "Qualea multiflora Mart.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28525815/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "vfm16enyo",
+      "name": "Qualea parviflora Mart.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/175205/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "k4t3bg72h",
+      "name": "Salvertia convallariodora A.St.-Hil.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/42349184/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "cqlsc2gjv",
+      "name": "Vochysia elliptica Mart.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/89136492/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "4lh7wp5ah",
+      "name": "Vochysia rufa Mart.",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/83355324/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "jmdbg3o68",
+      "name": "Vochysia thyrsoidea Pohl",
+      "family": "Vochysiaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/110138089/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "nred6c7zf"
+        ]
+      }
+    },
+    {
+      "id": "swrbw4dnz",
+      "name": "Schefflera macrocarpa (Cham. & Schltdl.) Frodin",
+      "family": "Araliaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/23064264/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "4p8x2zl0j"
+        ]
+      }
+    },
+    {
+      "id": "26xqo14np",
+      "name": "Eriotheca pubescens (Mart. & Zucc.) Schott & Endl.",
+      "family": "Malvaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/290544375/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "4p8x2zl0j"
+        ]
+      }
+    },
+    {
+      "id": "dwi9gb5q7",
+      "name": "Pseudobombax longiflorum (Mart. & Zucc.) A. Robyns.",
+      "family": "Malvaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/47892566/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "4p8x2zl0j"
+        ]
+      }
+    },
+    {
+      "id": "in4vazjlc",
+      "name": "Pseudobombax tomentosum (Mart. & Zucc.) A. Robyns.",
+      "family": "Malvaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26990218/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "4p8x2zl0j"
+        ]
+      }
+    },
+    {
+      "id": "chk9sy178",
+      "name": "Cybistax antisyphilitica (Mart.) Mart.",
+      "family": "Bignoniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/2266929/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "ml7tfqn9j",
+      "name": "Handroanthus ochraceus (Cham.) Mattos",
+      "family": "Bignoniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/24961755/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "8o0dwahi5",
+      "name": "Handroanthus serratifolius (A.H.Gentry) S.Grose",
+      "family": "Bignoniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/465520803/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "6a0fzuaxd",
+      "name": "Tabebuia aurea (Silva Manso) Benth. & Hook f. ex S. Moore",
+      "family": "Bignoniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/95085222/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "gdyusly4a",
+      "name": "Zeyheria montana Mart.",
+      "family": "Bignoniaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/342444417/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "0e6xftulr",
+      "name": "Caryocar brasiliense Cambess.",
+      "family": "Caryocaraceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/226250321/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "b83ats2e0"
+        ]
+      }
+    },
+    {
+      "id": "l57z8twv8",
+      "name": "Connarus suberosus Planch.",
+      "family": "Connaraceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/59527851/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "s23zscm92",
+      "name": "Rourea induta Planch.",
+      "family": "Connaraceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/23494853/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "lppzs7evk",
+      "name": "Chamaecrista orbiculata (Benth.) H.S. Irwin & Barneby",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/122199503/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "8mb9wiu93",
+      "name": "Copaifera langsdorffii Desf.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/83936235/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "hnp48mmjb",
+      "name": "Dimorphandra mollis Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/28009824/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "uhwdls2eu",
+      "name": "Hymenaea stigonocarpa Mart. ex Hayne",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/120822986/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "khnmz8dxg",
+      "name": "Tachigali aurea Tul.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60097370/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "cd7h7pdqk",
+      "name": "Tachigali subvelutina (Benth.) Oliveira-Filho",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/149703559/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "j67d2sqtk",
+      "name": "Enterolobium gummiferum (Mart.) J.F. Macbr.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/148805517/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "1epn33cw5",
+      "name": "Mimosa claussenii Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/42729548/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "loszxryew",
+      "name": "Plathymenia reticulata Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/294802942/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "tgt6owrba",
+      "name": "Stryphnodendron adstringens (Mart.) Coville",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/30180649/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "lfdjmn2yu",
+      "name": "Andira vermifuga (Mart.) Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/48897763/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "jpb733183",
+      "name": "Bowdichia virgilioides Kunth",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/297882585/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "cyylcel6x",
+      "name": "Dalbergia miscolobium Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/113180175/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "uzlnhy4zs",
+      "name": "Dipteryx alata Vogel",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/174136/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "nolic3dzs",
+      "name": "Leptolobium dasycarpum Vogel",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28372801/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "lt6vnjohn",
+      "name": "Machaerium acutifolium Vogel",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/593415584/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "eoyvwqus2",
+      "name": "Machaerium opacum Vogel",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/22953277/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "qwpjn1lzy",
+      "name": "Pterodon emarginatus Vogel",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/191374076/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "ekfly8ln7",
+      "name": "Pterodon pubescens (Benth.) Benth.",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/569241419/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "821ekuj8t",
+      "name": "Vatairea macrocarpa (Benth.) Ducke",
+      "family": "Fabaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://static.inaturalist.org/photos/145802223/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "02usfa222",
+      "name": "Zanthoxylum rhoifolium Lam.",
+      "family": "Rutaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/249095240/medium.jpeg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "93g8t534c",
+      "name": "Magonia pubescens A.St.-Hil.",
+      "family": "Sapindaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/112444826/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    },
+    {
+      "id": "cyid6wg10",
+      "name": "Simarouba versicolor A.St.-Hil.",
+      "family": "Simaroubaceae",
+      "description": "Esta espécie é uma de 100 árvores do Cerrado sentido restrito apresentadas neste guia de campo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/320897218/medium.jpg",
+      "links": [],
+      "traits": {
+        "69nnsnc0a": [
+          "uf91wicxq"
+        ]
+      }
+    }
+  ]
+}

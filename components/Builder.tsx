@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, fetchImagesForEntities, extractBinomial, convertDichotomousKey } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, validateTaxonomy, fetchImagesForEntities, extractBinomial, convertDichotomousKey } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile, read } from 'xlsx';
 
@@ -1323,6 +1323,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     fillGaps: true,
     removeRedundant: false,
     fixInconsistencies: true,
+    refineFeatureCount: 3,
     completePhotos: false,
     photoTarget: 'both' as 'entities' | 'features' | 'both',
     photoMode: 'expand' as 'replace' | 'expand',
@@ -3352,17 +3353,24 @@ ${JSON.stringify(entitiesRef, null, 2)}
 TASK: Improve this key.
 ${requiredFeaturesInstr}${featureTypeInstr}
 IMPROVEMENTS:
-${refineOptions.improveDescriptions ? '- Improve descriptions' : ''}
-${refineOptions.fillGaps ? '- Fill missing traits' : ''}
-${refineOptions.addFeatures ? '- Add 2-4 new features (assign traits to ALL entities)' : ''}
+${refineOptions.improveDescriptions ? '- Improve and lengthen descriptions for all entities' : ''}
+${refineOptions.fillGaps ? '- Fill ALL missing traits for existing features (currently some entities have gaps)' : ''}
+${refineOptions.addFeatures ? `- ADD EXACTLY ${refineOptions.refineFeatureCount} NEW DISCRIMINATING FEATURES. These features MUST effectively separate the species in the list. You MUST assign these new features to EVERY SINGLE one of the ${project.entities.length} entities.` : ''}
 
-RULES:
-1. PRESERVE all ${project.entities.length} entity IDs
-2. Return traitsMap as JSON string: {"featureId": ["stateId1"]}
-3. Use existing feature/state IDs
-4. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
+CRITICAL RULES:
+1. PRESERVE all ${project.entities.length} entity IDs from input. Do NOT omit any species.
+2. For NEW features: provide a unique "id" (9 chars) and a "name", and at least 2 "states" (each with "id" and "label").
+3. For EVERY entity in the "entities" array:
+   - "traitsMap" MUST be a JSON string representing an object: {"featureId": ["stateId1", ...]}
+   - The traitsMap MUST include assignments for BOTH existing features AND the new features you add.
+   - NO GAPS: Ensure every feature has at least one state assigned for every entity.
+4. Scientific Accuracy: Use real taxonomic data for the species provided.
+5. Language: ${language === 'pt' ? 'Portuguese (Brazil)' : 'English'}
 
-OUTPUT: Return JSON with "entities" array. Each needs: id, name, scientificName, family, description, traitsMap
+OUTPUT FORMAT: 
+Return a JSON object with:
+- "features": [array of ONLY the ${refineOptions.addFeatures ? refineOptions.refineFeatureCount : 0} NEW features you created]
+- "entities": [array of ALL ${project.entities.length} entities with updated description and traitsMap]
 `;
       }
     } else { // CLEAN
@@ -3763,22 +3771,7 @@ CRITICAL INSTRUCTIONS:
 3. ${refineOptions.validateFamily ? `FAMILY CHECK: Every species MUST belong to family "${refineOptions.validateFamily}". Remove ALL others.` : ''}
 4. DO NOT include species that fail ANY of the removal criteria
 5. Preserve ALL existing data for species that pass validation (traits, description, links, imageUrl)
-6. Return ONLY the entities that PASS ALL validation criteria
-
-OUTPUT FORMAT:
-Return a valid JSON object with this exact structure:
-{
-  "id": "${project.id}",
-  "name": "${project.name}",
-  "description": "${project.description}",
-  "features": <COPY EXACTLY FROM INPUT>,
-  "entities": <ONLY VALIDATED ENTITIES>
-}
-
-EXISTING PROJECT DATA:
-${JSON.stringify(project, null, 2)}
-
-IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outside the JSON.`;
+6. Return ONLY the entities that PASS ALL validation criteria`;
 
         setManualPrompt(validatePrompt);
         
@@ -3943,6 +3936,20 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
         
         // Clear refine mode
         setCurrentRefineMode(null);
+      } else if (refineAction === 'VALIDATE' && project.entities.length > 0) {
+        // Use optimized validate function
+        resultProject = await validateTaxonomy(
+          manualPrompt,
+          project,
+          apiKey,
+          aiConfig.model,
+          language
+        );
+        
+        const successMsg = language === 'pt'
+          ? `\n\n✅ Validação concluída! ${resultProject.entities.length} entidades mantidas.`
+          : `\n\n✅ Validation complete! ${resultProject.entities.length} entities kept.`;
+        setAiTypingText(prev => prev + successMsg);
       } else {
         // Standard generation (new key or non-refine operation)
         const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
@@ -6043,6 +6050,24 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                         <span className="text-sm text-slate-700">{strings.addFeatures}</span>
                       </label>
                       
+                      {refineOptions.addFeatures && (
+                        <div className="ml-6 space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs text-slate-500 font-medium">{language === 'pt' ? 'Nº de características a adicionar' : 'Number of features to add'}</span>
+                            <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.refineFeatureCount}</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="1"
+                            max="10"
+                            step="1"
+                            value={refineOptions.refineFeatureCount}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, refineFeatureCount: parseInt(e.target.value) }))}
+                            className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                          />
+                        </div>
+                      )}
+                      
                       {/* Required Features Dropdown for REFINE */}
                       {refineOptions.addFeatures && (
                         <div className="mt-4 pt-4 border-t border-slate-200">
@@ -6658,7 +6683,7 @@ IMPORTANT: Return RAW JSON only. No markdown code fences. No explanations outsid
                       <input
                         type="range"
                         min="2"
-                        max="10"
+                        max="20"
                         step="1"
                         value={aiConfig.featureCount}
                         onChange={(e) => setAiConfig(prev => ({ ...prev, featureCount: parseInt(e.target.value) }))}

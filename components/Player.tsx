@@ -364,7 +364,13 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
   const [hideEmptyFeatures, setHideEmptyFeatures] = useState(true);
 
   // Sub-keys navigation
-  const [currentProject, setCurrentProject] = useState<Project>(project);
+  const [activeKeyProject, setActiveKeyProject] = useState<Project>(project);
+
+  useEffect(() => {
+    setActiveKeyProject(project);
+    setSelections({}); // Reset selections when the main project changes
+    setShowSubKeysDropdown(false); // Close dropdown if open
+  }, [project]);
   const [showSubKeysDropdown, setShowSubKeysDropdown] = useState(false);
   const [subKeysCache, setSubKeysCache] = useState<Record<string, Project>>({});
 
@@ -372,7 +378,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
   const loadSubKey = (subKeyRef: SubKeyReference) => {
     // Check cache first
     if (subKeysCache[subKeyRef.id]) {
-      setCurrentProject(subKeysCache[subKeyRef.id]);
+      setActiveKeyProject(subKeysCache[subKeyRef.id]);
       setSelections({});
       return;
     }
@@ -385,7 +391,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
         const subKey = projects.find(p => p.id === subKeyRef.projectId);
         if (subKey) {
           setSubKeysCache(prev => ({ ...prev, [subKeyRef.id]: subKey }));
-          setCurrentProject(subKey);
+          setActiveKeyProject(subKey);
           setSelections({});
         }
       } catch (error) {
@@ -396,7 +402,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
 
   // Return to main key
   const returnToMainKey = () => {
-    setCurrentProject(project);
+    setActiveKeyProject(project);
     setSelections({});
   };
 
@@ -427,7 +433,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
     const remainingEntities: Entity[] = [];
     const discardedEntities: Entity[] = [];
 
-    currentProject.entities.forEach(entity => {
+    activeKeyProject.entities.forEach(entity => {
       let isMatch = true;
       for (const [featureId, selectedStateIds] of Object.entries(selections)) {
         const entityStates = entity.traits[featureId] || [];
@@ -444,16 +450,16 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
     });
 
     return { remaining: remainingEntities, discarded: discardedEntities };
-  }, [currentProject.entities, selections]);
+  }, [activeKeyProject.entities, selections]);
 
   // Count total active selections
   const totalSelectionsCount = Object.values(selections).reduce((acc, curr) => acc + curr.length, 0);
 
   // Filter features and states based on hideEmptyFeatures toggle
   const visibleFeatures = useMemo(() => {
-    if (!hideEmptyFeatures) return currentProject.features;
+    if (!hideEmptyFeatures) return activeKeyProject.features;
 
-    return currentProject.features
+    return activeKeyProject.features
       .map(feature => {
         // Get all state IDs that are present in remaining entities
         const usedStateIds = new Set<string>();
@@ -471,8 +477,8 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
           states: feature.states.filter(state => usedStateIds.has(state.id))
         };
       })
-      .filter((feature): feature is typeof currentProject.features[0] => feature !== null);
-  }, [currentProject.features, hideEmptyFeatures, remaining]);
+      .filter((feature): feature is typeof activeKeyProject.features[0] => feature !== null);
+  }, [activeKeyProject.features, hideEmptyFeatures, remaining]);
 
   // Export project as JSON
   const exportJSON = () => {
@@ -537,10 +543,10 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
           <div className="overflow-hidden">
             <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 truncate">
               <span className="hidden sm:inline-block bg-emerald-600 text-white text-xs px-2 py-1 rounded">{strings.player}</span>
-              <span className="truncate">{currentProject.name}</span>
+              <span className="truncate">{activeKeyProject.name}</span>
             </h2>
             {/* Breadcrumb for sub-keys */}
-            {currentProject.isSubKey && (
+            {activeKeyProject.isSubKey && (
               <div className="flex items-center gap-1 text-xs text-slate-500 mt-1">
                 <button
                   onClick={returnToMainKey}
@@ -549,14 +555,14 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
                   {project.name}
                 </button>
                 <span>→</span>
-                <span className="text-emerald-600">{currentProject.name}</span>
+                <span className="text-emerald-600">{activeKeyProject.name}</span>
               </div>
             )}
           </div>
         </div>
         <div className="flex gap-1 sm:gap-2 shrink-0">
           {/* Sub-keys navigation dropdown */}
-          {project.subKeys && project.subKeys.length > 0 && !currentProject.isSubKey && (
+          {project.subKeys && project.subKeys.length > 0 && !activeKeyProject.isSubKey && (
             <div className="relative">
               <button
                 onClick={() => setShowSubKeysDropdown(!showSubKeysDropdown)}
@@ -603,7 +609,7 @@ export const Player: React.FC<PlayerProps> = ({ project, onBack, language, onOpe
           )}
 
           {/* Return to main key button (shown when viewing sub-key) */}
-          {currentProject.isSubKey && (
+          {activeKeyProject.isSubKey && (
             <button
               onClick={returnToMainKey}
               className="flex items-center gap-1 px-2 sm:px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 rounded-lg transition-all"

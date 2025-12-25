@@ -145,6 +145,7 @@ const App: React.FC = () => {
 
   const handleStartBuilder = () => {
     setOpenAiModalOnMount(false);
+    setCurrentProject(null); // Reset to blank key
     setView('BUILDER');
   };
 

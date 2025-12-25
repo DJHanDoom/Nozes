@@ -1,0 +1,683 @@
+{
+  "id": "rvxvnns9h",
+  "name": "O GÊNERO CASEARIA NO ESTADO DO RIO DE JANEIRO, BRASIL",
+  "description": "Este estudo apresenta o tratamento taxonômico das espécies do gênero Casearia ocorrentes no estado do Rio de Janeiro, Brasil. A pesquisa baseou-se em observações de campo, coleta de material botânico e análise de coleções de herbários nacionais e internacionais. São fornecidas chaves de identificação, descrições detalhadas, ilustrações, dados sobre distribuição geográfica, períodos de floração e frutificação, nomes vulgares e comentários para cada táxon. Doze espécies foram reconhecidas: Casearia arborea, C. commersoniana, C. decandra, C. lasiophylla, C. luetzelburgii, C. melliodora, C. obliqua, C. oblongifolia, C. pauciflora, C. selloana, C. sessiliflora e C. sylvestris. Duas delas, C. luetzelburgii e C. selloana, são novos registros para o Rio de Janeiro, e C. sessiliflora é endêmica para o estado. A variedade C. sylvestris var. lingua foi tratada como sinônimo de C. sylvestris. O gênero Casearia é tradicionalmente associado a Flacourtiaceae, Samydaceae e, mais recentemente, Salicaceae.",
+  "features": [
+    {
+      "id": "6kvxqyy0u",
+      "name": "Tipo de Inflorescência",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "h22o91bik",
+          "label": "Em glomérulos"
+        },
+        {
+          "id": "8e29v1n5l",
+          "label": "Em fascículos"
+        }
+      ]
+    },
+    {
+      "id": "gdjfixfdx",
+      "name": "Textura da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "i9zoiqh5o",
+          "label": "Coriáceas"
+        },
+        {
+          "id": "dmhuqfil5",
+          "label": "Membranáceas"
+        },
+        {
+          "id": "xsg5xjd8y",
+          "label": "Cartáceas"
+        }
+      ]
+    },
+    {
+      "id": "dq6zba219",
+      "name": "Inflorescência (Pedicelo e Flores)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "k21ruj9i2",
+          "label": "Multifloras, flores pediceladas"
+        },
+        {
+          "id": "uced0xf71",
+          "label": "Paucifloras, flores sésseis a subsésseis"
+        },
+        {
+          "id": "bpjmlby2x",
+          "label": "Pedunculadas a curto-pedunculadas"
+        },
+        {
+          "id": "m2p897ld9",
+          "label": "Sésseis"
+        }
+      ]
+    },
+    {
+      "id": "ky44azqzc",
+      "name": "Estilete (Morfologia)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "0gb9n6hd4",
+          "label": "Tripartido"
+        },
+        {
+          "id": "7sxlwyora",
+          "label": "Inteiro"
+        },
+        {
+          "id": "iq6xfamj7",
+          "label": "Trífido"
+        },
+        {
+          "id": "mo37pryxi",
+          "label": "Trífido, esparsamente piloso"
+        },
+        {
+          "id": "cqvj1tuqx",
+          "label": "Inteiro, esparsamente pubescente"
+        },
+        {
+          "id": "7r4fynhlw",
+          "label": "Tripartido ou trífido"
+        }
+      ]
+    },
+    {
+      "id": "pheh9tysr",
+      "name": "Ramos (Lenticelas)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "1o5v2mubs",
+          "label": "Densamente lenticelados"
+        },
+        {
+          "id": "ufn0zeixb",
+          "label": "Esparsamente lenticelados"
+        }
+      ]
+    },
+    {
+      "id": "12xka2noi",
+      "name": "Lâmina Foliar (Pilosidade Geral)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "f1w93y0vr",
+          "label": "Glabra"
+        },
+        {
+          "id": "7qhd8xb24",
+          "label": "Levemente puberulenta na nervura primária a glabrescente"
+        },
+        {
+          "id": "f2g4cre4g",
+          "label": "Glabra ou levemente pilosa na nervura primária"
+        },
+        {
+          "id": "x1q1snfu",
+          "label": "Vilosa em ambas as faces"
+        },
+        {
+          "id": "ps43w6q28",
+          "label": "Glabra ou vilosa, raramente pubescente na nervura primária"
+        },
+        {
+          "id": "f581m1jf8",
+          "label": "Glabra ou com indumento hirsuto-velutino sobre as nervuras ou raramente, pubescente sobre a nervura principal a glabrescente"
+        }
+      ]
+    },
+    {
+      "id": "fcexkq4pz",
+      "name": "Ápice da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "gi05aizum",
+          "label": "Agudo, subacuminado a levemente obtuso"
+        },
+        {
+          "id": "roahg6kex",
+          "label": "Longo-acuminado a falcado"
+        },
+        {
+          "id": "i908ei23j",
+          "label": "Largamente acuminado a atenuado"
+        },
+        {
+          "id": "l7qxraeo0",
+          "label": "Acuminado, agudo a curtamente acuminado"
+        }
+      ]
+    },
+    {
+      "id": "3bemp02vw",
+      "name": "Pontos e Traços Translúcidos na Lâmina",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ikrjupnzd",
+          "label": "Dispersos"
+        },
+        {
+          "id": "4zl0nsni0",
+          "label": "Densamente dispersos, mais densos nos bordos"
+        },
+        {
+          "id": "wl67pkorq",
+          "label": "Não visíveis a olho nu"
+        },
+        {
+          "id": "2rtma5jzd",
+          "label": "Dispersos (mais visíveis nos bordos)"
+        },
+        {
+          "id": "rbdenyt3l",
+          "label": "Densamante dispersos"
+        }
+      ]
+    },
+    {
+      "id": "k71k0i5wz",
+      "name": "Sementes (Pilosidade do Arilo)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jf50trm75",
+          "label": "Vilosas, arilo fibroso glabro"
+        },
+        {
+          "id": "cqr6xiw2g",
+          "label": "Esparsamente hirsuta, arilo fibroso com indumento viloso"
+        }
+      ]
+    },
+    {
+      "id": "w0yh4duw7",
+      "name": "Anteras (Glândula Apical)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "cocekahx2",
+          "label": "Com glândula apical diminuta"
+        },
+        {
+          "id": "pdplvgx8b",
+          "label": "Sem glândula apical"
+        }
+      ]
+    },
+    {
+      "id": "cc01q518o",
+      "name": "Lobos do Disco (Posicionamento)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "8canu3sql",
+          "label": "Entre os filetes e o ovário"
+        },
+        {
+          "id": "z3hxbes3n",
+          "label": "Intercalados com os filetes"
+        }
+      ]
+    },
+    {
+      "id": "0lmvf6vul",
+      "name": "Ovário e Estigma (Pilosidade e Forma)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "d86l1cvex",
+          "label": "Glabro, estigma trilobado"
+        },
+        {
+          "id": "q5q0he2t4",
+          "label": "Piloso, estigma inteiro"
+        },
+        {
+          "id": "pjrgb1pbb",
+          "label": "Parcialmente piloso, até a metade superior"
+        },
+        {
+          "id": "ayns4zg1b",
+          "label": "Totalmente viloso a híspido-viloso"
+        }
+      ]
+    },
+    {
+      "id": "o5pdpxge0",
+      "name": "Botões Florais (Pilosidade)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "eyuwhqdha",
+          "label": "Vilosos"
+        },
+        {
+          "id": "zj7orzenl",
+          "label": "Tomentosos"
+        }
+      ]
+    },
+    {
+      "id": "core3474c",
+      "name": "Base da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "nbq4n2bqh",
+          "label": "Cuneada a levemente assimétrica"
+        },
+        {
+          "id": "va3dt11l4",
+          "label": "Atenuada"
+        }
+      ]
+    },
+    {
+      "id": "gj5jsir9c",
+      "name": "Brácteas (Pilosidade)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "5pnq5hxsc",
+          "label": "Glabras"
+        },
+        {
+          "id": "ex6lfo3rn",
+          "label": "Pilosas"
+        }
+      ]
+    },
+    {
+      "id": "2i9jfjrwe",
+      "name": "Filetes (Pilosidade)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9o139kzax",
+          "label": "Com base tomentosa"
+        },
+        {
+          "id": "h91o9dg0i",
+          "label": "Glabros"
+        },
+        {
+          "id": "f3ha34gz2",
+          "label": "Estilete esparsamente viloso"
+        },
+        {
+          "id": "1m5a0jtuq",
+          "label": "Estilete glabro"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "1fnuyqogv",
+      "name": "Casearia selloana",
+      "family": "Salicaceae",
+      "description": "Arbusto, árvore 3-6 m alt.; ramos inermes, levemente em ziguezague no ápice, glabros, amarronzados, densamente lenticelados; estípulas 1-2 × 1 mm, subdeltóides, cerdas nos bordos, esparsas do meio para o ápice, caducas. Folhas persistentes; pecíolo 5–7 cm compr., semicilíndrico, levemente canaliculado, glabros; lâmina (5,5–)6,5–7,5(–15)×3,5–5,4 cm, coriácea, discolor verde, glabra, oblongo-ovada a oblongo-lanceolada; ápice curto-cuspidado, obtuso a levemente cuspidado; base curto-atenuada a levemene assimétrica; bordos inteiros a obscuramente denticulados na face abaxial, levemente revoluto entre as cerdas, com glândulas arredondadas pouco proeminentes; pontos e traços translúcidos dispersos na lâmina, 4-6 nervuras ascendentes, reticulado das veias e vênulas denso, mais proeminente na face abaxial. Inflorescências glomérulos, multifloras, sesséis, pilosas; brácteas ovadas, transparentes, pilosas; flores com pedicelos cilíndricos, articulados próximos à base, pilosos para o ápice, esparsamente pilosos a glabrescentes para base, botões oblongos, esparsamente tomentosos; sépalas 2-2,5 × 1 mm, soldadas próximo à base, formando um tubo curto, ovadas, esverdeadas, pilosas com bordos barbados; estames 10, filetes 1 mm compr., cilíndricos, esparsamente vilosos; anteras globosas a oblongas, glândula apical arredondada, glabra; lobos do disco 0,5 mm compr., clavados, alvo-esverdeados, vilosos, intercalados com os filetes e soldados a base das sépalas; ovário ovado, glabro; óvulos ca. 10; estilete tripartido, espesso, esparso viloso; estigmas capitados, glabros. Fruto 6×3,5 mm, levemente obovado a obovado-oblongo, imaturo verde, glabro, glândulas arredondadas na superfície externa; sementes 10, ca. 0,5 mm compr., levemente arredondadas a angulosas, escuras; arilo franjado, amarelado a transparente, envolvendo quase toda semente.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "h22o91bik"
+        ],
+        "gdjfixfdx": [
+          "i9zoiqh5o"
+        ],
+        "dq6zba219": [
+          "k21ruj9i2"
+        ],
+        "ky44azqzc": [
+          "0gb9n6hd4"
+        ]
+      }
+    },
+    {
+      "id": "jdkxvvysp",
+      "name": "Casearia sessiliflora",
+      "family": "Salicaceae",
+      "description": "Arbusto 0,5 m alt.; ramos inermes, glabros a esparsamente pubescentes no ápice dos ramos, acinzentados, lenticelas esparsas, arredondadas; estípulas 2 × 0,5 mm, subuladas a levemente conchiformes, esparsamente pubescentes no dorso, caducas, raramente persistem na base da inflorescência. Folhas persistentes, pecíolo 2–4 mm compr., espesso, semi-cilídrico a levemente canaliculado, pubescente quando jovem a glabrescente na maturidade, lâmina 5,5–7,5 × 2–4,2 cm, membranácea, discolor, verde, glabra, lanceolada a larga oblongo-lanceolada, ápice acuminado a raramente curto-acuminado, base largo-atenuada, bordos serreados com cerdas curtas; pontos e traços translúcidos densamante dispersos na lâmina, nervuras secundárias (4–)6(-7) pares ascendentes, reticulado das veias e vênulas denso, mais proeminente na face abaxial, pouco visível a olho nu. Inflorescências glomérulos, paucifloras, sésseis, pubescentes, flores subsésseis; brácteas ovado-lanceoladas, conchiformes, membranáceas, transparentes, escariosas, amarelo-alvacentas, flores subsésseis a sésseis, cilíndricos, articulados na base, tomentosos. Botões oblongos, tomentosos, sépalas 2,5-3 × 1 mm, soldadas próximo à base, formando um tubo curto, oblongo-ovadas, esverdeadas, tomentosas; estames 10, desiguais, filetes 0,5–1 mm compr., subulados, esparsamente vilosos na parte mediana; anteras subglobosas a oblongas, diminutas (ca. 0,2 mm), glândula apical arredondada, glabra; lobos do disco 0,5-1 mm compr., clavados, alvo-esverdeados, vilosos, intercalados com os filetes; ovário subgloboso a levemente ovado, viloso acima do meio, óvulos poucos; estilete inteiro, delgado, viloso; estigma inteiro, capitado, glabro. Fruto 7 × 7 mm, globoso, negro, viloso somente na inserção com o estilete, sementes 6, ca. 4×2 mm, levemente ovadas a poliédricas, alaranjadas, arilo franjado amarelo, embrião 3 mm compr., reto, cotilédones membranáceos, levemente oblongos.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/97713896b94f82bd0104d9db788ae622.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "h22o91bik"
+        ],
+        "gdjfixfdx": [
+          "dmhuqfil5"
+        ],
+        "dq6zba219": [
+          "uced0xf71"
+        ],
+        "ky44azqzc": [
+          "7sxlwyora"
+        ]
+      }
+    },
+    {
+      "id": "8d17eqew8",
+      "name": "Casearia arborea",
+      "family": "Salicaceae",
+      "description": "Árvore (3–)5-14(–15) m alt., tronco com casca lisa a levemente estriada, marrom externamente, amarela internamente; ramos inermes, delgados, flexuosos, velutinos no ápice, glabrescente na base, marrons, esparsamente lenticelados; estípulas 4–6 x 0,5–1 mm, lineares a estreitamente ovadas, caducas; velutinas. Folhas persistentes, pecíolo 2–6 × 1-1,5 mm, cilíndrico, velutino, delgado, lâmina 4–11×1,6–2,9 cm, cartácea, discolor verde, oblongo-lanceolada a oblongo-elíptica, tomentosa em ambas as faces, mais densa abaxialmente, ápice acuminado com ponta agudamente rostrada, base arredondada-cuneada levemente atenuada, bordos serreados com dentes curtos, pontos e traços translúcidos dispersos na lâmina, 5–8(-10) pares de nervuras secundárias ascendentes, reticulado das veias e vênulas denso, mais proeminente na face abaxial. Inflorescências fasciculadas, multifloras, denso-tomentosas, pedunculadas, 2–4 mm compr.; brácteas e bractéolas diminutas e livres na base dos pedicelos, subuladas, tomentosas; pedicelos ca. 3 mm compr., cilíndricos e delgados, articulados no terço inferior, denso-tomentosos; botões globosos a alongados, tomentosos; sépalas 3–4 × 1,5–2 mm, soldadas na base, ovadas, esverdeadas, externamente tomentosas e internamente com tricomas adpressos, alvacentos em ambas as faces; estames 10, filetes ca. 2 mm compr., livres, velutinos na base, anteras ovóides, glândula apical arredondada no dorso; lobos do disco ca. 1,5 mm compr., clavados, densamente velutinos no ápice e glabrescentes na base, soldados na base e alternos com os filetes; ovário oblongo-ovado, glabro; estilete inteiro, espesso, densamente piloso na inserção do ovário e glabrescente para o ápice; estilete inteiro, estigma inteiro, capitado a levemente globoso, tricomas hirsutos. Fruto 7 × 3,5 mm, imaturo ovóide, glabro, vinoso-esverdeado, sementes 2×1,5 mm, oblongas, testa foveolada (escrobiculadas), arilo franjado, amarelado, cobrindo parcialmente a semente.",
+      "imageUrl": "https://static.inaturalist.org/photos/146516884/medium.jpeg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "bpjmlby2x"
+        ],
+        "ky44azqzc": [
+          "7sxlwyora"
+        ]
+      }
+    },
+    {
+      "id": "ck55sljss",
+      "name": "Casearia luetzelburgii",
+      "family": "Salicaceae",
+      "description": "Árvore 6-12(-14)m alt.; tronco com casca lisa, castanha; ramos raramente com espinhos, puberulentos, amarronzados, densamente lenticelados, lenticelas arredondadas; estípulas 2 × 3(-4) mm, subuladas, pubescentes, caducas. Folhas persistentes; pecíolo 2-3 mm compr., pubescente a puberulento, delgado, canaliculado; lâmina 3–6,8 × 1,8–3,5 cm, cartácea (quando jovem membranácea), discolor verde, quando desidratada parda, levemente lanceolada a oblongo-lanceolada, oblongo-ovada, glabra; ápice agudo a subacuminado a levemente obtuso; base levemente atenuada a curtamente agudo-arredondada; bordos serreados com glândulas nos dentes; pontos e traços dispersos na lâmina, raramente com traços no ápice, 7–9 pares de nervuras secundárias paralelas até próximo à margem, onde tornam-se ascendentes, reticulado das veias e vênulas denso, proeminente em ambas as faces. Inflorescências fasciculadas, paucifloras, pilosas quando jovens a glabrescentes com o tempo, curto pedunculadas; brácteas e bractéolas externas ovadas, conchiformes, coriáceas, internas pequenas e delgadas, diminutas, glabras, quando secas marrons; pedicelos 4-7 mm compr., cilíndricos, flexuosos, articulados próximo à base, glabros. Botões oblongos, glabros, sépalas ca. 4×2 mm, soldadas na base formando um tubo curto, oblongas a oblongo-elipticas, alvas, glabras; estames 10, filetes 2–3 mm compr., cilíndricos, glabros; anteras oblongas, sem glândulas apicais; lobos do disco ca. 0,5 mm compr., alvos-esverdeados, pilosos no ápice, intercalados com os filetes e adnatos às sépalas; ovário alvo-esverdeado, glabro; estilete pouco espesso, profundamente tripartido, glabro; estigmas capitados, glabros. Fruto 4-8,5 mm compr., coriáceo, ovado a globoso, marrom, glabro; sementes 2–2,5 × 1 mm, vilosas, obovadas a obovado-oblongas, raramente arredondadas, castanhas, curtamente apiculadas, com testa apresentando escrobiculada, arilo fibroso glabro, endosperma carnoso, avermelhado, alongado, embrião reto.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/59932963/medium.jpeg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "bpjmlby2x"
+        ],
+        "ky44azqzc": [
+          "7r4fynhlw"
+        ],
+        "pheh9tysr": [
+          "1o5v2mubs"
+        ],
+        "12xka2noi": [
+          "f1w93y0vr"
+        ],
+        "fcexkq4pz": [
+          "gi05aizum"
+        ],
+        "3bemp02vw": [
+          "ikrjupnzd"
+        ],
+        "k71k0i5wz": [
+          "jf50trm75"
+        ]
+      }
+    },
+    {
+      "id": "33wwans4v",
+      "name": "Casearia obliqua",
+      "family": "Salicaceae",
+      "description": "Árvore ou arbusto 2–8,7 (–11,5) m alt.; tronco com casca lisa, levemente estriada; ramos inermes, flexuosos, base glabra, ápice pubescente, castanho, esparsamente lenticelados, lenticelas arredondadas a oblongas; estípulas ca. 4,8 × 1 mm, subuladas, tomentosas nas duas faces, caducas. Folhas persistentes; pecíolo 5-10 mm compr., pubescente, cilíndrico; lâmina 5,5-9,6 × 1,8–4 cm, cartácea, discolor, verde, marrons quando secas, lanceolada, lanceolada-ovada, levemente puberulenta na nervura primária a glabrescente; ápice longo-acuminado a falcado; base assimétrica; bordos serreados com glândula no ápice das cerdas; pontos e traços densos na lâmina, nas folhas maiores mais densos nos bordos, 5-6 pares de nervuras secundárias ascendentes, reticulado das veias e vênulas denso, nervuras proeminentes em ambas as faces. Inflorescências fasciculadas, multifloras, curtamente pedunculadas, tomentosas; brácteas e bractéolas ovadas a escamosas (conchiformes), na base do pedicelo, puberulentas; pedicelos 3-5 mm compr., cilíndricos, delgados, articulados a 1–3 mm compr. acima da base, pubescentes. Botões globosos, puberulentos; sépalas ca. 1,5 × 1 mm, curtamente soldadas na base, oblongo-lanceoladas, alvo-esverdeadas, puberulentas; estames 10, filetes 1,5 mm compr., cilíndricos, glabros; anteras oblongas, sem glândula no ápice; lobos do disco clavados (muito mais curtos que os filetes), pilosos, intercalados com os filetes; ovário oblongo-ovado, glabro, estilete trífido no ápice, delgado, cilíndrico, glabro, estigma capitado, reflexo. Fruto 2,5–4 × 3 mm, imaturo verde, pedúnculo tomentoso, com glândulas no epicarpo, oblongo a obovado-oblongo, glabro; sementes 4, 1,5 × 1 mm, arredondadas a oblongo-elípticas, testa foveolada, amarronzada, esparsamente hirsuta, apículo na base da semente, arilo fibroso com indumento viloso, laranja, endosperma carnoso, laranja, embrião 1 mm compr., reto, alvo, cotilédones arredondados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28937634/medium.jpeg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "bpjmlby2x"
+        ],
+        "ky44azqzc": [
+          "iq6xfamj7"
+        ],
+        "pheh9tysr": [
+          "ufn0zeixb"
+        ],
+        "12xka2noi": [
+          "7qhd8xb24"
+        ],
+        "fcexkq4pz": [
+          "roahg6kex"
+        ],
+        "3bemp02vw": [
+          "4zl0nsni0"
+        ],
+        "k71k0i5wz": [
+          "cqr6xiw2g"
+        ]
+      }
+    },
+    {
+      "id": "ziykic7r7",
+      "name": "Casearia oblongifolia",
+      "family": "Salicaceae",
+      "description": "Arbusto a arvoreta 2-8 m alt.; tronco com casca lisa, com espinhos, verde; ramos com espinhos, tricomas adpressos laxos a glabrescentes, esverdeados; estípulas 3–6 × 1-1,5 mm, levementes deltóides a subuladas, mais frequentemente encontradas no ápice dos ramos, persistentes em alguns exemplares, esparsamente pubescentes, caducas. Folhas persitentes; pecíolo 5–8 mm compr., alvo, levemente piloso a glabrescente, subcilíndrico, canaliculado; lâmina (8–)11,5–15,5×5–6,5 cm, coriácea (quando jovem cartacea), com glândulas na superfície, levemente discolor verde, oblongo-lanceolada, obovada-lanceolada a lanceolada, adulta glabra a levemente pilosa na nervura primária; ápice largamente acuminado a atenuado; base levemente obtusa, largamente cuneada a curto atenuada; bordos levemente serreados com glândulas nos dentes, folhas jovens com dentes mais visíveis e margens levemente revolutas entre os dentes, traços translúcidos dispersos por toda lâmina e pontos translúcidos distribuídos pelos bordos, 6–10 pares de nervuras secundárias ascendentes, reticulado das veias e vênulas laxos, nervuras são mais proeminentes na face abaxial, nitidas na face adaxial. Inflorescências fasciculadas, (8–)10–17 flores por axila, sésseis, tricomas adpressos, alvos; brácteas ca. 2×1,5 mm, membranáceas, ovadas; bractéolas ca. 1×1,2 mm, ovadas. conchiformes, membranáceas; pedicelos 0,6–1,2 cm compr., cilíndricos, articulados próximos a base, estrigosos. Botões globosos, ovados a oblongo-ovados, esparsamente estrigosos; sépalas 5 × 1,5-2,5 mm, soldadas na base, oblongas, com glândulas nos lobos, esverdeadas, tricomas adpressos esparsos, alvos; estames 8, filetes ca. 2 mm compr., cilíndricos, soldados na base do disco, alvos, glabros com tricomas adpressos e esparsos; anteras amarelas, deltóides, ovado-deltóides, glândula apical diminuta, às vezes difícil de ser visualizada; lobos do disco 1,5-2 mm compr., achatados, vilosos, alvos, intercalados com os filetes; ovário ovado, viloso; estilete inteiro, curto, espesso, alvo; estigma inteiro, arredondado a capitado. Fruto ca. 1,7 × 1,2 cm, globoso a oblongo-globoso, verde, esparsamente piloso, glabrescente; sementes ca. 30, ovado-poliédricas, arilo carnoso, franjado, amarelo-alaranjado, quando removido deixando uma carnosidade na testa, testa foveolada, cor avermelhada a marrom, endosperma carnoso, ovado, com depressão circular no ápice mais largo, avermelhado, embrião reto, foliáceo, alvo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/241210245/medium.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "gdjfixfdx": [
+          "i9zoiqh5o"
+        ],
+        "12xka2noi": [
+          "f2g4cre4g"
+        ],
+        "fcexkq4pz": [
+          "i908ei23j"
+        ],
+        "w0yh4duw7": [
+          "cocekahx2"
+        ]
+      }
+    },
+    {
+      "id": "cb88f8r5b",
+      "name": "Casearia commersoniana",
+      "family": "Salicaceae",
+      "description": "Arvoreta ou arbusto 1,5–8 m alt., tronco com casca lisa a levemente estriada, cor amarronzada a cinza, subcorticosa; ramos inermes, superiores com a base glabra a levemente pilosos no ápice, acinzentados, esparsamente lenticelados; estípulas 2-5,5 × 1 mm, linear-lanceoladas a subuladas, caducas; tomentosas. Folhas persistentes; pecíolo 3–7 mm compr., glabro a levemente piloso em alguns exemplares, espesso; lâmina 7–14,4 × 3–6 cm, coriácea, quando jovem cartácea, discolor verde, às vezes pouco distinguível nesta tonalidade, nítida adaxialmente, obovado-oblonga, cuneado-lanceolada a largamente lanceolada, glabra; ápice agudo a curtamente acuminado; base obtusa a cuneada; bordos espaçadamente serrados; traços e pontuações não visíveis contra a luz, 3-5 pares de nervuras secundárias ascendentes, reticulado das veias e vênulas densos, mais proeminente na face abaxial. Inflorescências fasciculadas, 6-11 flores ou mais, sésseis, tomentosas, alvo-esverdeadas; brácteas e bractéolas 2 x 2,5 mm, ovadas, esparsamente velutinas, pedicelos 4–5 mm compr., cilíndricos, delgados, articulados próximo a base, tomentosos; botões subglobosos, tomentosos; sépalas 2–5 × 2–2,5 mm, livres, ovadas, alvo-esverdeadas, tomentosas; estames 10, livres, alvo-esverdeados e externos ao disco; filetes 4–5 mm compr., levemente alargados na base, glabros, anteras oblongas, sem glândula apical; lobos do disco 1,5 mm compr., oblongo-clavados, intermediários entre os filetes e o ovário, alvo-amarelados, densamente pilosos no ápice e glabrescentes para base; ovário levemente ovado a subgloboso, densamente piloso; estilete cilíndrico, tripartido no ápice, esparsamente piloso, estigmas capitados. Fruto 7–10(−14) × 5(-9) mm, subovado, levemente oblongo a elíptico, imaturo verde, maduro negro a avermelhado, esparsamente piloso; sementes 2 (–6)–3 mm, esféricas a obovadas, amarelo-avermelhadas; arilo carnoso, alvo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/505973/medium.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "gdjfixfdx": [
+          "i9zoiqh5o"
+        ],
+        "12xka2noi": [
+          "f2g4cre4g"
+        ],
+        "fcexkq4pz": [
+          "l7qxraeo0"
+        ],
+        "w0yh4duw7": [
+          "pdplvgx8b"
+        ],
+        "3bemp02vw": [
+          "wl67pkorq"
+        ],
+        "cc01q518o": [
+          "8canu3sql"
+        ],
+        "ky44azqzc": [
+          "mo37pryxi"
+        ]
+      }
+    },
+    {
+      "id": "mb8nzclxo",
+      "name": "Casearia melliodora",
+      "family": "Salicaceae",
+      "description": "Árvore (Eichler 1871); ramos inermes, levemente estriados, glabros, acinzentados, densamente lenticelados, lenticelas arredondadas a oblongas; estípulas ca. 5 × 1 mm, subuladas a linear-lanceoladas, tomentosas em ambas as faces, caducas. Folhas caducas na floração; pecíolo (4-)8–10 mm compr., espessado, glabro; lâmina (10–)13–16 × 4,5–8,6 cm, largamente lanceolada a lanceolada, oblongo-lanceolada, coriácea, esverdeada a amarelada quando seca, glabra; ápice acuminado; base larga atenuada a levemente assimétrica; bordos inteiros a espaçados, serreados próximo ao ápice, cerdas diminutas, pontos e traços translúcidos dispersos, mais visíveis nos bordos, 5-7 pares de nervuras secundárias largamente ascendentes, reticulado das veias e vênulas laxa, mais proeminente na face abaxial. Inflorescências fasciculadas, multifloras, sésseis, tomentosas; brácteas 1-1,5 mm compr., ovadas, coriáceas, puberulentas, margem mais hialina no terço superior; pedicelos ca. 5 mm compr., cilíndricos, articulados, ca. 1 mm da base, tomentosos. Botões oblongos, tomentosos; sépalas 4-5 × 1,5 mm, curtamente soldadas na base, eretas na antese, linear-oblongas, esverdeadas, tomentosas em ambas as faces; estames 10, filetes ca. 2 mm compr., subulados, base do filete curto-vilosa, glabrescente para o ápice; anteras subglobosas a oblongas, sem glândula apical; lobos do disco ca. 2 mm compr., oblongo-clavados, alvo-esverdeados, curto vilosos, soldados na base e intercalados com os filetes; ovário oblongo-ovado, base glabra, do meio para o ápice pubescente, glanduloso, óvulos muitos, estilete inteiro, cilíndrico, mais ou menos espesso, esparsamente pubescente; estigma inteiro, capitado, hirsuto. Fruto não visto.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Casearia_aff._melliodora_Eichler%2C_Salicaceae%2C_Atlantic_forest%2C_northern_littoral_of_Bahia%2C_Brazil_%2822864946884%29.jpg/500px-Casearia_aff._melliodora_Eichler%2C_Salicaceae%2C_Atlantic_forest%2C_northern_littoral_of_Bahia%2C_Brazil_%2822864946884%29.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "gdjfixfdx": [
+          "i9zoiqh5o"
+        ],
+        "12xka2noi": [
+          "f2g4cre4g"
+        ],
+        "fcexkq4pz": [
+          "l7qxraeo0"
+        ],
+        "w0yh4duw7": [
+          "pdplvgx8b"
+        ],
+        "3bemp02vw": [
+          "2rtma5jzd"
+        ],
+        "cc01q518o": [
+          "z3hxbes3n"
+        ],
+        "ky44azqzc": [
+          "cqvj1tuqx"
+        ]
+      }
+    },
+    {
+      "id": "yu1271vct",
+      "name": "Casearia sylvestris",
+      "family": "Salicaceae",
+      "description": "Árvore ou arvoreta 3–9(–18) m alt.; tronco com casca lisa a levemente fissurada a fissurada, acinzentada a marrom, camada corticosa fina a grossa; ramos inermes, delgados e patentes, puberulentos a glabrescentes, acinzentados, mais ou menos lenticelados; estípulas 1 mm compr., subovadas, puberulentas, caducas. Folhas persistentes; pecíolo 3–5 mm compr., subcilíndrico, levemente puberulento, delgado; lâmina 6-11 × 2–3,5 cm, cartáceas, concolor a levemente discolor, verde, lanceolado-ovada, oblongo-lanceolada a lanceolada, glabra, ocasionalmente curto pubescente na face abaxial, principalmente sobre as nervuras primária e secundárias; ápice acuminado a falcado; base freqüentemente assimétrica, cuneada; bordos mucronado-serreados a serreados; pontos e traços translúcidos densos por toda lâmina, 5-6 pares de nervuras secundárias ascendentes, reticulado das veias e vênulas denso, mais proeminentes abaxialmente. Inflorescências fasciculadas, multifloras, sésseis, variáveis no indumento; brácteas 0,5 mm compr., diminutas, ovadas, pubescentes, pedicelos 2–4 mm compr., cilíndricos, delgados, articulados próximo ao meio ou abaixo, pubescentes a glabrescentes. Botões obovados a globosos, esparsamente tomentosos, sépalas 1,5 × 1-1,5 mm, unidas na base, largamente ovadas, esverdeadas a alvacentas, glabras a tomentosas ou ciliadas na margem; estames 10, filetes 1-1,5 mm compr., livres, pilosos na base e subglabro no ápice, anteras globosas, glândula apical crassa, glabra; lobos do disco 1 mm compr., clavados, alvacentos, densamente pilosos, unidos na base e intercalados com os filetes; ovário ovóide, glabro; estilete inteiro, delgado, subglabro; estigma trilobado, globoso. Fruto 4 x 4 mm, globoso, anguloso, negro, glabro, sementes 5, 2,5 × 1,5 mm, oblongas, testa escrobiculada, alaranjada, arilo franjado, carnoso, envolvendo parcialmente a semente, alaranjada a vermelha, endosperma crasso; embrião ca. 1,5 mm compr., reto, alvo; cotilédones crassos, alvos, arredondados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/12994032/medium.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "12xka2noi": [
+          "ps43w6q28"
+        ],
+        "0lmvf6vul": [
+          "d86l1cvex"
+        ]
+      }
+    },
+    {
+      "id": "kd1jvvd5v",
+      "name": "Casearia lasiophylla",
+      "family": "Salicaceae",
+      "description": "Arbusto a árvore pequena 2,5 a 3 m alt.; ramos inermes, levemente estriados, glabros na base, pilosos para o ápice, marrons, denso-lenticelados; estípulas 5 × 1 mm, estreitamente lanceoladas a subuladas, persitentes nos ramos jovens, vilosas, caducas. Folhas com caducifolia na floração; pecíolo 4-6 mm compr., semicilíndrico, viloso; lâmina 6-11(-15)×2-4,5 cm, cartacea, discolor verde, lanceolada, oblongo-lanceolada, vilosa em ambas as faces, sendo mais densa na face abaxial; ápice agudo a acuminado; base cuneada a levemente assimétrica; bordos esparsamente serrados; pontos translúcidos poucos e esparsos na lâmina, 5-8 pares de nervuras secundários ascendentes, reticulado das veias e vênulas denso, oculto pelos tricomas, mais proeminente na face abaxial. Inflorescências fasciculadas, multifloras, sésseis, tomentosas; brácteas 1-1,5 mm compr., ovadas a arredondadas envolvendo o pedicelo, glabras a parcialmente pilosas; pedicelos 4-7 mm, cilíndricos, articulados próximos à base, pilosos. Botões globosos a oblongos, vilosos; sépalas 5–6 × 1–1,5 mm, soldadas próximo à base, ovadas a subuladas, esverdeadas, vilosas em ambas as faces; estames 10, filetes 1,5 mm compr., cilíndricos, pilosos na base, estames e discos soldados e adnatos na base das sépalas; anteras oblongas a oblongo-globosas, sem glândula apical; lobos do disco 1-2,5 mm compr., clavados, soldados na base e alternos com os filetes, alvo-esverdeado, vilosos; ovário ovado, piloso até a metade superior; estilete inteiro, delgado, piloso; estigma inteiro, capitado, glabro. Fruto 6–10 × 7-10 mm, globoso, esparsamente piloso, negro quando seco, sementes poucas, 6 × 5 mm, ovóides, testa lisa, alaranjada, arilo carnoso, alaranjado, endosperma carnoso, alaranjado, embrião reto, 5×4 mm, alaranjado, cotilédones crassos, base cordada.",
+      "imageUrl": "https://static.inaturalist.org/photos/252522410/medium.jpeg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "12xka2noi": [
+          "ps43w6q28",
+          "x1q1snfu"
+        ],
+        "0lmvf6vul": [
+          "q5q0he2t4",
+          "pjrgb1pbb"
+        ],
+        "o5pdpxge0": [
+          "eyuwhqdha"
+        ]
+      }
+    },
+    {
+      "id": "e5bevndk9",
+      "name": "Casearia decandra",
+      "family": "Salicaceae",
+      "description": "Árvore (3-)8-18(–20) m alt.; tronco com casca lisa, cor acinzentada; ramos inermes, eretos, base glabrescente, ápice puberulento, marrom-acinzentada, esparsamente lenticelados; estípulas 7 × 0,5 mm, subuladas, esparsamente pubescentes no ápice, emergências glandulares nos bordos, caducas. Folhas parcialmente decíduas na floração; pecíolo 2-5 mm compr., subcilíndrico, puberulento, delgado; lâmina 5–7(-9) × 2–4,1 cm, cartacea (quando jovem membranácea), discolor verde, raramente pubescente na nervura primária a glabrescente, lanceolada a oblongo-lanceolada; ápice longo acuminado a acuminado; base cuneada a levemente assimétrica; bordos serreados a crenados com dentes de 0,5 mm, levemente revolutos, poucos dentes na base; pontos e traços dispersos na lâmina, 4-6(-7) pares de nervuras secundárias ascendentes, reticulado das veias e vênulas laxos, pouco proeminente em ambas as faces. Inflorescências fasciculadas, 4-8 flores, fortemente aromáticas, tomentosas, sésseis; brácteas e bractéolas 1-1,5 × 1 mm, coriáceas, ovadas a escamosas (conchiformes), bractéolas na base do pedicelo, glabras, pedicelos ca. 4 mm compr., cilíndricos, articulados na base, laxamente tomentosos. Botões obovado-oblongos a oblongo-ovados, tomentosos, sépalas ca. 3 × 1 mm, curtamente soldadas na base, oblongo-lanceoladas, esverdeadas, externamente laxo-tomentosas; estames 10, filetes 1(–2,5) mm compr., livres, base tomentosa, glabro para o ápice, anteras globosas, sem glândulas apicais (amarelas quando secas), lobos do disco 0,5 mm compr., oblongo-clavados, soldados na base, alternos com os filetes, amarelos quando secos, tomentosos, ovário ovado a oblongo-ovado, viloso; estilete inteiro, delgado, esparsamente viloso, estigma inteiro, capitado, piloso. Fruto 1,3-1,5 × 1,3–1,5 cm, imaturo verde, maduro amarelo a vinoso, globoso, indumento próximo ao estilete vestigial e na base junto às sépalas, sementes 3-5,7×6,5 mm, poliédricas, testa lisa, arilo amarelo, delgado, cobrindo parcialmente a semente, sendo mais crasso na parte reta; embrião 5,5-7,5×5,5–6,5 mm, reto, amarelo, cotilédones foliáceos, arredondados a cordados junto ao eixo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/197469994/medium.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "12xka2noi": [
+          "ps43w6q28",
+          "f581m1jf8"
+        ],
+        "0lmvf6vul": [
+          "q5q0he2t4",
+          "ayns4zg1b"
+        ],
+        "o5pdpxge0": [
+          "zj7orzenl"
+        ],
+        "core3474c": [
+          "nbq4n2bqh"
+        ],
+        "gj5jsir9c": [
+          "5pnq5hxsc"
+        ],
+        "2i9jfjrwe": [
+          "9o139kzax"
+        ]
+      }
+    },
+    {
+      "id": "2vleovgi1",
+      "name": "Casearia pauciflora",
+      "family": "Salicaceae",
+      "description": "Árvore, arvoreta ou arbusto 1,5–12 (-16) m alt.; tronco com casca estriada, acinzentada; ramos inermes, flexuosos, base glabrescente e ápice pubescentes, marrons, esparsamente lenticelados; estípulas ca. 2,5 mm compr., subuladas, puberulentas, caducas. Folhas persistentes; pecíolo 3–14 mm compr., esparsamente puberulento, subcilíndrico, levemente canaliculado; lâmina 6,3-13×3,0–5,3 cm, cartácea, discolor verde, elíptica, elíptico-ovada, indumento hirsuto-velutino sobre as nervuras primária e secundária; ápice acuminado; base atenuada; bordos serreados com glândulas no ápice das cerdas; pontos translúcidas mais visíveis nas folhas jovens, nos bordos, traços espalhados na parte central da lâmina, 5 pares de nervuras secundárias ascendentes (as da base da lâmina quase opostas e longamente ascendentes), reticulado das veias e vênulas laxo, em ambas as faces, mais proeminente abaxialmente. Inflorescências fasciculadas, paucifloras, sésseis, tomentosas; brácteas 1,5 mm compr., reunidas na base dos pedicelos, ovadas, conchiformes, pilosas; pedicelos 4 mm compr.; cilíndricos, articulados próximos à base, tomentosos; botões obovado-oblongos, tomentosos; sépalas 4×1,5 mm, livres, ovado-oblongas, pilosas em ambas as faces; estames 10, filetes 2 mm compr., livres, glabros; anteras oblongas, sem glândula apical; lobos do disco 1 mm compr., oblongo-clavados, tomentosos, intercalados com os filetes; ovário oblongo-ovado a subgloboso, híspido-viloso; estilete inteiro, curto, glabro; estigma inteiro, capitado, hirsuto. Fruto 2,7-3×2,6-3 cm, globoso, amarelo, com máculas alvas, esparsamente piloso, tardiamente deiscente; sementes 8 × 7 mm, subglobosas a ovóides, testa lisa, arilo carnoso, franjado, amarelado, endosperma carnoso, cor amarela, embrião ca. 8 mm compr., reto, cotilédone foliáceo, cordado próximo ao eixo hipocótilo-radicula.",
+      "imageUrl": "https://static.inaturalist.org/photos/243553321/medium.jpg",
+      "links": [],
+      "traits": {
+        "6kvxqyy0u": [
+          "8e29v1n5l"
+        ],
+        "dq6zba219": [
+          "m2p897ld9"
+        ],
+        "12xka2noi": [
+          "ps43w6q28",
+          "f581m1jf8"
+        ],
+        "0lmvf6vul": [
+          "q5q0he2t4",
+          "ayns4zg1b"
+        ],
+        "o5pdpxge0": [
+          "zj7orzenl"
+        ],
+        "core3474c": [
+          "va3dt11l4"
+        ],
+        "gj5jsir9c": [
+          "ex6lfo3rn"
+        ],
+        "2i9jfjrwe": [
+          "h91o9dg0i"
+        ]
+      }
+    }
+  ]
+}

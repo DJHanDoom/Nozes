@@ -1202,6 +1202,28 @@ const fillGapsSchema: Schema = {
   required: ["filledEntities"]
 };
 
+// Schema for VALIDATE operations - returns only validation results
+const validationResultSchema: Schema = {
+  type: Type.OBJECT,
+  properties: {
+    validatedEntities: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: { type: Type.STRING, description: "Original Entity ID (exact match)" },
+          isValid: { type: Type.BOOLEAN, description: "Whether the entity passed validation criteria" },
+          scientificName: { type: Type.STRING, description: "Corrected scientific binomial name (e.g. 'Genus species')" },
+          family: { type: Type.STRING, description: "Corrected taxonomic family" },
+          correctionNote: { type: Type.STRING, description: "Reason for correction or removal, or empty if valid" }
+        },
+        required: ["id", "isValid", "scientificName", "family"]
+      }
+    }
+  },
+  required: ["validatedEntities"]
+};
+
 interface PromptData {
   systemInstruction: string;
   prompt: string;
@@ -1853,6 +1875,113 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
     }
   } catch (error) {
     console.error('[refineExistingProject] Error:', error);
+    throw error;
+  }
+};
+
+/**
+ * Specialized function for VALIDATE operations.
+ * Validates and corrects taxonomy without regenerating the entire project structure.
+ * This is much faster and more reliable than full regeneration.
+ */
+export const validateTaxonomy = async (
+  prompt: string,
+  existingProject: Project,
+  apiKey: string,
+  model: string = "gemini-2.5-flash",
+  language: string = 'pt'
+): Promise<Project> => {
+  if (!apiKey) throw new Error("API Key is missing");
+  const ai = new GoogleGenAI({ apiKey: apiKey });
+
+  // Serialize only necessary entity data to save tokens
+  const entityContext = JSON.stringify(
+    existingProject.entities.map(e => ({
+      id: e.id,
+      name: e.name,
+      scientificName: e.scientificName || extractScientificName(e.name),
+      family: e.family
+    })),
+    null,
+    2
+  );
+
+  const fullPrompt = `${prompt}\n\nENTITIES TO VALIDATE:\n${entityContext}`;
+  
+  const systemInstruction = `You are an expert taxonomic validator. 
+Your task is to validate the scientific names and taxonomy of the provided entities.
+1. Check each entity against reputable databases (GBIF, POWO, Flora do Brasil).
+2. Correct spelling errors in scientific names.
+3. Standardize family names.
+4. Mark 'isValid' as false ONLY if the entity should be REMOVED according to the specific removal criteria in the prompt (e.g. wrong genus/family/geography).
+5. If the entity is valid but name was corrected, set 'isValid' to true and provide the new 'scientificName'.
+6. CRITICAL: Preserve the exact 'id' for each entity.
+7. Output must be a JSON object with 'validatedEntities' array.`;
+
+  try {
+    const response = await callGeminiRaw(ai, model, fullPrompt, systemInstruction, validationResultSchema);
+    
+    // Parse response safely
+    let data: any = {};
+    try {
+      data = repairTruncatedJson(response) || {};
+    } catch (parseError) {
+      console.error('[validateTaxonomy] Failed to parse AI response:', parseError);
+      return existingProject;
+    }
+    
+    if (!data.validatedEntities || !Array.isArray(data.validatedEntities)) {
+      console.warn('[validateTaxonomy] Invalid response format, returning original project');
+      return existingProject;
+    }
+    
+    // Create map of validation results
+    const validationMap = new Map<string, any>(data.validatedEntities.map((e: any) => [e.id, e]));
+    
+    // Filter and update entities
+    const newEntities: Entity[] = [];
+    let modifiedCount = 0;
+    let removedCount = 0;
+    
+    for (const entity of existingProject.entities) {
+      const result = validationMap.get(entity.id);
+      
+      if (!result) {
+        // If not returned in validation, keep it (assume valid or missed)
+        newEntities.push(entity);
+        continue;
+      }
+      
+      if (result.isValid) {
+        // Update entity with corrected data if it changed
+        const newSciName = result.scientificName || entity.scientificName || extractScientificName(entity.name) || undefined;
+        const newFamily = result.family || entity.family || undefined;
+        
+        // Check if anything changed
+        if (newSciName !== entity.scientificName || newFamily !== entity.family) {
+          modifiedCount++;
+        }
+
+        newEntities.push({
+          ...entity,
+          scientificName: newSciName,
+          family: newFamily
+        });
+      } else {
+        removedCount++;
+        console.log(`[validateTaxonomy] Removing entity ${entity.name} (${entity.id}): ${result.correctionNote}`);
+      }
+    }
+    
+    console.log(`[validateTaxonomy] Completed. Modified: ${modifiedCount}, Removed: ${removedCount}`);
+    
+    return {
+      ...existingProject,
+      entities: newEntities
+    };
+    
+  } catch (error) {
+    console.error('[validateTaxonomy] Error:', error);
     throw error;
   }
 };
