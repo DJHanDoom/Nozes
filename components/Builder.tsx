@@ -3305,7 +3305,7 @@ TASK: For each entity above, determine the correct trait values for the missing 
 OUTPUT FORMAT (use fillGapsSchema):
 Return "filledEntities" array with:
 - entityId: the entity ID from above
-- filledTraits: JSON string like {"featureId": ["stateId"]} - ONLY the new traits being added
+- filledTraits: Object like {"featureId": ["stateId"]} - ONLY the new traits being added
 
 RULES:
 1. Use ONLY the state IDs from FEATURES list above

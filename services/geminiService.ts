@@ -1152,8 +1152,9 @@ const fillGapsSchema: Schema = {
         properties: {
           entityId: { type: Type.STRING, description: "The exact entity ID from input" },
           filledTraits: { 
-            type: Type.STRING, 
-            description: "JSON string: only the NEW traits being added, format {\"featureId\": [\"stateId\"]}" 
+            type: Type.OBJECT, 
+            description: "Object with featureId keys and array of stateIds values: {\"featureId\": [\"stateId\"]}",
+            nullable: true
           }
         },
         required: ["entityId", "filledTraits"]
@@ -1579,7 +1580,7 @@ export const refineExistingProject = async (
   if (mode === 'fillGaps') {
     systemInstruction = `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
 CRITICAL: Use ONLY the exact IDs provided in the input. Return ONLY the entityId and the NEW traits being added.
-Format for filledTraits: JSON string like {"featureId": ["stateId"]}`;
+Format for filledTraits: Object like {"featureId": ["stateId"]}`;
   } else if (mode === 'clean') {
     systemInstruction = `You are an expert taxonomist and data cleaner.
 Your task is to CLEAN and OPTIMIZE the provided identification key.
@@ -1658,8 +1659,9 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
           const entityId = item.entityId || item.id;
           const traitsData = item.filledTraits || item.traitsMap || item.traits;
           
+          // Schema now returns object directly, but handle string legacy case just in case
           const traits = typeof traitsData === 'string' 
-            ? JSON.parse(traitsData) 
+            ? repairTruncatedJson(traitsData) 
             : traitsData;
             
           if (entityId && traits) {
