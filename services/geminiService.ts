@@ -1575,20 +1575,162 @@ export const refineExistingProject = async (
 
   // Build ID lookup maps for fast access
   const featureById = new Map(existingProject.features.map(f => [f.id, f]));
-  const stateById = new Map<string, string>(); // stateId -> featureId
-  existingProject.features.forEach(f => f.states.forEach(s => stateById.set(s.id, f.id)));
   const entityById = new Map(existingProject.entities.map(e => [e.id, e]));
 
+  // ------------------------------------------------------------------
+  // BATCHING LOGIC FOR FILL GAPS
+  // ------------------------------------------------------------------
+  if (mode === 'fillGaps') {
+    console.log('[refineExistingProject] Starting batch processing for fillGaps...');
+    
+    // 1. Identify entities with missing traits (gaps)
+    const entitiesWithGaps = existingProject.entities.filter(entity => {
+      // Check if entity is missing traits for ANY feature
+      return existingProject.features.some(feature => {
+        const traits = entity.traits[feature.id];
+        return !traits || traits.length === 0;
+      });
+    });
+
+    console.log(`[refineExistingProject] Found ${entitiesWithGaps.length} entities with gaps.`);
+
+    if (entitiesWithGaps.length === 0) {
+      return existingProject;
+    }
+
+    // 2. Create batches
+    const BATCH_SIZE = 10; // Reduced to avoid 429 Rate Limits
+    const batches = [];
+    for (let i = 0; i < entitiesWithGaps.length; i += BATCH_SIZE) {
+      batches.push(entitiesWithGaps.slice(i, i + BATCH_SIZE));
+    }
+
+    console.log(`[refineExistingProject] Created ${batches.length} batches.`);
+
+    // 3. Process batches sequentially
+    const filledTraitsMap = new Map<string, Record<string, string[]>>();
+    
+    // Minimal feature context to save tokens (id, name, states)
+    const featuresContext = JSON.stringify(existingProject.features.map(f => ({
+      id: f.id,
+      name: f.name,
+      states: f.states.map(s => ({ id: s.id, label: s.label }))
+    })));
+
+    for (let i = 0; i < batches.length; i++) {
+      const batch = batches[i];
+      console.log(`[refineExistingProject] Processing batch ${i + 1}/${batches.length} (${batch.length} entities)...`);
+
+      const batchEntitiesContext = JSON.stringify(batch.map(e => ({
+        id: e.id,
+        name: e.name,
+        // Only send name and ID to minimize context - we just need traits filled
+        description: e.description?.substring(0, 100) // truncated context
+      })));
+
+      const batchPrompt = `
+      You are an expert biologist. Your goal is to generate accurate trait data for a specific set of species.
+      
+      PROJECT CONTEXT:
+      - Features to map: ${existingProject.features.length}
+      - Entities in this batch: ${batch.length}
+      
+      FEATURES DEFINITIONS:
+      ${featuresContext}
+      
+      ENTITIES TO PROCESS:
+      ${batchEntitiesContext}
+      
+      TASK:
+      For each entity listed above, analyze its description and scientific knowledge to determine the correct state for every feature.
+      
+      OUTPUT:
+      Return a JSON array where each item contains:
+      - "featureId": The ID of the feature
+      - "stateIds": Array of matching state IDs (usually one, but can be multiple)
+      
+      CRITICAL:
+      - Do not hallucinate. Use the provided descriptions.
+      - If a trait cannot be determined, make a best scientific estimate based on the family/genus.
+      `;
+
+      const systemInstruction = `You are an expert taxonomist. Fill missing trait data.
+      CRITICAL: Use exact IDs. Return array of objects: [{"entityId": "id", "filledTraits": [{"featureId": "fid", "stateIds": ["sid"]}]}]`;
+
+      try {
+        const response = await callGeminiRaw(ai, model, batchPrompt, systemInstruction, fillGapsSchema);
+        const data = repairTruncatedJson(response) || {};
+        
+        const filledEntities = data?.filledEntities || [];
+        
+        for (const item of filledEntities) {
+          const entityId = item.entityId;
+          const rawTraits = item.filledTraits;
+          
+          if (!entityId || !rawTraits) continue;
+
+          // Normalize traits from schema
+          const traits: Record<string, string[]> = {};
+          if (Array.isArray(rawTraits)) {
+             rawTraits.forEach((t: any) => {
+              if (t.featureId && Array.isArray(t.stateIds)) {
+                traits[t.featureId] = t.stateIds;
+              }
+            });
+          } else if (typeof rawTraits === 'object' && rawTraits !== null) {
+             Object.assign(traits, rawTraits);
+          }
+          
+          if (Object.keys(traits).length > 0) {
+            filledTraitsMap.set(entityId, traits);
+          }
+        }
+        
+        // Extended delay to avoid 429 Rate Limits
+        if (i < batches.length - 1) await new Promise(r => setTimeout(r, 5000));
+
+      } catch (err) {
+        console.error(`[refineExistingProject] Error processing batch ${i + 1}:`, err);
+        // Continue to next batch, don't fail everything
+      }
+    }
+
+    // 4. Merge results
+    const mergedEntities = existingProject.entities.map(entity => {
+      const newTraits = filledTraitsMap.get(entity.id);
+      if (!newTraits) return entity;
+
+      const validatedTraits = { ...entity.traits };
+      for (const [featureId, stateIds] of Object.entries(newTraits)) {
+        const feature = featureById.get(featureId);
+        if (!feature) continue;
+
+        const validStateIds = feature.states.map(s => s.id);
+        const validNewStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
+        
+        if (validNewStates.length > 0) {
+          const existing = validatedTraits[featureId] || [];
+          const combined = [...new Set([...existing, ...validNewStates])];
+          validatedTraits[featureId] = combined;
+        }
+      }
+      return { ...entity, traits: validatedTraits };
+    });
+
+    console.log(`[refineExistingProject] fillGaps COMPLETE: Updated ${filledTraitsMap.size} entities.`);
+    return { ...existingProject, entities: mergedEntities };
+  }
+
+  // ------------------------------------------------------------------
+  // ORIGINAL LOGIC FOR OTHER MODES (REFINE/EXPAND/CLEAN)
+  // ------------------------------------------------------------------
+  
   // Choose schema based on mode
-  const schema = mode === 'fillGaps' ? fillGapsSchema : (mode === 'clean' ? generationSchema : refineSchema);
+  const schema = mode === 'clean' ? generationSchema : refineSchema; // fillGaps handled above
   
   let systemInstruction = '';
   
-  if (mode === 'fillGaps') {
-    systemInstruction = `You are an expert taxonomist. Your task is to fill in missing trait data for entities.
-CRITICAL: Use ONLY the exact IDs provided in the input. Return ONLY the entityId and the NEW traits being added.
-Format for filledTraits: Array of objects like [{"featureId": "f1", "stateIds": ["s1"]}]`;
-  } else if (mode === 'clean') {
+  if (mode === 'clean') {
     systemInstruction = `You are an expert taxonomist and data cleaner.
 Your task is to CLEAN and OPTIMIZE the provided identification key.
 1. MERGE redundant features (e.g., "Habit" and "Life Form" if they overlap).
@@ -1646,225 +1788,141 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
     console.log(`[refineExistingProject] Mode: ${mode}, Response type: ${typeof data}, Response keys:`, Object.keys(data || {}));
     console.log(`[refineExistingProject] Raw response preview:`, response?.substring(0, 500));
 
-    if (mode === 'fillGaps') {
-      // fillGaps mode: merge only the new traits into existing project
-      // CRITICAL: Check multiple possible response formats
-      const filledEntities = data?.filledEntities || data?.entities || [];
+    // refine/expand/clean mode: full entity update
+    const responseEntities = data.entities || [];
+    if (responseEntities.length === 0) {
+      console.warn('[refineExistingProject] AI returned no entities, preserving original');
+      return existingProject;
+    }
+
+    // Process each returned entity
+    const processedEntities: Entity[] = [];
+    const seenIds = new Set<string>();
+
+    for (const item of responseEntities) {
+      // Try to match to existing entity
+      const existingEntity = entityById.get(item.id);
       
-      console.log(`[refineExistingProject] fillGaps - found ${filledEntities.length} filled entities of ${existingProject.entities.length} total`);
-      
-      if (!Array.isArray(filledEntities) || filledEntities.length === 0) {
-        console.log('[refineExistingProject] No valid filled entities found, returning original project INTACT');
-        return existingProject; // ALWAYS preserve original
+      // Parse traitsMap
+      let traits: Record<string, string[]> = {};
+      try {
+        traits = typeof item.traitsMap === 'string' 
+          ? JSON.parse(item.traitsMap) 
+          : (item.traitsMap || {});
+      } catch (e) {
+        console.warn(`Failed to parse traitsMap for entity ${item.name}`);
+        traits = existingEntity?.traits || {};
       }
 
-      // Create a map of filled traits by entity ID
-      const filledTraitsMap = new Map<string, Record<string, string[]>>();
-      for (const item of filledEntities) {
-        try {
-          // Handle different response formats
-          const entityId = item.entityId || item.id;
-          const traitsData = item.filledTraits || item.traitsMap || item.traits;
-          
-          // Schema now returns array of objects, but handle string/legacy object cases
-          const rawTraits = typeof traitsData === 'string' 
-            ? repairTruncatedJson(traitsData) 
-            : traitsData;
-            
-          // Normalize to Object format {featureId: [stateIds]}
-          const traits: Record<string, string[]> = {};
-          
-          if (Array.isArray(rawTraits)) {
-            // New format: [{featureId, stateIds}]
-            rawTraits.forEach((t: any) => {
-              if (t.featureId && Array.isArray(t.stateIds)) {
-                traits[t.featureId] = t.stateIds;
-              }
-            });
-          } else if (typeof rawTraits === 'object' && rawTraits !== null) {
-            // Legacy format: {featureId: [stateIds]}
-            Object.assign(traits, rawTraits);
-          }
-            
-          if (entityId && Object.keys(traits).length > 0) {
-            filledTraitsMap.set(entityId, traits);
-          }
-        } catch (e) {
-          console.warn(`Failed to parse traits for entity ${item.entityId || item.id}`);
-        }
-      }
+      // Validate trait IDs
+      const validatedTraits: Record<string, string[]> = {};
+      for (const [featureId, stateIds] of Object.entries(traits)) {
+        const feature = featureById.get(featureId);
+        if (!feature) continue;
 
-      // Merge filled traits into existing entities
-      const mergedEntities = existingProject.entities.map(entity => {
-        const newTraits = filledTraitsMap.get(entity.id);
-        if (!newTraits) return entity; // No changes for this entity
-
-        // Validate and merge new traits
-        const validatedTraits = { ...entity.traits };
-        for (const [featureId, stateIds] of Object.entries(newTraits)) {
-          const feature = featureById.get(featureId);
-          if (!feature) continue; // Skip invalid feature IDs
-
-          const validStateIds = feature.states.map(s => s.id);
-          const validNewStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
-          
-          if (validNewStates.length > 0) {
-            // Merge with existing (don't replace)
-            const existing = validatedTraits[featureId] || [];
-            const combined = [...new Set([...existing, ...validNewStates])];
-            validatedTraits[featureId] = combined;
-          }
-        }
-
-        return { ...entity, traits: validatedTraits };
-      });
-
-      // CRITICAL SAFETY CHECK: Ensure we never lose entities in fillGaps
-      if (mergedEntities.length !== existingProject.entities.length) {
-        console.error(`[refineExistingProject] CRITICAL: Entity count mismatch! Original: ${existingProject.entities.length}, Merged: ${mergedEntities.length}`);
-        console.log('[refineExistingProject] Returning original project to prevent data loss');
-        return existingProject;
-      }
-
-      console.log(`[refineExistingProject] fillGaps SUCCESS: ${filledTraitsMap.size} entities updated, ${mergedEntities.length} total entities preserved`);
-      return { ...existingProject, entities: mergedEntities };
-    } else {
-      // refine/expand/clean mode: full entity update
-      const responseEntities = data.entities || [];
-      if (responseEntities.length === 0) {
-        console.warn('[refineExistingProject] AI returned no entities, preserving original');
-        return existingProject;
-      }
-
-      // Process each returned entity
-      const processedEntities: Entity[] = [];
-      const seenIds = new Set<string>();
-
-      for (const item of responseEntities) {
-        // Try to match to existing entity
-        const existingEntity = entityById.get(item.id);
+        const validStateIds = feature.states.map(s => s.id);
+        const validStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
         
-        // Parse traitsMap
-        let traits: Record<string, string[]> = {};
-        try {
-          traits = typeof item.traitsMap === 'string' 
-            ? JSON.parse(item.traitsMap) 
-            : (item.traitsMap || {});
-        } catch (e) {
-          console.warn(`Failed to parse traitsMap for entity ${item.name}`);
-          traits = existingEntity?.traits || {};
+        if (validStates.length > 0) {
+          validatedTraits[featureId] = validStates;
         }
+      }
 
-        // Validate trait IDs
-        const validatedTraits: Record<string, string[]> = {};
-        for (const [featureId, stateIds] of Object.entries(traits)) {
-          const feature = featureById.get(featureId);
-          if (!feature) continue;
+      // Build entity, preserving existing data where not provided
+      const entityId = item.id || existingEntity?.id || generateId();
+      if (seenIds.has(entityId)) continue; // Skip duplicates
+      seenIds.add(entityId);
 
-          const validStateIds = feature.states.map(s => s.id);
-          const validStates = (stateIds as string[]).filter(sid => validStateIds.includes(sid));
-          
-          if (validStates.length > 0) {
-            validatedTraits[featureId] = validStates;
-          }
+      processedEntities.push({
+        id: entityId,
+        name: item.name || existingEntity?.name || 'Unknown',
+        scientificName: item.scientificName || existingEntity?.scientificName,
+        family: item.family || existingEntity?.family,
+        description: item.description || existingEntity?.description || '',
+        imageUrl: existingEntity?.imageUrl || '', // Always preserve existing image
+        links: existingEntity?.links || [],
+        traits: Object.keys(validatedTraits).length > 0 ? validatedTraits : (existingEntity?.traits || {})
+      });
+    }
+
+    // For EXPAND mode, also include any existing entities not in response
+    if (mode === 'expand') {
+      for (const entity of existingProject.entities) {
+        if (!seenIds.has(entity.id)) {
+          processedEntities.push(entity);
+          seenIds.add(entity.id);
         }
+      }
+    }
+    
+    // For REFINE mode, ALSO preserve any entities that weren't returned by AI
+    // This is CRITICAL to prevent data loss when AI omits some entities
+    if (mode === 'refine') {
+      const missingEntities: Entity[] = [];
+      for (const entity of existingProject.entities) {
+        if (!seenIds.has(entity.id)) {
+          missingEntities.push(entity);
+          processedEntities.push(entity);
+          seenIds.add(entity.id);
+        }
+      }
+      if (missingEntities.length > 0) {
+        console.warn(`[refineExistingProject] AI omitted ${missingEntities.length} entities - PRESERVING them to prevent data loss:`);
+        missingEntities.forEach(e => console.warn(`  - ${e.name} (${e.id})`));
+      }
+    }
 
-        // Build entity, preserving existing data where not provided
-        const entityId = item.id || existingEntity?.id || generateId();
-        if (seenIds.has(entityId)) continue; // Skip duplicates
-        seenIds.add(entityId);
+    // Safety check: if we lost too many entities, return original
+    if (processedEntities.length < existingProject.entities.length * 0.5) {
+      console.warn(`[refineExistingProject] Too many entities lost (${processedEntities.length} vs ${existingProject.entities.length}), preserving original`);
+      return existingProject;
+    }
 
-        processedEntities.push({
-          id: entityId,
-          name: item.name || existingEntity?.name || 'Unknown',
-          scientificName: item.scientificName || existingEntity?.scientificName,
-          family: item.family || existingEntity?.family,
-          description: item.description || existingEntity?.description || '',
-          imageUrl: existingEntity?.imageUrl || '', // Always preserve existing image
-          links: existingEntity?.links || [],
-          traits: Object.keys(validatedTraits).length > 0 ? validatedTraits : (existingEntity?.traits || {})
+    // Process new features if returned by AI (for REFINE mode with addFeatures option)
+    let finalFeatures = existingProject.features;
+    if (mode === 'refine' && data.features && Array.isArray(data.features) && data.features.length > 0) {
+      console.log(`[refineExistingProject] AI returned ${data.features.length} new features`);
+      
+      // Validate and add new features
+      const newFeatures: Feature[] = [];
+      for (const newFeature of data.features) {
+        if (!newFeature.id || !newFeature.name || !newFeature.states || newFeature.states.length < 2) {
+          console.warn(`Skipping invalid feature:`, newFeature);
+          continue;
+        }
+        
+        // Check if feature already exists by name
+        const existingFeature = existingProject.features.find(f => 
+          f.name.toLowerCase() === newFeature.name.toLowerCase()
+        );
+        if (existingFeature) {
+          console.warn(`Feature "${newFeature.name}" already exists, skipping`);
+          continue;
+        }
+        
+        newFeatures.push({
+          id: newFeature.id,
+          name: newFeature.name,
+          imageUrl: newFeature.imageUrl || '',
+          states: newFeature.states.map((s: any) => ({
+            id: s.id,
+            label: s.label,
+            imageUrl: s.imageUrl || ''
+          }))
         });
       }
-
-      // For EXPAND mode, also include any existing entities not in response
-      if (mode === 'expand') {
-        for (const entity of existingProject.entities) {
-          if (!seenIds.has(entity.id)) {
-            processedEntities.push(entity);
-            seenIds.add(entity.id);
-          }
-        }
-      }
       
-      // For REFINE mode, ALSO preserve any entities that weren't returned by AI
-      // This is CRITICAL to prevent data loss when AI omits some entities
-      if (mode === 'refine') {
-        const missingEntities: Entity[] = [];
-        for (const entity of existingProject.entities) {
-          if (!seenIds.has(entity.id)) {
-            missingEntities.push(entity);
-            processedEntities.push(entity);
-            seenIds.add(entity.id);
-          }
-        }
-        if (missingEntities.length > 0) {
-          console.warn(`[refineExistingProject] AI omitted ${missingEntities.length} entities - PRESERVING them to prevent data loss:`);
-          missingEntities.forEach(e => console.warn(`  - ${e.name} (${e.id})`));
-        }
+      if (newFeatures.length > 0) {
+        finalFeatures = [...existingProject.features, ...newFeatures];
+        console.log(`[refineExistingProject] Added ${newFeatures.length} new features to the key`);
       }
-
-      // Safety check: if we lost too many entities, return original
-      if (processedEntities.length < existingProject.entities.length * 0.5) {
-        console.warn(`[refineExistingProject] Too many entities lost (${processedEntities.length} vs ${existingProject.entities.length}), preserving original`);
-        return existingProject;
-      }
-
-      // Process new features if returned by AI (for REFINE mode with addFeatures option)
-      let finalFeatures = existingProject.features;
-      if (mode === 'refine' && data.features && Array.isArray(data.features) && data.features.length > 0) {
-        console.log(`[refineExistingProject] AI returned ${data.features.length} new features`);
-        
-        // Validate and add new features
-        const newFeatures: Feature[] = [];
-        for (const newFeature of data.features) {
-          if (!newFeature.id || !newFeature.name || !newFeature.states || newFeature.states.length < 2) {
-            console.warn(`Skipping invalid feature:`, newFeature);
-            continue;
-          }
-          
-          // Check if feature already exists by name
-          const existingFeature = existingProject.features.find(f => 
-            f.name.toLowerCase() === newFeature.name.toLowerCase()
-          );
-          if (existingFeature) {
-            console.warn(`Feature "${newFeature.name}" already exists, skipping`);
-            continue;
-          }
-          
-          newFeatures.push({
-            id: newFeature.id,
-            name: newFeature.name,
-            imageUrl: newFeature.imageUrl || '',
-            states: newFeature.states.map((s: any) => ({
-              id: s.id,
-              label: s.label,
-              imageUrl: s.imageUrl || ''
-            }))
-          });
-        }
-        
-        if (newFeatures.length > 0) {
-          finalFeatures = [...existingProject.features, ...newFeatures];
-          console.log(`[refineExistingProject] Added ${newFeatures.length} new features to the key`);
-        }
-      }
-      
-      return {
-        ...existingProject,
-        entities: processedEntities,
-        features: finalFeatures
-      };
     }
+    
+    return {
+      ...existingProject,
+      entities: processedEntities,
+      features: finalFeatures
+    };
   } catch (error) {
     console.error('[refineExistingProject] Error:', error);
     throw error;
@@ -1990,7 +2048,7 @@ async function callGeminiRaw(
   const fallbackModels = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
   
   const generate = async (model: string, retryCount: number = 0): Promise<string> => {
-    const maxRetries = 3;
+    const maxRetries = 5; // Increased from 3 to 5 for better stability
     try {
       const response = await ai.models.generateContent({
         model: model.trim(),
@@ -2009,7 +2067,7 @@ async function callGeminiRaw(
 
       // Handle 503/429 with retry
       if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount < maxRetries) {
-        const waitTime = Math.pow(2, retryCount) * 2000;
+        const waitTime = Math.pow(2, retryCount) * 4000; // Increased base delay to 4s (4, 8, 16, 32, 64s)
         console.warn(`Retrying ${model} in ${waitTime/1000}s (attempt ${retryCount + 1})`);
         await delay(waitTime);
         return generate(model, retryCount + 1);

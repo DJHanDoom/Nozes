@@ -3287,29 +3287,32 @@ For each required feature above:
           // Set refine mode for optimized processing
           setCurrentRefineMode('fillGaps');
           
-          // Create compact prompt for fillGaps - only send what's needed
+          // Create compact prompt for fillGaps
+          const entitiesListText = entitiesWithGaps.length > 20 
+            ? `Entities with gaps: ${entitiesWithGaps.length} (see attached project data for full list)` 
+            : `ENTITIES NEEDING DATA:\n${entitiesWithGaps.map(e => `- ${e.id}: "${e.name}" needs: ${e.missingFeatureIds.map(fid => {
+                const f = projectForAnalysis.features.find(feat => feat.id === fid);
+                return f ? f.name : fid;
+              }).join(', ')}`).join('\n')}`;
+
           refinePrompt = `
 FILL MISSING TRAITS
 
 FEATURES (use these IDs for traits):
 ${JSON.stringify(featuresRef, null, 2)}
 
-ENTITIES NEEDING DATA (${entitiesWithGaps.length} of ${projectForAnalysis.entities.length}):
-${entitiesWithGaps.map(e => `- ${e.id}: "${e.name}" needs: ${e.missingFeatureIds.map(fid => {
-  const f = projectForAnalysis.features.find(feat => feat.id === fid);
-  return f ? f.name : fid;
-}).join(', ')}`).join('\n')}
+${entitiesListText}
 
-TASK: For each entity above, determine the correct trait values for the missing features.
+TASK: For each entity with missing data, determine the correct trait values.
 
 OUTPUT FORMAT (use fillGapsSchema):
 Return "filledEntities" array with:
-- entityId: the entity ID from above
+- entityId: the entity ID
 - filledTraits: Array like [{"featureId": "fid", "stateIds": ["sid"]}] - ONLY the new traits being added
 
 RULES:
 1. Use ONLY the state IDs from FEATURES list above
-2. Return ONLY entities that have gaps (those listed above)
+2. Return ONLY entities that have gaps
 3. Do NOT include existing traits - only NEW ones
 4. Language: ${language === 'pt' ? 'Portuguese' : 'English'}
 `;
