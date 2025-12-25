@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [returnToAiModal, setReturnToAiModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [helpTab, setHelpTab] = useState<'ABOUT' | 'HELP'>('ABOUT');
-  const [aiModel, setAiModel] = useState<string>("gemini-2.5-flash");
+  const [aiModel, setAiModel] = useState<string>("gemini-2.0-flash");
   const [apiKey, setApiKey] = useState<string>("");
   const [openAiModalOnMount, setOpenAiModalOnMount] = useState(false);
 
@@ -255,10 +255,10 @@ const App: React.FC = () => {
               value={aiModel}
               onChange={(e) => setAiModel(e.target.value)}
               className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
-              placeholder="gemini-2.5-flash"
+              placeholder="gemini-2.0-flash"
             />
             <p className="text-xs text-slate-400 mt-1">
-              Default: gemini-2.5-flash
+              Default: gemini-2.0-flash
             </p>
           </div>
 
