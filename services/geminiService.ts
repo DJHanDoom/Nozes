@@ -1599,7 +1599,7 @@ export const refineExistingProject = async (
     }
 
     // 2. Create batches
-    const BATCH_SIZE = 10; // Reduced to avoid 429 Rate Limits
+    const BATCH_SIZE = 5; // Reduced to 5 to minimize 429 errors and token load
     const batches = [];
     for (let i = 0; i < entitiesWithGaps.length; i += BATCH_SIZE) {
       batches.push(entitiesWithGaps.slice(i, i + BATCH_SIZE));
@@ -1687,11 +1687,15 @@ export const refineExistingProject = async (
         }
         
         // Extended delay to avoid 429 Rate Limits
-        if (i < batches.length - 1) await new Promise(r => setTimeout(r, 5000));
+        if (i < batches.length - 1) await new Promise(r => setTimeout(r, 6000));
 
-      } catch (err) {
+      } catch (err: any) {
         console.error(`[refineExistingProject] Error processing batch ${i + 1}:`, err);
-        // Continue to next batch, don't fail everything
+        // CRITICAL FAIL-SAFE:
+        // If we hit a hard error (like 429 exhaustion), stop processing BUT return what we have so far.
+        // Do not throw the error up, or the user loses all progress.
+        console.warn(`[refineExistingProject] Stopping batch process early due to error. Saving ${filledTraitsMap.size} entities processed so far.`);
+        break; 
       }
     }
 
