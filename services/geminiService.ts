@@ -1599,7 +1599,7 @@ export const refineExistingProject = async (
     }
 
     // 2. Create batches
-    const BATCH_SIZE = 5; // Reduced to 5 to minimize 429 errors and token load
+    const BATCH_SIZE = 15; // Increased to 15 for speed (relies on fail-safe for stability)
     const batches = [];
     for (let i = 0; i < entitiesWithGaps.length; i += BATCH_SIZE) {
       batches.push(entitiesWithGaps.slice(i, i + BATCH_SIZE));
@@ -1687,7 +1687,7 @@ export const refineExistingProject = async (
         }
         
         // Extended delay to avoid 429 Rate Limits
-        if (i < batches.length - 1) await new Promise(r => setTimeout(r, 6000));
+        if (i < batches.length - 1) await new Promise(r => setTimeout(r, 2500));
 
       } catch (err: any) {
         console.error(`[refineExistingProject] Error processing batch ${i + 1}:`, err);
