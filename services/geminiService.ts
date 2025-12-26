@@ -1811,7 +1811,7 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
       let traits: Record<string, string[]> = {};
       try {
         traits = typeof item.traitsMap === 'string' 
-          ? JSON.parse(item.traitsMap) 
+          ? repairTruncatedJson(item.traitsMap) 
           : (item.traitsMap || {});
       } catch (e) {
         console.warn(`Failed to parse traitsMap for entity ${item.name}`);
@@ -1832,7 +1832,7 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
         }
       }
 
-      // Build entity, preserving existing data where not provided
+      // Build entity, strictly prioritizing NEW data from AI (especially description)
       const entityId = item.id || existingEntity?.id || generateId();
       if (seenIds.has(entityId)) continue; // Skip duplicates
       seenIds.add(entityId);
@@ -1842,7 +1842,8 @@ Format for traitsMap: JSON string like {"featureId": ["stateId", "stateId2"]}`;
         name: item.name || existingEntity?.name || 'Unknown',
         scientificName: item.scientificName || existingEntity?.scientificName,
         family: item.family || existingEntity?.family,
-        description: item.description || existingEntity?.description || '',
+        // CRITICAL FIX: Use new description if available and longer/valid, otherwise fallback
+        description: (item.description && item.description.length > 10) ? item.description : (existingEntity?.description || ''),
         imageUrl: existingEntity?.imageUrl || '', // Always preserve existing image
         links: existingEntity?.links || [],
         traits: Object.keys(validatedTraits).length > 0 ? validatedTraits : (existingEntity?.traits || {})
