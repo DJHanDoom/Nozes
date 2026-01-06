@@ -1,6 +1,24 @@
 export type Language = 'en' | 'pt';
 
-export type FeatureFocus = 'general' | 'reproductive' | 'vegetative';
+// AI Provider types for multi-provider model selection
+export type AIProvider = 'gemini' | 'openai' | 'claude' | 'huggingface';
+
+export interface ModelOption {
+  id: string;
+  name: string;
+  provider: AIProvider;
+  description?: string;
+  contextWindow?: number;
+  isRecommended?: boolean;
+}
+
+export interface ProviderConfig {
+  name: string;
+  apiKeyUrl: string;
+  icon: string;
+}
+
+export type FeatureFocus = 'general' | 'reproductive' | 'vegetative' | string;
 
 export interface FeatureState {
   id: string;
@@ -30,7 +48,7 @@ export interface Entity {
   imageUrl?: string;
   links: ExternalLink[];
   // Map featureId to an array of valid stateIds for this entity
-  traits: Record<string, string[]>; 
+  traits: Record<string, string[]>;
 }
 
 export interface SubKeyReference {
@@ -44,6 +62,7 @@ export interface Project {
   id: string;
   name: string;
   description: string;
+  category?: 'FLORA' | 'FAUNA' | 'OTHER';
   features: Feature[];
   entities: Entity[];
   // For hierarchical/linked keys

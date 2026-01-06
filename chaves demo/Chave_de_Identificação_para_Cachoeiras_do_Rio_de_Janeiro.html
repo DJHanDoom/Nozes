@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chave de Identificação para Cachoeiras do Rio de Janeiro - NOZESia Key</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-100 font-sans">
+  <div id="app"></div>
+  <script>
+    const project = {"id":"tm8ejvx0j","name":"Chave de Identificação para Cachoeiras do Rio de Janeiro","description":"Uma chave interativa para identificar as principais cachoeiras localizadas no município do Rio de Janeiro, com foco em características de acesso, morfologia da queda, entorno e infraestrutura. Destinado a estudantes e entusiastas da natureza.","features":[{"id":"f0jjyfkp1","name":"Acesso principal","imageUrl":"","states":[{"id":"7jkcovpkp","label":"Fácil (trilha curta e bem marcada, até 30 min)"},{"id":"41mniu62z","label":"Moderado (trilha de média dificuldade, 30 min a 1h)"},{"id":"m0bew7653","label":"Difícil (trilha longa ou íngreme, mais de 1h, pode requerer guia)"}]},{"id":"q0bhhl108","name":"Tipo de queda d'água","imageUrl":"","states":[{"id":"id1yenxqa","label":"Queda única (uma única parede de água)"},{"id":"22yqsfku8","label":"Degraus/Cascata (várias quedas menores em sequência)"},{"id":"6lfhzhzva","label":"Véu (água escorrendo por uma rocha côncava, formando um véu)"}]},{"id":"z9mxmvobm","name":"Presença de poço para banho","imageUrl":"","states":[{"id":"sup848qgo","label":"Sim, poço amplo e profundo"},{"id":"akhngygay","label":"Sim, poço pequeno/raso"},{"id":"nm7l7c4rq","label":"Não, apenas queda d'água turbulenta"}]},{"id":"xekxg535n","name":"Entorno da cachoeira","imageUrl":"","states":[{"id":"jjgy8exnt","label":"Mata Atlântica preservada"},{"id":"hsjuxkyfc","label":"Mata com vestígios de urbanização"},{"id":"e02pqn1k4","label":"Área rural/aberta"}]},{"id":"stlxv7vfs","name":"Volume de água (período de chuva)","imageUrl":"","states":[{"id":"99mxvfvwy","label":"Alto/Intenso"},{"id":"4lcm8e9qx","label":"Moderado"},{"id":"8pgsvirmx","label":"Baixo/Reduzido"}]},{"id":"1y0lcw0k8","name":"Queda principal (estimativa de altura)","imageUrl":"","states":[{"id":"g0tptaep6","label":"Até 5 metros"},{"id":"nuxqas047","label":"Entre 5 e 15 metros"},{"id":"1afznhj15","label":"Mais de 15 metros"}]},{"id":"1hcwbtams","name":"Infraestrutura no local/proximidades","imageUrl":"","states":[{"id":"swa1ytqhg","label":"Comércio e/ou lanchonetes próximos"},{"id":"hlbd2xmzq","label":"Apenas trilha sinalizada/natureza"},{"id":"49mpwidb8","label":"Estrutura mínima (bancos, lixeiras)"}]}],"entities":[{"id":"cm21yckvn","name":"Cachoeira do Horto","scientificName":"Cachoeira do Horto","description":"Uma das cachoeiras mais acessíveis e populares do Horto, na Floresta da Tijuca, com um poço convidativo para banho.","imageUrl":"https://picsum.photos/seed/cachoeira-do-horto/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["swa1ytqhg"]}},{"id":"248c34gge","name":"Cachoeira do Quebra","scientificName":"Cachoeira do Quebra","description":"Localizada na trilha do Horto, é menor que a Cachoeira do Horto, com uma sequência de pequenas quedas e poços.","imageUrl":"https://picsum.photos/seed/cachoeira-do-quebra/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"o175vsggg","name":"Cachoeira da Gruta","scientificName":"Cachoeira da Gruta","description":"Uma cachoeira escondida na região do Horto, com uma pequena gruta atrás da queda d'água, proporcionando um ambiente místico.","imageUrl":"https://picsum.photos/seed/cachoeira-da-gruta/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"5ojpwjetu","name":"Cachoeira dos Primatas","scientificName":"Cachoeira dos Primatas","description":"Uma das mais famosas da Floresta da Tijuca, oferece um bom poço para banho e é conhecida pela vista do Cristo Redentor de seu mirante superior.","imageUrl":"https://picsum.photos/seed/cachoeira-dos-primatas/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["swa1ytqhg"]}},{"id":"t6fjb1bnl","name":"Cachoeira do Alto","scientificName":"Cachoeira do Alto","description":"Uma das mais altas da Floresta da Tijuca, oferece uma experiência mais imersiva na natureza, com quedas significativas e um ambiente mais selvagem.","imageUrl":"https://picsum.photos/seed/cachoeira-do-alto/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"5kkxy2lkr","name":"Cachoeira do Mendanha","scientificName":"Cachoeira do Mendanha","description":"Localizada na Zona Oeste, no Parque Estadual do Mendanha, é uma das poucas opções de cachoeira em uma região mais afastada do centro, com poços convidativos.","imageUrl":"https://picsum.photos/seed/cachoeira-do-mendanha/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}},{"id":"jtqa5odsv","name":"Cachoeira do Poço Verde","scientificName":"Cachoeira do Poço Verde","description":"Pequena e charmosa cachoeira na Floresta da Tijuca, famosa pela coloração esverdeada de seu poço, ideal para um banho refrescante.","imageUrl":"https://picsum.photos/seed/cachoeira-do-po%C3%A7o-verde/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"l4uhed8xk","name":"Cachoeira da Formiga","scientificName":"Cachoeira da Formiga","description":"Uma queda d'água suave e charmosa, acessível por uma trilha curta na região do Sumaré, na Floresta da Tijuca, com um pequeno poço.","imageUrl":"https://picsum.photos/seed/cachoeira-da-formiga/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"cpdkm0qms","name":"Cachoeira da Floresta","scientificName":"Cachoeira da Floresta","description":"Uma das mais procuradas da Floresta da Tijuca, com um poço agradável para banho e ambiente tranquilo, ideal para famílias.","imageUrl":"https://picsum.photos/seed/cachoeira-da-floresta/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}},{"id":"ag2ufhrds","name":"Cachoeira do Caminho do Sorvete","scientificName":"Cachoeira do Caminho do Sorvete","description":"Pequena, mas pitoresca cachoeira na Floresta da Tijuca, com acesso relativamente fácil, ideal para um refresco rápido durante a caminhada.","imageUrl":"https://picsum.photos/seed/cachoeira-do-caminho-do-sorvete/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"3cmu52ewb","name":"Cachoeira do Recanto (Guaratiba)","scientificName":"Cachoeira do Recanto (Guaratiba)","description":"Localizada em uma região mais selvagem de Guaratiba, oferece uma experiência mais rústica e contato intenso com a natureza.","imageUrl":"https://picsum.photos/seed/cachoeira-do-recanto-(guaratiba)/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"4pkxdnol8","name":"Cachoeira da Pedra Branca","scientificName":"Cachoeira da Pedra Branca","description":"Situada no Parque Estadual da Pedra Branca, é uma das maiores e mais impressionantes, requerendo uma trilha mais longa e desafiadora para acesso.","imageUrl":"https://picsum.photos/seed/cachoeira-da-pedra-branca/400/300","links":[],"traits":{"f0jjyfkp1":["m0bew7653"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"6edpdiabj","name":"Cachoeira do Pancada","scientificName":"Cachoeira do Pancada","description":"Uma cachoeira com queda forte e poços rasos, também no Parque Estadual da Pedra Branca, um pouco menos conhecida, mas igualmente bela.","imageUrl":"https://picsum.photos/seed/cachoeira-do-pancada/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"kjty5o0u6","name":"Cachoeira do Poço do Soldado","scientificName":"Cachoeira do Poço do Soldado","description":"Um local tranquilo na Floresta da Tijuca, com um pequeno poço ideal para crianças e um ambiente familiar, de fácil acesso.","imageUrl":"https://picsum.photos/seed/cachoeira-do-po%C3%A7o-do-soldado/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"xze5q9pa0","name":"Cachoeira da Macumba","scientificName":"Cachoeira da Macumba","description":"Localizada próximo à Prainha e Grumari, na Zona Oeste, é uma cachoeira pequena, com acesso fácil e vista para a vegetação costeira, mas com poço menos convidativo.","imageUrl":"https://picsum.photos/seed/cachoeira-da-macumba/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["nm7l7c4rq"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"bo5qeaz25","name":"Cachoeira do Espelho","scientificName":"Cachoeira do Espelho","description":"Localizada na Floresta da Tijuca, esta cachoeira forma uma lâmina d'água suave que escorre sobre uma rocha, criando um efeito de espelho, com um pequeno poço.","imageUrl":"https://picsum.photos/seed/cachoeira-do-espelho/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["6lfhzhzva"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"6304mojpj","name":"Cachoeira das Almas","scientificName":"Cachoeira das Almas","description":"Uma cachoeira mais isolada na Floresta da Tijuca, que oferece um poço mais profundo para banho em meio a uma mata densa e preservada.","imageUrl":"https://picsum.photos/seed/cachoeira-das-almas/400/300","links":[],"traits":{"f0jjyfkp1":["m0bew7653"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"jzxfqeynt","name":"Cachoeira do Chuveiro","scientificName":"Cachoeira do Chuveiro","description":"Pequena cachoeira na Floresta da Tijuca, conhecida por suas quedas em degraus que lembram um chuveiro natural, com poços rasos e acessíveis.","imageUrl":"https://picsum.photos/seed/cachoeira-do-chuveiro/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["49mpwidb8"]}},{"id":"x5726uioo","name":"Cachoeira da Bocaina","scientificName":"Cachoeira da Bocaina","description":"Uma bela cachoeira na Floresta da Tijuca, com uma queda única e um poço convidativo para banho, ideal para quem busca tranquilidade.","imageUrl":"https://picsum.photos/seed/cachoeira-da-bocaina/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"hxm24pjib","name":"Cachoeira da Barata","scientificName":"Cachoeira da Barata","description":"Uma das cachoeiras com maior volume de água na Floresta da Tijuca, apresentando várias quedas em sequência e um ambiente mais selvagem.","imageUrl":"https://picsum.photos/seed/cachoeira-da-barata/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["nm7l7c4rq"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"a59fooy18","name":"Cachoeira da Taquara","scientificName":"Cachoeira da Taquara","description":"Situada em Jacarepaguá, é uma cachoeira de fácil acesso com uma queda única e um poço raso, cercada por mata com vestígios de urbanização.","imageUrl":"https://picsum.photos/seed/cachoeira-da-taquara/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"0y4hx40a5","name":"Cachoeira dos Macacos","scientificName":"Cachoeira dos Macacos","description":"Próxima ao Jardim Botânico, esta cachoeira oferece várias pequenas quedas e poços rasos, ideal para um contato rápido com a natureza.","imageUrl":"https://picsum.photos/seed/cachoeira-dos-macacos/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["49mpwidb8"]}},{"id":"cju6a77gb","name":"Cachoeira da Covanca","scientificName":"Cachoeira da Covanca","description":"Localizada em Jacarepaguá, a Cachoeira da Covanca possui uma queda d'água única e um poço amplo, em uma área com certo impacto urbano.","imageUrl":"https://picsum.photos/seed/cachoeira-da-covanca/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"azz0m9hu1","name":"Cachoeira de Sacopã","scientificName":"Cachoeira de Sacopã","description":"Uma pequena cachoeira na região da Lagoa, com queda d'água turbulenta e sem poço para banho, em uma área com vestígios de urbanização.","imageUrl":"https://picsum.photos/seed/cachoeira-de-sacop%C3%A3/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["nm7l7c4rq"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"zogtq4r4x","name":"Cachoeira do Camorim","scientificName":"Cachoeira do Camorim","description":"No Parque Natural Municipal de Grumari, em Jacarepaguá, esta cachoeira apresenta múltiplas quedas e poços rasos, cercada por mata preservada.","imageUrl":"https://picsum.photos/seed/cachoeira-do-camorim/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"jzp8nltvs","name":"Cachoeira do Grajaú","scientificName":"Cachoeira do Grajaú","description":"Localizada no Parque Estadual do Grajaú, é uma cachoeira de queda única e poço raso, em uma área de mata atlântica preservada e de fácil acesso.","imageUrl":"https://picsum.photos/seed/cachoeira-do-graja%C3%BA/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["49mpwidb8"]}},{"id":"jugyymxm6","name":"Cachoeira do Salto","scientificName":"Cachoeira do Salto","description":"Uma cachoeira no Parque Natural Municipal da Prainha, com queda única e água turbulenta, em um ambiente natural e preservado, sem poço para banho.","imageUrl":"https://picsum.photos/seed/cachoeira-do-salto/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["nm7l7c4rq"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"t46bb2121","name":"Cachoeira do Saco (Guaratiba)","scientificName":"Cachoeira do Saco (Guaratiba)","description":"Cachoeira grandiosa em Guaratiba, com múltiplas quedas e um poço amplo e profundo, exigindo uma trilha mais desafiadora para ser alcançada.","imageUrl":"https://picsum.photos/seed/cachoeira-do-saco-(guaratiba)/400/300","links":[],"traits":{"f0jjyfkp1":["m0bew7653"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"lk45uardy","name":"Cachoeira da Usina (Horto)","scientificName":"Cachoeira da Usina (Horto)","description":"Uma cachoeira no Horto com quedas em degraus e poços rasos, localizada em uma área de mata preservada, com algumas facilidades próximas.","imageUrl":"https://picsum.photos/seed/cachoeira-da-usina-(horto)/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"s3hk8fj3n","name":"Cachoeira da Serra (Vargem Grande)","scientificName":"Cachoeira da Serra (Vargem Grande)","description":"Situada em Vargem Grande, esta cachoeira oferece uma queda única e um poço amplo para banho, em um cenário de área rural/aberta.","imageUrl":"https://picsum.photos/seed/cachoeira-da-serra-(vargem-grande)/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["e02pqn1k4"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}},{"id":"dtg3s3e5x","name":"Cachoeira do Outeiro","scientificName":"Cachoeira do Outeiro","description":"Uma cachoeira serena na Floresta da Tijuca, com acesso moderado, conhecida por seu ambiente calmo e um poço de tamanho médio.","imageUrl":"https://picsum.photos/seed/cachoeira-do-outeiro/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"xqcbao0ut","name":"Cachoeira do Jequitibá","scientificName":"Cachoeira do Jequitibá","description":"Uma imponente cachoeira no Parque Estadual da Pedra Branca, com queda principal alta e forte volume, exigindo trilha difícil.","imageUrl":"https://picsum.photos/seed/cachoeira-do-jequitib%C3%A1/400/300","links":[],"traits":{"f0jjyfkp1":["m0bew7653"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"gqc08srmg","name":"Cachoeira do Véu de Noiva","scientificName":"Cachoeira do Véu de Noiva","description":"Charmosa cachoeira na Floresta da Tijuca, onde a água escorre suavemente sobre a rocha, criando um efeito de véu, com pequeno poço.","imageUrl":"https://picsum.photos/seed/cachoeira-do-v%C3%A9u-de-noiva/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["6lfhzhzva"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"fynf5xmxb","name":"Cachoeira da Bica","scientificName":"Cachoeira da Bica","description":"Uma cachoeira em região mais urbanizada da Zona Oeste, com queda única e fácil acesso, mas poço raso.","imageUrl":"https://picsum.photos/seed/cachoeira-da-bica/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"60qmg7804","name":"Cachoeira do Remanso","scientificName":"Cachoeira do Remanso","description":"Pequena cachoeira de degraus na região de Grumari, com poços rasos, ideal para um descanso rápido em meio à natureza.","imageUrl":"https://picsum.photos/seed/cachoeira-do-remanso/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"i5c2ywwqb","name":"Cachoeira dos Bois","scientificName":"Cachoeira dos Bois","description":"Uma cachoeira acessível na Floresta da Tijuca, com queda única e um poço raso, popular entre famílias.","imageUrl":"https://picsum.photos/seed/cachoeira-dos-bois/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}},{"id":"axtcfhzfh","name":"Cachoeira do Morcego","scientificName":"Cachoeira do Morcego","description":"Localizada em área remota do Parque da Pedra Branca, esta cachoeira apresenta múltiplas quedas e volume intenso, com acesso difícil.","imageUrl":"https://picsum.photos/seed/cachoeira-do-morcego/400/300","links":[],"traits":{"f0jjyfkp1":["m0bew7653"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["99mxvfvwy"],"1y0lcw0k8":["1afznhj15"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"jrojja7wn","name":"Cachoeira do Córrego Grande","scientificName":"Cachoeira do Córrego Grande","description":"Uma cachoeira robusta em Guaratiba, com queda única e um poço amplo, em uma área de mata preservada.","imageUrl":"https://picsum.photos/seed/cachoeira-do-c%C3%B3rrego-grande/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"jfevm04x0","name":"Cachoeira do Papagaio","scientificName":"Cachoeira do Papagaio","description":"Acima das mais conhecidas do Horto, esta cachoeira oferece um poço razoável em meio à mata, com acesso moderado.","imageUrl":"https://picsum.photos/seed/cachoeira-do-papagaio/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"7dmdb0jgm","name":"Cachoeira do Pântano","scientificName":"Cachoeira do Pântano","description":"Pequena cachoeira em Jacarepaguá, com queda em degraus e poços rasos, cercada por mata com vestígios de urbanização.","imageUrl":"https://picsum.photos/seed/cachoeira-do-p%C3%A2ntano/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"33lwo8364","name":"Cachoeira da Janela","scientificName":"Cachoeira da Janela","description":"Uma cachoeira única na Tijuca, onde a água passa por uma abertura na rocha, criando um efeito de janela, sem poço para banho.","imageUrl":"https://picsum.photos/seed/cachoeira-da-janela/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["nm7l7c4rq"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"3h8dk4f1u","name":"Cachoeira do Grotão","scientificName":"Cachoeira do Grotão","description":"Localizada em Vargem Grande, esta cachoeira tem queda única e poço amplo, em área rural, mas com infraestrutura mínima próxima.","imageUrl":"https://picsum.photos/seed/cachoeira-do-grot%C3%A3o/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["e02pqn1k4"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}},{"id":"lepbddqox","name":"Cachoeira do Rio das Pedras","scientificName":"Cachoeira do Rio das Pedras","description":"Cachoeira de pequeno porte em Jacarepaguá, com quedas em degraus e poços rasos, em entorno com urbanização.","imageUrl":"https://picsum.photos/seed/cachoeira-do-rio-das-pedras/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["22yqsfku8"],"z9mxmvobm":["akhngygay"],"xekxg535n":["hsjuxkyfc"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["swa1ytqhg"]}},{"id":"pk3a5xu61","name":"Cachoeira do Canto","scientificName":"Cachoeira do Canto","description":"Um recanto tranquilo na Floresta da Tijuca, com uma queda d'água suave e um poço raso, ideal para meditação.","imageUrl":"https://picsum.photos/seed/cachoeira-do-canto/400/300","links":[],"traits":{"f0jjyfkp1":["7jkcovpkp"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["akhngygay"],"xekxg535n":["jjgy8exnt"],"stlxv7vfs":["8pgsvirmx"],"1y0lcw0k8":["g0tptaep6"],"1hcwbtams":["hlbd2xmzq"]}},{"id":"f6svbrxsc","name":"Cachoeira da Fazenda","scientificName":"Cachoeira da Fazenda","description":"Uma cachoeira com características rurais, em uma propriedade ou área próxima a fazendas, com queda única e poço amplo.","imageUrl":"https://picsum.photos/seed/cachoeira-da-fazenda/400/300","links":[],"traits":{"f0jjyfkp1":["41mniu62z"],"q0bhhl108":["id1yenxqa"],"z9mxmvobm":["sup848qgo"],"xekxg535n":["e02pqn1k4"],"stlxv7vfs":["4lcm8e9qx"],"1y0lcw0k8":["nuxqas047"],"1hcwbtams":["49mpwidb8"]}}]};
+    const lang = "pt";
+    const t = {
+      en: {
+        features: "Features", selected: "selected", matches: "Matches", discarded: "Discarded",
+        restart: "Restart", noMatches: "No matches found.", tryUnselecting: "Try unselecting some features.",
+        potential: "potential matches", identified: "1 Entity identified", close: "Close",
+        speciesDetails: "Species Details", morphology: "Morphology & Traits", resources: "Resources",
+        createdWith: "Created with NOZESia", viewResults: "View Results", excluded: "Excluded by selection"
+      },
+      pt: {
+        features: "Características", selected: "selecionado(s)", matches: "Compatíveis", discarded: "Descartados",
+        restart: "Reiniciar", noMatches: "Nenhum resultado.", tryUnselecting: "Tente remover seleções.",
+        potential: "matches potenciais", identified: "1 Entidade identificada", close: "Fechar",
+        speciesDetails: "Detalhes da Espécie", morphology: "Morfologia & Características", resources: "Recursos Adicionais",
+        createdWith: "Criado com NOZESia", viewResults: "Ver Resultados", excluded: "Excluído pela seleção"
+      }
+    };
+    const strings = t[lang];
+    
+    let selections = {};
+    let showDiscarded = false;
+    let viewingEntity = null;
+    let mobileTab = 'FILTERS';
+    
+    function toggleSelection(featureId, stateId) {
+      if (!selections[featureId]) selections[featureId] = [];
+      const idx = selections[featureId].indexOf(stateId);
+      if (idx >= 0) {
+        selections[featureId].splice(idx, 1);
+        if (selections[featureId].length === 0) delete selections[featureId];
+      } else {
+        selections[featureId].push(stateId);
+      }
+      render();
+    }
+    
+    function resetKey() { selections = {}; render(); }
+    function setMobileTab(tab) { mobileTab = tab; render(); }
+    function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
+    function viewEntity(entity) { viewingEntity = entity; render(); }
+    function closeEntity() { viewingEntity = null; render(); }
+    
+    function getFilteredEntities() {
+      const remaining = [], discarded = [];
+      project.entities.forEach(entity => {
+        let isMatch = true;
+        for (const [fid, sids] of Object.entries(selections)) {
+          const entityStates = entity.traits[fid] || [];
+          if (!sids.some(id => entityStates.includes(id))) { isMatch = false; break; }
+        }
+        if (isMatch) remaining.push(entity); else discarded.push(entity);
+      });
+      return { remaining, discarded };
+    }
+    
+    function getTotalSelections() {
+      return Object.values(selections).reduce((a, c) => a + c.length, 0);
+    }
+    
+    function render() {
+      const { remaining, discarded } = getFilteredEntities();
+      const totalSel = getTotalSelections();
+      
+      let entityModalHTML = '';
+      if (viewingEntity) {
+        const e = viewingEntity;
+        const traitsHTML = project.features.map(f => {
+          const stateIds = e.traits[f.id] || [];
+          const stateLabels = stateIds.map(sid => f.states.find(s => s.id === sid)?.label).filter(Boolean).join(', ');
+          return stateLabels ? `<div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">${f.name}</span><span class="font-medium text-slate-800">${stateLabels}</span></div>` : '';
+        }).join('');
+        const linksHTML = e.links && e.links.length > 0 ? `<div class="mt-6"><h4 class="font-semibold text-slate-700 mb-3">${strings.resources}</h4><div class="space-y-2">${e.links.map(l => `<a href="${l.url}" target="_blank" class="flex items-center gap-2 text-emerald-600 hover:underline text-sm"><span>🔗</span>${l.label}</a>`).join('')}</div></div>` : '';
+        entityModalHTML = `
+          <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this)closeEntity()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+              <div class="relative h-48 sm:h-64 bg-slate-200 shrink-0">
+                ${e.imageUrl ? `<img src="${e.imageUrl}" class="w-full h-full object-cover" onerror="this.style.display='none'">` : '<div class="w-full h-full flex items-center justify-center text-slate-400 text-6xl">🌿</div>'}
+                <button onclick="closeEntity()" class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 text-white rounded-full p-2">✕</button>
+              </div>
+              <div class="p-6 overflow-y-auto custom-scrollbar">
+                <h2 class="text-2xl font-bold text-slate-800 mb-1">${e.name}</h2>
+                ${e.description ? `<p class="text-slate-600 mb-4">${e.description}</p>` : ''}
+                <div class="mt-4"><h4 class="font-semibold text-slate-700 mb-2">${strings.morphology}</h4><div class="text-sm">${traitsHTML}</div></div>
+                ${linksHTML}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      const featuresHTML = project.features.map(f => {
+        const selStates = selections[f.id] || [];
+        return `
+          <div class="bg-slate-50 rounded-xl p-4">
+            <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+              ${f.imageUrl ? `<img src="${f.imageUrl}" class="w-6 h-6 rounded object-cover">` : ''}
+              ${f.name}
+              ${selStates.length > 0 ? `<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">${selStates.length}</span>` : ''}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              ${f.states.map(s => {
+                const isSel = selStates.includes(s.id);
+                return `<button onclick="toggleSelection('${f.id}','${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">${s.label}</button>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      const entityCard = (e, isDiscarded = false) => `
+        <div onclick="viewEntity(project.entities.find(x=>x.id==='${e.id}'))" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden border ${isDiscarded ? 'border-red-200 opacity-60' : 'border-slate-200 hover:border-emerald-300'}">
+          <div class="h-32 bg-slate-100 relative">
+            ${e.imageUrl ? `<img src="${e.imageUrl}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-slate-300 text-4xl\\'>🌿</div>'">` : '<div class="w-full h-full flex items-center justify-center text-slate-300 text-4xl">🌿</div>'}
+            ${isDiscarded ? '<div class="absolute inset-0 bg-red-500/20 flex items-center justify-center"><span class="bg-red-500 text-white text-xs px-2 py-1 rounded">✕</span></div>' : ''}
+          </div>
+          <div class="p-3">
+            <h4 class="font-semibold text-slate-800 text-sm truncate">${e.name}</h4>
+            ${e.description ? `<p class="text-xs text-slate-500 mt-1 line-clamp-2">${e.description}</p>` : ''}
+          </div>
+        </div>
+      `;
+      
+      const remainingHTML = remaining.length > 0 
+        ? remaining.map(e => entityCard(e)).join('')
+        : `<div class="col-span-full text-center py-12 text-slate-500"><div class="text-4xl mb-3">🔍</div><p class="font-medium">${strings.noMatches}</p><p class="text-sm">${strings.tryUnselecting}</p></div>`;
+      
+      const discardedHTML = discarded.length > 0 && showDiscarded
+        ? `<div class="mt-6 pt-6 border-t"><h4 class="font-semibold text-slate-500 mb-4 flex items-center gap-2">❌ ${strings.discarded} (${discarded.length})</h4><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">${discarded.map(e => entityCard(e, true)).join('')}</div></div>`
+        : '';
+      
+      document.getElementById('app').innerHTML = `
+        <div class="min-h-screen flex flex-col">
+          <header class="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3">
+              <span class="bg-emerald-600 text-white text-xs px-2 py-1 rounded font-bold">KEY</span>
+              <h1 class="text-lg font-bold text-slate-800 truncate">${project.name}</h1>
+            </div>
+            <button onclick="resetKey()" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg">🔄 ${strings.restart}</button>
+          </header>
+          
+          <div class="md:hidden flex border-b bg-white">
+            <button onclick="setMobileTab('FILTERS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 ${mobileTab==='FILTERS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              🔍 ${strings.features} ${totalSel>0?`<span class="bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">${totalSel}</span>`:''}
+            </button>
+            <button onclick="setMobileTab('RESULTS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 ${mobileTab==='RESULTS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              📋 ${strings.matches} <span class="bg-slate-200 text-slate-700 text-xs px-1.5 py-0.5 rounded-full">${remaining.length}</span>
+            </button>
+          </div>
+          
+          <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <div class="w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex-col h-full ${mobileTab==='FILTERS'?'flex':'hidden md:flex'}">
+              <div class="hidden md:block p-4 border-b bg-slate-50">
+                <h3 class="font-semibold text-slate-700 flex items-center gap-2">🔍 ${strings.features}</h3>
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">${featuresHTML}</div>
+            </div>
+            
+            <div class="flex-1 flex flex-col h-full ${mobileTab==='RESULTS'?'flex':'hidden md:flex'}">
+              <div class="p-4 border-b bg-slate-50 flex justify-between items-center">
+                <div>
+                  <span class="font-semibold text-slate-700">${remaining.length === 1 ? strings.identified : remaining.length + ' ' + strings.potential}</span>
+                </div>
+                ${discarded.length > 0 ? `<button onclick="toggleDiscarded()" class="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1">${showDiscarded?'🔼':'🔽'} ${strings.discarded} (${discarded.length})</button>` : ''}
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">${remainingHTML}</div>
+                ${discardedHTML}
+              </div>
+            </div>
+          </div>
+          
+          <footer class="bg-white border-t px-4 py-2 text-center text-xs text-slate-400">
+            ${strings.createdWith} • <a href="https://djhandoom.github.io/nozes/" target="_blank" class="text-emerald-600 hover:underline">djhandoom.github.io/nozes</a>
+          </footer>
+        </div>
+        ${entityModalHTML}
+      `;
+    }
+    
+    render();
+  </script>
+</body>
+</html>

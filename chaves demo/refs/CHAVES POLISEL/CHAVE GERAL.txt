@@ -1,0 +1,43 @@
+Passo,Diagnose,Identificação / Próximo Passo
+1,Vegetal não lenhoso (erva ou bambu),Chave A
+,Outros hábitos de vida,Ir para 2
+2,Planta com hábito de trepadeira,Chave B
+,Planta com hábito ereto,Ir para 3
+3,"Planta com caule sem ramificação (fetos arborescentes, palmeiras, etc.)",Ir para 4
+,Planta com caule ramificado (arbustos e árvores),Ir para 6
+4,"Feto arborescente (""samambaia-açu""), frondes tripinatipartidas",Chave C (Cyatheaceae e Dicksoniaceae)
+,"Outro grupo vegetal, folhas simples ou compostas",Ir para 5
+5,Folhas simples,Laxmanniaceae (Cordyline spectabilis)
+,Folhas compostas e presença de estipe,Chave D (Arecaceae)
+6,Folhas modificadas em espinhos. Caule do tipo cladódio,Cactaceae
+,Sem estas características,Ir para 7
+7,Folhas compostas,Chave E
+,Folhas simples ou aparentemente simples (unifolioladas),Ir para 8
+8,Nervação paralelinérvia,Ir para 9
+,Outro tipo de nervação,Ir para 10
+9,"Folhas deltóides, disposição densamente espiralada",Araucariaceae (Araucaria angustifolia)
+,"Folhas lanceoladas, oblongas até lineares",Podocarpaceae (Podocarpus)
+10,Folhas lobadas ou partidas,Ir para 11
+,Folhas inteiras,Ir para 20
+11,Folhas com dois ou três lóbulos,Ir para 12
+,Folhas multilobadas (mais de 3 lóbulos) ou partidas,Ir para 14
+12,Folhas com dois lóbulos,Fabaceae-cercideae (Bauhinia)
+,Folhas com três lóbulos,Ir para 13
+13,Folhas alternas. Ausência de látex,Malvaceae (Sterculia)
+,Folhas opostas. Presença de látex,Moraceae (Bagassa guianensis)
+14,Presença de látex branco,Ir para 15
+,Ausência de látex branco,Ir para 16
+15,"Tricomas urticantes, glândulas na folha e apícolos",Euphorbiaceae (Cnidoscolus)
+,Ausência destas características,Euphorbiaceae (Manihot grahamii) ou Caricaceae
+16,Presença de estípulas,Euphorbiaceae (Jatropha)
+,Ausência de estípulas,Bignoniaceae (Godmania dardanoi)
+17,Folhas opostas,(Verificar passo anterior ou contexto específico na chave original)
+,Folhas alternas,Ir para 18
+18,Folhas bipinatipartidas e ausência de estípulas,Proteaceae
+,Folhas multilobadas e presença de estípulas,Ir para 19
+19,Estípulas fimbriadas ou filiformes,"Araliaceae (Oreopanax), Bixaceae (Cochlospermum) ou Malvaceae (Ochroma)"
+,Estípulas terminais,"Malvaceae (Sterculia) ou Urticaceae (Cecropia, Pourouma)"
+20,Filotaxia oposta com folhas bem distribuídas,Chave F
+,Outro tipo de filotaxia,Ir para 21
+21,Filotaxia verticilada,Chave G
+,Filotaxia alterna,Chave H

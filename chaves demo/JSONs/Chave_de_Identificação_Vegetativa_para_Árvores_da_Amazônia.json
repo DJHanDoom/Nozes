@@ -1,0 +1,4462 @@
+{
+  "id": "ryaodfqrq",
+  "name": "Chave de Identificação Vegetativa para Árvores da Amazônia",
+  "description": "Uma chave de identificação interativa focada em características vegetativas (folhas, casca, exsudato, filotaxia) de árvores arbóreas comuns e ecologicamente significativas encontradas no bioma Amazônico do Brasil, destinada a especialistas e cientistas.",
+  "features": [
+    {
+      "id": "b61zvtrsi",
+      "name": "Tipo de Filotaxia",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "01m7i9wi8",
+          "label": "Alternada espiralada"
+        },
+        {
+          "id": "dkecyfu2f",
+          "label": "Alternada dística"
+        },
+        {
+          "id": "en7kfzzg2",
+          "label": "Oposta"
+        },
+        {
+          "id": "ubt2atqwh",
+          "label": "Verticilada"
+        }
+      ]
+    },
+    {
+      "id": "fvre7if2q",
+      "name": "Tipo de Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xo9ti955i",
+          "label": "Simples"
+        },
+        {
+          "id": "l6m8s6r82",
+          "label": "Composta (paripenada)"
+        },
+        {
+          "id": "z545r73uw",
+          "label": "Composta (imparipenada)"
+        },
+        {
+          "id": "z21avd8z2",
+          "label": "Composta (bipinada)"
+        },
+        {
+          "id": "pqa5bc78b",
+          "label": "Composta (palmada)"
+        }
+      ]
+    },
+    {
+      "id": "iu13r6kyf",
+      "name": "Margem da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "zz2wi1q1f",
+          "label": "Inteira"
+        },
+        {
+          "id": "wpwcukbv4",
+          "label": "Serrilhada"
+        },
+        {
+          "id": "lhs3ywnj6",
+          "label": "Crenada"
+        },
+        {
+          "id": "cb620tkbo",
+          "label": "Lobada"
+        }
+      ]
+    },
+    {
+      "id": "piur9ri6k",
+      "name": "Presença de Estípulas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "iyktb6hy8",
+          "label": "Ausentes"
+        },
+        {
+          "id": "ywi95eio6",
+          "label": "Presentes (livres)"
+        },
+        {
+          "id": "tj43py0iu",
+          "label": "Presentes (interpeciolares)"
+        },
+        {
+          "id": "my9wwcsz8",
+          "label": "Presentes (intrapeciolares)"
+        }
+      ]
+    },
+    {
+      "id": "i4c1l9yzs",
+      "name": "Exsudato do Tronco",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "o56bn9r16",
+          "label": "Ausente"
+        },
+        {
+          "id": "0t2bb02ek",
+          "label": "Látex (branco/amarelado)"
+        },
+        {
+          "id": "xasgyilpl",
+          "label": "Resina (transparente/âmbar)"
+        },
+        {
+          "id": "5yoyz571c",
+          "label": "Seiva (avermelhada/sanguínea)"
+        }
+      ]
+    },
+    {
+      "id": "fiewekedk",
+      "name": "Ritidoma (Casca do Tronco)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ajxjqeqyo",
+          "label": "Liso ou levemente áspero"
+        },
+        {
+          "id": "a4dfbnmep",
+          "label": "Fissurado (longitudinalmente)"
+        },
+        {
+          "id": "fe4u2irip",
+          "label": "Escamoso ou descamante"
+        },
+        {
+          "id": "rse0vuhfx",
+          "label": "Lenticelado proeminente"
+        }
+      ]
+    },
+    {
+      "id": "1c8l9z0z1",
+      "name": "Nervação da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "uu8bcdylq",
+          "label": "Peninérvea"
+        },
+        {
+          "id": "6s627mni1",
+          "label": "Actinódroma (palmada na base)"
+        },
+        {
+          "id": "w24su3pg8",
+          "label": "Brochidódroma"
+        },
+        {
+          "id": "85jsh10cg",
+          "label": "Craspedódroma"
+        }
+      ]
+    },
+    {
+      "id": "69k08h296",
+      "name": "Indumento da Face Abaxial da Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "iota0er2u",
+          "label": "Glabro"
+        },
+        {
+          "id": "f70xs2f07",
+          "label": "Pubescente (esparso)"
+        },
+        {
+          "id": "4t6gwen1n",
+          "label": "Tomentoso (denso)"
+        },
+        {
+          "id": "n7d8gptv6",
+          "label": "Estrigoso/Seríceo"
+        }
+      ]
+    },
+    {
+      "id": "m45gv662y",
+      "name": "Forma Predominante da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "2g1elwt8b",
+          "label": "Elíptica a oblonga"
+        },
+        {
+          "id": "3a8v2s1ov",
+          "label": "Ovada a obovada"
+        },
+        {
+          "id": "5j2pmbq6g",
+          "label": "Lanceolada a espatulada"
+        },
+        {
+          "id": "6sqic6k1y",
+          "label": "Cordiforme"
+        }
+      ]
+    },
+    {
+      "id": "oife81x6u",
+      "name": "Consistência da Lâmina Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "k7zm5e8jh",
+          "label": "Membranácea"
+        },
+        {
+          "id": "g4eg2b5uo",
+          "label": "Cartácea"
+        },
+        {
+          "id": "3mcqbj8kx",
+          "label": "Coriácea"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "805h3e2ls",
+      "name": "Seringueira",
+      "scientificName": "Hevea brasiliensis (Willd. ex A.Juss.) Müll.Arg.",
+      "family": "Euphorbiaceae",
+      "description": "Árvore de grande porte, conhecida pela produção de látex. Folhas digitadas. Casca com ritidoma liso a levemente fissurado, liberando látex branco abundante ao ser cortada.",
+      "imageUrl": "https://static.inaturalist.org/photos/56965105/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "cd1dsiasv",
+      "name": "Castanheira-do-Brasil",
+      "scientificName": "Bertholletia excelsa Bonpl.",
+      "family": "Lecythidaceae",
+      "description": "Uma das maiores árvores da Amazônia, com tronco reto e folhas grandes. Ritidoma espesso, fissurado longitudinalmente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/64136678/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "xu32vyzdv",
+      "name": "Andiroba",
+      "scientificName": "Carapa guianensis Aubl.",
+      "family": "Meliaceae",
+      "description": "Árvore de médio a grande porte, comum em áreas de várzea. Folhas compostas pinadas. Casca com fissuras e placas descamantes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/211579196/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "3po9m3m8o",
+      "name": "Ucuuba",
+      "scientificName": "Virola surinamensis (Rol. ex Rottb.) Warb.",
+      "family": "Myristicaceae",
+      "description": "Árvore de tronco reto, com folhas simples. Caracterizada pela presença de um látex avermelhado que exuda do tronco e pecíolos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/338207863/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "dkecyfu2f"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "rfiod65sv",
+      "name": "Maçaranduba",
+      "scientificName": "Manilkara huberi (Ducke) Standl.",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte, madeira muito densa. Folhas simples, coriáceas. Produz látex branco pegajoso.",
+      "imageUrl": "https://static.inaturalist.org/photos/4043962/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "soeh4k2l2",
+      "name": "Sumaúma",
+      "scientificName": "Ceiba pentandra (L.) Gaertn.",
+      "family": "Malvaceae",
+      "description": "Árvore monumental, com tronco frequentemente com sapopemas e coberto por acúleos (espinhos). Folhas compostas digitadas. Casca lisa a levemente áspera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/32279278/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "09ae3cgfa",
+      "name": "Jatobá",
+      "scientificName": "Hymenaea courbaril L.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, conhecida pela resina aromática. Folhas compostas com dois folíolos grandes, coriáceos. Casca fissurada e resinosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/456165450/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "rz2gscuce",
+      "name": "Matauá",
+      "scientificName": "Eschweilera coriacea (DC.) S.A.Mori",
+      "family": "Lecythidaceae",
+      "description": "Árvore comum, com folhas simples, elípticas e coriáceas. Tronco com casca fissurada e placas que se desprendem.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/d130a34db25b9cad194291abd8124e0d.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "e638dpyhz",
+      "name": "Angelim-vermelho",
+      "scientificName": "Dinizia excelsa Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, folhas compostas imparipenadas, folíolos grandes. Casca grossa, fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/42869700/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "ni1mxcnv1",
+      "name": "Mogno",
+      "scientificName": "Swietenia macrophylla King",
+      "family": "Meliaceae",
+      "description": "Árvore valiosa, de grande porte. Folhas compostas paripenadas. Casca com ritidoma descamante em placas finas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/38634940/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "5j2pmbq6g"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "bzdfsvcie",
+      "name": "Visgueiro",
+      "scientificName": "Parkia multijuga Benth.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, copa ampla. Folhas grandes, bipinadas. Casca fissurada e lenticelada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/244923223/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "cr767i9ox",
+      "name": "Cumaru",
+      "scientificName": "Dipteryx odorata (Aubl.) Forsyth f.",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, conhecida pela semente aromática. Folhas compostas imparipenadas, folíolos coriáceos. Casca lisa a levemente fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/10894787/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "zm1tutpjx",
+      "name": "Piquiá",
+      "scientificName": "Caryocar villosum (Aubl.) Pers.",
+      "family": "Caryocaraceae",
+      "description": "Árvore robusta, frutos grandes. Folhas compostas palmadas, com folíolos coriáceos e nervação proeminente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/24947324/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "4t6gwen1n"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "j0g94g056",
+      "name": "Faveira",
+      "scientificName": "Parkia discolor Spruce ex Benth.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte. Folhas compostas imparipenadas, com folíolos grandes e ovados.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/257730e56f290e304b2d5fb329533468.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "rwq4al1js",
+      "name": "Ipê-roxo",
+      "scientificName": "Handroanthus impetiginosus (Mart. ex DC.) Mattos",
+      "family": "Bignoniaceae",
+      "description": "Árvore ornamental, com folhas compostas palmadas e folíolos coriáceos. Casca cinzenta, fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/539921449/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "3xlgsshqx",
+      "name": "Tauari",
+      "scientificName": "Couratari guianensis Aubl.",
+      "family": "Lecythidaceae",
+      "description": "Árvore de grande porte, com tronco cilíndrico. Folhas simples, agrupadas nas extremidades dos ramos. Casca com ritidoma que se desprende em grandes placas retangulares.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/30588428/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "0mkwrxfua",
+      "name": "Anani",
+      "scientificName": "Symphonia globulifera L.f.",
+      "family": "Clusiaceae",
+      "description": "Árvore de porte médio, com raízes escoras, comum em várzeas e igapós. Produz látex amarelado e exsudato avermelhado. Folhas simples, brilhantes, coriáceas e frequentemente com pontuações. Casca fissurada a levemente fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/201630600/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "xazwvayon",
+      "name": "Jacarandá-da-Amazônia",
+      "scientificName": "Jacaranda copaia (Aubl.) D.Don",
+      "family": "Bignoniaceae",
+      "description": "Árvore de médio porte. Folhas compostas imparipenadas, com folíolos elípticos. Casca geralmente lisa.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/df4c09803f42542e419c9c07450b6b5f.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "1tn2j7rr4",
+      "name": "Roxinho",
+      "scientificName": "Peltogyne paniculata Benth.",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, famosa pela madeira roxa. Folhas compostas paripenadas. Casca com ritidoma fissurado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/98326240/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "28lrf4ad3",
+      "name": "Mandioqueira",
+      "scientificName": "Qualea paraensis Ducke",
+      "family": "Vochysiaceae",
+      "description": "Árvore de porte médio, com folhas simples e grandes, com nervuras secundárias proeminentes. Casca lisa, com lenticelas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340714113/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "htyuxx9pb",
+      "name": "Cedro",
+      "scientificName": "Cedrela odorata L.",
+      "family": "Meliaceae",
+      "description": "Árvore de grande porte, madeira aromática. Folhas compostas imparipenadas. Casca com fissuras longitudinais, com placas descamantes.",
+      "imageUrl": "https://static.inaturalist.org/photos/227197663/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "5j2pmbq6g"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "65pj2u0d8",
+      "name": "Azeitona",
+      "scientificName": "Minquartia guianensis Aubl.",
+      "family": "Olacaceae",
+      "description": "Árvore de médio porte. Folhas simples, coriáceas. Tronco com casca fissurada e exsudato aquoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/68256761/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "meogbuvcv",
+      "name": "Cardeiro",
+      "scientificName": "Eriotheca globosa (Aubl.) A.Robyns",
+      "family": "Malvaceae",
+      "description": "Árvore de grande porte, com tronco reto e casca grossa. Folhas simples, grandes, com nervuras secundárias marcadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11859702/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "pdex2xhdl",
+      "name": "Cupiúba",
+      "scientificName": "Goupia glabra Aubl.",
+      "family": "Goupiaceae",
+      "description": "Árvore de médio a grande porte, com folhas simples. Casca fina, que se desprende em lâminas finas. Madeira de alta densidade.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/6928521/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "wpwcukbv4"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "y3iunoukf",
+      "name": "Marupá",
+      "scientificName": "Simarouba amara Aubl.",
+      "family": "Simaroubaceae",
+      "description": "Árvore de porte médio, madeira leve. Folhas compostas imparipenadas, com folíolos coriáceos.",
+      "imageUrl": "https://static.inaturalist.org/photos/1497482/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "niktdlias",
+      "name": "Cajuí",
+      "scientificName": "Anacardium microcarpum Ducke",
+      "family": "Anacardiaceae",
+      "description": "Árvore de porte médio, com folhas grandes e simples. Característica por sua casca geralmente lisa e cinzenta.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/111073548/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "1euv74stg",
+      "name": "Muiracatiara",
+      "scientificName": "Astronium lecointei Ducke",
+      "family": "Anacardiaceae",
+      "description": "Árvore de grande porte, madeira com listras marcantes. Folhas compostas imparipenadas. Casca escamosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/250429952/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "5oah5ed6h",
+      "name": "Copaíba",
+      "scientificName": "Copaifera reticulata Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, conhecida pelo óleo-resina medicinal. Folhas compostas paripenadas. Casca lisa, com lenticelas e exsudato oleoso.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Copaicaaclimacao.JPG/500px-Copaicaaclimacao.JPG",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "cyotcd9s8",
+      "name": "Amarelão",
+      "scientificName": "Terminalia amazonia (J.F.Gmel.) Exell",
+      "family": "Combretaceae",
+      "description": "Árvore de grande porte, com tronco reto. Folhas simples, agrupadas nas extremidades. Casca geralmente lisa, que se descama em placas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/403501697/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "jtaphiocq",
+      "name": "Uxi",
+      "scientificName": "Endopleura uchi (Huber) Cuatrec.",
+      "family": "Humiriaceae",
+      "description": "Árvore de médio a grande porte, com frutos comestíveis. Folhas simples, coriáceas. Casca fissurada e rugosa.",
+      "imageUrl": "https://static.inaturalist.org/photos/6545125/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "v9dkbotef",
+      "name": "Abiu",
+      "scientificName": "Pouteria caimito (Ruiz & Pav.) Radlk.",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte, com frutos amarelados. Folhas simples, brilhantes. Produz látex branco.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/56391813/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "gifl7ohgi",
+      "name": "Sorva",
+      "scientificName": "Couma macrocarpa Barb.Rodr.",
+      "family": "Apocynaceae",
+      "description": "Árvore de médio porte, produzindo látex comestível. Folhas simples, com nervuras secundárias paralelas. Casca lisa.",
+      "imageUrl": "https://static.inaturalist.org/photos/255444271/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "zbyj2sr29",
+      "name": "Curupixá",
+      "scientificName": "Micropholis venulosa (Mart. & Eichler) Pierre",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio a grande porte, com folhas simples e brilhantes, coriáceas. Produz látex branco. Casca fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/165402946/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "z389a7961",
+      "name": "Louro-vermelho",
+      "scientificName": "Nectandra rubra (Meisn.) Mez",
+      "family": "Lauraceae",
+      "description": "Árvore de porte médio, madeira avermelhada. Folhas simples, com nervuras secundárias proeminentes. Casca lisa a ligeiramente fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/592273325/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "qkik5p51j",
+      "name": "Almécega",
+      "scientificName": "Protium heptaphyllum (Aubl.) Marchand",
+      "family": "Burseraceae",
+      "description": "Árvore de médio a grande porte, conhecida pela resina aromática. Folhas compostas imparipenadas. Casca lisa, com exsudato resinoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/331492887/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "sqx47axn3",
+      "name": "Caroba",
+      "scientificName": "Jacaranda caroba (Vell.) DC.",
+      "family": "Bignoniaceae",
+      "description": "Árvore de porte médio, com folhas compostas bipinadas, grandes e vistosas. Casca lisa, acinzentada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/177047/medium.JPG",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "m7gmuzgbl",
+      "name": "Tatajuba",
+      "scientificName": "Bagassa guianensis Aubl.",
+      "family": "Moraceae",
+      "description": "Árvore de grande porte, com látex amarelo. Folhas simples, alternadas. Casca com lenticelas proeminentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/119470957/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "1hbpq6iii",
+      "name": "Visgueiro-da-várzea",
+      "scientificName": "Parkia inundabilis Ducke",
+      "family": "Fabaceae",
+      "description": "Espécie de Parkia adaptada a áreas de várzea. Folhas compostas bipinadas. Casca lisa a levemente fissurada.",
+      "imageUrl": "https://static.inaturalist.org/photos/120566184/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "hnrs3v55x",
+      "name": "Pau-alho",
+      "scientificName": "Gallesia integrifolia (Spreng.) Harms",
+      "family": "Phytolaccaceae",
+      "description": "Árvore de porte médio, exalando um forte odor de alho da casca e folhas ao serem maceradas. Folhas simples.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/47278169/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "aty20ph1m",
+      "name": "Pau-de-leite",
+      "scientificName": "Sapium glandulosum (L.) Morong",
+      "family": "Euphorbiaceae",
+      "description": "Árvore de médio porte, comum em áreas de igapó e várzea. Folhas simples, com látex branco. Casca lisa.",
+      "imageUrl": "https://static.inaturalist.org/photos/56189377/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "wpwcukbv4"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "5j2pmbq6g"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "qrzqg1hu2",
+      "name": "Balsa",
+      "scientificName": "Ochroma pyramidale (Cav. ex Lam.) Urb.",
+      "family": "Malvaceae",
+      "description": "Árvore de crescimento rápido, madeira muito leve. Folhas simples, grandes, geralmente lobadas quando jovem. Casca lisa, verde-acinzentada.",
+      "imageUrl": "https://static.inaturalist.org/photos/37132197/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "cb620tkbo"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "6s627mni1"
+        ],
+        "69k08h296": [
+          "4t6gwen1n"
+        ],
+        "m45gv662y": [
+          "6sqic6k1y"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "tueagne7o",
+      "name": "Munguba",
+      "scientificName": "Pachira aquatica Aubl.",
+      "family": "Malvaceae",
+      "description": "Árvore de médio porte, comum em áreas alagadiças. Folhas compostas palmadas. Tronco com casca lisa, verde.",
+      "imageUrl": "https://static.inaturalist.org/photos/41385494/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "5j2pmbq6g"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "wxatkgp4n",
+      "name": "Gameleira",
+      "scientificName": "Ficus insipida Willd.",
+      "family": "Moraceae",
+      "description": "Árvore de grande porte, com raízes tabulares (sapopemas) proeminentes. Produz látex branco. Folhas simples, alternadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/99390683/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "qbll59w6e",
+      "name": "Guariúba",
+      "scientificName": "Clarisia racemosa Ruiz & Pav.",
+      "family": "Moraceae",
+      "description": "Árvore de grande porte. Folhas simples, alternadas. Produz látex amarelado. Casca com ritidoma lenticelado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/22983379/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "hsnwrpbzd",
+      "name": "Jenipapo",
+      "scientificName": "Genipa americana L.",
+      "family": "Rubiaceae",
+      "description": "Árvore de porte médio. Folhas simples, opostas, grandes e brilhantes. Casca fissurada e escamosa.",
+      "imageUrl": "https://static.inaturalist.org/photos/169831616/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "tj43py0iu"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "epxp3dv4s",
+      "name": "Bacuri",
+      "scientificName": "Platonia insignis Mart.",
+      "family": "Clusiaceae",
+      "description": "Árvore de porte médio, com frutos grandes e aromáticos. Folhas simples, coriáceas, com nervuras secundárias proeminentes. Exsudato resinoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/335878338/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "pxsyprwva",
+      "name": "Ingá-cipó",
+      "scientificName": "Inga edulis Mart.",
+      "family": "Fabaceae",
+      "description": "Árvore de médio porte, comum em beira de rios. Folhas compostas paripenadas, com raque alada. Estípulas presentes.",
+      "imageUrl": "https://static.inaturalist.org/photos/32845019/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "z5ut8bias",
+      "name": "Piranheira",
+      "scientificName": "Piranhea trifoliata Baill.",
+      "family": "Picrodendraceae",
+      "description": "Árvore de porte médio, com folhas trifolioladas (raro em árvores amazônicas). Casca lisa a levemente escamosa.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Piranhea_trifoliata.jpg/400px-Piranhea_trifoliata.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "b73br2z0w",
+      "name": "Abiu-rana",
+      "scientificName": "Pouteria macrophylla (P.Beauv.) Eyma",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte, similar ao Abiu, com látex branco. Folhas simples, brilhantes, coriáceas e frequentemente com pontuações translúcidas. Produz frutos de polpa oleosa. Casca fissurada, com exsudato amarelado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/152544410/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "61pfns9pw",
+      "name": "Acariquara",
+      "scientificName": "Licania majuscula Kuhlm.",
+      "family": "Chrysobalanaceae",
+      "description": "Árvore de grande porte, madeira muito dura. Folhas simples, coriáceas. Tronco com casca fissurada, com exsudato avermelhado.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/fbbe4609226559606e6bab44814df3d3.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "wltpm5ydk",
+      "name": "Breu-branco",
+      "scientificName": "Protium tenuifolium (Engl.) T.C.Andres & J.D.Mitch.",
+      "family": "Burseraceae",
+      "description": "Árvore de médio a grande porte, conhecida pela resina aromática. Folhas compostas imparipenadas. Casca lisa, com exsudato resinoso claro.",
+      "imageUrl": "https://static.inaturalist.org/photos/57100236/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "0w2t91bur",
+      "name": "Envira",
+      "scientificName": "Xylopia aromatica (Lam.) Mart.",
+      "family": "Annonaceae",
+      "description": "Árvore de médio porte. Folhas simples, dísticas, geralmente com base assimétrica. Casca fibrosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/250872849/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "dkecyfu2f"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "ie2iejs3j",
+      "name": "Guajará",
+      "scientificName": "Pouteria guianensis Aubl.",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte. Folhas simples, coriáceas. Ritidoma escamoso, com placas que se desprendem. Exsudato branco.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/339051298/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "zb9p3wakh",
+      "name": "Pau-rosa",
+      "scientificName": "Aniba rosiodora Ducke",
+      "family": "Lauraceae",
+      "description": "Árvore de grande porte, muito aromática. Folhas simples, alternadas. Casca lisa, com odor característico.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/106512562/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "qhnh60lm7",
+      "name": "Pau-ferro",
+      "scientificName": "Libidibia ferrea (Mart. ex Tul.) L.P.Queiroz",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, madeira muito densa. Folhas compostas imparipenadas, com folíolos coriáceos. Casca com fissuras e placas descamantes.",
+      "imageUrl": "https://static.inaturalist.org/photos/305065278/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "rlsy2r2ze",
+      "name": "Sorveira-verdadeira",
+      "scientificName": "Couma utilis (Mart.) Müll.Arg.",
+      "family": "Apocynaceae",
+      "description": "Árvore de grande porte. Folhas simples, com nervuras secundárias paralelas e proeminentes. Produz látex branco comestível.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/48029519/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "fujag7aaj",
+      "name": "Taxi",
+      "scientificName": "Luetzelburgia paniculata (Vogel) Harms",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, com folhas compostas bipinadas. Casca com ritidoma lenticelado e exsudato escuro.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/489379539/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "k8q9xzb7e",
+      "name": "Caxinguba",
+      "scientificName": "Ficus gomelleira Kunth",
+      "family": "Moraceae",
+      "description": "Árvore de porte médio, com látex abundante. Folhas simples, alternadas. Casca lisa e esverdeada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/76229022/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "gr4qznbmh",
+      "name": "Angelina",
+      "scientificName": "Hymenolobium petraeum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte. Folhas compostas imparipenadas, com folíolos coriáceos. Casca com ritidoma escamoso.",
+      "imageUrl": "https://static.inaturalist.org/photos/74339797/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "7nuiz3vcw",
+      "name": "Barbatimão",
+      "scientificName": "Stryphnodendron adstringens (Mart.) Coville",
+      "family": "Fabaceae",
+      "description": "Árvore de porte médio, com casca rica em taninos. Folhas compostas bipinadas, folíolos pequenos. Casca grossa e fissurada.",
+      "imageUrl": "https://static.inaturalist.org/photos/30180649/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "uy2wwhg78",
+      "name": "Curupau",
+      "scientificName": "Anadenanthera colubrina (Vell.) Brenan",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, com madeira avermelhada. Folhas compostas imparipenadas. Casca com fissuras longitudinais e exsudato avermelhado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/121312577/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "gieybas9u",
+      "name": "Jequitibá-rosa",
+      "scientificName": "Cariniana legalis (Mart.) Kuntze",
+      "family": "Lecythidaceae",
+      "description": "Árvore gigante da Amazônia, com tronco cilíndrico e copa ampla. Folhas simples, agrupadas nas extremidades dos ramos. Casca escamosa.",
+      "imageUrl": "https://static.inaturalist.org/photos/1797430/medium.JPG",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "okxs2vf74",
+      "name": "Sucupira",
+      "scientificName": "Pterodon emarginatus Vogel",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, madeira muito resistente. Folhas compostas imparipenadas, com folíolos coriáceos. Casca com fissuras profundas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/297882585/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "817umlua5",
+      "name": "Guarabú",
+      "scientificName": "Lafoensia pacari A.St.-Hil.",
+      "family": "Lythraceae",
+      "description": "Árvore de médio porte. Folhas simples, coriáceas. Casca geralmente lisa, acinzentada, com lenticelas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/387802566/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "s5p39zc6w",
+      "name": "Paricá",
+      "scientificName": "Schizolobium parahyba (Vell.) S.F.Blake",
+      "family": "Fabaceae",
+      "description": "Árvore de rápido crescimento, com folhas grandes, compostas bipinadas. Casca lisa, acinzentada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/59825163/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "xpka744pw",
+      "name": "Quaruba",
+      "scientificName": "Vochysia obidensis Ducke",
+      "family": "Vochysiaceae",
+      "description": "Árvore de grande porte. Folhas compostas bipinadas, folíolos pequenos. Casca geralmente lisa a levemente fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/431743061/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "c2wky90ps",
+      "name": "Cerejeira",
+      "scientificName": "Amburana cearensis (Allemao) A.C.Sm.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, madeira de coloração rosada. Folhas compostas imparipenadas, folíolos coriáceos. Casca com ritidoma descamante.",
+      "imageUrl": "https://static.inaturalist.org/photos/369443636/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "trrib0u19",
+      "name": "Pau-de-chuva",
+      "scientificName": "Albizia saman (Jacq.) Merr.",
+      "family": "Fabaceae",
+      "description": "Árvore de médio a grande porte, com copa ampla e folhas bipinadas que se fecham à noite. Casca cinzenta, fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/1539776/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "750ldzxx5",
+      "name": "Angelim-da-mata",
+      "scientificName": "Hymenolobium excelsum Ducke",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte. Folhas compostas imparipenadas, com folíolos coriáceos. Casca com ritidoma fissurado.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Falta_imagem_aves.svg/400px-Falta_imagem_aves.svg.png",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "vikzj5egt",
+      "name": "Massaranduba-verdadeira",
+      "scientificName": "Manilkara bidentata (A.DC.) A.Chev.",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte, com madeira avermelhada e densa. Folhas simples, coriáceas. Produz látex branco abundante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/437898470/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "ieh64aq63",
+      "name": "Cumarurana",
+      "scientificName": "Dipteryx alata Vogel",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, madeira densa e escura. Folhas compostas imparipenadas, com folíolos coriáceos. Casca com fissuras e descamação irregular.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/56250466/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "82y74z6vq",
+      "name": "Pau-amarelo",
+      "scientificName": "Maytenus aquifolia Mart.",
+      "family": "Celastraceae",
+      "description": "Árvore de médio a grande porte, madeira amarelada. Folhas simples, alternadas. Casca com ritidoma liso a finamente fissurado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/111602434/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "v7lragqso",
+      "name": "Marmelada-de-cavalo",
+      "scientificName": "Alibertia edulis (Rich.) A.Rich. ex DC.",
+      "family": "Rubiaceae",
+      "description": "Árvore de porte médio, com frutos comestíveis. Folhas simples, coriáceas. Casca lisa, com látex branco.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/73795460/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "tj43py0iu"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "5m41d526l",
+      "name": "Fava-de-bolota",
+      "scientificName": "Parkia pendula (Willd.) Benth. ex Walp.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, com grandes frutos lenhosos. Folhas compostas bipinadas. Casca com fissuras longitudinais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26033221/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "hv7j9svbn",
+      "name": "Jatobá-da-mata",
+      "scientificName": "Hymenaea rubriflora Ducke",
+      "family": "Fabaceae",
+      "description": "Outra espécie de Jatobá, com resina transparente. Folhas compostas bifolioladas, coriáceas. Casca com fissuras e exsudato resinoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/145144039/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "cs0kg240h",
+      "name": "Quaruba-rosa",
+      "scientificName": "Vochysia punctata Spruce ex Warm.",
+      "family": "Vochysiaceae",
+      "description": "Árvore de grande porte, madeira rosada. Folhas simples, grandes, com nervuras secundárias proeminentes. Casca lisa a levemente escamosa.",
+      "imageUrl": "https://static.inaturalist.org/photos/493294591/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "ccx6v56uo",
+      "name": "Cupuimirim",
+      "scientificName": "Theobroma subincanum Mart.",
+      "family": "Malvaceae",
+      "description": "Árvore de médio porte, parente do Cupuaçu. Folhas simples, grandes, com indumento tomentoso na face abaxial. Casca rugosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/330399077/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "4t6gwen1n"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "r0w3q6yor",
+      "name": "Pau-d'arco-amarelo",
+      "scientificName": "Handroanthus serratifolius (Vahl) S.O.Grose",
+      "family": "Bignoniaceae",
+      "description": "Árvore de grande porte, madeira amarela. Folhas compostas palmadas. Casca com fissuras longitudinais e ritidoma escamoso.",
+      "imageUrl": "https://static.inaturalist.org/photos/465520803/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "c2ylnfk21",
+      "name": "Urucuzeiro",
+      "scientificName": "Bixa orellana L.",
+      "family": "Bixaceae",
+      "description": "Árvore ou arbusto de pequeno porte, com frutos característicos. Folhas simples, cordiformes, com pontuações. Casca lisa.",
+      "imageUrl": "https://static.inaturalist.org/photos/80625986/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "6s627mni1"
+        ],
+        "69k08h296": [
+          "f70xs2f07"
+        ],
+        "m45gv662y": [
+          "6sqic6k1y"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "r7vveqg89",
+      "name": "Pau-roxo",
+      "scientificName": "Peltogyne venosa (Vahl) Benth.",
+      "family": "Fabaceae",
+      "description": "Árvore de grande porte, madeira roxa. Folhas compostas paripenadas. Casca lisa, acinzentada, com lenticelas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/539921449/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "f1h98ypqe",
+      "name": "Pequi-á",
+      "scientificName": "Caryocar glabrum (Blanchet) Cabrera",
+      "family": "Caryocaraceae",
+      "description": "Árvore de grande porte. Folhas compostas trifolioladas, folíolos grandes, coriáceos. Casca fissurada e exsudato oleoso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/10641714/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "pqa5bc78b"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "4t6gwen1n"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "6k75pp2nm",
+      "name": "Uchipucu",
+      "scientificName": "Pouteria venosa (Mart.) Baehni",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte. Folhas simples, alternadas. Casca com ritidoma lenticelado e exsudato amarelado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/421131403/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "8xroq6puz",
+      "name": "Caxias",
+      "scientificName": "Caxias",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte, madeira vermelha. Folhas simples, alternadas. Casca com ritidoma lenticelado e exsudato branco.",
+      "imageUrl": "https://static.inaturalist.org/photos/331104009/medium.jpg",
+      "links": [
+        {
+          "id": "hu4m07875",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=Caxias&go=Go"
+        },
+        {
+          "id": "clbmq0v2y",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=Caxias"
+        },
+        {
+          "id": "8s9n481w0",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=Caxias"
+        },
+        {
+          "id": "kdqobmqfd",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=Caxias"
+        },
+        {
+          "id": "fqykhqy33",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=Caxias"
+        }
+      ],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "jj7bumzpj",
+      "name": "Louro-pucheri",
+      "family": "Lauraceae",
+      "description": "Árvore de porte médio, com folhas simples e coriáceas, geralmente com odor aromático. Casca lisa a levemente rugosa.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "firvpyo50",
+      "name": "Jari",
+      "family": "Symphoniaceae",
+      "description": "Árvore de médio porte, comum em várzeas e igapós. Folhas simples, geralmente com pontuações. Casca fissurada, com exsudato avermelhado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/61263403/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "xx11ahkfz",
+      "name": "Pau-mulato",
+      "family": "Fabaceae",
+      "description": "Árvore de porte médio, conhecida pela casca que se descama em placas finas e coloridas, revelando um tronco multicolorido. Folhas simples, alternadas.",
+      "imageUrl": "https://static.inaturalist.org/photos/237718462/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "gl50oju7q",
+      "name": "Pariri",
+      "family": "Rubiaceae",
+      "description": "Árvore de pequeno a médio porte, com folhas simples, opostas, com coloração roxa na face abaxial. Casca lisa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/577942353/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "en7kfzzg2"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "tj43py0iu"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "dkotne97h",
+      "name": "Piquia-bravo",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte, madeira dura. Folhas simples, coriáceas. Casca fissurada e rugosa, exsudando seiva avermelhada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/226250321/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "2m6xm0c24",
+      "name": "Mumbaca",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte, comum em várzeas. Folhas simples, coriáceas. Casca com lenticelas e exsudato branco.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/75775/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "l5m0qn8sg",
+      "name": "Cutite",
+      "family": "Sapotaceae",
+      "description": "Árvore de porte médio, com frutos de polpa oleosa. Folhas simples, coriáceas. Casca fissurada, com exsudato amarelado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/280449916/medium.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "g6l5ld78n",
+      "name": "Castanha-de-macaco",
+      "family": "Lecythidaceae",
+      "description": "Árvore de médio porte, com frutos comestíveis. Folhas simples, alternadas, grandes. Casca lisa a levemente fissurada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9662259/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "adjten9wa",
+      "name": "Abiurana",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte, com látex branco. Folhas simples, alternadas, com nervuras secundárias paralelas e proeminentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/123178169/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "cred1xfdi",
+      "name": "Casca-de-anta",
+      "family": "Winteraceae",
+      "description": "Árvore de porte médio, com folhas simples. Casca fina, aromática, com odor de canela. Exsudato resinoso.",
+      "imageUrl": "https://static.inaturalist.org/photos/29228874/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "6s627mni1"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "4tvssw4j3",
+      "name": "Embaúba",
+      "family": "Urticaceae",
+      "description": "Árvore de crescimento rápido, com tronco oco e anelado. Folhas grandes, peltadas, com face abaxial prateada. Estípulas grandes e caducas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9723595/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "cb620tkbo"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "6s627mni1"
+        ],
+        "69k08h296": [
+          "4t6gwen1n"
+        ],
+        "m45gv662y": [
+          "6sqic6k1y"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "e3ee99e3e",
+      "name": "Guajuvira",
+      "family": "Sapotaceae",
+      "description": "Árvore de médio porte. Folhas simples, alternadas. Casca com lenticelas e exsudato amarelado.",
+      "imageUrl": "https://static.inaturalist.org/photos/15366275/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "rse0vuhfx"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "mmmcpoxbo",
+      "name": "Jatobazinho",
+      "family": "Fabaceae",
+      "description": "Espécie menor de Jatobá. Folhas compostas bifolioladas, coriáceas. Resina transparente no tronco.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/116696739/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "l6m8s6r82"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "ywi95eio6"
+        ],
+        "i4c1l9yzs": [
+          "xasgyilpl"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "3a8v2s1ov"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "qx0umza6a",
+      "name": "Pau-preto",
+      "family": "Ebenaceae",
+      "description": "Árvore de grande porte, madeira muito escura e densa. Folhas simples, alternadas. Casca com ritidoma escuro e fissurado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14914426/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "cyhy3b4xu",
+      "name": "Taperebá",
+      "family": "Anacardiaceae",
+      "description": "Árvore de médio a grande porte, com frutos comestíveis. Folhas compostas imparipenadas, folíolos coriáceos. Casca com ritidoma descamante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/604477/medium.jpeg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z545r73uw"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "0nhavneib",
+      "name": "Pau-rainha",
+      "family": "Sapotaceae",
+      "description": "Árvore de grande porte. Folhas simples, coriáceas. Casca fissurada e exsudato branco.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/83a2ee3d83f3d1a00eac48aaef0796e2.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "0t2bb02ek"
+        ],
+        "fiewekedk": [
+          "a4dfbnmep"
+        ],
+        "1c8l9z0z1": [
+          "w24su3pg8"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "r3i4a010e",
+      "name": "Sapucaia",
+      "family": "Lecythidaceae",
+      "description": "Árvore de grande porte, com frutos em forma de urna. Folhas simples, alternadas. Casca fissurada e descamante.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Lecythis_grandiflora_Aublet_284.jpg/500px-Lecythis_grandiflora_Aublet_284.jpg",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "wpwcukbv4"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    },
+    {
+      "id": "naxwfaf7u",
+      "name": "Chuveiro-de-ouro",
+      "family": "Fabaceae",
+      "description": "Árvore de médio porte. Folhas compostas bipinadas, com folíolos pequenos. Casca lisa, cinzenta.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "z21avd8z2"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "5j2pmbq6g"
+        ],
+        "oife81x6u": [
+          "k7zm5e8jh"
+        ]
+      }
+    },
+    {
+      "id": "qil21595w",
+      "name": "Capinuri",
+      "family": "Symphoniaceae",
+      "description": "Árvore de grande porte. Folhas simples, coriáceas. Casca lisa a levemente fissurada, exsudato avermelhado.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "5yoyz571c"
+        ],
+        "fiewekedk": [
+          "ajxjqeqyo"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "3mcqbj8kx"
+        ]
+      }
+    },
+    {
+      "id": "amwq0s89s",
+      "name": "Mulateiro",
+      "family": "Rubiaceae",
+      "description": "Árvore de médio porte, conhecida pela casca que se renova anualmente, deixando o tronco liso e bronzeado. Folhas simples.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "b61zvtrsi": [
+          "01m7i9wi8"
+        ],
+        "fvre7if2q": [
+          "xo9ti955i"
+        ],
+        "iu13r6kyf": [
+          "zz2wi1q1f"
+        ],
+        "piur9ri6k": [
+          "iyktb6hy8"
+        ],
+        "i4c1l9yzs": [
+          "o56bn9r16"
+        ],
+        "fiewekedk": [
+          "fe4u2irip"
+        ],
+        "1c8l9z0z1": [
+          "uu8bcdylq"
+        ],
+        "69k08h296": [
+          "iota0er2u"
+        ],
+        "m45gv662y": [
+          "2g1elwt8b"
+        ],
+        "oife81x6u": [
+          "g4eg2b5uo"
+        ]
+      }
+    }
+  ]
+}

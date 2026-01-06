@@ -1,0 +1,57 @@
+Passo,Diagnose,Identificação / Próximo Passo
+1,Folha composta,Ir para 2
+,Folha simples,Ir para 9
+2,Filotaxia oposta,Ir para 3
+,Filotaxia alterna,Ir para 5
+3,Folha digitada,Vitaceae
+,Outro tipo de folha composta,Ir para 4
+4,Folha bi ou trifoliolada,Bignoniaceae
+,Folha pinada,Asteraceae (Calea)
+5,Folha digitada,Ir para 6
+,Outro tipo de folha composta,Ir para 7
+6,Presença de gavinhas,Vitaceae
+,Ausência de gavinhas,Convolvulaceae
+7,Presença de estípulas,Fabaceae
+,Ausência de estípulas,Ir para 8
+8,Presença de gavinhas,Sapindaceae
+,Ausência de gavinhas,Connaraceae
+9,Filotaxia verticilada,Apocynaceae
+,Outro tipo de filotaxia,Ir para 10
+10,Filotaxia oposta,Ir para 11
+,Filotaxia alterna,Ir para 15
+11,Nervação curvinérvia ou trinervada,"Loganiaceae, Melastomataceae"
+,Outro tipo de nervação,Ir para 12
+12,Presença de látex,"Apocynaceae, Malpighiaceae"
+,Ausência de látex,Ir para 13
+13,Estípulas interpeciolares,Rubiaceae
+,Ausência desta característica,Ir para 14
+14,Glândulas/nectários extra-florais,Malpighiaceae
+,Ausência desta característica,"Acanthaceae, Amaranthaceae, Asteraceae, Celastraceae"
+15,Presença de gavinhas,Ir para 16
+,Ausência de gavinhas,Ir para 19
+16,Gavinha oposta à folha,Vitaceae
+,Gavinha em outra posição,Ir para 17
+17,Presença de estípulas,Ir para 18
+,Ausência de estípulas,Cucurbitaceae
+18,Glândulas/nectários extra-florais,Passifloraceae
+,Ausência desta característica,Rhamnaceae
+19,Presença de látex,Ir para 20
+,Ausência de látex,Ir para 21
+20,Estípula foliácea ou ausente,Convolvulaceae
+,Estípula fimbriada no ápice,Euphorbiaceae
+21,Presença de espinhos,Ir para 22
+,Ausência de espinhos,Ir para 23
+22,Base cordada a levemente cordada,Smilacaceae
+,Base aguda,"Asteraceae, Polygonaceae"
+23,Estípula em forma de ócrea,Polygonaceae
+,Estípula com outros formatos/ausente,Ir para 24
+24,Bainha fendida na base da folha,Dioscoreaceae
+,Ausência desta característica,Ir para 25
+25,Bordo crenado a serreado,Dilleniaceae
+,Ausência desta característica,Ir para 26
+26,Presença de raízes adventícias,"Araceae, Marcgraviaceae"
+,Ausência desta característica,Ir para 27
+27,Presença de apícolo (nervura sobressalente),Ericaceae
+,Ausência desta característica,Ir para 28
+28,Presença de estípulas,Aristolochiaceae
+,Ausência desta característica,"Boraginaceae, Menispermaceae, Polygalaceae, Solanaceae"

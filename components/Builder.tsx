@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, validateTaxonomy, fetchImagesForEntities, extractBinomial, convertDichotomousKey } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, validateTaxonomy, fetchImagesForEntities, extractBinomial, convertDichotomousKey, generateEntityLinks } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile, read } from 'xlsx';
+import { TypingTerminal, TypingTerminalRef } from './TypingTerminal';
 
 // Generate standalone HTML file with embedded player
 const generateStandaloneHTML = (project: Project, lang: Language): string => {
   const projectJSON = JSON.stringify(project);
-  
+
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -281,9 +282,8 @@ interface BuilderProps {
   defaultModel: string;
   apiKey: string;
   onOpenSettings?: (returnToAi?: boolean) => void;
-  reopenAiModal?: boolean;
-  onAiModalOpened?: () => void;
   onProjectImported?: (project: Project) => void;
+  openAiModalOnMount?: boolean;
 }
 
 type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
@@ -444,9 +444,9 @@ const t = {
     photoTargetEntities: "Entity Images",
     photoTargetFeatures: "Feature Images",
     photoTargetBoth: "Both",
-    actionPhotos: "Complete Photos",
-    actionPhotosDesc: "Fill all missing images with real URLs",
-    photosActionDesc: "Select which images to complete with valid URLs",
+    actionPhotos: "Complete Photos / References",
+    actionPhotosDesc: "Fill missing images and add reference links",
+    photosActionDesc: "Select which content to complete (Images and/or Links)",
     actionValidate: "Validate Taxonomy",
     actionValidateDesc: "Check species names, synonyms, and geographic distribution",
     validateOptions: "Validation Options",
@@ -469,6 +469,13 @@ const t = {
     photoModeExpandDesc: "Keep existing, fill empty only",
     photoCustomSources: "Custom Sources (optional)",
     photoCustomSourcesPlaceholder: "Paste URLs of image databases separated by newlines\ne.g., https://inaturalist.org\nhttps://floradobrasil.jbrj.gov.br",
+    fetchPhotosToggle: "Fetch Photos",
+    fetchPhotosDesc: "Search and update entity/feature images",
+    fetchLinksToggle: "Fetch Links/Materials",
+    fetchLinksDesc: "Add reference links (Wikipedia, GBIF, iNaturalist, etc.)",
+    fetchLinksMinCount: "Minimum links",
+    fetchLinksSources: "Priority sources (optional)",
+    fetchLinksSourcesPlaceholder: "e.g. Wikipedia, GBIF, iNaturalist\n(one per line)",
     modeMerge: "Merge Keys",
     mergeTitle: "Combine Two Keys",
     mergeDesc: "Import two JSON keys and merge them into one optimized key.",
@@ -643,9 +650,9 @@ const t = {
     photoTargetEntities: "Imagens de Entidades",
     photoTargetFeatures: "Imagens de Características",
     photoTargetBoth: "Ambos",
-    actionPhotos: "Completar Fotos",
-    actionPhotosDesc: "Preencher todas as imagens faltantes com URLs reais",
-    photosActionDesc: "Selecione quais imagens completar com URLs válidas",
+    actionPhotos: "Completar Fotos / Referências",
+    actionPhotosDesc: "Preencher imagens faltantes e adicionar links de referência",
+    photosActionDesc: "Selecione o que completar (Imagens e/ou Links)",
     actionValidate: "Validar Taxonomia",
     actionValidateDesc: "Verificar nomes de espécies, sinonímias e distribuição geográfica",
     validateOptions: "Opções de Validação",
@@ -668,6 +675,13 @@ const t = {
     photoModeExpandDesc: "Manter existentes, preencher vazias",
     photoCustomSources: "Fontes Personalizadas (opcional)",
     photoCustomSourcesPlaceholder: "Cole URLs de bancos de imagens separados por quebras de linha\nex: https://inaturalist.org\nhttps://floradobrasil.jbrj.gov.br",
+    fetchPhotosToggle: "Buscar Fotos",
+    fetchPhotosDesc: "Pesquisar e atualizar imagens de entidades/características",
+    fetchLinksToggle: "Buscar Links/Materiais",
+    fetchLinksDesc: "Adicionar links de referência (Wikipedia, GBIF, iNaturalist, etc.)",
+    fetchLinksMinCount: "Mínimo de links",
+    fetchLinksSources: "Fontes prioritárias (opcional)",
+    fetchLinksSourcesPlaceholder: "ex: Wikipedia, GBIF, iNaturalist\n(uma por linha)",
     modeMerge: "Combinar",
     mergeTitle: "Combinar Duas Chaves",
     mergeDesc: "Importe dois JSONs e combine-os em uma chave otimizada.",
@@ -712,13 +726,13 @@ const normalizeName = (name: string): string => {
 const namesMatch = (name1: string, name2: string): boolean => {
   const n1 = normalizeName(name1);
   const n2 = normalizeName(name2);
-  
+
   // Exact match
   if (n1 === n2) return true;
-  
+
   // One contains the other (for cases like "Eugenia uniflora" vs "Eugenia uniflora L.")
   if (n1.includes(n2) || n2.includes(n1)) return true;
-  
+
   // First significant word matches (for species names)
   const words1 = n1.split(' ').filter(w => w.length > 2);
   const words2 = n2.split(' ').filter(w => w.length > 2);
@@ -729,7 +743,7 @@ const namesMatch = (name1: string, name2: string): boolean => {
       return true;
     }
   }
-  
+
   return false;
 };
 
@@ -743,41 +757,41 @@ const namesMatch = (name1: string, name2: string): boolean => {
  */
 const mergeProjectsPreservingData = (newProject: Project, existingProject: Project, preserveAllExisting: boolean = true): Project => {
   console.log(`[mergeProjectsPreservingData] Starting merge: new=${newProject.entities.length} entities, existing=${existingProject.entities.length} entities`);
-  
+
   // ═══════════════════════════════════════════════════════════════════════════════
   // CRITICAL SAFETY CHECKS: Detect AI failures that could cause data loss
   // ═══════════════════════════════════════════════════════════════════════════════
-  
+
   // Check 1: Empty or near-empty AI response - ONLY reject if truly empty
   if (!newProject.entities || newProject.entities.length === 0) {
     console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned EMPTY project! Preserving original.`);
     return existingProject;
   }
-  
+
   // Check 2: Partial response - AI returned fewer entities
   // Instead of rejecting, we'll merge what we got and keep the rest
   const isPartialResponse = newProject.entities.length < existingProject.entities.length;
   if (isPartialResponse) {
     console.warn(`[mergeProjectsPreservingData] PARTIAL RESPONSE: AI returned ${newProject.entities.length} of ${existingProject.entities.length} entities. Will merge available data and preserve remaining entities.`);
   }
-  
+
   // Check 3: AI returned entities but NO features (corrupt response)
   if (!newProject.features || newProject.features.length === 0) {
     console.error(`[mergeProjectsPreservingData] CRITICAL: AI returned NO features! Preserving original.`);
     return existingProject;
   }
-  
+
   // Log trait counts for debugging (no longer used to reject)
   const countTotalTraits = (proj: Project): number => {
     return proj.entities.reduce((sum, e) => {
       return sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0);
     }, 0);
   };
-  
+
   const existingTotalTraits = countTotalTraits(existingProject);
   const newTotalTraits = countTotalTraits(newProject);
   console.log(`[mergeProjectsPreservingData] Trait count - existing: ${existingTotalTraits}, new: ${newTotalTraits}`);
-  
+
   // ═══════════════════════════════════════════════════════════════════════════════
 
   // Create lookup maps for existing data
@@ -847,7 +861,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     if (existingFeaturesById.has(newFeatureId)) {
       return newFeatureId;
     }
-    
+
     // Try to find matching feature by ID in new project and map to existing by name
     const newFeature = newProject.features.find(f => f.id === newFeatureId);
     if (newFeature) {
@@ -857,7 +871,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         return existingFeature.id;
       }
     }
-    
+
     // If we have the feature name from our map, try to find existing feature by name
     const featureName = newFeatureIdToName.get(newFeatureId);
     if (featureName) {
@@ -868,7 +882,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         }
       }
     }
-    
+
     return null;
   };
 
@@ -876,17 +890,17 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   const mapStateId = (newStateId: string, existingFeatureId: string, newFeatureId: string): string | null => {
     const existingFeature = existingFeaturesById.get(existingFeatureId);
     if (!existingFeature) return null;
-    
+
     // First check if state ID already exists in existing feature (direct match)
     const directMatch = existingFeature.states.find(s => s.id === newStateId);
     if (directMatch) {
       mappingStats.stateMatches++;
       return newStateId;
     }
-    
+
     // Try to find state label from new project
     let newStateLabel: string | null = null;
-    
+
     // Method 1: Find in the specified new feature
     const newFeature = newProject.features.find(f => f.id === newFeatureId);
     if (newFeature) {
@@ -895,7 +909,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         newStateLabel = newState.label;
       }
     }
-    
+
     // Method 2: If not found, search in all new features
     if (!newStateLabel) {
       for (const nf of newProject.features) {
@@ -906,7 +920,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         }
       }
     }
-    
+
     // Method 3: Try to find by ID pattern - some IDs might have the label encoded
     if (!newStateLabel && newStateId.includes('_')) {
       const potentialLabel = newStateId.split('_').slice(0, -1).join('_').replace(/-/g, ' ');
@@ -914,18 +928,18 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         newStateLabel = potentialLabel;
       }
     }
-    
+
     if (newStateLabel) {
       // Find matching state by normalized label in existing feature
       const normalizedNewLabel = normalizeName(newStateLabel);
-      const matchingState = existingFeature.states.find(s => 
+      const matchingState = existingFeature.states.find(s =>
         normalizeName(s.label) === normalizedNewLabel
       );
       if (matchingState) {
         mappingStats.stateMatches++;
         return matchingState.id;
       }
-      
+
       // Try partial match (label contains or is contained)
       const partialMatch = existingFeature.states.find(s => {
         const existingNorm = normalizeName(s.label);
@@ -936,7 +950,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         return partialMatch.id;
       }
     }
-    
+
     // Method 4: Try matching by index position (if state order is preserved)
     if (newFeature) {
       const newStateIndex = newFeature.states.findIndex(s => s.id === newStateId);
@@ -945,14 +959,14 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         return existingFeature.states[newStateIndex].id;
       }
     }
-    
+
     // Method 5: If the state ID looks like a number (0, 1, 2...) use it as index
     const stateIdAsNumber = parseInt(newStateId, 10);
     if (!isNaN(stateIdAsNumber) && stateIdAsNumber >= 0 && stateIdAsNumber < existingFeature.states.length) {
       mappingStats.stateMatches++;
       return existingFeature.states[stateIdAsNumber].id;
     }
-    
+
     mappingStats.stateMisses++;
     return null;
   };
@@ -985,13 +999,13 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
     // IMPORTANT: First clean existing traits to remove invalid IDs from previous failed merges
     const cleanedExistingTraits = cleanExistingTraits(existingTraits);
     const result = { ...cleanedExistingTraits };
-    
+
     // Build a set of new feature IDs for quick lookup
     const newFeatureIds = new Set(newProject.features.map(f => f.id));
-    
+
     for (const [newFeatureId, newStateIds] of Object.entries(newTraits)) {
       const existingFeatureId = mapFeatureId(newFeatureId);
-      
+
       if (existingFeatureId) {
         // Feature exists in both - map state IDs
         const mappedStateIds: string[] = [];
@@ -1001,7 +1015,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
             mappedStateIds.push(mappedStateId);
           }
         }
-        
+
         if (mappedStateIds.length > 0) {
           // Only update if existing doesn't have VALID data for this feature (filling gaps)
           if (!result[existingFeatureId] || result[existingFeatureId].length === 0) {
@@ -1021,7 +1035,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
       }
       // If feature doesn't exist in either, skip it (orphaned data)
     }
-    
+
     return result;
   };
 
@@ -1049,8 +1063,8 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         ? existingEntity.imageUrl
         : (newEntity.imageUrl || existingEntity.imageUrl),
       // Preserve links if existing has them and new doesn't
-      links: (newEntity.links && newEntity.links.length > 0) 
-        ? newEntity.links 
+      links: (newEntity.links && newEntity.links.length > 0)
+        ? newEntity.links
         : existingEntity.links,
       // Preserve description if new is empty/generic
       description: (newEntity.description && newEntity.description.length > 20)
@@ -1068,7 +1082,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   // This prevents data loss when AI truncates or omits entities
   if (preserveAllExisting) {
     const missingEntities = existingProject.entities.filter(e => !matchedExistingIds.has(e.id));
-    
+
     if (missingEntities.length > 0) {
       console.warn(`[mergeProjectsPreservingData] ═══════════════════════════════════════════════════════════`);
       console.warn(`[mergeProjectsPreservingData] PARTIAL MERGE SUMMARY:`);
@@ -1127,7 +1141,7 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   // Add back missing features (for REFINE/CLEAN actions where features might be accidentally removed)
   if (preserveAllExisting) {
     const missingFeatures = existingProject.features.filter(f => !matchedFeatureIds.has(f.id));
-    
+
     if (missingFeatures.length > 0) {
       console.warn(`[mergeProjectsPreservingData] AI omitted ${missingFeatures.length} features. Re-adding them to prevent data loss:`);
       missingFeatures.forEach(f => console.warn(`  - "${f.name}" (ID: ${f.id})`));
@@ -1145,11 +1159,11 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
 
   // FINAL SANITIZATION: Ensure all trait IDs in entities are valid for final features (optimized - batch processing)
   let sanitizeStats = { entitiesProcessed: 0, invalidTraitsRemoved: 0, entitiesWithIssues: 0 };
-  
+
   const sanitizedEntities = mergedEntities.map(entity => {
     const sanitizedTraits: Record<string, string[]> = {};
     let entityHadIssues = false;
-    
+
     for (const [featureId, stateIds] of Object.entries(entity.traits)) {
       const validStateIds = finalFeaturesMap.get(featureId);
       if (validStateIds) {
@@ -1166,10 +1180,10 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
         sanitizeStats.invalidTraitsRemoved += stateIds.length;
       }
     }
-    
+
     sanitizeStats.entitiesProcessed++;
     if (entityHadIssues) sanitizeStats.entitiesWithIssues++;
-    
+
     return { ...entity, traits: sanitizedTraits };
   });
 
@@ -1220,41 +1234,42 @@ const mergeProjectsPreservingData = (newProject: Project, existingProject: Proje
   };
 };
 
-export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, reopenAiModal, onAiModalOpened, onProjectImported }) => {
+export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCancel, language, defaultModel, apiKey, onOpenSettings, onProjectImported, openAiModalOnMount }) => {
   const strings = t[language];
-  
+
   // Helper to ensure unique IDs in project (prevents React key warnings)
   const ensureUniqueIds = (proj: Project): Project => {
     const seenEntityIds = new Set<string>();
     const seenFeatureIds = new Set<string>();
-    
+
     const uniqueEntities = proj.entities.filter(e => {
       if (seenEntityIds.has(e.id)) return false;
       seenEntityIds.add(e.id);
       return true;
     });
-    
+
     const uniqueFeatures = proj.features.filter(f => {
       if (seenFeatureIds.has(f.id)) return false;
       seenFeatureIds.add(f.id);
       return true;
     });
-    
+
     if (uniqueEntities.length !== proj.entities.length || uniqueFeatures.length !== proj.features.length) {
       return { ...proj, entities: uniqueEntities, features: uniqueFeatures };
     }
     return proj;
   };
-  
+
   // State
   const [project, setProjectRaw] = useState<Project>(ensureUniqueIds(initialProject || {
     id: Math.random().toString(36).substr(2, 9),
     name: language === 'pt' ? "Nova Chave" : "New Key",
     description: "",
+
     features: [],
     entities: []
   }));
-  
+
   // Wrapper for setProject that ensures unique IDs
   const setProject = (newProject: Project | ((prev: Project) => Project)) => {
     setProjectRaw(prev => {
@@ -1262,7 +1277,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       return ensureUniqueIds(updated);
     });
   };
-  
+
   const [activeTab, setActiveTab] = useState<Tab>('GENERAL');
 
   // AI Generation State
@@ -1298,9 +1313,9 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [showMobileMenu, setShowMobileMenu] = useState(false); // Mobile Header Menu
   const [pendingImportProject, setPendingImportProject] = useState<Project | null>(null); // For confirming optimized imports
   const [pendingNervuraFile, setPendingNervuraFile] = useState<Project | null>(null); // For staging Nervura JSON before import
-  
+
   // State Image Modal
-  const [expandedStateImage, setExpandedStateImage] = useState<{url: string, label: string, featureName: string} | null>(null);
+  const [expandedStateImage, setExpandedStateImage] = useState<{ url: string, label: string, featureName: string } | null>(null);
 
   // Refine Mode State
   const [refineAction, setRefineAction] = useState<RefineAction>('EXPAND');
@@ -1318,31 +1333,44 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     expandRequiredSpecies: '' as string, // Species that MUST be added
     // Refine required features
     refineRequiredFeatures: [] as string[],
-    featureType: 'both' as 'vegetative' | 'reproductive' | 'both', // Feature type filter
+    featureType: 'both' as 'vegetative' | 'reproductive' | 'both' | string, // Feature type filter
     improveDescriptions: true,
     fillGaps: true,
     removeRedundant: false,
     fixInconsistencies: true,
     refineFeatureCount: 3,
     completePhotos: false,
+    fetchPhotos: true,
     photoTarget: 'both' as 'entities' | 'features' | 'both',
     photoMode: 'expand' as 'replace' | 'expand',
     photoCustomSources: '',
+    // Links/Materials options
+    fetchLinks: false,
+    fetchLinksMinCount: 3,
+    fetchLinksPrioritySources: '',
     // Validate options
     validateFixNames: true,
     validateMergeSynonyms: true,
     validateCheckGeography: true,
     validateCheckTaxonomy: true,
-    validateReference: 'floradobrasil' as 'floradobrasil' | 'gbif' | 'powo' | 'custom',
+    validateReference: 'floradobrasil' as 'floradobrasil' | 'gbif' | 'powo' | 'custom' | 'wfo' | 'catalogueoflife' | 'ctfb',
     validateFamily: '',
     validateGenus: '',
     validateBiome: '',
     validateStateUF: '',
-    validateScope: 'national' as 'global' | 'national' | 'regional'
+
+    validateScope: 'national' as 'global' | 'national' | 'regional',
+    validateCustomSource: ''
   });
 
   // Merge Mode State
   const [mergeKey1, setMergeKey1] = useState<Project | null>(null);
+
+  // Terminal Persistence & Raw Output
+  const [rawOutput, setRawOutput] = useState<string | null>(null);
+  const [showRawOutput, setShowRawOutput] = useState(false);
+  const [aiTypingComplete, setAiTypingCompleteState] = useState(false);
+  const [resultProject, setResultProject] = useState<Project | null>(null); // Store result before saving
 
   // Spreadsheet import states
   const [showFormatModal, setShowFormatModal] = useState(false);
@@ -1367,11 +1395,11 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [requiredFeatures, setRequiredFeatures] = useState<string[]>([]);
   const [showRequiredFeaturesDropdown, setShowRequiredFeaturesDropdown] = useState(false);
   const [customFeatureInput, setCustomFeatureInput] = useState('');
-  
+
   // Required Species State (for TOPIC mode)
   const [requiredSpeciesText, setRequiredSpeciesText] = useState('');
   const speciesListInputRef = React.useRef<HTMLInputElement>(null);
-  
+
   // Suggested features for dropdown (bilingual) - Dynamic based on Category
   const suggestedFeatures = (() => {
     if (aiConfig.category === 'FAUNA') {
@@ -1398,80 +1426,92 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       // FLORA (Default)
       return language === 'pt' ? [
         // Vegetative features
-        { category: 'Vegetativas', items: [
-          'Tipo de folha (simples/composta)',
-          'Filotaxia (alterna/oposta/verticilada)',
-          'Margem foliar',
-          'Forma da folha',
-          'Textura da folha',
-          'Presença de estípulas',
-          'Tipo de nervação',
-          'Forma do caule',
-          'Tipo de casca',
-          'Hábito de crescimento',
-          'Presença de espinhos/acúleos',
-          'Presença de látex',
-          'Tipo de raiz',
-          'Presença de tricomas/pelos',
-          'Domácias',
-        ]},
+        {
+          category: 'Vegetativas', items: [
+            'Tipo de folha (simples/composta)',
+            'Filotaxia (alterna/oposta/verticilada)',
+            'Margem foliar',
+            'Forma da folha',
+            'Textura da folha',
+            'Presença de estípulas',
+            'Tipo de nervação',
+            'Forma do caule',
+            'Tipo de casca',
+            'Hábito de crescimento',
+            'Presença de espinhos/acúleos',
+            'Presença de látex',
+            'Tipo de raiz',
+            'Presença de tricomas/pelos',
+            'Domácias',
+          ]
+        },
         // Reproductive features
-        { category: 'Reprodutivas', items: [
-          'Tipo de inflorescência',
-          'Cor da flor',
-          'Número de pétalas',
-          'Simetria floral',
-          'Tipo de fruto',
-          'Cor do fruto',
-          'Tipo de semente',
-          'Deiscência do fruto',
-        ]},
+        {
+          category: 'Reprodutivas', items: [
+            'Tipo de inflorescência',
+            'Cor da flor',
+            'Número de pétalas',
+            'Simetria floral',
+            'Tipo de fruto',
+            'Cor do fruto',
+            'Tipo de semente',
+            'Deiscência do fruto',
+          ]
+        },
         // Ecological/Other
-        { category: 'Ecológicas', items: [
-          'Ambiente/habitat',
-          'Altitude',
-          'Fenologia',
-          'Polinizadores',
-          'Dispersão',
-        ]}
+        {
+          category: 'Ecológicas', items: [
+            'Ambiente/habitat',
+            'Altitude',
+            'Fenologia',
+            'Polinizadores',
+            'Dispersão',
+          ]
+        }
       ] : [
         // Vegetative features (English)
-        { category: 'Vegetative', items: [
-          'Leaf type (simple/compound)',
-          'Phyllotaxy (alternate/opposite/whorled)',
-          'Leaf margin',
-          'Leaf shape',
-          'Leaf texture',
-          'Stipule presence',
-          'Venation type',
-          'Stem shape',
-          'Bark type',
-          'Growth habit',
-          'Spine/prickle presence',
-          'Latex presence',
-          'Root type',
-          'Trichome/hair presence',
-          'Domatia',
-        ]},
+        {
+          category: 'Vegetative', items: [
+            'Leaf type (simple/compound)',
+            'Phyllotaxy (alternate/opposite/whorled)',
+            'Leaf margin',
+            'Leaf shape',
+            'Leaf texture',
+            'Stipule presence',
+            'Venation type',
+            'Stem shape',
+            'Bark type',
+            'Growth habit',
+            'Spine/prickle presence',
+            'Latex presence',
+            'Root type',
+            'Trichome/hair presence',
+            'Domatia',
+          ]
+        },
         // Reproductive features (English)
-        { category: 'Reproductive', items: [
-          'Inflorescence type',
-          'Flower color',
-          'Petal number',
-          'Floral symmetry',
-          'Fruit type',
-          'Fruit color',
-          'Seed type',
-          'Fruit dehiscence',
-        ]},
+        {
+          category: 'Reproductive', items: [
+            'Inflorescence type',
+            'Flower color',
+            'Petal number',
+            'Floral symmetry',
+            'Fruit type',
+            'Fruit color',
+            'Seed type',
+            'Fruit dehiscence',
+          ]
+        },
         // Ecological/Other (English)
-        { category: 'Ecological', items: [
-          'Habitat/environment',
-          'Altitude',
-          'Phenology',
-          'Pollinators',
-          'Dispersal',
-        ]}
+        {
+          category: 'Ecological', items: [
+            'Habitat/environment',
+            'Altitude',
+            'Phenology',
+            'Pollinators',
+            'Dispersal',
+          ]
+        }
       ];
     }
   })();
@@ -1479,10 +1519,39 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Prompt Editor State
   const [showPromptEditor, setShowPromptEditor] = useState(false);
   const [manualPrompt, setManualPrompt] = useState("");
-  const [aiTypingText, setAiTypingText] = useState(""); // Simulated AI typing response
-  const [aiTypingComplete, setAiTypingComplete] = useState(false); // Whether typing animation is complete
+  const [isTerminalVisible, setIsTerminalVisible] = useState(false);
+
+  // Refs for optimization (avoid re-renders during typing)
+  const typingTerminalRef = useRef<TypingTerminalRef>(null);
+  const lastTextRef = useRef("");
   const typingIntervalRef = React.useRef<NodeJS.Timeout | null>(null);
-  const typingContainerRef = React.useRef<HTMLDivElement | null>(null); // Ref for auto-scroll
+
+  // Proxy setters to update Child component directly
+  const setAiTypingText = (valueOrFn: string | ((prev: string) => string)) => {
+    let newValue: string;
+    if (typeof valueOrFn === 'function') {
+      newValue = valueOrFn(lastTextRef.current);
+    } else {
+      newValue = valueOrFn;
+    }
+
+    // Auto-show terminal if text is added
+    if (newValue && !isTerminalVisible) {
+      setIsTerminalVisible(true);
+    }
+    // Auto-hide if cleared
+    if (!newValue && isTerminalVisible) {
+      setIsTerminalVisible(false);
+    }
+
+    lastTextRef.current = newValue;
+    typingTerminalRef.current?.setText(newValue);
+  };
+
+  const setAiTypingComplete = (complete: boolean) => {
+    typingTerminalRef.current?.setComplete(complete);
+    setAiTypingCompleteState(complete);
+  };
 
   // Entity Trait Editor State
   const [editingEntityId, setEditingEntityId] = useState<string | null>(null);
@@ -1505,22 +1574,22 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       setTimeout(() => {
         const container = matrixScrollRef.current;
         if (!container) return;
-        
+
         // Calculate position of the feature column
         const featureIndex = project.features.findIndex(f => f.id === featureId);
         if (featureIndex === -1) return;
-        
+
         // Calculate offset: entity column width (200px) + collapsed columns before this feature
         let scrollTarget = 200; // Entity column width
         for (let i = 0; i < featureIndex; i++) {
           scrollTarget += 70; // Collapsed column width
         }
-        
+
         // Center the expanded section in the viewport
         const containerWidth = container.clientWidth;
         const expandedWidth = project.features[featureIndex].states.length * 90;
         const centeredScroll = scrollTarget - (containerWidth / 2) + (expandedWidth / 2);
-        
+
         container.scrollTo({
           left: Math.max(0, centeredScroll),
           behavior: 'smooth'
@@ -1579,19 +1648,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         const sciNameMatch = entity.scientificName?.toLowerCase().includes(searchLower);
         if (!nameMatch && !sciNameMatch) return false;
       }
-      
+
       // Filter by family
       if (entityFilter.family) {
         if (entity.family?.toLowerCase() !== entityFilter.family.toLowerCase()) return false;
       }
-      
+
       // Filter by genus (first word of scientificName or name)
       if (entityFilter.genus) {
         const name = entity.scientificName || entity.name || '';
         const genus = name.split(' ')[0];
         if (genus?.toLowerCase() !== entityFilter.genus.toLowerCase()) return false;
       }
-      
+
       // Filter by gaps (entities with missing traits)
       if (entityFilter.onlyWithGaps) {
         const hasGaps = project.features.some(feature => {
@@ -1600,7 +1669,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         });
         if (!hasGaps) return false;
       }
-      
+
       return true;
     });
   }, [project.entities, project.features, entityFilter]);
@@ -1619,13 +1688,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Check if any filter is active
   const hasActiveFilters = entityFilter.searchText || entityFilter.family || entityFilter.genus || entityFilter.onlyWithGaps;
 
-  // Reopen AI modal when returning from settings
-  useEffect(() => {
-    if (reopenAiModal) {
-      setShowAiModal(true);
-      onAiModalOpened?.();
-    }
-  }, [reopenAiModal, onAiModalOpened]);
+
 
   // Update model if defaultModel prop changes
   useEffect(() => {
@@ -1654,12 +1717,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
   }, []);
 
-  // Auto-scroll typing container when new text is added
+  // Open AI modal on mount if requested (from home page "Nozes IA" button)
   useEffect(() => {
-    if (typingContainerRef.current && aiTypingText) {
-      typingContainerRef.current.scrollTop = typingContainerRef.current.scrollHeight;
+    if (openAiModalOnMount) {
+      setShowAiModal(true);
     }
-  }, [aiTypingText]);
+  }, [openAiModalOnMount]);
+
+
 
   // Handlers
   const updateProject = (updates: Partial<Project>) => setProject(p => ({ ...p, ...updates }));
@@ -1800,11 +1865,11 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   useEffect(() => {
     if (pendingNervuraFile && !isGenerating && !pendingImportProject) {
       const numStates = pendingNervuraFile.features?.reduce((sum: number, f: Feature) => sum + (f.states?.length || 0), 0) || 0;
-      
-      const fileInfo = language === 'pt' 
+
+      const fileInfo = language === 'pt'
         ? `📁 Projeto: "${pendingNervuraFile.name}"\n📊 ${pendingNervuraFile.entities?.length || 0} entidades • ${pendingNervuraFile.features?.length || 0} características • ${numStates} estados\n\n${optimizeNervura ? '🔧 Modo: Otimizar com IA\n\n⬇️ Clique no botão amarelo abaixo para iniciar a importação.' : '📥 Modo: Importação Fiel\n\n⬇️ Clique no botão amarelo abaixo para confirmar a importação.'}`
         : `📁 Project: "${pendingNervuraFile.name}"\n📊 ${pendingNervuraFile.entities?.length || 0} entities • ${pendingNervuraFile.features?.length || 0} features • ${numStates} states\n\n${optimizeNervura ? '🔧 Mode: Optimize with AI\n\n⬇️ Click the yellow button below to start import.' : '📥 Mode: Faithful Import\n\n⬇️ Click the yellow button below to confirm import.'}`;
-      
+
       setAiTypingText(fileInfo);
     }
   }, [optimizeNervura, pendingNervuraFile, isGenerating, pendingImportProject, language]);
@@ -1813,25 +1878,25 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const generateCuriositiesFromProjects = (): string[] => {
     const saved = localStorage.getItem('nozesia_projects');
     if (!saved) return [];
-    
+
     try {
       const projects: Project[] = JSON.parse(saved);
       if (projects.length === 0) return [];
-      
+
       const curiosities: string[] = [];
-      
+
       // Collect statistics from all projects
       const totalEntities = projects.reduce((sum, p) => sum + (p.entities?.length || 0), 0);
       const totalFeatures = projects.reduce((sum, p) => sum + (p.features?.length || 0), 0);
-      
+
       // Get unique entity names from all projects
       const allEntities = projects.flatMap(p => p.entities?.map(e => e.name) || []);
       const uniqueEntityNames = [...new Set(allEntities)];
-      
+
       // Get unique feature names from all projects
       const allFeatures = projects.flatMap(p => p.features?.map(f => f.name) || []);
       const uniqueFeatureNames = [...new Set(allFeatures)];
-      
+
       // Generate curiosities based on the data
       if (language === 'pt') {
         if (projects.length > 0) {
@@ -1843,30 +1908,30 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         if (totalFeatures > 0) {
           curiosities.push(`🔬 ${totalFeatures} características morfológicas registradas em seu acervo`);
         }
-        
+
         // Pick random entities to highlight
         if (uniqueEntityNames.length > 0) {
           const randomEntities = uniqueEntityNames.sort(() => Math.random() - 0.5).slice(0, 3);
           curiosities.push(`🌱 Algumas espécies em suas chaves: ${randomEntities.join(', ')}`);
         }
-        
+
         // Pick random features to highlight
         if (uniqueFeatureNames.length > 0) {
           const randomFeatures = uniqueFeatureNames.sort(() => Math.random() - 0.5).slice(0, 3);
           curiosities.push(`🔍 Características utilizadas: ${randomFeatures.join(', ')}`);
         }
-        
+
         // Most recent project
         if (projects.length > 0) {
           const recentProject = projects[0];
           curiosities.push(`📖 Sua chave mais recente: "${recentProject.name}"`);
         }
-        
+
         // Project with most entities
         if (projects.length > 1) {
-          const largestProject = projects.reduce((max, p) => 
+          const largestProject = projects.reduce((max, p) =>
             (p.entities?.length || 0) > (max.entities?.length || 0) ? p : max
-          , projects[0]);
+            , projects[0]);
           if (largestProject.entities?.length > 0) {
             curiosities.push(`🏆 Maior chave: "${largestProject.name}" com ${largestProject.entities.length} entidades`);
           }
@@ -1881,32 +1946,32 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         if (totalFeatures > 0) {
           curiosities.push(`🔬 ${totalFeatures} morphological features recorded in your collection`);
         }
-        
+
         if (uniqueEntityNames.length > 0) {
           const randomEntities = uniqueEntityNames.sort(() => Math.random() - 0.5).slice(0, 3);
           curiosities.push(`🌱 Some species in your keys: ${randomEntities.join(', ')}`);
         }
-        
+
         if (uniqueFeatureNames.length > 0) {
           const randomFeatures = uniqueFeatureNames.sort(() => Math.random() - 0.5).slice(0, 3);
           curiosities.push(`🔍 Features used: ${randomFeatures.join(', ')}`);
         }
-        
+
         if (projects.length > 0) {
           const recentProject = projects[0];
           curiosities.push(`📖 Your most recent key: "${recentProject.name}"`);
         }
-        
+
         if (projects.length > 1) {
-          const largestProject = projects.reduce((max, p) => 
+          const largestProject = projects.reduce((max, p) =>
             (p.entities?.length || 0) > (max.entities?.length || 0) ? p : max
-          , projects[0]);
+            , projects[0]);
           if (largestProject.entities?.length > 0) {
             curiosities.push(`🏆 Largest key: "${largestProject.name}" with ${largestProject.entities.length} entities`);
           }
         }
       }
-      
+
       return curiosities;
     } catch (err) {
       console.error("Error generating curiosities:", err);
@@ -1918,22 +1983,22 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const formatNervuraProject = (parsed: Project): Project => {
     const numSpecies = parsed.entities?.length || 0;
     const numFeatures = parsed.features?.length || 0;
-    
+
     // Count total states across all features
     const numStates = parsed.features?.reduce((sum, f) => sum + (f.states?.length || 0), 0) || 0;
-    
+
     // Detect language from content
-    const isPortuguese = parsed.description?.includes('Chave de identificação') || 
-                         parsed.features?.some(f => f.name === 'Forma de Vida' || f.name === 'Filotaxia') ||
-                         language === 'pt';
+    const isPortuguese = parsed.description?.includes('Chave de identificação') ||
+      parsed.features?.some(f => f.name === 'Forma de Vida' || f.name === 'Filotaxia') ||
+      language === 'pt';
     const langCode = isPortuguese ? 'PTBR' : 'EN';
-    
+
     // Generate version number (v1 for new imports)
     const version = 'v1';
-    
+
     // Standardized name: "NervuraColetora PTBR v1 (14sp / 49crc)"
     const standardName = `NervuraColetora ${langCode} ${version} (${numSpecies}sp / ${numFeatures}crc)`;
-    
+
     // Extract metadata from original description if available
     let collector = isPortuguese ? 'Coletor não especificado' : 'Collector not specified';
     let collectionDates = '';
@@ -1942,82 +2007,82 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     let families: string[] = [];
     let genera: string[] = [];
     let lifeFormsText = '';
-    
+
     if (parsed.description) {
       // Extract collector
       const collectorMatch = parsed.description.match(/pelo coletor[:\s]+([^\n.]+)/i) ||
-                             parsed.description.match(/by collector[:\s]+([^\n.]+)/i);
+        parsed.description.match(/by collector[:\s]+([^\n.]+)/i);
       if (collectorMatch) {
         collector = collectorMatch[1].trim();
       }
-      
+
       // Extract dates
       const dateMatch = parsed.description.match(/Data de coleta[:\s]+([^\n]+)/i) ||
-                        parsed.description.match(/Collection date[:\s]+([^\n]+)/i);
+        parsed.description.match(/Collection date[:\s]+([^\n]+)/i);
       if (dateMatch) {
         collectionDates = dateMatch[1].trim();
       }
-      
+
       const exportMatch = parsed.description.match(/Data de exportação[:\s]+([^\n]+)/i) ||
-                          parsed.description.match(/Export date[:\s]+([^\n]+)/i);
+        parsed.description.match(/Export date[:\s]+([^\n]+)/i);
       if (exportMatch) {
         exportDate = exportMatch[1].trim();
       }
-      
+
       // Extract states
       const statesMatch = parsed.description.match(/Estados de coleta[:\s]+([^\n]+)/i) ||
-                          parsed.description.match(/Collection states[:\s]+([^\n]+)/i);
+        parsed.description.match(/Collection states[:\s]+([^\n]+)/i);
       if (statesMatch) {
         collectionStates = statesMatch[1].trim();
       }
-      
+
       // Extract families
       const familiesMatch = parsed.description.match(/FAMÍLIAS[:\s]*\n([^\n]+)/i) ||
-                            parsed.description.match(/FAMILIES[:\s]*\n([^\n]+)/i);
+        parsed.description.match(/FAMILIES[:\s]*\n([^\n]+)/i);
       if (familiesMatch) {
         families = familiesMatch[1].split(',').map(f => f.trim()).filter(f => f);
       }
-      
+
       // Extract genera
       const generaMatch = parsed.description.match(/GÊNEROS[:\s]*\n([^\n]+)/i) ||
-                          parsed.description.match(/GENERA[:\s]*\n([^\n]+)/i);
+        parsed.description.match(/GENERA[:\s]*\n([^\n]+)/i);
       if (generaMatch) {
         genera = generaMatch[1].split(',').map(g => g.trim()).filter(g => g);
       }
-      
+
       // Extract life forms
       const lifeFormsMatch = parsed.description.match(/FORMAS DE VIDA[:\s]*\n([^\n]+)/i) ||
-                             parsed.description.match(/LIFE FORMS[:\s]*\n([^\n]+)/i);
+        parsed.description.match(/LIFE FORMS[:\s]*\n([^\n]+)/i);
       if (lifeFormsMatch) {
         lifeFormsText = lifeFormsMatch[1].trim();
       }
     }
-    
+
     // If no data extracted from description, try to infer from entities
     if (families.length === 0 && parsed.entities) {
       const extractedFamilies = new Set<string>();
       const extractedGenera = new Set<string>();
-      
+
       parsed.entities.forEach(entity => {
         // Try to extract family from description
         const famMatch = entity.description?.match(/Família[:\s]+([A-Za-z]+)/i);
         if (famMatch) extractedFamilies.add(famMatch[1]);
-        
+
         // Extract genus from species name (first word)
         const genusMatch = entity.name?.match(/^([A-Z][a-z]+)/);
         if (genusMatch) extractedGenera.add(genusMatch[1]);
       });
-      
+
       families = Array.from(extractedFamilies);
       genera = Array.from(extractedGenera);
     }
-    
+
     // Build standardized description
     let newDescription = '';
-    
+
     if (isPortuguese) {
       newDescription = `🌿 Chave de identificação produzida com dados coletados no NervuraColetora pelo coletor: ${collector}.\n\n`;
-      
+
       if (collectionDates) {
         newDescription += `📅 Data de coleta: ${collectionDates}\n`;
       }
@@ -2026,12 +2091,12 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       } else {
         newDescription += `📅 Data de importação: ${new Date().toLocaleDateString('pt-BR')}\n`;
       }
-      
+
       newDescription += `\n📊 ESTATÍSTICAS:\n`;
       newDescription += `• Número de espécies/entidades: ${numSpecies}\n`;
       newDescription += `• Número de características morfológicas: ${numFeatures}\n`;
       newDescription += `• Número total de estados: ${numStates}\n`;
-      
+
       if (families.length > 0) {
         newDescription += `• Número de famílias: ${families.length}\n`;
       }
@@ -2041,21 +2106,21 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       if (collectionStates) {
         newDescription += `• Estados de coleta: ${collectionStates}\n`;
       }
-      
+
       if (lifeFormsText) {
         newDescription += `\n🌳 FORMAS DE VIDA:\n${lifeFormsText}\n`;
       }
-      
+
       if (families.length > 0) {
         newDescription += `\n👨‍👩‍👧‍👦 FAMÍLIAS:\n${families.join(', ')}\n`;
       }
-      
+
       if (genera.length > 0) {
         newDescription += `\n🧬 GÊNEROS:\n${genera.join(', ')}`;
       }
     } else {
       newDescription = `🌿 Identification key produced with data collected in NervuraColetora by collector: ${collector}.\n\n`;
-      
+
       if (collectionDates) {
         newDescription += `📅 Collection date: ${collectionDates}\n`;
       }
@@ -2064,12 +2129,12 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       } else {
         newDescription += `📅 Import date: ${new Date().toLocaleDateString('en-US')}\n`;
       }
-      
+
       newDescription += `\n📊 STATISTICS:\n`;
       newDescription += `• Number of species/entities: ${numSpecies}\n`;
       newDescription += `• Number of morphological features: ${numFeatures}\n`;
       newDescription += `• Total number of states: ${numStates}\n`;
-      
+
       if (families.length > 0) {
         newDescription += `• Number of families: ${families.length}\n`;
       }
@@ -2079,20 +2144,20 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       if (collectionStates) {
         newDescription += `• Collection states: ${collectionStates}\n`;
       }
-      
+
       if (lifeFormsText) {
         newDescription += `\n🌳 LIFE FORMS:\n${lifeFormsText}\n`;
       }
-      
+
       if (families.length > 0) {
         newDescription += `\n👨‍👩‍👧‍👦 FAMILIES:\n${families.join(', ')}\n`;
       }
-      
+
       if (genera.length > 0) {
         newDescription += `\n🧬 GENERA:\n${genera.join(', ')}`;
       }
     }
-    
+
     return {
       ...parsed,
       name: standardName,
@@ -2111,24 +2176,24 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           if (parsed.name && parsed.features && parsed.entities) {
             // Format the project with standardized name and description
             const formattedProject = formatNervuraProject(parsed);
-            
+
             // Stage the formatted file for confirmation - don't run immediately
             setPendingNervuraFile(formattedProject);
-            
+
             // Show the prompt editor with info about the staged file
             setShowPromptEditor(true);
-            setAiTypingText(""); 
+            setAiTypingText("");
             setAiTypingComplete(false);
-            
+
             const numStates = parsed.features?.reduce((sum: number, f: Feature) => sum + (f.states?.length || 0), 0) || 0;
-            
-            const fileInfo = language === 'pt' 
+
+            const fileInfo = language === 'pt'
               ? `📁 Arquivo carregado: "${parsed.name}"\n\n🏷️ Nome padronizado: "${formattedProject.name}"\n📊 ${parsed.entities.length} entidades • ${parsed.features.length} características • ${numStates} estados\n\n${optimizeNervura ? '🔧 Modo: Otimizar com IA\n\n⬇️ Clique no botão amarelo abaixo para iniciar a importação.' : '📥 Modo: Importação Fiel\n\n⬇️ Clique no botão amarelo abaixo para confirmar a importação.'}`
               : `📁 File loaded: "${parsed.name}"\n\n🏷️ Standardized name: "${formattedProject.name}"\n📊 ${parsed.entities.length} entities • ${parsed.features.length} features • ${numStates} states\n\n${optimizeNervura ? '🔧 Mode: Optimize with AI\n\n⬇️ Click the yellow button below to start import.' : '📥 Mode: Faithful Import\n\n⬇️ Click the yellow button below to confirm import.'}`;
-            
+
             setAiTypingText(fileInfo);
             setAiTypingComplete(true);
-            
+
           } else {
             alert("Formato inválido. Certifique-se que é um JSON do Nervura/Nozes.");
           }
@@ -2142,31 +2207,31 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Execute the actual Nervura import (called when user confirms)
   const executeNervuraImport = async () => {
     if (!pendingNervuraFile) return;
-    
+
     const parsed = pendingNervuraFile;
-    
+
     // Get curiosities from existing projects
     const curiosities = generateCuriositiesFromProjects();
-    
+
     if (optimizeNervura) {
       // Show the typing view for optimization
       setIsGenerating(true);
       setAiTypingText(""); // Reset typing text
       setAiTypingComplete(false);
-      
+
       // Simulate typing effect for the "thinking" phase
-      const thinkingText = language === 'pt' 
-        ? "🔄 Analisando estrutura da chave...\n🔍 Identificando redundâncias...\n✨ Otimizando características e estados...\n" 
+      const thinkingText = language === 'pt'
+        ? "🔄 Analisando estrutura da chave...\n🔍 Identificando redundâncias...\n✨ Otimizando características e estados...\n"
         : "🔄 Analyzing key structure...\n🔍 Identifying redundancies...\n✨ Optimizing features and states...\n";
-      
+
       // Add curiosities section
-      const curiositiesText = curiosities.length > 0 
-        ? (language === 'pt' ? "\n📖 Curiosidades do seu acervo:\n" : "\n📖 Curiosities from your collection:\n") + 
-          curiosities.map(c => `   ${c}`).join('\n') + "\n"
+      const curiositiesText = curiosities.length > 0
+        ? (language === 'pt' ? "\n📖 Curiosidades do seu acervo:\n" : "\n📖 Curiosities from your collection:\n") +
+        curiosities.map(c => `   ${c}`).join('\n') + "\n"
         : "";
-      
+
       const fullThinkingText = thinkingText + curiositiesText;
-      
+
       let charIndex = 0;
       const typingInterval = setInterval(() => {
         if (charIndex < fullThinkingText.length) {
@@ -2179,7 +2244,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
       try {
         // Explicit language instruction
-        const prompt = language === 'pt' 
+        const prompt = language === 'pt'
           ? "Limpe e otimize esta chave importada. MANTENHA TODO O CONTEÚDO EM PORTUGUÊS. Padronize nomes de características e estados. Remova redundâncias."
           : "Clean and optimize this imported key. KEEP ALL CONTENT IN ENGLISH. Standardize feature and state names. Remove redundancies.";
 
@@ -2191,19 +2256,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           language,
           'clean'
         );
-        
+
         // Store for confirmation instead of setting immediately
         setPendingImportProject(optimizedProject);
         setPendingNervuraFile(null); // Clear the staged file
-        
+
         // Add completion message to typing text
         const completionText = language === 'pt'
           ? `\n\n✅ Otimização concluída!\n📊 ${optimizedProject.entities.length} entidades • ${optimizedProject.features.length} características\n\n⬇️ Clique no botão amarelo para confirmar a importação.`
           : `\n\n✅ Optimization complete!\n📊 ${optimizedProject.entities.length} entities • ${optimizedProject.features.length} features\n\n⬇️ Click the yellow button to confirm import.`;
-        
+
         setAiTypingText(prev => prev + completionText);
         setAiTypingComplete(true);
-        
+
       } catch (err) {
         console.error(err);
         const errorText = language === 'pt'
@@ -2218,21 +2283,21 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       }
     } else {
       // Faithful import - no AI processing, but show confirmation
-      setAiTypingText(prev => prev + (language === 'pt' 
-        ? "\n\n🔄 Processando importação...\n" 
+      setAiTypingText(prev => prev + (language === 'pt'
+        ? "\n\n🔄 Processando importação...\n"
         : "\n\n🔄 Processing import...\n"));
-      
+
       // Small delay for visual feedback
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       // Store for confirmation
       setPendingImportProject(parsed);
       setPendingNervuraFile(null);
-      
+
       const successText = language === 'pt'
         ? `\n✅ Arquivo processado!\n\n⬇️ Clique no botão amarelo para confirmar a importação.`
         : `\n✅ File processed!\n\n⬇️ Click the yellow button to confirm import.`;
-      
+
       setAiTypingText(prev => prev + successText);
       setAiTypingComplete(true);
     }
@@ -2376,7 +2441,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
     // Create features with states
     const featuresMap = new Map<string, Set<string>>();
-    const entitiesData: Array<{name: string, traits: Record<string, string>}> = [];
+    const entitiesData: Array<{ name: string, traits: Record<string, string> }> = [];
 
     // Process each row (skip header)
     for (let i = 1; i < data.length; i++) {
@@ -2695,7 +2760,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     e.preventDefault();
     e.stopPropagation();
     setIsDraggingFile(false);
-    
+
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
       const file = files[0];
@@ -2704,11 +2769,11 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       const validExtensions = ['.pdf', '.txt', '.jpg', '.jpeg', '.png'];
       const fileName = file.name.toLowerCase();
       const isValidType = validTypes.includes(file.type) || validExtensions.some(ext => fileName.endsWith(ext));
-      
+
       if (isValidType) {
         setImportedFile(file);
       } else {
-        alert(language === 'pt' 
+        alert(language === 'pt'
           ? 'Tipo de arquivo não suportado. Use PDF, TXT, JPG ou PNG.'
           : 'Unsupported file type. Use PDF, TXT, JPG or PNG.');
       }
@@ -2718,13 +2783,13 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   // Handle species list file import
   const handleSpeciesListImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) return;
-    
+
     const file = event.target.files[0];
     const fileName = file.name.toLowerCase();
-    
+
     try {
       let speciesText = '';
-      
+
       if (fileName.endsWith('.txt') || fileName.endsWith('.csv')) {
         // Plain text or CSV
         const text = await file.text();
@@ -2751,7 +2816,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         // Excel file - use SheetJS if available, otherwise show message
         // For now, try to read as text (won't work for binary xlsx)
         // We'll use a simpler approach: ask user to save as CSV
-        alert(language === 'pt' 
+        alert(language === 'pt'
           ? 'Para arquivos Excel, por favor salve como .csv ou .txt primeiro, ou copie e cole a lista diretamente.'
           : 'For Excel files, please save as .csv or .txt first, or copy and paste the list directly.');
         return;
@@ -2762,7 +2827,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           : 'For Word files, please copy and paste the list directly into the text field.');
         return;
       }
-      
+
       // Append to existing or replace
       if (requiredSpeciesText.trim()) {
         const existingSpecies = requiredSpeciesText.split('\n').filter(s => s.trim());
@@ -2772,14 +2837,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       } else {
         setRequiredSpeciesText(speciesText);
       }
-      
+
       // Reset input
       if (speciesListInputRef.current) {
         speciesListInputRef.current.value = '';
       }
     } catch (error) {
       console.error('Error importing species list:', error);
-      alert(language === 'pt' 
+      alert(language === 'pt'
         ? 'Erro ao importar arquivo. Verifique o formato.'
         : 'Error importing file. Check the format.');
     }
@@ -2813,17 +2878,17 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       "📊 Processing identification matrix...",
       "🧬 Extracting species information...",
     ];
-    
+
     // Add intro messages
     curiosities.push(...introMessages);
-    
+
     // Get curiosities from saved projects
     if (savedProjects.length > 0) {
-      const headerMsg = language === 'pt' 
+      const headerMsg = language === 'pt'
         ? "\n💡 Enquanto isso, você sabia que..."
         : "\n💡 Meanwhile, did you know that...";
       curiosities.push(headerMsg);
-      
+
       savedProjects.forEach(proj => {
         // Random entity facts
         if (proj.entities && proj.entities.length > 0) {
@@ -2844,7 +2909,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
             }
           });
         }
-        
+
         // Random feature facts
         if (proj.features && proj.features.length > 0) {
           const randomFeature = proj.features[Math.floor(Math.random() * proj.features.length)];
@@ -2857,7 +2922,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           }
         }
       });
-      
+
       // Project stats
       const totalEntities = savedProjects.reduce((sum, p) => sum + (p.entities?.length || 0), 0);
       const totalFeatures = savedProjects.reduce((sum, p) => sum + (p.features?.length || 0), 0);
@@ -2866,7 +2931,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
         : `\n\n📈 You have cataloged ${totalEntities} entities and ${totalFeatures} features across ${savedProjects.length} key(s)!`;
       curiosities.push(statsMsg);
     }
-    
+
     return curiosities;
   };
 
@@ -2874,16 +2939,16 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const startTypingEffect = () => {
     setAiTypingText("");
     setAiTypingComplete(false);
-    
+
     const curiosities = generateCuriosities();
     const fullText = curiosities.join('\n');
     let currentIndex = 0;
-    
+
     // Clear any existing interval
     if (typingIntervalRef.current) {
       clearInterval(typingIntervalRef.current);
     }
-    
+
     typingIntervalRef.current = setInterval(() => {
       if (currentIndex < fullText.length) {
         // Type multiple characters at once for faster effect
@@ -2900,25 +2965,25 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       clearInterval(typingIntervalRef.current);
       typingIntervalRef.current = null;
     }
-    
+
     if (resultProject) {
       const entitiesCount = resultProject.entities?.length || 0;
       const featuresCount = resultProject.features?.length || 0;
       const statesCount = resultProject.features?.reduce((sum, f) => sum + (f.states?.length || 0), 0) || 0;
       const withPhotos = resultProject.entities?.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos') && !e.imageUrl.includes('placehold.co')).length || 0;
       const withLinks = resultProject.entities?.filter(e => e.links && e.links.length > 0).length || 0;
-      
+
       const warningMsg = language === 'pt'
         ? `\n\n⚠️ ATENÇÃO: REVISÃO NECESSÁRIA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOs dados gerados por IA podem conter:\n• Erros taxonômicos ou nomenclaturais\n• Características incorretas ou incompletas\n• Associações espécie-característica imprecisas\n• Fotos que não correspondem à espécie\n\n👉 REVISE E CORRIJA todos os dados antes\n   de utilizar esta chave para identificação.`
         : `\n\n⚠️ WARNING: REVIEW REQUIRED!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nAI-generated data may contain:\n• Taxonomic or nomenclatural errors\n• Incorrect or incomplete features\n• Inaccurate species-trait associations\n• Photos that don't match the species\n\n👉 REVIEW AND CORRECT all data before\n   using this key for identification.`;
-      
+
       const summaryMsg = language === 'pt'
         ? `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANÁLISE CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resumo da Geração:\n\n   🌿 Entidades: ${entitiesCount}\n   🔬 Características: ${featuresCount}\n   📋 Estados totais: ${statesCount}\n   📷 Com fotos: ${withPhotos}/${entitiesCount}\n   🔗 Com links: ${withLinks}/${entitiesCount}${warningMsg}`
         : `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ANALYSIS COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Generation Summary:\n\n   🌿 Entities: ${entitiesCount}\n   🔬 Features: ${featuresCount}\n   📋 Total states: ${statesCount}\n   📷 With photos: ${withPhotos}/${entitiesCount}\n   🔗 With links: ${withLinks}/${entitiesCount}${warningMsg}`;
-      
+
       setAiTypingText(prev => prev + summaryMsg);
     }
-    
+
     setAiTypingComplete(true);
   };
 
@@ -2942,19 +3007,19 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }
     setIsGenerating(true);
     setGeneratingMessage(strings.generating);
-    
+
     // Open prompt editor and start typing effect
     setShowAiModal(false);
     setShowPromptEditor(true);
     startTypingEffect();
-    
+
     try {
       // Parse required species from text input
       const requiredSpeciesList = requiredSpeciesText
         .split('\n')
         .map(s => s.trim())
         .filter(s => s.length > 0);
-      
+
       let config = { ...aiConfig, requiredFeatures, requiredSpecies: requiredSpeciesList };
 
       if (aiMode === 'IMPORT' && importedFile) {
@@ -2972,15 +3037,15 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
       // Pass callbacks to receive prompt text and image fetch progress
       const generatedProject = await generateKeyFromTopic(
-        config, 
-        apiKey, 
+        config,
+        apiKey,
         (fullPrompt) => {
           // Store prompt for viewing/editing
           setManualPrompt(fullPrompt);
         },
         // Image fetch progress callback
         (current, total, entityName) => {
-          const msg = aiConfig.language === 'pt' 
+          const msg = aiConfig.language === 'pt'
             ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
             : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
           setGeneratingMessage(msg);
@@ -2996,7 +3061,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
 
       // Stop typing effect and show summary
       stopTypingEffect(generatedProject);
-      
+
       // Wait so user can see the summary
       await new Promise(resolve => setTimeout(resolve, 2500));
 
@@ -3007,7 +3072,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       console.error(e);
       // Stop typing and show error
       stopTypingEffect();
-      setAiTypingText(prev => prev + (language === 'pt' 
+      setAiTypingText(prev => prev + (language === 'pt'
         ? "\n\n❌ ERRO: Não foi possível gerar a chave."
         : "\n\n❌ ERROR: Could not generate the key."));
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -3024,14 +3089,14 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     // ═══════════════════════════════════════════════════════════════════════════════
     // OPTIMIZED: Use ID-based format for traits to avoid complex remapping
     // ═══════════════════════════════════════════════════════════════════════════════
-    
+
     // Build compact ID reference for features and states
     const featuresRef = project.features.map(f => ({
       id: f.id,
       name: f.name,
       states: f.states.map(s => ({ id: s.id, label: s.label }))
     }));
-    
+
     // Build entity data with ID-based traits (traitsMap format)
     const entitiesRef = project.entities.map(e => ({
       id: e.id,
@@ -3043,7 +3108,7 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     }));
 
     let refinePrompt = '';
-    
+
     // PHOTOS action - dedicated photo completion prompt (optimized: send only names, not full JSON)
     if (refineAction === 'PHOTOS') {
       setCurrentRefineMode(null); // PHOTOS doesn't use refine mode
@@ -3051,10 +3116,10 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
       const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
       const replaceMode = refineOptions.photoMode === 'replace';
       const customSources = refineOptions.photoCustomSources?.trim();
-      
+
       // Build compact data: only names and optionally current URLs
       let photoData: any = { name: project.name };
-      
+
       if (targetEntities) {
         photoData.entities = project.entities.map(e => ({
           name: e.name,
@@ -3062,16 +3127,16 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
           currentUrl: replaceMode ? '' : (e.imageUrl || '')
         })).filter(e => replaceMode || !e.currentUrl); // Only include items needing photos
       }
-      
+
       if (targetFeatures) {
         photoData.features = project.features.map(f => ({
           name: f.name,
           currentUrl: replaceMode ? '' : (f.imageUrl || '')
         })).filter(f => replaceMode || !f.currentUrl);
       }
-      
+
       const compactJson = JSON.stringify(photoData, null, 2);
-      
+
       // Build source instructions
       let sourceInstructions = '';
       if (customSources) {
@@ -3085,7 +3150,7 @@ If user sources don't have the image, then check these scientific databases:`;
         sourceInstructions = `
 SCIENTIFIC IMAGE SOURCES (check in this order):`;
       }
-      
+
       refinePrompt = `
 # PHOTO COLLECTION TASK
 
@@ -3179,26 +3244,26 @@ Total items to process: ${(targetEntities ? photoData.entities?.length || 0 : 0)
       } else if (refineOptions.expandScope === 'regional' && (refineOptions.expandBiome || refineOptions.expandStateUF)) {
         expandFilters.push('GEOGRAPHIC SCOPE: Strictly regional - species must occur in the specified biome/state');
       }
-      
-      const filterInstructions = expandFilters.length > 0 
+
+      const filterInstructions = expandFilters.length > 0
         ? `\nTAXONOMIC & GEOGRAPHIC FILTERS (MANDATORY):\n${expandFilters.map((f, i) => `${i + 1}. ${f}`).join('\n')}\n`
         : '';
 
       const keepExistingEntities = refineOptions.keepExisting;
-      
+
       // Parse required species for EXPAND
       const expandRequiredSpeciesList = refineOptions.expandRequiredSpecies
         .split('\n')
         .map(s => s.trim())
         .filter(s => s.length > 0);
-      
+
       const requiredSpeciesInstr = expandRequiredSpeciesList.length > 0
         ? `\nMANDATORY SPECIES TO ADD: ${expandRequiredSpeciesList.join(', ')}`
         : '';
-      
+
       // Set refine mode for optimized processing
       setCurrentRefineMode('expand');
-      
+
       // Use ID-based format for EXPAND
       refinePrompt = `
 EXPAND IDENTIFICATION KEY
@@ -3231,13 +3296,13 @@ For each required feature above:
 - If it does NOT exist, ADD it as a new feature with relevant states and assign all entities accordingly.
 `
         : '';
-      
+
       // Check if ONLY fillGaps is selected (specialized prompt for better results)
       const onlyFillGaps = refineOptions.fillGaps && !refineOptions.improveDescriptions && !refineOptions.addFeatures && refineOptions.refineRequiredFeatures.length === 0;
-      
+
       // Helper to get valid state IDs for a feature
       const getValidStateIds = (feature: Feature): Set<string> => new Set(feature.states.map(s => s.id));
-      
+
       // Clean up invalid trait IDs from entities before processing
       // This fixes issues where traits were saved with incorrect IDs from previous AI responses
       const cleanedProject = {
@@ -3257,14 +3322,14 @@ For each required feature above:
           return { ...entity, traits: cleanedTraits };
         })
       };
-      
+
       // Use cleaned project for gap analysis
       const projectForAnalysis = cleanedProject;
 
       if (onlyFillGaps) {
         // Build detailed gap analysis - identify which entities need which features filled
         const entitiesWithGaps: { id: string; name: string; missingFeatureIds: string[] }[] = [];
-        
+
         projectForAnalysis.entities.forEach(entity => {
           const missingFeatureIds: string[] = [];
           projectForAnalysis.features.forEach(feature => {
@@ -3279,21 +3344,21 @@ For each required feature above:
             entitiesWithGaps.push({ id: entity.id, name: entity.name, missingFeatureIds });
           }
         });
-        
+
         if (entitiesWithGaps.length === 0) {
           setCurrentRefineMode(null);
           refinePrompt = `No missing trait data found. All ${projectForAnalysis.entities.length} entities have assignments for all ${projectForAnalysis.features.length} features.`;
         } else {
           // Set refine mode for optimized processing
           setCurrentRefineMode('fillGaps');
-          
+
           // Create compact prompt for fillGaps
-          const entitiesListText = entitiesWithGaps.length > 20 
-            ? `Entities with gaps: ${entitiesWithGaps.length} (see attached project data for full list)` 
+          const entitiesListText = entitiesWithGaps.length > 20
+            ? `Entities with gaps: ${entitiesWithGaps.length} (see attached project data for full list)`
             : `ENTITIES NEEDING DATA:\n${entitiesWithGaps.map(e => `- ${e.id}: "${e.name}" needs: ${e.missingFeatureIds.map(fid => {
-                const f = projectForAnalysis.features.find(feat => feat.id === fid);
-                return f ? f.name : fid;
-              }).join(', ')}`).join('\n')}`;
+              const f = projectForAnalysis.features.find(feat => feat.id === fid);
+              return f ? f.name : fid;
+            }).join(', ')}`).join('\n')}`;
 
           refinePrompt = `
 FILL MISSING TRAITS
@@ -3320,30 +3385,34 @@ RULES:
       } else {
         // Standard REFINE prompt (multiple options selected)
         setCurrentRefineMode('refine');
-        
+
         // Feature type instruction - Dynamic based on Category
         let featureTypeInstr = '';
-        if (aiConfig.category === 'FAUNA') {
+        const isCustomFeatureType = !['vegetative', 'reproductive', 'both', 'general'].includes(refineOptions.featureType);
+
+        if (isCustomFeatureType) {
+          featureTypeInstr = `\nFEATURE TYPE RESTRICTION: Focus features on the description provided: "${refineOptions.featureType}". Extract characteristics and states based on this specific focus.`;
+        } else if (aiConfig.category === 'FAUNA') {
           featureTypeInstr = refineOptions.featureType === 'vegetative' // mapped to Morphological
             ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on MORPHOLOGICAL characters (body shape, size, color, appendages, skin/fur/feathers, etc.). Do NOT add behavioral characters.`
             : refineOptions.featureType === 'reproductive' // mapped to Behavioral
-            ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on BEHAVIORAL characters (diet, activity, social, locomotion, vocalization, etc.). Do NOT add morphological characters.`
-            : '';
+              ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on BEHAVIORAL characters (diet, activity, social, locomotion, vocalization, etc.). Do NOT add morphological characters.`
+              : '';
         } else if (aiConfig.category === 'OTHER') {
           featureTypeInstr = refineOptions.featureType === 'vegetative' // mapped to Visual/Physical
             ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on VISUAL/PHYSICAL characters (color, shape, material, size, texture, etc.). Do NOT add conceptual characters.`
             : refineOptions.featureType === 'reproductive' // mapped to Conceptual
-            ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on CONCEPTUAL characters (genre, theme, era, origin, creator, etc.). Do NOT add visual characters.`
-            : '';
+              ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on CONCEPTUAL characters (genre, theme, era, origin, creator, etc.). Do NOT add visual characters.`
+              : '';
         } else {
           // FLORA (Default)
           featureTypeInstr = refineOptions.featureType === 'vegetative'
             ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on VEGETATIVE characters (leaves, stems, bark, branching, stipules, etc.). Do NOT add reproductive characters (flowers, fruits, seeds).`
             : refineOptions.featureType === 'reproductive'
-            ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on REPRODUCTIVE characters (flowers, inflorescences, fruits, seeds, pods, etc.). Do NOT add vegetative characters.`
-            : '';
+              ? `\nFEATURE TYPE RESTRICTION: Focus ONLY on REPRODUCTIVE characters (flowers, inflorescences, fruits, seeds, pods, etc.). Do NOT add vegetative characters.`
+              : '';
         }
-        
+
         refinePrompt = `
 REFINE IDENTIFICATION KEY
 
@@ -3378,7 +3447,7 @@ Return a JSON object with:
       }
     } else { // CLEAN
       setCurrentRefineMode('clean');
-      
+
       refinePrompt = `
 CLEAN IDENTIFICATION KEY
 
@@ -3400,7 +3469,7 @@ RULES:
 OUTPUT: Return JSON with "entities" array with: id, name, traitsMap
 `;
     }
-    
+
     return refinePrompt;
   };
 
@@ -3513,17 +3582,17 @@ OUTPUT: Return a single merged JSON identification key with:
     input.onchange = async (e) => {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) return;
-      
+
       try {
         const text = await file.text();
         const parsed = JSON.parse(text);
-        
+
         // Validate it's a valid project structure
         if (!parsed.features || !parsed.entities) {
           alert(language === 'pt' ? 'JSON inválido. Deve conter features e entities.' : 'Invalid JSON. Must contain features and entities.');
           return;
         }
-        
+
         if (keyNumber === 1) {
           setMergeKey1(parsed as Project);
         } else {
@@ -3546,11 +3615,11 @@ OUTPUT: Return a single merged JSON identification key with:
       alert(language === 'pt' ? 'Carregue ambas as chaves JSON primeiro.' : 'Load both JSON keys first.');
       return;
     }
-    
+
     try {
       const mergePrompt = buildMergePrompt();
       setManualPrompt(mergePrompt);
-      
+
       // Open prompt editor - user can review/edit then click Generate to execute
       setShowAiModal(false);
       setShowPromptEditor(true);
@@ -3571,162 +3640,112 @@ OUTPUT: Return a single merged JSON identification key with:
       alert(language === 'pt' ? 'Carregue um projeto primeiro.' : 'Load a project first.');
       return;
     }
-    
+
     // Validate action requires at least one validation option
-    if (refineAction === 'VALIDATE' && 
-        !refineOptions.validateFixNames && 
-        !refineOptions.validateMergeSynonyms && 
-        !refineOptions.validateCheckGeography && 
-        !refineOptions.validateCheckTaxonomy) {
-      alert(language === 'pt' 
-        ? 'Selecione pelo menos uma opção de validação.' 
+    if (refineAction === 'VALIDATE' &&
+      !refineOptions.validateFixNames &&
+      !refineOptions.validateMergeSynonyms &&
+      !refineOptions.validateCheckGeography &&
+      !refineOptions.validateCheckTaxonomy) {
+      alert(language === 'pt'
+        ? 'Selecione pelo menos uma opção de validação.'
         : 'Select at least one validation option.');
       return;
     }
-    
-    setIsGenerating(true);
+
+    setIsGenerating(false); // Not generating yet, just preparing
     setGeneratingMessage('');
-    
-    // Open prompt editor and start typing effect for all refine actions
     setShowAiModal(false);
     setShowPromptEditor(true);
     setAiTypingText('');
     setAiTypingComplete(false);
-    
+
     try {
-      // PHOTOS action - Use direct API fetching instead of Gemini (much more reliable!)
+      // PHOTOS action - Prepare Execution Plan
       if (refineAction === 'PHOTOS') {
         const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
-        const targetFeatures = refineOptions.photoTarget === 'features' || refineOptions.photoTarget === 'both';
         const replaceMode = refineOptions.photoMode === 'replace';
-        
-        let updatedProject = { ...project };
-        
-        // Initial message
-        const introMsg = language === 'pt'
-          ? "🔍 Iniciando busca de imagens...\n\n📷 Fontes: Biodiversity4All, iNaturalist, Wikipedia, Wikimedia Commons, PlantNet, POWO (Kew)\n\n"
-          : "🔍 Starting image search...\n\n📷 Sources: Biodiversity4All, iNaturalist, Wikipedia, Wikimedia Commons, PlantNet, POWO (Kew)\n\n";
-        setAiTypingText(introMsg);
-        
-        // Fetch images for entities
-        if (targetEntities) {
+
+        let plan = language === 'pt'
+          ? "PLANEJAMENTO DE EXECUÇÃO: COMPLETAR FOTOS / REFERÊNCIAS\n"
+          : "EXECUTION PLAN: COMPLETE PHOTOS / REFERENCES\n";
+
+        plan += language === 'pt'
+          ? "\n🔍 Ações Planejadas:"
+          : "\n🔍 Planned Actions:";
+
+        if (targetEntities && refineOptions.fetchPhotos) {
           const entitiesToFetch = project.entities
             .filter(e => replaceMode || !e.imageUrl || e.imageUrl.includes('picsum.photos') || e.imageUrl.includes('placehold.co'))
-            .map(e => ({ name: e.name, scientificName: e.name }));
-          
-          if (entitiesToFetch.length > 0) {
-            const imageMap = await fetchImagesForEntities(
-              entitiesToFetch,
-              language,
-              (current, total, entityName) => {
-                const msg = language === 'pt' 
-                  ? `🔍 Buscando imagens: ${current}/${total} - ${entityName}`
-                  : `🔍 Fetching images: ${current}/${total} - ${entityName}`;
-                setGeneratingMessage(msg);
-                // Update typing text with progress
-                setAiTypingText(prev => prev + `📷 ${entityName}...\n`);
-              },
-              aiConfig.category
-            );
-            
-            updatedProject.entities = project.entities.map(entity => {
-              const newUrl = imageMap.get(entity.name);
-              if (newUrl) {
-                return { ...entity, imageUrl: newUrl };
-              }
-              return entity;
-            });
-          }
+            .length;
+
+          plan += language === 'pt'
+            ? `\n• Buscar imagens para ${entitiesToFetch} entidades (Modo: ${replaceMode ? 'Substituir Tudo' : 'Preencher Faltantes'})`
+            : `\n• Fetch images for ${entitiesToFetch} entities (Mode: ${replaceMode ? 'Replace All' : 'Fill Missing'})`;
         }
-        
-        // Note: Feature images are harder to fetch automatically as they're abstract concepts
-        if (targetFeatures) {
-          const featureMsg = language === 'pt' 
-            ? '\n⚠️ Imagens de características não suportadas via API automática\n'
-            : '\n⚠️ Feature images not supported via automatic API\n';
-          setAiTypingText(prev => prev + featureMsg);
-          await new Promise(r => setTimeout(r, 1500));
+
+        if (refineOptions.fetchLinks) {
+          plan += language === 'pt'
+            ? `\n• Gerar links/referências para as entidades (Min: ${refineOptions.fetchLinksMinCount})`
+            : `\n• Generate links/references for entities (Min: ${refineOptions.fetchLinksMinCount})`;
         }
-        
-        // Show summary
-        const foundCount = targetEntities 
-          ? updatedProject.entities.filter(e => e.imageUrl && !e.imageUrl.includes('picsum.photos')).length
-          : 0;
-        const totalCount = targetEntities ? project.entities.length : 0;
-        
-        const summaryMsg = language === 'pt'
-          ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ BUSCA CONCLUÍDA!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Resultado:\n   📷 Imagens encontradas: ${foundCount}/${totalCount}\n\n🎉 Fotos atualizadas com sucesso!`
-          : `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ SEARCH COMPLETE!\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 Result:\n   📷 Images found: ${foundCount}/${totalCount}\n\n🎉 Photos updated successfully!`;
-        
-        setAiTypingText(prev => prev + summaryMsg);
-        setAiTypingComplete(true);
-        
-        // Wait so user can see the summary
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        setProject(updatedProject);
-        setShowPromptEditor(false);
-        setActiveTab('ENTITIES');
-        
+
+        plan += language === 'pt'
+          ? "\n\n📷 Fontes Utilizadas:\n• Biodiversity4All\n• iNaturalist\n• Wikipedia / Commons\n• PlantNet\n• POWO (Kew)"
+          : "\n\n📷 Sources Used:\n• Biodiversity4All\n• iNaturalist\n• Wikipedia / Commons\n• PlantNet\n• POWO (Kew)";
+
+        plan += language === 'pt'
+          ? "\n\n👉 Clique em 'Gerar Chave' para iniciar o processo."
+          : "\n\n👉 Click 'Generate Key' to start the process.";
+
+        setManualPrompt(plan);
         return;
       }
 
       // VALIDATE action - Uses Gemini to validate taxonomy
       if (refineAction === 'VALIDATE') {
-        startTypingEffect();
-        
         // Build validation prompt
-        const entityList = project.entities.map((e, idx) => 
+        const entityList = project.entities.map((e, idx) =>
           `${idx + 1}. "${e.name}"${e.scientificName ? ` [Scientific: ${e.scientificName}]` : ''} (ID: ${e.id})`
         ).join('\n');
-        
-        const catalogName = refineOptions.validateReference === 'floradobrasil' 
-          ? 'Flora do Brasil 2020 (https://floradobrasil.jbrj.gov.br)' 
-          : refineOptions.validateReference === 'gbif' 
+
+        const catalogName = refineOptions.validateReference === 'floradobrasil'
+          ? 'Flora do Brasil 2020 (https://floradobrasil.jbrj.gov.br)'
+          : refineOptions.validateReference === 'gbif'
             ? 'GBIF Backbone Taxonomy'
             : refineOptions.validateReference === 'powo'
               ? 'Plants of the World Online (POWO - Kew)'
               : 'current taxonomic literature';
-        
+
         // Build strict validation rules
         const validationRules: string[] = [];
         const removalCriteria: string[] = [];
-        
+
+        validationRules.push(`RULE 1 - TAXONOMIC VALIDITY (STRICT):
+    - Check if the species name is valid according to ${catalogName}
+    - If the name is INVALID or UNKNOWN → REMOVE the entity
+    - If the name is a SYNONYM → REMOVE the synonym and KEEP the accepted name (or merge if accepted name exists)`);
+
         if (refineOptions.validateFixNames) {
-          validationRules.push(`RULE 1 - NAME VALIDATION:
-   - Check each scientific name against ${catalogName}
-   - If the name is a SYNONYM → replace with the ACCEPTED name
-   - If the name is MISSPELLED → correct the spelling
-   - If the name DOES NOT EXIST in any taxonomic database → REMOVE the entity entirely
-   - Update the "scientificName" field with the correct binomial (Genus species Author)`);
+          // Logic handled in prompt instructions
+          removalCriteria.push(`INVALID NAME: Species name cannot be verified in ${catalogName}`);
         }
-        
+
         if (refineOptions.validateMergeSynonyms) {
           validationRules.push(`RULE 2 - SYNONYM MERGING:
-   - If TWO OR MORE entities in the list are synonyms of each other → KEEP ONLY ONE (the accepted name)
-   - Merge their trait data: combine all trait values from both entities
-   - Merge their descriptions: combine relevant information
-   - Keep the best available imageUrl`);
+    - If TWO OR MORE entities in the list are synonyms of each other → KEEP ONLY ONE (the accepted name)
+    - Keep the best available imageUrl`);
         }
-        
+
         if (refineOptions.validateCheckTaxonomy) {
           if (refineOptions.validateGenus) {
             removalCriteria.push(`GENUS FILTER: The species MUST belong to genus "${refineOptions.validateGenus}"`);
-            validationRules.push(`RULE 3 - GENUS RESTRICTION (STRICT):
-   - ONLY species of genus "${refineOptions.validateGenus}" are allowed
-   - The first word of the scientific name MUST be exactly "${refineOptions.validateGenus}"
-   - ANY species from a different genus MUST BE REMOVED - NO EXCEPTIONS
-   - Example: If genus is "Andira", then "Bowdichia virgilioides" must be REMOVED because "Bowdichia" ≠ "Andira"`);
           }
           if (refineOptions.validateFamily) {
             removalCriteria.push(`FAMILY FILTER: The species MUST belong to family "${refineOptions.validateFamily}"`);
-            validationRules.push(`RULE 3B - FAMILY RESTRICTION (STRICT):
-   - ONLY species of family "${refineOptions.validateFamily}" are allowed
-   - Check the taxonomic classification of each species
-   - ANY species from a different family MUST BE REMOVED - NO EXCEPTIONS`);
           }
         }
-        
+
         if (refineOptions.validateCheckGeography && refineOptions.validateScope !== 'global') {
           const geoDetails: string[] = [];
           if (refineOptions.validateScope === 'national') {
@@ -3740,11 +3759,6 @@ OUTPUT: Return a single merged JSON identification key with:
           }
           const geoScope = geoDetails.join(', ');
           removalCriteria.push(`GEOGRAPHIC FILTER: The species MUST occur in ${geoScope}`);
-          validationRules.push(`RULE 4 - GEOGRAPHIC RESTRICTION (STRICT):
-   - ONLY species that NATURALLY OCCUR in ${geoScope} are allowed
-   - Check the species distribution according to ${catalogName}
-   - Species that DO NOT OCCUR in this geographic area MUST BE REMOVED
-   - Be strict: if uncertain about distribution, REMOVE the species`);
         }
 
         const validatePrompt = `You are a strict taxonomic validation expert. Your task is to validate a species list and REMOVE any species that do not meet ALL criteria.
@@ -3777,40 +3791,18 @@ CRITICAL INSTRUCTIONS:
 6. Return ONLY the entities that PASS ALL validation criteria`;
 
         setManualPrompt(validatePrompt);
-        
-        // Open prompt editor - user can review/edit then click Generate to execute
-        setShowAiModal(false);
-        setShowPromptEditor(true);
-        setIsGenerating(false);
-        // Don't execute automatically - let user review prompt and click Generate in the modal
-        
         return;
       }
 
       // Other refine actions use Gemini - with typing effect
       const refinePrompt = buildRefinePrompt();
       setManualPrompt(refinePrompt);
-      
-      // Open prompt editor - user can review/edit then click Generate to execute
-      setShowAiModal(false);
-      setShowPromptEditor(true);
-      // Don't execute automatically - let user review prompt and click Generate in the modal
-      // The modal's Generate button calls handleSendManualPrompt which uses the (possibly edited) manualPrompt
-      setIsGenerating(false);
       return;
+
     } catch (e) {
       console.error(e);
-      // Stop typing and show error
-      stopTypingEffect();
-      setAiTypingText(prev => prev + (language === 'pt' 
-        ? "\n\n❌ ERRO: Não foi possível refinar a chave."
-        : "\n\n❌ ERROR: Could not refine the key."));
-      await new Promise(resolve => setTimeout(resolve, 2000));
       alert(strings.errGen);
       setShowPromptEditor(false);
-    } finally {
-      setIsGenerating(false);
-      setGeneratingMessage('');
     }
   };
 
@@ -3858,31 +3850,126 @@ CRITICAL INSTRUCTIONS:
   };
 
   const handleSendManualPrompt = async () => {
-    if (!apiKey) {
+    if (!apiKey && (aiMode !== 'REFINE' || refineAction !== 'PHOTOS')) {
       alert(strings.missingKey);
       return;
     }
     setIsGenerating(true);
     // Don't close the modal - keep it open to show typing effect
     setShowPromptEditor(true);
-    
+
     // Start the typing effect immediately
     startTypingEffect();
 
     try {
       let resultProject: Project;
-      
-      // ═══════════════════════════════════════════════════════════════════════════════
-      // Use optimized refine function when in refine mode
-      // ═══════════════════════════════════════════════════════════════════════════════
-      if (currentRefineMode && project.entities.length > 0) {
+
+      // ══════════════════════════════════════════════════════════════════════════════
+      // SPECIAL ACTION: PHOTOS (Direct execution, no Gemini)
+      // ══════════════════════════════════════════════════════════════════════════════
+      if (aiMode === 'REFINE' && refineAction === 'PHOTOS') {
+        const targetEntities = refineOptions.photoTarget === 'entities' || refineOptions.photoTarget === 'both';
+        const replaceMode = refineOptions.photoMode === 'replace';
+
+        let updatedProject = { ...project };
+
+        const introMsg = language === 'pt'
+          ? "\n🚀 Iniciando busca de imagens..."
+          : "\n🚀 Starting image search...";
+        setAiTypingText(prev => prev + introMsg);
+
+        if (targetEntities && refineOptions.fetchPhotos) {
+          const entitiesToFetch = project.entities
+            .filter(e => replaceMode || !e.imageUrl || e.imageUrl.includes('picsum.photos') || e.imageUrl.includes('placehold.co'))
+            .map(e => ({ name: e.name, scientificName: (e as any).scientificName || undefined }));
+
+          if (entitiesToFetch.length > 0) {
+            const imageMap = await fetchImagesForEntities(
+              entitiesToFetch,
+              language,
+              (current, total, entityName) => {
+                const msg = language === 'pt'
+                  ? `🔍 Buscando: ${current}/${total} - ${entityName}`
+                  : `🔍 Fetching: ${current}/${total} - ${entityName}`;
+                setGeneratingMessage(msg);
+                setAiTypingText(prev => prev + `\n📷 ${entityName}...`);
+              },
+              aiConfig.category
+            );
+
+            updatedProject.entities = project.entities.map(entity => {
+              const newUrl = imageMap.get(entity.name);
+              if (newUrl) return { ...entity, imageUrl: newUrl };
+              return entity;
+            });
+
+            const foundCount = Array.from(imageMap.values()).filter(url => url).length;
+            setAiTypingText(prev => prev + (language === 'pt'
+              ? `\n✅ Imagens encontradas: ${foundCount}/${entitiesToFetch.length}`
+              : `\n✅ Images found: ${foundCount}/${entitiesToFetch.length}`));
+          } else {
+            setAiTypingText(prev => prev + (language === 'pt' ? "\n⚠️ Nenhuma entidade precisa de imagens." : "\n⚠️ No entities need images."));
+          }
+        }
+
+        if (refineOptions.fetchLinks) {
+          setAiTypingText(prev => prev + (language === 'pt' ? "\n🔗 Gerando links..." : "\n🔗 Generating links..."));
+          const minLinks = refineOptions.fetchLinksMinCount || 3;
+          let linksCount = 0;
+          updatedProject.entities = updatedProject.entities.map(entity => {
+            // Generate links for this entity - passing family to help specific DBs
+            const newLinks = generateEntityLinks(entity.scientificName || entity.name, entity.family || '', language);
+
+            // Filter/Sort by priority sources if provided
+            let sortedLinks = [...newLinks];
+            if (refineOptions.fetchLinksPrioritySources && refineOptions.fetchLinksPrioritySources.trim().length > 0) {
+              const priorities = refineOptions.fetchLinksPrioritySources
+                .toLowerCase()
+                .split('\n')
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+
+              if (priorities.length > 0) {
+                sortedLinks.sort((a, b) => {
+                  const aIndex = priorities.findIndex(p => a.label.toLowerCase().includes(p) || a.url.toLowerCase().includes(p));
+                  const bIndex = priorities.findIndex(p => b.label.toLowerCase().includes(p) || b.url.toLowerCase().includes(p));
+
+                  // If both have priority, sort by index (higher priority first)
+                  if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+                  // If only a has priority, it comes first
+                  if (aIndex !== -1) return -1;
+                  // If only b has priority, it comes first
+                  if (bIndex !== -1) return 1;
+                  // Otherwise validation order
+                  return 0;
+                });
+              }
+            }
+
+            // Slice to min count
+            const limitedLinks = sortedLinks.slice(0, Math.max(minLinks, 1));
+
+            if (limitedLinks.length > 0) {
+              linksCount++;
+              const existing = new Set((entity.links || []).map(l => l.url));
+              const unique = limitedLinks.filter(l => !existing.has(l.url));
+              return { ...entity, links: [...(entity.links || []), ...unique] };
+            }
+            return entity;
+          });
+          setAiTypingText(prev => prev + (language === 'pt' ? `\n✅ Links adicionados: ${linksCount}` : `\n✅ Links added: ${linksCount}`));
+        }
+
+        resultProject = updatedProject;
+
+      } else if (currentRefineMode && project.entities.length > 0) {
         // Use the new optimized refine function
         resultProject = await refineExistingProject(
-          manualPrompt, 
-          project, 
-          apiKey, 
-          aiConfig.model, 
-          language, 
+          manualPrompt,
+          project,
+          apiKey,
+          aiConfig.model,
+          language,
           currentRefineMode
         );
 
@@ -3892,15 +3979,15 @@ CRITICAL INSTRUCTIONS:
         if (currentRefineMode === 'expand') {
           const originalNames = new Set(project.entities.map(e => e.name.toLowerCase()));
           const newEntities = resultProject.entities.filter(e => !originalNames.has(e.name.toLowerCase()));
-          
+
           if (newEntities.length > 0) {
             const msg = language === 'pt'
               ? `\n\n🔍 Detectadas ${newEntities.length} novas entidades. Buscando imagens automaticamente...`
               : `\n\n🔍 Detected ${newEntities.length} new entities. Automatically fetching images...`;
             setAiTypingText(prev => prev + msg);
-            
+
             const entitiesToFetch = newEntities.map(e => ({ name: e.name, scientificName: e.name }));
-            
+
             try {
               const imageMap = await fetchImagesForEntities(
                 entitiesToFetch,
@@ -3910,7 +3997,7 @@ CRITICAL INSTRUCTIONS:
                 },
                 aiConfig.category
               );
-              
+
               resultProject.entities = resultProject.entities.map(entity => {
                 if (!originalNames.has(entity.name.toLowerCase())) {
                   const newUrl = imageMap.get(entity.name);
@@ -3918,7 +4005,7 @@ CRITICAL INSTRUCTIONS:
                 }
                 return entity;
               });
-              
+
               const foundCount = Array.from(imageMap.values()).filter(url => url).length;
               const resultMsg = language === 'pt'
                 ? `\n✅ Imagens encontradas: ${foundCount}/${newEntities.length}`
@@ -3930,13 +4017,13 @@ CRITICAL INSTRUCTIONS:
             }
           }
         }
-        
+
         // Show success message
         const successMsg = language === 'pt'
           ? `\n\n✅ Operação concluída! ${resultProject.entities.length} entidades processadas.`
           : `\n\n✅ Operation complete! ${resultProject.entities.length} entities processed.`;
         setAiTypingText(prev => prev + successMsg);
-        
+
         // Clear refine mode
         setCurrentRefineMode(null);
       } else if (refineAction === 'VALIDATE' && project.entities.length > 0) {
@@ -3946,28 +4033,41 @@ CRITICAL INSTRUCTIONS:
           project,
           apiKey,
           aiConfig.model,
-          language
+          language,
+          {
+            referenceSource: refineOptions.validateReference,
+            customSource: refineOptions.validateCustomSource,
+            category: (() => {
+              if (project.category) return project.category;
+              if (aiConfig.category && aiConfig.category !== 'FLORA') return aiConfig.category;
+              const featStr = JSON.stringify(project.features || []).toLowerCase();
+              const faunaKeywords = ['patas', 'legs', 'asas', 'wings', 'pelo', 'fur', 'cauda', 'tail', 'bico', 'beak', 'antena', 'antenna', 'animal', 'focinho', 'snout', 'corpo', 'body'];
+              if (faunaKeywords.some(k => featStr.includes(k))) return 'FAUNA';
+              return 'FLORA';
+            })()
+          }
         );
-        
+
         const successMsg = language === 'pt'
           ? `\n\n✅ Validação concluída! ${resultProject.entities.length} entidades mantidas.`
           : `\n\n✅ Validation complete! ${resultProject.entities.length} entities kept.`;
         setAiTypingText(prev => prev + successMsg);
       } else {
         // Standard generation (new key or non-refine operation)
-        const generatedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
-        
+        const rawGeneratedProject = await generateKeyFromCustomPrompt(manualPrompt, apiKey, aiConfig.model, language);
+        const generatedProject = { ...rawGeneratedProject, category: aiConfig.category };
+
         // VALIDATION: Check if AI response is valid
-        const isValidResponse = generatedProject && 
-          generatedProject.entities && 
+        const isValidResponse = generatedProject &&
+          generatedProject.entities &&
           generatedProject.entities.length > 0 &&
           generatedProject.features &&
           generatedProject.features.length > 0;
-        
+
         if (!isValidResponse) {
           console.error("[handleSendManualPrompt] AI returned invalid/empty response:", generatedProject);
           stopTypingEffect();
-          const errorMsg = language === 'pt' 
+          const errorMsg = language === 'pt'
             ? "\n\n❌ ERRO: A IA retornou uma resposta vazia ou inválida. Os dados originais foram preservados. Tente novamente."
             : "\n\n❌ ERROR: AI returned empty or invalid response. Original data preserved. Please try again.";
           setAiTypingText(prev => prev + errorMsg);
@@ -3975,14 +4075,14 @@ CRITICAL INSTRUCTIONS:
           setShowPromptEditor(false);
           return;
         }
-        
+
         // Check for significant data loss when refining
         if (project.entities.length > 0) {
-          const existingTraitCount = project.entities.reduce((sum, e) => 
+          const existingTraitCount = project.entities.reduce((sum, e) =>
             sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
-          const newTraitCount = generatedProject.entities.reduce((sum, e) => 
+          const newTraitCount = generatedProject.entities.reduce((sum, e) =>
             sum + Object.values(e.traits).reduce((tSum, states) => tSum + states.length, 0), 0);
-          
+
           if (existingTraitCount > 10 && newTraitCount < existingTraitCount * 0.3) {
             console.warn(`[handleSendManualPrompt] WARNING: Significant trait loss detected! Existing: ${existingTraitCount}, New: ${newTraitCount}`);
             const warningMsg = language === 'pt'
@@ -3991,12 +4091,12 @@ CRITICAL INSTRUCTIONS:
             setAiTypingText(prev => prev + warningMsg);
           }
         }
-        
+
         // Merge with existing project to preserve images, links, and other data
-        resultProject = project.entities.length > 0 
+        resultProject = project.entities.length > 0
           ? mergeProjectsPreservingData(generatedProject, project)
           : generatedProject;
-        
+
         // Safety check: if merge returned original project, inform user
         if (resultProject === project) {
           const preservedMsg = language === 'pt'
@@ -4005,27 +4105,38 @@ CRITICAL INSTRUCTIONS:
           setAiTypingText(prev => prev + preservedMsg);
         }
       }
-      
-      // Stop typing effect and show summary
+
+      // ══════════════════════════════════════════════════════════════════════════════
+      // COMMON COMPLETION LOGIC (PERSISTENCE)
+      // ══════════════════════════════════════════════════════════════════════════════
+
       stopTypingEffect(resultProject);
-      
-      // Wait a moment so user can see the summary
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setProject(resultProject);
-      setActiveTab('MATRIX');
-      setShowPromptEditor(false);
+
+      const successMsg = language === 'pt'
+        ? "\n\n✨ Processo Finalizado! Revise o resultado abaixo e clique em Confirmar."
+        : "\n\n✨ Process Finished! Review the result below and click Confirm.";
+      setAiTypingText(prev => prev + successMsg);
+
+      setResultProject(resultProject);
+      // Wait for summary to render
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Store Raw Output
+      setRawOutput(JSON.stringify(resultProject, null, 2));
+      setAiTypingComplete(true);
+
+      // DO NOT CLOSE MODAL - User must click confirmation button
     } catch (e: any) {
       console.error(e);
       // Stop typing and show error with specific message based on error type
       stopTypingEffect();
-      
+
       // Clear refine mode on error
       setCurrentRefineMode(null);
-      
+
       const errorMessage = e?.message || String(e);
       let userErrorMessage: string;
-      
+
       if (errorMessage.includes('503') || errorMessage.includes('overloaded') || errorMessage.includes('UNAVAILABLE')) {
         userErrorMessage = language === 'pt'
           ? "\n\n❌ ERRO: O serviço de IA está sobrecarregado no momento. Por favor, aguarde alguns minutos e tente novamente."
@@ -4047,7 +4158,7 @@ CRITICAL INSTRUCTIONS:
           ? "\n\n❌ ERRO: Não foi possível gerar a chave. Por favor, tente novamente."
           : "\n\n❌ ERROR: Could not generate the key. Please try again.";
       }
-      
+
       setAiTypingText(prev => prev + userErrorMessage);
       await new Promise(resolve => setTimeout(resolve, 3000));
       // Don't show alert - the error is already displayed in the typing area
@@ -4069,6 +4180,9 @@ CRITICAL INSTRUCTIONS:
     setShowPromptEditor(false);
     setPendingNervuraFile(null); // Clear staged Nervura file
     setPendingImportProject(null); // Clear pending import
+    setResultProject(null);
+    setRawOutput(null);
+    setShowRawOutput(false);
     setShowAiModal(true);
   };
 
@@ -4407,9 +4521,9 @@ CRITICAL INSTRUCTIONS:
                             )}
                             {/* Existing Image URL (Read-only if not editing and URL exists) */}
                             {!isEditingImage && state.imageUrl && (
-                                <div className="ml-8 mt-1">
-                                    <span className="text-[10px] w-full text-slate-400 truncate block">{state.imageUrl}</span>
-                                </div>
+                              <div className="ml-8 mt-1">
+                                <span className="text-[10px] w-full text-slate-400 truncate block">{state.imageUrl}</span>
+                              </div>
                             )}
                           </div>
                         );
@@ -4438,7 +4552,7 @@ CRITICAL INSTRUCTIONS:
                   <div className="flex items-center gap-3">
                     <h3 className="text-lg font-semibold text-slate-800">{strings.manageEntities}</h3>
                     <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">
-                      {hasActiveFilters 
+                      {hasActiveFilters
                         ? `${filteredEntities.length} ${strings.ofEntities} ${project.entities.length}`
                         : `${project.entities.length} ${language === 'pt' ? 'entidades' : 'entities'}`
                       }
@@ -4450,7 +4564,7 @@ CRITICAL INSTRUCTIONS:
                   <Plus size={16} /> <span className="hidden sm:inline">{strings.addEntity}</span>
                 </button>
               </div>
-              
+
               {/* Filter Bar */}
               <div className="mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
                 <div className="flex flex-wrap items-center gap-3">
@@ -4467,7 +4581,7 @@ CRITICAL INSTRUCTIONS:
                       />
                     </div>
                   </div>
-                  
+
                   {/* Family Filter */}
                   {uniqueFamilies.length > 0 && (
                     <select
@@ -4481,7 +4595,7 @@ CRITICAL INSTRUCTIONS:
                       ))}
                     </select>
                   )}
-                  
+
                   {/* Genus Filter */}
                   {uniqueGenera.length > 0 && (
                     <select
@@ -4495,15 +4609,14 @@ CRITICAL INSTRUCTIONS:
                       ))}
                     </select>
                   )}
-                  
+
                   {/* Only With Gaps Filter */}
                   {project.features.length > 0 && (
-                    <label 
-                      className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg cursor-pointer transition-colors ${
-                        entityFilter.onlyWithGaps 
-                          ? 'bg-amber-50 border-amber-300 text-amber-700' 
-                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                      }`}
+                    <label
+                      className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg cursor-pointer transition-colors ${entityFilter.onlyWithGaps
+                        ? 'bg-amber-50 border-amber-300 text-amber-700'
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        }`}
                       title={strings.onlyWithGapsDesc}
                     >
                       <input
@@ -4515,7 +4628,7 @@ CRITICAL INSTRUCTIONS:
                       <span className="whitespace-nowrap">{strings.onlyWithGaps}</span>
                     </label>
                   )}
-                  
+
                   {/* Clear Filters */}
                   {hasActiveFilters && (
                     <button
@@ -4533,155 +4646,155 @@ CRITICAL INSTRUCTIONS:
                 {filteredEntities.map((entity) => {
                   const eIdx = project.entities.findIndex(e => e.id === entity.id);
                   return (
-                  <div key={entity.id} className="flex flex-col sm:flex-row gap-6 items-start border border-slate-200 p-4 md:p-6 rounded-xl bg-white hover:shadow-md transition-shadow">
-                    <div className="w-full sm:w-48 space-y-2 flex-shrink-0">
-                      <div className="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
-                        {entity.imageUrl ? (
-                          <img src={entity.imageUrl} className="w-full h-full object-cover" alt="preview" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-300">
-                            <ImageIcon size={32} />
-                          </div>
-                        )}
-                      </div>
-                      <input
-                        value={entity.imageUrl || ""}
-                        onChange={(e) => {
-                          const newEntities = [...project.entities];
-                          newEntities[eIdx].imageUrl = e.target.value;
-                          setProject(p => ({ ...p, entities: newEntities }));
-                        }}
-                        className="text-xs w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded outline-none focus:border-emerald-500 text-slate-600"
-                        placeholder={strings.imageURL}
-                      />
-                      <button
-                        onClick={() => setEditingEntityId(entity.id)}
-                        className="w-full flex items-center justify-center gap-2 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 md:py-2 rounded-lg font-medium transition-colors border border-slate-200"
-                      >
-                        <Edit3 size={12} /> {strings.editTraits}
-                      </button>
-                    </div>
-
-                    <div className="flex-1 space-y-4 w-full">
-                      <div className="flex justify-between items-start gap-2">
+                    <div key={entity.id} className="flex flex-col sm:flex-row gap-6 items-start border border-slate-200 p-4 md:p-6 rounded-xl bg-white hover:shadow-md transition-shadow">
+                      <div className="w-full sm:w-48 space-y-2 flex-shrink-0">
+                        <div className="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+                          {entity.imageUrl ? (
+                            <img src={entity.imageUrl} className="w-full h-full object-cover" alt="preview" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-300">
+                              <ImageIcon size={32} />
+                            </div>
+                          )}
+                        </div>
                         <input
-                          value={entity.name}
+                          value={entity.imageUrl || ""}
                           onChange={(e) => {
                             const newEntities = [...project.entities];
-                            newEntities[eIdx].name = e.target.value;
+                            newEntities[eIdx].imageUrl = e.target.value;
                             setProject(p => ({ ...p, entities: newEntities }));
                           }}
-                          className="text-xl font-bold bg-transparent border-b border-transparent hover:border-slate-300 focus:border-emerald-500 outline-none w-full pb-1 text-slate-800"
+                          className="text-xs w-full px-2 py-1.5 bg-slate-50 border border-slate-200 rounded outline-none focus:border-emerald-500 text-slate-600"
+                          placeholder={strings.imageURL}
                         />
                         <button
-                          onClick={() => {
-                            const newEntities = project.entities.filter(e => e.id !== entity.id);
-                            setProject(p => ({ ...p, entities: newEntities }));
-                          }}
-                          className="text-slate-300 hover:text-red-500 p-2 hover:bg-red-50 rounded transition-colors"
+                          onClick={() => setEditingEntityId(entity.id)}
+                          className="w-full flex items-center justify-center gap-2 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 md:py-2 rounded-lg font-medium transition-colors border border-slate-200"
                         >
-                          <Trash2 size={18} />
+                          <Edit3 size={12} /> {strings.editTraits}
                         </button>
                       </div>
-                      
-                      {/* Scientific Name & Family Row */}
-                      <div className="flex gap-3 flex-wrap md:flex-nowrap">
-                        <div className="flex-1 min-w-[140px]">
-                          <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Nome Científico' : 'Scientific Name'}</label>
+
+                      <div className="flex-1 space-y-4 w-full">
+                        <div className="flex justify-between items-start gap-2">
                           <input
-                            value={entity.scientificName || ''}
+                            value={entity.name}
                             onChange={(e) => {
                               const newEntities = [...project.entities];
-                              newEntities[eIdx].scientificName = e.target.value;
+                              newEntities[eIdx].name = e.target.value;
                               setProject(p => ({ ...p, entities: newEntities }));
                             }}
-                            placeholder={language === 'pt' ? 'Ex: Panthera leo' : 'e.g., Panthera leo'}
-                            className="text-sm italic text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
+                            className="text-xl font-bold bg-transparent border-b border-transparent hover:border-slate-300 focus:border-emerald-500 outline-none w-full pb-1 text-slate-800"
                           />
-                        </div>
-                        <div className="flex-1 min-w-[120px]">
-                          <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Família' : 'Family'}</label>
-                          <input
-                            value={entity.family || ''}
-                            onChange={(e) => {
-                              const newEntities = [...project.entities];
-                              newEntities[eIdx].family = e.target.value;
-                              setProject(p => ({ ...p, entities: newEntities }));
-                            }}
-                            placeholder={language === 'pt' ? 'Ex: Felidae' : 'e.g., Felidae'}
-                            className="text-sm text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      <textarea
-                        value={entity.description}
-                        onChange={(e) => {
-                          const newEntities = [...project.entities];
-                          newEntities[eIdx].description = e.target.value;
-                          setProject(p => ({ ...p, entities: newEntities }));
-                        }}
-                        className="text-sm text-slate-600 bg-slate-50 border border-transparent focus:bg-white focus:border-emerald-500 w-full h-24 outline-none resize-none rounded-lg p-3 transition-colors"
-                      />
-
-                      {/* Links Section */}
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
-                          <LinkIcon size={12} /> {strings.links}
-                        </h5>
-                        <div className="space-y-2">
-                          {(entity.links || []).map((link, lIdx) => (
-                            <div key={link.id || lIdx} className="flex gap-2">
-                              <input
-                                placeholder="Label"
-                                value={link.label}
-                                onChange={(e) => {
-                                  const newEntities = [...project.entities];
-                                  if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
-                                  newEntities[eIdx].links[lIdx].label = e.target.value;
-                                  setProject(p => ({ ...p, entities: newEntities }));
-                                }}
-                                className="text-xs flex-1 px-2 py-1 border border-slate-200 rounded outline-none focus:border-emerald-400"
-                              />
-                              <input
-                                placeholder="URL"
-                                value={link.url}
-                                onChange={(e) => {
-                                  const newEntities = [...project.entities];
-                                  if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
-                                  newEntities[eIdx].links[lIdx].url = e.target.value;
-                                  setProject(p => ({ ...p, entities: newEntities }));
-                                }}
-                                className="text-xs flex-[2] px-2 py-1 border border-slate-200 rounded outline-none focus:border-emerald-400"
-                              />
-                              <button
-                                onClick={() => {
-                                  const newEntities = [...project.entities];
-                                  if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
-                                  newEntities[eIdx].links = newEntities[eIdx].links.filter((_, i) => i !== lIdx);
-                                  setProject(p => ({ ...p, entities: newEntities }));
-                                }}
-                                className="text-slate-400 hover:text-red-500"
-                              >
-                                <X size={14} />
-                              </button>
-                            </div>
-                          ))}
                           <button
                             onClick={() => {
-                              const newEntities = [...project.entities];
-                              if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
-                              newEntities[eIdx].links.push({ id: Math.random().toString(36).substr(2, 9), label: '', url: '' });
+                              const newEntities = project.entities.filter(e => e.id !== entity.id);
                               setProject(p => ({ ...p, entities: newEntities }));
                             }}
-                            className="text-xs flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-medium"
+                            className="text-slate-300 hover:text-red-500 p-2 hover:bg-red-50 rounded transition-colors"
                           >
-                            <Plus size={12} /> {strings.addLink}
+                            <Trash2 size={18} />
                           </button>
+                        </div>
+
+                        {/* Scientific Name & Family Row */}
+                        <div className="flex gap-3 flex-wrap md:flex-nowrap">
+                          <div className="flex-1 min-w-[140px]">
+                            <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Nome Científico' : 'Scientific Name'}</label>
+                            <input
+                              value={entity.scientificName || ''}
+                              onChange={(e) => {
+                                const newEntities = [...project.entities];
+                                newEntities[eIdx].scientificName = e.target.value;
+                                setProject(p => ({ ...p, entities: newEntities }));
+                              }}
+                              placeholder={language === 'pt' ? 'Ex: Panthera leo' : 'e.g., Panthera leo'}
+                              className="text-sm italic text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-[120px]">
+                            <label className="text-xs text-slate-400 block mb-1">{language === 'pt' ? 'Família' : 'Family'}</label>
+                            <input
+                              value={entity.family || ''}
+                              onChange={(e) => {
+                                const newEntities = [...project.entities];
+                                newEntities[eIdx].family = e.target.value;
+                                setProject(p => ({ ...p, entities: newEntities }));
+                              }}
+                              placeholder={language === 'pt' ? 'Ex: Felidae' : 'e.g., Felidae'}
+                              className="text-sm text-slate-600 bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 w-full outline-none rounded-lg px-3 py-2 transition-colors"
+                            />
+                          </div>
+                        </div>
+
+                        <textarea
+                          value={entity.description}
+                          onChange={(e) => {
+                            const newEntities = [...project.entities];
+                            newEntities[eIdx].description = e.target.value;
+                            setProject(p => ({ ...p, entities: newEntities }));
+                          }}
+                          className="text-sm text-slate-600 bg-slate-50 border border-transparent focus:bg-white focus:border-emerald-500 w-full h-24 outline-none resize-none rounded-lg p-3 transition-colors"
+                        />
+
+                        {/* Links Section */}
+                        <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                          <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <LinkIcon size={12} /> {strings.links}
+                          </h5>
+                          <div className="space-y-2">
+                            {(entity.links || []).map((link, lIdx) => (
+                              <div key={link.id || lIdx} className="flex gap-2">
+                                <input
+                                  placeholder="Label"
+                                  value={link.label}
+                                  onChange={(e) => {
+                                    const newEntities = [...project.entities];
+                                    if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
+                                    newEntities[eIdx].links[lIdx].label = e.target.value;
+                                    setProject(p => ({ ...p, entities: newEntities }));
+                                  }}
+                                  className="text-xs flex-1 px-2 py-1 border border-slate-200 rounded outline-none focus:border-emerald-400"
+                                />
+                                <input
+                                  placeholder="URL"
+                                  value={link.url}
+                                  onChange={(e) => {
+                                    const newEntities = [...project.entities];
+                                    if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
+                                    newEntities[eIdx].links[lIdx].url = e.target.value;
+                                    setProject(p => ({ ...p, entities: newEntities }));
+                                  }}
+                                  className="text-xs flex-[2] px-2 py-1 border border-slate-200 rounded outline-none focus:border-emerald-400"
+                                />
+                                <button
+                                  onClick={() => {
+                                    const newEntities = [...project.entities];
+                                    if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
+                                    newEntities[eIdx].links = newEntities[eIdx].links.filter((_, i) => i !== lIdx);
+                                    setProject(p => ({ ...p, entities: newEntities }));
+                                  }}
+                                  className="text-slate-400 hover:text-red-500"
+                                >
+                                  <X size={14} />
+                                </button>
+                              </div>
+                            ))}
+                            <button
+                              onClick={() => {
+                                const newEntities = [...project.entities];
+                                if (!newEntities[eIdx].links) newEntities[eIdx].links = [];
+                                newEntities[eIdx].links.push({ id: Math.random().toString(36).substr(2, 9), label: '', url: '' });
+                                setProject(p => ({ ...p, entities: newEntities }));
+                              }}
+                              className="text-xs flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-medium"
+                            >
+                              <Plus size={12} /> {strings.addLink}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   );
                 })}
               </div>
@@ -4723,7 +4836,7 @@ CRITICAL INSTRUCTIONS:
                     )}
                   </div>
                 </div>
-                
+
                 {/* Entity Filter Bar for Matrix */}
                 <div className="flex flex-wrap items-center gap-2 mb-3 pb-3 border-b border-slate-100">
                   {/* Search */}
@@ -4737,7 +4850,7 @@ CRITICAL INSTRUCTIONS:
                       className="w-full pl-8 pr-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:border-emerald-500 outline-none"
                     />
                   </div>
-                  
+
                   {/* Family Filter */}
                   {uniqueFamilies.length > 0 && (
                     <select
@@ -4751,7 +4864,7 @@ CRITICAL INSTRUCTIONS:
                       ))}
                     </select>
                   )}
-                  
+
                   {/* Genus Filter */}
                   {uniqueGenera.length > 0 && (
                     <select
@@ -4765,15 +4878,14 @@ CRITICAL INSTRUCTIONS:
                       ))}
                     </select>
                   )}
-                  
+
                   {/* Only With Gaps Filter */}
                   {project.features.length > 0 && (
-                    <label 
-                      className={`flex items-center gap-1.5 px-2 py-1.5 text-xs border rounded-lg cursor-pointer transition-colors ${
-                        entityFilter.onlyWithGaps 
-                          ? 'bg-amber-50 border-amber-300 text-amber-700' 
-                          : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
-                      }`}
+                    <label
+                      className={`flex items-center gap-1.5 px-2 py-1.5 text-xs border rounded-lg cursor-pointer transition-colors ${entityFilter.onlyWithGaps
+                        ? 'bg-amber-50 border-amber-300 text-amber-700'
+                        : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                        }`}
                       title={strings.onlyWithGapsDesc}
                     >
                       <input
@@ -4785,7 +4897,7 @@ CRITICAL INSTRUCTIONS:
                       <span className="whitespace-nowrap">{strings.onlyWithGaps}</span>
                     </label>
                   )}
-                  
+
                   {/* Clear Filters */}
                   {hasActiveFilters && (
                     <button
@@ -4797,18 +4909,17 @@ CRITICAL INSTRUCTIONS:
                     </button>
                   )}
                 </div>
-                
+
                 {/* Feature Navigation Pills */}
                 <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
                   {project.features.map((feature, idx) => (
                     <button
                       key={feature.id}
                       onClick={() => toggleFeatureExpansion(feature.id)}
-                      className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                        expandedFeatureId === feature.id
-                          ? 'bg-emerald-600 text-white shadow-md'
-                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                      }`}
+                      className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${expandedFeatureId === feature.id
+                        ? 'bg-emerald-600 text-white shadow-md'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        }`}
                     >
                       {feature.name}
                     </button>
@@ -4823,27 +4934,26 @@ CRITICAL INSTRUCTIONS:
                     <thead className="sticky top-0 z-40">
                       {/* Row 1: Feature Names */}
                       <tr className="bg-gradient-to-r from-slate-800 to-slate-900">
-                        <th 
-                          rowSpan={2} 
+                        <th
+                          rowSpan={2}
                           className="sticky left-0 z-50 bg-gradient-to-br from-slate-800 to-slate-900 text-white px-3 py-2 font-bold border-r border-b border-slate-600 text-left align-bottom"
                           style={{ minWidth: '180px', maxWidth: '180px' }}
                         >
                           <span className="text-xs font-semibold tracking-wide">{strings.taxaFeatures}</span>
                         </th>
-                        
+
                         {project.features.map((feature) => {
                           const isExpanded = expandedFeatureId === feature.id;
                           const colCount = isExpanded ? feature.states.length : 1;
-                          
+
                           return (
                             <th
                               key={`header-${feature.id}`}
                               colSpan={colCount}
-                              className={`px-1 py-1.5 font-semibold border-r border-b text-center align-middle cursor-pointer transition-all duration-200 ${
-                                isExpanded 
-                                  ? 'bg-gradient-to-br from-emerald-500 to-emerald-700 border-emerald-400 text-white shadow-lg' 
-                                  : 'bg-gradient-to-b from-slate-600 to-slate-700 border-slate-500 text-slate-100 hover:from-slate-500 hover:to-slate-600'
-                              }`}
+                              className={`px-1 py-1.5 font-semibold border-r border-b text-center align-middle cursor-pointer transition-all duration-200 ${isExpanded
+                                ? 'bg-gradient-to-br from-emerald-500 to-emerald-700 border-emerald-400 text-white shadow-lg'
+                                : 'bg-gradient-to-b from-slate-600 to-slate-700 border-slate-500 text-slate-100 hover:from-slate-500 hover:to-slate-600'
+                                }`}
                               style={{ minWidth: isExpanded ? `${colCount * 80}px` : '60px' }}
                               onClick={() => toggleFeatureExpansion(feature.id)}
                               title={feature.name}
@@ -4868,12 +4978,12 @@ CRITICAL INSTRUCTIONS:
                           );
                         })}
                       </tr>
-                      
+
                       {/* Row 2: State Labels or Expand Info */}
                       <tr>
                         {project.features.map((feature) => {
                           const isExpanded = expandedFeatureId === feature.id;
-                          
+
                           if (isExpanded) {
                             return feature.states.map((state) => (
                               <th
@@ -4905,13 +5015,13 @@ CRITICAL INSTRUCTIONS:
                         })}
                       </tr>
                     </thead>
-                    
+
                     {/* Body */}
                     <tbody>
                       {filteredEntities.map((entity, idx) => (
                         <tr key={entity.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}>
                           {/* Entity Name - Frozen Left */}
-                          <td 
+                          <td
                             className={`sticky left-0 z-20 px-2 py-1.5 border-r-2 border-b border-slate-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
                             style={{ minWidth: '180px', maxWidth: '180px', boxShadow: '2px 0 6px rgba(0,0,0,0.08)' }}
                           >
@@ -4935,18 +5045,17 @@ CRITICAL INSTRUCTIONS:
                               return feature.states.map(state => {
                                 const isChecked = entityTraits.includes(state.id);
                                 return (
-                                  <td 
-                                    key={`${entity.id}-${state.id}`} 
+                                  <td
+                                    key={`${entity.id}-${state.id}`}
                                     className={`border-b border-r border-slate-200 text-center hover:bg-emerald-50 transition-colors p-1 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/80'}`}
                                     style={{ minWidth: '80px', maxWidth: '100px' }}
                                   >
                                     <button
                                       onClick={() => toggleTrait(entity.id, feature.id, state.id)}
-                                      className={`w-7 h-7 rounded-md flex items-center justify-center transition-all mx-auto ${
-                                        isChecked
-                                          ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-sm'
-                                          : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
-                                      }`}
+                                      className={`w-7 h-7 rounded-md flex items-center justify-center transition-all mx-auto ${isChecked
+                                        ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-sm'
+                                        : 'bg-slate-100 text-slate-300 hover:bg-slate-200'
+                                        }`}
                                     >
                                       {isChecked && <CheckSquare size={14} strokeWidth={2.5} />}
                                     </button>
@@ -4962,11 +5071,10 @@ CRITICAL INSTRUCTIONS:
                                   onClick={() => toggleFeatureExpansion(feature.id)}
                                   title={`${selectedCount} de ${feature.states.length}`}
                                 >
-                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold mx-auto ${
-                                    selectedCount > 0
-                                      ? 'bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-700'
-                                      : 'bg-slate-100 text-slate-400'
-                                  }`}>
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold mx-auto ${selectedCount > 0
+                                    ? 'bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-700'
+                                    : 'bg-slate-100 text-slate-400'
+                                    }`}>
                                     {selectedCount}
                                   </div>
                                 </td>
@@ -5055,2280 +5163,2475 @@ CRITICAL INSTRUCTIONS:
       {showAiModal && (
         <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           {aiStep === 'CATEGORY' ? (
-             <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200 p-8 flex flex-col items-center relative">
-                <button 
-                  onClick={() => setShowAiModal(false)}
-                  className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors"
+            <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200 p-8 flex flex-col items-center relative">
+              <button
+                onClick={() => setShowAiModal(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              <img src="./assets/icon.png" className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
+              <h2 className="text-2xl font-bold text-slate-800 mb-2">Nozes IA</h2>
+              <p className="text-slate-500 text-center mb-8">
+                {language === 'pt' ? 'O que você deseja identificar hoje?' : 'What do you want to identify today?'}
+              </p>
+
+              <div className="grid grid-cols-1 gap-4 w-full">
+                <button
+                  onClick={() => {
+                    setAiConfig(prev => ({ ...prev, category: 'FLORA' }));
+                    setAiStep('WIZARD');
+                  }}
+                  className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-emerald-500 hover:bg-emerald-50 transition-all group bg-white shadow-sm hover:shadow-md"
                 >
-                  <X size={24} />
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🌿</div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-slate-800 group-hover:text-emerald-700">Flora</h3>
+                    <p className="text-xs text-slate-500">{language === 'pt' ? 'Plantas, árvores, flores' : 'Plants, trees, flowers'}</p>
+                  </div>
                 </button>
 
-                <img src="./assets/icon.png" className="w-24 h-24 mb-6 drop-shadow-md" alt="Nozes Logo" />
-                <h2 className="text-2xl font-bold text-slate-800 mb-2">Nozes IA</h2>
-                <p className="text-slate-500 text-center mb-8">
-                  {language === 'pt' ? 'O que você deseja identificar hoje?' : 'What do you want to identify today?'}
-                </p>
-                
-                <div className="grid grid-cols-1 gap-4 w-full">
-                  <button 
-                    onClick={() => {
-                      setAiConfig(prev => ({ ...prev, category: 'FLORA' }));
-                      setAiStep('WIZARD');
-                    }}
-                    className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-emerald-500 hover:bg-emerald-50 transition-all group bg-white shadow-sm hover:shadow-md"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🌿</div>
-                    <div className="text-left">
-                      <h3 className="font-bold text-slate-800 group-hover:text-emerald-700">Flora</h3>
-                      <p className="text-xs text-slate-500">{language === 'pt' ? 'Plantas, árvores, flores' : 'Plants, trees, flowers'}</p>
-                    </div>
-                  </button>
+                <button
+                  onClick={() => {
+                    setAiConfig(prev => ({ ...prev, category: 'FAUNA' }));
+                    setAiStep('WIZARD');
+                  }}
+                  className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-amber-500 hover:bg-amber-50 transition-all group bg-white shadow-sm hover:shadow-md"
+                >
+                  <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🦁</div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-slate-800 group-hover:text-amber-700">Fauna</h3>
+                    <p className="text-xs text-slate-500">{language === 'pt' ? 'Animais, insetos, aves' : 'Animals, insects, birds'}</p>
+                  </div>
+                </button>
 
-                  <button 
-                    onClick={() => {
-                      setAiConfig(prev => ({ ...prev, category: 'FAUNA' }));
-                      setAiStep('WIZARD');
-                    }}
-                    className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-amber-500 hover:bg-amber-50 transition-all group bg-white shadow-sm hover:shadow-md"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🦁</div>
-                    <div className="text-left">
-                      <h3 className="font-bold text-slate-800 group-hover:text-amber-700">Fauna</h3>
-                      <p className="text-xs text-slate-500">{language === 'pt' ? 'Animais, insetos, aves' : 'Animals, insects, birds'}</p>
-                    </div>
-                  </button>
-
-                  <button 
-                    onClick={() => {
-                      setAiConfig(prev => ({ ...prev, category: 'OTHER' }));
-                      setAiStep('WIZARD');
-                    }}
-                    className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50 transition-all group bg-white shadow-sm hover:shadow-md"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">✨</div>
-                    <div className="text-left">
-                      <h3 className="font-bold text-slate-800 group-hover:text-purple-700">{language === 'pt' ? 'Outros' : 'Others'}</h3>
-                      <p className="text-xs text-slate-500">{language === 'pt' ? 'Filmes, livros, objetos, etc.' : 'Movies, books, objects, etc.'}</p>
-                    </div>
-                  </button>
-                </div>
-             </div>
+                <button
+                  onClick={() => {
+                    setAiConfig(prev => ({ ...prev, category: 'OTHER' }));
+                    setAiStep('WIZARD');
+                  }}
+                  className="flex items-center gap-4 p-4 rounded-xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50 transition-all group bg-white shadow-sm hover:shadow-md"
+                >
+                  <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">✨</div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-slate-800 group-hover:text-purple-700">{language === 'pt' ? 'Outros' : 'Others'}</h3>
+                    <p className="text-xs text-slate-500">{language === 'pt' ? 'Filmes, livros, objetos, etc.' : 'Movies, books, objects, etc.'}</p>
+                  </div>
+                </button>
+              </div>
+            </div>
           ) : (
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200 max-h-[90vh] flex flex-col">
-            {/* Header - Dynamic Color based on Category */}
-            <div className={`p-4 md:p-6 text-white shrink-0 bg-gradient-to-r ${
-              aiConfig.category === 'FAUNA' ? 'from-amber-600 to-orange-500' :
-              aiConfig.category === 'OTHER' ? 'from-purple-600 to-indigo-500' :
-              'from-emerald-600 to-teal-500' // FLORA (Default)
-            }`}>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-white/20 rounded-lg">
-                  <Brain size={24} className="text-white" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold flex-1">{strings.aiTitle}</h3>
-                
-                {/* Icon in Header */}
-                <img src="./assets/icon.png" className="w-12 h-12 drop-shadow-sm opacity-90" alt="Nozes" />
+            <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200 max-h-[90vh] flex flex-col">
+              {/* Header - Dynamic Color based on Category */}
+              <div className={`p-4 md:p-6 text-white shrink-0 bg-gradient-to-r ${aiConfig.category === 'FAUNA' ? 'from-amber-600 to-orange-500' :
+                aiConfig.category === 'OTHER' ? 'from-purple-600 to-indigo-500' :
+                  'from-emerald-600 to-teal-500' // FLORA (Default)
+                }`}>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <Brain size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold flex-1">{strings.aiTitle}</h3>
 
-                {onOpenSettings && (
-                  <button
-                    onClick={() => { setShowAiModal(false); onOpenSettings(true); }}
-                    className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-                    title={language === 'pt' ? 'Configurar Chave de API' : 'Configure API Key'}
-                  >
-                    <KeyRound size={18} className="text-white" />
-                  </button>
+                  {/* Icon in Header */}
+                  <img src="./assets/icon.png" className="w-12 h-12 drop-shadow-sm opacity-90" alt="Nozes" />
+
+                  {onOpenSettings && (
+                    <button
+                      onClick={() => { setShowAiModal(false); onOpenSettings(true); }}
+                      className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+                      title={language === 'pt' ? 'Configurar Chave de API' : 'Configure API Key'}
+                    >
+                      <KeyRound size={18} className="text-white" />
+                    </button>
+                  )}
+                </div>
+                <p className="text-white/90 text-xs md:text-sm font-medium drop-shadow-sm">
+                  {strings.aiDesc}
+                </p>
+                {/* API Key Warning - only show if no API key configured */}
+                {!apiKey && onOpenSettings && (
+                  <div className="mt-3 flex items-center gap-2 bg-red-500/30 backdrop-blur-sm px-3 py-2 rounded-lg border border-red-300/50 animate-pulse">
+                    <KeyRound size={16} className="text-yellow-200" />
+                    <div className="flex-1">
+                      <p className="text-yellow-100 text-xs font-bold">{strings.apiKeyWarning}</p>
+                      <p className="text-yellow-200/80 text-[10px]">{strings.clickGear}</p>
+                    </div>
+                  </div>
                 )}
               </div>
-              <p className="text-white/90 text-xs md:text-sm font-medium drop-shadow-sm">
-                {strings.aiDesc}
-              </p>
-              {/* API Key Warning - only show if no API key configured */}
-              {!apiKey && onOpenSettings && (
-                <div className="mt-3 flex items-center gap-2 bg-red-500/30 backdrop-blur-sm px-3 py-2 rounded-lg border border-red-300/50 animate-pulse">
-                  <KeyRound size={16} className="text-yellow-200" />
-                  <div className="flex-1">
-                    <p className="text-yellow-100 text-xs font-bold">{strings.apiKeyWarning}</p>
-                    <p className="text-yellow-200/80 text-[10px]">{strings.clickGear}</p>
+
+              {/* AI Mode Tabs - Layout Fixed & Emojis Substituted */}
+              <div className="flex border-b border-slate-200 bg-slate-50/50 shrink-0 select-none overflow-x-auto no-scrollbar">
+                <button
+                  onClick={() => setAiMode('TOPIC')}
+                  className={`flex-1 min-w-[80px] py-2 px-1 text-[11px] md:text-sm font-bold transition-all border-b-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 group ${aiMode === 'TOPIC'
+                    ? 'border-emerald-500 text-emerald-700 bg-emerald-50/50'
+                    : 'border-transparent text-slate-500 hover:bg-emerald-50/30 hover:text-emerald-600'
+                    }`}
+                >
+                  <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-lg transition-transform group-hover:scale-110 ${aiMode === 'TOPIC' ? 'bg-emerald-100' : 'bg-slate-100 group-hover:bg-emerald-50'}`}>
+                    ✨
                   </div>
-                </div>
-              )}
-            </div>
+                  <span className="text-center leading-none">
+                    <span className="block sm:inline">{strings.modeTopic}</span>
+                  </span>
+                </button>
 
-            {/* AI Mode Tabs */}
-            <div className="flex border-b border-slate-200 bg-slate-50 shrink-0">
-              <button
-                onClick={() => setAiMode('TOPIC')}
-                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'TOPIC' ? (aiConfig.category === 'FAUNA' ? 'border-amber-500 text-amber-600' : aiConfig.category === 'OTHER' ? 'border-purple-500 text-purple-600' : 'border-emerald-500 text-emerald-600') + ' bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
-              >
-                <span className="flex items-center justify-center gap-1"><Wand2 size={14} /> <span className="hidden sm:inline">{strings.modeTopic}</span><span className="sm:hidden">Gerar</span></span>
-              </button>
-              <button
-                onClick={() => setAiMode('IMPORT')}
-                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'IMPORT' ? (aiConfig.category === 'FAUNA' ? 'border-amber-500 text-amber-600' : aiConfig.category === 'OTHER' ? 'border-purple-500 text-purple-600' : 'border-emerald-500 text-emerald-600') + ' bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
-              >
-                <span className="flex items-center justify-center gap-1"><FileSearch size={14} /> <span className="hidden sm:inline">{strings.modeImport}</span><span className="sm:hidden">Importar</span></span>
-              </button>
-              <button
-                onClick={() => setAiMode('REFINE')}
-                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'REFINE' ? (aiConfig.category === 'FAUNA' ? 'border-amber-500 text-amber-600' : aiConfig.category === 'OTHER' ? 'border-purple-500 text-purple-600' : 'border-emerald-500 text-emerald-600') + ' bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
-              >
-                <span className="flex items-center justify-center gap-1"><Sparkles size={14} /> <span className="hidden sm:inline">{strings.modeRefine}</span><span className="sm:hidden">Refinar</span></span>
-              </button>
-              <button
-                onClick={() => setAiMode('MERGE')}
-                className={`flex-1 py-2 text-xs font-bold transition-colors border-b-2 ${aiMode === 'MERGE' ? (aiConfig.category === 'FAUNA' ? 'border-amber-500 text-amber-600' : aiConfig.category === 'OTHER' ? 'border-purple-500 text-purple-600' : 'border-emerald-500 text-emerald-600') + ' bg-white' : 'border-transparent text-slate-500 hover:bg-slate-100'}`}
-              >
-                <span className="flex items-center justify-center gap-1"><Combine size={14} /> <span className="hidden sm:inline">{strings.modeMerge}</span><span className="sm:hidden">Combinar</span></span>
-              </button>
-            </div>
-
-            <div className="p-4 md:p-6 space-y-5 overflow-y-auto custom-scrollbar flex-1 bg-white">
-
-              {aiMode === 'TOPIC' ? (
-                /* TOPIC MODE INPUTS */
-                <>
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">{strings.topic}</label>
-                    <input
-                      value={aiConfig.topic}
-                      onChange={(e) => setAiConfig(prev => ({ ...prev, topic: e.target.value }))}
-                      placeholder={
-                        aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Felinos da África, Aves do Pantanal" : "e.g. African Cats, Birds of Pantanal") :
-                        aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: Filmes de Terror dos anos 80, Personagens de Harry Potter" : "e.g. 80s Horror Movies, Harry Potter Characters") :
-                        strings.topicPlace // FLORA default
-                      }
-                      className={`w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 outline-none text-base md:text-lg ${
-                        aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500 focus:border-amber-500' :
-                        aiConfig.category === 'OTHER' ? 'focus:ring-purple-500 focus:border-purple-500' :
-                        'focus:ring-emerald-500 focus:border-emerald-500'
-                      }`}
-                      disabled={isGenerating}
-                    />
+                <button
+                  onClick={() => setAiMode('REFINE')}
+                  className={`flex-1 min-w-[80px] py-2 px-1 text-[11px] md:text-sm font-bold transition-all border-b-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 group ${aiMode === 'REFINE'
+                    ? 'border-amber-500 text-amber-700 bg-amber-50/50'
+                    : 'border-transparent text-slate-500 hover:bg-amber-50/30 hover:text-amber-600'
+                    }`}
+                >
+                  <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-lg transition-transform group-hover:scale-110 ${aiMode === 'REFINE' ? 'bg-amber-100' : 'bg-slate-100 group-hover:bg-amber-50'}`}>
+                    💎
                   </div>
+                  <span className="text-center leading-none">
+                    <span className="block sm:inline">{strings.modeRefine}</span>
+                  </span>
+                </button>
 
-                  {/* Taxonomic Filters - Only for FLORA and FAUNA */}
-                  {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
-                  <div className={`p-3 rounded-xl border ${
-                    aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' : 'bg-emerald-50/50 border-emerald-100'
-                  }`}>
-                    <label className={`block text-xs font-bold uppercase mb-2 flex items-center gap-1 ${
-                      aiConfig.category === 'FAUNA' ? 'text-amber-700' : 'text-emerald-700'
-                    }`}>
-                      <Leaf size={12} /> {strings.taxonomyFilters}
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyFamily}</label>
-                        <input
-                          value={aiConfig.taxonomyFamily}
-                          onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyFamily: e.target.value }))}
-                          placeholder={
-                            aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Felidae" : "e.g. Felidae") :
-                            (language === 'pt' ? "ex: Fabaceae" : "e.g. Fabaceae")
-                          }
-                          className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white ${
-                            aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' : 'focus:ring-emerald-500'
-                          }`}
-                          disabled={isGenerating}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyGenus}</label>
-                        <input
-                          value={aiConfig.taxonomyGenus}
-                          onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyGenus: e.target.value }))}
-                          placeholder={
-                            aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera" : "e.g. Panthera") :
-                            (language === 'pt' ? "ex: Inga" : "e.g. Inga")
-                          }
-                          className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white ${
-                            aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' : 'focus:ring-emerald-500'
-                          }`}
-                          disabled={isGenerating}
-                        />
-                      </div>
-                    </div>
+                <button
+                  onClick={() => setAiMode('IMPORT')}
+                  className={`flex-1 min-w-[80px] py-2 px-1 text-[11px] md:text-sm font-bold transition-all border-b-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 group ${aiMode === 'IMPORT'
+                    ? 'border-blue-500 text-blue-700 bg-blue-50/50'
+                    : 'border-transparent text-slate-500 hover:bg-blue-50/30 hover:text-blue-600'
+                    }`}
+                >
+                  <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-lg transition-transform group-hover:scale-110 ${aiMode === 'IMPORT' ? 'bg-blue-100' : 'bg-slate-100 group-hover:bg-blue-50'}`}>
+                    📂
                   </div>
-                  )}
+                  <span className="text-center leading-none">
+                    <span className="block sm:inline">{strings.modeImport}</span>
+                  </span>
+                </button>
 
-                  {/* Geographic Filters - Only for FLORA and FAUNA */}
-                  {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
-                  <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                    <label className="block text-xs font-bold text-blue-700 uppercase mb-2 flex items-center gap-1">
-                      <Globe size={12} /> {strings.geographyFilters}
-                    </label>
-                    
-                    {/* Scope selector */}
-                    <div className="flex gap-2 mb-3">
-                      {(['global', 'national', 'regional'] as const).map((scope) => (
-                        <button
-                          key={scope}
-                          onClick={() => setAiConfig(prev => ({ ...prev, scope }))}
-                          className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${
-                            aiConfig.scope === scope 
-                              ? 'bg-blue-600 text-white' 
-                              : 'bg-white text-slate-600 hover:bg-blue-100 border border-slate-200'
-                          }`}
-                          disabled={isGenerating}
-                        >
-                          {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
-                        </button>
-                      ))}
-                    </div>
+                <button
+                  onClick={() => setAiMode('MERGE')}
+                  className={`flex-1 min-w-[80px] py-2 px-1 text-[11px] md:text-sm font-bold transition-all border-b-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 group ${aiMode === 'MERGE'
+                    ? 'border-purple-500 text-purple-700 bg-purple-50/50'
+                    : 'border-transparent text-slate-500 hover:bg-purple-50/30 hover:text-purple-600'
+                    }`}
+                >
+                  <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-lg transition-transform group-hover:scale-110 ${aiMode === 'MERGE' ? 'bg-purple-100' : 'bg-slate-100 group-hover:bg-purple-50'}`}>
+                    🧩
+                  </div>
+                  <span className="text-center leading-none">
+                    <span className="block sm:inline">{strings.modeMerge}</span>
+                  </span>
+                </button>
+              </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.biome}</label>
-                        <select
-                          value={aiConfig.biome}
-                          onChange={(e) => setAiConfig(prev => ({ ...prev, biome: e.target.value }))}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
-                          disabled={isGenerating}
-                        >
-                          <option value="">{language === 'pt' ? "Todos os biomas" : "All biomes"}</option>
-                          <option value="Amazônia">Amazônia</option>
-                          <option value="Mata Atlântica">Mata Atlântica</option>
-                          <option value="Cerrado">Cerrado</option>
-                          <option value="Caatinga">Caatinga</option>
-                          <option value="Pampa">Pampa</option>
-                          <option value="Pantanal">Pantanal</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-slate-500 mb-1">{strings.stateUF}</label>
-                        <select
-                          value={aiConfig.stateUF}
-                          onChange={(e) => setAiConfig(prev => ({ ...prev, stateUF: e.target.value }))}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
-                          disabled={isGenerating}
-                        >
-                          <option value="">{language === 'pt' ? "Todos os estados" : "All states"}</option>
-                          <option value="AC">Acre (AC)</option>
-                          <option value="AL">Alagoas (AL)</option>
-                          <option value="AP">Amapá (AP)</option>
-                          <option value="AM">Amazonas (AM)</option>
-                          <option value="BA">Bahia (BA)</option>
-                          <option value="CE">Ceará (CE)</option>
-                          <option value="DF">Distrito Federal (DF)</option>
-                          <option value="ES">Espírito Santo (ES)</option>
-                          <option value="GO">Goiás (GO)</option>
-                          <option value="MA">Maranhão (MA)</option>
-                          <option value="MT">Mato Grosso (MT)</option>
-                          <option value="MS">Mato Grosso do Sul (MS)</option>
-                          <option value="MG">Minas Gerais (MG)</option>
-                          <option value="PA">Pará (PA)</option>
-                          <option value="PB">Paraíba (PB)</option>
-                          <option value="PR">Paraná (PR)</option>
-                          <option value="PE">Pernambuco (PE)</option>
-                          <option value="PI">Piauí (PI)</option>
-                          <option value="RJ">Rio de Janeiro (RJ)</option>
-                          <option value="RN">Rio Grande do Norte (RN)</option>
-                          <option value="RS">Rio Grande do Sul (RS)</option>
-                          <option value="RO">Rondônia (RO)</option>
-                          <option value="RR">Roraima (RR)</option>
-                          <option value="SC">Santa Catarina (SC)</option>
-                          <option value="SP">São Paulo (SP)</option>
-                          <option value="SE">Sergipe (SE)</option>
-                          <option value="TO">Tocantins (TO)</option>
-                        </select>
-                      </div>
-                    </div>
-                    
-                    {/* Free text geography field */}
-                    <div className="mt-3">
-                      <label className="block text-xs font-medium text-slate-500 mb-1">{language === 'pt' ? "Região específica (opcional)" : "Specific region (optional)"}</label>
+              <div className="p-4 md:p-6 space-y-5 overflow-y-auto custom-scrollbar flex-1 bg-white">
+
+                {aiMode === 'TOPIC' ? (
+                  /* TOPIC MODE INPUTS */
+                  <>
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-700 mb-1.5">{strings.topic}</label>
                       <input
-                        value={aiConfig.geography}
-                        onChange={(e) => setAiConfig(prev => ({ ...prev, geography: e.target.value }))}
-                        placeholder={language === 'pt' ? "ex: Serra do Mar, Bacia do Rio Doce" : "e.g. Amazon Basin, Andes"}
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                        value={aiConfig.topic}
+                        onChange={(e) => setAiConfig(prev => ({ ...prev, topic: e.target.value }))}
+                        placeholder={
+                          aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Felinos da África, Aves do Pantanal" : "e.g. African Cats, Birds of Pantanal") :
+                            aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: Filmes de Terror dos anos 80, Personagens de Harry Potter" : "e.g. 80s Horror Movies, Harry Potter Characters") :
+                              strings.topicPlace // FLORA default
+                        }
+                        className={`w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 outline-none text-base md:text-lg ${aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500 focus:border-amber-500' :
+                          aiConfig.category === 'OTHER' ? 'focus:ring-purple-500 focus:border-purple-500' :
+                            'focus:ring-emerald-500 focus:border-emerald-500'
+                          }`}
                         disabled={isGenerating}
                       />
                     </div>
-                  </div>
-                  )}
 
-                  {/* Feature Type Selector - Dynamic based on Category */}
-                  <div className={`p-3 rounded-xl border ${
-                    aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' :
-                    aiConfig.category === 'OTHER' ? 'bg-purple-50/50 border-purple-100' :
-                    'bg-emerald-50/50 border-emerald-100'
-                  }`}>
-                    <label className={`block text-xs font-bold uppercase mb-2 flex items-center gap-1 ${
-                      aiConfig.category === 'FAUNA' ? 'text-amber-700' :
-                      aiConfig.category === 'OTHER' ? 'text-purple-700' :
-                      'text-emerald-700'
-                    }`}>
-                      {aiConfig.category === 'OTHER' ? '✨' : '🌿'} {strings.featureTypeLabel}
-                    </label>
-                    <p className={`text-xs mb-2 ${
-                      aiConfig.category === 'FAUNA' ? 'text-amber-600/80' :
-                      aiConfig.category === 'OTHER' ? 'text-purple-600/80' :
-                      'text-emerald-600/80'
-                    }`}>
-                      {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Focar em características morfológicas (corpo) ou comportamentais' : 'Focus on morphological (body) or behavioral features') :
-                       aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Focar em características visuais ou conceituais' : 'Focus on visual or conceptual features') :
-                       strings.featureTypeDesc}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {aiConfig.category === 'FLORA' ? (
-                        <>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'vegetative'
-                                ? 'bg-emerald-500 text-white border-emerald-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🌿 {strings.featureTypeVegetative}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'reproductive'
-                                ? 'bg-pink-500 text-white border-pink-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🌸 {strings.featureTypeReproductive}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'general'
-                                ? 'bg-emerald-600 text-white border-emerald-600'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🌱 {strings.featureTypeBoth}
-                          </button>
-                        </>
-                      ) : aiConfig.category === 'FAUNA' ? (
-                        <>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'vegetative'
-                                ? 'bg-amber-500 text-white border-amber-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🦁 {language === 'pt' ? 'Morfológicas' : 'Morphological'}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'reproductive'
-                                ? 'bg-orange-500 text-white border-orange-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🐾 {language === 'pt' ? 'Comportamentais' : 'Behavioral'}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'general'
-                                ? 'bg-amber-600 text-white border-amber-600'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🌍 {language === 'pt' ? 'Geral + Habitat' : 'General + Habitat'}
-                          </button>
-                        </>
-                      ) : (
-                        /* OTHER */
-                        <>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'vegetative'
-                                ? 'bg-purple-500 text-white border-purple-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            👁️ {language === 'pt' ? 'Visuais/Físicas' : 'Visual/Physical'}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'reproductive'
-                                ? 'bg-indigo-500 text-white border-indigo-500'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            🧠 {language === 'pt' ? 'Conceituais/Abstratas' : 'Conceptual/Abstract'}
-                          </button>
-                          <button
-                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
-                            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                              aiConfig.featureFocus === 'general'
-                                ? 'bg-purple-600 text-white border-purple-600'
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
-                            }`}
-                            disabled={isGenerating}
-                          >
-                            ✨ {language === 'pt' ? 'Misto' : 'Mixed'}
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Required Species/Items List - Dynamic Label */}
-                  <div className={`p-3 rounded-xl border ${
-                    aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' :
-                    aiConfig.category === 'OTHER' ? 'bg-purple-50/50 border-purple-100' :
-                    'bg-emerald-50/50 border-emerald-100'
-                  }`}>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className={`block text-xs font-bold uppercase flex items-center gap-1 ${
-                        aiConfig.category === 'FAUNA' ? 'text-amber-700' :
-                        aiConfig.category === 'OTHER' ? 'text-purple-700' :
-                        'text-emerald-700'
-                      }`}>
-                        <List size={12} /> 
-                        {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Lista de Espécies (Opcional)' : 'Required Species List') :
-                         aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Lista de Itens (Opcional)' : 'Required Items List') :
-                         strings.requiredSpecies}
-                      </label>
-                      {requiredSpeciesText.trim() && (
-                        <span className={`text-xs font-bold px-2 py-0.5 rounded ${
-                          aiConfig.category === 'FAUNA' ? 'text-amber-600 bg-amber-100' :
-                          aiConfig.category === 'OTHER' ? 'text-purple-600 bg-purple-100' :
-                          'text-emerald-600 bg-emerald-100'
+                    {/* Taxonomic Filters - Only for FLORA and FAUNA */}
+                    {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
+                      <div className={`p-3 rounded-xl border ${aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' : 'bg-emerald-50/50 border-emerald-100'
                         }`}>
-                          {requiredSpeciesText.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
-                        </span>
-                      )}
-                    </div>
-                    <p className={`text-xs mb-2 ${
-                      aiConfig.category === 'FAUNA' ? 'text-amber-600/80' :
-                      aiConfig.category === 'OTHER' ? 'text-purple-600/80' :
-                      'text-emerald-600/80'
-                    }`}>{strings.requiredSpeciesDesc}</p>
-                    
-                    <textarea
-                      value={requiredSpeciesText}
-                      onChange={(e) => setRequiredSpeciesText(e.target.value)}
-                      placeholder={
-                        aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera onca\nPanthera leo\nPuma concolor" : "e.g. Panthera onca\nPanthera leo") :
-                        aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: O Iluminado\nAlien - O 8º Passageiro\nHalloween" : "e.g. The Shining\nAlien\nHalloween") :
-                        strings.requiredSpeciesPlaceholder
-                      }
-                      className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white resize-none h-24 font-mono ${
-                        aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' :
-                        aiConfig.category === 'OTHER' ? 'focus:ring-purple-500' :
-                        'focus:ring-emerald-500'
-                      }`}
-                      disabled={isGenerating}
-                    />
-                    
-                    <div className="flex items-center justify-between mt-2 gap-2">
-                      <label className="cursor-pointer flex items-center gap-2 text-xs text-purple-600 hover:text-purple-800 transition-colors">
-                        <Upload size={14} />
-                        <span className="font-medium">{strings.importSpeciesList}</span>
-                        <input
-                          ref={speciesListInputRef}
-                          type="file"
-                          className="hidden"
-                          accept=".txt,.csv,.json,.doc,.docx"
-                          onChange={handleSpeciesListImport}
-                          disabled={isGenerating}
-                        />
-                      </label>
-                      {requiredSpeciesText.trim() && (
-                        <button
-                          onClick={() => setRequiredSpeciesText('')}
-                          className="text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
-                          disabled={isGenerating}
-                        >
-                          <Trash2 size={12} /> {strings.clearList}
-                        </button>
-                      )}
-                    </div>
-                    <p className="text-[10px] text-purple-400 mt-1">{strings.importSpeciesFormats}</p>
-                  </div>
-                </>
-              ) : aiMode === 'IMPORT' ? (
-                /* IMPORT MODE INPUTS */
-                <div className="flex flex-col gap-4">
-                  <div className="text-center space-y-2 mb-2">
-                    <h4 className="font-bold text-slate-800 text-lg">{strings.uploadLabel}</h4>
-                    <p className="text-slate-500 text-sm">{strings.uploadDesc}</p>
-                  </div>
-
-                  <div 
-                    className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center transition-all ${isDraggingFile ? 'border-amber-500 bg-amber-100 scale-[1.02]' : importedFile ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}
-                    onDragOver={handleDragOver}
-                    onDragEnter={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                  >
-                    {importedFile ? (
-                      <div className="flex flex-col items-center gap-3">
-                        <FileText size={48} className="text-amber-600" />
-                        <span className="font-bold text-slate-800 text-sm text-center break-all">{importedFile.name}</span>
-                        <span className="text-xs text-slate-400">{(importedFile.size / 1024).toFixed(1)} KB</span>
-                        <button
-                          onClick={() => setImportedFile(null)}
-                          className="mt-2 text-red-500 text-xs font-bold hover:underline flex items-center gap-1 p-2"
-                        >
-                          <Trash2 size={12} /> {strings.removeFile}
-                        </button>
-                      </div>
-                    ) : (
-                      <label className="cursor-pointer flex flex-col items-center gap-3 w-full h-full">
-                        <div className={`p-4 bg-white rounded-full shadow-sm transition-transform ${isDraggingFile ? 'scale-110' : ''}`}>
-                          <Upload size={24} className={`${isDraggingFile ? 'text-amber-600' : 'text-amber-500'}`} />
-                        </div>
-                        <span className="font-bold text-slate-600">{isDraggingFile ? (language === 'pt' ? 'Solte o arquivo aqui!' : 'Drop file here!') : strings.dropFile}</span>
-                        <span className="text-xs text-slate-400">{strings.supportedFormats}</span>
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept=".pdf,.txt,.jpg,.jpeg,.png"
-                          onChange={handleFileUpload}
-                        />
-                      </label>
-                    )}
-                  </div>
-
-                  {/* Nervura Import Option */}
-                  <div className="mt-2 pt-4 border-t border-slate-200">
-                    <label className="w-full flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer transition-colors border bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 text-emerald-700 border-emerald-200 hover:border-emerald-300">
-                      <img src="./assets/nervura.png" alt="Nervura" className="w-5 h-5 object-contain" />
-                      <span className="font-bold text-sm">
-                        {language === 'pt' ? 'Ficha Morfológica NervuraColetora' : 'NervuraColetora Morphological Sheet'}
-                      </span>
-                      <input
-                        type="file"
-                        className="hidden"
-                        accept=".json"
-                        onChange={handleNervuraImport}
-                        disabled={isGenerating}
-                      />
-                    </label>
-                    <p className="text-[10px] text-center text-slate-400 mt-2">
-                      {language === 'pt' 
-                        ? 'Selecione um arquivo JSON exportado do NervuraColetora.' 
-                        : 'Select a JSON file exported from NervuraColetora.'}
-                    </p>
-                  </div>
-                </div>
-              ) : aiMode === 'REFINE' ? (
-                /* REFINE MODE INPUTS */
-                <div className="flex flex-col gap-4">
-                  {/* Current Project Info */}
-                  <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200">
-                    <h5 className="text-xs font-bold text-emerald-700 uppercase mb-2">{strings.currentProject}</h5>
-                    {project.entities.length > 0 || project.features.length > 0 ? (
-                      <div className="flex items-center gap-4">
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800 truncate">{project.name}</p>
-                          <p className="text-xs text-slate-500">
-                            {project.entities.length} {strings.entitiesCount} • {project.features.length} {strings.featuresCount}
-                          </p>
-                        </div>
-                        <div className="flex gap-2">
-                          <span className="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded">
-                            {project.entities.length}
-                          </span>
-                          <span className="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-1 rounded">
-                            {project.features.length}
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <p className="text-sm text-amber-600 italic">{strings.noProjectLoaded}</p>
-                    )}
-                  </div>
-
-                  {/* Action Selector */}
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => setRefineAction('EXPAND')}
-                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'EXPAND' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${refineAction === 'EXPAND' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
-                          <ListPlus size={20} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800">{strings.actionExpand}</p>
-                          <p className="text-xs text-slate-500">{strings.actionExpandDesc}</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => setRefineAction('REFINE')}
-                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'REFINE' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${refineAction === 'REFINE' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
-                          <Target size={20} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800">{strings.actionRefine}</p>
-                          <p className="text-xs text-slate-500">{strings.actionRefineDesc}</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => setRefineAction('CLEAN')}
-                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'CLEAN' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${refineAction === 'CLEAN' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
-                          <Eraser size={20} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800">{strings.actionClean}</p>
-                          <p className="text-xs text-slate-500">{strings.actionCleanDesc}</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => setRefineAction('PHOTOS')}
-                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'PHOTOS' ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${refineAction === 'PHOTOS' ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
-                          <Camera size={20} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800">{strings.actionPhotos}</p>
-                          <p className="text-xs text-slate-500">{strings.actionPhotosDesc}</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => setRefineAction('VALIDATE')}
-                      className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'VALIDATE' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 hover:border-emerald-300'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${refineAction === 'VALIDATE' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
-                          <ShieldCheck size={20} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-bold text-slate-800">{strings.actionValidate}</p>
-                          <p className="text-xs text-slate-500">{strings.actionValidateDesc}</p>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-
-                  {/* Action-specific options */}
-                  {refineAction === 'EXPAND' && (
-                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
-                      <div>
-                        <div className="flex justify-between items-center mb-1.5">
-                          <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.expandCount}</label>
-                          <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.expandCount}</span>
-                        </div>
-                        <input
-                          type="range"
-                          min="5"
-                          max="100"
-                          step="5"
-                          value={refineOptions.expandCount}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, expandCount: parseInt(e.target.value) }))}
-                          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                          disabled={isGenerating}
-                        />
-                      </div>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.keepExisting}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, keepExisting: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.keepExisting}</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.addFeatures}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.addFeatures}</span>
-                      </label>
-                      
-                      {/* Taxonomic & Geographic Filters for EXPAND */}
-                      {/* Taxonomic & Geographic Filters - Only for FLORA and FAUNA */}
-                      {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
-                      <div className="mt-4 pt-4 border-t border-slate-200">
-                        <p className="text-xs font-semibold text-slate-500 uppercase mb-3">{strings.expandFilters}</p>
-                        
+                        <label className={`block text-xs font-bold uppercase mb-2 flex items-center gap-1 ${aiConfig.category === 'FAUNA' ? 'text-amber-700' : 'text-emerald-700'
+                          }`}>
+                          <Leaf size={12} /> {strings.taxonomyFilters}
+                        </label>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-xs text-slate-500 mb-1">{strings.expandFamily}</label>
+                            <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyFamily}</label>
                             <input
-                              type="text"
-                              value={refineOptions.expandFamily}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandFamily: e.target.value }))}
-                              placeholder={aiConfig.category === 'FAUNA' ? "Felidae" : "Fabaceae"}
-                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                              value={aiConfig.taxonomyFamily}
+                              onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyFamily: e.target.value }))}
+                              placeholder={
+                                aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Felidae" : "e.g. Felidae") :
+                                  (language === 'pt' ? "ex: Fabaceae" : "e.g. Fabaceae")
+                              }
+                              className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white ${aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' : 'focus:ring-emerald-500'
+                                }`}
+                              disabled={isGenerating}
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-slate-500 mb-1">{strings.expandGenus}</label>
+                            <label className="block text-xs font-medium text-slate-500 mb-1">{strings.taxonomyGenus}</label>
                             <input
-                              type="text"
-                              value={refineOptions.expandGenus}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandGenus: e.target.value }))}
-                              placeholder={aiConfig.category === 'FAUNA' ? "Panthera" : "Inga"}
-                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                              value={aiConfig.taxonomyGenus}
+                              onChange={(e) => setAiConfig(prev => ({ ...prev, taxonomyGenus: e.target.value }))}
+                              placeholder={
+                                aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera" : "e.g. Panthera") :
+                                  (language === 'pt' ? "ex: Inga" : "e.g. Inga")
+                              }
+                              className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white ${aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' : 'focus:ring-emerald-500'
+                                }`}
+                              disabled={isGenerating}
                             />
                           </div>
-                          <div>
-                            <label className="block text-xs text-slate-500 mb-1">{strings.expandBiome}</label>
-                            <select
-                              value={refineOptions.expandBiome}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandBiome: e.target.value }))}
-                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Geographic Filters - Only for FLORA and FAUNA */}
+                    {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
+                      <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                        <label className="block text-xs font-bold text-blue-700 uppercase mb-2 flex items-center gap-1">
+                          <Globe size={12} /> {strings.geographyFilters}
+                        </label>
+
+                        {/* Scope selector */}
+                        <div className="flex gap-2 mb-3">
+                          {(['global', 'national', 'regional'] as const).map((scope) => (
+                            <button
+                              key={scope}
+                              onClick={() => setAiConfig(prev => ({ ...prev, scope }))}
+                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${aiConfig.scope === scope
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-white text-slate-600 hover:bg-blue-100 border border-slate-200'
+                                }`}
+                              disabled={isGenerating}
                             >
-                              <option value="">--</option>
+                              {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
+                            </button>
+                          ))}
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-xs font-medium text-slate-500 mb-1">{strings.biome}</label>
+                            <select
+                              value={aiConfig.biome}
+                              onChange={(e) => setAiConfig(prev => ({ ...prev, biome: e.target.value }))}
+                              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                              disabled={isGenerating}
+                            >
+                              <option value="">{language === 'pt' ? "Todos os biomas" : "All biomes"}</option>
                               <option value="Amazônia">Amazônia</option>
                               <option value="Mata Atlântica">Mata Atlântica</option>
                               <option value="Cerrado">Cerrado</option>
                               <option value="Caatinga">Caatinga</option>
-                              <option value="Pantanal">Pantanal</option>
                               <option value="Pampa">Pampa</option>
+                              <option value="Pantanal">Pantanal</option>
                             </select>
                           </div>
                           <div>
-                            <label className="block text-xs text-slate-500 mb-1">{strings.expandStateUF}</label>
+                            <label className="block text-xs font-medium text-slate-500 mb-1">{strings.stateUF}</label>
                             <select
-                              value={refineOptions.expandStateUF}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, expandStateUF: e.target.value }))}
-                              className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                              value={aiConfig.stateUF}
+                              onChange={(e) => setAiConfig(prev => ({ ...prev, stateUF: e.target.value }))}
+                              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                              disabled={isGenerating}
                             >
-                              <option value="">--</option>
-                              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
-                              <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
-                              <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
-                              <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
-                              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
-                              <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
-                              <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
-                              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
-                              <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                              <option value="">{language === 'pt' ? "Todos os estados" : "All states"}</option>
+                              <option value="AC">Acre (AC)</option>
+                              <option value="AL">Alagoas (AL)</option>
+                              <option value="AP">Amapá (AP)</option>
+                              <option value="AM">Amazonas (AM)</option>
+                              <option value="BA">Bahia (BA)</option>
+                              <option value="CE">Ceará (CE)</option>
+                              <option value="DF">Distrito Federal (DF)</option>
+                              <option value="ES">Espírito Santo (ES)</option>
+                              <option value="GO">Goiás (GO)</option>
+                              <option value="MA">Maranhão (MA)</option>
+                              <option value="MT">Mato Grosso (MT)</option>
+                              <option value="MS">Mato Grosso do Sul (MS)</option>
+                              <option value="MG">Minas Gerais (MG)</option>
+                              <option value="PA">Pará (PA)</option>
+                              <option value="PB">Paraíba (PB)</option>
+                              <option value="PR">Paraná (PR)</option>
+                              <option value="PE">Pernambuco (PE)</option>
+                              <option value="PI">Piauí (PI)</option>
+                              <option value="RJ">Rio de Janeiro (RJ)</option>
+                              <option value="RN">Rio Grande do Norte (RN)</option>
+                              <option value="RS">Rio Grande do Sul (RS)</option>
+                              <option value="RO">Rondônia (RO)</option>
+                              <option value="RR">Roraima (RR)</option>
+                              <option value="SC">Santa Catarina (SC)</option>
+                              <option value="SP">São Paulo (SP)</option>
+                              <option value="SE">Sergipe (SE)</option>
+                              <option value="TO">Tocantins (TO)</option>
                             </select>
                           </div>
                         </div>
-                        
+
+                        {/* Free text geography field */}
                         <div className="mt-3">
-                          <label className="block text-xs text-slate-500 mb-1">{strings.expandScope}</label>
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'global' }))}
-                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
-                                refineOptions.expandScope === 'global' 
-                                  ? 'bg-amber-500 text-white shadow-sm' 
-                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
-                              }`}
-                            >
-                              {strings.scopeGlobal}
-                            </button>
-                            <button
-                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'national' }))}
-                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
-                                refineOptions.expandScope === 'national' 
-                                  ? 'bg-amber-500 text-white shadow-sm' 
-                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
-                              }`}
-                            >
-                              {strings.scopeNational}
-                            </button>
-                            <button
-                              onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'regional' }))}
-                              className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${
-                                refineOptions.expandScope === 'regional' 
-                                  ? 'bg-amber-500 text-white shadow-sm' 
-                                  : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
-                              }`}
-                            >
-                              {strings.scopeRegional}
-                            </button>
-                          </div>
+                          <label className="block text-xs font-medium text-slate-500 mb-1">{language === 'pt' ? "Região específica (opcional)" : "Specific region (optional)"}</label>
+                          <input
+                            value={aiConfig.geography}
+                            onChange={(e) => setAiConfig(prev => ({ ...prev, geography: e.target.value }))}
+                            placeholder={language === 'pt' ? "ex: Serra do Mar, Bacia do Rio Doce" : "e.g. Amazon Basin, Andes"}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
+                            disabled={isGenerating}
+                          />
                         </div>
                       </div>
-                      )}
-                      
-                      {/* Required Species to Add */}
-                      <div className="mt-4 pt-4 border-t border-slate-200">
-                        <div className="flex items-center justify-between mb-2">
-                          <label className="block text-xs font-semibold text-amber-700 uppercase flex items-center gap-1">
-                            <List size={12} /> {aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Itens Obrigatórios' : 'Required Items') : strings.expandRequiredSpecies}
-                          </label>
-                          {refineOptions.expandRequiredSpecies.trim() && (
-                            <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">
-                              {refineOptions.expandRequiredSpecies.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
-                            </span>
+                    )}
+
+                    {/* Feature Type Selector - Dynamic based on Category */}
+                    <div className={`p-3 rounded-xl border ${aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' :
+                      aiConfig.category === 'OTHER' ? 'bg-purple-50/50 border-purple-100' :
+                        'bg-emerald-50/50 border-emerald-100'
+                      }`}>
+                      <label className={`block text-xs font-bold uppercase mb-2 flex items-center gap-1 ${aiConfig.category === 'FAUNA' ? 'text-amber-700' :
+                        aiConfig.category === 'OTHER' ? 'text-purple-700' :
+                          'text-emerald-700'
+                        }`}>
+                        {aiConfig.category === 'OTHER' ? '✨' : '🌿'} {strings.featureTypeLabel}
+                      </label>
+                      <p className={`text-xs mb-2 ${aiConfig.category === 'FAUNA' ? 'text-amber-600/80' :
+                        aiConfig.category === 'OTHER' ? 'text-purple-600/80' :
+                          'text-emerald-600/80'
+                        }`}>
+                        {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Focar em características morfológicas (corpo) ou comportamentais' : 'Focus on morphological (body) or behavioral features') :
+                          aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Focar em características visuais ou conceituais' : 'Focus on visual or conceptual features') :
+                            strings.featureTypeDesc}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {aiConfig.category === 'FLORA' ? (
+                          <>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'vegetative'
+                                ? 'bg-emerald-500 text-white border-emerald-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🌿 {strings.featureTypeVegetative}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'reproductive'
+                                ? 'bg-pink-500 text-white border-pink-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🌸 {strings.featureTypeReproductive}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'general'
+                                ? 'bg-emerald-600 text-white border-emerald-600'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🌱 {strings.featureTypeBoth}
+                            </button>
+                          </>
+                        ) : aiConfig.category === 'FAUNA' ? (
+                          <>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'vegetative'
+                                ? 'bg-amber-500 text-white border-amber-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🦁 {language === 'pt' ? 'Morfológicas' : 'Morphological'}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'reproductive'
+                                ? 'bg-orange-500 text-white border-orange-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🐾 {language === 'pt' ? 'Comportamentais' : 'Behavioral'}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'general'
+                                ? 'bg-amber-600 text-white border-amber-600'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🌍 {language === 'pt' ? 'Geral + Habitat' : 'General + Habitat'}
+                            </button>
+                          </>
+                        ) : (
+                          /* OTHER */
+                          <>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'vegetative' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'vegetative'
+                                ? 'bg-purple-500 text-white border-purple-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              👁️ {language === 'pt' ? 'Visuais/Físicas' : 'Visual/Physical'}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'reproductive' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'reproductive'
+                                ? 'bg-indigo-500 text-white border-indigo-500'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              🧠 {language === 'pt' ? 'Conceituais/Abstratas' : 'Conceptual/Abstract'}
+                            </button>
+                            <button
+                              onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: 'general' }))}
+                              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${aiConfig.featureFocus === 'general'
+                                ? 'bg-purple-600 text-white border-purple-600'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
+                                }`}
+                              disabled={isGenerating}
+                            >
+                              ✨ {language === 'pt' ? 'Misto' : 'Mixed'}
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Free text feature focus input */}
+                      <div className="mt-3 pt-2 border-t border-slate-200/50">
+                        <label className={`text-[10px] uppercase font-bold mb-1 block ${aiConfig.category === 'FAUNA' ? 'text-amber-400' :
+                          aiConfig.category === 'OTHER' ? 'text-purple-400' :
+                            'text-emerald-400'
+                          }`}>
+                          {language === 'pt' ? 'Ou defina um tipo personalizado' : 'Or define custom type'}
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder={language === 'pt' ? "ex: Ingredientes, Aspectos geológicos, Dados químicos..." : "e.g. Ingredients, Geological aspects, Chemical data..."}
+                            className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white pr-8 ${aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' :
+                              aiConfig.category === 'OTHER' ? 'focus:ring-purple-500' :
+                                'focus:ring-emerald-500'
+                              }`}
+                            value={['vegetative', 'reproductive', 'general'].includes(aiConfig.featureFocus) ? '' : aiConfig.featureFocus}
+                            onChange={(e) => setAiConfig(prev => ({ ...prev, featureFocus: e.target.value }))}
+                            disabled={isGenerating}
+                          />
+                          {/* Show checkmark if custom value is active */}
+                          {!['vegetative', 'reproductive', 'general'].includes(aiConfig.featureFocus) && aiConfig.featureFocus.trim().length > 0 && (
+                            <div className="absolute right-2 top-1/2 -translate-y-1/2 text-emerald-500">
+                              <CheckSquare size={16} />
+                            </div>
                           )}
                         </div>
-                        <p className="text-xs text-amber-600/80 mb-2">{strings.expandRequiredSpeciesDesc}</p>
-                        <textarea
-                          value={refineOptions.expandRequiredSpecies}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: e.target.value }))}
-                          placeholder={
-                            aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera onca\nPanthera leo" : "e.g. Panthera onca\nPanthera leo") :
-                            aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: O Iluminado\nAlien" : "e.g. The Shining\nAlien") :
-                            strings.expandRequiredSpeciesPlaceholder
-                          }
-                          className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm bg-white resize-none h-20 font-mono"
-                          disabled={isGenerating}
-                        />
-                        {refineOptions.expandRequiredSpecies.trim() && (
+                      </div>
+                    </div>
+
+                    {/* Required Species/Items List - Dynamic Label */}
+                    <div className={`p-3 rounded-xl border ${aiConfig.category === 'FAUNA' ? 'bg-amber-50/50 border-amber-100' :
+                      aiConfig.category === 'OTHER' ? 'bg-purple-50/50 border-purple-100' :
+                        'bg-emerald-50/50 border-emerald-100'
+                      }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className={`block text-xs font-bold uppercase flex items-center gap-1 ${aiConfig.category === 'FAUNA' ? 'text-amber-700' :
+                          aiConfig.category === 'OTHER' ? 'text-purple-700' :
+                            'text-emerald-700'
+                          }`}>
+                          <List size={12} />
+                          {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Lista de Espécies (Opcional)' : 'Required Species List') :
+                            aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Lista de Itens (Opcional)' : 'Required Items List') :
+                              strings.requiredSpecies}
+                        </label>
+                        {requiredSpeciesText.trim() && (
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded ${aiConfig.category === 'FAUNA' ? 'text-amber-600 bg-amber-100' :
+                            aiConfig.category === 'OTHER' ? 'text-purple-600 bg-purple-100' :
+                              'text-emerald-600 bg-emerald-100'
+                            }`}>
+                            {requiredSpeciesText.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
+                          </span>
+                        )}
+                      </div>
+                      <p className={`text-xs mb-2 ${aiConfig.category === 'FAUNA' ? 'text-amber-600/80' :
+                        aiConfig.category === 'OTHER' ? 'text-purple-600/80' :
+                          'text-emerald-600/80'
+                        }`}>{strings.requiredSpeciesDesc}</p>
+
+                      <textarea
+                        value={requiredSpeciesText}
+                        onChange={(e) => setRequiredSpeciesText(e.target.value)}
+                        placeholder={
+                          aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera onca\nPanthera leo\nPuma concolor" : "e.g. Panthera onca\nPanthera leo") :
+                            aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: O Iluminado\nAlien - O 8º Passageiro\nHalloween" : "e.g. The Shining\nAlien\nHalloween") :
+                              strings.requiredSpeciesPlaceholder
+                        }
+                        className={`w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 outline-none text-sm bg-white resize-none h-24 font-mono ${aiConfig.category === 'FAUNA' ? 'focus:ring-amber-500' :
+                          aiConfig.category === 'OTHER' ? 'focus:ring-purple-500' :
+                            'focus:ring-emerald-500'
+                          }`}
+                        disabled={isGenerating}
+                      />
+
+                      <div className="flex items-center justify-between mt-2 gap-2">
+                        <label className="cursor-pointer flex items-center gap-2 text-xs text-purple-600 hover:text-purple-800 transition-colors">
+                          <Upload size={14} />
+                          <span className="font-medium">{strings.importSpeciesList}</span>
+                          <input
+                            ref={speciesListInputRef}
+                            type="file"
+                            className="hidden"
+                            accept=".txt,.csv,.json,.doc,.docx"
+                            onChange={handleSpeciesListImport}
+                            disabled={isGenerating}
+                          />
+                        </label>
+                        {requiredSpeciesText.trim() && (
                           <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: '' }))}
-                            className="mt-2 text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
+                            onClick={() => setRequiredSpeciesText('')}
+                            className="text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
                             disabled={isGenerating}
                           >
                             <Trash2 size={12} /> {strings.clearList}
                           </button>
                         )}
                       </div>
+                      <p className="text-[10px] text-purple-400 mt-1">{strings.importSpeciesFormats}</p>
                     </div>
-                  )}
+                  </>
+                ) : aiMode === 'IMPORT' ? (
+                  /* IMPORT MODE INPUTS */
+                  <div className="flex flex-col gap-4">
+                    <div className="text-center space-y-2 mb-2">
+                      <h4 className="font-bold text-slate-800 text-lg">{strings.uploadLabel}</h4>
+                      <p className="text-slate-500 text-sm">{strings.uploadDesc}</p>
+                    </div>
 
-                  {refineAction === 'REFINE' && (
-                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                      {/* Feature Type Selector - Dynamic */}
-                      <div className="pb-3 border-b border-slate-200">
-                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.featureTypeLabel}</label>
-                        <p className="text-xs text-slate-400 mb-2">
-                          {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Focar em características morfológicas ou comportamentais' : 'Focus on morphological or behavioral features') :
-                           aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Focar em características visuais ou conceituais' : 'Focus on visual or conceptual features') :
-                           strings.featureTypeDesc}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {aiConfig.category === 'FLORA' ? (
-                            <>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'vegetative'
-                                    ? 'bg-emerald-500 text-white border-emerald-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
-                                }`}
-                              >
-                                🌿 {strings.featureTypeVegetative}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'reproductive'
-                                    ? 'bg-pink-500 text-white border-pink-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
-                                }`}
-                              >
-                                🌸 {strings.featureTypeReproductive}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'both'
-                                    ? 'bg-amber-500 text-white border-amber-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
-                                }`}
-                              >
-                                🌱 {strings.featureTypeBoth}
-                              </button>
-                            </>
-                          ) : aiConfig.category === 'FAUNA' ? (
-                            <>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'vegetative'
-                                    ? 'bg-amber-500 text-white border-amber-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
-                                }`}
-                              >
-                                🦁 {language === 'pt' ? 'Morfológicas' : 'Morphological'}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'reproductive'
-                                    ? 'bg-orange-500 text-white border-orange-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
-                                }`}
-                              >
-                                🐾 {language === 'pt' ? 'Comportamentais' : 'Behavioral'}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'both'
-                                    ? 'bg-amber-600 text-white border-amber-600'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
-                                }`}
-                              >
-                                🌍 {language === 'pt' ? 'Geral + Habitat' : 'General + Habitat'}
-                              </button>
-                            </>
-                          ) : (
-                            /* OTHER */
-                            <>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'vegetative'
-                                    ? 'bg-purple-500 text-white border-purple-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
-                                }`}
-                              >
-                                👁️ {language === 'pt' ? 'Visuais/Físicas' : 'Visual/Physical'}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'reproductive'
-                                    ? 'bg-indigo-500 text-white border-indigo-500'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
-                                }`}
-                              >
-                                🧠 {language === 'pt' ? 'Conceituais/Abstratas' : 'Conceptual/Abstract'}
-                              </button>
-                              <button
-                                onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
-                                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
-                                  refineOptions.featureType === 'both'
-                                    ? 'bg-purple-600 text-white border-purple-600'
-                                    : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
-                                }`}
-                              >
-                                ✨ {language === 'pt' ? 'Misto' : 'Mixed'}
-                              </button>
-                            </>
-                          )}
+                    <div
+                      className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center transition-all ${isDraggingFile ? 'border-amber-500 bg-amber-100 scale-[1.02]' : importedFile ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}
+                      onDragOver={handleDragOver}
+                      onDragEnter={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                    >
+                      {importedFile ? (
+                        <div className="flex flex-col items-center gap-3">
+                          <FileText size={48} className="text-amber-600" />
+                          <span className="font-bold text-slate-800 text-sm text-center break-all">{importedFile.name}</span>
+                          <span className="text-xs text-slate-400">{(importedFile.size / 1024).toFixed(1)} KB</span>
+                          <button
+                            onClick={() => setImportedFile(null)}
+                            className="mt-2 text-red-500 text-xs font-bold hover:underline flex items-center gap-1 p-2"
+                          >
+                            <Trash2 size={12} /> {strings.removeFile}
+                          </button>
                         </div>
-                      </div>
-                      
-                      <label className="flex items-center gap-2 cursor-pointer">
+                      ) : (
+                        <label className="cursor-pointer flex flex-col items-center gap-3 w-full h-full">
+                          <div className={`p-4 bg-white rounded-full shadow-sm transition-transform ${isDraggingFile ? 'scale-110' : ''}`}>
+                            <Upload size={24} className={`${isDraggingFile ? 'text-amber-600' : 'text-amber-500'}`} />
+                          </div>
+                          <span className="font-bold text-slate-600">{isDraggingFile ? (language === 'pt' ? 'Solte o arquivo aqui!' : 'Drop file here!') : strings.dropFile}</span>
+                          <span className="text-xs text-slate-400">{strings.supportedFormats}</span>
+                          <input
+                            type="file"
+                            className="hidden"
+                            accept=".pdf,.txt,.jpg,.jpeg,.png"
+                            onChange={handleFileUpload}
+                          />
+                        </label>
+                      )}
+                    </div>
+
+                    {/* Nervura Import Option */}
+                    <div className="mt-2 pt-4 border-t border-slate-200">
+                      <label className="w-full flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer transition-colors border bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 text-emerald-700 border-emerald-200 hover:border-emerald-300">
+                        <img src="./assets/nervura.png" alt="Nervura" className="w-5 h-5 object-contain" />
+                        <span className="font-bold text-sm">
+                          {language === 'pt' ? 'Ficha Morfológica NervuraColetora' : 'NervuraColetora Morphological Sheet'}
+                        </span>
                         <input
-                          type="checkbox"
-                          checked={refineOptions.improveDescriptions}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, improveDescriptions: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
+                          type="file"
+                          className="hidden"
+                          accept=".json"
+                          onChange={handleNervuraImport}
+                          disabled={isGenerating}
                         />
-                        <span className="text-sm text-slate-700">{strings.improveDescriptions}</span>
                       </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.fillGaps}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, fillGaps: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.fillGaps}</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.addFeatures}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.addFeatures}</span>
-                      </label>
-                      
-                      {refineOptions.addFeatures && (
-                        <div className="ml-6 space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-xs text-slate-500 font-medium">{language === 'pt' ? 'Nº de características a adicionar' : 'Number of features to add'}</span>
-                            <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.refineFeatureCount}</span>
+                      <p className="text-[10px] text-center text-slate-400 mt-2">
+                        {language === 'pt'
+                          ? 'Selecione um arquivo JSON exportado do NervuraColetora.'
+                          : 'Select a JSON file exported from NervuraColetora.'}
+                      </p>
+                    </div>
+                  </div>
+                ) : aiMode === 'REFINE' ? (
+                  /* REFINE MODE INPUTS */
+                  <div className="flex flex-col gap-4">
+                    {/* Current Project Info */}
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200">
+                      <h5 className="text-xs font-bold text-emerald-700 uppercase mb-2">{strings.currentProject}</h5>
+                      {project.entities.length > 0 || project.features.length > 0 ? (
+                        <div className="flex items-center gap-4">
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800 truncate">{project.name}</p>
+                            <p className="text-xs text-slate-500">
+                              {project.entities.length} {strings.entitiesCount} • {project.features.length} {strings.featuresCount}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            <span className="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded">
+                              {project.entities.length}
+                            </span>
+                            <span className="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-1 rounded">
+                              {project.features.length}
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-amber-600 italic">{strings.noProjectLoaded}</p>
+                      )}
+                    </div>
+
+                    {/* Action Selector */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setRefineAction('EXPAND')}
+                        className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'EXPAND' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${refineAction === 'EXPAND' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <ListPlus size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800">{strings.actionExpand}</p>
+                            <p className="text-xs text-slate-500">{strings.actionExpandDesc}</p>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button
+                        onClick={() => setRefineAction('REFINE')}
+                        className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'REFINE' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${refineAction === 'REFINE' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <Target size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800">{strings.actionRefine}</p>
+                            <p className="text-xs text-slate-500">{strings.actionRefineDesc}</p>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button
+                        onClick={() => setRefineAction('CLEAN')}
+                        className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'CLEAN' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${refineAction === 'CLEAN' ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <Eraser size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800">{strings.actionClean}</p>
+                            <p className="text-xs text-slate-500">{strings.actionCleanDesc}</p>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button
+                        onClick={() => setRefineAction('PHOTOS')}
+                        className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'PHOTOS' ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${refineAction === 'PHOTOS' ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <Camera size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800">{strings.actionPhotos}</p>
+                            <p className="text-xs text-slate-500">{strings.actionPhotosDesc}</p>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button
+                        onClick={() => setRefineAction('VALIDATE')}
+                        className={`w-full p-3 rounded-xl border-2 text-left transition-all ${refineAction === 'VALIDATE' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 hover:border-emerald-300'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${refineAction === 'VALIDATE' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                            <ShieldCheck size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-slate-800">{strings.actionValidate}</p>
+                            <p className="text-xs text-slate-500">{strings.actionValidateDesc}</p>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Action-specific options */}
+                    {refineAction === 'EXPAND' && (
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
+                        <div>
+                          <div className="flex justify-between items-center mb-1.5">
+                            <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.expandCount}</label>
+                            <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.expandCount}</span>
                           </div>
                           <input
                             type="range"
-                            min="1"
-                            max="10"
-                            step="1"
-                            value={refineOptions.refineFeatureCount}
-                            onChange={(e) => setRefineOptions(prev => ({ ...prev, refineFeatureCount: parseInt(e.target.value) }))}
-                            className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                            min="5"
+                            max="100"
+                            step="5"
+                            value={refineOptions.expandCount}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, expandCount: parseInt(e.target.value) }))}
+                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                            disabled={isGenerating}
                           />
                         </div>
-                      )}
-                      
-                      {/* Required Features Dropdown for REFINE */}
-                      {refineOptions.addFeatures && (
-                        <div className="mt-4 pt-4 border-t border-slate-200">
-                          <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{strings.refineRequiredFeaturesTitle}</p>
-                          <p className="text-xs text-slate-400 mb-3">{strings.refineRequiredFeaturesDesc}</p>
-                          
-                          {/* Selected features tags */}
-                          {refineOptions.refineRequiredFeatures.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mb-3">
-                              {refineOptions.refineRequiredFeatures.map((feat, idx) => (
-                                <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">
-                                  {feat}
-                                  <button
-                                    onClick={() => setRefineOptions(prev => ({
-                                      ...prev,
-                                      refineRequiredFeatures: prev.refineRequiredFeatures.filter((_, i) => i !== idx)
-                                    }))}
-                                    className="hover:text-amber-600"
-                                  >
-                                    <X size={12} />
-                                  </button>
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                          
-                          {/* Dropdown for suggested features */}
-                          <div className="relative">
-                            <button
-                              onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
-                              className="w-full px-3 py-2 text-sm text-left border border-slate-200 rounded-lg bg-white hover:border-amber-400 focus:ring-2 focus:ring-amber-400 focus:outline-none flex justify-between items-center"
-                            >
-                              <span className="text-slate-500">{strings.addRequiredFeature}</span>
-                              <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
-                            </button>
-                            
-                            {showRequiredFeaturesDropdown && (
-                              <div className="absolute z-20 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                {suggestedFeatures.map((category, catIdx) => (
-                                  <div key={catIdx}>
-                                    <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-0">
-                                      {category.category}
-                                    </div>
-                                    {category.items.map((item, itemIdx) => (
-                                      <button
-                                        key={itemIdx}
-                                        onClick={() => {
-                                          if (!refineOptions.refineRequiredFeatures.includes(item)) {
-                                            setRefineOptions(prev => ({
-                                              ...prev,
-                                              refineRequiredFeatures: [...prev.refineRequiredFeatures, item]
-                                            }));
-                                          }
-                                          setShowRequiredFeaturesDropdown(false);
-                                        }}
-                                        disabled={refineOptions.refineRequiredFeatures.includes(item)}
-                                        className={`w-full px-3 py-2 text-sm text-left hover:bg-amber-50 ${
-                                          refineOptions.refineRequiredFeatures.includes(item) ? 'text-slate-300' : 'text-slate-700'
-                                        }`}
-                                      >
-                                        {item}
-                                      </button>
-                                    ))}
-                                  </div>
-                                ))}
-                                
-                                {/* Custom feature input */}
-                                <div className="p-2 border-t border-slate-100">
-                                  <div className="flex gap-2">
-                                    <input
-                                      type="text"
-                                      value={customFeatureInput}
-                                      onChange={(e) => setCustomFeatureInput(e.target.value)}
-                                      placeholder={strings.customFeature}
-                                      className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
-                                      onKeyDown={(e) => {
-                                        if (e.key === 'Enter' && customFeatureInput.trim()) {
-                                          setRefineOptions(prev => ({
-                                            ...prev,
-                                            refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
-                                          }));
-                                          setCustomFeatureInput('');
-                                          setShowRequiredFeaturesDropdown(false);
-                                        }
-                                      }}
-                                    />
-                                    <button
-                                      onClick={() => {
-                                        if (customFeatureInput.trim()) {
-                                          setRefineOptions(prev => ({
-                                            ...prev,
-                                            refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
-                                          }));
-                                          setCustomFeatureInput('');
-                                          setShowRequiredFeaturesDropdown(false);
-                                        }
-                                      }}
-                                      className="px-3 py-1.5 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600"
-                                    >
-                                      +
-                                    </button>
-                                  </div>
-                                </div>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.keepExisting}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, keepExisting: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.keepExisting}</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.addFeatures}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.addFeatures}</span>
+                        </label>
+
+                        {/* Taxonomic & Geographic Filters for EXPAND */}
+                        {/* Taxonomic & Geographic Filters - Only for FLORA and FAUNA */}
+                        {(aiConfig.category === 'FLORA' || aiConfig.category === 'FAUNA') && (
+                          <div className="mt-4 pt-4 border-t border-slate-200">
+                            <p className="text-xs font-semibold text-slate-500 uppercase mb-3">{strings.expandFilters}</p>
+
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <label className="block text-xs text-slate-500 mb-1">{strings.expandFamily}</label>
+                                <input
+                                  type="text"
+                                  value={refineOptions.expandFamily}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, expandFamily: e.target.value }))}
+                                  placeholder={aiConfig.category === 'FAUNA' ? "Felidae" : "Fabaceae"}
+                                  className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                />
                               </div>
+                              <div>
+                                <label className="block text-xs text-slate-500 mb-1">{strings.expandGenus}</label>
+                                <input
+                                  type="text"
+                                  value={refineOptions.expandGenus}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, expandGenus: e.target.value }))}
+                                  placeholder={aiConfig.category === 'FAUNA' ? "Panthera" : "Inga"}
+                                  className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-xs text-slate-500 mb-1">{strings.expandBiome}</label>
+                                <select
+                                  value={refineOptions.expandBiome}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, expandBiome: e.target.value }))}
+                                  className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                                >
+                                  <option value="">--</option>
+                                  <option value="Amazônia">Amazônia</option>
+                                  <option value="Mata Atlântica">Mata Atlântica</option>
+                                  <option value="Cerrado">Cerrado</option>
+                                  <option value="Caatinga">Caatinga</option>
+                                  <option value="Pantanal">Pantanal</option>
+                                  <option value="Pampa">Pampa</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block text-xs text-slate-500 mb-1">{strings.expandStateUF}</label>
+                                <select
+                                  value={refineOptions.expandStateUF}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, expandStateUF: e.target.value }))}
+                                  className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white"
+                                >
+                                  <option value="">--</option>
+                                  <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                                  <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                                  <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                                  <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                                  <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                                  <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                                  <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                                  <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                                  <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div className="mt-3">
+                              <label className="block text-xs text-slate-500 mb-1">{strings.expandScope}</label>
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'global' }))}
+                                  className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${refineOptions.expandScope === 'global'
+                                    ? 'bg-amber-500 text-white shadow-sm'
+                                    : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                                    }`}
+                                >
+                                  {strings.scopeGlobal}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'national' }))}
+                                  className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${refineOptions.expandScope === 'national'
+                                    ? 'bg-amber-500 text-white shadow-sm'
+                                    : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                                    }`}
+                                >
+                                  {strings.scopeNational}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, expandScope: 'regional' }))}
+                                  className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-all ${refineOptions.expandScope === 'regional'
+                                    ? 'bg-amber-500 text-white shadow-sm'
+                                    : 'bg-white text-amber-700 border border-amber-200 hover:bg-amber-50'
+                                    }`}
+                                >
+                                  {strings.scopeRegional}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Required Species to Add */}
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                          <div className="flex items-center justify-between mb-2">
+                            <label className="block text-xs font-semibold text-amber-700 uppercase flex items-center gap-1">
+                              <List size={12} /> {aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Itens Obrigatórios' : 'Required Items') : strings.expandRequiredSpecies}
+                            </label>
+                            {refineOptions.expandRequiredSpecies.trim() && (
+                              <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">
+                                {refineOptions.expandRequiredSpecies.split('\n').filter(s => s.trim()).length} {strings.speciesCount}
+                              </span>
                             )}
                           </div>
-                          
-                          {/* Direct text input for multiple features */}
-                          <div className="mt-3">
-                            <label className="block text-xs text-slate-400 mb-1">
-                              {language === 'pt' ? 'Ou digite características manualmente (Enter para adicionar)' : 'Or type features manually (Enter to add)'}
-                            </label>
-                            <div className="flex gap-2">
-                              <input
-                                type="text"
-                                value={customFeatureInput}
-                                onChange={(e) => setCustomFeatureInput(e.target.value)}
-                                placeholder={language === 'pt' ? 'ex: Tipo de tricoma, Forma do ovário...' : 'e.g. Trichome type, Ovary shape...'}
-                                className="flex-1 px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:outline-none"
-                                onKeyDown={(e) => {
-                                  if (e.key === 'Enter' && customFeatureInput.trim()) {
-                                    // Support comma-separated input
-                                    const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
-                                    setRefineOptions(prev => ({
-                                      ...prev,
-                                      refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
-                                    }));
-                                    setCustomFeatureInput('');
-                                  }
-                                }}
-                              />
-                              <button
-                                onClick={() => {
-                                  if (customFeatureInput.trim()) {
-                                    const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
-                                    setRefineOptions(prev => ({
-                                      ...prev,
-                                      refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
-                                    }));
-                                    setCustomFeatureInput('');
-                                  }
-                                }}
-                                className="px-3 py-2 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600 font-bold"
-                              >
-                                +
-                              </button>
-                            </div>
-                            <p className="text-[10px] text-slate-400 mt-1">
-                              {language === 'pt' ? 'Dica: separe múltiplas características com vírgula' : 'Tip: separate multiple features with comma'}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {refineAction === 'CLEAN' && (
-                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.removeRedundant}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, removeRedundant: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.removeRedundant}</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={refineOptions.fixInconsistencies}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, fixInconsistencies: e.target.checked }))}
-                          className="w-4 h-4 accent-amber-500"
-                        />
-                        <span className="text-sm text-slate-700">{strings.fixInconsistencies}</span>
-                      </label>
-                    </div>
-                  )}
-
-                  {refineAction === 'PHOTOS' && (
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-4">
-                      {/* Target Selection */}
-                      <div className="space-y-2">
-                        <p className="text-sm font-medium text-blue-800">{strings.photosActionDesc}</p>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
-                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                              refineOptions.photoTarget === 'entities' 
-                                ? 'bg-blue-500 text-white shadow-sm' 
-                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                            }`}
-                          >
-                            {strings.photoTargetEntities}
-                          </button>
-                          <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
-                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                              refineOptions.photoTarget === 'features' 
-                                ? 'bg-blue-500 text-white shadow-sm' 
-                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                            }`}
-                          >
-                            {strings.photoTargetFeatures}
-                          </button>
-                          <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
-                            className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                              refineOptions.photoTarget === 'both' 
-                                ? 'bg-blue-500 text-white shadow-sm' 
-                                : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
-                            }`}
-                          >
-                            {strings.photoTargetBoth}
-                          </button>
-                        </div>
-                      </div>
-                      
-                      {/* Replace vs Expand Mode */}
-                      <div className="space-y-2">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'expand' }))}
-                            className={`flex-1 py-2 px-3 rounded-lg transition-all ${
-                              refineOptions.photoMode === 'expand' 
-                                ? 'bg-emerald-500 text-white shadow-sm' 
-                                : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
-                            }`}
-                          >
-                            <div className="text-xs font-medium">{strings.photoModeExpand}</div>
-                            <div className="text-[10px] opacity-80">{strings.photoModeExpandDesc}</div>
-                          </button>
-                          <button
-                            onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'replace' }))}
-                            className={`flex-1 py-2 px-3 rounded-lg transition-all ${
-                              refineOptions.photoMode === 'replace' 
-                                ? 'bg-orange-500 text-white shadow-sm' 
-                                : 'bg-white text-orange-700 border border-orange-200 hover:bg-orange-50'
-                            }`}
-                          >
-                            <div className="text-xs font-medium">{strings.photoModeReplace}</div>
-                            <div className="text-[10px] opacity-80">{strings.photoModeReplaceDesc}</div>
-                          </button>
-                        </div>
-                      </div>
-                      
-                      {/* Custom Sources */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium text-blue-700">{strings.photoCustomSources}</label>
-                        <textarea
-                          value={refineOptions.photoCustomSources || ''}
-                          onChange={(e) => setRefineOptions(prev => ({ ...prev, photoCustomSources: e.target.value }))}
-                          placeholder={strings.photoCustomSourcesPlaceholder}
-                          className="w-full h-20 text-xs p-2 border border-blue-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {refineAction === 'VALIDATE' && (
-                    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200 space-y-4">
-                      <p className="text-sm font-medium text-emerald-800">{strings.validateOptions}</p>
-                      
-                      {/* Reference Catalog Selection */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-emerald-700 uppercase">{strings.validateReference}</label>
-                        <div className="grid grid-cols-2 gap-2">
-                          {(['floradobrasil', 'gbif', 'powo', 'custom'] as const).map((ref) => (
+                          <p className="text-xs text-amber-600/80 mb-2">{strings.expandRequiredSpeciesDesc}</p>
+                          <textarea
+                            value={refineOptions.expandRequiredSpecies}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: e.target.value }))}
+                            placeholder={
+                              aiConfig.category === 'FAUNA' ? (language === 'pt' ? "ex: Panthera onca\nPanthera leo" : "e.g. Panthera onca\nPanthera leo") :
+                                aiConfig.category === 'OTHER' ? (language === 'pt' ? "ex: O Iluminado\nAlien" : "e.g. The Shining\nAlien") :
+                                  strings.expandRequiredSpeciesPlaceholder
+                            }
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm bg-white resize-none h-20 font-mono"
+                            disabled={isGenerating}
+                          />
+                          {refineOptions.expandRequiredSpecies.trim() && (
                             <button
-                              key={ref}
-                              onClick={() => setRefineOptions(prev => ({ ...prev, validateReference: ref }))}
-                              className={`py-2 px-3 text-xs font-medium rounded-lg transition-all ${
-                                refineOptions.validateReference === ref 
-                                  ? 'bg-emerald-600 text-white shadow-sm' 
-                                  : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
-                              }`}
+                              onClick={() => setRefineOptions(prev => ({ ...prev, expandRequiredSpecies: '' }))}
+                              className="mt-2 text-xs text-red-500 hover:text-red-700 font-medium flex items-center gap-1"
+                              disabled={isGenerating}
                             >
-                              {ref === 'floradobrasil' ? strings.validateFloradobrasil :
-                               ref === 'gbif' ? strings.validateGbif :
-                               ref === 'powo' ? strings.validatePowo : strings.validateCustom}
+                              <Trash2 size={12} /> {strings.clearList}
                             </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Validation Checkboxes */}
-                      <div className="space-y-2">
-                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
-                          <input
-                            type="checkbox"
-                            checked={refineOptions.validateFixNames}
-                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFixNames: e.target.checked }))}
-                            className="w-4 h-4 accent-emerald-500 mt-0.5"
-                          />
-                          <div>
-                            <span className="text-sm font-medium text-slate-800">{strings.validateFixNames}</span>
-                            <p className="text-xs text-slate-500">{strings.validateFixNamesDesc}</p>
-                          </div>
-                        </label>
-                        
-                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
-                          <input
-                            type="checkbox"
-                            checked={refineOptions.validateMergeSynonyms}
-                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateMergeSynonyms: e.target.checked }))}
-                            className="w-4 h-4 accent-emerald-500 mt-0.5"
-                          />
-                          <div>
-                            <span className="text-sm font-medium text-slate-800">{strings.validateMergeSynonyms}</span>
-                            <p className="text-xs text-slate-500">{strings.validateMergeSynonymsDesc}</p>
-                          </div>
-                        </label>
-                        
-                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
-                          <input
-                            type="checkbox"
-                            checked={refineOptions.validateCheckGeography}
-                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckGeography: e.target.checked }))}
-                            className="w-4 h-4 accent-emerald-500 mt-0.5"
-                          />
-                          <div>
-                            <span className="text-sm font-medium text-slate-800">{strings.validateCheckGeography}</span>
-                            <p className="text-xs text-slate-500">{strings.validateCheckGeographyDesc}</p>
-                          </div>
-                        </label>
-                        
-                        <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
-                          <input
-                            type="checkbox"
-                            checked={refineOptions.validateCheckTaxonomy}
-                            onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckTaxonomy: e.target.checked }))}
-                            className="w-4 h-4 accent-emerald-500 mt-0.5"
-                          />
-                          <div>
-                            <span className="text-sm font-medium text-slate-800">{strings.validateCheckTaxonomy}</span>
-                            <p className="text-xs text-slate-500">{strings.validateCheckTaxonomyDesc}</p>
-                          </div>
-                        </label>
-                      </div>
-
-                      {/* Taxonomic Scope (for validation) */}
-                      {refineOptions.validateCheckTaxonomy && (
-                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
-                          <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
-                            <Leaf size={12} /> {strings.taxonomyFilters}
-                          </label>
-                          <div className="grid grid-cols-2 gap-2">
-                            <input
-                              value={refineOptions.validateFamily}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFamily: e.target.value }))}
-                              placeholder={strings.taxonomyFamily}
-                              className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
-                            />
-                            <input
-                              value={refineOptions.validateGenus}
-                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateGenus: e.target.value }))}
-                              placeholder={strings.taxonomyGenus}
-                              className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Geographic Scope (for validation) */}
-                      {refineOptions.validateCheckGeography && (
-                        <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
-                          <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
-                            <Globe size={12} /> {strings.geographyFilters}
-                          </label>
-                          
-                          {/* Scope selector */}
-                          <div className="flex gap-2">
-                            {(['global', 'national', 'regional'] as const).map((scope) => (
-                              <button
-                                key={scope}
-                                onClick={() => setRefineOptions(prev => ({ ...prev, validateScope: scope }))}
-                                className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${
-                                  refineOptions.validateScope === scope 
-                                    ? 'bg-emerald-600 text-white' 
-                                    : 'bg-white text-slate-600 hover:bg-emerald-100 border border-slate-200'
-                                }`}
-                              >
-                                {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
-                              </button>
-                            ))}
-                          </div>
-
-                          {refineOptions.validateScope !== 'global' && (
-                            <div className="grid grid-cols-2 gap-2">
-                              <select
-                                value={refineOptions.validateBiome}
-                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateBiome: e.target.value }))}
-                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
-                              >
-                                <option value="">{strings.biome}</option>
-                                <option value="Amazônia">Amazônia</option>
-                                <option value="Mata Atlântica">Mata Atlântica</option>
-                                <option value="Cerrado">Cerrado</option>
-                                <option value="Caatinga">Caatinga</option>
-                                <option value="Pampa">Pampa</option>
-                                <option value="Pantanal">Pantanal</option>
-                              </select>
-                              <select
-                                value={refineOptions.validateStateUF}
-                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateStateUF: e.target.value }))}
-                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
-                              >
-                                <option value="">{strings.stateUF}</option>
-                                <option value="AC">Acre (AC)</option>
-                                <option value="AL">Alagoas (AL)</option>
-                                <option value="AP">Amapá (AP)</option>
-                                <option value="AM">Amazonas (AM)</option>
-                                <option value="BA">Bahia (BA)</option>
-                                <option value="CE">Ceará (CE)</option>
-                                <option value="DF">Distrito Federal (DF)</option>
-                                <option value="ES">Espírito Santo (ES)</option>
-                                <option value="GO">Goiás (GO)</option>
-                                <option value="MA">Maranhão (MA)</option>
-                                <option value="MT">Mato Grosso (MT)</option>
-                                <option value="MS">Mato Grosso do Sul (MS)</option>
-                                <option value="MG">Minas Gerais (MG)</option>
-                                <option value="PA">Pará (PA)</option>
-                                <option value="PB">Paraíba (PB)</option>
-                                <option value="PR">Paraná (PR)</option>
-                                <option value="PE">Pernambuco (PE)</option>
-                                <option value="PI">Piauí (PI)</option>
-                                <option value="RJ">Rio de Janeiro (RJ)</option>
-                                <option value="RN">Rio Grande do Norte (RN)</option>
-                                <option value="RS">Rio Grande do Sul (RS)</option>
-                                <option value="RO">Rondônia (RO)</option>
-                                <option value="RR">Roraima (RR)</option>
-                                <option value="SC">Santa Catarina (SC)</option>
-                                <option value="SP">São Paulo (SP)</option>
-                                <option value="SE">Sergipe (SE)</option>
-                                <option value="TO">Tocantins (TO)</option>
-                              </select>
-                            </div>
                           )}
                         </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : null}
-              
-              {aiMode === 'MERGE' && (
-                /* MERGE MODE INPUTS */
-                <div className="flex flex-col gap-4">
-                  <div className="text-center space-y-2 mb-2">
-                    <h4 className="font-bold text-slate-800 text-lg">{strings.mergeTitle}</h4>
-                    <p className="text-slate-500 text-sm">{strings.mergeDesc}</p>
-                  </div>
-
-                  {/* Key 1 Upload */}
-                  <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey1 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
-                    {mergeKey1 ? (
-                      <div className="flex flex-col items-center gap-2 w-full">
-                        <FileText size={32} className="text-amber-600" />
-                        <span className="font-bold text-slate-800 text-sm text-center">{mergeKey1.name || 'Key 1'}</span>
-                        <span className="text-xs text-slate-500">{mergeKey1.entities?.length || 0} {strings.entities} • {mergeKey1.features?.length || 0} {strings.features}</span>
-                        <button
-                          onClick={() => setMergeKey1(null)}
-                          className="text-xs text-red-500 hover:text-red-700 underline"
-                        >
-                          {strings.remove}
-                        </button>
                       </div>
-                    ) : (
-                      <button
-                        onClick={() => handleMergeKeyUpload(1)}
-                        className="flex flex-col items-center gap-2 p-2 w-full"
-                      >
-                        <Upload size={32} className="text-slate-400" />
-                        <span className="text-sm font-medium text-slate-600">{strings.uploadKey1}</span>
-                      </button>
                     )}
-                  </div>
 
-                  {/* Key 2 Upload */}
-                  <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey2 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
-                    {mergeKey2 ? (
-                      <div className="flex flex-col items-center gap-2 w-full">
-                        <FileText size={32} className="text-amber-600" />
-                        <span className="font-bold text-slate-800 text-sm text-center">{mergeKey2.name || 'Key 2'}</span>
-                        <span className="text-xs text-slate-500">{mergeKey2.entities?.length || 0} {strings.entities} • {mergeKey2.features?.length || 0} {strings.features}</span>
-                        <button
-                          onClick={() => setMergeKey2(null)}
-                          className="text-xs text-red-500 hover:text-red-700 underline"
-                        >
-                          {strings.remove}
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => handleMergeKeyUpload(2)}
-                        className="flex flex-col items-center gap-2 p-2 w-full"
-                      >
-                        <Upload size={32} className="text-slate-400" />
-                        <span className="text-sm font-medium text-slate-600">{strings.uploadKey2}</span>
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Merge Strategy */}
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                    <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.mergeStrategy}</label>
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => setMergeStrategy('union')}
-                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'union' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                      >
-                        <p className="font-bold text-slate-800 text-sm">{strings.strategyUnion}</p>
-                        <p className="text-xs text-slate-500">{strings.strategyUnionDesc}</p>
-                      </button>
-                      <button
-                        onClick={() => setMergeStrategy('intersection')}
-                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'intersection' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                      >
-                        <p className="font-bold text-slate-800 text-sm">{strings.strategyIntersection}</p>
-                        <p className="text-xs text-slate-500">{strings.strategyIntersectionDesc}</p>
-                      </button>
-                      <button
-                        onClick={() => setMergeStrategy('primary')}
-                        className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'primary' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
-                      >
-                        <p className="font-bold text-slate-800 text-sm">{strings.strategyPrimary}</p>
-                        <p className="text-xs text-slate-500">{strings.strategyPrimaryDesc}</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* SHARED CONFIGURATION SECTION - Only for TOPIC and IMPORT modes */}
-              {(aiMode === 'TOPIC' || aiMode === 'IMPORT') && (
-              <div className="pt-4 border-t border-slate-100 space-y-5">
-                <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                  <Settings2 size={12} /> {strings.configSettings}
-                </h5>
-
-                {/* Detail Level Slider */}
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <div className="flex justify-between items-center mb-4">
-                    <label className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1">
-                      <Microscope size={14} /> {strings.detailLevel}
-                    </label>
-                    <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded">
-                      {getDetailLabel(aiConfig.detailLevel)}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="3"
-                    step="1"
-                    value={aiConfig.detailLevel}
-                    onChange={(e) => setAiConfig(prev => ({ ...prev, detailLevel: parseInt(e.target.value) }))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500 mb-2"
-                    disabled={isGenerating}
-                  />
-                  <div className="flex justify-between text-[10px] text-slate-400 font-medium uppercase tracking-wide">
-                    <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 1 ? 'text-amber-600' : ''}`}><Baby size={16} /> Simple</span>
-                    <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 2 ? 'text-amber-600' : ''}`}><Brain size={16} /> Bal.</span>
-                    <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 3 ? 'text-amber-600' : ''}`}><GraduationCap size={16} /> Expert</span>
-                  </div>
-                </div>
-
-                {/* Focus Selector */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.featureFocus}</label>
-                  <div className="flex bg-slate-100 p-1 rounded-lg">
-                    {(['general', 'reproductive', 'vegetative'] as FeatureFocus[]).map(focus => (
-                      <button
-                        key={focus}
-                        onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: focus }))}
-                        className={`flex-1 py-2 rounded-md text-[10px] md:text-xs font-medium transition-all ${aiConfig.featureFocus === focus
-                          ? 'bg-white text-amber-600 shadow-sm'
-                          : 'text-slate-500 hover:text-slate-800'
-                          }`}
-                        disabled={isGenerating}
-                      >
-                        {focus === 'general' ? strings.focusGeneral : focus === 'reproductive' ? strings.focusRepro : strings.focusVeg}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Sliders (Topic Only) */}
-                {aiMode === 'TOPIC' && (
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between items-center mb-1.5">
-                        <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.numEntities}</label>
-                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{aiConfig.count}</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="3"
-                        max="100"
-                        step="1"
-                        value={aiConfig.count}
-                        onChange={(e) => setAiConfig(prev => ({ ...prev, count: parseInt(e.target.value) }))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                        disabled={isGenerating}
-                      />
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between items-center mb-1.5">
-                        <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.numFeatures}</label>
-                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{aiConfig.featureCount}</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="2"
-                        max="20"
-                        step="1"
-                        value={aiConfig.featureCount}
-                        onChange={(e) => setAiConfig(prev => ({ ...prev, featureCount: parseInt(e.target.value) }))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                        disabled={isGenerating}
-                      />
-                    </div>
-
-                    {/* Required Features Dropdown */}
-                    <div className="relative">
-                      <div className="flex justify-between items-center mb-1.5">
-                        <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.requiredFeatures}</label>
-                        {requiredFeatures.length > 0 && (
-                          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
-                            {requiredFeatures.length} {strings.selectedFeatures}
-                          </span>
-                        )}
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
-                        className="w-full px-3 py-2 text-left text-sm bg-white border border-slate-200 rounded-lg hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-colors flex items-center justify-between"
-                        disabled={isGenerating}
-                      >
-                        <span className={requiredFeatures.length > 0 ? 'text-slate-700' : 'text-slate-400'}>
-                          {requiredFeatures.length > 0 
-                            ? requiredFeatures.slice(0, 2).join(', ') + (requiredFeatures.length > 2 ? ` +${requiredFeatures.length - 2}` : '')
-                            : strings.requiredFeaturesDesc}
-                        </span>
-                        <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
-                      </button>
-                      
-                      {showRequiredFeaturesDropdown && (
-                        <div className="absolute z-50 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl max-h-64 overflow-y-auto custom-scrollbar">
-                          {/* Custom input */}
-                          <div className="sticky top-0 bg-white border-b p-2">
-                            <div className="flex gap-2">
-                              <input
-                                type="text"
-                                value={customFeatureInput}
-                                onChange={(e) => setCustomFeatureInput(e.target.value)}
-                                placeholder={strings.addCustomFeature}
-                                className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:border-amber-400"
-                                onKeyDown={(e) => {
-                                  if (e.key === 'Enter' && customFeatureInput.trim()) {
-                                    if (!requiredFeatures.includes(customFeatureInput.trim())) {
-                                      setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
-                                    }
-                                    setCustomFeatureInput('');
-                                  }
-                                }}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  if (customFeatureInput.trim() && !requiredFeatures.includes(customFeatureInput.trim())) {
-                                    setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
-                                    setCustomFeatureInput('');
-                                  }
-                                }}
-                                className="px-2 py-1 bg-amber-500 text-white rounded text-xs font-medium hover:bg-amber-600"
-                              >
-                                <Plus size={14} />
-                              </button>
-                            </div>
+                    {refineAction === 'REFINE' && (
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        {/* Feature Type Selector - Dynamic */}
+                        <div className="pb-3 border-b border-slate-200">
+                          <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.featureTypeLabel}</label>
+                          <p className="text-xs text-slate-400 mb-2">
+                            {aiConfig.category === 'FAUNA' ? (language === 'pt' ? 'Focar em características morfológicas ou comportamentais' : 'Focus on morphological or behavioral features') :
+                              aiConfig.category === 'OTHER' ? (language === 'pt' ? 'Focar em características visuais ou conceituais' : 'Focus on visual or conceptual features') :
+                                strings.featureTypeDesc}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {aiConfig.category === 'FLORA' ? (
+                              <>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'vegetative'
+                                    ? 'bg-emerald-500 text-white border-emerald-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300'
+                                    }`}
+                                >
+                                  🌿 {strings.featureTypeVegetative}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'reproductive'
+                                    ? 'bg-pink-500 text-white border-pink-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-pink-300'
+                                    }`}
+                                >
+                                  🌸 {strings.featureTypeReproductive}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'both'
+                                    ? 'bg-amber-500 text-white border-amber-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                                    }`}
+                                >
+                                  🌱 {strings.featureTypeBoth}
+                                </button>
+                              </>
+                            ) : aiConfig.category === 'FAUNA' ? (
+                              <>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'vegetative'
+                                    ? 'bg-amber-500 text-white border-amber-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                                    }`}
+                                >
+                                  🦁 {language === 'pt' ? 'Morfológicas' : 'Morphological'}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'reproductive'
+                                    ? 'bg-orange-500 text-white border-orange-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
+                                    }`}
+                                >
+                                  🐾 {language === 'pt' ? 'Comportamentais' : 'Behavioral'}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'both'
+                                    ? 'bg-amber-600 text-white border-amber-600'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-amber-300'
+                                    }`}
+                                >
+                                  🌍 {language === 'pt' ? 'Geral + Habitat' : 'General + Habitat'}
+                                </button>
+                              </>
+                            ) : (
+                              /* OTHER */
+                              <>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'vegetative' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'vegetative'
+                                    ? 'bg-purple-500 text-white border-purple-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
+                                    }`}
+                                >
+                                  👁️ {language === 'pt' ? 'Visuais/Físicas' : 'Visual/Physical'}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'reproductive' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'reproductive'
+                                    ? 'bg-indigo-500 text-white border-indigo-500'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                                    }`}
+                                >
+                                  🧠 {language === 'pt' ? 'Conceituais/Abstratas' : 'Conceptual/Abstract'}
+                                </button>
+                                <button
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, featureType: 'both' }))}
+                                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${refineOptions.featureType === 'both'
+                                    ? 'bg-purple-600 text-white border-purple-600'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-purple-300'
+                                    }`}
+                                >
+                                  ✨ {language === 'pt' ? 'Misto' : 'Mixed'}
+                                </button>
+                              </>
+                            )}
                           </div>
-                          
-                          {/* Selected features (removable) */}
-                          {requiredFeatures.length > 0 && (
-                            <div className="p-2 border-b bg-emerald-50/50">
-                              <div className="text-xs font-semibold text-emerald-700 mb-1.5 uppercase">
-                                {language === 'pt' ? 'Selecionadas' : 'Selected'}
-                              </div>
-                              <div className="flex flex-wrap gap-1">
-                                {requiredFeatures.map((feature, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="inline-flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full"
-                                  >
-                                    {feature}
+
+                          {/* Free text feature type input for REFINE */}
+                          <div className="mt-3 pt-2 border-t border-slate-200/50">
+                            <label className="text-[10px] uppercase font-bold text-slate-400 mb-1 block">
+                              {language === 'pt' ? 'Ou defina um tipo personalizado' : 'Or define custom type'}
+                            </label>
+                            <input
+                              type="text"
+                              placeholder={language === 'pt' ? "ex: Ingredientes, Aspectos geológicos..." : "e.g. Ingredients, Geological aspects..."}
+                              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white"
+                              value={['vegetative', 'reproductive', 'both'].includes(refineOptions.featureType) ? '' : refineOptions.featureType}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, featureType: e.target.value }))}
+                            />
+                          </div>
+                        </div>
+
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.improveDescriptions}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, improveDescriptions: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.improveDescriptions}</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.fillGaps}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, fillGaps: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.fillGaps}</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.addFeatures}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, addFeatures: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.addFeatures}</span>
+                        </label>
+
+                        {refineOptions.addFeatures && (
+                          <div className="ml-6 space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-xs text-slate-500 font-medium">{language === 'pt' ? 'Nº de características a adicionar' : 'Number of features to add'}</span>
+                              <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{refineOptions.refineFeatureCount}</span>
+                            </div>
+                            <input
+                              type="range"
+                              min="1"
+                              max="10"
+                              step="1"
+                              value={refineOptions.refineFeatureCount}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, refineFeatureCount: parseInt(e.target.value) }))}
+                              className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                            />
+                          </div>
+                        )}
+
+                        {/* Required Features Dropdown for REFINE */}
+                        {refineOptions.addFeatures && (
+                          <div className="mt-4 pt-4 border-t border-slate-200">
+                            <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{strings.refineRequiredFeaturesTitle}</p>
+                            <p className="text-xs text-slate-400 mb-3">{strings.refineRequiredFeaturesDesc}</p>
+
+                            {/* Selected features tags */}
+                            {refineOptions.refineRequiredFeatures.length > 0 && (
+                              <div className="flex flex-wrap gap-1.5 mb-3">
+                                {refineOptions.refineRequiredFeatures.map((feat, idx) => (
+                                  <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">
+                                    {feat}
                                     <button
-                                      type="button"
-                                      onClick={() => setRequiredFeatures(prev => prev.filter(f => f !== feature))}
-                                      className="hover:text-red-500"
+                                      onClick={() => setRefineOptions(prev => ({
+                                        ...prev,
+                                        refineRequiredFeatures: prev.refineRequiredFeatures.filter((_, i) => i !== idx)
+                                      }))}
+                                      className="hover:text-amber-600"
                                     >
                                       <X size={12} />
                                     </button>
                                   </span>
                                 ))}
                               </div>
+                            )}
+
+                            {/* Dropdown for suggested features */}
+                            <div className="relative">
+                              <button
+                                onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
+                                className="w-full px-3 py-2 text-sm text-left border border-slate-200 rounded-lg bg-white hover:border-amber-400 focus:ring-2 focus:ring-amber-400 focus:outline-none flex justify-between items-center"
+                              >
+                                <span className="text-slate-500">{strings.addRequiredFeature}</span>
+                                <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
+                              </button>
+
+                              {showRequiredFeaturesDropdown && (
+                                <div className="absolute z-20 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                  {suggestedFeatures.map((category, catIdx) => (
+                                    <div key={catIdx}>
+                                      <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-0">
+                                        {category.category}
+                                      </div>
+                                      {category.items.map((item, itemIdx) => (
+                                        <button
+                                          key={itemIdx}
+                                          onClick={() => {
+                                            if (!refineOptions.refineRequiredFeatures.includes(item)) {
+                                              setRefineOptions(prev => ({
+                                                ...prev,
+                                                refineRequiredFeatures: [...prev.refineRequiredFeatures, item]
+                                              }));
+                                            }
+                                            setShowRequiredFeaturesDropdown(false);
+                                          }}
+                                          disabled={refineOptions.refineRequiredFeatures.includes(item)}
+                                          className={`w-full px-3 py-2 text-sm text-left hover:bg-amber-50 ${refineOptions.refineRequiredFeatures.includes(item) ? 'text-slate-300' : 'text-slate-700'
+                                            }`}
+                                        >
+                                          {item}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  ))}
+
+                                  {/* Custom feature input */}
+                                  <div className="p-2 border-t border-slate-100">
+                                    <div className="flex gap-2">
+                                      <input
+                                        type="text"
+                                        value={customFeatureInput}
+                                        onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                        placeholder={strings.customFeature}
+                                        className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                        onKeyDown={(e) => {
+                                          if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                            setRefineOptions(prev => ({
+                                              ...prev,
+                                              refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
+                                            }));
+                                            setCustomFeatureInput('');
+                                            setShowRequiredFeaturesDropdown(false);
+                                          }
+                                        }}
+                                      />
+                                      <button
+                                        onClick={() => {
+                                          if (customFeatureInput.trim()) {
+                                            setRefineOptions(prev => ({
+                                              ...prev,
+                                              refineRequiredFeatures: [...prev.refineRequiredFeatures, customFeatureInput.trim()]
+                                            }));
+                                            setCustomFeatureInput('');
+                                            setShowRequiredFeaturesDropdown(false);
+                                          }
+                                        }}
+                                        className="px-3 py-1.5 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600"
+                                      >
+                                        +
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Direct text input for multiple features */}
+                            <div className="mt-3">
+                              <label className="block text-xs text-slate-400 mb-1">
+                                {language === 'pt' ? 'Ou digite características manualmente (Enter para adicionar)' : 'Or type features manually (Enter to add)'}
+                              </label>
+                              <div className="flex gap-2">
+                                <input
+                                  type="text"
+                                  value={customFeatureInput}
+                                  onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                  placeholder={language === 'pt' ? 'ex: Tipo de tricoma, Forma do ovário...' : 'e.g. Trichome type, Ovary shape...'}
+                                  className="flex-1 px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:outline-none"
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                      // Support comma-separated input
+                                      const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
+                                      setRefineOptions(prev => ({
+                                        ...prev,
+                                        refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
+                                      }));
+                                      setCustomFeatureInput('');
+                                    }
+                                  }}
+                                />
+                                <button
+                                  onClick={() => {
+                                    if (customFeatureInput.trim()) {
+                                      const features = customFeatureInput.split(',').map(f => f.trim()).filter(f => f.length > 0);
+                                      setRefineOptions(prev => ({
+                                        ...prev,
+                                        refineRequiredFeatures: [...prev.refineRequiredFeatures, ...features.filter(f => !prev.refineRequiredFeatures.includes(f))]
+                                      }));
+                                      setCustomFeatureInput('');
+                                    }
+                                  }}
+                                  className="px-3 py-2 bg-amber-500 text-white text-sm rounded-lg hover:bg-amber-600 font-bold"
+                                >
+                                  +
+                                </button>
+                              </div>
+                              <p className="text-[10px] text-slate-400 mt-1">
+                                {language === 'pt' ? 'Dica: separe múltiplas características com vírgula' : 'Tip: separate multiple features with comma'}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {refineAction === 'CLEAN' && (
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.removeRedundant}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, removeRedundant: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.removeRedundant}</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={refineOptions.fixInconsistencies}
+                            onChange={(e) => setRefineOptions(prev => ({ ...prev, fixInconsistencies: e.target.checked }))}
+                            className="w-4 h-4 accent-amber-500"
+                          />
+                          <span className="text-sm text-slate-700">{strings.fixInconsistencies}</span>
+                        </label>
+                      </div>
+                    )}
+
+                    {refineAction === 'PHOTOS' && (
+                      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 space-y-4">
+                        {/* Photos Toggle */}
+                        <div className="space-y-3 pb-3 border-b border-blue-200/50">
+                          <label className="flex items-center justify-between cursor-pointer group">
+                            <div className="flex items-center gap-2">
+                              <Camera size={16} className="text-blue-500 group-hover:text-blue-600 transition-colors" />
+                              <div>
+                                <span className="text-sm font-medium text-blue-800">{strings.fetchPhotosToggle}</span>
+                                <p className="text-[10px] text-blue-600/70">{strings.fetchPhotosDesc}</p>
+                              </div>
+                            </div>
+                            <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${refineOptions.fetchPhotos ? 'bg-blue-500' : 'bg-slate-300'}`}>
+                              <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${refineOptions.fetchPhotos ? 'translate-x-5' : ''}`}></div>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={refineOptions.fetchPhotos}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, fetchPhotos: e.target.checked }))}
+                            />
+                          </label>
+
+                          {refineOptions.fetchPhotos && (
+                            <div className="space-y-4 pl-6 animate-in slide-in-from-top-2">
+                              {/* Target Selection */}
+                              <div className="space-y-2">
+                                <p className="text-sm font-medium text-blue-800">{strings.photosActionDesc}</p>
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'entities' }))}
+                                    className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${refineOptions.photoTarget === 'entities'
+                                      ? 'bg-blue-500 text-white shadow-sm'
+                                      : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                                      }`}
+                                  >
+                                    {strings.photoTargetEntities}
+                                  </button>
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'features' }))}
+                                    className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${refineOptions.photoTarget === 'features'
+                                      ? 'bg-blue-500 text-white shadow-sm'
+                                      : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                                      }`}
+                                  >
+                                    {strings.photoTargetFeatures}
+                                  </button>
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({ ...prev, photoTarget: 'both' }))}
+                                    className={`flex-1 py-2 px-3 text-xs font-medium rounded-lg transition-all ${refineOptions.photoTarget === 'both'
+                                      ? 'bg-blue-500 text-white shadow-sm'
+                                      : 'bg-white text-blue-600 border border-blue-200 hover:bg-blue-50'
+                                      }`}
+                                  >
+                                    {strings.photoTargetBoth}
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Replace vs Expand Mode */}
+                              <div className="space-y-2">
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'expand' }))}
+                                    className={`flex-1 py-2 px-3 rounded-lg transition-all ${refineOptions.photoMode === 'expand'
+                                      ? 'bg-emerald-500 text-white shadow-sm'
+                                      : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
+                                      }`}
+                                  >
+                                    <div className="text-xs font-medium">{strings.photoModeExpand}</div>
+                                    <div className="text-[10px] opacity-80">{strings.photoModeExpandDesc}</div>
+                                  </button>
+                                  <button
+                                    onClick={() => setRefineOptions(prev => ({ ...prev, photoMode: 'replace' }))}
+                                    className={`flex-1 py-2 px-3 rounded-lg transition-all ${refineOptions.photoMode === 'replace'
+                                      ? 'bg-orange-500 text-white shadow-sm'
+                                      : 'bg-white text-orange-700 border border-orange-200 hover:bg-orange-50'
+                                      }`}
+                                  >
+                                    <div className="text-xs font-medium">{strings.photoModeReplace}</div>
+                                    <div className="text-[10px] opacity-80">{strings.photoModeReplaceDesc}</div>
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Custom Sources */}
+                              <div className="space-y-2">
+                                <label className="text-xs font-medium text-blue-700">{strings.photoCustomSources}</label>
+                                <textarea
+                                  value={refineOptions.photoCustomSources || ''}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, photoCustomSources: e.target.value }))}
+                                  placeholder={strings.photoCustomSourcesPlaceholder}
+                                  className="w-full h-20 text-xs p-2 border border-blue-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
+                                />
+                              </div>
                             </div>
                           )}
-                          
-                          {/* Suggested features by category */}
-                          {suggestedFeatures.map((category, catIdx) => (
-                            <div key={catIdx}>
-                              <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-[52px]">
-                                {category.category}
-                              </div>
-                              {category.items.map((item, itemIdx) => {
-                                const isSelected = requiredFeatures.includes(item);
-                                return (
-                                  <button
-                                    key={itemIdx}
-                                    type="button"
-                                    onClick={() => {
-                                      if (isSelected) {
-                                        setRequiredFeatures(prev => prev.filter(f => f !== item));
-                                      } else {
-                                        setRequiredFeatures(prev => [...prev, item]);
-                                      }
-                                    }}
-                                    className={`w-full px-3 py-2 text-left text-sm hover:bg-amber-50 flex items-center justify-between transition-colors ${isSelected ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600'}`}
-                                  >
-                                    <span>{item}</span>
-                                    {isSelected && <Check size={14} className="text-emerald-500" />}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          ))}
                         </div>
+
+
+
+                        {/* Links/Materials Toggle */}
+                        <div className="space-y-3 pt-3 border-t border-blue-200/50">
+                          <label className="flex items-center justify-between cursor-pointer group">
+                            <div className="flex items-center gap-2">
+                              <LinkIcon size={16} className="text-blue-500 group-hover:text-blue-600 transition-colors" />
+                              <div>
+                                <span className="text-sm font-medium text-blue-800">{strings.fetchLinksToggle}</span>
+                                <p className="text-[10px] text-blue-600/70">{strings.fetchLinksDesc}</p>
+                              </div>
+                            </div>
+                            <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${refineOptions.fetchLinks ? 'bg-amber-500' : 'bg-slate-300'}`}>
+                              <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${refineOptions.fetchLinks ? 'translate-x-5' : ''}`}></div>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={refineOptions.fetchLinks}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, fetchLinks: e.target.checked }))}
+                            />
+                          </label>
+
+                          {refineOptions.fetchLinks && (
+                            <div className="space-y-3 pl-6 animate-in slide-in-from-top-2">
+                              {/* Min links count */}
+                              <div className="flex items-center gap-3">
+                                <label className="text-xs font-medium text-blue-700 whitespace-nowrap">{strings.fetchLinksMinCount}:</label>
+                                <input
+                                  type="number"
+                                  min={1}
+                                  max={10}
+                                  value={refineOptions.fetchLinksMinCount}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, fetchLinksMinCount: Math.min(10, Math.max(1, parseInt(e.target.value) || 3)) }))}
+                                  className="w-16 px-2 py-1 text-xs border border-blue-200 rounded-lg bg-white focus:ring-2 focus:ring-amber-400 focus:outline-none text-center"
+                                />
+                                <span className="text-[10px] text-blue-500/60">1-10</span>
+                              </div>
+
+                              {/* Priority sources */}
+                              <div className="space-y-1">
+                                <label className="text-xs font-medium text-blue-700">{strings.fetchLinksSources}</label>
+                                <textarea
+                                  value={refineOptions.fetchLinksPrioritySources || ''}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, fetchLinksPrioritySources: e.target.value }))}
+                                  placeholder={strings.fetchLinksSourcesPlaceholder}
+                                  className="w-full h-16 text-xs p-2 border border-amber-200 rounded-lg bg-amber-50/50 focus:ring-2 focus:ring-amber-400 focus:outline-none resize-none"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {refineAction === 'VALIDATE' && (
+                      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-4 rounded-xl border border-emerald-200 space-y-4">
+                        <p className="text-sm font-medium text-emerald-800">{strings.validateOptions}</p>
+
+                        {/* Reference Catalog Selection */}
+                        <div className="space-y-2">
+                          <label className="text-xs font-bold text-emerald-700 uppercase">{strings.validateReference}</label>
+                          <div className="flex flex-wrap gap-2">
+                            {(() => {
+                              const getInferredCategory = () => {
+                                if (project?.category) return project.category;
+                                if (aiConfig.category && aiConfig.category !== 'FLORA') return aiConfig.category;
+
+                                // Heuristic for legacy projects
+                                const featStr = JSON.stringify(project?.features || []).toLowerCase();
+                                const faunaKeywords = ['patas', 'legs', 'asas', 'wings', 'pelo', 'fur', 'cauda', 'tail', 'bico', 'beak', 'antena', 'antenna', 'animal', 'focinho', 'snout', 'corpo', 'body'];
+                                if (faunaKeywords.some(k => featStr.includes(k))) return 'FAUNA';
+
+                                return 'FLORA';
+                              };
+
+                              const category = getInferredCategory();
+
+                              const sources = category === 'FAUNA' ? [
+                                { id: 'catalogueoflife', label: 'Catálogo da Vida (CoL)' },
+                                { id: 'gbif', label: 'GBIF Backbone' },
+                                { id: 'ctfb', label: 'Catálogo Taxonômico Fauna BR' },
+                                { id: 'custom', label: 'Outro/Personalizado' }
+                              ] : category === 'OTHER' ? [
+                                { id: 'gbif', label: 'GBIF Backbone' },
+                                { id: 'custom', label: 'Outro/Personalizado' }
+                              ] : [ // FLORA (Default)
+                                { id: 'wfo', label: 'World Flora Online' },
+                                { id: 'floradobrasil', label: 'Flora do Brasil 2020' },
+                                { id: 'powo', label: 'POWO (Kew)' },
+                                { id: 'gbif', label: 'GBIF Backbone' },
+                                { id: 'custom', label: 'Outro/Personalizado' }
+                              ];
+
+                              return sources.map((src) => (
+                                <button
+                                  key={src.id}
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, validateReference: src.id as any }))}
+                                  className={`py-2 px-3 text-xs font-medium rounded-lg transition-all ${refineOptions.validateReference === src.id
+                                    ? 'bg-emerald-600 text-white shadow-sm'
+                                    : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
+                                    }`}
+                                >
+                                  {src.label}
+                                </button>
+                              ));
+                            })()}
+                          </div>
+
+                          {/* Custom Source Input */}
+                          {refineOptions.validateReference === 'custom' && (
+                            <div className="mt-2">
+                              <input
+                                type="text"
+                                value={refineOptions.validateCustomSource || ''}
+                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCustomSource: e.target.value }))}
+                                placeholder="Digite o nome da fonte de referência (ex: FishBase, Avibase...)"
+                                className="w-full px-3 py-2 text-sm border border-emerald-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                              />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Validation Checkboxes */}
+                        <div className="space-y-2">
+                          <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={refineOptions.validateFixNames}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFixNames: e.target.checked }))}
+                              className="w-4 h-4 accent-emerald-500 mt-0.5"
+                            />
+                            <div>
+                              <span className="text-sm font-medium text-slate-800">{strings.validateFixNames}</span>
+                              <p className="text-xs text-slate-500">{strings.validateFixNamesDesc}</p>
+                            </div>
+                          </label>
+
+                          <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={refineOptions.validateMergeSynonyms}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateMergeSynonyms: e.target.checked }))}
+                              className="w-4 h-4 accent-emerald-500 mt-0.5"
+                            />
+                            <div>
+                              <span className="text-sm font-medium text-slate-800">{strings.validateMergeSynonyms}</span>
+                              <p className="text-xs text-slate-500">{strings.validateMergeSynonymsDesc}</p>
+                            </div>
+                          </label>
+
+                          <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={refineOptions.validateCheckGeography}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckGeography: e.target.checked }))}
+                              className="w-4 h-4 accent-emerald-500 mt-0.5"
+                            />
+                            <div>
+                              <span className="text-sm font-medium text-slate-800">{strings.validateCheckGeography}</span>
+                              <p className="text-xs text-slate-500">{strings.validateCheckGeographyDesc}</p>
+                            </div>
+                          </label>
+
+                          <label className="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white/50 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={refineOptions.validateCheckTaxonomy}
+                              onChange={(e) => setRefineOptions(prev => ({ ...prev, validateCheckTaxonomy: e.target.checked }))}
+                              className="w-4 h-4 accent-emerald-500 mt-0.5"
+                            />
+                            <div>
+                              <span className="text-sm font-medium text-slate-800">{strings.validateCheckTaxonomy}</span>
+                              <p className="text-xs text-slate-500">{strings.validateCheckTaxonomyDesc}</p>
+                            </div>
+                          </label>
+                        </div>
+
+                        {/* Taxonomic Scope (for validation) */}
+                        {refineOptions.validateCheckTaxonomy && (
+                          <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
+                            <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
+                              <Leaf size={12} /> {strings.taxonomyFilters}
+                            </label>
+                            <div className="grid grid-cols-2 gap-2">
+                              <input
+                                value={refineOptions.validateFamily}
+                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateFamily: e.target.value }))}
+                                placeholder={strings.taxonomyFamily}
+                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                              />
+                              <input
+                                value={refineOptions.validateGenus}
+                                onChange={(e) => setRefineOptions(prev => ({ ...prev, validateGenus: e.target.value }))}
+                                placeholder={strings.taxonomyGenus}
+                                className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Geographic Scope (for validation) */}
+                        {refineOptions.validateCheckGeography && (
+                          <div className="bg-white/50 p-3 rounded-lg border border-emerald-200 space-y-3">
+                            <label className="text-xs font-bold text-emerald-700 uppercase flex items-center gap-1">
+                              <Globe size={12} /> {strings.geographyFilters}
+                            </label>
+
+                            {/* Scope selector */}
+                            <div className="flex gap-2">
+                              {(['global', 'national', 'regional'] as const).map((scope) => (
+                                <button
+                                  key={scope}
+                                  onClick={() => setRefineOptions(prev => ({ ...prev, validateScope: scope }))}
+                                  className={`flex-1 py-1.5 px-2 text-xs font-medium rounded-lg transition-colors ${refineOptions.validateScope === scope
+                                    ? 'bg-emerald-600 text-white'
+                                    : 'bg-white text-slate-600 hover:bg-emerald-100 border border-slate-200'
+                                    }`}
+                                >
+                                  {scope === 'global' ? strings.scopeGlobal : scope === 'national' ? strings.scopeNational : strings.scopeRegional}
+                                </button>
+                              ))}
+                            </div>
+
+                            {refineOptions.validateScope !== 'global' && (
+                              <div className="grid grid-cols-2 gap-2">
+                                <select
+                                  value={refineOptions.validateBiome}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, validateBiome: e.target.value }))}
+                                  className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                                >
+                                  <option value="">{strings.biome}</option>
+                                  <option value="Amazônia">Amazônia</option>
+                                  <option value="Mata Atlântica">Mata Atlântica</option>
+                                  <option value="Cerrado">Cerrado</option>
+                                  <option value="Caatinga">Caatinga</option>
+                                  <option value="Pampa">Pampa</option>
+                                  <option value="Pantanal">Pantanal</option>
+                                </select>
+                                <select
+                                  value={refineOptions.validateStateUF}
+                                  onChange={(e) => setRefineOptions(prev => ({ ...prev, validateStateUF: e.target.value }))}
+                                  className="px-3 py-2 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                                >
+                                  <option value="">{strings.stateUF}</option>
+                                  <option value="AC">Acre (AC)</option>
+                                  <option value="AL">Alagoas (AL)</option>
+                                  <option value="AP">Amapá (AP)</option>
+                                  <option value="AM">Amazonas (AM)</option>
+                                  <option value="BA">Bahia (BA)</option>
+                                  <option value="CE">Ceará (CE)</option>
+                                  <option value="DF">Distrito Federal (DF)</option>
+                                  <option value="ES">Espírito Santo (ES)</option>
+                                  <option value="GO">Goiás (GO)</option>
+                                  <option value="MA">Maranhão (MA)</option>
+                                  <option value="MT">Mato Grosso (MT)</option>
+                                  <option value="MS">Mato Grosso do Sul (MS)</option>
+                                  <option value="MG">Minas Gerais (MG)</option>
+                                  <option value="PA">Pará (PA)</option>
+                                  <option value="PB">Paraíba (PB)</option>
+                                  <option value="PR">Paraná (PR)</option>
+                                  <option value="PE">Pernambuco (PE)</option>
+                                  <option value="PI">Piauí (PI)</option>
+                                  <option value="RJ">Rio de Janeiro (RJ)</option>
+                                  <option value="RN">Rio Grande do Norte (RN)</option>
+                                  <option value="RS">Rio Grande do Sul (RS)</option>
+                                  <option value="RO">Rondônia (RO)</option>
+                                  <option value="RR">Roraima (RR)</option>
+                                  <option value="SC">Santa Catarina (SC)</option>
+                                  <option value="SP">São Paulo (SP)</option>
+                                  <option value="SE">Sergipe (SE)</option>
+                                  <option value="TO">Tocantins (TO)</option>
+                                </select>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+
+                {aiMode === 'MERGE' && (
+                  /* MERGE MODE INPUTS */
+                  <div className="flex flex-col gap-4">
+                    <div className="text-center space-y-2 mb-2">
+                      <h4 className="font-bold text-slate-800 text-lg">{strings.mergeTitle}</h4>
+                      <p className="text-slate-500 text-sm">{strings.mergeDesc}</p>
+                    </div>
+
+                    {/* Key 1 Upload */}
+                    <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey1 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
+                      {mergeKey1 ? (
+                        <div className="flex flex-col items-center gap-2 w-full">
+                          <FileText size={32} className="text-amber-600" />
+                          <span className="font-bold text-slate-800 text-sm text-center">{mergeKey1.name || 'Key 1'}</span>
+                          <span className="text-xs text-slate-500">{mergeKey1.entities?.length || 0} {strings.entities} • {mergeKey1.features?.length || 0} {strings.features}</span>
+                          <button
+                            onClick={() => setMergeKey1(null)}
+                            className="text-xs text-red-500 hover:text-red-700 underline"
+                          >
+                            {strings.remove}
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleMergeKeyUpload(1)}
+                          className="flex flex-col items-center gap-2 p-2 w-full"
+                        >
+                          <Upload size={32} className="text-slate-400" />
+                          <span className="text-sm font-medium text-slate-600">{strings.uploadKey1}</span>
+                        </button>
                       )}
+                    </div>
+
+                    {/* Key 2 Upload */}
+                    <div className={`border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center transition-all ${mergeKey2 ? 'border-amber-500 bg-amber-50/30' : 'border-slate-300 hover:border-amber-400 bg-slate-50'}`}>
+                      {mergeKey2 ? (
+                        <div className="flex flex-col items-center gap-2 w-full">
+                          <FileText size={32} className="text-amber-600" />
+                          <span className="font-bold text-slate-800 text-sm text-center">{mergeKey2.name || 'Key 2'}</span>
+                          <span className="text-xs text-slate-500">{mergeKey2.entities?.length || 0} {strings.entities} • {mergeKey2.features?.length || 0} {strings.features}</span>
+                          <button
+                            onClick={() => setMergeKey2(null)}
+                            className="text-xs text-red-500 hover:text-red-700 underline"
+                          >
+                            {strings.remove}
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleMergeKeyUpload(2)}
+                          className="flex flex-col items-center gap-2 p-2 w-full"
+                        >
+                          <Upload size={32} className="text-slate-400" />
+                          <span className="text-sm font-medium text-slate-600">{strings.uploadKey2}</span>
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Merge Strategy */}
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                      <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.mergeStrategy}</label>
+                      <div className="space-y-2">
+                        <button
+                          onClick={() => setMergeStrategy('union')}
+                          className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'union' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                        >
+                          <p className="font-bold text-slate-800 text-sm">{strings.strategyUnion}</p>
+                          <p className="text-xs text-slate-500">{strings.strategyUnionDesc}</p>
+                        </button>
+                        <button
+                          onClick={() => setMergeStrategy('intersection')}
+                          className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'intersection' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                        >
+                          <p className="font-bold text-slate-800 text-sm">{strings.strategyIntersection}</p>
+                          <p className="text-xs text-slate-500">{strings.strategyIntersectionDesc}</p>
+                        </button>
+                        <button
+                          onClick={() => setMergeStrategy('primary')}
+                          className={`w-full p-3 rounded-lg border-2 text-left transition-all ${mergeStrategy === 'primary' ? 'border-amber-500 bg-amber-50' : 'border-slate-200 hover:border-amber-300'}`}
+                        >
+                          <p className="font-bold text-slate-800 text-sm">{strings.strategyPrimary}</p>
+                          <p className="text-xs text-slate-500">{strings.strategyPrimaryDesc}</p>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* Image Toggles (Shared) */}
-                <div className="space-y-3">
-                  <label className="flex items-center justify-between cursor-pointer group">
-                    <div className="flex items-center gap-2">
-                      <ImageIcon size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
-                      <span className="text-sm font-medium text-slate-700">{strings.fetchSpeciesImg}</span>
-                    </div>
-                    <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeSpeciesImages ? 'bg-amber-500' : 'bg-slate-300'}`}>
-                      <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeSpeciesImages ? 'translate-x-5' : ''}`}></div>
-                    </div>
-                    <input
-                      type="checkbox"
-                      className="hidden"
-                      checked={aiConfig.includeSpeciesImages}
-                      onChange={(e) => setAiConfig(prev => ({ ...prev, includeSpeciesImages: e.target.checked }))}
-                      disabled={isGenerating}
-                    />
-                  </label>
-                  {/* Feature Images - Available for BOTH modes now */}
-                  <label className="flex items-center justify-between cursor-pointer group">
-                    <div className="flex items-center gap-2">
-                      <Settings2 size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
-                      <span className="text-sm font-medium text-slate-700">{strings.fetchFeatureImg}</span>
-                    </div>
-                    <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeFeatureImages ? 'bg-amber-500' : 'bg-slate-300'}`}>
-                      <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeFeatureImages ? 'translate-x-5' : ''}`}></div>
-                    </div>
-                    <input
-                      type="checkbox"
-                      className="hidden"
-                      checked={aiConfig.includeFeatureImages}
-                      onChange={(e) => setAiConfig(prev => ({ ...prev, includeFeatureImages: e.target.checked }))}
-                      disabled={isGenerating}
-                    />
-                  </label>
-                  {/* External Links Toggle */}
-                  <label className="flex items-center justify-between cursor-pointer group">
-                    <div className="flex items-center gap-2">
-                      <LinkIcon size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
-                      <span className="text-sm font-medium text-slate-700">{strings.fetchLinks}</span>
-                    </div>
-                    <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeLinks ? 'bg-amber-500' : 'bg-slate-300'}`}>
-                      <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeLinks ? 'translate-x-5' : ''}`}></div>
-                    </div>
-                    <input
-                      type="checkbox"
-                      className="hidden"
-                      checked={aiConfig.includeLinks}
-                      onChange={(e) => setAiConfig(prev => ({ ...prev, includeLinks: e.target.checked }))}
-                      disabled={isGenerating}
-                    />
-                  </label>
-                </div>
-              </div>
-              )}
+                {/* SHARED CONFIGURATION SECTION - Only for TOPIC and IMPORT modes */}
+                {(aiMode === 'TOPIC' || aiMode === 'IMPORT') && (
+                  <div className="pt-4 border-t border-slate-100 space-y-5">
+                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                      <Settings2 size={12} /> {strings.configSettings}
+                    </h5>
 
-              {isGenerating && (
-                <div className="bg-amber-50 text-amber-700 p-3 rounded-lg text-sm flex items-center justify-center gap-2">
-                  <Loader2 className="animate-spin" size={16} /> {generatingMessage || (aiMode === 'IMPORT' ? strings.analyzing : strings.generating)}
-                </div>
-              )}
-            </div>
-
-            <div className="p-4 bg-slate-50 border-t flex gap-3 shrink-0 safe-area-bottom">
-              <button
-                onClick={handleCloseAiModal}
-                className="flex-none w-16 md:w-20 py-2.5 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors text-center text-xs md:text-sm"
-              >
-                {strings.cancel}
-              </button>
-
-              <button
-                onClick={handleOpenPromptEditor}
-                className="w-auto px-3 py-2 text-xs bg-white border border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-amber-400 hover:text-amber-600 shadow-sm transition-all flex items-center justify-center gap-2"
-                disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile) || (aiMode === 'REFINE' && project.entities.length === 0) || (aiMode === 'MERGE' && (!mergeKey1 || !mergeKey2))}
-                title="View and edit the prompt before sending"
-              >
-                <Edit3 size={14} /> <span className="hidden sm:inline">View/Edit Prompt</span>
-              </button>
-
-              {aiMode === 'REFINE' ? (
-              <button
-                onClick={handleRefineGenerate}
-                className={`flex-1 py-2.5 ${refineAction === 'VALIDATE' ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-900/20' : 'bg-amber-500 hover:bg-amber-600 shadow-amber-900/20'} text-white font-bold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm`}
-                disabled={isGenerating || project.entities.length === 0}
-              >
-                {refineAction === 'EXPAND' ? strings.actionExpand : refineAction === 'REFINE' ? strings.actionRefine : refineAction === 'CLEAN' ? strings.actionClean : refineAction === 'VALIDATE' ? strings.actionValidate : strings.actionPhotos} {refineAction === 'VALIDATE' ? <ShieldCheck size={16} className="opacity-70" /> : <Sparkles size={16} className="opacity-70" />}
-              </button>
-              ) : aiMode === 'MERGE' ? (
-              <button
-                onClick={handleMergeGenerate}
-                className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
-                disabled={isGenerating || !mergeKey1 || !mergeKey2}
-              >
-                {strings.mergeAction} <Combine size={16} className="opacity-70" />
-              </button>
-              ) : (
-              <button
-                onClick={handleAiGenerate}
-                className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
-                disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile)}
-              >
-                {strings.generate} <Wand2 size={16} className="opacity-70" />
-              </button>
-              )}
-            </div>
-          </div>
-          )}
-        </div>
-      )}
-
-      {/* Prompt Editor Modal */}
-      {showPromptEditor && (
-        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col h-[80vh] max-h-[90vh] animate-in fade-in zoom-in-95 overflow-hidden">
-            <div className="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center text-white shrink-0">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <Edit3 size={18} className="text-amber-400" />
-                Prompt Editor
-              </h3>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(manualPrompt);
-                    alert(strings.promptCopied);
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white"
-                  disabled={isGenerating}
-                >
-                  <Copy size={12} /> {strings.copyPrompt}
-                </button>
-                <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1">
-                  <X size={20} />
-                </button>
-              </div>
-            </div>
-
-            <div className="flex-1 p-2 bg-slate-100 min-h-0 flex flex-col gap-2">
-              {/* Import Mode Toggle - Shown when pendingNervuraFile is present */}
-              {pendingNervuraFile && !isGenerating && !pendingImportProject && (
-                <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-                  <p className="text-xs font-bold text-slate-500 uppercase mb-3 text-center">
-                    {language === 'pt' ? 'Modo de Importação' : 'Import Mode'}
-                  </p>
-                  <div className="flex rounded-xl overflow-hidden border-2 border-slate-200">
-                    <button
-                      onClick={() => setOptimizeNervura(false)}
-                      className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${
-                        !optimizeNervura 
-                          ? 'bg-slate-800 text-white' 
-                          : 'bg-white text-slate-500 hover:bg-slate-50'
-                      }`}
-                    >
-                      <FileCode size={18} />
-                      <div className="text-left">
-                        <div className="font-bold text-sm">{language === 'pt' ? 'Fiel' : 'Faithful'}</div>
-                        <div className="text-[10px] opacity-70">{language === 'pt' ? 'Sem alterações' : 'No changes'}</div>
+                    {/* Detail Level Slider */}
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                      <div className="flex justify-between items-center mb-4">
+                        <label className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1">
+                          <Microscope size={14} /> {strings.detailLevel}
+                        </label>
+                        <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded">
+                          {getDetailLabel(aiConfig.detailLevel)}
+                        </span>
                       </div>
-                    </button>
-                    <button
-                      onClick={() => setOptimizeNervura(true)}
-                      className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${
-                        optimizeNervura 
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white' 
-                          : 'bg-white text-slate-500 hover:bg-slate-50'
-                      }`}
-                    >
-                      <Sparkles size={18} />
-                      <div className="text-left">
-                        <div className="font-bold text-sm">{language === 'pt' ? 'Otimizar' : 'Optimize'}</div>
-                        <div className="text-[10px] opacity-70">{language === 'pt' ? 'IA padroniza' : 'AI cleans'}</div>
+                      <input
+                        type="range"
+                        min="1"
+                        max="3"
+                        step="1"
+                        value={aiConfig.detailLevel}
+                        onChange={(e) => setAiConfig(prev => ({ ...prev, detailLevel: parseInt(e.target.value) }))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500 mb-2"
+                        disabled={isGenerating}
+                      />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-medium uppercase tracking-wide">
+                        <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 1 ? 'text-amber-600' : ''}`}><Baby size={16} /> Simple</span>
+                        <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 2 ? 'text-amber-600' : ''}`}><Brain size={16} /> Bal.</span>
+                        <span className={`flex flex-col items-center gap-1 ${aiConfig.detailLevel === 3 ? 'text-amber-600' : ''}`}><GraduationCap size={16} /> Expert</span>
                       </div>
-                    </button>
-                  </div>
-                </div>
-              )}
-              
-              {/* AI Typing Effect Display - Shown during generation OR when showing import status */}
-              {(isGenerating || pendingNervuraFile || pendingImportProject || aiTypingText) ? (
-                <div 
-                  ref={typingContainerRef}
-                  className="w-full flex-1 p-4 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 font-mono text-sm rounded-lg overflow-auto custom-scrollbar border-2 border-amber-500/30"
-                >
-                  <div className="whitespace-pre-wrap">
-                    {aiTypingText || (language === 'pt' ? 'Aguardando...' : 'Waiting...')}
-                    {isGenerating && !aiTypingComplete && (
-                      <span className="inline-block w-2 h-4 bg-amber-400 animate-pulse ml-1 align-middle"></span>
+                    </div>
+
+                    {/* Focus Selector */}
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">{strings.featureFocus}</label>
+                      <div className="flex bg-slate-100 p-1 rounded-lg">
+                        {(['general', 'reproductive', 'vegetative'] as FeatureFocus[]).map(focus => (
+                          <button
+                            key={focus}
+                            onClick={() => setAiConfig(prev => ({ ...prev, featureFocus: focus }))}
+                            className={`flex-1 py-2 rounded-md text-[10px] md:text-xs font-medium transition-all ${aiConfig.featureFocus === focus
+                              ? 'bg-white text-amber-600 shadow-sm'
+                              : 'text-slate-500 hover:text-slate-800'
+                              }`}
+                            disabled={isGenerating}
+                          >
+                            {focus === 'general' ? strings.focusGeneral : focus === 'reproductive' ? strings.focusRepro : strings.focusVeg}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Sliders (Topic Only) */}
+                    {aiMode === 'TOPIC' && (
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex justify-between items-center mb-1.5">
+                            <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.numEntities}</label>
+                            <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{aiConfig.count}</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="3"
+                            max="100"
+                            step="1"
+                            value={aiConfig.count}
+                            onChange={(e) => setAiConfig(prev => ({ ...prev, count: parseInt(e.target.value) }))}
+                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                            disabled={isGenerating}
+                          />
+                        </div>
+
+                        <div>
+                          <div className="flex justify-between items-center mb-1.5">
+                            <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.numFeatures}</label>
+                            <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">{aiConfig.featureCount}</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="2"
+                            max="20"
+                            step="1"
+                            value={aiConfig.featureCount}
+                            onChange={(e) => setAiConfig(prev => ({ ...prev, featureCount: parseInt(e.target.value) }))}
+                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                            disabled={isGenerating}
+                          />
+                        </div>
+
+                        {/* Required Features Dropdown */}
+                        <div className="relative">
+                          <div className="flex justify-between items-center mb-1.5">
+                            <label className="block text-xs font-semibold text-slate-500 uppercase">{strings.requiredFeatures}</label>
+                            {requiredFeatures.length > 0 && (
+                              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                                {requiredFeatures.length} {strings.selectedFeatures}
+                              </span>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setShowRequiredFeaturesDropdown(!showRequiredFeaturesDropdown)}
+                            className="w-full px-3 py-2 text-left text-sm bg-white border border-slate-200 rounded-lg hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-colors flex items-center justify-between"
+                            disabled={isGenerating}
+                          >
+                            <span className={requiredFeatures.length > 0 ? 'text-slate-700' : 'text-slate-400'}>
+                              {requiredFeatures.length > 0
+                                ? requiredFeatures.slice(0, 2).join(', ') + (requiredFeatures.length > 2 ? ` +${requiredFeatures.length - 2}` : '')
+                                : strings.requiredFeaturesDesc}
+                            </span>
+                            <ChevronDown size={16} className={`text-slate-400 transition-transform ${showRequiredFeaturesDropdown ? 'rotate-180' : ''}`} />
+                          </button>
+
+                          {showRequiredFeaturesDropdown && (
+                            <div className="absolute z-50 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl max-h-64 overflow-y-auto custom-scrollbar">
+                              {/* Custom input */}
+                              <div className="sticky top-0 bg-white border-b p-2">
+                                <div className="flex gap-2">
+                                  <input
+                                    type="text"
+                                    value={customFeatureInput}
+                                    onChange={(e) => setCustomFeatureInput(e.target.value)}
+                                    placeholder={strings.addCustomFeature}
+                                    className="flex-1 px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:border-amber-400"
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter' && customFeatureInput.trim()) {
+                                        if (!requiredFeatures.includes(customFeatureInput.trim())) {
+                                          setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
+                                        }
+                                        setCustomFeatureInput('');
+                                      }
+                                    }}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (customFeatureInput.trim() && !requiredFeatures.includes(customFeatureInput.trim())) {
+                                        setRequiredFeatures(prev => [...prev, customFeatureInput.trim()]);
+                                        setCustomFeatureInput('');
+                                      }
+                                    }}
+                                    className="px-2 py-1 bg-amber-500 text-white rounded text-xs font-medium hover:bg-amber-600"
+                                  >
+                                    <Plus size={14} />
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Selected features (removable) */}
+                              {requiredFeatures.length > 0 && (
+                                <div className="p-2 border-b bg-emerald-50/50">
+                                  <div className="text-xs font-semibold text-emerald-700 mb-1.5 uppercase">
+                                    {language === 'pt' ? 'Selecionadas' : 'Selected'}
+                                  </div>
+                                  <div className="flex flex-wrap gap-1">
+                                    {requiredFeatures.map((feature, idx) => (
+                                      <span
+                                        key={idx}
+                                        className="inline-flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full"
+                                      >
+                                        {feature}
+                                        <button
+                                          type="button"
+                                          onClick={() => setRequiredFeatures(prev => prev.filter(f => f !== feature))}
+                                          className="hover:text-red-500"
+                                        >
+                                          <X size={12} />
+                                        </button>
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Suggested features by category */}
+                              {suggestedFeatures.map((category, catIdx) => (
+                                <div key={catIdx}>
+                                  <div className="px-3 py-1.5 bg-slate-50 text-xs font-semibold text-slate-500 uppercase sticky top-[52px]">
+                                    {category.category}
+                                  </div>
+                                  {category.items.map((item, itemIdx) => {
+                                    const isSelected = requiredFeatures.includes(item);
+                                    return (
+                                      <button
+                                        key={itemIdx}
+                                        type="button"
+                                        onClick={() => {
+                                          if (isSelected) {
+                                            setRequiredFeatures(prev => prev.filter(f => f !== item));
+                                          } else {
+                                            setRequiredFeatures(prev => [...prev, item]);
+                                          }
+                                        }}
+                                        className={`w-full px-3 py-2 text-left text-sm hover:bg-amber-50 flex items-center justify-between transition-colors ${isSelected ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600'}`}
+                                      >
+                                        <span>{item}</span>
+                                        {isSelected && <Check size={14} className="text-emerald-500" />}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     )}
-                  </div>
-                </div>
-              ) : (
-                /* Prompt Textarea - Only shown when NOT in import mode */
-                <textarea
-                  value={manualPrompt}
-                  onChange={(e) => setManualPrompt(e.target.value)}
-                  className="w-full flex-1 p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
-                  spellCheck="false"
-                />
-              )}
-            </div>
 
-            <div className="p-4 border-t bg-slate-50 shrink-0 flex items-center justify-between gap-4">
-              {/* Generation progress indicator */}
-              {isGenerating && (
-                <div className="flex items-center gap-2 text-amber-600">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                    {/* Image Toggles (Shared) */}
+                    <div className="space-y-3">
+                      <label className="flex items-center justify-between cursor-pointer group">
+                        <div className="flex items-center gap-2">
+                          <ImageIcon size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
+                          <span className="text-sm font-medium text-slate-700">{strings.fetchSpeciesImg}</span>
+                        </div>
+                        <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeSpeciesImages ? 'bg-amber-500' : 'bg-slate-300'}`}>
+                          <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeSpeciesImages ? 'translate-x-5' : ''}`}></div>
+                        </div>
+                        <input
+                          type="checkbox"
+                          className="hidden"
+                          checked={aiConfig.includeSpeciesImages}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, includeSpeciesImages: e.target.checked }))}
+                          disabled={isGenerating}
+                        />
+                      </label>
+                      {/* Feature Images - Available for BOTH modes now */}
+                      <label className="flex items-center justify-between cursor-pointer group">
+                        <div className="flex items-center gap-2">
+                          <Settings2 size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
+                          <span className="text-sm font-medium text-slate-700">{strings.fetchFeatureImg}</span>
+                        </div>
+                        <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeFeatureImages ? 'bg-amber-500' : 'bg-slate-300'}`}>
+                          <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeFeatureImages ? 'translate-x-5' : ''}`}></div>
+                        </div>
+                        <input
+                          type="checkbox"
+                          className="hidden"
+                          checked={aiConfig.includeFeatureImages}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, includeFeatureImages: e.target.checked }))}
+                          disabled={isGenerating}
+                        />
+                      </label>
+                      {/* External Links Toggle */}
+                      <label className="flex items-center justify-between cursor-pointer group">
+                        <div className="flex items-center gap-2">
+                          <LinkIcon size={16} className="text-slate-400 group-hover:text-amber-500 transition-colors" />
+                          <span className="text-sm font-medium text-slate-700">{strings.fetchLinks}</span>
+                        </div>
+                        <div className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${aiConfig.includeLinks ? 'bg-amber-500' : 'bg-slate-300'}`}>
+                          <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${aiConfig.includeLinks ? 'translate-x-5' : ''}`}></div>
+                        </div>
+                        <input
+                          type="checkbox"
+                          className="hidden"
+                          checked={aiConfig.includeLinks}
+                          onChange={(e) => setAiConfig(prev => ({ ...prev, includeLinks: e.target.checked }))}
+                          disabled={isGenerating}
+                        />
+                      </label>
+                    </div>
                   </div>
-                  <span className="text-sm font-medium">{language === 'pt' ? 'IA processando...' : 'AI processing...'}</span>
-                </div>
-              )}
-              
-              <div className="flex items-center gap-4 ml-auto">
+                )}
+
+                {isGenerating && (
+                  <div className="bg-amber-50 text-amber-700 p-3 rounded-lg text-sm flex items-center justify-center gap-2">
+                    <Loader2 className="animate-spin" size={16} /> {generatingMessage || (aiMode === 'IMPORT' ? strings.analyzing : strings.generating)}
+                  </div>
+                )}
+              </div>
+
+              <div className="p-4 bg-slate-50 border-t flex gap-3 shrink-0 safe-area-bottom">
                 <button
-                  onClick={handleClosePromptEditor}
-                  className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors"
+                  onClick={handleCloseAiModal}
+                  className="flex-none w-16 md:w-20 py-2.5 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors text-center text-xs md:text-sm"
                 >
                   {strings.cancel}
                 </button>
-                
-                {pendingImportProject ? (
+
+                <button
+                  onClick={handleOpenPromptEditor}
+                  className="w-auto px-3 py-2 text-xs bg-white border border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-amber-400 hover:text-amber-600 shadow-sm transition-all flex items-center justify-center gap-2"
+                  disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile) || (aiMode === 'REFINE' && project.entities.length === 0) || (aiMode === 'MERGE' && (!mergeKey1 || !mergeKey2))}
+                  title="View and edit the prompt before sending"
+                >
+                  <Edit3 size={14} /> <span className="hidden sm:inline">View/Edit Prompt</span>
+                </button>
+
+                {aiMode === 'REFINE' ? (
                   <button
-                    onClick={() => {
-                      setProject(pendingImportProject);
-                      setPendingImportProject(null);
-                      setPendingNervuraFile(null);
-                      setShowPromptEditor(false);
-                      setShowAiModal(false);
-                      
-                      // Also save to localStorage logic if needed (copied from original import)
-                      const saved = localStorage.getItem('nozesia_projects');
-                      let projectsList: Project[] = [];
-                      if (saved) { try { projectsList = JSON.parse(saved); } catch (err) {} }
-                      const updatedList = [pendingImportProject, ...projectsList.filter((p: Project) => p.id !== pendingImportProject.id)];
-                      localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
-                      if (onProjectImported) onProjectImported(pendingImportProject);
-                      
-                      alert(language === 'pt' ? 'Chave importada com sucesso!' : 'Key imported successfully!');
-                    }}
-                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 flex items-center gap-2"
+                    onClick={handleRefineGenerate}
+                    className={`flex-1 py-2.5 ${refineAction === 'VALIDATE' ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-900/20' : 'bg-amber-500 hover:bg-amber-600 shadow-amber-900/20'} text-white font-bold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm`}
+                    disabled={isGenerating || project.entities.length === 0}
                   >
-                    {language === 'pt' ? 'Confirmar Importação' : 'Confirm Import'} <Check size={16} />
+                    {refineAction === 'EXPAND' ? strings.actionExpand : refineAction === 'REFINE' ? strings.actionRefine : refineAction === 'CLEAN' ? strings.actionClean : refineAction === 'VALIDATE' ? strings.actionValidate : strings.actionPhotos} {refineAction === 'VALIDATE' ? <ShieldCheck size={16} className="opacity-70" /> : <Sparkles size={16} className="opacity-70" />}
                   </button>
-                ) : pendingNervuraFile ? (
+                ) : aiMode === 'MERGE' ? (
                   <button
-                    onClick={executeNervuraImport}
-                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
-                    disabled={isGenerating}
+                    onClick={handleMergeGenerate}
+                    className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+                    disabled={isGenerating || !mergeKey1 || !mergeKey2}
                   >
-                    {isGenerating ? (
-                      <><Loader2 className="animate-spin" size={16} /> {language === 'pt' ? 'Processando...' : 'Processing...'}</>
-                    ) : (
-                      <>{optimizeNervura ? (language === 'pt' ? 'Otimizar e Importar' : 'Optimize & Import') : (language === 'pt' ? 'Importar Chave' : 'Import Key')} <Wand2 size={16} /></>
-                    )}
+                    {strings.mergeAction} <Combine size={16} className="opacity-70" />
                   </button>
                 ) : (
                   <button
-                    onClick={handleSendManualPrompt}
-                    className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
-                    disabled={isGenerating}
+                    onClick={handleAiGenerate}
+                    className="flex-1 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+                    disabled={isGenerating || (aiMode === 'TOPIC' && !aiConfig.topic) || (aiMode === 'IMPORT' && !importedFile)}
                   >
-                    {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
+                    {strings.generate} <Wand2 size={16} className="opacity-70" />
                   </button>
                 )}
               </div>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      )
+      }
 
-      {/* State Image Viewer Modal */}
-      {expandedStateImage && (
-        <div 
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setExpandedStateImage(null)}
-        >
-          <div 
-            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in zoom-in-95"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="relative">
-              <img 
-                src={expandedStateImage.url} 
-                alt={expandedStateImage.label}
-                className="w-full max-h-[60vh] object-contain bg-slate-100"
-              />
-              <button 
-                onClick={() => setExpandedStateImage(null)}
-                className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-              >
-                <X size={18} />
-              </button>
-            </div>
-            <div className="p-4 bg-white">
-              <h4 className="font-semibold text-slate-800">{expandedStateImage.label}</h4>
-              <p className="text-sm text-slate-500">{expandedStateImage.featureName}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Format Detection Modal */}
-      {showFormatModal && detectedFormat && pendingSpreadsheetData && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 animate-in fade-in zoom-in-95">
-            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <FileSearch className="text-emerald-600" size={20} />
-              {language === 'pt' ? 'Formato Detectado' : 'Format Detected'}
-            </h3>
-
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🔍</span>
-                <div>
-                  <p className="font-semibold text-emerald-900">{detectedFormat.description}</p>
-                  <p className="text-sm text-emerald-700">
-                    {language === 'pt' ? 'Confiança' : 'Confidence'}: {Math.round(detectedFormat.confidence * 100)}%
-                  </p>
+      {/* Prompt Editor Modal */}
+      {
+        showPromptEditor && (
+          <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col h-[80vh] max-h-[90vh] animate-in fade-in zoom-in-95 overflow-hidden">
+              <div className="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center text-white shrink-0">
+                <h3 className="font-bold text-lg flex items-center gap-2">
+                  <Edit3 size={18} className="text-amber-400" />
+                  Prompt Editor
+                </h3>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(manualPrompt);
+                      alert(strings.promptCopied);
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white"
+                    disabled={isGenerating}
+                  >
+                    <Copy size={12} /> {strings.copyPrompt}
+                  </button>
+                  <button onClick={handleClosePromptEditor} className="text-slate-400 hover:text-white p-1">
+                    <X size={20} />
+                  </button>
                 </div>
               </div>
-            </div>
 
-            {detectedFormat.format === 'linked_hub' && (
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
-                <p className="text-sm text-amber-900 mb-2">
-                  <strong>🔗 {language === 'pt' ? 'Chave com Múltiplas Referências Detectada!' : 'Linked Key System Detected!'}</strong>
-                </p>
-                <p className="text-sm text-amber-800 mb-3">
-                  {language === 'pt'
-                    ? 'Esta chave referencia outras chaves (ex: Chave A, Chave B, etc). Para melhor experiência, recomendamos importar TODOS os arquivos relacionados.'
-                    : 'This key references other keys (e.g., Key A, Key B, etc). For best experience, we recommend importing ALL related files.'}
-                </p>
-                <label className="block">
-                  <div className="border-2 border-dashed border-amber-300 rounded-lg p-4 text-center hover:border-amber-400 hover:bg-amber-100 transition-colors cursor-pointer">
-                    <Upload className="mx-auto mb-2 text-amber-600" size={32} />
-                    <p className="text-sm font-medium text-amber-900">
-                      {language === 'pt' ? 'Selecionar Múltiplos Arquivos' : 'Select Multiple Files'}
+              <div className="flex-1 p-2 bg-slate-100 min-h-0 flex flex-col gap-2">
+                {/* Import Mode Toggle - Shown when pendingNervuraFile is present */}
+                {pendingNervuraFile && !isGenerating && !pendingImportProject && (
+                  <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                    <p className="text-xs font-bold text-slate-500 uppercase mb-3 text-center">
+                      {language === 'pt' ? 'Modo de Importação' : 'Import Mode'}
                     </p>
-                    <p className="text-xs text-amber-700 mt-1">
-                      {language === 'pt' ? 'Use Ctrl/Cmd para selecionar vários' : 'Use Ctrl/Cmd to select multiple'}
-                    </p>
+                    <div className="flex rounded-xl overflow-hidden border-2 border-slate-200">
+                      <button
+                        onClick={() => setOptimizeNervura(false)}
+                        className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${!optimizeNervura
+                          ? 'bg-slate-800 text-white'
+                          : 'bg-white text-slate-500 hover:bg-slate-50'
+                          }`}
+                      >
+                        <FileCode size={18} />
+                        <div className="text-left">
+                          <div className="font-bold text-sm">{language === 'pt' ? 'Fiel' : 'Faithful'}</div>
+                          <div className="text-[10px] opacity-70">{language === 'pt' ? 'Sem alterações' : 'No changes'}</div>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setOptimizeNervura(true)}
+                        className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 transition-all ${optimizeNervura
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                          : 'bg-white text-slate-500 hover:bg-slate-50'
+                          }`}
+                      >
+                        <Sparkles size={18} />
+                        <div className="text-left">
+                          <div className="font-bold text-sm">{language === 'pt' ? 'Otimizar' : 'Optimize'}</div>
+                          <div className="text-[10px] opacity-70">{language === 'pt' ? 'IA padroniza' : 'AI cleans'}</div>
+                        </div>
+                      </button>
+                    </div>
                   </div>
-                  <input
-                    type="file"
-                    multiple
-                    accept=".xlsx,.xls,.csv"
-                    onChange={handleMultipleFiles}
-                    className="hidden"
+                )}
+
+                {/* AI Typing Effect Display - Shown during generation OR when showing import status */}
+                {(isGenerating || pendingNervuraFile || pendingImportProject || isTerminalVisible) ? (
+                  <TypingTerminal
+                    ref={typingTerminalRef}
+                    language={language}
+                    isGenerating={isGenerating}
                   />
-                </label>
+                ) : (
+                  /* Prompt Textarea - Only shown when NOT in import mode */
+                  <textarea
+                    value={manualPrompt}
+                    onChange={(e) => setManualPrompt(e.target.value)}
+                    className="w-full flex-1 p-4 bg-slate-900 text-slate-200 font-mono text-sm rounded-lg resize-none outline-none border-2 border-transparent focus:border-amber-500"
+                    spellCheck="false"
+                  />
+                )}
               </div>
-            )}
 
-            <div className="space-y-2 mb-4">
-              <button
-                onClick={async () => {
-                  if (!aiConfig.model) {
-                    alert(language === 'pt' ? 'Configure a API Key primeiro' : 'Configure API Key first');
-                    return;
-                  }
-                  setShowFormatModal(false);
-                  setIsConvertingWithAI(true);
-                  try {
-                    const project = await convertDichotomousKey(
-                      aiConfig.model,
-                      pendingSpreadsheetData.data,
-                      pendingSpreadsheetData.fileName,
-                      language
-                    );
-                    setProject(project);
-                    const saved = localStorage.getItem('nozesia_projects');
-                    let projectsList: Project[] = saved ? JSON.parse(saved) : [];
-                    projectsList = [project, ...projectsList.filter(p => p.id !== project.id)];
-                    localStorage.setItem('nozesia_projects', JSON.stringify(projectsList));
-                    if (onProjectImported) onProjectImported(project);
-                  } catch (error) {
-                    alert(language === 'pt' ? 'Erro na conversão' : 'Conversion error');
-                  } finally {
-                    setIsConvertingWithAI(false);
-                    setPendingSpreadsheetData(null);
-                  }
-                }}
-                className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold hover:from-amber-400 hover:to-orange-400 transition-all flex items-center justify-center gap-2"
-              >
-                <Brain size={18} />
-                {language === 'pt' ? 'Converter com IA (Somente este arquivo)' : 'Convert with AI (This file only)'}
-              </button>
+              <div className="p-4 border-t bg-slate-50 shrink-0 flex items-center justify-between gap-4">
+                {/* Generation progress indicator */}
+                {isGenerating && (
+                  <div className="flex items-center gap-2 text-amber-600">
+                    <div className="flex gap-1">
+                      <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                      <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                      <span className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                    </div>
+                    <span className="text-sm font-medium">{language === 'pt' ? 'IA processando...' : 'AI processing...'}</span>
+                  </div>
+                )}
 
-              <button
-                onClick={() => {
-                  setShowFormatModal(false);
-                  setPendingSpreadsheetData(null);
-                }}
-                className="w-full py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
-              >
-                {language === 'pt' ? 'Cancelar' : 'Cancel'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+                <div className="flex items-center gap-4 ml-auto">
+                  <button
+                    onClick={handleClosePromptEditor}
+                    className="px-6 py-2 text-slate-600 font-medium hover:bg-slate-200 rounded-xl transition-colors"
+                  >
+                    {strings.cancel}
+                  </button>
 
-      {/* Multiple Files Selection Modal */}
-      {showMultiFileModal && multipleFiles.length > 0 && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 animate-in fade-in zoom-in-95">
-            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Layers className="text-emerald-600" size={20} />
-              {language === 'pt' ? 'Importar Chaves Interligadas' : 'Import Linked Keys'}
-            </h3>
+                  {pendingImportProject ? (
+                    <button
+                      onClick={() => {
+                        setProject(pendingImportProject);
+                        setPendingImportProject(null);
+                        setPendingNervuraFile(null);
+                        setShowPromptEditor(false);
+                        setShowAiModal(false);
 
-            <p className="text-sm text-slate-600 mb-4">
-              {language === 'pt'
-                ? `${multipleFiles.length} arquivos selecionados. Escolha qual é a chave principal (hub):`
-                : `${multipleFiles.length} files selected. Choose which is the main key (hub):`}
-            </p>
+                        // Also save to localStorage logic if needed (copied from original import)
+                        const saved = localStorage.getItem('nozesia_projects');
+                        let projectsList: Project[] = [];
+                        if (saved) { try { projectsList = JSON.parse(saved); } catch (err) { } }
+                        const updatedList = [pendingImportProject, ...projectsList.filter((p: Project) => p.id !== pendingImportProject.id)];
+                        localStorage.setItem('nozesia_projects', JSON.stringify(updatedList));
+                        if (onProjectImported) onProjectImported(pendingImportProject);
 
-            <div className="space-y-2 max-h-96 overflow-y-auto mb-4 custom-scrollbar">
-              {multipleFiles.map((file, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
-                >
-                  <input
-                    type="radio"
-                    name="mainKey"
-                    id={`file-${idx}`}
-                    defaultChecked={idx === 0}
-                    className="w-4 h-4 text-emerald-600"
-                  />
-                  <label htmlFor={`file-${idx}`} className="flex-1 cursor-pointer">
-                    <div className="font-medium text-slate-800 text-sm">{file.name}</div>
-                    <div className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</div>
-                  </label>
-                  {file.name.toLowerCase().includes('geral') && (
-                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">
-                      {language === 'pt' ? 'Sugerido' : 'Suggested'}
-                    </span>
+                        alert(language === 'pt' ? 'Chave importada com sucesso!' : 'Key imported successfully!');
+                      }}
+                      className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 flex items-center gap-2"
+                    >
+                      {language === 'pt' ? 'Confirmar Importação' : 'Confirm Import'} <Check size={16} />
+                    </button>
+                  ) : pendingNervuraFile ? (
+                    <button
+                      onClick={executeNervuraImport}
+                      className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                      disabled={isGenerating}
+                    >
+                      {isGenerating ? (
+                        <><Loader2 className="animate-spin" size={16} /> {language === 'pt' ? 'Processando...' : 'Processing...'}</>
+                      ) : (
+                        <>{optimizeNervura ? (language === 'pt' ? 'Otimizar e Importar' : 'Optimize & Import') : (language === 'pt' ? 'Importar Chave' : 'Import Key')} <Wand2 size={16} /></>
+                      )}
+                    </button>
+                  ) : resultProject && aiTypingComplete ? (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          const newShowRaw = !showRawOutput;
+                          setShowRawOutput(newShowRaw);
+                          if (typingTerminalRef.current) {
+                            typingTerminalRef.current.setText(
+                              newShowRaw
+                                ? (rawOutput || "")
+                                : (aiTypingText || "")
+                            );
+                          }
+                        }}
+                        className="px-4 py-2 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 flex items-center gap-2"
+                      >
+                        {showRawOutput
+                          ? (language === 'pt' ? "Ver Logs" : "View Logs")
+                          : (language === 'pt' ? "Ver JSON" : "View JSON")}
+                        <FileCode size={16} />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setProject(resultProject);
+                          setResultProject(null); // Clear stash
+                          setShowRawOutput(false);
+                          setRawOutput(null);
+                          setActiveTab('ENTITIES'); // Default to entities view or matrix? Previous was Matrix.
+                          setShowPromptEditor(false);
+                        }}
+                        className="px-6 py-2 bg-emerald-500 text-white font-bold rounded-xl hover:bg-emerald-600 shadow-lg shadow-emerald-900/20 flex items-center gap-2 animate-in fade-in zoom-in-95"
+                      >
+                        {language === 'pt' ? 'Confirmar e Ver Chave' : 'Confirm & View Key'} <Check size={16} />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={handleSendManualPrompt}
+                      className="px-6 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg shadow-amber-900/20 disabled:opacity-50 flex items-center gap-2"
+                      disabled={isGenerating}
+                    >
+                      {isGenerating ? <><Loader2 className="animate-spin" size={16} /> {generatingMessage || strings.generating}</> : <>{strings.generate}</>}
+                    </button>
                   )}
                 </div>
-              ))}
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
-              <p className="text-xs text-blue-900">
-                <strong>ℹ️ {language === 'pt' ? 'Como funciona:' : 'How it works:'}</strong>
-                <br />
-                {language === 'pt'
-                  ? 'A IA irá processar cada chave e criar links automáticos entre elas. A chave principal será carregada no editor e as sub-chaves ficarão acessíveis via navegação.'
-                  : 'AI will process each key and create automatic links between them. The main key will be loaded in the editor and sub-keys will be accessible via navigation.'}
-              </p>
-            </div>
-
-            <div className="flex gap-2">
-              <button
-                onClick={() => {
-                  const selectedIndex = Array.from(document.querySelectorAll('input[name="mainKey"]'))
-                    .findIndex((input: any) => input.checked);
-                  processMultipleFilesWithAI(multipleFiles, selectedIndex);
-                }}
-                className="flex-1 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-bold hover:from-emerald-400 hover:to-teal-400 transition-all flex items-center justify-center gap-2"
-              >
-                <Sparkles size={18} />
-                {language === 'pt' ? 'Processar com IA' : 'Process with AI'}
-              </button>
-
-              <button
-                onClick={() => {
-                  setShowMultiFileModal(false);
-                  setMultipleFiles([]);
-                }}
-                className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
-              >
-                {language === 'pt' ? 'Cancelar' : 'Cancel'}
-              </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
+
+      {/* State Image Viewer Modal */}
+      {
+        expandedStateImage && (
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setExpandedStateImage(null)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in zoom-in-95"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="relative">
+                <img
+                  src={expandedStateImage.url}
+                  alt={expandedStateImage.label}
+                  className="w-full max-h-[60vh] object-contain bg-slate-100"
+                />
+                <button
+                  onClick={() => setExpandedStateImage(null)}
+                  className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="p-4 bg-white">
+                <h4 className="font-semibold text-slate-800">{expandedStateImage.label}</h4>
+                <p className="text-sm text-slate-500">{expandedStateImage.featureName}</p>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      {/* Format Detection Modal */}
+      {
+        showFormatModal && detectedFormat && pendingSpreadsheetData && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 animate-in fade-in zoom-in-95">
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <FileSearch className="text-emerald-600" size={20} />
+                {language === 'pt' ? 'Formato Detectado' : 'Format Detected'}
+              </h3>
+
+              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">🔍</span>
+                  <div>
+                    <p className="font-semibold text-emerald-900">{detectedFormat.description}</p>
+                    <p className="text-sm text-emerald-700">
+                      {language === 'pt' ? 'Confiança' : 'Confidence'}: {Math.round(detectedFormat.confidence * 100)}%
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {detectedFormat.format === 'linked_hub' && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-amber-900 mb-2">
+                    <strong>🔗 {language === 'pt' ? 'Chave com Múltiplas Referências Detectada!' : 'Linked Key System Detected!'}</strong>
+                  </p>
+                  <p className="text-sm text-amber-800 mb-3">
+                    {language === 'pt'
+                      ? 'Esta chave referencia outras chaves (ex: Chave A, Chave B, etc). Para melhor experiência, recomendamos importar TODOS os arquivos relacionados.'
+                      : 'This key references other keys (e.g., Key A, Key B, etc). For best experience, we recommend importing ALL related files.'}
+                  </p>
+                  <label className="block">
+                    <div className="border-2 border-dashed border-amber-300 rounded-lg p-4 text-center hover:border-amber-400 hover:bg-amber-100 transition-colors cursor-pointer">
+                      <Upload className="mx-auto mb-2 text-amber-600" size={32} />
+                      <p className="text-sm font-medium text-amber-900">
+                        {language === 'pt' ? 'Selecionar Múltiplos Arquivos' : 'Select Multiple Files'}
+                      </p>
+                      <p className="text-xs text-amber-700 mt-1">
+                        {language === 'pt' ? 'Use Ctrl/Cmd para selecionar vários' : 'Use Ctrl/Cmd to select multiple'}
+                      </p>
+                    </div>
+                    <input
+                      type="file"
+                      multiple
+                      accept=".xlsx,.xls,.csv"
+                      onChange={handleMultipleFiles}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              )}
+
+              <div className="space-y-2 mb-4">
+                <button
+                  onClick={async () => {
+                    if (!aiConfig.model) {
+                      alert(language === 'pt' ? 'Configure a API Key primeiro' : 'Configure API Key first');
+                      return;
+                    }
+                    setShowFormatModal(false);
+                    setIsConvertingWithAI(true);
+                    try {
+                      const project = await convertDichotomousKey(
+                        aiConfig.model,
+                        pendingSpreadsheetData.data,
+                        pendingSpreadsheetData.fileName,
+                        language
+                      );
+                      setProject(project);
+                      const saved = localStorage.getItem('nozesia_projects');
+                      let projectsList: Project[] = saved ? JSON.parse(saved) : [];
+                      projectsList = [project, ...projectsList.filter(p => p.id !== project.id)];
+                      localStorage.setItem('nozesia_projects', JSON.stringify(projectsList));
+                      if (onProjectImported) onProjectImported(project);
+                    } catch (error) {
+                      alert(language === 'pt' ? 'Erro na conversão' : 'Conversion error');
+                    } finally {
+                      setIsConvertingWithAI(false);
+                      setPendingSpreadsheetData(null);
+                    }
+                  }}
+                  className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold hover:from-amber-400 hover:to-orange-400 transition-all flex items-center justify-center gap-2"
+                >
+                  <Brain size={18} />
+                  {language === 'pt' ? 'Converter com IA (Somente este arquivo)' : 'Convert with AI (This file only)'}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setShowFormatModal(false);
+                    setPendingSpreadsheetData(null);
+                  }}
+                  className="w-full py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+                >
+                  {language === 'pt' ? 'Cancelar' : 'Cancel'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      {/* Multiple Files Selection Modal */}
+      {
+        showMultiFileModal && multipleFiles.length > 0 && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 animate-in fade-in zoom-in-95">
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Layers className="text-emerald-600" size={20} />
+                {language === 'pt' ? 'Importar Chaves Interligadas' : 'Import Linked Keys'}
+              </h3>
+
+              <p className="text-sm text-slate-600 mb-4">
+                {language === 'pt'
+                  ? `${multipleFiles.length} arquivos selecionados. Escolha qual é a chave principal (hub):`
+                  : `${multipleFiles.length} files selected. Choose which is the main key (hub):`}
+              </p>
+
+              <div className="space-y-2 max-h-96 overflow-y-auto mb-4 custom-scrollbar">
+                {multipleFiles.map((file, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+                  >
+                    <input
+                      type="radio"
+                      name="mainKey"
+                      id={`file-${idx}`}
+                      defaultChecked={idx === 0}
+                      className="w-4 h-4 text-emerald-600"
+                    />
+                    <label htmlFor={`file-${idx}`} className="flex-1 cursor-pointer">
+                      <div className="font-medium text-slate-800 text-sm">{file.name}</div>
+                      <div className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</div>
+                    </label>
+                    {file.name.toLowerCase().includes('geral') && (
+                      <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">
+                        {language === 'pt' ? 'Sugerido' : 'Suggested'}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                <p className="text-xs text-blue-900">
+                  <strong>ℹ️ {language === 'pt' ? 'Como funciona:' : 'How it works:'}</strong>
+                  <br />
+                  {language === 'pt'
+                    ? 'A IA irá processar cada chave e criar links automáticos entre elas. A chave principal será carregada no editor e as sub-chaves ficarão acessíveis via navegação.'
+                    : 'AI will process each key and create automatic links between them. The main key will be loaded in the editor and sub-keys will be accessible via navigation.'}
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    const selectedIndex = Array.from(document.querySelectorAll('input[name="mainKey"]'))
+                      .findIndex((input: any) => input.checked);
+                    processMultipleFilesWithAI(multipleFiles, selectedIndex);
+                  }}
+                  className="flex-1 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-bold hover:from-emerald-400 hover:to-teal-400 transition-all flex items-center justify-center gap-2"
+                >
+                  <Sparkles size={18} />
+                  {language === 'pt' ? 'Processar com IA' : 'Process with AI'}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setShowMultiFileModal(false);
+                    setMultipleFiles([]);
+                  }}
+                  className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+                >
+                  {language === 'pt' ? 'Cancelar' : 'Cancel'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      }
 
       {/* Load Project Modal (Global) */}
-      {showLoadModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
-            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <FolderOpen className="text-emerald-600" size={20} />
-              {strings.open}
-            </h3>
-            <div className="space-y-2 max-h-64 overflow-y-auto mb-4 custom-scrollbar">
-              {savedProjects.length === 0 ? (
-                <p className="text-slate-500 text-sm text-center py-8 border-2 border-dashed border-slate-200 rounded-lg">{strings.noSaved}</p>
-              ) : (
-                savedProjects.map(p => (
-                  <button
-                    key={p.id}
-                    onClick={() => loadFromLocal(p)}
-                    className="w-full text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all"
-                  >
-                    <div className="font-medium text-slate-800 group-hover:text-emerald-700">{p.name}</div>
-                    <div className="text-xs text-slate-400 truncate">{p.description || "No description"}</div>
-                  </button>
-                ))
-              )}
+      {
+        showLoadModal && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <FolderOpen className="text-emerald-600" size={20} />
+                {strings.open}
+              </h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto mb-4 custom-scrollbar">
+                {savedProjects.length === 0 ? (
+                  <p className="text-slate-500 text-sm text-center py-8 border-2 border-dashed border-slate-200 rounded-lg">{strings.noSaved}</p>
+                ) : (
+                  savedProjects.map(p => (
+                    <button
+                      key={p.id}
+                      onClick={() => loadFromLocal(p)}
+                      className="w-full text-left p-3 hover:bg-emerald-50 rounded-lg border border-slate-100 hover:border-emerald-200 group transition-all"
+                    >
+                      <div className="font-medium text-slate-800 group-hover:text-emerald-700">{p.name}</div>
+                      <div className="text-xs text-slate-400 truncate">{p.description || "No description"}</div>
+                    </button>
+                  ))
+                )}
+              </div>
+              <button
+                onClick={() => setShowLoadModal(false)}
+                className="w-full py-2.5 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+              >
+                {strings.close}
+              </button>
             </div>
-            <button
-              onClick={() => setShowLoadModal(false)}
-              className="w-full py-2.5 bg-slate-100 text-slate-600 rounded-xl font-medium hover:bg-slate-200 transition-colors"
-            >
-              {strings.close}
-            </button>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 };

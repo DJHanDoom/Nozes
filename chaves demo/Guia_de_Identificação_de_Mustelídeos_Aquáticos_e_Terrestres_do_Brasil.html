@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Identificação de Mustelídeos Aquáticos e Terrestres do Brasil - NOZESia Key</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-100 font-sans">
+  <div id="app"></div>
+  <script>
+    const project = {"id":"w6u6uqtjl","name":"Guia de Identificação de Mustelídeos Aquáticos e Terrestres do Brasil","description":"Chave de identificação para auxiliar na distinção de ariranhas, lontras e outros mustelídeos próximos encontrados no território brasileiro, focando em características morfológicas, comportamentais e ecológicas distintivas. Este guia é direcionado a estudantes e entusiastas da fauna brasileira.","features":[{"id":"hf8l3wgpk","name":"Habitat Principal","imageUrl":"","states":[{"id":"h2rjv4kz1","label":"Aquático (rios, lagos, estuários)"},{"id":"9qdaknfmf","label":"Terrestre (florestas, campos, capoeiras)"}]},{"id":"evywbo0zp","name":"Tamanho Corporal (com cauda)","imageUrl":"","states":[{"id":"ne5fbby0r","label":"Grande (1,5 - 1,8 m)"},{"id":"sclpnrrya","label":"Médio (0,8 - 1,2 m)"},{"id":"qmrvtz00h","label":"Pequeno (0,3 - 0,7 m)"}]},{"id":"1a3nqqvmx","name":"Padrão de Pelagem","imageUrl":"","states":[{"id":"5y36erj6r","label":"Manchas irregulares claras na garganta e peito"},{"id":"zyrn59bqt","label":"Marrom uniforme, sem manchas proeminentes"},{"id":"npqgtric9","label":"Corpo escuro, cabeça e pescoço mais claros/acinzentados"},{"id":"ek0gswg4o","label":"Dorso cinza, flancos e ventre pretos, linha branca na face"}]},{"id":"qze1dcfc2","name":"Formato da Cauda","imageUrl":"","states":[{"id":"4a4t6tvyi","label":"Achatada dorsoventralmente e musculosa"},{"id":"nmmxy7jkm","label":"Cônica e afilada"},{"id":"zxwrehz4w","label":"Longa e peluda"},{"id":"urzb9zq8j","label":"Relativamente curta e peluda"},{"id":"60tt5m2rv","label":"Longa e esguia"}]},{"id":"a93c7umbc","name":"Hábito Social","imageUrl":"","states":[{"id":"2k3m4q4f0","label":"Grupos familiares grandes"},{"id":"v24twa97u","label":"Solitário ou em pares"}]},{"id":"sxahwual0","name":"Atividade Principal","imageUrl":"","states":[{"id":"bj28gngzz","label":"Diurna"},{"id":"umowsbmui","label":"Crepuscular/Noturna"},{"id":"7mlljelgb","label":"Noturna"}]},{"id":"10r2a6dnc","name":"Dieta Principal","imageUrl":"","states":[{"id":"61tnk8h18","label":"Piscívora (peixes e crustáceos)"},{"id":"x6fec7qhu","label":"Onívora (frutas, pequenos vertebrados, insetos)"},{"id":"4uh70koua","label":"Carnívora (pequenos mamíferos, aves, insetos)"}]},{"id":"26k5opl2t","name":"Presença de Patas Membranadas (natatórias)","imageUrl":"","states":[{"id":"52zbvbely","label":"Sim"},{"id":"eoaqor0b1","label":"Não"}]}],"entities":[{"id":"entity_ariranha","name":"Ariranha","family":"Mustelidae","description":"O maior mustelídeo da América do Sul, conhecido por viver em grupos sociais complexos e caçar peixes de forma colaborativa. Possui um distintivo padrão de manchas claras na garganta e peito, único em cada indivíduo.","imageUrl":"https://inaturalist-open-data.s3.amazonaws.com/photos/227172098/medium.jpeg","links":[],"traits":{"hf8l3wgpk":["h2rjv4kz1"],"evywbo0zp":["ne5fbby0r"],"1a3nqqvmx":["5y36erj6r"],"qze1dcfc2":["4a4t6tvyi"],"a93c7umbc":["2k3m4q4f0"],"sxahwual0":["bj28gngzz"],"10r2a6dnc":["61tnk8h18"],"26k5opl2t":["52zbvbely"]}},{"id":"entity_lontra_neotropical","name":"Lontra Neotropical","family":"Mustelidae","description":"Uma lontra de porte médio, amplamente distribuída na América Latina, incluindo o Brasil. É um animal semi-aquático e solitário, que se alimenta principalmente de peixes e crustáceos. Sua pelagem é marrom-escura e geralmente uniforme.","imageUrl":"https://inaturalist-open-data.s3.amazonaws.com/photos/90286401/medium.jpg","links":[],"traits":{"hf8l3wgpk":["h2rjv4kz1"],"evywbo0zp":["sclpnrrya"],"1a3nqqvmx":["zyrn59bqt"],"qze1dcfc2":["nmmxy7jkm"],"a93c7umbc":["v24twa97u"],"sxahwual0":["umowsbmui"],"10r2a6dnc":["61tnk8h18"],"26k5opl2t":["52zbvbely"]}},{"id":"entity_irara","name":"Irara (Jaguatirica-de-água)","family":"Mustelidae","description":"Um mustelídeo terrestre de porte médio, com corpo esguio e pelagem geralmente escura, mas com a cabeça e pescoço mais claros. Possui hábitos diurnos e uma dieta onívora, sendo encontrada em diversas formações florestais.","imageUrl":"https://inaturalist-open-data.s3.amazonaws.com/photos/119998659/medium.jpg","links":[],"traits":{"hf8l3wgpk":["9qdaknfmf"],"evywbo0zp":["sclpnrrya"],"1a3nqqvmx":["npqgtric9"],"qze1dcfc2":["zxwrehz4w"],"a93c7umbc":["v24twa97u"],"sxahwual0":["bj28gngzz"],"10r2a6dnc":["x6fec7qhu"],"26k5opl2t":["eoaqor0b1"]}},{"id":"entity_grison_maior","name":"Grison-maior","family":"Mustelidae","description":"Um mustelídeo terrestre de pequeno porte, caracterizado por um contraste marcante entre o dorso cinza e o ventre preto, com uma faixa branca que se estende da testa aos ombros. É um predador ágil e oportunista.","imageUrl":"https://inaturalist-open-data.s3.amazonaws.com/photos/474123887/medium.jpg","links":[],"traits":{"hf8l3wgpk":["9qdaknfmf"],"evywbo0zp":["qmrvtz00h"],"1a3nqqvmx":["ek0gswg4o"],"qze1dcfc2":["urzb9zq8j"],"a93c7umbc":["v24twa97u"],"sxahwual0":["bj28gngzz"],"10r2a6dnc":["4uh70koua"],"26k5opl2t":["eoaqor0b1"]}},{"id":"entity_doninha_amazonica","name":"Doninha-amazônica","family":"Mustelidae","description":"Uma doninha pequena e elusiva, encontrada nas florestas úmidas da Amazônia. Possui pelagem marrom-avermelhada no dorso e amarelada no ventre, com um corpo esguio e cauda relativamente longa. É um predador noturno de pequenos animais.","imageUrl":"https://inaturalist-open-data.s3.amazonaws.com/photos/589627918/medium.jpg","links":[],"traits":{"hf8l3wgpk":["9qdaknfmf"],"evywbo0zp":["qmrvtz00h"],"1a3nqqvmx":["zyrn59bqt"],"qze1dcfc2":["60tt5m2rv"],"a93c7umbc":["v24twa97u"],"sxahwual0":["7mlljelgb"],"10r2a6dnc":["4uh70koua"],"26k5opl2t":["eoaqor0b1"]}}]};
+    const lang = "pt";
+    const t = {
+      en: {
+        features: "Features", selected: "selected", matches: "Matches", discarded: "Discarded",
+        restart: "Restart", noMatches: "No matches found.", tryUnselecting: "Try unselecting some features.",
+        potential: "potential matches", identified: "1 Entity identified", close: "Close",
+        speciesDetails: "Species Details", morphology: "Morphology & Traits", resources: "Resources",
+        createdWith: "Created with NOZESia", viewResults: "View Results", excluded: "Excluded by selection",
+        scientificName: "Scientific Name", family: "Family", taxonomy: "Taxonomy"
+      },
+      pt: {
+        features: "Características", selected: "selecionado(s)", matches: "Compatíveis", discarded: "Descartados",
+        restart: "Reiniciar", noMatches: "Nenhum resultado.", tryUnselecting: "Tente remover seleções.",
+        potential: "matches potenciais", identified: "1 Entidade identificada", close: "Fechar",
+        speciesDetails: "Detalhes da Espécie", morphology: "Morfologia & Características", resources: "Recursos Adicionais",
+        createdWith: "Criado com NOZESia", viewResults: "Ver Resultados", excluded: "Excluído pela seleção",
+        scientificName: "Nome Científico", family: "Família", taxonomy: "Taxonomia"
+      }
+    };
+    const strings = t[lang];
+    
+    let selections = {};
+    let showDiscarded = false;
+    let viewingEntity = null;
+    let viewingStateImage = null;
+    let mobileTab = 'FILTERS';
+    let hideEmptyFeatures = true;
+    
+    function toggleSelection(featureId, stateId) {
+      if (!selections[featureId]) selections[featureId] = [];
+      const idx = selections[featureId].indexOf(stateId);
+      if (idx >= 0) {
+        selections[featureId].splice(idx, 1);
+        if (selections[featureId].length === 0) delete selections[featureId];
+      } else {
+        selections[featureId].push(stateId);
+      }
+      render();
+    }
+    
+    function resetKey() { selections = {}; render(); }
+    function setMobileTab(tab) { mobileTab = tab; render(); }
+    function toggleDiscarded() { showDiscarded = !showDiscarded; render(); }
+    function toggleHideEmpty() { hideEmptyFeatures = !hideEmptyFeatures; render(); }
+    function viewEntity(entity) { viewingEntity = entity; render(); }
+    function closeEntity() { viewingEntity = null; render(); }
+    function viewStateImage(url, label, featureName) { viewingStateImage = {url, label, featureName}; render(); }
+    function closeStateImage() { viewingStateImage = null; render(); }
+    
+    function getFilteredEntities() {
+      const remaining = [], discarded = [];
+      project.entities.forEach(entity => {
+        let isMatch = true;
+        for (const [fid, sids] of Object.entries(selections)) {
+          const entityStates = entity.traits[fid] || [];
+          if (!sids.some(id => entityStates.includes(id))) { isMatch = false; break; }
+        }
+        if (isMatch) remaining.push(entity); else discarded.push(entity);
+      });
+      return { remaining, discarded };
+    }
+    
+    function getTotalSelections() {
+      return Object.values(selections).reduce((a, c) => a + c.length, 0);
+    }
+
+    function hasRemainingEntitiesForFeature(featureId, remainingEntities) {
+      return remainingEntities.some(entity => {
+        const entityStates = entity.traits[featureId] || [];
+        return entityStates.length > 0;
+      });
+    }
+    
+    function render() {
+      const { remaining, discarded } = getFilteredEntities();
+      const totalSel = getTotalSelections();
+      
+      let entityModalHTML = '';
+      if (viewingEntity) {
+        const e = viewingEntity;
+        const traitsHTML = project.features.map(f => {
+          const stateIds = e.traits[f.id] || [];
+          const stateLabels = stateIds.map(sid => f.states.find(s => s.id === sid)?.label).filter(Boolean).join(', ');
+          return stateLabels ? `<div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">${f.name}</span><span class="font-medium text-slate-800">${stateLabels}</span></div>` : '';
+        }).join('');
+        const linksHTML = e.links && e.links.length > 0 ? `<div class="mt-6"><h4 class="font-semibold text-slate-700 mb-3">${strings.resources}</h4><div class="space-y-2">${e.links.map(l => `<a href="${l.url}" target="_blank" class="flex items-center gap-2 text-emerald-600 hover:underline text-sm"><span>🔗</span>${l.label}</a>`).join('')}</div></div>` : '';
+        const taxonomyHTML = (e.scientificName || e.family) ? `
+          <div class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+            <h4 class="font-semibold text-emerald-800 mb-2 text-sm flex items-center gap-1">🧬 ${strings.taxonomy}</h4>
+            ${e.scientificName ? `<div class="flex justify-between py-1"><span class="text-emerald-600 text-sm">${strings.scientificName}</span><span class="font-medium text-emerald-800 italic">${e.scientificName}</span></div>` : ''}
+            ${e.family ? `<div class="flex justify-between py-1"><span class="text-emerald-600 text-sm">${strings.family}</span><span class="font-medium text-emerald-800">${e.family}</span></div>` : ''}
+          </div>
+        ` : '';
+        entityModalHTML = `
+          <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this)closeEntity()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+              <div class="relative h-48 sm:h-64 bg-slate-200 shrink-0">
+                ${e.imageUrl ? `<img src="${e.imageUrl}" class="w-full h-full object-cover" onerror="this.style.display='none'">` : '<div class="w-full h-full flex items-center justify-center text-slate-400 text-6xl">🌿</div>'}
+                <button onclick="closeEntity()" class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 text-white rounded-full p-2">✕</button>
+              </div>
+              <div class="p-6 overflow-y-auto custom-scrollbar">
+                <h2 class="text-2xl font-bold text-slate-800 mb-1">${e.name}</h2>
+                ${e.scientificName && e.scientificName !== e.name ? `<p class="text-slate-500 italic mb-2">${e.scientificName}</p>` : ''}
+                ${e.family ? `<span class="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full mb-3">${e.family}</span>` : ''}
+                ${e.description ? `<p class="text-slate-600 mb-4">${e.description}</p>` : ''}
+                ${taxonomyHTML}
+                <div class="mt-4"><h4 class="font-semibold text-slate-700 mb-2">${strings.morphology}</h4><div class="text-sm">${traitsHTML}</div></div>
+                ${linksHTML}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // State Image Modal
+      let stateImageModalHTML = '';
+      if (viewingStateImage) {
+        stateImageModalHTML = `
+          <div class="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4" onclick="if(event.target===this)closeStateImage()">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden" onclick="event.stopPropagation()">
+              <div class="relative">
+                <img src="${viewingStateImage.url}" alt="${viewingStateImage.label}" class="w-full max-h-[60vh] object-contain bg-slate-100">
+                <button onclick="closeStateImage()" class="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors">✕</button>
+              </div>
+              <div class="p-4 bg-white">
+                <h4 class="font-semibold text-slate-800">${viewingStateImage.label}</h4>
+                <p class="text-sm text-slate-500">${viewingStateImage.featureName}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Filter features and states based on hideEmptyFeatures
+      const featuresHTML = project.features
+        .map(f => {
+          // Get all state IDs that are present in remaining entities
+          const usedStateIds = new Set();
+          if (hideEmptyFeatures) {
+            remaining.forEach(entity => {
+              const entityStates = entity.traits[f.id] || [];
+              entityStates.forEach(stateId => usedStateIds.add(stateId));
+            });
+
+            // If no states are used, skip this feature
+            if (usedStateIds.size === 0) return '';
+          }
+
+          // Filter states to only show those that are used (when hideEmptyFeatures is true)
+          const visibleStates = hideEmptyFeatures
+            ? f.states.filter(s => usedStateIds.has(s.id))
+            : f.states;
+
+          const selStates = selections[f.id] || [];
+          return `
+            <div class="bg-slate-50 rounded-xl p-4">
+              <h4 class="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                ${f.imageUrl ? `<img src="${f.imageUrl}" class="w-6 h-6 rounded object-cover">` : ''}
+                ${f.name}
+                ${selStates.length > 0 ? `<span class="ml-auto text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">${selStates.length}</span>` : ''}
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                ${visibleStates.map(s => {
+                  const isSel = selStates.includes(s.id);
+                  const hasImg = s.imageUrl ? true : false;
+                  return `<div class="flex items-center gap-1">
+                    ${hasImg ? `<button onclick="viewStateImage('${s.imageUrl}', '${s.label.replace(/'/g, "\\'")}', '${f.name.replace(/'/g, "\\'")}')" class="w-6 h-6 rounded overflow-hidden border border-slate-200 hover:border-emerald-400 transition-colors shrink-0" title="Ver imagem"><img src="${s.imageUrl}" class="w-full h-full object-cover"></button>` : ''}
+                    <button onclick="toggleSelection('${f.id}','${s.id}')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${isSel ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">${s.label}</button>
+                  </div>`;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        })
+        .filter(html => html !== '')
+        .join('');
+      
+      const entityCard = (e, isDiscarded = false) => `
+        <div onclick="viewEntity(project.entities.find(x=>x.id==='${e.id}'))" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden border ${isDiscarded ? 'border-red-200 opacity-60' : 'border-slate-200 hover:border-emerald-300'}">
+          <div class="h-32 bg-slate-100 relative">
+            ${e.imageUrl ? `<img src="${e.imageUrl}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-slate-300 text-4xl\\'>🌿</div>'">` : '<div class="w-full h-full flex items-center justify-center text-slate-300 text-4xl">🌿</div>'}
+            ${isDiscarded ? '<div class="absolute inset-0 bg-red-500/20 flex items-center justify-center"><span class="bg-red-500 text-white text-xs px-2 py-1 rounded">✕</span></div>' : ''}
+            ${e.family ? `<span class="absolute top-2 left-2 bg-emerald-600/90 text-white text-[10px] px-1.5 py-0.5 rounded">${e.family}</span>` : ''}
+          </div>
+          <div class="p-3">
+            <h4 class="font-semibold text-slate-800 text-sm truncate">${e.name}</h4>
+            ${e.scientificName && e.scientificName !== e.name ? `<p class="text-xs text-slate-400 italic truncate">${e.scientificName}</p>` : ''}
+            ${e.description ? `<p class="text-xs text-slate-500 mt-1 line-clamp-2">${e.description}</p>` : ''}
+          </div>
+        </div>
+      `;
+      
+      const remainingHTML = remaining.length > 0 
+        ? remaining.map(e => entityCard(e)).join('')
+        : `<div class="col-span-full text-center py-12 text-slate-500"><div class="text-4xl mb-3">🔍</div><p class="font-medium">${strings.noMatches}</p><p class="text-sm">${strings.tryUnselecting}</p></div>`;
+      
+      const discardedHTML = discarded.length > 0 && showDiscarded
+        ? `<div class="mt-6 pt-6 border-t"><h4 class="font-semibold text-slate-500 mb-4 flex items-center gap-2">❌ ${strings.discarded} (${discarded.length})</h4><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">${discarded.map(e => entityCard(e, true)).join('')}</div></div>`
+        : '';
+      
+      document.getElementById('app').innerHTML = `
+        <div class="min-h-screen flex flex-col">
+          <header class="bg-white border-b px-4 py-3 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3">
+              <span class="bg-emerald-600 text-white text-xs px-2 py-1 rounded font-bold">KEY</span>
+              <h1 class="text-lg font-bold text-slate-800 truncate">${project.name}</h1>
+            </div>
+            <button onclick="resetKey()" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg">🔄 ${strings.restart}</button>
+          </header>
+          
+          <div class="md:hidden flex border-b bg-white">
+            <button onclick="setMobileTab('FILTERS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 ${mobileTab==='FILTERS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              🔍 ${strings.features} ${totalSel>0?`<span class="bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">${totalSel}</span>`:''}
+            </button>
+            <button onclick="setMobileTab('RESULTS')" class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 ${mobileTab==='RESULTS'?'text-emerald-600 border-b-2 border-emerald-600':'text-slate-500 bg-slate-50'}">
+              📋 ${strings.matches} <span class="bg-slate-200 text-slate-700 text-xs px-1.5 py-0.5 rounded-full">${remaining.length}</span>
+            </button>
+          </div>
+          
+          <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <div class="w-full md:w-1/3 lg:w-1/4 bg-white md:border-r flex-col h-full ${mobileTab==='FILTERS'?'flex':'hidden md:flex'}">
+              <div class="hidden md:block p-4 border-b bg-slate-50">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold text-slate-700 flex items-center gap-2">🔍 ${strings.features}</h3>
+                  <button onclick="toggleHideEmpty()" class="flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-lg transition-all ${hideEmptyFeatures ? 'bg-emerald-100 text-emerald-700' : 'text-slate-600 bg-slate-100 hover:bg-slate-200'}" title="${hideEmptyFeatures ? 'Mostrar todas' : 'Ocultar vazias'}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${hideEmptyFeatures ? 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' : 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21'}"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">${featuresHTML}</div>
+            </div>
+            
+            <div class="flex-1 flex flex-col h-full ${mobileTab==='RESULTS'?'flex':'hidden md:flex'}">
+              <div class="p-4 border-b bg-slate-50 flex justify-between items-center">
+                <div>
+                  <span class="font-semibold text-slate-700">${remaining.length === 1 ? strings.identified : remaining.length + ' ' + strings.potential}</span>
+                </div>
+                ${discarded.length > 0 ? `<button onclick="toggleDiscarded()" class="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1">${showDiscarded?'🔼':'🔽'} ${strings.discarded} (${discarded.length})</button>` : ''}
+              </div>
+              <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">${remainingHTML}</div>
+                ${discardedHTML}
+              </div>
+            </div>
+          </div>
+          
+          <footer class="bg-white border-t px-4 py-2 text-center text-xs text-slate-400">
+            ${strings.createdWith} • <a href="https://djhandoom.github.io/nozes/" target="_blank" class="text-emerald-600 hover:underline">djhandoom.github.io/nozes</a>
+          </footer>
+        </div>
+        ${entityModalHTML}
+        ${stateImageModalHTML}
+      `;
+    }
+    
+    render();
+  </script>
+</body>
+</html>

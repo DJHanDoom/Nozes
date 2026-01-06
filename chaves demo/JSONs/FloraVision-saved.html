@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botanical Analysis Report</title>
+    <!-- Tailwind CSS CDN - CRITICAL: Always use this specific CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - For premium aesthetics as per instructions -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@300;400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom scrollbar for raw data section and body (for aesthetic consistency) */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #FDFCF7; /* secondary-cream */
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #6B8E23; /* primary-green */
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #556B2F; /* primary-green-dark */
+        }
+        
+        /* For dark mode scrollbar within code block */
+        .dark-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .dark-scrollbar::-webkit-scrollbar-track {
+            background: #4A5568; /* Tailwind gray-700 equivalent */
+            border-radius: 10px;
+        }
+        .dark-scrollbar::-webkit-scrollbar-thumb {
+            background: #A0AEC0; /* Tailwind gray-400 equivalent */
+            border-radius: 10px;
+        }
+        .dark-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #CBD5E0; /* Tailwind gray-300 equivalent */
+        }
+
+        /* Basic resets and font application based on Tailwind config */
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+        }
+        code, pre {
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-green': {
+                            DEFAULT: '#6B8E23', // Olive Drab - a muted, earthy green
+                            light: '#9ACD32', // YellowGreen for accents
+                            dark: '#556B2F', // Dark Olive Green for text/header
+                        },
+                        'secondary-cream': {
+                            DEFAULT: '#FDFCF7', // Warm off-white/cream for backgrounds
+                            dark: '#F5F5DC', // Slightly darker beige for body background
+                        },
+                        'text-dark': {
+                            DEFAULT: '#36454F', // Charcoal for primary text
+                            light: '#4F4F4F', // Dark gray for secondary text
+                        },
+                        'accent-teal': {
+                            DEFAULT: '#5F9EA0', // CadetBlue - muted teal for subtle highlights
+                            light: '#AFEEEE', // PaleTurquoise
+                        },
+                        'card-bg': {
+                            DEFAULT: '#F0F4F8', // Very light grey-blue to subtly distinguish cards
+                        },
+                    },
+                    fontFamily: {
+                        display: ['Merriweather', 'serif'],
+                        body: ['Lato', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-secondary-cream-dark text-text-dark custom-scrollbar">
+    <!-- Header -->
+    <header class="bg-primary-green-dark text-secondary-cream py-8 px-4 sm:px-8 shadow-xl">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between space-y-4 sm:space-y-0">
+            <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-center">
+                <span class="inline-block align-middle mr-3">
+                    <!-- Nature-inspired icon (leaf) -->
+                    <svg class="w-10 h-10 sm:w-12 sm:h-12 text-primary-green-light" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 17.93V14h3.535l-2.062 5.93zM8.465 14H11v5.93L8.465 14zm-4.321-2H7.4l-.56 1.63L3 12.02l1.144-.02zm12.67 0l1.144.02-3.845 1.61L16.514 12zm-8.814-2.73l-.527-1.55L3.89 12l-.001-.02 4.103-2.75zm8.397-1.55l-.527 1.55 4.104 2.75-.001.02-3.89-2.77zm-3.04-4.88c-.61-.31-1.3-.49-2-.49s-1.39.18-2 .49L7 3.52c.61-.31 1.3-.49 2-.49s1.39.18 2 .49L9.56 5.59l-.02.01L12 3.53l2.46 2.07-.02-.01-2-1.99zM12 4.07L9.5 6.47 7.02 4.05c-.39.2-.74.45-1.05.74L6 8h12l-.02-3.21c-.3-.29-.65-.54-1.04-.73L12 4.07z"/>
+                    </svg>
+                </span>
+                Botanical Analysis Report
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-8">
+
+        <!-- Overview & Plant Identification Section -->
+        <section class="mb-16">
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary-green-dark mb-6 leading-tight">
+                Identification: Malpighiaceae - Byrsonima
+            </h2>
+            <p class="font-body text-lg text-text-dark leading-relaxed mb-4">
+                This report details the botanical analysis of an item identified at the family and genus level based on the provided album content.
+                The title "Malpighiaceae - Byrsonima - Mariana, MG - Google Photos" clearly indicates the botanical classification and a general geographic origin.
+            </p>
+            <p class="font-body text-lg text-text-dark leading-relaxed">
+                While a specific species name is not available from the given data, this document compiles available information regarding its taxonomy, morphology, distribution, conservation status, and practical dendrologist tips relevant to the <em class="italic">*Byrsonima*</em> genus.
+            </p>
+        </section>
+
+        <!-- Detailed Textual Analysis Section -->
+        <section class="mb-16 bg-card-bg p-8 rounded-xl shadow-md">
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary-green-dark mb-6 leading-tight">
+                Comprehensive Botanical Analysis
+            </h2>
+            <article class="prose max-w-none text-text-dark font-body text-lg leading-relaxed">
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Taxonomic Data</h3>
+                <ul class="list-disc list-inside mb-6 space-y-2 pl-4">
+                    <li><strong class="font-semibold text-text-dark">Family:</strong> Malpighiaceae</li>
+                    <li><strong class="font-semibold text-text-dark">Genus:</strong> <em class="italic">*Byrsonima*</em></li>
+                    <li><strong class="font-semibold text-text-dark">Species:</strong> Not specified in the provided content.</li>
+                </ul>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Morphological Characteristics</h3>
+                <p class="mb-6">
+                    The provided album content does not offer specific morphological characteristics of the plant(s) depicted. However, members of the genus <em class="italic">*Byrsonima*</em> (Malpighiaceae) are typically trees or shrubs, rarely subshrubs. They are characterized by simple, opposite, or sometimes whorled leaves, often bearing paired glands on the petioles or at the base of the leaf blade.
+                </p>
+                <p class="mb-6">
+                    Flowers are typically organized in terminal or axillary racemes, often yellow or orange, with five sepals (usually bearing large oil glands), five clawed petals, ten stamens, and a superior ovary with three carpels. The fruit is typically a globose drupe. Without direct imagery or detailed descriptions, further specific morphological analysis is not possible.
+                </p>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Geographical Distribution</h3>
+                <p class="mb-6">
+                    The content explicitly states "Mariana, MG," which refers to Mariana, a municipality in the state of Minas Gerais, Brazil. This provides a precise local distribution point for the photographed specimen.
+                    The genus <em class="italic">*Byrsonima*</em> is widely distributed throughout the Neotropics, ranging from Mexico and the Caribbean south to northern Argentina, with a significant diversity center in Brazil, especially in cerrado and savanna ecosystems.
+                </p>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Conservation Status</h3>
+                <p class="mb-6">
+                    The conservation status cannot be determined as the species is not identified. Conservation assessments are typically species-specific. Many <em class="italic">*Byrsonima*</em> species are common in their native ranges, while others may face threats due to habitat loss, especially those restricted to specific biomes like the Atlantic Forest or cerrado.
+                </p>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">EXIF Coordinates</h3>
+                <p class="mb-6">
+                    EXIF coordinates are not provided in the extracted album content, therefore an interactive map cannot be displayed.
+                </p>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Dichotomous Key</h3>
+                <p class="mb-6">
+                    A dichotomous key cannot be formulated with the information provided, as it requires specific distinguishing morphological features for multiple species within the genus <em class="italic">*Byrsonima*</em>. The content only identifies the genus and family.
+                </p>
+
+                <h3 class="font-display text-2xl font-semibold text-primary-green mb-4">Literature References</h3>
+                <p>
+                    No specific literature references are provided or inferable from the album content. For detailed information on <em class="italic">*Byrsonima*</em> in Minas Gerais, one would typically consult regional floras, monographs on Malpighiaceae (e.g., by W.R. Anderson), and botanical checklists for Brazilian biomes such as the cerrado.
+                </p>
+            </article>
+        </section>
+
+        <!-- Structured Botanical Data Section -->
+        <section class="mb-16">
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary-green-dark mb-8 leading-tight text-center">
+                Key Botanical Data Summary
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Taxonomic & Morphological Data Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Taxonomic & Morphological Data</h3>
+                    <div class="space-y-3 font-body text-text-dark">
+                        <div>
+                            <p class="font-semibold text-primary-green">Family:</p>
+                            <p>Malpighiaceae</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">Genus:</p>
+                            <p><em class="italic">*Byrsonima*</em></p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">Species:</p>
+                            <p>Not Specified</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">Common Names:</p>
+                            <p>None provided</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">Key Morphological Characteristics:</p>
+                            <p class="text-sm italic">Typically trees/shrubs, simple opposite/whorled leaves often with paired glands on petioles. Flowers yellow/orange in racemes, 5 sepals (oil glands), 5 clawed petals, 10 stamens, superior ovary. Fruit a globose drupe. (General for genus)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geographical Distribution Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Geographical Distribution</h3>
+                    <div class="space-y-3 font-body text-text-dark">
+                        <div>
+                            <p class="font-semibold text-primary-green">Specific Location:</p>
+                            <p>Mariana, Minas Gerais, Brazil</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">General Genus Distribution:</p>
+                            <p>Widely distributed throughout the Neotropics (Mexico & Caribbean south to northern Argentina), with a significant diversity center in Brazil (cerrado and savanna ecosystems).</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-primary-green">EXIF Coordinates:</p>
+                            <p>Not provided. No interactive map available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conservation Status Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Conservation Status</h3>
+                    <div class="space-y-3 font-body text-text-dark">
+                        <div>
+                            <p class="font-semibold text-primary-green">Status:</p>
+                            <span class="inline-block bg-gray-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow-sm">Undetermined</span>
+                        </div>
+                        <p class="text-sm italic mt-2">
+                            Conservation status cannot be determined without species identification. Status is species-specific.
+                            Many <em class="italic">*Byrsonima*</em> species are common, while others face threats from habitat loss.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dendrologist Tips Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Dendrologist Tips (for <em class="italic">*Byrsonima*</em>)</h3>
+                    <ul class="list-disc list-inside space-y-2 font-body text-text-dark pl-4">
+                        <li><strong class="font-semibold text-text-dark">Petiole Glands:</strong> Look for characteristic paired glands on the petiole or at the base of the leaf blade.</li>
+                        <li><strong class="font-semibold text-text-dark">Flower Color & Structure:</strong> Most species have yellow to orange flowers with prominent oil glands on sepals and clawed petals.</li>
+                        <li><strong class="font-semibold text-text-dark">Bark:</strong> Often rough or fissured in mature trees.</li>
+                        <li><strong class="font-semibold text-text-dark">Habitat:</strong> Characteristic components of cerrado, caatinga, and savanna formations.</li>
+                        <li><strong class="font-semibold text-text-dark">Fruit:</strong> Globose drupes, often turning yellow or orange when ripe, are typical.</li>
+                    </ul>
+                </div>
+
+                <!-- Dichotomous Key Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Dichotomous Key</h3>
+                    <p class="font-body text-text-dark leading-relaxed">
+                        A dichotomous key cannot be formulated with the information provided. It requires specific distinguishing morphological features for multiple species within the genus <em class="italic">*Byrsonima*</em>, and only the genus and family are identified here.
+                    </p>
+                </div>
+
+                <!-- Literature References Card -->
+                <div class="bg-card-bg p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <h3 class="font-display text-xl font-semibold text-primary-green-dark mb-4">Literature References</h3>
+                    <p class="font-body text-text-dark leading-relaxed">
+                        No specific literature references are provided or inferable from the album content.
+                        For detailed information, regional floras, monographs on Malpighiaceae (e.g., by W.R. Anderson), and botanical checklists for Brazilian biomes are recommended.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Raw Data Section (Collapsible) -->
+        <section>
+            <details class="group bg-card-bg p-6 rounded-xl shadow-lg cursor-pointer">
+                <summary class="font-display text-2xl font-bold text-primary-green-dark flex items-center justify-between pb-4">
+                    Raw JSON Data for NervuraColetora Import
+                    <span class="text-primary-green group-open:rotate-180 transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </summary>
+                <div class="pt-4 border-t border-primary-green-light/30">
+                    <pre class="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto font-mono text-sm dark-scrollbar max-h-96"><code class="language-json">
+{
+  "scientific_name_family": "Malpighiaceae",
+  "scientific_name_genus": "Byrsonima",
+  "scientific_name_species": null,
+  "common_names": [],
+  "morphological_description": null,
+  "geographical_distribution": "Mariana, Minas Gerais, Brazil (Specific); Neotropical, predominantly South America, particularly Brazil (General for genus)",
+  "conservation_status": null,
+  "exif_coordinates": null,
+  "literature_references": []
+}
+                    </code></pre>
+                </div>
+            </details>
+        </section>
+
+    </main>
+</body>
+</html>

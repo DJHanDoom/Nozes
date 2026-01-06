@@ -1,0 +1,3046 @@
+{
+  "id": "95tx41i20",
+  "name": "ChaveNozes_06/12/2025",
+  "description": "Exportado do LeafMap em 06/12/2025",
+  "features": [
+    {
+      "id": "lifeForm",
+      "name": "Forma de Vida",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "gtqw02hm0",
+          "label": "Árvore"
+        },
+        {
+          "id": "gkh5uny2a",
+          "label": "Árvore (Fanerófito)"
+        },
+        {
+          "id": "wqbdyvx5z",
+          "label": "cacto"
+        },
+        {
+          "id": "m75haakfl",
+          "label": "Fanerófito"
+        },
+        {
+          "id": "p7wuj8byn",
+          "label": "Arbusto"
+        },
+        {
+          "id": "j5ucxrzq0",
+          "label": "Árvore (frequentemente hemiepífita na fase jovem)"
+        }
+      ]
+    },
+    {
+      "id": "habit",
+      "name": "Hábito",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9fwixqkzy",
+          "label": "Ereto"
+        },
+        {
+          "id": "2yy95rsx1",
+          "label": "heliófita"
+        },
+        {
+          "id": "r82kbucag",
+          "label": "heliófito"
+        },
+        {
+          "id": "zf4bckc3x",
+          "label": "copa irregular"
+        },
+        {
+          "id": "5cxy2mtt8",
+          "label": "copa densa e escura"
+        },
+        {
+          "id": "dzaa2y05b",
+          "label": "solitário"
+        },
+        {
+          "id": "2lb2wse1g",
+          "label": "rupícola"
+        },
+        {
+          "id": "hegb7v42r",
+          "label": "Árvore ou arvoreta"
+        },
+        {
+          "id": "jxk6wlj81",
+          "label": "copa ampla"
+        },
+        {
+          "id": "s6ffctks3",
+          "label": "tortuoso"
+        },
+        {
+          "id": "xgoqwj5qi",
+          "label": "ramificado"
+        },
+        {
+          "id": "1ybzm0q09",
+          "label": "robusto"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "name": "Saúde",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "3yvcanmm3",
+          "label": "boa"
+        },
+        {
+          "id": "yepm7z29l",
+          "label": "Regular (presença de manchas foliares e herbivoria)"
+        },
+        {
+          "id": "wmu8pck5r",
+          "label": "saudável"
+        },
+        {
+          "id": "edcud6zqi",
+          "label": "com sinais leves de herbivoria"
+        },
+        {
+          "id": "4l65aqxu3",
+          "label": "cefálio bem desenvolvido"
+        }
+      ]
+    },
+    {
+      "id": "leafType",
+      "name": "Tipo de Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "7bs7tt19c",
+          "label": "composta"
+        },
+        {
+          "id": "np4yl4j6v",
+          "label": "simples"
+        },
+        {
+          "id": "vh89i65x4",
+          "label": "ausente (modificada em espinhos)"
+        }
+      ]
+    },
+    {
+      "id": "compoundLeafType",
+      "name": "Tipo de Folha Composta",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ghb1ixp8e",
+          "label": "imparipinada"
+        },
+        {
+          "id": "eyiedmmvj",
+          "label": "bipinada"
+        },
+        {
+          "id": "nmgu33p3c",
+          "label": "trifoliolada"
+        }
+      ]
+    },
+    {
+      "id": "leafMargin",
+      "name": "leafMargin",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "45srfrfq0",
+          "label": "crenada a serrilhada"
+        },
+        {
+          "id": "im0ys5zpe",
+          "label": "com glândulas nos senos"
+        },
+        {
+          "id": "ygveclzou",
+          "label": "inteira"
+        },
+        {
+          "id": "csv4gp9l1",
+          "label": "levemente ondulada"
+        },
+        {
+          "id": "v90n416hv",
+          "label": "inteira (diferencial chave para P. sellowii)"
+        },
+        {
+          "id": "v9qta3uwo",
+          "label": "crenada a serrada"
+        },
+        {
+          "id": "ea4rd8tei",
+          "label": "serrada no terço superior (distal)"
+        },
+        {
+          "id": "5j7rqi7wc",
+          "label": "inteira na base"
+        },
+        {
+          "id": "5o7unavet",
+          "label": "revoluta na base"
+        },
+        {
+          "id": "wlwfs1500",
+          "label": "levemente revoluta"
+        }
+      ]
+    },
+    {
+      "id": "phyllotaxy",
+      "name": "Filotaxia",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "p9rdutnu1",
+          "label": "alterna"
+        },
+        {
+          "id": "4e9w3cvbh",
+          "label": "alterna espiralada (congesta no ápice dos ramos parecendo verticilada)"
+        },
+        {
+          "id": "r9ahz7tvr",
+          "label": "espiralada"
+        },
+        {
+          "id": "s640q2wo5",
+          "label": "alterna espiralada"
+        },
+        {
+          "id": "17y8bdeh8",
+          "label": "dística ou espiralada"
+        },
+        {
+          "id": "q6qmz6qdb",
+          "label": "espiralada (aréolas nas costelas)"
+        },
+        {
+          "id": "lhffn3mbd",
+          "label": "oposta cruzada"
+        },
+        {
+          "id": "94ambmnad",
+          "label": "oposta"
+        },
+        {
+          "id": "s80047sx4",
+          "label": "oposta ou verticilada"
+        }
+      ]
+    },
+    {
+      "id": "venation",
+      "name": "Nervação",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "srftizuqd",
+          "label": "peninérvea"
+        },
+        {
+          "id": "q9jqaeoj8",
+          "label": "broquidódroma"
+        },
+        {
+          "id": "amjkdxod7",
+          "label": "camptódroma a broquidódroma"
+        },
+        {
+          "id": "hs6axmy5u",
+          "label": "peninérvea (pouco evidente nos folíolos)"
+        },
+        {
+          "id": "whbbqy92k",
+          "label": "camptódroma a craspedódroma (nervuras secundárias terminam nos dentes)"
+        },
+        {
+          "id": "pq431hqrz",
+          "label": "com nervuras secundárias numerosas e paralelas"
+        }
+      ]
+    },
+    {
+      "id": "venationTertiary",
+      "name": "Nervação Terciária",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ofk3g3f4y",
+          "label": "reticulada"
+        },
+        {
+          "id": "n8332i552",
+          "label": "pouco evidente"
+        },
+        {
+          "id": "xf6zorou8",
+          "label": "reticulada fina"
+        },
+        {
+          "id": "g0d89eqxv",
+          "label": "pouco evidente a olho nu"
+        },
+        {
+          "id": "hkr8nge29",
+          "label": "pouco conspícua a olho nu"
+        },
+        {
+          "id": "cooimla8b",
+          "label": "reticulada (rede laxa visível na face abaxial)"
+        },
+        {
+          "id": "m7jleuueh",
+          "label": "fortemente reticulada (aspecto de rede fina)"
+        },
+        {
+          "id": "j2y17ron2",
+          "label": "proeminente na face abaxial"
+        },
+        {
+          "id": "8to4y3oe7",
+          "label": "impressa na face adaxial (fundas)"
+        },
+        {
+          "id": "177t36xw1",
+          "label": "pouco evidente devido à espessura da lâmina"
+        },
+        {
+          "id": "n1tdoafdz",
+          "label": "com nervura marginal coletora proeminente"
+        },
+        {
+          "id": "1vkw7l6o9",
+          "label": "pouco conspícua"
+        }
+      ]
+    },
+    {
+      "id": "leafApex",
+      "name": "Ápice Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "5evohxs1d",
+          "label": "acuminado a agudo"
+        },
+        {
+          "id": "7igrh9crn",
+          "label": "agudo a acuminado"
+        },
+        {
+          "id": "7w3uu5sg7",
+          "label": "acuminado (com ponta fina distinta)"
+        },
+        {
+          "id": "ylieul1og",
+          "label": "obtuso a arredondado"
+        },
+        {
+          "id": "73mlb9huq",
+          "label": "acuminado"
+        },
+        {
+          "id": "r7rwkcir8",
+          "label": "acuminado (com acumen longo e agudo)"
+        },
+        {
+          "id": "ceqyzbpt7",
+          "label": "agudo a obtuso"
+        },
+        {
+          "id": "kq3jp9vgn",
+          "label": "acuminado a subagudo"
+        },
+        {
+          "id": "lkpi7j1t9",
+          "label": "curto"
+        }
+      ]
+    },
+    {
+      "id": "leafBase",
+      "name": "Base Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "lfbia44kw",
+          "label": "obtusa a cuneada"
+        },
+        {
+          "id": "wg11t6kub",
+          "label": "frequentemente oblíqua/assimétrica"
+        },
+        {
+          "id": "dlzonurr1",
+          "label": "atenuada a cuneada (longamente decorrente no pecíolo)"
+        },
+        {
+          "id": "hrmtvl17u",
+          "label": "cuneada a atenuada"
+        },
+        {
+          "id": "oxo1zparm",
+          "label": "assimétrica"
+        },
+        {
+          "id": "0r6se6hyd",
+          "label": "obtusa"
+        },
+        {
+          "id": "q7gggwd10",
+          "label": "cuneada a decurrente no pecíolo"
+        },
+        {
+          "id": "2h4yei9ae",
+          "label": "atenuada a cuneada"
+        },
+        {
+          "id": "dh9p1le5z",
+          "label": "decurrente no pecíolo"
+        },
+        {
+          "id": "qsdhdqvgx",
+          "label": "obtusa a arredondada"
+        },
+        {
+          "id": "jnn6hxmng",
+          "label": "arredondada a subcordada"
+        },
+        {
+          "id": "brhqpiu4g",
+          "label": "aguda"
+        },
+        {
+          "id": "x4qgadhur",
+          "label": "por vezes assimétrica"
+        },
+        {
+          "id": "4uvhyndgz",
+          "label": "cuneada a obtusa"
+        }
+      ]
+    },
+    {
+      "id": "leafTexture",
+      "name": "Textura Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "6d8qyfi1c",
+          "label": "membranácea a cartácea"
+        },
+        {
+          "id": "6idl9zqt9",
+          "label": "cartácea a subcoriácea"
+        },
+        {
+          "id": "dmalfyny8",
+          "label": "cartácea"
+        },
+        {
+          "id": "cchfefogr",
+          "label": "coriácea a subcoriácea"
+        },
+        {
+          "id": "ie3tol428",
+          "label": "coriácea"
+        },
+        {
+          "id": "347ikvpuq",
+          "label": "bulada (rugosa/bolhosa)"
+        },
+        {
+          "id": "5k0ehczh2",
+          "label": "coriácea a cartácea-espessa"
+        }
+      ]
+    },
+    {
+      "id": "indument",
+      "name": "Indumento",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "pxmkzzu4y",
+          "label": "pubescente na face abaxial"
+        },
+        {
+          "id": "0v85k56be",
+          "label": "glabrescente na adaxial"
+        },
+        {
+          "id": "bljzyir9z",
+          "label": "glabrescente na face adaxial"
+        },
+        {
+          "id": "vlexcsm89",
+          "label": "pubescente nas nervuras da face abaxial"
+        },
+        {
+          "id": "ssqurhjz1",
+          "label": "glabro (sem pelos) em ambas as faces"
+        },
+        {
+          "id": "hp2s93yl0",
+          "label": "glabra (sem pelos evidentes nos folíolos maduros)"
+        },
+        {
+          "id": "4px0az72m",
+          "label": "glabro em ambas as faces"
+        },
+        {
+          "id": "ub8f0ysnp",
+          "label": "glabro no caule"
+        },
+        {
+          "id": "pl4y7zhpj",
+          "label": "lanoso no cefálio"
+        },
+        {
+          "id": "lunz23rio",
+          "label": "glabrescente a pubérulo (pêlos esparsos e curtos"
+        },
+        {
+          "id": "ruxyms8af",
+          "label": "possivelmente decíduos)"
+        },
+        {
+          "id": "z2jnipfvr",
+          "label": "glabra na face adaxial"
+        },
+        {
+          "id": "k3zh214c0",
+          "label": "levemente pubescente nas nervuras da abaxial"
+        },
+        {
+          "id": "ms6ncgwe2",
+          "label": "glabro ou glabrescente (folíolos adultos)"
+        },
+        {
+          "id": "i79jq5dbs",
+          "label": "pubescente a tomentoso (inferido pela espécie"
+        },
+        {
+          "id": "uzn3qncpi",
+          "label": "pouco visível na foto)"
+        },
+        {
+          "id": "2y9crq8a4",
+          "label": "escabro (áspero ao tato) ou hispídulo; pelos simples hialinos"
+        },
+        {
+          "id": "v6r0y2f0a",
+          "label": "glabro"
+        },
+        {
+          "id": "cr36fthdp",
+          "label": "glabra (folíolos e raque)"
+        },
+        {
+          "id": "fobtgl6rc",
+          "label": "glabra"
+        }
+      ]
+    },
+    {
+      "id": "leafletArrangement",
+      "name": "Arranjo dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "a54xbn21u",
+          "label": "oposto a suboposto"
+        },
+        {
+          "id": "c5ot8pawi",
+          "label": "oposto"
+        },
+        {
+          "id": "60jl0stbo",
+          "label": "digitado (trifoliolado)"
+        },
+        {
+          "id": "kja091fel",
+          "label": "alterno a subalterno"
+        }
+      ]
+    },
+    {
+      "id": "rachisChanneled",
+      "name": "Raque Canaliculada",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "d8efs4uju",
+          "label": "levemente canaliculada na face superior"
+        },
+        {
+          "id": "jddeamzxj",
+          "label": "sim (levemente canaliculada)"
+        },
+        {
+          "id": "6592de97f",
+          "label": "sim"
+        },
+        {
+          "id": "aqysv6g6i",
+          "label": "canaliculada na face superior"
+        },
+        {
+          "id": "fyx935qp0",
+          "label": "Raque canaliculada (sim|não)"
+        },
+        {
+          "id": "l6sm2lodi",
+          "label": "não visível / subcilíndrica"
+        }
+      ]
+    },
+    {
+      "id": "rachisWinged",
+      "name": "Raque Alada",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "esqkf10mc",
+          "label": "não alada"
+        },
+        {
+          "id": "2n0f8phn3",
+          "label": "não"
+        }
+      ]
+    },
+    {
+      "id": "stipels",
+      "name": "Estipelas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vwvyq8xyc",
+          "label": "ausentes"
+        },
+        {
+          "id": "9a33df3nd",
+          "label": "ausentes (possível confusão com pulvínulos na observação de campo)"
+        },
+        {
+          "id": "xa4ubtq0n",
+          "label": "ausentes ou decíduas (não visíveis)"
+        }
+      ]
+    },
+    {
+      "id": "flowers",
+      "name": "Flores",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "66ju18daq",
+          "label": "pequenas"
+        },
+        {
+          "id": "we2g40pab",
+          "label": "unissexuais"
+        },
+        {
+          "id": "vpe51hh49",
+          "label": "actinomorfas"
+        },
+        {
+          "id": "km2mtqznb",
+          "label": "em panículas terminais (não observadas)"
+        },
+        {
+          "id": "uhipyizi0",
+          "label": "Ausentes (fase de frutificação)"
+        },
+        {
+          "id": "7gskve86m",
+          "label": "capítulos homogâmicos com flores alaranjadas ou amarelas vistosas (não observadas nas fotos)"
+        },
+        {
+          "id": "bf3svs04o",
+          "label": "não observadas (geralmente amarelas"
+        },
+        {
+          "id": "obzxghg1p",
+          "label": "zigomorfas)"
+        },
+        {
+          "id": "dspb1fu15",
+          "label": "brancas"
+        },
+        {
+          "id": "wmkvnfl8h",
+          "label": "em racemos axilares (não observadas)"
+        },
+        {
+          "id": "g4dhrhiqi",
+          "label": "presentes"
+        },
+        {
+          "id": "650p1zsa0",
+          "label": "imersas no cefálio"
+        },
+        {
+          "id": "cth7ylgt3",
+          "label": "não observadas"
+        },
+        {
+          "id": "a25esyicj",
+          "label": "tubulosas"
+        },
+        {
+          "id": "7paycbi3u",
+          "label": "assimétricas"
+        },
+        {
+          "id": "387ncobg3",
+          "label": "brancas ou rosadas (não observadas na coleta atual)"
+        },
+        {
+          "id": "2j07ujhvb",
+          "label": "papilionáceas"
+        },
+        {
+          "id": "jndcyf44g",
+          "label": "numerosas"
+        },
+        {
+          "id": "ispgscef3",
+          "label": "odoríferas"
+        },
+        {
+          "id": "mve4dcz5h",
+          "label": "não"
+        },
+        {
+          "id": "ugi2yiwmc",
+          "label": "gamopétala"
+        },
+        {
+          "id": "ealfj4hpj",
+          "label": "infundibuliforme"
+        },
+        {
+          "id": "m241lpkyp",
+          "label": "disposta em inflorescência capitada (globosa)"
+        },
+        {
+          "id": "19orrumtj",
+          "label": "não observadas (presentes apenas frutos)"
+        }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "Frutos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "52egw2eik",
+          "label": "ausentes"
+        },
+        {
+          "id": "9rd3aj4ui",
+          "label": "presentes"
+        }
+      ]
+    },
+    {
+      "id": "bark",
+      "name": "Casca",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vtpxlja9z",
+          "label": "cinza-clara a acastanhada"
+        },
+        {
+          "id": "3n68pq7mm",
+          "label": "espessa"
+        },
+        {
+          "id": "wx0usoil8",
+          "label": "rugosa"
+        },
+        {
+          "id": "d1ixuu56a",
+          "label": "com profundas fissuras e grandes acúleos cônicos (mamilos) característicos"
+        },
+        {
+          "id": "9kv83pdku",
+          "label": "Ritidoma avermelhado a acastanhado"
+        },
+        {
+          "id": "s2480oi01",
+          "label": "esfoliante em placas papiráceas finas e irregulares; casca interna lisa e rosada; aspecto 'manchado' no tronco."
+        },
+        {
+          "id": "1wtsn949t",
+          "label": "cinza-acastanhada"
+        },
+        {
+          "id": "5f509mvtv",
+          "label": "muito espessa"
+        },
+        {
+          "id": "mxdb67tpz",
+          "label": "suberosa"
+        },
+        {
+          "id": "0kx2a0q0p",
+          "label": "com fissuras longitudinais profundas e cristas evidentes (aspecto encortiçado)"
+        },
+        {
+          "id": "d49mhxdui",
+          "label": "lisa"
+        },
+        {
+          "id": "r8u6wmnng",
+          "label": "descamante em placas irregulares (esfoliante)"
+        },
+        {
+          "id": "y7e1g0tf8",
+          "label": "padrão marmorizado/camuflado (tons de cinza"
+        },
+        {
+          "id": "pf2hor1ee",
+          "label": "branco e bege)"
+        },
+        {
+          "id": "jcz3jrv1h",
+          "label": "dura"
+        },
+        {
+          "id": "xsw7ny4bj",
+          "label": "cinza-escura"
+        },
+        {
+          "id": "5bv33mc20",
+          "label": "com lenticelas horizontais; casca interna oxida rapidamente para vermelho-vinho/ferrugem ao corte"
+        },
+        {
+          "id": "3atjanfvo",
+          "label": "epiderme verde-escura"
+        },
+        {
+          "id": "an39weoqo",
+          "label": "rígida"
+        },
+        {
+          "id": "x8gzusabi",
+          "label": "levemente cerosa"
+        },
+        {
+          "id": "gxqvenzdz",
+          "label": "ritidoma fissurado"
+        },
+        {
+          "id": "hj1d6ziqi",
+          "label": "escamoso (placas irregulares)"
+        },
+        {
+          "id": "y5l2ifmmi",
+          "label": "pardo-escuro; casca interna oxida rapidamente para marrom-avermelhado/laranja"
+        },
+        {
+          "id": "b1hldcznh",
+          "label": "textura granular"
+        },
+        {
+          "id": "dh29t3qim",
+          "label": "odor característico"
+        },
+        {
+          "id": "9n1f5mdru",
+          "label": "fissurada longitudinalmente"
+        },
+        {
+          "id": "cx25ljzpl",
+          "label": "cor pardo-acinzentada"
+        },
+        {
+          "id": "zaops0de8",
+          "label": "casca interna (floema) oxida para tom alaranjado/avermelhado"
+        },
+        {
+          "id": "2phlub4f9",
+          "label": "sabor amargo"
+        },
+        {
+          "id": "xoe91zs1e",
+          "label": "cinza-pardacenta"
+        },
+        {
+          "id": "i0ethk9ug",
+          "label": "com desprendimento em placas lenhosas irregulares"
+        },
+        {
+          "id": "yk4cn9p32",
+          "label": "fissurada"
+        },
+        {
+          "id": "n4qmb7s4u",
+          "label": "com lenticelas"
+        },
+        {
+          "id": "u65tnqtje",
+          "label": "fissurada longitudinalmente em ramos velhos"
+        },
+        {
+          "id": "etucvr5wx",
+          "label": "áspera"
+        },
+        {
+          "id": "blyx75asw",
+          "label": "lenticelada"
+        },
+        {
+          "id": "schxhak1p",
+          "label": "corte revelando tecido interno vermelho-intenso e exsudação resinosa"
+        },
+        {
+          "id": "m0yshcbet",
+          "label": "com ritidoma acinzentado/marrom-acinzentado"
+        },
+        {
+          "id": "v9bv1hsji",
+          "label": "acinzentada"
+        },
+        {
+          "id": "3fs19h1iu",
+          "label": "levemente fissurada longitudinalmente"
+        }
+      ]
+    },
+    {
+      "id": "latex",
+      "name": "Látex/Exsudato",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "m80v1s64r",
+          "label": "ausente"
+        },
+        {
+          "id": "bs4xab9am",
+          "label": "mas apresenta odor cítrico característico ao esmagar folhas"
+        },
+        {
+          "id": "6w17n4292",
+          "label": "ausente (exsudação aquosa escassa)"
+        },
+        {
+          "id": "ze9r0634l",
+          "label": "ausente (mucilagem presente)"
+        },
+        {
+          "id": "3cr9ih2rj",
+          "label": "ausente (exsudato aquoso ou inexistente"
+        },
+        {
+          "id": "qdwbn458g",
+          "label": "mas oxida)"
+        },
+        {
+          "id": "13iwo64l3",
+          "label": "não observado (seiva translúcida"
+        },
+        {
+          "id": "qxw1dapb4",
+          "label": "oxidando para avermelhado)"
+        },
+        {
+          "id": "92zx78wf9",
+          "label": "presente"
+        },
+        {
+          "id": "64i4e64wh",
+          "label": "resinoso (família Clusiaceae tipicamente apresenta látex amarelo ou branco"
+        },
+        {
+          "id": "ko8a97za1",
+          "label": "mas oxidação pode escurecer)"
+        },
+        {
+          "id": "jaqex3mzx",
+          "label": "Exsudato resinoso avermelhado a castanho-avermelhado nas bordas do ferimento da casca"
+        },
+        {
+          "id": "6gfrcf9zf",
+          "label": "branco"
+        },
+        {
+          "id": "o2ivqwogl",
+          "label": "abundante"
+        },
+        {
+          "id": "pzo6qvmy2",
+          "label": "espesso"
+        },
+        {
+          "id": "167rj281r",
+          "label": "viscoso"
+        }
+      ]
+    },
+    {
+      "id": "thorns",
+      "name": "Espinhos/Acúleos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "6nrw9glr2",
+          "label": "Acúleos presentes no tronco (cônicos) e na raque/nervura central das folhas (curvos)"
+        },
+        {
+          "id": "emieeesfl",
+          "label": "sem espinhos"
+        },
+        {
+          "id": "brc5srp9x",
+          "label": "ausentes"
+        },
+        {
+          "id": "m6wj97fc3",
+          "label": "Espinhos radiais curvos (7-11) e centrais mais eretos (1-4)"
+        },
+        {
+          "id": "c4wvhhy6g",
+          "label": "cor castanho-acinzentada"
+        }
+      ]
+    },
+    {
+      "id": "aroma",
+      "name": "aroma",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "20v2snt9y",
+          "label": "cítrico"
+        }
+      ]
+    },
+    {
+      "id": "margin",
+      "name": "Margem Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "qvat1xmrs",
+          "label": "inteira"
+        }
+      ]
+    },
+    {
+      "id": "indumentum",
+      "name": "Indumento",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "mswnyihnl",
+          "label": "tomentoso"
+        }
+      ]
+    },
+    {
+      "id": "stipule",
+      "name": "Estípulas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "67iod1arm",
+          "label": "sem estípulas"
+        }
+      ]
+    },
+    {
+      "id": "leafSurface",
+      "name": "Superfície Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "m7twr1csr",
+          "label": "lisa"
+        }
+      ]
+    },
+    {
+      "id": "leafColor",
+      "name": "Cor da Folha",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "0yjj18yzj",
+          "label": "verde-clara"
+        }
+      ]
+    },
+    {
+      "id": "fruit",
+      "name": "Fruto",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "m9bxj6xfx",
+          "label": "ausentes"
+        }
+      ]
+    },
+    {
+      "id": "barkColorPreset",
+      "name": "barkColorPreset",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "8415lif89",
+          "label": "esbranquiçada"
+        }
+      ]
+    },
+    {
+      "id": "rachisColor",
+      "name": "Cor da Raque",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "7dn3t7qvs",
+          "label": "verde a castanho-claro"
+        },
+        {
+          "id": "c8nez12g3",
+          "label": "verde"
+        },
+        {
+          "id": "ohdt7oq0u",
+          "label": "verde-amarelada a acastanhada"
+        }
+      ]
+    },
+    {
+      "id": "rachisTexture",
+      "name": "Textura da Raque",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vjcpd2os3",
+          "label": "pubérula"
+        },
+        {
+          "id": "50goeuemc",
+          "label": "lisa a levemente lenticelada"
+        },
+        {
+          "id": "nzw4xp62l",
+          "label": "estriada"
+        },
+        {
+          "id": "pgxayk4oj",
+          "label": "glabra"
+        },
+        {
+          "id": "y8lo2mbme",
+          "label": "cilíndrica"
+        },
+        {
+          "id": "3hrizbk11",
+          "label": "pubescente"
+        },
+        {
+          "id": "n0zet4eo0",
+          "label": "lisa a levemente sulcada"
+        }
+      ]
+    },
+    {
+      "id": "rachisIndument",
+      "name": "Indumento da Raque",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "28ou49i6o",
+          "label": "armada com acúleos curvos e rígidos"
+        },
+        {
+          "id": "vozmvjkcz",
+          "label": "glabra a pubérula"
+        },
+        {
+          "id": "ybihkhxw2",
+          "label": "ausente nos adultos"
+        },
+        {
+          "id": "dlz4pxtaz",
+          "label": "piloso"
+        },
+        {
+          "id": "nz35qbe9x",
+          "label": "glabra"
+        }
+      ]
+    },
+    {
+      "id": "leafletShape",
+      "name": "Forma dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "deb7tj396",
+          "label": "oblongo-lanceolado"
+        },
+        {
+          "id": "9w9pr37mu",
+          "label": "obovada a oblanceolada"
+        },
+        {
+          "id": "h6yjw89vb",
+          "label": "oblongo a obovado"
+        },
+        {
+          "id": "g1r5rcwm1",
+          "label": "oblongo-lanceolado a elíptico"
+        },
+        {
+          "id": "n51r9helo",
+          "label": "ovado a elíptico"
+        },
+        {
+          "id": "2qnj84p46",
+          "label": "elíptico-oblongo a lanceolado"
+        }
+      ]
+    },
+    {
+      "id": "leafletSize",
+      "name": "Tamanho dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "82ucs719t",
+          "label": "6-12 cm comprimento"
+        },
+        {
+          "id": "0fg0et8th",
+          "label": "Variável"
+        },
+        {
+          "id": "848qh65ft",
+          "label": "aprox. 8-15cm comp."
+        },
+        {
+          "id": "166ns0lmc",
+          "label": "pequeno (aprox. 1-2 cm)"
+        },
+        {
+          "id": "bqbpijeby",
+          "label": "5-12 cm comprimento"
+        },
+        {
+          "id": "y1o6ub6p9",
+          "label": "grande"
+        },
+        {
+          "id": "9vmq8zbuh",
+          "label": "aprox. 10-15cm comp"
+        },
+        {
+          "id": "q8dnffitv",
+          "label": "médio (cerca de 5-10 cm de comprimento)"
+        }
+      ]
+    },
+    {
+      "id": "leafletMargin",
+      "name": "Margem dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "22athln27",
+          "label": "crenada"
+        },
+        {
+          "id": "ldjolt1pf",
+          "label": "glandular"
+        },
+        {
+          "id": "p03an4jcv",
+          "label": "inteira"
+        },
+        {
+          "id": "zwk082rwu",
+          "label": "denteada a serrada nas bordas"
+        }
+      ]
+    },
+    {
+      "id": "leafletApex",
+      "name": "Ápice dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "0jk4wnqcd",
+          "label": "acuminado"
+        },
+        {
+          "id": "rcyimzenf",
+          "label": "arredondado"
+        },
+        {
+          "id": "6q103h9vy",
+          "label": "agudo ou acuminado curto"
+        }
+      ]
+    },
+    {
+      "id": "leafletBase",
+      "name": "Base dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "rs2sbcjl6",
+          "label": "assimétrica"
+        },
+        {
+          "id": "ruqzt4q7i",
+          "label": "arredondada"
+        },
+        {
+          "id": "6z517tm9l",
+          "label": "cuneada a arredondada"
+        }
+      ]
+    },
+    {
+      "id": "leafletTexture",
+      "name": "Textura dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "hpkvwyp3p",
+          "label": "membranácea"
+        },
+        {
+          "id": "fq492ux4q",
+          "label": "com pontuações translúcidas visíveis contra a luz"
+        },
+        {
+          "id": "kdiw6wq58",
+          "label": "lisa"
+        },
+        {
+          "id": "vh43k9pif",
+          "label": "cartácea a coriácea"
+        },
+        {
+          "id": "9rcjw5ztx",
+          "label": "coriácea"
+        },
+        {
+          "id": "eyofz8698",
+          "label": "superfície adaxial brilhante"
+        }
+      ]
+    },
+    {
+      "id": "leafletIndument",
+      "name": "Indumento dos Folíolos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "0u4pv17jl",
+          "label": "pubescente nas nervuras principais"
+        },
+        {
+          "id": "ek1afugs6",
+          "label": "glabro"
+        },
+        {
+          "id": "5gh9nquul",
+          "label": "piloso na face abaxial (provável)"
+        }
+      ]
+    },
+    {
+      "id": "leafletPetiolule",
+      "name": "Peciólulo",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "e12u3g1un",
+          "label": "curto ou subséssil (< 2mm)"
+        },
+        {
+          "id": "u402jj7dz",
+          "label": "sessil ou subsessil"
+        },
+        {
+          "id": "hjjumvo8k",
+          "label": "cilíndrico"
+        },
+        {
+          "id": "eu1ml502d",
+          "label": "rugoso"
+        },
+        {
+          "id": "21ixp2ffd",
+          "label": "enegrecido (pulvínulo evidente)"
+        },
+        {
+          "id": "48w3dtmoc",
+          "label": "presente"
+        },
+        {
+          "id": "qkxo30zq8",
+          "label": "curto"
+        },
+        {
+          "id": "jsrt8xgha",
+          "label": "curto (alguns milímetros)"
+        }
+      ]
+    },
+    {
+      "id": "inflorescence",
+      "name": "Inflorescência",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ytw80l7mp",
+          "label": "Tirso espiciforme"
+        },
+        {
+          "id": "s16gxetk6",
+          "label": "terminal"
+        },
+        {
+          "id": "z8ak23plj",
+          "label": "cilíndrico"
+        },
+        {
+          "id": "rywscs2h9",
+          "label": "solitária"
+        },
+        {
+          "id": "zekhhotus",
+          "label": "emergindo do cefálio terminal"
+        },
+        {
+          "id": "05zstvf71",
+          "label": "racemo"
+        },
+        {
+          "id": "mrj6f9hp4",
+          "label": "racemo terminal (frutificação)"
+        }
+      ]
+    },
+    {
+      "id": "fruitType",
+      "name": "Tipo de Fruto",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "09drv310a",
+          "label": "Cápsula septicida"
+        },
+        {
+          "id": "1e1dxhrxy",
+          "label": "cipsela com pápus plumoso abundante"
+        },
+        {
+          "id": "5dkdpm0nl",
+          "label": "legume indeiscente (vagem dura)"
+        },
+        {
+          "id": "eq0qx9q6z",
+          "label": "lenhoso"
+        },
+        {
+          "id": "h7x4sodt1",
+          "label": "escuro (não observado nas fotos)"
+        },
+        {
+          "id": "zij50mge8",
+          "label": "baga claviforme"
+        },
+        {
+          "id": "llimq15kh",
+          "label": "baga (supostamente"
+        },
+        {
+          "id": "2lah4njlj",
+          "label": "não observado)"
+        },
+        {
+          "id": "ycs2xpf64",
+          "label": "assentado em cúpula"
+        },
+        {
+          "id": "711gbdfx5",
+          "label": "drupa"
+        }
+      ]
+    },
+    {
+      "id": "phenology",
+      "name": "Fenologia",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jun2m2sz6",
+          "label": "vegetativo"
+        },
+        {
+          "id": "uhxi24u6u",
+          "label": "floração e frutificação simultâneas"
+        },
+        {
+          "id": "f032qawq7",
+          "label": "floração"
+        },
+        {
+          "id": "rqt8e7mtp",
+          "label": "frutificação (frutos imaturos/verdes)"
+        },
+        {
+          "id": "qdra392up",
+          "label": "vegetativo (sem flores ou frutos)"
+        }
+      ]
+    },
+    {
+      "id": "barkColorExternal",
+      "name": "Cor Externa da Casca",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "r2jjqeyef",
+          "label": "cinza-esverdeado"
+        },
+        {
+          "id": "bgiz71244",
+          "label": "verde-escuro"
+        },
+        {
+          "id": "zk6yerens",
+          "label": "marrom"
+        },
+        {
+          "id": "c0usfi6hf",
+          "label": "cinza-acastanhado"
+        },
+        {
+          "id": "isjubqhjn",
+          "label": "cinza a marrom-acinzentado"
+        }
+      ]
+    },
+    {
+      "id": "barkColorInternal",
+      "name": "Cor Interna da Casca",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "lwmhur79v",
+          "label": "vermelho-ferrugíneo a vinho (após oxidação)"
+        },
+        {
+          "id": "5qi2rm76c",
+          "label": "suculenta"
+        },
+        {
+          "id": "0z77r3qnv",
+          "label": "parênquima aquífero translúcido"
+        },
+        {
+          "id": "d97kr0odu",
+          "label": "Cor da casca interna (se visível)"
+        },
+        {
+          "id": "upy1qtlq5",
+          "label": "amarelada intensa a alaranjada (em corte)"
+        },
+        {
+          "id": "crjzcjtgi",
+          "label": "com alburno creme"
+        }
+      ]
+    },
+    {
+      "id": "habitatMorph",
+      "name": "Habitat (Morfologia)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "daehxxmbl",
+          "label": "terrestre"
+        },
+        {
+          "id": "cl0xwijjl",
+          "label": "rupícola (afloramentos rochosos)"
+        }
+      ]
+    },
+    {
+      "id": "exposure",
+      "name": "Exposição Solar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "bgvednht3",
+          "label": "meia-sombra a sol pleno"
+        },
+        {
+          "id": "nngznsadv",
+          "label": "sol pleno"
+        },
+        {
+          "id": "9t1n0xzpw",
+          "label": "sol pleno a meia-sombra"
+        }
+      ]
+    },
+    {
+      "id": "abundance",
+      "name": "Abundância",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jam91qkfp",
+          "label": "comum"
+        },
+        {
+          "id": "clczc0rux",
+          "label": "comum na localidade"
+        },
+        {
+          "id": "pq5qrvjop",
+          "label": "isolado ou pouco comum (necessita confirmação)"
+        }
+      ]
+    },
+    {
+      "id": "threats",
+      "name": "Ameaças",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "im53u5z4h",
+          "label": "nenhuma observada"
+        },
+        {
+          "id": "489udb1l9",
+          "label": "coleta ornamental ilegal"
+        },
+        {
+          "id": "o1hsi3udp",
+          "label": "degradação de habitat"
+        },
+        {
+          "id": "2rs1ayko3",
+          "label": "nenhuma evidente na foto"
+        },
+        {
+          "id": "97dab6tbr",
+          "label": "Nenhuma ameaça observada nas fotos"
+        }
+      ]
+    },
+    {
+      "id": "rootType",
+      "name": "Tipo de Raiz",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "tn7gdx4ja",
+          "label": "fasciculada"
+        },
+        {
+          "id": "1at7xpydm",
+          "label": "superficial (adaptação rupícola)"
+        },
+        {
+          "id": "1n2xk7ikz",
+          "label": "pivotante (inferido)"
+        },
+        {
+          "id": "2vmq1bd28",
+          "label": "Não visível"
+        }
+      ]
+    },
+    {
+      "id": "leafExudate",
+      "name": "Exsudato Foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9yj1t8mk2",
+          "label": "ausente"
+        }
+      ]
+    },
+    {
+      "id": "flowerColor",
+      "name": "Cor da Flor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "00nhd4gnc",
+          "label": "roxa"
+        },
+        {
+          "id": "yma2euufx",
+          "label": "rosa"
+        },
+        {
+          "id": "mp8x28zkj",
+          "label": "creme"
+        }
+      ]
+    },
+    {
+      "id": "gemas",
+      "name": "Gemas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "661eoc8ye",
+          "label": "escamadas"
+        },
+        {
+          "id": "aus2l0lda",
+          "label": "Estipulas grandes no apice"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "a3ee6d8a-7896-4b84-818c-e9badc226aee",
+      "name": "Zanthoxylum petiolare",
+      "description": "Nome popular: Mamicao. Família: Rutaceae. Ocorrência: Alpercata/MG. Habitat: Margem da rodovia. Obs. Morfo: Casca corticenta\n\n[IA - 06/12/2025] Folíolos subsésseis e acúleos na nervura central diferenciam de Z. petiolare. Presença marcante de pontuações translúcidas (glândulas de óleo) no limbo foliar. Casca com aspecto suberoso acentuado.. IA: 🤖 ANOTAÇÕES DA IA (06/12/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANÁLISE BOTÂNICA DETALHADA - FDBK0000102\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO:\nO espécime apresenta todas as características clássicas de *Zanthoxylum rhoifolium* Lam. A distinção crucial aqui, que refuta a identificação preliminar de *Z. petiolare*, reside na inserção dos folíolos. Enquanto *Z. petiolare* possui peciólulos distintos e longos (daí seu epíteto específico), o espécime fotografado exibe folíolos subsésseis ou com peciólulos ínfimos. Além disso, a presença agressiva de acúleos na nervura central da face abaxial é uma 'assinatura' comum de *Z. rhoifolium*, muitas vezes ausente ou menos conspícua em outras espécies do gênero na região.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA MG:\n1. **Zanthoxylum petiolare:** Diferencia-se pelos peciólulos longos (5-15mm) e folíolos geralmente mais ovais e menos armados na nervura central.\n2. **Zanthoxylum caribaeum:** Pode ser confundida, mas geralmente apresenta folíolos mais coriáceos, glabros e com menor densidade de acúleos na raque foliar se comparada ao espécime analisado.\n3. **Zanthoxylum monogynum:** Possui folíolos menores e habitualmente ocorre em formações mais secas, com padrão de venação ligeiramente distinto.\n\n🔑 CHAVE DICOTÔMICA BREVE (Focada em Vegetativo/MG):\n1a. Folíolos com peciólulos evidentes (>5mm) .......................................... *Z. petiolare*\n1b. Folíolos sésseis ou subsésseis (<2mm) .............................................. 2\n   2a. Raque e nervura central dos folíolos armadas com acúleos; folíolos com pontuações translúcidas notáveis; tronco com acúleos mamiliformes grandes ..... *Z. rhoifolium* (Espécie identificada)\n   2b. Raque inerme ou com poucos acúleos; características divergentes .......... [Outras espécies]\n\n🗺️ DISTRIBUIÇÃO GEOGRÁFICA E ECOLÓGICA:\n*Zanthoxylum rhoifolium* possui ampla distribuição na América do Sul. No Brasil, ocorre em todos os estados e biomas, sendo extremamente frequente em Minas Gerais. Em Alpercata (Vale do Rio Doce), a vegetação de transição e Floresta Estacional Semidecidual é o habitat ideal. É uma espécie pioneira, heliófita, colonizando rapidamente clareiras, bordas de mata e pastagens abandonadas (o que condiz com o habitat 'Margem de rodovia' citado no registro).\n\n⚠️ OBSERVAÇÕES IMPORTANTES:\nEsta espécie apresenta grande plasticidade fenotípica (variação morfológica). O indumento (pelos) pode variar de denso a ausente dependendo da idade da planta e exposição solar. A característica mais estável para identificação em campo, na ausência de frutos, é a combinação: cheiro cítrico + folhas compostas com pontuações translúcidas + acúleos na nervura central + tronco com 'mamilos'. O nome vulgar 'Mamica-de-porca' refere-se justamente a esses acúleos do tronco que se assemelham a tetas de animais.",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "a1p59qym1",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/bT84fMTSRi2k6wBV9"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "2yy95rsx1"
+        ],
+        "health": [
+          "3yvcanmm3"
+        ],
+        "leafType": [
+          "7bs7tt19c"
+        ],
+        "compoundLeafType": [
+          "ghb1ixp8e"
+        ],
+        "leafMargin": [
+          "45srfrfq0",
+          "im0ys5zpe"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "n8332i552"
+        ],
+        "leafApex": [
+          "5evohxs1d"
+        ],
+        "leafBase": [
+          "lfbia44kw",
+          "wg11t6kub"
+        ],
+        "leafTexture": [
+          "6d8qyfi1c"
+        ],
+        "indument": [
+          "pxmkzzu4y",
+          "0v85k56be"
+        ],
+        "leafletArrangement": [
+          "a54xbn21u"
+        ],
+        "rachisChanneled": [
+          "d8efs4uju"
+        ],
+        "rachisWinged": [
+          "esqkf10mc"
+        ],
+        "stipels": [
+          "vwvyq8xyc"
+        ],
+        "flowers": [
+          "66ju18daq",
+          "we2g40pab",
+          "vpe51hh49",
+          "km2mtqznb"
+        ],
+        "fruits": [
+          "52egw2eik"
+        ],
+        "bark": [
+          "vtpxlja9z",
+          "3n68pq7mm",
+          "wx0usoil8",
+          "d1ixuu56a"
+        ],
+        "latex": [
+          "m80v1s64r",
+          "bs4xab9am"
+        ],
+        "thorns": [
+          "6nrw9glr2"
+        ],
+        "aroma": [
+          "20v2snt9y"
+        ],
+        "margin": [
+          "qvat1xmrs"
+        ],
+        "indumentum": [
+          "mswnyihnl"
+        ],
+        "stipule": [
+          "67iod1arm"
+        ],
+        "leafSurface": [
+          "m7twr1csr"
+        ],
+        "leafColor": [
+          "0yjj18yzj"
+        ],
+        "fruit": [
+          "m9bxj6xfx"
+        ],
+        "barkColorPreset": [
+          "8415lif89"
+        ],
+        "rachisColor": [
+          "7dn3t7qvs"
+        ],
+        "rachisTexture": [
+          "vjcpd2os3"
+        ],
+        "rachisIndument": [
+          "28ou49i6o"
+        ],
+        "leafletShape": [
+          "deb7tj396"
+        ],
+        "leafletSize": [
+          "82ucs719t"
+        ],
+        "leafletMargin": [
+          "22athln27",
+          "ldjolt1pf"
+        ],
+        "leafletApex": [
+          "0jk4wnqcd"
+        ],
+        "leafletBase": [
+          "rs2sbcjl6"
+        ],
+        "leafletTexture": [
+          "hpkvwyp3p",
+          "fq492ux4q"
+        ],
+        "leafletIndument": [
+          "0u4pv17jl"
+        ],
+        "leafletPetiolule": [
+          "e12u3g1un"
+        ]
+      }
+    },
+    {
+      "id": "bbdf053e-c3d0-45c7-972b-8ec4be2d6e88",
+      "name": "Alseis floribunda",
+      "description": "Nome popular: Alma-da-serra, Maria-preta, Ibiratinga. Família: Rubiaceae. Ocorrência: Alpercata/MG. Habitat: Beira da rodovia. Obs. Morfo: Muitos fustes\n\n[IA - 29/11/2025] Folhas agrupadas nas pontas dos ramos (arrimo); Presença de manchas necróticas circulares (possível fungo) nas folhas; Inflorescências velhas persistentes semelhantes a espigas secas.. IA: 🤖 ANOTAÇÕES DA IA (29/11/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANÁLISE DETALHADA NERVURA COLETORA - Alseis floribunda\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO:\nO gênero Alseis (Rubiaceae) é caracterizado por árvores decíduas com folhas geralmente agrupadas no ápice dos ramos e inflorescências em tirsos espiciformes (parecem espigas longas). *Alseis floribunda* distingue-se principalmente pela morfologia foliar e características da inflorescência. Diferencia-se de *A. gardneri* por apresentar folhas tendendo mais a obovadas/oblanceoladas (vs. elípticas/ovais em gardneri) e por ocorrer preferencialmente em formações florestais semideciduais, enquanto *A. gardneri* é mais típica do Cerrado *sensu stricto*. Outra característica diagnóstica visualizada nas fotos é a casca: em *A. floribunda*, ela esfolia em placas muito finas, quase translúcidas/papiráceas, de cor avermelhada intensa.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA MG:\n1. **Calycophyllum spruceanum (Pau-mulato):** Embora tenha casca esfoliante, o tronco tende a ser verde ou marrom-escuro liso antes da descamação (e não rugoso/avermelhado como nas fotos). Os frutos são cápsulas oblongas, não tão aglomeradas em espigas longas como em *Alseis*.\n2. **Alseis gardneri:** Pode ocorrer em áreas de transição em MG. Possui indumento (pelos) mais denso nas folhas e ramos jovens (velutino a tomentoso), enquanto *A. floribunda* é glabrescente a pubérula.\n3. **Clethra scabra (Carne-de-vaca):** Pode ser confundida pela disposição das folhas e inflorescência em racemos, mas pertence à família Clethraceae, não possui estípulas interpeciolares e a casca é suberosa/rugosa, não esfoliante papirácea.\n\n🔑 CHAVE DICOTÔMICA SIMPLIFICADA (Para Árvores com Casca Esfoliante/Frutos em Espiga em MG):\n1a. Folhas opostas ou verticiladas; estípulas interpeciolares presentes (ou cicatrizes); ovário ínfero.\n    2a. Frutos do tipo cápsula dispostos em espigas longas e cilíndricas terminais.\n        3a. Folhas obovadas/oblanceoladas, glabrescentes; Mata Atlântica/Estacional → **Alseis floribunda** (CONFIRMADO)\n        3b. Folhas elípticas/ovais, densamente pilosas; Cerrado típico → **Alseis gardneri**\n    2b. Frutos não dispostos em espigas longas (cimeiras, panículas, etc.) → Outras Rubiaceae (*Calycophyllum*, *Simira*)\n1b. Folhas alternas; sem estípulas interpeciolares → Outras famílias (ex: Clethraceae, Combretaceae)\n\n🗺️ DISTRIBUIÇÃO GEOGRÁFICA E ECOLÓGICA:\nA espécie é nativa e endêmica do Brasil. Em Minas Gerais, é uma componente estrutural importante da Floresta Estacional Semidecidual (Mata Seca). Sua ocorrência em Alpercata (Vale do Rio Doce) é totalmente esperada. É uma espécie que tolera bem a sazonalidade hídrica, perdendo as folhas na estação seca (julho-setembro), momento em que os frutos secos se tornam mais visíveis para dispersão anemocórica (pelo vento).\n\n⚠️ OBSERVAÇÕES IMPORTANTES:\nAs 'manchas' pretas observadas nas folhas (`IMG...638`) são provavelmente estromas de fungos ascomicetos (como Phyllachorales), muito comuns em *Alseis* no final da estação de crescimento, e não devem ser confundidas com características naturais da folha. A coleta de material fértil com flores (novembro-janeiro) auxiliaria a confirmar detalhes da corola, mas os frutos e casca atuais são suficientes para identificação segura.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "r82kbucag",
+          "zf4bckc3x"
+        ],
+        "health": [
+          "yepm7z29l"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "csv4gp9l1"
+        ],
+        "phyllotaxy": [
+          "4e9w3cvbh"
+        ],
+        "venation": [
+          "srftizuqd",
+          "amjkdxod7"
+        ],
+        "venationTertiary": [
+          "xf6zorou8",
+          "g0d89eqxv"
+        ],
+        "leafApex": [
+          "7igrh9crn"
+        ],
+        "leafBase": [
+          "dlzonurr1"
+        ],
+        "leafTexture": [
+          "6d8qyfi1c"
+        ],
+        "indument": [
+          "bljzyir9z",
+          "vlexcsm89"
+        ],
+        "flowers": [
+          "uhipyizi0"
+        ],
+        "inflorescence": [
+          "ytw80l7mp",
+          "s16gxetk6",
+          "z8ak23plj"
+        ],
+        "fruits": [
+          "9rd3aj4ui"
+        ],
+        "fruitType": [
+          "09drv310a"
+        ],
+        "bark": [
+          "9kv83pdku",
+          "s2480oi01"
+        ],
+        "latex": [
+          "m80v1s64r"
+        ],
+        "thorns": [
+          "emieeesfl"
+        ],
+        "leafletShape": [
+          "9w9pr37mu"
+        ],
+        "leafletSize": [
+          "0fg0et8th",
+          "848qh65ft"
+        ]
+      }
+    },
+    {
+      "id": "d677558e-f339-4bdc-81fe-9f265911f8e7",
+      "name": "Stifftia parviflora",
+      "description": "Nome popular: Diadema. Família: Asteraceae. Ocorrência: Nanuque/MG. Obs. Morfo: [IA - 06/12/2025] Identificada pela casca profundamente fissurada característica e folhas alternas glabras com ápice acuminado. O nome Stifftia parviflora é sinônimo heterotípico de S. chrysantha.. IA: 🤖 ANOTAÇÕES DA IA (06/12/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANOTAÇÕES DETALHADAS DA IA (FDBK0000102)\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO:\nO gênero *Stifftia* J.C.Mikan caracteriza-se por arbustos ou árvores com folhas alternas e capítulos solitários ou corymbosos com flores vistosas. Dentro do bioma Mata Atlântica em Minas Gerais, a espécie **_Stifftia chrysantha_** (anteriormente conhecida também por sinonímias como *S. parviflora*) é inconfundível quando fértil, devido aos seus capítulos discoides com flores longas de cor laranja-vibrante. Vegetativamente, a distinção é feita pela combinação de folhas totalmente glabras (diferenciando de *Stifftia fruticosa* que pode ter alguma pilosidade jovem ou hábito diferente) e, principalmente, pela arquitetura da casca. A casca de *S. chrysantha* é notavelmente espessa e fendida, lembrando árvores do Cerrado, embora seja uma espécie de mata.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA MG:\n1. **_Piptocarpha_ spp. (Vassourão):** Muitas espécies deste gênero compartilham o hábito arbóreo e folhas alternas em Asteraceae. Porém, a grande maioria das *Piptocarpha* possui a face abaxial da folha coberta por indumento incano, tomentoso ou lepidoto (escamoso, prateado), enquanto *Stifftia chrysantha* é glabra.\n2. **_Gochnatia polymorpha_ (Candeia):** Também possui folhas alternas e ocorre em MG. Diferencia-se pela folha geralmente discolors (branca/cinza embaixo) e casca com fissuras profundas mas com padrão diferente (mais reticulado ou em placas menores).\n3. **_Eremanthus_ spp. (Candeia):** Comum em áreas abertas de MG, possui folhas com indumento denso e venação muito impressa, hábito mais tortuoso.\n\n🔑 CHAVE DICOTÔMICA (Vegetativa para Asteraceae Arbóreas em MG):\n1a. Folhas com face inferior coberta por pelos ou escamas (discolores) ... *Piptocarpha*, *Gochnatia*, *Eremanthus*\n1b. Folhas glabras em ambas as faces (concolores ou levemente discolores) ... (2)\n   2a. Folhas suculentas ou crassas; ambiente de restinga/pedra ... *Stifftia* spp. (grupo rupícola)\n   2b. Folhas cartáceas a subcoriáceas; ambiente florestal ... (3)\n      3a. Ápice foliar obtuso ou arredondado; arbusto ... *Baccharis* spp.\n      3b. Ápice foliar acuminado; árvore ... *Stifftia chrysantha* (Casca profundamente fissurada)\n\n🗺️ DISTRIBUIÇÃO GEOGRÁFICA E ECOLÓGICA:\n*Stifftia chrysantha* é endêmica da Mata Atlântica, ocorrendo da Bahia ao Rio de Janeiro e Minas Gerais. Em Nanuque (Vale do Mucuri/Rio Doce), ela habita as Florestas Estacionais Semideciduais. É uma espécie tolerante à sombra quando jovem, mas que ocupa o dossel quando adulta. Sua casca espessa sugere uma adaptação evolutiva a ambientes que podem sofrer estresse hídrico ou fogo ocasional nas bordas de mata.\n\n⚠️ OBSERVAÇÕES IMPORTANTES:\nO uso do nome *S. parviflora* pelo usuário indica consulta a bibliografia mais antiga ou uso de nome popular regional que preservou o epíteto antigo. É fundamental atualizar para *S. chrysantha* no banco de dados. Em trabalhos de restauração florestal, esta espécie é valiosa por atrair polinizadores (beija-flores) e dispersores de vento, além de ser rústica.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "csv4gp9l1"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1",
+          "r9ahz7tvr"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "g0d89eqxv"
+        ],
+        "leafApex": [
+          "7w3uu5sg7"
+        ],
+        "leafBase": [
+          "hrmtvl17u"
+        ],
+        "leafTexture": [
+          "6idl9zqt9"
+        ],
+        "indument": [
+          "ssqurhjz1"
+        ],
+        "flowers": [
+          "7gskve86m"
+        ],
+        "fruitType": [
+          "1e1dxhrxy"
+        ],
+        "bark": [
+          "1wtsn949t",
+          "5f509mvtv",
+          "mxdb67tpz",
+          "0kx2a0q0p"
+        ]
+      }
+    },
+    {
+      "id": "d9941a49-b4ee-4e01-a065-3258c8ae0f11",
+      "name": "Libidibia ferrea",
+      "description": "Nome popular: Pau-ferro, Jucá, Ibirá-obi. Família: Fabaceae. Ocorrência: Nanuque/MG. Obs. Morfo: [IA - 06/12/2025] Râmulos com lenticelas brancas pequenas (foto download 9). Ausência de espinhos (acúleos) nos ramos observados.. IA: 🤖 ANOTAÇÕES DA IA (06/12/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANOTAÇÕES DETALHADAS DA IA - LIBIDIBIA FERREA\n\n⚠️ ALERTA DE DADOS: As fotos anexadas a este registro continham imagens misturadas de espécies diferentes. Esta análise considera APENAS as fotos de folhas bipinadas e tronco liso manchado (arquivos 'download').\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO:\nO gênero Libidibia (anteriormente parte de Caesalpinia) caracteriza-se por frutos lenhosos indeiscentes e sépalas unidas na base. A espécie L. ferrea é inconfundível devido ao seu tronco: o ritidoma (casca externa) desprende-se em placas irregulares, revelando uma casca interna nova de cor clara, o que dá o aspecto de 'camuflagem' militar (manchas cinzas, brancas e esverdeadas). Nenhuma outra espécie do gênero no Brasil possui esse padrão de casca tão marcante associado a folhas bipinadas glabras.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA MG:\n1. Chloroleucon tortum (Tataré/Jacaré): Pode apresentar tronco manchado ('casca de python'), mas possui folhas com glândulas no pecíolo (nectários extraflorais) e o fruto é um legume espiralado (encaracolado), diferente da vagem reta e dura do Pau-ferro.\n2. Cenostigma pluviosum (Sibipiruna): Muito comum na arborização urbana, possui folhas semelhantes, mas sua casca é rugosa e fissurada longitudinalmente, nunca lisa e manchada como no Pau-ferro.\n3. Paubrasilia echinata (Pau-brasil): Parente próximo, mas diferencia-se pelos folíolos em forma de losango (rômbicos) e, principalmente, pela presença de acúleos (espinhos) no tronco e ramos, além da casca que descama mas revela cor alaranjada/vermelha (tinta), não branca/cinza.\n\n🗺️ DISTRIBUIÇÃO GEOGRÁFICA E ECOLÓGICA:\nOcorre naturalmente da Caatinga à Mata Atlântica. Em Minas Gerais, é comum nas regiões do Vale do Rio Doce, Jequitinhonha e Norte de Minas. Prefere solos drenados e é componente frequente de matas estacionais deciduais e semideciduais. Devido à sua madeira duríssima e porte ornamental, é muito cultivada em parques, o que expande sua ocorrência para áreas urbanas.\n\n⚠️ OBSERVAÇÕES IMPORTANTES:\nO nome 'ferrea' refere-se à extrema dureza da madeira, que solta faíscas quando golpeada com machado. Para identificação estéril (sem flores/frutos), o padrão da casca é soberano (confiança 99%). Cuidado com árvores jovens que podem ainda não apresentar o padrão de descamação completo.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gkh5uny2a"
+        ],
+        "leafType": [
+          "7bs7tt19c"
+        ],
+        "compoundLeafType": [
+          "eyiedmmvj"
+        ],
+        "leafMargin": [
+          "ygveclzou"
+        ],
+        "phyllotaxy": [
+          "s640q2wo5"
+        ],
+        "venation": [
+          "hs6axmy5u"
+        ],
+        "leafApex": [
+          "ylieul1og"
+        ],
+        "leafBase": [
+          "oxo1zparm",
+          "0r6se6hyd"
+        ],
+        "leafTexture": [
+          "dmalfyny8"
+        ],
+        "indument": [
+          "hp2s93yl0"
+        ],
+        "leafletArrangement": [
+          "c5ot8pawi"
+        ],
+        "rachisChanneled": [
+          "jddeamzxj"
+        ],
+        "rachisWinged": [
+          "2n0f8phn3"
+        ],
+        "stipels": [
+          "vwvyq8xyc"
+        ],
+        "flowers": [
+          "bf3svs04o",
+          "obzxghg1p"
+        ],
+        "fruitType": [
+          "5dkdpm0nl",
+          "eq0qx9q6z",
+          "h7x4sodt1"
+        ],
+        "bark": [
+          "d49mhxdui",
+          "r8u6wmnng",
+          "y7e1g0tf8",
+          "pf2hor1ee",
+          "jcz3jrv1h"
+        ],
+        "rachisColor": [
+          "7dn3t7qvs"
+        ],
+        "rachisTexture": [
+          "50goeuemc"
+        ],
+        "rachisIndument": [
+          "vozmvjkcz"
+        ],
+        "leafletShape": [
+          "h6yjw89vb"
+        ],
+        "leafletSize": [
+          "166ns0lmc"
+        ],
+        "leafletMargin": [
+          "p03an4jcv"
+        ],
+        "leafletApex": [
+          "rcyimzenf"
+        ],
+        "leafletBase": [
+          "rs2sbcjl6"
+        ],
+        "leafletTexture": [
+          "kdiw6wq58"
+        ],
+        "leafletIndument": [
+          "ek1afugs6"
+        ],
+        "leafletPetiolule": [
+          "u402jj7dz"
+        ]
+      }
+    },
+    {
+      "id": "7fc39548-5343-4290-b5dd-215e1063c03d",
+      "name": "Prunus myrtifolia",
+      "description": "Nome popular: pessegueiro-bravo. Família: Rosaceae. Ocorrência: Petrópolis/RJ. Habitat: Floresta Ombrófila Densa, Matas de Galeria. Obs. Morfo: [IA - 21/11/2025] Folhas com odor característico de amêndoas quando maceradas (característica do gênero). Presença de duas glândulas na base da lâmina foliar ou ápice do pecíolo (observável com lupa). Casca interna com oxidação rápida característica.\n\n[IA - 06/12/2025] Odor cianogênico (amêndoas amargas) forte ao macerar folhas jovens. Presença de par de glândulas na base da lâmina foliar. Casca viva com oxidação marcante.",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "rzi5l92ud",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/ohWvGB6vYb97Eg1u6"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "5cxy2mtt8"
+        ],
+        "health": [
+          "wmu8pck5r",
+          "edcud6zqi"
+        ],
+        "phenology": [
+          "jun2m2sz6"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "v90n416hv"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1",
+          "17y8bdeh8"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "xf6zorou8",
+          "hkr8nge29"
+        ],
+        "leafApex": [
+          "73mlb9huq"
+        ],
+        "leafBase": [
+          "q7gggwd10"
+        ],
+        "leafTexture": [
+          "6idl9zqt9"
+        ],
+        "indument": [
+          "4px0az72m"
+        ],
+        "flowers": [
+          "66ju18daq",
+          "dspb1fu15",
+          "wmkvnfl8h"
+        ],
+        "bark": [
+          "xsw7ny4bj",
+          "5bv33mc20"
+        ],
+        "barkColorExternal": [
+          "r2jjqeyef"
+        ],
+        "barkColorInternal": [
+          "lwmhur79v"
+        ],
+        "latex": [
+          "6w17n4292"
+        ],
+        "thorns": [
+          "brc5srp9x"
+        ],
+        "habitatMorph": [
+          "daehxxmbl"
+        ],
+        "exposure": [
+          "bgvednht3"
+        ],
+        "abundance": [
+          "jam91qkfp"
+        ],
+        "threats": [
+          "im53u5z4h"
+        ]
+      }
+    },
+    {
+      "id": "fe43c12e-81e7-4d39-b321-0ce180da532c",
+      "name": "Melocactus sp.",
+      "description": "Nome popular: Coroa-de-frade, Cabeça-de-frade. Família: Cactaceae. Ocorrência: Juazeiro/BA. Obs. Morfo: [IA - 27/11/2025] Espécime adulto apresentando cefálio cilíndrico com cerdas vermelhas densas e lã branca. Presença de múltiplos frutos claviformes de cor lilás sendo expulsos do cefálio. A espinação é robusta, com espinhos radiais fortemente recurvados contra as costelas.",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "lgmxpas60",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/BHCJrgjjesqmpfop9"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "wqbdyvx5z"
+        ],
+        "habit": [
+          "dzaa2y05b",
+          "2lb2wse1g"
+        ],
+        "health": [
+          "wmu8pck5r",
+          "4l65aqxu3"
+        ],
+        "phenology": [
+          "uhxi24u6u"
+        ],
+        "leafType": [
+          "vh89i65x4"
+        ],
+        "phyllotaxy": [
+          "q6qmz6qdb"
+        ],
+        "indument": [
+          "ub8f0ysnp",
+          "pl4y7zhpj"
+        ],
+        "flowers": [
+          "g4dhrhiqi",
+          "66ju18daq",
+          "650p1zsa0"
+        ],
+        "inflorescence": [
+          "rywscs2h9",
+          "zekhhotus"
+        ],
+        "fruitType": [
+          "zij50mge8"
+        ],
+        "bark": [
+          "3atjanfvo",
+          "an39weoqo",
+          "x8gzusabi"
+        ],
+        "barkColorExternal": [
+          "bgiz71244"
+        ],
+        "barkColorInternal": [
+          "5qi2rm76c",
+          "0z77r3qnv"
+        ],
+        "latex": [
+          "ze9r0634l"
+        ],
+        "thorns": [
+          "m6wj97fc3",
+          "c4wvhhy6g"
+        ],
+        "rootType": [
+          "tn7gdx4ja",
+          "1at7xpydm"
+        ],
+        "habitatMorph": [
+          "cl0xwijjl"
+        ],
+        "exposure": [
+          "nngznsadv"
+        ],
+        "abundance": [
+          "clczc0rux"
+        ],
+        "threats": [
+          "489udb1l9",
+          "o1hsi3udp"
+        ]
+      }
+    },
+    {
+      "id": "ccac61ec-577c-4093-a2a0-a89c61c25413",
+      "name": "Ocotea longifolia",
+      "description": "Nome popular: Canelão, Canela-cheirosa. Família: Lauraceae. Ocorrência: Mar de Espanha/MG. Obs. Morfo: [IA - 06/12/2025] Pecíolo distintamente canaliculado (sulcado) e enegrecido. Gema terminal cônica aguda serícea. Folhas estreitas e longas (lanceoladas). Ausência de domácias visíveis nas fotos (necessário lupa).",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "lvw4pzgdp",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/8mQqGSmFes6ZEz6H9"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "gkh5uny2a"
+        ],
+        "habit": [
+          "9fwixqkzy"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "csv4gp9l1"
+        ],
+        "phyllotaxy": [
+          "s640q2wo5"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "cooimla8b"
+        ],
+        "leafApex": [
+          "r7rwkcir8"
+        ],
+        "leafBase": [
+          "2h4yei9ae",
+          "dh9p1le5z"
+        ],
+        "leafTexture": [
+          "6idl9zqt9"
+        ],
+        "indument": [
+          "lunz23rio",
+          "ruxyms8af"
+        ],
+        "flowers": [
+          "cth7ylgt3"
+        ],
+        "fruitType": [
+          "llimq15kh",
+          "2lah4njlj",
+          "ycs2xpf64"
+        ],
+        "bark": [
+          "gxqvenzdz",
+          "hj1d6ziqi",
+          "y5l2ifmmi",
+          "b1hldcznh",
+          "dh29t3qim"
+        ]
+      }
+    },
+    {
+      "id": "be285d34-b829-41e8-8fb7-e5a2f314d66e",
+      "name": "Coutarea hexandra",
+      "description": "Nome popular: QuinaBranca. Família: Rubiaceae. Ocorrência: Rio de Janeiro/RJ",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "gcltnt5ec",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/XLLHkAsnnFVqf7z98"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "m75haakfl"
+        ],
+        "habit": [
+          "hegb7v42r"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou"
+        ],
+        "phyllotaxy": [
+          "lhffn3mbd"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "n8332i552"
+        ],
+        "leafApex": [
+          "5evohxs1d"
+        ],
+        "leafBase": [
+          "hrmtvl17u"
+        ],
+        "leafTexture": [
+          "6d8qyfi1c"
+        ],
+        "indument": [
+          "z2jnipfvr",
+          "k3zh214c0"
+        ],
+        "stipels": [
+          "vwvyq8xyc"
+        ],
+        "flowers": [
+          "a25esyicj",
+          "7paycbi3u",
+          "387ncobg3"
+        ],
+        "bark": [
+          "9n1f5mdru",
+          "mxdb67tpz",
+          "cx25ljzpl",
+          "zaops0de8",
+          "2phlub4f9"
+        ],
+        "latex": [
+          "3cr9ih2rj",
+          "qdwbn458g"
+        ]
+      }
+    },
+    {
+      "id": "126cb8ce-9da0-4baa-adc7-d9eb75c8ce50",
+      "name": "Andira fraxinifolia",
+      "description": "Nome popular: Angelim. Família: Fabaceae. Ocorrência: Rio de Janeiro/RJ. Habitat: Arborização Urbana. Obs. Morfo: [IA - 06/12/2025] Nervação terciária formando retículo denso e evidente é característica diagnóstica. Flores dispostas em grandes panículas terminais róseas. Confusão comum: Estipelas geralmente ausentes no gênero Andira, estruturas observadas provavelmente são pulvínulos.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "jxk6wlj81"
+        ],
+        "phenology": [
+          "f032qawq7"
+        ],
+        "leafType": [
+          "7bs7tt19c"
+        ],
+        "compoundLeafType": [
+          "ghb1ixp8e"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "csv4gp9l1"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1",
+          "r9ahz7tvr"
+        ],
+        "venation": [
+          "srftizuqd",
+          "q9jqaeoj8"
+        ],
+        "venationTertiary": [
+          "m7jleuueh",
+          "j2y17ron2"
+        ],
+        "leafApex": [
+          "5evohxs1d"
+        ],
+        "leafBase": [
+          "qsdhdqvgx"
+        ],
+        "leafTexture": [
+          "cchfefogr"
+        ],
+        "indument": [
+          "ms6ncgwe2"
+        ],
+        "leafExudate": [
+          "9yj1t8mk2"
+        ],
+        "leafletArrangement": [
+          "c5ot8pawi"
+        ],
+        "rachisChanneled": [
+          "6592de97f",
+          "aqysv6g6i"
+        ],
+        "rachisWinged": [
+          "esqkf10mc"
+        ],
+        "stipels": [
+          "9a33df3nd"
+        ],
+        "flowers": [
+          "2j07ujhvb",
+          "jndcyf44g",
+          "ispgscef3"
+        ],
+        "flowerColor": [
+          "00nhd4gnc",
+          "yma2euufx",
+          "mp8x28zkj"
+        ],
+        "inflorescence": [
+          "05zstvf71"
+        ],
+        "bark": [
+          "xoe91zs1e",
+          "wx0usoil8",
+          "i0ethk9ug"
+        ],
+        "barkColorExternal": [
+          "zk6yerens"
+        ],
+        "latex": [
+          "13iwo64l3",
+          "qxw1dapb4"
+        ],
+        "gemas": [
+          "661eoc8ye",
+          "aus2l0lda"
+        ],
+        "rachisColor": [
+          "7dn3t7qvs"
+        ],
+        "rachisTexture": [
+          "nzw4xp62l",
+          "pgxayk4oj"
+        ],
+        "rachisIndument": [
+          "ybihkhxw2"
+        ],
+        "leafletShape": [
+          "g1r5rcwm1"
+        ],
+        "leafletSize": [
+          "bqbpijeby"
+        ],
+        "leafletMargin": [
+          "p03an4jcv"
+        ],
+        "leafletApex": [
+          "0jk4wnqcd"
+        ],
+        "leafletBase": [
+          "ruqzt4q7i"
+        ],
+        "leafletTexture": [
+          "vh43k9pif"
+        ],
+        "leafletIndument": [
+          "ek1afugs6"
+        ],
+        "leafletPetiolule": [
+          "hjjumvo8k",
+          "eu1ml502d",
+          "21ixp2ffd"
+        ]
+      }
+    },
+    {
+      "id": "86146878-5e8a-43cc-9d48-2028323983dd",
+      "name": "Caryocar brasiliense",
+      "description": "Nome popular: Pequi. Família: Caryocaraceae. Ocorrência: Itanhangá/MT. Habitat: Mata de galeria, Floresta estacional, Sub-bosque. Obs. Morfo: [IA - 27/11/2025] Planta com filotaxia oposta cruzada e cicatriz estipular interpeciolar evidente nos nós (característica de Rubiaceae). As estruturas nas axilas da foto 2 parecem ser primórdios de inflorescência ou estruturas estipulares residuais. A identificação como Caryocar (Pequi) é totalmente descartada pela filotaxia e tipo foliar.\n\n[IA - 27/11/2025] 📝 Observações morfológicas adicionais - descreva detalhes importantes não capturados nos campos acima\n\n[IA - 27/11/2025] Folhas opostas, trifolioladas, com margens serradas. Frutos globosos verdes agrupados em racemos terminais. Presença de cicatrizes peciolares nos ramos.\n\n[IA - 27/11/2025] Folhas opostas, trifolioladas, com margens serradas. Frutos globosos verdes agrupados em racemos terminais. Presença de cicatrizes peciolares nos ramos.\n\n[IA - 27/11/2025] Folhas opostas, trifolioladas, com margens serradas. Frutos globosos verdes agrupados em racemos terminais. Presença de cicatrizes peciolares nos ramos.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "s6ffctks3"
+        ],
+        "health": [
+          "wmu8pck5r"
+        ],
+        "phenology": [
+          "rqt8e7mtp"
+        ],
+        "leafType": [
+          "7bs7tt19c"
+        ],
+        "compoundLeafType": [
+          "nmgu33p3c"
+        ],
+        "leafMargin": [
+          "v9qta3uwo"
+        ],
+        "phyllotaxy": [
+          "94ambmnad"
+        ],
+        "venation": [
+          "srftizuqd"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y"
+        ],
+        "leafApex": [
+          "ceqyzbpt7"
+        ],
+        "leafBase": [
+          "jnn6hxmng"
+        ],
+        "leafTexture": [
+          "ie3tol428"
+        ],
+        "indument": [
+          "i79jq5dbs",
+          "uzn3qncpi"
+        ],
+        "leafletArrangement": [
+          "60jl0stbo"
+        ],
+        "rachisChanneled": [
+          "fyx935qp0"
+        ],
+        "rachisWinged": [
+          "2n0f8phn3"
+        ],
+        "stipels": [
+          "vwvyq8xyc"
+        ],
+        "flowers": [
+          "mve4dcz5h"
+        ],
+        "inflorescence": [
+          "mrj6f9hp4"
+        ],
+        "fruitType": [
+          "711gbdfx5"
+        ],
+        "bark": [
+          "yk4cn9p32",
+          "mxdb67tpz"
+        ],
+        "barkColorExternal": [
+          "c0usfi6hf"
+        ],
+        "barkColorInternal": [
+          "d97kr0odu"
+        ],
+        "latex": [
+          "m80v1s64r"
+        ],
+        "thorns": [
+          "brc5srp9x"
+        ],
+        "rootType": [
+          "1n2xk7ikz"
+        ],
+        "habitatMorph": [
+          "daehxxmbl"
+        ],
+        "exposure": [
+          "nngznsadv"
+        ],
+        "abundance": [
+          "jam91qkfp"
+        ],
+        "threats": [
+          "2rs1ayko3"
+        ],
+        "rachisColor": [
+          "c8nez12g3"
+        ],
+        "rachisTexture": [
+          "y8lo2mbme",
+          "3hrizbk11"
+        ],
+        "rachisIndument": [
+          "dlz4pxtaz"
+        ],
+        "leafletShape": [
+          "n51r9helo"
+        ],
+        "leafletSize": [
+          "y1o6ub6p9",
+          "9vmq8zbuh"
+        ],
+        "leafletMargin": [
+          "zwk082rwu"
+        ],
+        "leafletApex": [
+          "6q103h9vy"
+        ],
+        "leafletBase": [
+          "ruqzt4q7i"
+        ],
+        "leafletTexture": [
+          "9rcjw5ztx"
+        ],
+        "leafletIndument": [
+          "5gh9nquul"
+        ],
+        "leafletPetiolule": [
+          "48w3dtmoc",
+          "qkxo30zq8"
+        ]
+      }
+    },
+    {
+      "id": "2f195247-0938-44df-96e7-974e21cc25f4",
+      "name": "Cordia rufescens",
+      "description": "Nome popular: louro-mirim. Família: Cordiaceae. Ocorrência: Tabocas do Brejo Velho/BA. Obs. Morfo: [IA - 06/12/2025] Destaque para a superfície foliar fortemente bulada (rugosa) devido às nervuras impressas. Inflorescência compacta em glomérulos/capítulos, diferente das espigas alongadas de outras espécies do gênero.. IA: 🤖 ANOTAÇÕES DA IA (06/12/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANÁLISE BOTÂNICA DETALHADA - FDBK0000110\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO:\nO táxon pertence ao gênero *Varronia* P.Browne (anteriormente tratado como uma seção de *Cordia* L.), que agrupa espécies arbustivas de inflorescências espiciformes ou capitadas. A identificação como **_Varronia globosa_** (Jacq.) Borhidi se sustenta pela combinação de: inflorescências capitadas (globosas), cálice com dentes curtos (não filiformes longos), folhas com superfície bulada (nervuras impressas) e margem serrada distalmente. Difere da *Cordia rufescens* sugerida pela ausência de indumento ferrugíneo marcante nos ramos jovens e cálices.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA BA:\n1. **_Varronia leucocephala_ (Moleque-duro):** Muito similar e simpátrica (ocorre junto). A principal diferença é que *V. leucocephala* possui a face abaxial (inferior) da folha densamente tomentosa-branca (discolor), enquanto *V. globosa* possui a face inferior verde ou apenas levemente pubescente, mas não branca-nivea.\n2. **_Varronia curassavica_ (Erva-baleeira):** Possui inflorescências em espigas alongadas (não globosas/capitadas como na foto) e folhas geralmente mais lanceoladas e aromáticas.\n3. **_Varronia polycephala_:** Possui inflorescências menores e mais numerosas, e as folhas tendem a ser menores e menos buladas.\n\n🔑 CHAVE DICOTÔMICA (Grupo Varronia/Cordia arbustiva na Bahia):\n1a. Inflorescência em espigas alongadas (>3cm); folhas lanceoladas ... *Varronia curassavica*\n1b. Inflorescência globosa (capitada) ou espigas muito curtas; folhas ovadas a obovadas ... (2)\n   2a. Folhas fortemente discolores (face inferior branca-tomentosa) ... *Varronia leucocephala*\n   2b. Folhas concolores ou levemente discolores (face inferior verde/pálida, não branca) ... (3)\n      3a. Cálice com lobos filiformes longos (>2mm); folhas ovadas ... *Varronia leucomalloides*\n      3b. Cálice com lobos triangulares/curtos; folhas obovadas a espatuladas, superfície bulada ... *Varronia globosa* (Espécie identificada)\n\n🗺️ DISTRIBUIÇÃO GEOGRÁFICA E ECOLÓGICA:\nA espécie ocorre amplamente no Nordeste e Sudeste do Brasil, sendo típica de áreas de Caatinga, Cerrado e matas secas (Floresta Estacional Decidual). Em Tabocas do Brejo Velho (Oeste Baiano), ela habita áreas de 'Carrasco' ou transição, preferindo solos arenosos ou pedregosos e exposição plena ao sol.\n\n⚠️ OBSERVAÇÕES IMPORTANTES:\nNo sistema do *NervuraColetora*, atente-se para a sinonímia: se o banco de dados for antigo, pode constar apenas como *Cordia globosa*. A textura da folha ('rugosa' ou 'bulada') é o caráter mais fácil para reconhecimento rápido em campo. O nome popular 'Louro-mirim' geralmente é aplicado a espécies arbóreas de *Cordia* (como *C. trichotoma* ou *C. glabrata*), sendo 'Maria-preta' mais comum para este arbusto.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "p7wuj8byn"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "xgoqwj5qi",
+          "r82kbucag"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ea4rd8tei",
+          "5j7rqi7wc"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1"
+        ],
+        "venation": [
+          "srftizuqd",
+          "whbbqy92k"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "8to4y3oe7"
+        ],
+        "leafApex": [
+          "ceqyzbpt7"
+        ],
+        "leafBase": [
+          "hrmtvl17u"
+        ],
+        "leafTexture": [
+          "dmalfyny8",
+          "347ikvpuq"
+        ],
+        "indument": [
+          "2y9crq8a4"
+        ],
+        "flowers": [
+          "ugi2yiwmc",
+          "ealfj4hpj",
+          "m241lpkyp"
+        ],
+        "bark": [
+          "xsw7ny4bj",
+          "n4qmb7s4u",
+          "u65tnqtje"
+        ],
+        "latex": [
+          "m80v1s64r"
+        ]
+      }
+    },
+    {
+      "id": "57fefd6c-2230-45f1-9417-1eb69cb60e15",
+      "name": "Clusia insignis",
+      "description": "Nome popular: apuí. Família: Clusiaceae. Ocorrência: Beruri/AM. Obs. Morfo: [IA - 06/12/2025] Nervação secundária muito característica: fina, densa e paralela. Presença de cicatrizes anelares nos ramos deixadas pelas folhas caídas. Fruto maduro aberto expondo arilo vermelho atrativo à avifauna.",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "i6o7xzm7z",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/KfByUfvCFpENXN4u8"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "j5ucxrzq0"
+        ],
+        "habit": [
+          "9fwixqkzy",
+          "1ybzm0q09"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "5o7unavet"
+        ],
+        "phyllotaxy": [
+          "94ambmnad"
+        ],
+        "venation": [
+          "srftizuqd",
+          "pq431hqrz"
+        ],
+        "venationTertiary": [
+          "177t36xw1"
+        ],
+        "leafApex": [
+          "ylieul1og"
+        ],
+        "leafBase": [
+          "2h4yei9ae",
+          "dh9p1le5z"
+        ],
+        "leafTexture": [
+          "5k0ehczh2"
+        ],
+        "indument": [
+          "v6r0y2f0a"
+        ],
+        "flowers": [
+          "19orrumtj"
+        ],
+        "bark": [
+          "etucvr5wx",
+          "blyx75asw",
+          "schxhak1p"
+        ],
+        "latex": [
+          "92zx78wf9",
+          "64i4e64wh",
+          "ko8a97za1"
+        ]
+      }
+    },
+    {
+      "id": "8a85a3f2-230c-4e8f-b930-f47e7df24943",
+      "name": "Diplotropis brasiliensis",
+      "description": "Nome popular: Sapupira. Família: Fabaceae. Ocorrência: Itanhangá/MT. Habitat: Floresta de Terra Firme; Mata de Galeria; Cerradão. Obs. Morfo: [IA - 24/11/2025] Árvore com folhas compostas imparipinadas; folíolos coriáceos, glabros e brilhantes, com nervura marginal coletora. A casca externa é fissurada e acinzentada. Um corte na casca revela uma casca interna amarela intensa, com exsudato resinoso avermelhado na margem do ferimento. Esta característica de casca e exsudato é altamente diagnóstica para o complexo 'sapupira', principalmente em Diplotropis spp. ou outros gêneros lenhosos de Fabaceae/Malvaceae/Apocynaceae.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy"
+        ],
+        "health": [
+          "wmu8pck5r"
+        ],
+        "phenology": [
+          "qdra392up"
+        ],
+        "leafType": [
+          "7bs7tt19c"
+        ],
+        "compoundLeafType": [
+          "ghb1ixp8e"
+        ],
+        "leafMargin": [
+          "ygveclzou"
+        ],
+        "phyllotaxy": [
+          "p9rdutnu1"
+        ],
+        "venation": [
+          "srftizuqd"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "n1tdoafdz"
+        ],
+        "leafApex": [
+          "kq3jp9vgn"
+        ],
+        "leafBase": [
+          "brhqpiu4g",
+          "x4qgadhur"
+        ],
+        "leafTexture": [
+          "ie3tol428"
+        ],
+        "indument": [
+          "cr36fthdp"
+        ],
+        "leafletArrangement": [
+          "kja091fel"
+        ],
+        "rachisChanneled": [
+          "l6sm2lodi"
+        ],
+        "rachisWinged": [
+          "2n0f8phn3"
+        ],
+        "stipels": [
+          "xa4ubtq0n"
+        ],
+        "flowers": [
+          "mve4dcz5h"
+        ],
+        "bark": [
+          "yk4cn9p32",
+          "blyx75asw",
+          "m0yshcbet"
+        ],
+        "barkColorExternal": [
+          "isjubqhjn"
+        ],
+        "barkColorInternal": [
+          "upy1qtlq5",
+          "crjzcjtgi"
+        ],
+        "latex": [
+          "jaqex3mzx"
+        ],
+        "thorns": [
+          "brc5srp9x"
+        ],
+        "rootType": [
+          "2vmq1bd28"
+        ],
+        "habitatMorph": [
+          "daehxxmbl"
+        ],
+        "exposure": [
+          "9t1n0xzpw"
+        ],
+        "abundance": [
+          "pq5qrvjop"
+        ],
+        "threats": [
+          "97dab6tbr"
+        ],
+        "rachisColor": [
+          "ohdt7oq0u"
+        ],
+        "rachisTexture": [
+          "n0zet4eo0"
+        ],
+        "rachisIndument": [
+          "nz35qbe9x"
+        ],
+        "leafletShape": [
+          "2qnj84p46"
+        ],
+        "leafletSize": [
+          "q8dnffitv"
+        ],
+        "leafletMargin": [
+          "p03an4jcv"
+        ],
+        "leafletApex": [
+          "0jk4wnqcd"
+        ],
+        "leafletBase": [
+          "6z517tm9l",
+          "rs2sbcjl6"
+        ],
+        "leafletTexture": [
+          "9rcjw5ztx",
+          "eyofz8698"
+        ],
+        "leafletIndument": [
+          "ek1afugs6"
+        ],
+        "leafletPetiolule": [
+          "48w3dtmoc",
+          "jsrt8xgha"
+        ]
+      }
+    },
+    {
+      "id": "a518bcf8-2798-4f5c-b01c-3e1ff1e9c70a",
+      "name": "Parahancornia krukovii",
+      "description": "Nome popular: amapá. Família: Apocynaceae. Ocorrência: Beruri/AM. Obs. Morfo: [IA - 29/11/2025] Folhas discolores (face abaxial mais clara). Nervuras secundárias em ângulo obtuso em relação à central (quase perpendiculares). Pedúnculo do fruto robusto e lenhoso. Exsudato látex branco abundante ao corte (característica diagnóstica de 'Amapá').. IA: 🤖 ANOTAÇÕES DA IA (29/11/2025):\nConfiança: alta\n\n📝 ANOTAÇÕES DETALHADAS DA IA:\n📝 ANÁLISE BOTÂNICA DETALHADA - NervuraColetora IA\n\n🔬 IDENTIFICAÇÃO DENTRO DO GÊNERO (Parahancornia):\nO gênero Parahancornia Ducke distingue-se na família Apocynaceae (subfamília Rauvolfioideae, tribo Willughbeieae) pelo hábito arbóreo, presença abundante de látex branco (medicinal), folhas opostas (ou verticiladas em 3), e fruto bacáceo grande (amapá). A espécie sugerida, **P. krukovii**, é morfologicamente muito próxima de **P. fasciculata**. A distinção clássica seria que P. krukovii possui folhas mais estreitas e oblongas, enquanto P. fasciculata tende a ter folhas mais largas e elípticas. Nas fotos, as folhas apresentam-se oblongo-elípticas, o que mantém a possibilidade de P. krukovii, embora a tendência atual seja tratar o complexo como P. fasciculata.\n\n🌿 COMPARAÇÃO COM ESPÉCIES SIMILARES NO BIOMA AMAZÔNIA:\n1. **Couma guianensis (Sorva):** Muito similar vegetativamente e pelo látex. Diferencia-se pela filotaxia consistentemente verticilada (geralmente 3-5 folhas por nó) e frutos menores, muitas vezes em cachos mais densos. O látex da Sorva é conhecido por ser saboroso (chiclete), enquanto o do Amapá (Parahancornia) é medicinal e muitas vezes amargo.\n2. **Hancornia speciosa (Mangaba):** Ocorre mais em áreas de savana/cerrado ou enclaves, tem porte menor, ramificação dicotômica mais evidente e fruto menor com polpa diferente.\n3. **Amapa (gênero Brosimum - Moraceae):** O nome popular 'Amapá' às vezes é usado para Moraceaes (Amapá-doce), mas estas possuem estípulas terminais cônicas evidentes (o 'charuto') e folhas alternas, o que descarta totalmente este espécime (que tem folhas opostas).\n\n🔑 CHAVE DIAGNÓSTICA SIMPLIFICADA (Beruri/AM):\n1a. Folhas alternas, estípula terminal cônica................................. Moraceae (Brosimum)\n1b. Folhas opostas ou verticiladas, sem estípula cônica evidente........................ 2\n  2a. Fruto cápsula ou folículo, sementes aladas ou com arilo..................... Outros Apocynaceae\n  2b. Fruto baga globosa carnosa, grande (>6cm)................................. 3\n    3a. Folhas consistentemente verticiladas (3-5), fruto menor (<5cm)........... Couma (Sorva)\n    3b. Folhas opostas ou verticiladas (2-3), fruto grande (>6cm)................ **Parahancornia (Amapá)**\n\n📚 REFERÊNCIAS E STATUS:\nA Flora do Brasil 2020 confirma a ocorrência de *Parahancornia fasciculata* e *P. oblonga* no Amazonas. *P. krukovii* é frequentemente citada em levantamentos fitossociológicos na Amazônia Central. O status de conservação geral para o gênero na região não é de ameaça iminente, mas a exploração predatória para extração do látex (sangria até a morte da árvore) é um problema local.\n\n🗺️ DISTRIBUIÇÃO E ECOLOGIA:\nEspécie típica da Hileia Amazônica, ocorrendo preferencialmente em matas de terra firme argilosas, mas tolerando áreas de várzea alta (como é comum na região de Beruri/Purus). É uma árvore de dossel, podendo atingir grandes diâmetros.\n\n⚠️ OBSERVAÇÕES IMPORTANTES PARA O COLETOR:\nO látex deste espécime (Amapá) é um potente medicinal. No entanto, é crucial diferenciar do 'Amapá-doce' (Brosimum parinarioides) e garantir que não se trata de uma espécie tóxica de Apocynaceae. A identificação visual do fruto e folha está segura para o gênero. Para o NervuraColetora, recomenda-se manter a identificação como *Parahancornia sp.* ou *Parahancornia cf. fasciculata* até que flores sejam observadas, dada a sinonímia complexa de *krukovii*.",
+      "imageUrl": "",
+      "links": [
+        {
+          "id": "6iwlbos69",
+          "label": "Foto/Material de Referência",
+          "url": "https://photos.app.goo.gl/R2bjtAAfZQEVziUP8"
+        }
+      ],
+      "traits": {
+        "lifeForm": [
+          "gtqw02hm0"
+        ],
+        "habit": [
+          "9fwixqkzy"
+        ],
+        "leafType": [
+          "np4yl4j6v"
+        ],
+        "leafMargin": [
+          "ygveclzou",
+          "wlwfs1500"
+        ],
+        "phyllotaxy": [
+          "s80047sx4"
+        ],
+        "venation": [
+          "srftizuqd"
+        ],
+        "venationTertiary": [
+          "ofk3g3f4y",
+          "1vkw7l6o9"
+        ],
+        "leafApex": [
+          "7igrh9crn",
+          "lkpi7j1t9"
+        ],
+        "leafBase": [
+          "4uvhyndgz"
+        ],
+        "leafTexture": [
+          "ie3tol428"
+        ],
+        "indument": [
+          "fobtgl6rc"
+        ],
+        "bark": [
+          "v9bv1hsji",
+          "n4qmb7s4u",
+          "3fs19h1iu"
+        ],
+        "latex": [
+          "6gfrcf9zf",
+          "o2ivqwogl",
+          "pzo6qvmy2",
+          "167rj281r"
+        ]
+      }
+    }
+  ]
+}

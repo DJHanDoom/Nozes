@@ -1,0 +1,5850 @@
+{
+  "id": "pjcg3n5b1",
+  "name": "Óleos Vegetais para Biocosméticos Capilares Brasileiros",
+  "description": "Uma chave de identificação matricial para óleos vegetais naturais provenientes da flora brasileira ou cultivados no Brasil, destinados ao uso em biocosméticos artesanais capilares, com foco em seus efeitos no couro cabeludo e nos fios de cabelo. Este guia é elaborado para cientistas e especialistas da área, utilizando terminologia botânica e química precisa para a distinção das entidades.",
+  "features": [
+    {
+      "id": "naw6diczu",
+      "name": "Viscosidade do Óleo (a 25°C)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "6mao2c97c",
+          "label": "Baixa (<50 cSt)"
+        },
+        {
+          "id": "dlox53dv1",
+          "label": "Média (50-200 cSt)"
+        },
+        {
+          "id": "gok2waf9q",
+          "label": "Alta (>200 cSt)"
+        }
+      ]
+    },
+    {
+      "id": "a1x1uqkwh",
+      "name": "Absorção Cutânea/Capilar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "o88h2jox7",
+          "label": "Rápida"
+        },
+        {
+          "id": "94xyol6a7",
+          "label": "Média"
+        },
+        {
+          "id": "53a7gtrqy",
+          "label": "Lenta"
+        }
+      ]
+    },
+    {
+      "id": "k7uywgs9n",
+      "name": "Sensação Pós-Aplicação",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "hwj4y9wu5",
+          "label": "Leve/Seca"
+        },
+        {
+          "id": "pr1czm78h",
+          "label": "Não-Oleosa/Sedosa"
+        },
+        {
+          "id": "xh1shh0hs",
+          "label": "Oleosa/Encorpada"
+        }
+      ]
+    },
+    {
+      "id": "zncex5stq",
+      "name": "Predominância de Ácidos Graxos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "1zgtcpa8v",
+          "label": "Saturados (Ex: Láurico, Mirístico)"
+        },
+        {
+          "id": "33zeeoi71",
+          "label": "Monoinsaturados (Ex: Oleico)"
+        },
+        {
+          "id": "y47wwnm0p",
+          "label": "Poliinsaturados (Ex: Linoleico, Linolênico)"
+        }
+      ]
+    },
+    {
+      "id": "00uv2j3fw",
+      "name": "Presença de Ésteres Cera",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "963pzddrt",
+          "label": "Sim"
+        },
+        {
+          "id": "bxzppo82k",
+          "label": "Não"
+        }
+      ]
+    },
+    {
+      "id": "0e3oav06x",
+      "name": "Conteúdo de Fitoesteróis",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "b68u715d1",
+          "label": "Baixo"
+        },
+        {
+          "id": "y925qv7la",
+          "label": "Moderado"
+        },
+        {
+          "id": "akhovr9l8",
+          "label": "Alto"
+        }
+      ]
+    },
+    {
+      "id": "rey13gvhz",
+      "name": "Propriedades Antioxidantes (Nível)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "2tw80kycx",
+          "label": "Baixo"
+        },
+        {
+          "id": "etqqhif1r",
+          "label": "Moderado"
+        },
+        {
+          "id": "x2av7r8xu",
+          "label": "Elevado"
+        }
+      ]
+    },
+    {
+      "id": "ns58f1ugd",
+      "name": "Potencial Anti-inflamatório",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "842t5gf9h",
+          "label": "Ausente/Baixo"
+        },
+        {
+          "id": "b0wrx04i1",
+          "label": "Moderado"
+        },
+        {
+          "id": "7asrsljnf",
+          "label": "Alto"
+        }
+      ]
+    },
+    {
+      "id": "9finmum1i",
+      "name": "Indicação para Couro Cabeludo Oleoso",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9wfx6zmfs",
+          "label": "Adequado"
+        },
+        {
+          "id": "ebrx15e7j",
+          "label": "Neutro"
+        },
+        {
+          "id": "wj4smrnwj",
+          "label": "Não Adequado"
+        }
+      ]
+    },
+    {
+      "id": "sdjlrfxpl",
+      "name": "Indicação para Couro Cabeludo Seco/Sensível",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "g0bslnan2",
+          "label": "Adequado"
+        },
+        {
+          "id": "a2h74vuff",
+          "label": "Neutro"
+        },
+        {
+          "id": "8ctqxpwz6",
+          "label": "Não Adequado"
+        }
+      ]
+    },
+    {
+      "id": "0470cvyk2",
+      "name": "Indicação para Cabelos Secos/Danificados",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ydsgbgaqd",
+          "label": "Adequado"
+        },
+        {
+          "id": "nyum65sgq",
+          "label": "Neutro"
+        },
+        {
+          "id": "jm78n2tfp",
+          "label": "Não Adequado"
+        }
+      ]
+    },
+    {
+      "id": "ss5unfxmx",
+      "name": "Indicação para Cabelos Finos/Frágeis",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "1i6d3bzcl",
+          "label": "Adequado"
+        },
+        {
+          "id": "6wofjp2nj",
+          "label": "Neutro"
+        },
+        {
+          "id": "ocqxvvpfd",
+          "label": "Não Adequado"
+        }
+      ]
+    },
+    {
+      "id": "g5slca2b8",
+      "name": "Capacidade de Formar Filme Protetor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "6860by5o5",
+          "label": "Baixa"
+        },
+        {
+          "id": "8m9ziipo4",
+          "label": "Média"
+        },
+        {
+          "id": "uwix62mod",
+          "label": "Alta"
+        }
+      ]
+    },
+    {
+      "id": "1ei8uy5p5",
+      "name": "Aroma Característico",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "m0npak3e4",
+          "label": "Suave/Neutro"
+        },
+        {
+          "id": "kwxw3ay7g",
+          "label": "Herbal/Terroso"
+        },
+        {
+          "id": "esxzp1r2o",
+          "label": "Frutado/Amendoado"
+        },
+        {
+          "id": "adf1kqxkt",
+          "label": "Forte/Peculiar"
+        }
+      ]
+    },
+    {
+      "id": "24jb7p9tz",
+      "name": "Cor do Óleo Bruto",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "67lbprm43",
+          "label": "Incolor/Amarelo Pálido"
+        },
+        {
+          "id": "ilz2uhhl1",
+          "label": "Amarelo Intenso/Dourado"
+        },
+        {
+          "id": "obxwskf3g",
+          "label": "Laranja/Vermelho"
+        },
+        {
+          "id": "2oyckdx67",
+          "label": "Verde Escuro/Marrom"
+        }
+      ]
+    },
+    {
+      "id": "qq071un3u",
+      "name": "Estado Físico à Temperatura Ambiente (25°C)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "yqmbg7rdl",
+          "label": "Líquido"
+        },
+        {
+          "id": "0oawbkoql",
+          "label": "Semi-sólido/Manteiga"
+        }
+      ]
+    },
+    {
+      "id": "osnz9w0il",
+      "name": "Potencial Antifúngico/Antibacteriano",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "5arl68c1i",
+          "label": "Baixo"
+        },
+        {
+          "id": "yqyz9kd3x",
+          "label": "Moderado"
+        },
+        {
+          "id": "ggbx5p47t",
+          "label": "Alto"
+        }
+      ]
+    },
+    {
+      "id": "04btavfpr",
+      "name": "Ação Fortalecedora Capilar (Bulbo/Fio)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "7188jma2i",
+          "label": "Baixa"
+        },
+        {
+          "id": "qxg3x015w",
+          "label": "Moderada"
+        },
+        {
+          "id": "ddrmkscpd",
+          "label": "Alta"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "oleo-copaiba",
+      "name": "Óleo de Copaíba",
+      "scientificName": "Copaifera reticulata",
+      "family": "Fabaceae",
+      "description": "Óleo-resina de copaíba, comumente utilizado por suas potentes propriedades anti-inflamatórias e antissépticas. Rico em sesquiterpenos, especialmente beta-cariofileno. Ideal para tratar inflamações do couro cabeludo e caspa.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Copaicaaclimacao.JPG/500px-Copaicaaclimacao.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "kwxw3ay7g"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "ggbx5p47t"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-buriti",
+      "name": "Óleo de Buriti",
+      "scientificName": "Mauritia flexuosa",
+      "family": "Arecaceae",
+      "description": "Extraído do fruto da palmeira Buriti, é extremamente rico em carotenoides (principalmente beta-caroteno), o que lhe confere um forte poder antioxidante e protetor UV. Ótimo para cabelos secos, coloridos e para proteção solar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/Mauritia.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pracaxi",
+      "name": "Óleo de Pracaxi",
+      "scientificName": "Pentaclethra macroloba",
+      "family": "Fabaceae",
+      "description": "Conhecido por seu alto teor de ácido beênico, é excelente para condicionamento e brilho capilar, além de promover a renovação celular do couro cabeludo e auxiliar na cicatrização.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pentaclethra_macroloba_Costa_Rica.jpg/400px-Pentaclethra_macroloba_Costa_Rica.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-babacu",
+      "name": "Óleo de Babaçu",
+      "scientificName": "Attalea speciosa",
+      "family": "Arecaceae",
+      "description": "Extraído das amêndoas do coco de Babaçu, é rico em ácidos graxos saturados, principalmente ácido láurico. Possui propriedades emolientes e forma uma barreira protetora nos fios, ideal para hidratação e cabelos crespos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Attalea_speciosa.JPG/400px-Attalea_speciosa.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-licuri",
+      "name": "Óleo de Licuri",
+      "scientificName": "Syagrus coronata",
+      "family": "Arecaceae",
+      "description": "Óleo da amêndoa do Licuri, uma palmeira do semiárido brasileiro. Similar ao óleo de coco, rico em ácido láurico, mirístico e oleico. Usado para hidratação, nutrição e brilho capilar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Licuri.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pataua",
+      "name": "Óleo de Patauá",
+      "scientificName": "Oenocarpus bataua",
+      "family": "Arecaceae",
+      "description": "Obtido do fruto da palmeira amazônica Patauá, possui alto teor de ácido oleico, similar ao azeite de oliva. Excelente para nutrição capilar, promovendo brilho e maciez sem pesar. Ajuda a restaurar a saúde do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Oenocarpus_bataua.jpg/400px-Oenocarpus_bataua.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-castanha-do-para",
+      "name": "Óleo de Castanha-do-Pará",
+      "scientificName": "Bertholletia excelsa",
+      "family": "Lecythidaceae",
+      "description": "Extraído da amêndoa da Castanheira-do-Pará, é um óleo leve, rico em selênio, vitamina E e ácidos graxos poli-insaturados. Nutre profundamente sem deixar resíduos pesados, promovendo elasticidade e brilho capilar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Bertholletia_excelsa_compose.jpg/400px-Bertholletia_excelsa_compose.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-andiroba",
+      "name": "Óleo de Andiroba",
+      "scientificName": "Carapa guianensis",
+      "family": "Meliaceae",
+      "description": "Extraído das sementes da Andiroba, conhecido por suas propriedades curativas e anti-inflamatórias. Rico em limonoides, é eficaz no tratamento de problemas do couro cabeludo como caspa e seborreia, além de fortalecer os fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Andirobaatacada.JPG/400px-Andirobaatacada.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "kwxw3ay7g"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "ggbx5p47t"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-acai",
+      "name": "Óleo de Açaí",
+      "scientificName": "Euterpe oleracea",
+      "family": "Arecaceae",
+      "description": "Extraído da polpa do fruto de Açaí, é rico em antocianinas, ácidos graxos essenciais e fitoesteróis. Possui grande poder antioxidante e nutritivo, revitalizando cabelos e couro cabeludo, especialmente os danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Acapalms.jpg/400px-Acapalms.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pequi",
+      "name": "Óleo de Pequi",
+      "scientificName": "Caryocar brasiliense",
+      "family": "Caryocaraceae",
+      "description": "Extraído da polpa do fruto do Pequi, é rico em ácidos graxos saturados e monoinsaturados, além de vitaminas A e E. Oferece nutrição intensa e proteção contra danos externos, sendo um excelente aliado para cabelos ressecados e crespos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Pequi01.JPG/400px-Pequi01.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "ocqxvvpfd"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-dende",
+      "name": "Óleo de Dendê",
+      "scientificName": "Elaeis guineensis",
+      "family": "Arecaceae",
+      "description": "Obtido do fruto da palma-de-óleo, é rico em betacaroteno e vitamina E. Possui alta concentração de ácidos graxos saturados e monoinsaturados, conferindo emoliência e nutrição profunda, especialmente para cabelos muito secos e étnicos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Elaeis_guineensis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-056.jpg/400px-Elaeis_guineensis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-056.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-gergelim",
+      "name": "Óleo de Gergelim",
+      "scientificName": "Sesamum indicum",
+      "family": "Pedaliaceae",
+      "description": "Extraído das sementes de gergelim, é rico em ácidos graxos insaturados, vitamina E e lignanas (sesamina, sesamolina). Possui propriedades antioxidantes e protetoras, além de ser um bom condicionador capilar e auxiliar na saúde do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Sesamum_indicum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-129.jpg/400px-Sesamum_indicum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-129.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-girassol",
+      "name": "Óleo de Girassol",
+      "scientificName": "Helianthus annuus",
+      "family": "Asteraceae",
+      "description": "Extraído das sementes de girassol, é um óleo leve, rico em ácido linoleico (Ômega-6) e vitamina E. Atua como emoliente, hidratante e antioxidante, ideal para cabelos leves e para proteger contra radicais livres.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/400px-Sunflower_sky_backdrop.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-linhaca",
+      "name": "Óleo de Linhaça",
+      "scientificName": "Linum usitatissimum",
+      "family": "Linaceae",
+      "description": "Extraído das sementes de Linhaça, é uma das maiores fontes vegetais de ácido alfa-linolênico (Ômega-3). Possui propriedades emolientes e filmógenas, sendo excelente para cabelos secos, danificados e para modelagem de cachos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Linum_usitatissimum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-088.jpg/400px-Linum_usitatissimum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-088.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-mamona",
+      "name": "Óleo de Mamona (Rícino)",
+      "scientificName": "Ricinus communis",
+      "family": "Euphorbiaceae",
+      "description": "Extraído das sementes de Mamona, seu principal componente é o ácido ricinoleico. Conhecido por suas propriedades umectantes, fortalecedoras e estimulantes do crescimento capilar. Auxilia no tratamento de caspa e queda.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Illustration_Ricinus_communis0.jpg/400px-Illustration_Ricinus_communis0.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-maracuja",
+      "name": "Óleo de Maracujá",
+      "scientificName": "Passiflora edulis",
+      "family": "Passifloraceae",
+      "description": "Extraído das sementes de Maracujá, é um óleo leve, rico em ácido linoleico. Possui propriedades emolientes e calmantes, ideal para o couro cabeludo sensível e para conferir leveza e brilho aos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Passiflora_edulis_forma_flavicarpa.jpg/400px-Passiflora_edulis_forma_flavicarpa.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-jojoba",
+      "name": "Óleo de Jojoba",
+      "scientificName": "Simmondsia chinensis",
+      "family": "Simmondsiaceae",
+      "description": "Na verdade um éster de cera líquido, sua composição é muito similar ao sebo humano. Equilibra a oleosidade do couro cabeludo, hidrata sem pesar e confere brilho e maciez. Excelente para todos os tipos de cabelo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/JojobaOil.png/400px-JojobaOil.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "963pzddrt"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-macadamia",
+      "name": "Óleo de Macadâmia",
+      "scientificName": "Macadamia integrifolia",
+      "family": "Proteaceae",
+      "description": "Extraído da noz de Macadâmia, é rico em ácido palmitoleico (Ômega-7), um ácido graxo presente no sebo humano. Penetra facilmente no fio, promovendo hidratação, maciez, brilho e protegendo contra danos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Macadamia_integrifolia.jpg/400px-Macadamia_integrifolia.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-amendoas-doces",
+      "name": "Óleo de Amêndoas Doces",
+      "scientificName": "Prunus dulcis",
+      "family": "Rosaceae",
+      "description": "Óleo suave extraído das sementes de amêndoa doce, rico em ácidos graxos mono e poli-insaturados, vitaminas A e E. Altamente emoliente e hidratante, ideal para cabelos secos e danificados, e para acalmar o couro cabeludo irritado.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Urue%C3%B1a_almendro1_lou.jpg/400px-Urue%C3%B1a_almendro1_lou.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-abacate",
+      "name": "Óleo de Abacate",
+      "scientificName": "Persea americana",
+      "family": "Lauraceae",
+      "description": "Extraído da polpa do abacate, é rico em ácidos graxos monoinsaturados (ácido oleico), vitaminas A, D e E. Possui alta capacidade de penetração, nutrindo e reparando cabelos secos e danificados. Também protege o couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Persea_americana_fruit.JPG/400px-Persea_americana_fruit.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-oliva",
+      "name": "Óleo de Oliva (Azeite)",
+      "scientificName": "Olea europaea",
+      "family": "Oleaceae",
+      "description": "Extraído do fruto da oliveira, é amplamente conhecido por sua riqueza em ácido oleico e antioxidantes. Nutre profundamente, confere brilho e elasticidade aos cabelos, além de ser benéfico para o couro cabeludo seco.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Olea_europaea_subsp_europaeaOliveTree.jpg/400px-Olea_europaea_subsp_europaeaOliveTree.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-coco",
+      "name": "Óleo de Coco",
+      "scientificName": "Cocos nucifera",
+      "family": "Arecaceae",
+      "description": "Extraído da polpa do coco, é majoritariamente composto por ácido láurico, que tem alta afinidade com as proteínas capilares. Penetra profundamente nos fios, reduzindo a perda de proteínas, hidratando e conferindo brilho.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg/400px-Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-urucum",
+      "name": "Óleo de Urucum",
+      "scientificName": "Bixa orellana",
+      "family": "Bixaceae",
+      "description": "Extraído das sementes de Urucum, é rico em carotenoides (bixina e norbixina) e tocotrienóis. Possui propriedades antioxidantes e protetoras contra a radiação UV, sendo útil para cabelos que necessitam de proteção e vitalidade.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Urucum_-_fruto_vermelho.jpg/400px-Urucum_-_fruto_vermelho.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-murumuru",
+      "name": "Óleo de Murumuru",
+      "scientificName": "Astrocaryum murumuru",
+      "family": "Arecaceae",
+      "description": "Extraído das sementes da palmeira Murumuru, é rico em ácidos láurico, mirístico e oleico. Possui alta capacidade de reparação e restauração dos cabelos danificados e crespos, conferindo elasticidade e brilho. É uma manteiga à temperatura ambiente.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Murumuru1.JPG/400px-Murumuru1.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-tucuma",
+      "name": "Óleo de Tucumã",
+      "scientificName": "Astrocaryum vulgare",
+      "family": "Arecaceae",
+      "description": "Extraído da polpa ou semente do fruto do Tucumã, é rico em betacaroteno, vitamina A e ácidos graxos palmítico e oleico. Possui alto poder de nutrição e formação de filme protetor, ideal para cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Awarra-Small.jpg/400px-Awarra-Small.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cafe-verde",
+      "name": "Óleo de Café Verde",
+      "scientificName": "Coffea arabica",
+      "family": "Rubiaceae",
+      "description": "Extraído dos grãos de café não torrados, é rico em ácidos graxos (linoleico, oleico), cafeína e ácido clorogênico. Possui propriedades antioxidantes, anti-inflamatórias e estimulantes do couro cabeludo, ajudando na circulação e no crescimento capilar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Coffea_arabica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-189.jpg/400px-Coffea_arabica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-189.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-semente-uva",
+      "name": "Óleo de Semente de Uva",
+      "scientificName": "Vitis vinifera",
+      "family": "Vitaceae",
+      "description": "Extraído das sementes da uva, é um óleo leve, rico em ácido linoleico e vitamina E. Possui propriedades antioxidantes e emolientes, ideal para cabelos finos, oleosos ou mistos, sem pesar. Também contribui para a saúde do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Cabernet_Sauvignon_Gaillac.jpg/400px-Cabernet_Sauvignon_Gaillac.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-chia",
+      "name": "Óleo de Chia",
+      "scientificName": "Salvia hispanica",
+      "family": "Lamiaceae",
+      "description": "Extraído das sementes de Chia, é uma fonte concentrada de ácido alfa-linolênico (Ômega-3) e antioxidantes. Promove hidratação, elasticidade e fortalecimento capilar, sendo leve e bem absorvido.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Salvia_aethiopis_jd_alp_0.jpg/400px-Salvia_aethiopis_jd_alp_0.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-nim",
+      "name": "Óleo de Nim",
+      "scientificName": "Azadirachta indica",
+      "family": "Meliaceae",
+      "description": "Extraído das sementes da árvore Nim, é conhecido por suas poderosas propriedades antibacterianas, antifúngicas e inseticidas. Indicado para tratar problemas do couro cabeludo como caspa, piolhos e infecções.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Neemtree.jpg/400px-Neemtree.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "ggbx5p47t"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-castanha-de-caju",
+      "name": "Óleo de Castanha-de-Caju",
+      "scientificName": "Anacardium occidentale",
+      "family": "Anacardiaceae",
+      "description": "Extraído da castanha de caju, é rico em ácido oleico e linoleico. Possui propriedades emolientes e hidratantes, que conferem maciez e brilho aos fios. Pode ser usado para nutrição de cabelos secos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Anacardium_occidentale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-010.jpg/400px-Anacardium_occidentale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-010.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-baru",
+      "name": "Óleo de Baru",
+      "scientificName": "Dipteryx alata",
+      "family": "Fabaceae",
+      "description": "Extraído da amêndoa do Baru, um fruto do Cerrado brasileiro. Rico em ácidos graxos insaturados (oleico, linoleico) e vitamina E. Possui alto poder antioxidante, nutritivo e protetor, ideal para cabelos danificados e com frizz.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Cumaru.JPG/400px-Cumaru.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pupunha",
+      "name": "Óleo de Pupunha",
+      "scientificName": "Bactris gasipaes",
+      "family": "Arecaceae",
+      "description": "Extraído da polpa do fruto da Pupunha, é rico em carotenoides (principalmente betacaroteno), tocoferóis e ácidos graxos monoinsaturados. Possui alto poder antioxidante e nutritivo, protegendo os cabelos dos danos e conferindo vitalidade.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Pupunha_%28Bactris_gasipaes%29_11.jpg/400px-Pupunha_%28Bactris_gasipaes%29_11.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cacay",
+      "name": "Óleo de Cacay",
+      "scientificName": "Caryodendron orinocense",
+      "family": "Euphorbiaceae",
+      "description": "Extraído das sementes da árvore Cacay, é rico em ácido linoleico, vitamina E e retinol. Considerado um óleo rejuvenescedor, melhora a elasticidade, nutre profundamente e confere brilho aos cabelos, além de ser benéfico para o couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Frutos_de_Cacay.jpg/400px-Frutos_de_Cacay.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-sucupira-branca",
+      "name": "Óleo de Sucupira Branca",
+      "scientificName": "Pterodon emarginatus",
+      "family": "Fabaceae",
+      "description": "Óleo obtido das sementes de Sucupira Branca. Tradicionalmente usado para problemas inflamatórios. Rico em ácidos graxos insaturados, pode auxiliar na saúde do couro cabeludo, reduzindo irritações e promovendo o bem-estar capilar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Sucupira-branca.jpg/400px-Sucupira-branca.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "kwxw3ay7g"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-sucupira-preta",
+      "name": "Óleo de Sucupira Preta",
+      "scientificName": "Pterodon pubescens",
+      "family": "Fabaceae",
+      "description": "Extraído das sementes de Sucupira Preta, possui propriedades anti-inflamatórias e analgésicas. Contribui para a saúde do couro cabeludo, podendo aliviar irritações e coceiras, além de nutrir os fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Flickr_-_Jo%C3%A3o_de_Deus_Medeiros_-_Pterodon_pubescens_%282%29.jpg/400px-Flickr_-_Jo%C3%A3o_de_Deus_Medeiros_-_Pterodon_pubescens_%282%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "kwxw3ay7g"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-bacuri",
+      "name": "Óleo de Bacuri",
+      "scientificName": "Platonia insignis",
+      "family": "Clusiaceae",
+      "description": "Extraído das sementes da árvore Bacuri, é rico em ácidos graxos palmítico e oleico, e também em tripalmitina. É uma manteiga emoliente e nutritiva, ideal para cabelos secos e danificados, promovendo a reconstrução e elasticidade.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Bacurizeiroo.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-guarana",
+      "name": "Óleo de Guaraná",
+      "scientificName": "Paullinia cupana",
+      "family": "Sapindaceae",
+      "description": "Extraído das sementes de Guaraná, contém cafeína e taninos. Embora mais comum como extrato, o óleo pode ter propriedades estimulantes para o couro cabeludo, promovendo microcirculação e fortalecimento dos fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Paullinia_cupana_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-234.jpg/400px-Paullinia_cupana_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-234.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-inaja",
+      "name": "Óleo de Inajá",
+      "scientificName": "Attalea maripa",
+      "family": "Arecaceae",
+      "description": "Extraído do fruto da palmeira Inajá, é rico em ácidos graxos saturados (láurico, mirístico) e oleico. Possui propriedades nutritivas e emolientes, ideal para hidratação profunda de cabelos secos e opacos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Attalea_maripa_closeup.jpg/400px-Attalea_maripa_closeup.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-castanha-de-sapucaia",
+      "name": "Óleo de Castanha-de-Sapucaia",
+      "scientificName": "Lecythis pisonis",
+      "family": "Lecythidaceae",
+      "description": "Óleo extraído das sementes da Sapucaia, rico em ácidos graxos insaturados e minerais. Possui propriedades nutritivas e emolientes, que auxiliam na hidratação e no fortalecimento dos fios, conferindo brilho e maciez.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Lecythis_marcgraaviana_Miers_%2811684873315%29.jpg/400px-Lecythis_marcgraaviana_Miers_%2811684873315%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-maraja",
+      "name": "Óleo de Marajá",
+      "scientificName": "Bactris maraja",
+      "family": "Arecaceae",
+      "description": "Extraído das sementes da palmeira Marajá, possui ácidos graxos saturados e monoinsaturados. Apresenta propriedades emolientes e nutritivas, contribuindo para a hidratação e maciez dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Jo%C3%A3o_Barbosa_Rodrigues_-_A._Bactris_umbraticola%3B_B._Bactris_umbrosa.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-uxi",
+      "name": "Óleo de Uxi",
+      "scientificName": "Endopleura uchi",
+      "family": "Humiriaceae",
+      "description": "Extraído da semente do Uxi, é rico em ácidos graxos saturados e insaturados. Conhecido por suas propriedades emolientes e anti-inflamatórias, é benéfico para o couro cabeludo, ajudando a aliviar irritações e a nutrir os fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Uxi.jpg/400px-Uxi.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-semente-abobora",
+      "name": "Óleo de Semente de Abóbora",
+      "scientificName": "Cucurbita pepo",
+      "family": "Cucurbitaceae",
+      "description": "Extraído das sementes de abóbora, é rico em ácidos graxos insaturados, zinco, vitamina E e fitoesteróis. Possui propriedades antioxidantes e anti-inflamatórias, e é conhecido por auxiliar na saúde do couro cabeludo e na prevenção da queda capilar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Courgette_Cucurbita_pepo.jpg/400px-Courgette_Cucurbita_pepo.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "yqyz9kd3x"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cupuacu",
+      "name": "Óleo de Cupuaçu",
+      "scientificName": "Theobroma grandiflorum",
+      "family": "Malvaceae",
+      "description": "Extraído da semente do Cupuaçu, é uma manteiga rica em ácidos graxos saturados (palmítico, esteárico) e poliinsaturados. Possui alta capacidade de absorção de água, sendo um excelente emoliente e hidratante para cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Theobroma_fruits_and_Theobroma_grandiflorum_-_Spanish_labels_%28calabaza_-amphisarca%29.jpg/400px-Theobroma_fruits_and_Theobroma_grandiflorum_-_Spanish_labels_%28calabaza_-amphisarca%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cacau",
+      "name": "Óleo de Cacau",
+      "scientificName": "Theobroma cacao",
+      "family": "Malvaceae",
+      "description": "Extraído das sementes de cacau, é uma manteiga rica em ácidos graxos saturados (esteárico, palmítico) e antioxidantes. Altamente emoliente e nutritivo, confere maciez, brilho e proteção a cabelos secos e crespos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Cacaueiro_-_Par%C3%A1_2015.jpg/400px-Cacaueiro_-_Par%C3%A1_2015.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cupui",
+      "name": "Óleo de Cupuí",
+      "scientificName": "Theobroma speciosum",
+      "family": "Malvaceae",
+      "description": "Extraído das sementes de Cupuí, semelhante ao cupuaçu, possui uma manteiga rica em ácidos graxos saturados e monoinsaturados. Proporciona hidratação intensa, emoliência e revitalização para cabelos secos e opacos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Flores_do_cacauieiro.JPG/400px-Flores_do_cacauieiro.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "gok2waf9q"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pindaiba",
+      "name": "Óleo de Pindaíba",
+      "scientificName": "Duguetia lanceolata",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Pindaíba, possui ácidos graxos insaturados. Pode apresentar propriedades nutritivas e emolientes, contribuindo para a maciez e o condicionamento dos fios capilares.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Pindaiba_fruit.jpg/400px-Pindaiba_fruit.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-umburana",
+      "name": "Óleo de Umburana",
+      "scientificName": "Amburana cearensis",
+      "family": "Fabaceae",
+      "description": "Óleo extraído das sementes da Umburana, conhecida por seu aroma. Rico em ácidos graxos insaturados. Possui propriedades emolientes e pode ajudar a condicionar e perfumar os cabelos de forma suave.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Cumaru-nordestino.JPG/400px-Cumaru-nordestino.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-fava-d-anta",
+      "name": "Óleo de Fava-d'anta",
+      "scientificName": "Dimorphandra mollis",
+      "family": "Fabaceae",
+      "description": "Óleo obtido das sementes de Fava-d'anta, rico em ácidos graxos insaturados. Suas propriedades emolientes podem contribuir para a nutrição e o condicionamento capilar, auxiliando na maciez e no brilho dos fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Favadanta02.jpg/400px-Favadanta02.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-jua",
+      "name": "Óleo de Juá",
+      "scientificName": "Ziziphus joazeiro",
+      "family": "Rhamnaceae",
+      "description": "Extraído das sementes do Juá, que também é conhecido por suas propriedades saponáceas. O óleo pode oferecer nutrição e emoliência aos cabelos, auxiliando na limpeza suave e na saúde do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Zizyphus_joazeiro_juazeiro.JPG/400px-Zizyphus_joazeiro_juazeiro.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cutia",
+      "name": "Óleo de Cutia",
+      "scientificName": "Couepia edulis",
+      "family": "Chrysobalanaceae",
+      "description": "Óleo obtido das sementes de Cutia, rico em ácidos graxos insaturados. Possui propriedades emolientes e nutritivas, contribuindo para a hidratação e condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Indigenous_fruits_noncommercial.png/500px-Indigenous_fruits_noncommercial.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-tuchaua",
+      "name": "Óleo de Tuchaua",
+      "scientificName": "Astrocaryum chambira",
+      "family": "Arecaceae",
+      "description": "Extraído da palmeira Tuchaua, similar ao Tucumã, apresenta propriedades nutritivas e protetoras. Rico em ácidos graxos, auxilia na hidratação, elasticidade e na formação de um filme protetor nos fios capilares.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Astrocaryum_chambira_%2819854314902%29.jpg/400px-Astrocaryum_chambira_%2819854314902%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-inajazeiro",
+      "name": "Óleo de Inajazeiro",
+      "scientificName": "Attalea butyracea",
+      "family": "Arecaceae",
+      "description": "Variação do óleo de Inajá, proveniente de outra espécie de Attalea. Possui características semelhantes, rico em ácidos graxos saturados e monoinsaturados, conferindo nutrição e emoliência aos cabelos e couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Attalea_butyracea_%2819601924100%29.jpg/400px-Attalea_butyracea_%2819601924100%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pati",
+      "name": "Óleo de Pati",
+      "scientificName": "Syagrus romanzoffiana",
+      "family": "Arecaceae",
+      "description": "Óleo extraído da palmeira Pati, rico em ácidos graxos saturados e monoinsaturados. Possui propriedades nutritivas e emolientes, sendo útil para a hidratação e condicionamento de cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Jeriv%C3%A1_%28do_tupi_%C3%AEara%27yb%C3%A1%29_no_Rio_Grande_do_Sul_02.jpg/400px-Jeriv%C3%A1_%28do_tupi_%C3%AEara%27yb%C3%A1%29_no_Rio_Grande_do_Sul_02.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-macauba",
+      "name": "Óleo de Macaúba",
+      "scientificName": "Acrocomia aculeata",
+      "family": "Arecaceae",
+      "description": "Extraído do fruto da palmeira Macaúba, é rico em ácidos graxos saturados e monoinsaturados, além de carotenoides. Possui propriedades emolientes, nutritivas e protetoras, ideal para cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Maca%C3%BAba_23_03_15S_-_49_01_33W_REFON.jpg/400px-Maca%C3%BAba_23_03_15S_-_49_01_33W_REFON.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-guabiroba",
+      "name": "Óleo de Guabiroba",
+      "scientificName": "Campomanesia reitziana",
+      "family": "Myrtaceae",
+      "description": "Óleo obtido das sementes de Guabiroba. Possui ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na hidratação e no brilho dos fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Falta_imagem_aves.svg/400px-Falta_imagem_aves.svg.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-guapeva",
+      "name": "Óleo de Guapeva",
+      "scientificName": "Pouteria bullata",
+      "family": "Sapotaceae",
+      "description": "Extraído das sementes de Guapeva. Rico em ácidos graxos insaturados. Possui propriedades emolientes e nutritivas, contribuindo para a maciez e o brilho dos fios capilares, além de hidratar.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Falta_imagem_aves.svg/400px-Falta_imagem_aves.svg.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-munguba",
+      "name": "Óleo de Munguba",
+      "scientificName": "Pachira aquatica",
+      "family": "Malvaceae",
+      "description": "Extraído das sementes da Munguba. Possui ácidos graxos insaturados. Conhecido por suas propriedades nutritivas e emolientes, pode auxiliar na hidratação e no condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/PACHIRA_AQUATICA.JPG/400px-PACHIRA_AQUATICA.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-ariticum",
+      "name": "Óleo de Ariticum",
+      "scientificName": "Annona cacans",
+      "family": "Annonaceae",
+      "description": "Óleo extraído das sementes de Ariticum. Possui ácidos graxos insaturados e pode oferecer propriedades emolientes e nutritivas para os cabelos, auxiliando na maciez e hidratação.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/AnnonaCacans.jpg/400px-AnnonaCacans.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-bacuripari",
+      "name": "Óleo de Bacuripari",
+      "scientificName": "Garcinia brasiliensis",
+      "family": "Clusiaceae",
+      "description": "Óleo extraído do fruto de Bacuripari. Rico em ácidos graxos insaturados e antioxidantes. Pode apresentar propriedades nutritivas, emolientes e antioxidantes, contribuindo para a saúde dos cabelos e do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Garcinia_subelliptica_%28200703%29.jpg/400px-Garcinia_subelliptica_%28200703%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pindaiba-cerrado",
+      "name": "Óleo de Pindaíba-do-Cerrado",
+      "scientificName": "Duguetia furfuracea",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Pindaíba-do-Cerrado, com propriedades semelhantes à Pindaíba comum. Possui ácidos graxos insaturados que conferem emoliência e nutrição aos fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/PINDAUVA_DO_CAMPO_%28Duguetia_furfuracea%29.jpg/500px-PINDAUVA_DO_CAMPO_%28Duguetia_furfuracea%29.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pinha",
+      "name": "Óleo de Pinha",
+      "scientificName": "Annona squamosa",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Pinha. Rico em ácidos graxos insaturados. Possui propriedades nutritivas e emolientes, sendo útil para a hidratação e condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sugar_apple_on_tree.jpg/400px-Sugar_apple_on_tree.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-graviola",
+      "name": "Óleo de Graviola",
+      "scientificName": "Annona muricata",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Graviola. Rico em ácidos graxos insaturados. Possui propriedades nutritivas e emolientes, contribuindo para a hidratação, maciez e vitalidade dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Soursop_fruit.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-araca",
+      "name": "Óleo de Araçá",
+      "scientificName": "Psidium cattleyanum",
+      "family": "Myrtaceae",
+      "description": "Extraído das sementes de Araçá. Rico em ácidos graxos insaturados e antioxidantes. Pode oferecer propriedades nutritivas, emolientes e protetoras, contribuindo para a vitalidade dos cabelos e do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Ara%C3%A7%C3%A1-rosa_%28do_tupi_aras%C3%A1%29%2C_Psidium_cattleyanum_02.jpg/400px-Ara%C3%A7%C3%A1-rosa_%28do_tupi_aras%C3%A1%29%2C_Psidium_cattleyanum_02.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-pitanga",
+      "name": "Óleo de Pitanga",
+      "scientificName": "Eugenia uniflora",
+      "family": "Myrtaceae",
+      "description": "Extraído das sementes de Pitanga. Rico em ácidos graxos insaturados e antioxidantes. Possui propriedades nutritivas e protetoras, auxiliando na vitalidade dos cabelos e do couro cabeludo, além de um aroma agradável.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Pitanga_%28do_tupi_%27ybapytanga%29_no_pampa_ga%C3%BAcho_01.jpg/400px-Pitanga_%28do_tupi_%27ybapytanga%29_no_pampa_ga%C3%BAcho_01.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cambuci",
+      "name": "Óleo de Cambuci",
+      "scientificName": "Campomanesia phaea",
+      "family": "Myrtaceae",
+      "description": "Óleo obtido das sementes de Cambuci. Rico em ácidos graxos insaturados e antioxidantes. Pode oferecer propriedades nutritivas e protetoras para os cabelos, auxiliando na saúde capilar geral.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Webysther_20190219235610_-_Fruta_do_cambuci_%28Campomanesia_phaea%29-_na_esquerda-direita_%C3%A9_o_fruto_maduro_e_no_centro_%C3%A9_o_fruto_verde.jpg/400px-Webysther_20190219235610_-_Fruta_do_cambuci_%28Campomanesia_phaea%29-_na_esquerda-direita_%C3%A9_o_fruto_maduro_e_no_centro_%C3%A9_o_fruto_verde.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-gabiroba-cerrado",
+      "name": "Óleo de Gabiroba-do-Cerrado",
+      "scientificName": "Campomanesia adamantium",
+      "family": "Myrtaceae",
+      "description": "Extraído das sementes de Gabiroba-do-Cerrado. Rico em ácidos graxos insaturados e antioxidantes. Possui propriedades nutritivas e protetoras, contribuindo para a vitalidade dos cabelos e do couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Guabiroba_fruto.jpg/400px-Guabiroba_fruto.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "o88h2jox7"
+        ],
+        "k7uywgs9n": [
+          "hwj4y9wu5"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-araticum-cerrado",
+      "name": "Óleo de Araticum-do-Cerrado",
+      "scientificName": "Annona crassiflora",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Araticum-do-Cerrado. Rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na maciez e hidratação.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Marolo.JPG/400px-Marolo.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-marolo",
+      "name": "Óleo de Marolo",
+      "scientificName": "Annona coriacea",
+      "family": "Annonaceae",
+      "description": "Extraído das sementes de Marolo. Rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na maciez e hidratação.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Araticum-do-brejo.jpg/400px-Araticum-do-brejo.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-sapucaia-mirim",
+      "name": "Óleo de Sapucaia-Mirim",
+      "scientificName": "Lecythis minor",
+      "family": "Lecythidaceae",
+      "description": "Óleo extraído das sementes de Sapucaia-Mirim, com propriedades semelhantes à Sapucaia comum. Rico em ácidos graxos insaturados, pode nutrir e fortalecer os fios capilares.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Lecythis_minor_5zz.jpg/400px-Lecythis_minor_5zz.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cajui",
+      "name": "Óleo de Cajuí",
+      "scientificName": "Anacardium humile",
+      "family": "Anacardiaceae",
+      "description": "Extraído da castanha de Cajuí (uma espécie nativa do Cerrado), com propriedades semelhantes ao óleo de castanha de caju. Rico em ácidos graxos insaturados, nutre e hidrata os cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cajuzindo-do-cerrado.jpg/400px-Cajuzindo-do-cerrado.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-gurgel",
+      "name": "Óleo de Gurgel",
+      "scientificName": "Syagrus oleracea",
+      "family": "Arecaceae",
+      "description": "Óleo extraído da palmeira Gurgel. Rico em ácidos graxos saturados e monoinsaturados. Propriedades nutritivas e emolientes, sendo útil para a hidratação e condicionamento de cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Syagrus-oleracea.jpg/400px-Syagrus-oleracea.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-indaia",
+      "name": "Óleo de Indaiá",
+      "scientificName": "Attalea dubia",
+      "family": "Arecaceae",
+      "description": "Extraído do fruto da palmeira Indaiá. Rico em ácidos graxos saturados e monoinsaturados. Possui propriedades nutritivas e emolientes, sendo útil para a hidratação e condicionamento de cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Attalea_brasiliensis.jpg/400px-Attalea_brasiliensis.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-jucara",
+      "name": "Óleo de Juçara",
+      "scientificName": "Euterpe edulis",
+      "family": "Arecaceae",
+      "description": "Extraído da polpa do fruto da palmeira Juçara, parente do Açaí. Rico em antocianinas e ácidos graxos essenciais. Possui propriedades antioxidantes e nutritivas, revitalizando cabelos e couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Palmera_palmito_Parque_nacional_Iguaz%C3%BA.JPG/400px-Palmera_palmito_Parque_nacional_Iguaz%C3%BA.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "akhovr9l8"
+        ],
+        "rey13gvhz": [
+          "x2av7r8xu"
+        ],
+        "ns58f1ugd": [
+          "b0wrx04i1"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "2oyckdx67"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "qxg3x015w"
+        ]
+      }
+    },
+    {
+      "id": "oleo-jupati",
+      "name": "Óleo de Jupati",
+      "scientificName": "Raphia taedigera",
+      "family": "Arecaceae",
+      "description": "Extraído do fruto da palmeira Jupati, é rico em ácidos graxos saturados e monoinsaturados. Possui propriedades nutritivas e emolientes, sendo útil para a hidratação e condicionamento de cabelos secos e danificados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/PSM_V60_D403_Raphia_toedigera_the_jupay_of_the_lower_amazons.png/400px-PSM_V60_D403_Raphia_toedigera_the_jupay_of_the_lower_amazons.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "53a7gtrqy"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-cumaru",
+      "name": "Óleo de Cumaru",
+      "scientificName": "Dipteryx odorata",
+      "family": "Fabaceae",
+      "description": "Extraído da semente da árvore Cumaru, rico em cumarina (responsável pelo aroma), ácido oleico e linoleico. Possui propriedades emolientes, antioxidantes e confere brilho aos cabelos, além de um aroma doce característico.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Tonka_Beans.jpg/400px-Tonka_Beans.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-piquia-bravo",
+      "name": "Óleo de Piquiá-Bravo",
+      "scientificName": "Caryocar glabrum",
+      "family": "Caryocaraceae",
+      "description": "Extraído do fruto de Piquiá-Bravo, similar ao Pequi. Rico em ácidos graxos saturados e monoinsaturados, além de vitaminas. Oferece nutrição intensa e proteção contra danos externos, ideal para cabelos ressecados.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Caryocar_glabrum.jpg/400px-Caryocar_glabrum.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "1zgtcpa8v"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "wj4smrnwj"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "ocqxvvpfd"
+        ],
+        "g5slca2b8": [
+          "uwix62mod"
+        ],
+        "1ei8uy5p5": [
+          "adf1kqxkt"
+        ],
+        "24jb7p9tz": [
+          "obxwskf3g"
+        ],
+        "qq071un3u": [
+          "0oawbkoql"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-jenipapo",
+      "name": "Óleo de Jenipapo",
+      "scientificName": "Genipa americana",
+      "family": "Rubiaceae",
+      "description": "Extraído das sementes de Jenipapo. Rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes, contribuindo para a hidratação e condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Genipa_americana.jpg/400px-Genipa_americana.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-mangaba",
+      "name": "Óleo de Mangaba",
+      "scientificName": "Hancornia speciosa",
+      "family": "Apocynaceae",
+      "description": "Extraído das sementes de Mangaba, é rico em ácidos graxos insaturados. Possui propriedades nutritivas e emolientes, contribuindo para a hidratação e maciez dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Picked_mangaba_fruit.png",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "esxzp1r2o"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-oiti",
+      "name": "Óleo de Oiti",
+      "scientificName": "Licania tomentosa",
+      "family": "Chrysobalanaceae",
+      "description": "Óleo extraído das sementes de Oiti. Rico em ácidos graxos insaturados. Possui propriedades emolientes e nutritivas, contribuindo para a hidratação e o condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Licania_tomentosa.JPG/400px-Licania_tomentosa.JPG",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-semente-jatoba",
+      "name": "Óleo de Semente de Jatobá",
+      "scientificName": "Hymenaea courbaril",
+      "family": "Fabaceae",
+      "description": "Extraído das sementes de Jatobá. Rico em ácidos graxos insaturados. Possui propriedades nutritivas e emolientes, contribuindo para a hidratação e maciez dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Hymenaea_courbaril_1.jpg/400px-Hymenaea_courbaril_1.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-carobinha",
+      "name": "Óleo de Carobinha",
+      "scientificName": "Jacaranda caroba",
+      "family": "Bignoniaceae",
+      "description": "Extraído das sementes de Carobinha. Rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na maciez e no condicionamento.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flickr_-_Jo%C3%A3o_de_Deus_Medeiros_-_Jacaranda_caroba.jpg/400px-Flickr_-_Jo%C3%A3o_de_Deus_Medeiros_-_Jacaranda_caroba.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-andiroba-branca",
+      "name": "Óleo de Andiroba-Branca",
+      "scientificName": "Carapa procera",
+      "family": "Meliaceae",
+      "description": "Extraído das sementes de Carapa procera, com propriedades semelhantes à Andiroba comum, mas com possíveis variações no perfil de limonoides. Possui propriedades anti-inflamatórias e fortalecedoras para o cabelo e couro cabeludo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Touloucouna.jpg/400px-Touloucouna.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "xh1shh0hs"
+        ],
+        "zncex5stq": [
+          "33zeeoi71"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "y925qv7la"
+        ],
+        "rey13gvhz": [
+          "etqqhif1r"
+        ],
+        "ns58f1ugd": [
+          "7asrsljnf"
+        ],
+        "9finmum1i": [
+          "9wfx6zmfs"
+        ],
+        "sdjlrfxpl": [
+          "g0bslnan2"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "kwxw3ay7g"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "ggbx5p47t"
+        ],
+        "04btavfpr": [
+          "ddrmkscpd"
+        ]
+      }
+    },
+    {
+      "id": "oleo-guavira",
+      "name": "Óleo de Guavira",
+      "scientificName": "Campomanesia pubescens",
+      "family": "Myrtaceae",
+      "description": "Extraído das sementes de Guavira. Rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na hidratação e no brilho dos fios.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Campomanesia_pubescens.jpg/400px-Campomanesia_pubescens.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "6mao2c97c"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "nyum65sgq"
+        ],
+        "ss5unfxmx": [
+          "1i6d3bzcl"
+        ],
+        "g5slca2b8": [
+          "6860by5o5"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "67lbprm43"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-semente-pau-brasil",
+      "name": "Óleo de Semente de Pau-Brasil",
+      "scientificName": "Paubrasilia echinata",
+      "family": "Fabaceae",
+      "description": "Óleo extraído das sementes de Pau-Brasil. Embora a árvore seja mais conhecida pela madeira, o óleo de semente pode conter ácidos graxos insaturados com potencial nutritivo para os cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/%C3%81rvore_pau-brasil_%28Paubrasilia_echinata%29_por_Jani_Pereira.jpg/400px-%C3%81rvore_pau-brasil_%28Paubrasilia_echinata%29_por_Jani_Pereira.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "oleo-semente-angelim",
+      "name": "Óleo de Semente de Angelim",
+      "scientificName": "Dinizia excelsa",
+      "family": "Fabaceae",
+      "description": "Extraído das sementes de Angelim, rico em ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes, contribuindo para a hidratação e o condicionamento dos cabelos.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Dinizia_excelsa.jpg/400px-Dinizia_excelsa.jpg",
+      "links": [],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ],
+        "00uv2j3fw": [
+          "bxzppo82k"
+        ],
+        "0e3oav06x": [
+          "b68u715d1"
+        ],
+        "rey13gvhz": [
+          "2tw80kycx"
+        ],
+        "ns58f1ugd": [
+          "842t5gf9h"
+        ],
+        "9finmum1i": [
+          "ebrx15e7j"
+        ],
+        "sdjlrfxpl": [
+          "a2h74vuff"
+        ],
+        "0470cvyk2": [
+          "ydsgbgaqd"
+        ],
+        "ss5unfxmx": [
+          "6wofjp2nj"
+        ],
+        "g5slca2b8": [
+          "8m9ziipo4"
+        ],
+        "1ei8uy5p5": [
+          "m0npak3e4"
+        ],
+        "24jb7p9tz": [
+          "ilz2uhhl1"
+        ],
+        "qq071un3u": [
+          "yqmbg7rdl"
+        ],
+        "osnz9w0il": [
+          "5arl68c1i"
+        ],
+        "04btavfpr": [
+          "7188jma2i"
+        ]
+      }
+    },
+    {
+      "id": "lmoort59n",
+      "name": "Óleo de Pindaíba-do-Campo",
+      "scientificName": "Óleo de Pindaíba-do-Campo",
+      "family": "",
+      "description": "Extraído das sementes de Pindaíba-do-Campo. Possui ácidos graxos insaturados. Pode oferecer propriedades nutritivas e emolientes para os cabelos, auxiliando na maciez e no condicionamento.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/%C3%93leo_060107_REFON.jpg/500px-%C3%93leo_060107_REFON.jpg",
+      "links": [
+        {
+          "id": "i6stt0z7l",
+          "label": "Wikipedia",
+          "url": "https://pt.wikipedia.org/wiki/Special:Search?search=%C3%93leo%20de%20Pinda%C3%ADba-do-Campo&go=Go"
+        },
+        {
+          "id": "8vtzwwe4e",
+          "label": "GBIF",
+          "url": "https://www.gbif.org/species/search?q=%C3%93leo%20de%20Pinda%C3%ADba-do-Campo"
+        },
+        {
+          "id": "8wpiaffy1",
+          "label": "iNaturalist",
+          "url": "https://www.inaturalist.org/search?q=%C3%93leo%20de%20Pinda%C3%ADba-do-Campo"
+        },
+        {
+          "id": "9v7qol0as",
+          "label": "Flora e Funga do Brasil",
+          "url": "https://floradobrasil.jbrj.gov.br/consulta/busca.html?q=%C3%93leo%20de%20Pinda%C3%ADba-do-Campo"
+        },
+        {
+          "id": "0v2t4kq41",
+          "label": "Biodiversity4All",
+          "url": "https://www.biodiversity4all.org/search?q=%C3%93leo%20de%20Pinda%C3%ADba-do-Campo"
+        }
+      ],
+      "traits": {
+        "naw6diczu": [
+          "dlox53dv1"
+        ],
+        "a1x1uqkwh": [
+          "94xyol6a7"
+        ],
+        "k7uywgs9n": [
+          "pr1czm78h"
+        ],
+        "zncex5stq": [
+          "y47wwnm0p"
+        ]
+      }
+    }
+  ]
+}

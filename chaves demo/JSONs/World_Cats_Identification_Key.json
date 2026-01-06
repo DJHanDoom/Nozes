@@ -1,0 +1,3948 @@
+{
+  "id": "5i3i1et9g",
+  "name": "World Cats Identification Key",
+  "description": "An expert-level interactive identification key for 50 extant species and recognized species-level splits within the family Felidae (cats), globally distributed. Features include detailed morphological, behavioral, and ecological characteristics, designed for scientific and taxonomic differentiation.",
+  "features": [
+    {
+      "id": "lp9jzsuxf",
+      "name": "Pelage Pattern",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "wcmyswogg",
+          "label": "Uniform/Plain"
+        },
+        {
+          "id": "f9wn58dx3",
+          "label": "Spotted (small spots/stripes)"
+        },
+        {
+          "id": "vfziq1n58",
+          "label": "Rosetted (large broken spots)"
+        },
+        {
+          "id": "mtd8tw1j2",
+          "label": "Striped (distinct bars)"
+        },
+        {
+          "id": "rj26erea6",
+          "label": "Marbled (swirling patterns)"
+        }
+      ]
+    },
+    {
+      "id": "686jnm10m",
+      "name": "Relative Body Size",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "b9324qooj",
+          "label": "Very Small (<5 kg)"
+        },
+        {
+          "id": "skcbt823t",
+          "label": "Small (5-15 kg)"
+        },
+        {
+          "id": "gtnewx11l",
+          "label": "Medium (15-40 kg)"
+        },
+        {
+          "id": "792sqii60",
+          "label": "Large (40-100 kg)"
+        },
+        {
+          "id": "t5lry2903",
+          "label": "Very Large (>100 kg)"
+        }
+      ]
+    },
+    {
+      "id": "gulx1pqv0",
+      "name": "Tail Length Relative to Body",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "q27j2sh92",
+          "label": "Very Short (<1/4 body)"
+        },
+        {
+          "id": "yodj9in41",
+          "label": "Short (1/4 - 1/2 body)"
+        },
+        {
+          "id": "djy735cz5",
+          "label": "Medium (1/2 - 3/4 body)"
+        },
+        {
+          "id": "ud5hjjh3s",
+          "label": "Long (>= body length)"
+        }
+      ]
+    },
+    {
+      "id": "jvkt7idbq",
+      "name": "Ear Morphology",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "2ejng0ne3",
+          "label": "Rounded without tufts"
+        },
+        {
+          "id": "o2fjncynl",
+          "label": "Rounded with prominent tufts"
+        },
+        {
+          "id": "x5kx5lia0",
+          "label": "Pointed without tufts"
+        },
+        {
+          "id": "9pgy8hzgl",
+          "label": "Pointed with short tufts"
+        }
+      ]
+    },
+    {
+      "id": "3neu8khu6",
+      "name": "Social Structure",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "yxejtk2uy",
+          "label": "Solitary"
+        },
+        {
+          "id": "yukkqtpm9",
+          "label": "Gregarious (prides)"
+        },
+        {
+          "id": "bdlqsye06",
+          "label": "Pair-bonding (seasonal/loose)"
+        }
+      ]
+    },
+    {
+      "id": "avzp82zpp",
+      "name": "Primary Habitat Type",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "yhlsfq5e4",
+          "label": "Arid/Desert"
+        },
+        {
+          "id": "uwioue2hf",
+          "label": "Savannah/Grassland"
+        },
+        {
+          "id": "8bhis9ket",
+          "label": "Forest (Tropical/Temperate)"
+        },
+        {
+          "id": "jwl1jch9o",
+          "label": "Mountainous/High Altitude"
+        },
+        {
+          "id": "y66p1ud52",
+          "label": "Wetland/Aquatic"
+        }
+      ]
+    },
+    {
+      "id": "nctjw1j54",
+      "name": "Hunting Strategy",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "qla4oqtvb",
+          "label": "Stalk-and-Ambush"
+        },
+        {
+          "id": "pxi7dz0g3",
+          "label": "Pursuit (long chase)"
+        },
+        {
+          "id": "fbwomcv7y",
+          "label": "Aquatic Foraging"
+        },
+        {
+          "id": "z5zfynk1v",
+          "label": "Arboreal Predation"
+        }
+      ]
+    },
+    {
+      "id": "3o2asrtde",
+      "name": "Vocalization Type",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ifly6w3pv",
+          "label": "True Roar (Panthera)"
+        },
+        {
+          "id": "ugwpkwk5x",
+          "label": "Purring (continuous)"
+        },
+        {
+          "id": "8gjo8tq3a",
+          "label": "Chirp/Trill (distinctive calls)"
+        },
+        {
+          "id": "xqf7d4fwh",
+          "label": "Hiss/Spit/Growl (primary defensive)"
+        }
+      ]
+    },
+    {
+      "id": "celfq0zlq",
+      "name": "Presence of Mane/Ruff",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "lvbkc3lf1",
+          "label": "Absent"
+        },
+        {
+          "id": "5cym6s1i4",
+          "label": "Present (prominent mane)"
+        },
+        {
+          "id": "wbqzjzbrv",
+          "label": "Present (subtle neck ruff)"
+        }
+      ]
+    },
+    {
+      "id": "ftc3djvds",
+      "name": "Limb Proportions",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "hyu998oz4",
+          "label": "Long-legged"
+        },
+        {
+          "id": "10c1qjafd",
+          "label": "Medium-legged"
+        },
+        {
+          "id": "pw2562ke3",
+          "label": "Short-legged"
+        }
+      ]
+    },
+    {
+      "id": "ztwroflhq",
+      "name": "Snout Length",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "1fe69x0he",
+          "label": "Short/Brachycephalic"
+        },
+        {
+          "id": "62d6gee30",
+          "label": "Medium"
+        },
+        {
+          "id": "77s1qo4ld",
+          "label": "Long/Dolichocephalic"
+        }
+      ]
+    },
+    {
+      "id": "gyn7xeyn6",
+      "name": "Paw Size (relative)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "wzefhki30",
+          "label": "Small/Delicate"
+        },
+        {
+          "id": "2lfu6sjol",
+          "label": "Medium/Proportional"
+        },
+        {
+          "id": "sumvn8172",
+          "label": "Large/Broad"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "63dsmobau",
+      "name": "Cheetah",
+      "family": "Felidae",
+      "description": "A large cat native to Africa and central Iran, known for its speed. It has a slender body, deep chest, and non-retractable claws. Distinctive 'tear tracks' run from the corner of its eyes to its mouth.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/57582224/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "bdlqsye06"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "pxi7dz0g3"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "6c9czg58u",
+      "name": "Caracal",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to Africa, the Middle East, Central Asia, and India. It is characterized by a robust build, long legs, a short face, long tufted ears, and long canine teeth.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/61116593/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "elct14yz8",
+      "name": "African Golden Cat",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to the rainforests of West and Central Africa. Its coat color ranges from golden-bronze to reddish-brown or greyish, often with spots.",
+      "imageUrl": "https://static.inaturalist.org/photos/14571239/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "wc7fod5t1",
+      "name": "Asian Golden Cat",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to Northeast India, Southeast Asia, and Sumatra. Its coat is typically golden or reddish-brown, often with faint markings.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/187398363/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "e5v4547t2",
+      "name": "Bay Cat",
+      "family": "Felidae",
+      "description": "A rare wild cat endemic to the island of Borneo. It has a reddish-brown or grey coat, a relatively long tail, and round ears.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/8608809/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "jcltuxvlz",
+      "name": "Domestic Cat",
+      "family": "Felidae",
+      "description": "A small, typically furry, carnivorous mammal. It is the only domesticated species in the family Felidae and is one of the most popular pets in the world.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "mjjvrfkey",
+      "name": "European Wildcat",
+      "family": "Felidae",
+      "description": "A wild cat species native to Europe. It is a robust cat with a dense coat, typically greyish-brown with faint tabby markings, and a thick, blunt-tipped tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "yk9jczrdg",
+      "name": "African Wildcat",
+      "family": "Felidae",
+      "description": "A wild cat species native to Africa and Southwest Asia. It typically has a sandy-grey coat with faint stripes and a pointed tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "qu2g5qh7l",
+      "name": "Asiatic Wildcat",
+      "family": "Felidae",
+      "description": "A subspecies group of the wildcat native to Central Asia and India. Characterized by a sandy-grey to yellowish coat with distinct spots or stripes, often forming bands.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/278609539/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "xcmanqy21",
+      "name": "Jungle Cat",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to the Middle East, Asia, and Southeast Asia. It has a uniformly sandy, reddish-brown or grey coat, often with faint markings on the legs and tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60135146/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "dzz2tdze3",
+      "name": "Sand Cat",
+      "family": "Felidae",
+      "description": "A small wild cat found in the deserts of North Africa, Central Asia, and Southwest Asia. Its sand-colored fur provides excellent camouflage, and it has large, prominent ears.",
+      "imageUrl": "https://static.inaturalist.org/photos/270753209/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "98janl389",
+      "name": "Black-footed Cat",
+      "family": "Felidae",
+      "description": "The smallest wild cat in Africa, native to Botswana, Namibia, and South Africa. It has a tawny coat covered in black spots and stripes, with black pads on its feet.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/140144955/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "m1z1213sj",
+      "name": "Chinese Mountain Cat",
+      "family": "Felidae",
+      "description": "A small wild cat endemic to western China. It has a dense, sandy-yellow coat, often with faint spots or stripes, and a relatively broad head.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/421097576/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "9pgy8hzgl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "61ru37ll3",
+      "name": "Jaguarundi",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to the Americas. It has a long, slender body with short legs and a long tail, and can be uniform grey or reddish-brown.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/533622088/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "8gjo8tq3a"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "77s1qo4ld"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "mt5w5rxnt",
+      "name": "Ocelot",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to the southwestern United States, Mexico, Central, and South America. It is characterized by solid black spots, streaks, and rosettes on a tawny background.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/518453211/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "yid9bgnan",
+      "name": "Margay",
+      "family": "Felidae",
+      "description": "A small wild cat native to Central and South America. It is known for its ability to climb trees and its large eyes. Its coat is tawny with dark brown rosettes and streaks.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/336545285/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "z5zfynk1v"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "jl3dy9ikz",
+      "name": "Northern Tiger Cat",
+      "family": "Felidae",
+      "description": "A small wild cat found in the montane and cloud forests of Central and South America. Its coat is tawny with numerous black spots that often merge into stripes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/15426855/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "kq1mk03z0",
+      "name": "Southern Tiger Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to southern Brazil, Paraguay, and Argentina. It closely resembles the Northern Tiger Cat but is genetically distinct, with a more yellowish coat and more distinct rosettes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/15426855/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "mmkczuoky",
+      "name": "Eastern Oncilla",
+      "family": "Felidae",
+      "description": "A recently recognized species of tiger cat found in northeastern Brazil. It is characterized by its specific genetic lineage and subtle morphological differences from other oncilla species.",
+      "imageUrl": "https://static.inaturalist.org/photos/325646848/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "9gdj3d1m7",
+      "name": "Geoffroy's Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to the southern and central regions of South America. It has a silvery-grey or brownish-yellow coat densely marked with small black spots.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26456463/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "oddgi3iun",
+      "name": "Northern Pampas Cat",
+      "family": "Felidae",
+      "description": "A small wild cat found in the central and northern grasslands of South America. Its pelage is variable but typically yellowish-brown with irregular streaks or spots.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "64ohggwp8",
+      "name": "Southern Pampas Cat",
+      "family": "Felidae",
+      "description": "A small wild cat from southern South America, part of the Pampas cat complex. It often has a greyish-brown coat with faint or absent markings and a relatively bushy tail.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "i2iczwnf6",
+      "name": "Pantanal Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat found in the Pantanal wetlands of South America. It typically has a rufous-brown coat with indistinct markings and a short, stout tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/333364249/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "qa9o0qyfl",
+      "name": "Garlepp's Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat found in the high Andean grasslands of South America. It has a relatively light, yellowish-grey coat with varying spot patterns.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "hit2heiai",
+      "name": "Muñoa's Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat recognized from Uruguay and adjacent areas. It is generally greyish-yellow with indistinct patterns and a short, thick tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/117171659/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "osluybigl",
+      "name": "Nariño Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat found in the high altitude grasslands of Nariño, Colombia. It has a distinctive dark, often unpatterned, coat.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11713510/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "57pm3tfyf",
+      "name": "Andean Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to the high Andes mountain range. It has a thick, silvery-grey fur with reddish-brown spots and a long, bushy tail ringed with dark bands.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/70208142/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "4yh0qndeq",
+      "name": "Kodkod",
+      "family": "Felidae",
+      "description": "The smallest wild cat in the Americas, found in central and southern Chile and Argentina. It has a yellowish-brown to greyish coat with numerous small, dark spots.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/26456463/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "0syw4b0bo",
+      "name": "Andean Tiger Cat",
+      "family": "Felidae",
+      "description": "A distinct species of tiger cat found in high-altitude Andean cloud forests. It generally has a rich tawny-orange coat with prominent dark rosettes and a relatively long tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/15426855/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "2zrflg0dv",
+      "name": "Serval",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to Africa. It is characterized by its long legs, large ears, and a spotted coat. Exceptional hearing aids in hunting small prey in tall grass.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/127018903/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "8gjo8tq3a"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "77s1qo4ld"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "7lkard76t",
+      "name": "Eurasian Lynx",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to European and Siberian forests. It has a reddish-grey coat, often with faint spots, and distinctively long ear tufts and a short, 'bobbed' tail.",
+      "imageUrl": "https://static.inaturalist.org/photos/241776412/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "jvkt7idbq": [
+          "o2fjncynl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "m8kslb36v",
+      "name": "Bobcat",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to North America. It has a reddish-brown coat with black spots and bars, a distinctive ruff of hair on the sides of its face, and a short, black-tipped tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60028871/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "y4d60lcox",
+      "name": "Canada Lynx",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to the boreal forests of North America. It is characterized by its long, thick fur, prominent ear tufts, and large, well-padded paws adapted for snow.",
+      "imageUrl": "https://static.inaturalist.org/photos/116298857/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "jvkt7idbq": [
+          "o2fjncynl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "4alhlflne",
+      "name": "Iberian Lynx",
+      "family": "Felidae",
+      "description": "A critically endangered wild cat native to the Iberian Peninsula. It has a yellowish-tan coat with distinct spots, prominent ear tufts, and a distinctive 'beard' of hair.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/176881049/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "jvkt7idbq": [
+          "o2fjncynl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "b5upjqiru",
+      "name": "Clouded Leopard",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat found in Southeast Asia, known for its distinctive 'cloud-like' fur patterns. It is highly arboreal with a long tail for balance.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/96024237/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "z5zfynk1v"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "jawm1rz05",
+      "name": "Sunda Clouded Leopard",
+      "family": "Felidae",
+      "description": "A wild cat species endemic to Borneo and Sumatra, distinct from the mainland Clouded Leopard. It has smaller, darker cloud-like markings and a slightly darker overall pelage.",
+      "imageUrl": "https://static.inaturalist.org/photos/71259529/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "gtnewx11l"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "z5zfynk1v"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "yzzw2940w",
+      "name": "Pallas's Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to the steppes of Central Asia. It has a distinctive flattened face, stocky build, dense long fur, and rounded ears set low on the head.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/154541041/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "p6cmjm1t9",
+      "name": "Lion",
+      "family": "Felidae",
+      "description": "A large, carnivorous feline of Africa and India, known for its social structure (prides) and, in males, a prominent mane. It is a powerful apex predator.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/43633891/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "t5lry2903"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yukkqtpm9"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "5cym6s1i4"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "v524io2ih",
+      "name": "Tiger",
+      "family": "Felidae",
+      "description": "The largest extant cat species, native to Asia. It is characterized by its distinctive pattern of dark vertical stripes on reddish-orange fur. Solitary and territorial.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/43633891/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "t5lry2903"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "d7it5huik",
+      "name": "Leopard",
+      "family": "Felidae",
+      "description": "A versatile and widely distributed big cat native to Africa and Asia. It has a tawny coat patterned with rosettes (dark spots grouped in circles). Known for its arboreal habits.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/8666580/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "158p9vxl2",
+      "name": "Jaguar",
+      "family": "Felidae",
+      "description": "The largest cat in the Americas, found from the southwestern United States to northern Argentina. It has a tawny-yellow coat covered in distinct rosettes, often with a spot inside the rosette.",
+      "imageUrl": "https://static.inaturalist.org/photos/51015966/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "bnmnm3yy2",
+      "name": "Snow Leopard",
+      "family": "Felidae",
+      "description": "A large cat native to the mountain ranges of Central and South Asia. It has a thick, greyish-white coat with dark rosettes, providing excellent camouflage in rocky, snowy terrain.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/16308659/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "g3q9p2h38",
+      "name": "Marbled Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to Southeast Asia and the eastern Himalayas. Its coat is covered in irregular, large, dark-edged blotches resembling marble, giving it its name.",
+      "imageUrl": "https://static.inaturalist.org/photos/60295232/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "rj26erea6"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "z5zfynk1v"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "odz7y24z2",
+      "name": "Leopard Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to East and Southeast Asia. Its coat is widely variable, ranging from pale tawny to greyish-brown, with black spots and stripes.",
+      "imageUrl": "https://static.inaturalist.org/photos/275816639/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "w1wzir6b6",
+      "name": "Fishing Cat",
+      "family": "Felidae",
+      "description": "A medium-sized wild cat native to South and Southeast Asia, highly specialized for aquatic environments. Its coat is greyish-brown with dark spots and stripes, and it has webbed feet.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/324406071/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "fbwomcv7y"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "x2cobu306",
+      "name": "Rusty-spotted Cat",
+      "family": "Felidae",
+      "description": "One of the smallest wild cat species, native to India and Sri Lanka. It has a short, reddish-grey fur with rusty spots covering its body.",
+      "imageUrl": "https://static.inaturalist.org/photos/297300783/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "vug96s5lp",
+      "name": "Flat-headed Cat",
+      "family": "Felidae",
+      "description": "A small wild cat native to the tropical rainforests of the Malay Peninsula, Sumatra, and Borneo. It has a distinctive flattened skull, short legs, and small, rounded ears.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/52118396/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "fbwomcv7y"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "5t4yk791u",
+      "name": "Cougar/Puma",
+      "family": "Felidae",
+      "description": "A large wild cat native to the Americas, with the broadest range of any terrestrial mammal in the Western Hemisphere. It has a plain, tawny to greyish-brown coat and a long, muscular tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9834553/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "g8je9mofr",
+      "name": "Crux Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat from southern South America, recognized as part of the *Leopardus colocolo* complex. It often has a greyish-brown coat with faint or absent markings and a relatively bushy tail, found in diverse habitats including dry forests and grasslands.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "nx7qcp624",
+      "name": "Anallucina Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat from the central Andes, differentiated by its unique genetic markers and specific pelage characteristics, often with a grayish-tan coat and somewhat blurred spot patterns.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "pfkqgpyxi",
+      "name": "Chacoan Pampas Cat",
+      "family": "Felidae",
+      "description": "A distinct species within the Pampas cat complex, found in the dry Chaco regions. It typically has a pale, sandy coat with faint, often banded, markings.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/117171659/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "4p382dy9n",
+      "name": "Peruvian Pampas Cat",
+      "family": "Felidae",
+      "description": "A newly recognized species of Pampas cat from Peru, often found in high Andean grasslands. Characterized by a grayish-tan coat with relatively clear spotted patterns.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "hpmy5kl0h",
+      "name": "Columbian Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat found in the grasslands and forests of Colombia. It tends to have a darker, more uniform coat with very faint markings.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Clevelandart_1950.567.jpg/500px-Clevelandart_1950.567.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "e0gl1ralc",
+      "name": "Bolivian Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat from the Bolivian Andes, characterized by a brownish-grey coat, often with faint stripe-like patterns.",
+      "imageUrl": "https://static.inaturalist.org/photos/30983076/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "m93suryy8",
+      "name": "Quechuan Pampas Cat",
+      "family": "Felidae",
+      "description": "A species of Pampas cat recognized from the high Andean regions, particularly in Peru and Bolivia. It possesses a thick, somewhat woolly pelage with varying patterns, often a mix of spots and streaks.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "jwl1jch9o"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "ox2me0zkq",
+      "name": "Chilean Pampas Cat",
+      "family": "Felidae",
+      "description": "A recently identified species of Pampas cat from central Chile. Its coat varies from grayish to a more tawny hue, typically with a less distinct pattern of spots and streaks compared to some other Pampas cat species.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/156027880/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "a4eosqyt6",
+      "name": "Iriomote Cat",
+      "family": "Felidae",
+      "description": "A very rare and critically endangered wild cat endemic to Iriomote Island, Japan. It is a small, dark brown cat with indistinct spots and a relatively short tail.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/441690756/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "my6ehzegc",
+      "name": "Manul's Cat (Central Asian Wildcat)",
+      "family": "Felidae",
+      "description": "Sometimes considered a subspecies or distinct species from the Pallas's Cat or Asiatic Wildcat, found in the arid and semi-arid regions of Central Asia. It exhibits a yellowish-grey coat with varying degrees of spotting.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/WhfPallasCat.JPG/500px-WhfPallasCat.JPG",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "7pxeozu4f",
+      "name": "Southern African Wildcat",
+      "family": "Felidae",
+      "description": "Recognized by some as a distinct species or subspecies within the African wildcat complex, inhabiting southern Africa. It has a slightly darker and more pronounced pattern than its northern counterparts.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/99451714/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "uwioue2hf"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "jgzqfrb8c",
+      "name": "Chinese Desert Cat",
+      "family": "Felidae",
+      "description": "Often considered a synonym or a subspecies of the Chinese Mountain Cat (*Felis bieti*), found in more arid regions. It generally features a paler coat adapted to desert environments.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/421097576/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "9pgy8hzgl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "rc9pxbnor",
+      "name": "Servaline Genet (for comparison but not a cat, need another cat)",
+      "family": "Viverridae",
+      "description": "A medium-sized genet native to Central and West Africa, not a cat but similar in appearance. Its fur is dense and soft, pale yellow to grey, with numerous small, round black spots arranged in longitudinal rows.",
+      "imageUrl": "https://static.inaturalist.org/photos/13046653/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "77s1qo4ld"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "72fd1leny",
+      "name": "Bornean Bay Cat",
+      "family": "Felidae",
+      "description": "Sometimes recognized as separate from *Catopuma badia*, focusing on the Borneo population. This re-enforces its endemic nature and subtle distinctions.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/8608809/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "q8ucxooul",
+      "name": "Sumatran Marbled Cat",
+      "family": "Felidae",
+      "description": "Considered a subspecies of Marbled Cat, found on Sumatra, with distinct genetic and some morphological differences from mainland populations. It displays the characteristic marbled pelage.",
+      "imageUrl": "https://static.inaturalist.org/photos/60295232/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "rj26erea6"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "z5zfynk1v"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "ju05r72xj",
+      "name": "Andaman Leopard Cat",
+      "family": "Felidae",
+      "description": "A subspecies of Leopard Cat found on the Andaman Islands. It is generally darker with reduced spot patterns, adapted to its island habitat.",
+      "imageUrl": "https://static.inaturalist.org/photos/275816639/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "668hp86dy",
+      "name": "Javan Fishing Cat",
+      "family": "Felidae",
+      "description": "A subspecies of Fishing Cat endemic to Java, recognized for its specific morphological and genetic traits. It retains the specialized aquatic adaptations of its species.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/324406071/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "fbwomcv7y"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "fdz2qzwdm",
+      "name": "Sri Lankan Rusty-spotted Cat",
+      "family": "Felidae",
+      "description": "A subspecies of Rusty-spotted Cat endemic to Sri Lanka. It typically has a more rufous-brown base color compared to its Indian counterpart, with rusty spots.",
+      "imageUrl": "https://static.inaturalist.org/photos/297300783/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "ernf0f6wf",
+      "name": "Sumatran Flat-headed Cat",
+      "family": "Felidae",
+      "description": "A subspecies of Flat-headed Cat found on Sumatra, distinguished by slight morphological variations. It shares the same aquatic adaptations and flattened skull.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/52118396/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "yodj9in41"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "y66p1ud52"
+        ],
+        "nctjw1j54": [
+          "fbwomcv7y"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "j9h72v6kq",
+      "name": "Manchurian Lynx",
+      "family": "Felidae",
+      "description": "A subspecies of Eurasian Lynx found in parts of Siberia and Manchuria. It is typically larger with a denser coat than other lynx populations, adapted for colder climates.",
+      "imageUrl": "https://static.inaturalist.org/photos/241776412/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "jvkt7idbq": [
+          "o2fjncynl"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "t2ju2wt1i",
+      "name": "Siberian Tiger",
+      "family": "Felidae",
+      "description": "The largest tiger subspecies, native to the Russian Far East and Northeast China. Known for its thick, pale coat and broad stripes, adapted to harsh, snowy environments.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/43633891/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "t5lry2903"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "xe0hmaxre",
+      "name": "Barbary Lion",
+      "family": "Felidae",
+      "description": "An extinct subspecies of lion historically native to North Africa. Males were known for their particularly extensive dark manes, often extending over the shoulders and belly.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/43633891/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "t5lry2903"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yukkqtpm9"
+        ],
+        "avzp82zpp": [
+          "yhlsfq5e4"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "5cym6s1i4"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "br9nk6c1h",
+      "name": "Amur Leopard",
+      "family": "Felidae",
+      "description": "A critically endangered subspecies of Leopard, native to the Russian Far East and Northeast China. It has a thick, pale coat with widely spaced rosettes, adapted for cold, snowy habitats.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/8666580/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "vfziq1n58"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ifly6w3pv"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "ohbx0po25",
+      "name": "Florida Panther",
+      "family": "Felidae",
+      "description": "A critically endangered subspecies of cougar, historically found across the southeastern US, now restricted to Florida. It has a tawny coat and exhibits minor morphological differences.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9834553/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "792sqii60"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    },
+    {
+      "id": "v5mrrk88l",
+      "name": "Manx Cat (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A variant of the domestic cat, characterized by a naturally occurring genetic mutation that shortens the tail, resulting in a 'rumpy' (no tail) or 'stumpy' (short tail) appearance.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "q27j2sh92"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "4op14dhey",
+      "name": "Scottish Wildcat",
+      "family": "Felidae",
+      "description": "A distinct population of European Wildcat, endemic to Scotland. It is characterized by its robust build, dense, striped coat and bushy, ringed tail, genetically distinct from continental European wildcats.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "xqf7d4fwh"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "j7d02zjk6",
+      "name": "Rusty-spotted Bengal Cat",
+      "family": "Felidae",
+      "description": "A hybrid cat breed developed from crossing domestic cats with the Asian Leopard Cat, exhibiting a unique spotted pattern resembling the wild parent, but with domestic cat size and traits.",
+      "imageUrl": "https://static.inaturalist.org/photos/297300783/medium.jpeg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "f9wn58dx3"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "aqa79wepa",
+      "name": "Abyssinian Cat (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A domestic cat breed known for its distinctive ticked, or agouti, coat pattern, where each hair strand has multiple bands of color, giving a shimmering effect.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "abk0zl83a",
+      "name": "Persian Cat (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A domestic cat breed characterized by its long, flowing coat and distinctive round head with a short, brachycephalic muzzle.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "djy735cz5"
+        ],
+        "jvkt7idbq": [
+          "2ejng0ne3"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "pw2562ke3"
+        ],
+        "ztwroflhq": [
+          "1fe69x0he"
+        ],
+        "gyn7xeyn6": [
+          "2lfu6sjol"
+        ]
+      }
+    },
+    {
+      "id": "vuvdlnyt4",
+      "name": "Siamese Cat (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A domestic cat breed originating in Thailand, known for its distinctive pointed coat pattern (darker extremities) and slender, elegant build.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "b9324qooj"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "8gjo8tq3a"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "hyu998oz4"
+        ],
+        "ztwroflhq": [
+          "77s1qo4ld"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "o05ag9c7i",
+      "name": "Sphynx Cat (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A breed of domestic cat known for its lack of a coat, though it may have a fine down. Its skin is often wrinkled and its head has pronounced cheekbones.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "wcmyswogg"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "jvkt7idbq": [
+          "x5kx5lia0"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "ugwpkwk5x"
+        ],
+        "celfq0zlq": [
+          "lvbkc3lf1"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "wzefhki30"
+        ]
+      }
+    },
+    {
+      "id": "8miyqu0nu",
+      "name": "Maine Coon (Domestic Variant for distinctness)",
+      "family": "Felidae",
+      "description": "A large domestic cat breed, known for its long, shaggy coat, bushy tail, and tufted ears. It is one of the oldest natural cat breeds in North America.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/129658776/medium.jpg",
+      "links": [],
+      "traits": {
+        "lp9jzsuxf": [
+          "mtd8tw1j2"
+        ],
+        "686jnm10m": [
+          "skcbt823t"
+        ],
+        "gulx1pqv0": [
+          "ud5hjjh3s"
+        ],
+        "3neu8khu6": [
+          "yxejtk2uy"
+        ],
+        "avzp82zpp": [
+          "8bhis9ket"
+        ],
+        "nctjw1j54": [
+          "qla4oqtvb"
+        ],
+        "3o2asrtde": [
+          "8gjo8tq3a"
+        ],
+        "celfq0zlq": [
+          "wbqzjzbrv"
+        ],
+        "ftc3djvds": [
+          "10c1qjafd"
+        ],
+        "ztwroflhq": [
+          "62d6gee30"
+        ],
+        "gyn7xeyn6": [
+          "sumvn8172"
+        ]
+      }
+    }
+  ]
+}

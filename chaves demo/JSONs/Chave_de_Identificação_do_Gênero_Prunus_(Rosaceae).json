@@ -1,0 +1,6157 @@
+{
+  "id": "gn4ahr2k1",
+  "name": "Chave de Identificação do Gênero Prunus (Rosaceae)",
+  "description": "Chave interativa para auxiliar na identificação de 40 espécies do gênero Prunus, da família Rosaceae. Esta chave explora características botânicas gerais, incluindo aspectos vegetativos e reprodutivos, para facilitar a distinção entre as espécies.",
+  "features": [
+    {
+      "id": "m3lyiaquk",
+      "name": "Hábito da planta",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "b3n3pqxl1",
+          "label": "Árvore"
+        },
+        {
+          "id": "0nd5r9p0x",
+          "label": "Arbusto"
+        },
+        {
+          "id": "6n4g0gi42",
+          "label": "Árvore pequena ou arbusto"
+        }
+      ]
+    },
+    {
+      "id": "8er20kxq3",
+      "name": "Margem da lâmina foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "m7hkvehh4",
+          "label": "Serreada"
+        },
+        {
+          "id": "8x0boec9u",
+          "label": "Duplamente serreada"
+        },
+        {
+          "id": "d48vanbi5",
+          "label": "Crenada ou serreada"
+        },
+        {
+          "id": "0voulmwkx",
+          "label": "Inteira ou quase inteira"
+        }
+      ]
+    },
+    {
+      "id": "v82j9gbzw",
+      "name": "Presença de glândulas no pecíolo",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "evhkejcdj",
+          "label": "Presentes"
+        },
+        {
+          "id": "6ysdgmnlj",
+          "label": "Ausentes"
+        },
+        {
+          "id": "brgw0806i",
+          "label": "Variável (presentes ou ausentes)"
+        }
+      ]
+    },
+    {
+      "id": "bvj9mdvrj",
+      "name": "Forma da lâmina foliar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "pjnwy33r4",
+          "label": "Ovoide"
+        },
+        {
+          "id": "3cny2rqio",
+          "label": "Elíptica"
+        },
+        {
+          "id": "3yf6j3mej",
+          "label": "Lanceolada"
+        },
+        {
+          "id": "cbrgqdz1c",
+          "label": "Oblonga"
+        },
+        {
+          "id": "f4kb8a5n1",
+          "label": "Obovada"
+        }
+      ]
+    },
+    {
+      "id": "v5lsqq84o",
+      "name": "Pilosidade na face abaxial das folhas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ss545cawh",
+          "label": "Glabra"
+        },
+        {
+          "id": "6g2bctytp",
+          "label": "Pubescente"
+        },
+        {
+          "id": "kstu2nmg0",
+          "label": "Tomentosa"
+        },
+        {
+          "id": "0ewbbnmfl",
+          "label": "Ligeiramente pubescente"
+        }
+      ]
+    },
+    {
+      "id": "e5x74hn99",
+      "name": "Tipo de inflorescência",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "88dot1zo6",
+          "label": "Racemos (cachos alongados)"
+        },
+        {
+          "id": "arjktfxvg",
+          "label": "Umbela (em fascículos)"
+        },
+        {
+          "id": "acrij2qit",
+          "label": "Solitárias ou em pequenos grupos (1-4 flores)"
+        },
+        {
+          "id": "wbtus086y",
+          "label": "Corimbos"
+        }
+      ]
+    },
+    {
+      "id": "8f1hezgaq",
+      "name": "Cor das flores",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "7otcz0ufz",
+          "label": "Brancas"
+        },
+        {
+          "id": "ylt3d07oz",
+          "label": "Rosadas"
+        },
+        {
+          "id": "r4ti8ttai",
+          "label": "Brancas a rosadas"
+        },
+        {
+          "id": "q4d2o0xe0",
+          "label": "Vermelho-escuras"
+        }
+      ]
+    },
+    {
+      "id": "df0dzz4x2",
+      "name": "Formato do fruto (drupa)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "72g92reek",
+          "label": "Globoso"
+        },
+        {
+          "id": "1iqxtvdp8",
+          "label": "Ovoide"
+        },
+        {
+          "id": "ad9naz1ff",
+          "label": "Elipsoide"
+        },
+        {
+          "id": "y72k89aon",
+          "label": "Cordiforme"
+        },
+        {
+          "id": "hefn87o2q",
+          "label": "Oblongo"
+        }
+      ]
+    },
+    {
+      "id": "ftv9gj7hs",
+      "name": "Cor do fruto maduro",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "bvh6cd3pt",
+          "label": "Vermelho"
+        },
+        {
+          "id": "o6ektkisu",
+          "label": "Amarelo ou laranja"
+        },
+        {
+          "id": "7u7899gai",
+          "label": "Púrpura-escura a preta"
+        },
+        {
+          "id": "m9hlcz130",
+          "label": "Vermelho-claro a amarelo"
+        },
+        {
+          "id": "qemh62rqn",
+          "label": "Azul-escuro"
+        }
+      ]
+    },
+    {
+      "id": "ssfbpayre",
+      "name": "Superfície do fruto",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "71oo7p4sm",
+          "label": "Lisa"
+        },
+        {
+          "id": "2nk0c7z1t",
+          "label": "Pubescente/Aveludada"
+        },
+        {
+          "id": "gwak88xj7",
+          "label": "Glauca (com pruína cerosa)"
+        }
+      ]
+    },
+    {
+      "id": "et1zauzsv",
+      "name": "Semente (caroço) aderente à polpa",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jbrxomels",
+          "label": "Sim (aderente)"
+        },
+        {
+          "id": "h358mf76w",
+          "label": "Não (solto)"
+        }
+      ]
+    },
+    {
+      "id": "sk3jzvm13",
+      "name": "Presença de espinhos ou ramos espinhosos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "v99gznkuw",
+          "label": "Sim"
+        },
+        {
+          "id": "6sc82anhi",
+          "label": "Não"
+        },
+        {
+          "id": "073tz39bv",
+          "label": "Por vezes"
+        }
+      ]
+    },
+    {
+      "id": "qpsfsy9t8",
+      "name": "Casca do tronco",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "691d4goju",
+          "label": "Lisa e brilhante"
+        },
+        {
+          "id": "j9kwwvjgl",
+          "label": "Fissurada e escamosa"
+        },
+        {
+          "id": "7fklmqqws",
+          "label": "Rugosa"
+        },
+        {
+          "id": "6dox9dvm5",
+          "label": "Com lenticelas proeminentes"
+        }
+      ]
+    },
+    {
+      "id": "qpyewrabs",
+      "name": "Glandulas na base da lâmina foliar (apical do pecíolo)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xkufwhwy3",
+          "label": "Presentes"
+        },
+        {
+          "id": "na16ywmg4",
+          "label": "Ausentes"
+        }
+      ]
+    },
+    {
+      "id": "c4sr5xduv",
+      "name": "Tamanho médio do fruto (diâmetro)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "09w7a7rj6",
+          "label": "Pequeno (< 2 cm)"
+        },
+        {
+          "id": "q7sxdzwz0",
+          "label": "Médio (2-5 cm)"
+        },
+        {
+          "id": "iy8aolwoz",
+          "label": "Grande (> 5 cm)"
+        }
+      ]
+    },
+    {
+      "id": "hlnd0osdj",
+      "name": "Pilosidade dos ramos jovens",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "y8zuqddsc",
+          "label": "Glabros"
+        },
+        {
+          "id": "jqky3yt0v",
+          "label": "Pubescentes"
+        },
+        {
+          "id": "1jhosz1je",
+          "label": "Ligeiramente pubescentes"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "s7727yigs",
+      "name": "Cerejeira-doce",
+      "scientificName": "Prunus avium",
+      "family": "Rosaceae",
+      "description": "Uma árvore frutífera amplamente cultivada, nativa da Europa e Ásia Ocidental, valorizada pelos seus frutos doces e madeira. As flores são brancas e dispostas em umbelas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "a7ztvo0p1",
+      "name": "Cerejeira-ácida",
+      "scientificName": "Prunus cerasus",
+      "family": "Rosaceae",
+      "description": "Espécie de cerejeira conhecida por seus frutos mais ácidos, frequentemente usados em culinária. É menor que a cerejeira-doce e mais resistente ao frio.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "ayrxscabh",
+      "name": "Pessegueiro",
+      "scientificName": "Prunus persica",
+      "family": "Rosaceae",
+      "description": "Árvore frutífera amplamente cultivada por seus frutos suculentos e aveludados, nativa da China. As flores são rosadas e aparecem antes das folhas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/188900677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "iy8aolwoz"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "egsrb57jx",
+      "name": "Ameixeira-europeia",
+      "scientificName": "Prunus domestica",
+      "family": "Rosaceae",
+      "description": "Árvore de fruto conhecida pelas ameixas, amplamente cultivada em regiões temperadas. Existem muitas variedades, com frutos de diversas cores e tamanhos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340356965/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "ad9naz1ff"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "073tz39bv"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "ojwl2h57j",
+      "name": "Ameixeira-japonesa",
+      "scientificName": "Prunus salicina",
+      "family": "Rosaceae",
+      "description": "Árvore de fruto originária da China, cultivada por suas ameixas doces e grandes. Geralmente tem flores brancas e frutos que amadurecem no verão.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/179593072/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "m9hlcz130"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "nvakr78bm",
+      "name": "Damasqueiro",
+      "scientificName": "Prunus armeniaca",
+      "family": "Rosaceae",
+      "description": "Árvore de fruto cultivada em regiões de clima temperado, conhecida pelos seus frutos alaranjados e doces. Originária da Ásia Central.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340357219/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "9xns880wm",
+      "name": "Amendoeira",
+      "scientificName": "Prunus dulcis",
+      "family": "Rosaceae",
+      "description": "Árvore de fruto conhecida pelas amêndoas, suas sementes comestíveis. Florescem cedo na primavera com flores brancas ou rosadas. Nativa do Oriente Médio.",
+      "imageUrl": "https://static.inaturalist.org/photos/113968708/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "z86kbx68n",
+      "name": "Louro-cerejeira",
+      "scientificName": "Prunus laurocerasus",
+      "family": "Rosaceae",
+      "description": "Um arbusto ou árvore ornamental de folhagem perene, valorizado por suas folhas brilhantes e frutos escuros, embora as sementes sejam tóxicas. Usado em cercas vivas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/146285013/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "cbrgqdz1c"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "t1plmsbhj",
+      "name": "Cerejeira-negra",
+      "scientificName": "Prunus serotina",
+      "family": "Rosaceae",
+      "description": "Árvore grande, nativa da América do Norte. Produz frutos pequenos e escuros, comestíveis, e é valorizada por sua madeira de alta qualidade. Inflorescências em racemos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14006/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "g97379pgq",
+      "name": "Cerejeira-dos-pássaros",
+      "scientificName": "Prunus padus",
+      "family": "Rosaceae",
+      "description": "Árvore ornamental e frutífera nativa da Europa e Ásia. Os frutos são pequenos, escuros e comestíveis por pássaros. As flores brancas são dispostas em cachos pendentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11624584/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "b53aclf99",
+      "name": "Abrunheiro",
+      "scientificName": "Prunus spinosa",
+      "family": "Rosaceae",
+      "description": "Arbusto denso e espinhoso, nativo da Europa, Ásia Ocidental e Norte da África. Produz pequenas ameixas escuras e adstringentes, usadas em geleias e licores.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67812800/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "qemh62rqn"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "346qs02d2",
+      "name": "Cerejeira-americana",
+      "scientificName": "Prunus virginiana",
+      "family": "Rosaceae",
+      "description": "Arbusto ou árvore pequena nativa da América do Norte, com frutos vermelhos a roxos, ligeiramente adstringentes. As folhas são elípticas e as flores brancas em racemos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/146282563/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "3u2m3b70l",
+      "name": "Cerejeira-chorona",
+      "scientificName": "Prunus subhirtella",
+      "family": "Rosaceae",
+      "description": "Cultivar ornamental de cerejeira japonesa, conhecida por seus ramos pendentes e flores duplas rosadas, que florescem abundantemente na primavera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/182922216/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "leqlz5v2m",
+      "name": "Cerejeira-japonesa ornamental",
+      "scientificName": "Prunus serrulata",
+      "family": "Rosaceae",
+      "description": "Famosa árvore ornamental, cultivada por suas espetaculares flores na primavera. Possui muitas variedades, algumas com flores duplas. Originária da Ásia Oriental.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90432717/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "wbtus086y"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "ji44waf9k",
+      "name": "Amendoeira-anã",
+      "scientificName": "Prunus glandulosa",
+      "family": "Rosaceae",
+      "description": "Pequeno arbusto ornamental, nativo da Europa e Ásia. Apresenta flores rosadas abundantes no início da primavera. As folhas são estreitas.",
+      "imageUrl": "https://static.inaturalist.org/photos/260299624/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "69k8expgc",
+      "name": "Cerejeira-peluda",
+      "scientificName": "Prunus tomentosa",
+      "family": "Rosaceae",
+      "description": "Arbusto ou árvore pequena do Leste Asiático, valorizada pelos seus frutos vermelhos, comestíveis e ligeiramente ácidos. As folhas e ramos são pubescentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/869537/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "kstu2nmg0"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "ckblpnhbi",
+      "name": "Ameixeira-japonesa ornamental (Mume)",
+      "scientificName": "Prunus mume",
+      "family": "Rosaceae",
+      "description": "Árvore ornamental e frutífera do Leste Asiático, valorizada por suas flores perfumadas que desabrocham no inverno ou início da primavera. Seus frutos são ácidos.",
+      "imageUrl": "https://static.inaturalist.org/photos/905549/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "wbbklcyec",
+      "name": "Amendoeira-de-três-lobos",
+      "scientificName": "Prunus triloba",
+      "family": "Rosaceae",
+      "description": "Arbusto ou árvore pequena com flores rosadas, geralmente duplas, que surgem antes das folhas. As folhas podem apresentar três lóbulos distintos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/191302321/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "nfvr3x00d",
+      "name": "Cerejeira-da-Pensilvânia",
+      "scientificName": "Prunus pensylvanica",
+      "family": "Rosaceae",
+      "description": "Árvore pequena ou arbusto nativo da América do Norte, muitas vezes pioneira em áreas perturbadas. Produz pequenos frutos vermelhos ácidos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/39945615/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "wbtus086y"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "dk47kwaeh",
+      "name": "Ameixa-da-praia",
+      "scientificName": "Prunus maritima",
+      "family": "Rosaceae",
+      "description": "Arbusto nativo das dunas costeiras do leste da América do Norte. Produz frutos pequenos e doces a ácidos, usados em geleias.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/24175601/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "f4kb8a5n1"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "craht8cwz",
+      "name": "Cerejeira-rasteira",
+      "scientificName": "Prunus pumila",
+      "family": "Rosaceae",
+      "description": "Arbusto prostrado ou pequeno, nativo da América do Norte, que cresce em solos arenosos. Produz pequenos frutos roxos-escuros.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/2241283/medium.JPG",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "ek0bckx94",
+      "name": "Ameixa-negra",
+      "scientificName": "Prunus nigra",
+      "family": "Rosaceae",
+      "description": "Árvore ou arbusto nativo do leste da América do Norte. Produz ameixas comestíveis que amadurecem no verão, tornando-se escuras e pruinosas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/17985242/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "2oe7muq2o",
+      "name": "Ameixa-americana",
+      "scientificName": "Prunus americana",
+      "family": "Rosaceae",
+      "description": "Uma das espécies de ameixa selvagem mais comuns na América do Norte. Produz frutos comestíveis de cor amarela a vermelha. Frequentemente espinhosa.",
+      "imageUrl": "https://static.inaturalist.org/photos/6553272/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "m9hlcz130"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "073tz39bv"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "r931qi1nn",
+      "name": "Abrunheiro-bravo (Ameixa-mirabel)",
+      "scientificName": "Prunus insititia",
+      "family": "Rosaceae",
+      "description": "Espécie de ameixa selvagem, frequentemente espinhosa, com frutos pequenos e doces a ácidos, de cor amarela a roxa. Usada como porta-enxerto.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11530825/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "ssr1pk58w",
+      "name": "Cerejeira-de-Santa-Luzia",
+      "scientificName": "Prunus mahaleb",
+      "family": "Rosaceae",
+      "description": "Árvore ou arbusto nativo da Europa e Ásia, conhecido por suas flores perfumadas e frutos pequenos e amargos. As sementes são usadas como aromatizante.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/595804246/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "l7oxa2edc",
+      "name": "Louro-de-Portugal",
+      "scientificName": "Prunus lusitanica",
+      "family": "Rosaceae",
+      "description": "Arbusto ou pequena árvore perene, nativa da Península Ibérica e Macaronésia. Possui folhas brilhantes e flores brancas em racemos, seguida por frutos escuros.",
+      "imageUrl": "https://static.inaturalist.org/photos/428364516/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "gpzsmpjnl",
+      "name": "Louro-cerejeira-da-Carolina",
+      "scientificName": "Prunus caroliniana",
+      "family": "Rosaceae",
+      "description": "Árvore ou arbusto perene, nativo do sudeste dos Estados Unidos. Usado como planta ornamental e para cercas vivas. Folhas brilhantes e frutos escuros.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/195635137/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "hefn87o2q"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "i22xb368f",
+      "name": "Ameixa-do-deserto",
+      "scientificName": "Prunus fremontii",
+      "family": "Rosaceae",
+      "description": "Arbusto espinhoso nativo do sudoeste dos EUA, com pequenas folhas e flores que dão origem a frutos comestíveis. Adaptado a climas áridos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/82467/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "49suse3bf",
+      "name": "Ameixa-chickasaw",
+      "scientificName": "Prunus angustifolia",
+      "family": "Rosaceae",
+      "description": "Arbusto ou pequena árvore nativa do sudeste dos EUA, que forma densos matagais. Produz pequenos frutos vermelhos a amarelos, comestíveis.",
+      "imageUrl": "https://static.inaturalist.org/photos/115808401/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "m9hlcz130"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "ehrl57375",
+      "name": "Ameixa-folha-roxa",
+      "scientificName": "Prunus cistena",
+      "family": "Rosaceae",
+      "description": "Híbrido ornamental, conhecido por sua folhagem roxa escura e flores rosadas. Raramente produz frutos. É um arbusto ou pequena árvore.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/17701278/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "f32q3cg0v",
+      "name": "Mirabolano",
+      "scientificName": "Prunus cerasifera",
+      "family": "Rosaceae",
+      "description": "Árvore de fruto conhecida por seus frutos pequenos e doces, de cor variada. Frequentemente usada como planta ornamental e porta-enxerto para outras ameixas.",
+      "imageUrl": "https://static.inaturalist.org/photos/62295627/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "m9hlcz130"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "8uxi9j994",
+      "name": "Amendoeira-do-deserto",
+      "scientificName": "Prunus fasciculata",
+      "family": "Rosaceae",
+      "description": "Arbusto ou pequena árvore espinhosa, nativa do sudoeste dos EUA. Apresenta ramos nus ou com folhas pequenas, adaptada a ambientes secos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/33272304/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "r9ibxelqw",
+      "name": "Cerejeira-amarga",
+      "scientificName": "Prunus emarginata",
+      "family": "Rosaceae",
+      "description": "Árvore ou arbusto nativo do oeste da América do Norte. Produz pequenos frutos amargos, comestíveis por pássaros. As flores são brancas e em cachos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67338881/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "aamzr0hqz",
+      "name": "Cerejeira-de-Sargent",
+      "scientificName": "Prunus sargentii",
+      "family": "Rosaceae",
+      "description": "Árvore ornamental nativa do Japão e Coreia, apreciada por suas espetaculares flores rosadas e folhagem de outono vibrante. É uma das cerejeiras mais resistentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/196725442/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "ooa2l6lhz",
+      "name": "Amendoeira-anã-russa",
+      "scientificName": "Prunus tenella",
+      "family": "Rosaceae",
+      "description": "Pequeno arbusto ornamental nativo da Europa Oriental e Ásia Central. Conhecido por suas flores rosadas brilhantes e pequenos frutos secos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/92591703/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "n8tg7gmmd",
+      "name": "Cerejeira-do-Afeganistão",
+      "scientificName": "Prunus jacquemontii",
+      "family": "Rosaceae",
+      "description": "Espécie nativa do Afeganistão e Paquistão, um arbusto ou pequena árvore com flores rosadas e frutos vermelhos. Pouco cultivada fora de sua área de ocorrência.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Prunus_jacquemontii_at_Chicago_Botanic_Garden_1.jpg/400px-Prunus_jacquemontii_at_Chicago_Botanic_Garden_1.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "f0dikv8yq",
+      "name": "Cerejeira-de-Taiwan",
+      "scientificName": "Prunus campanulata",
+      "family": "Rosaceae",
+      "description": "Árvore ornamental nativa de Taiwan e sul da China. Conhecida por suas flores vibrantes, geralmente em tons de rosa ou vermelho intenso, que surgem no inverno.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/348834748/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "q4d2o0xe0"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "mpz681qw7",
+      "name": "Pêssego-amargo",
+      "scientificName": "Prunus persicoides",
+      "family": "Rosaceae",
+      "description": "Espécie selvagem de pêssego, com frutos menores e mais amargos que o pêssego cultivado, mas com caroço rugoso. Nativa da Ásia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/476016010/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "zbbz4hpmx",
+      "name": "Damasqueiro-siberiano",
+      "scientificName": "Prunus sibirica",
+      "family": "Rosaceae",
+      "description": "Árvore ou arbusto pequeno e resistente ao frio extremo, nativo da Sibéria e China. Produz pequenos frutos ácidos, semelhantes a damascos, com sementes amargas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/63442524/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "r9sihlupy",
+      "name": "Ameixa-de-Fergana",
+      "scientificName": "Prunus ferganica",
+      "family": "Rosaceae",
+      "description": "Espécie de ameixa nativa da Ásia Central, produzindo frutos roxos e doces. Cultivada em regiões áridas por sua resiliência.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "hn8j68ff3",
+      "name": "Prunus Grayana",
+      "scientificName": "Prunus grayana",
+      "family": "Rosaceae",
+      "description": "Cerejeira de racemo nativa do Japão. É uma árvore de médio porte com folhas elípticas e frutos pequenos e pretos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/13731587/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "tuu380txd",
+      "name": "Prunus yedoensis (Cerejeira de Yoshino)",
+      "scientificName": "Prunus × yedoensis",
+      "family": "Rosaceae",
+      "description": "Uma das cerejeiras mais famosas do Japão, amplamente cultivada por suas flores brancas ou rosa pálido que cobrem a árvore na primavera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45000543/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "emfuf18t7",
+      "name": "Prunus padus 'Colorata'",
+      "scientificName": "Prunus padus 'Colorata'",
+      "family": "Rosaceae",
+      "description": "Variedade ornamental da cerejeira-dos-pássaros, com folhagem mais escura e flores com um tom rosado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11624584/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "z3785vyx8",
+      "name": "Prunus incisa (Cerejeira Fuji)",
+      "scientificName": "Prunus incisa",
+      "family": "Rosaceae",
+      "description": "Pequena cerejeira nativa do Japão, conhecida por sua floração precoce e delicada, com flores brancas a rosa pálido.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/182922216/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "gf47yi1af",
+      "name": "Prunus maackii (Cerejeira-amarela)",
+      "scientificName": "Prunus maackii",
+      "family": "Rosaceae",
+      "description": "Árvore de médio porte nativa da Manchúria e Coreia, com casca distintiva cor de bronze, descamada. Flores brancas em cachos e frutos pequenos e pretos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/34058303/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "6dox9dvm5"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "19y18mxmb",
+      "name": "Prunus nipponica (Cerejeira alpina)",
+      "scientificName": "Prunus nipponica",
+      "family": "Rosaceae",
+      "description": "Pequena cerejeira nativa das montanhas do Japão. Cresce como arbusto ou pequena árvore, com flores brancas ou rosa-pálido.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/7289349/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "f4kb8a5n1"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "pc4hw0wyx",
+      "name": "Prunus subcordata (Ameixa-silvestre)",
+      "scientificName": "Prunus subcordata",
+      "family": "Rosaceae",
+      "description": "Arbusto ou pequena árvore nativa do oeste da América do Norte. Produz ameixas pequenas, vermelhas a púrpuras, com folhas cordiformes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/17243118/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "q1fodr4nh",
+      "name": "Prunus mandshurica (Damasqueiro da Manchúria)",
+      "scientificName": "Prunus mandshurica",
+      "family": "Rosaceae",
+      "description": "Árvore resistente ao frio, nativa do nordeste da Ásia. Produz damascos pequenos e amarelos, com casca ligeiramente aveludada.",
+      "imageUrl": "https://static.inaturalist.org/photos/65623403/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "v6nsj7dp4",
+      "name": "Prunus cerasifera 'Nigra'",
+      "scientificName": "Prunus cerasifera 'Nigra'",
+      "family": "Rosaceae",
+      "description": "Cultivar ornamental de mirabolano, caracterizada por sua folhagem roxa escura durante toda a estação e flores rosadas.",
+      "imageUrl": "https://static.inaturalist.org/photos/62295627/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "00d0an3cc",
+      "name": "Prunus campanulata 'Okame'",
+      "scientificName": "Prunus campanulata 'Okame'",
+      "family": "Rosaceae",
+      "description": "Cultivar popular da cerejeira-de-Taiwan, valorizada por sua floração abundante de flores rosa vibrantes e precoce.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/348834748/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "g0lvby433",
+      "name": "Prunus davidiana (Pêssego-silvestre)",
+      "scientificName": "Prunus davidiana",
+      "family": "Rosaceae",
+      "description": "Pêssego silvestre nativo da China, resistente ao frio, frequentemente usado como porta-enxerto para pêssegos e nectarinas. Floresce muito cedo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/259905054/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "au5d5n3be",
+      "name": "Prunus sphaerocarpa",
+      "scientificName": "Prunus sphaerocarpa",
+      "family": "Rosaceae",
+      "description": "Espécie arbustiva encontrada em regiões montanhosas, com frutos globosos e pequenos. Menos conhecida comercialmente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/176421613/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "s74isf0dr",
+      "name": "Prunus glandulifolia",
+      "scientificName": "Prunus glandulifolia",
+      "family": "Rosaceae",
+      "description": "Espécie caracterizada por suas folhas com muitas glândulas, um arbusto nativo do leste da Ásia.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Prunus-maackii-habit.jpg/400px-Prunus-maackii-habit.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "hj3s46n7p",
+      "name": "Prunus cerasoides (Cerejeira-do-Himalaia)",
+      "scientificName": "Prunus cerasoides",
+      "family": "Rosaceae",
+      "description": "Árvore de médio porte nativa do Himalaia, conhecida por suas flores rosadas que florescem no outono e inverno, e frutos vermelhos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/348834748/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "rgizrb4um",
+      "name": "Prunus brigantina (Alperce de Briançon)",
+      "scientificName": "Prunus brigantina",
+      "family": "Rosaceae",
+      "description": "Pequena árvore ou arbusto nativo dos Alpes franceses. Produz pequenos damascos com sementes amargas, usados para extração de óleo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/224245122/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "r0809w8ih",
+      "name": "Prunus caroliniana 'Compacta'",
+      "scientificName": "Prunus caroliniana 'Compacta'",
+      "family": "Rosaceae",
+      "description": "Cultivar compacta do louro-cerejeira-da-Carolina, ideal para cercas vivas menores e paisagismo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/195635137/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "hefn87o2q"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "sb75tgoae",
+      "name": "Prunus laurocerasus 'Otto Luyken'",
+      "scientificName": "Prunus laurocerasus 'Otto Luyken'",
+      "family": "Rosaceae",
+      "description": "Cultivar popular do louro-cerejeira, com folhas mais estreitas e porte compacto, amplamente usada em paisagismo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/146285013/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "cbrgqdz1c"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "xbb614bry",
+      "name": "Prunus lusitanica 'Angustifolia'",
+      "scientificName": "Prunus lusitanica 'Angustifolia'",
+      "family": "Rosaceae",
+      "description": "Variedade do louro-de-Portugal com folhas mais estreitas e um hábito de crescimento denso. Ideal para cercas vivas formais.",
+      "imageUrl": "https://static.inaturalist.org/photos/428364516/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "0voulmwkx"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "15xhy18r7",
+      "name": "Prunus persica 'Nucipersica' (Nectarina)",
+      "scientificName": "Prunus persica var. nucipersica",
+      "family": "Rosaceae",
+      "description": "Variedade do pessegueiro com frutos de casca lisa, sem pelos, conhecidos como nectarinas. Muitas características são idênticas ao pêssego.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/188900677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "iy8aolwoz"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "vn3wz6a5a",
+      "name": "Prunus serrulata 'Kwanzan'",
+      "scientificName": "Prunus serrulata 'Kwanzan'",
+      "family": "Rosaceae",
+      "description": "Uma das cerejeiras japonesas mais populares, famosa por suas grandes flores duplas de cor rosa profundo, que florescem na primavera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90432717/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "wbtus086y"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "5twzz3c4z",
+      "name": "Prunus x cistena 'Crimson Pointe'",
+      "scientificName": "Prunus x cistena 'Crimson Pointe'",
+      "family": "Rosaceae",
+      "description": "Variedade de ameixa-folha-roxa com crescimento mais ereto e colunar, mantendo a folhagem roxa e flores rosadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45000543/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "b2jlzsuw9",
+      "name": "Prunus triloba 'Multiplex'",
+      "scientificName": "Prunus triloba 'Multiplex'",
+      "family": "Rosaceae",
+      "description": "Cultivar ornamental da amendoeira-de-três-lobos, conhecida por suas flores duplas e exuberantes, de cor rosa intensa, que florescem antes das folhas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/191302321/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "iw18aovpf",
+      "name": "Prunus tomentosa 'Orient'",
+      "scientificName": "Prunus tomentosa 'Orient'",
+      "family": "Rosaceae",
+      "description": "Variedade da cerejeira-peluda com floração mais abundante ou frutos de cor mais intensa, mantendo as características pilosas da espécie.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/869537/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "kstu2nmg0"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "h35c2dacr",
+      "name": "Prunus okame (Cerejeira Okame)",
+      "scientificName": "Prunus 'Okame'",
+      "family": "Rosaceae",
+      "description": "Híbrido ornamental valorizado por sua floração precoce de flores rosa brilhantes e folhagem de outono atraente.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Prunus_incamp_cv_Okame.jpg/500px-Prunus_incamp_cv_Okame.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "14kzbpl5e",
+      "name": "Prunus x blireiana",
+      "scientificName": "Prunus × blireiana",
+      "family": "Rosaceae",
+      "description": "Híbrido ornamental conhecido pela folhagem púrpura escura e flores duplas rosadas. Hábito de crescimento arbustivo ou como pequena árvore.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/BlireianaPlum_Cutler_closeup.jpg/400px-BlireianaPlum_Cutler_closeup.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "fw3wjmpn1",
+      "name": "Prunus x cistena 'Purpleleaf Sand Cherry'",
+      "scientificName": "Prunus x cistena",
+      "family": "Rosaceae",
+      "description": "Nome comum para Prunus x cistena, que é um híbrido ornamental com folhagem roxa e flores rosadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45000543/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "9rhdexwox",
+      "name": "Prunus 'Accolade'",
+      "scientificName": "Prunus 'Accolade'",
+      "family": "Rosaceae",
+      "description": "Híbrido ornamental de cerejeira, valorizado por suas abundantes flores semiduplas de cor rosa, que florescem no início da primavera.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Prunus_%27Accolade%27_Flowers_3008px.jpg/500px-Prunus_%27Accolade%27_Flowers_3008px.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "o961080be",
+      "name": "Prunus avium 'Plena'",
+      "scientificName": "Prunus avium 'Plena'",
+      "family": "Rosaceae",
+      "description": "Cultivar de cerejeira-doce com flores duplas, brancas e muito ornamentais, que não produzem frutos ou produzem muito poucos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "shcpb8vvf",
+      "name": "Prunus cerasifera 'Pissardii'",
+      "scientificName": "Prunus cerasifera 'Pissardii'",
+      "family": "Rosaceae",
+      "description": "Variedade do mirabolano, com folhas de cor púrpura escura e flores rosa pálido que surgem no início da primavera.",
+      "imageUrl": "https://static.inaturalist.org/photos/62295627/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "m9hlcz130"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "bmj244x1y",
+      "name": "Prunus persica 'Pendula' (Pessegueiro chorão)",
+      "scientificName": "Prunus persica 'Pendula'",
+      "family": "Rosaceae",
+      "description": "Cultivar ornamental de pessegueiro com ramos pendentes, frequentemente cultivada por seu hábito distinto e flores rosadas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/188900677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "iy8aolwoz"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "z9ora3gsn",
+      "name": "Prunus padus 'Summerglow'",
+      "scientificName": "Prunus padus 'Summerglow'",
+      "family": "Rosaceae",
+      "description": "Variedade ornamental da cerejeira-dos-pássaros, com folhagem que ganha tons de bronze a roxo no outono.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11624584/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "i35mygb4a",
+      "name": "Prunus armeniaca 'Tilton'",
+      "scientificName": "Prunus armeniaca 'Tilton'",
+      "family": "Rosaceae",
+      "description": "Variedade de damasqueiro com frutos grandes, firmes e saborosos, de cor laranja intensa. Ideal para consumo fresco e conservas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340357219/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "3pqwksez4",
+      "name": "Prunus domestica 'Reine Claude'",
+      "scientificName": "Prunus domestica 'Reine Claude'",
+      "family": "Rosaceae",
+      "description": "Grupo de variedades de ameixeira-europeia, conhecidas por suas ameixas doces, suculentas e geralmente verdes ou amarelas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340356965/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "073tz39bv"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "k1jqad12y",
+      "name": "Prunus dulcis 'Nonpareil'",
+      "scientificName": "Prunus dulcis 'Nonpareil'",
+      "family": "Rosaceae",
+      "description": "Uma das variedades mais cultivadas de amendoeira, conhecida por suas amêndoas de casca fina e sabor superior.",
+      "imageUrl": "https://static.inaturalist.org/photos/113968708/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "sa2gq4cs6",
+      "name": "Prunus avium 'Bing'",
+      "scientificName": "Prunus avium 'Bing'",
+      "family": "Rosaceae",
+      "description": "Famosa variedade de cerejeira-doce, conhecida por seus grandes frutos vermelho-escuros, firmes e muito doces. Amplamente cultivada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "y72k89aon"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "pw27gc4es",
+      "name": "Prunus serrulata 'Kanzan'",
+      "scientificName": "Prunus serrulata 'Kanzan'",
+      "family": "Rosaceae",
+      "description": "Uma das variedades mais conhecidas da cerejeira japonesa ornamental, com espetaculares flores duplas e rosadas na primavera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90432717/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "wbtus086y"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "qt51maui5",
+      "name": "Prunus 'Snofozam'",
+      "scientificName": "Prunus serrulata 'Snow Fountains'",
+      "family": "Rosaceae",
+      "description": "Nome comercial para Prunus serrulata 'Snow Fountains', uma cerejeira chorona com flores brancas e ricas em cachos, muito ornamental.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90432717/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "83nmwoev3",
+      "name": "Prunus subhirtella 'Autumnalis'",
+      "scientificName": "Prunus subhirtella 'Autumnalis'",
+      "family": "Rosaceae",
+      "description": "Variedade da cerejeira-chorona que floresce esporadicamente no outono e inverno, com flores semiduplas brancas a rosa pálido.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/182922216/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "u42pylgr8",
+      "name": "Prunus 'Hally Jolivette'",
+      "scientificName": "Prunus 'Hally Jolivette'",
+      "family": "Rosaceae",
+      "description": "Cerejeira ornamental híbrida que produz muitas flores semiduplas de cor branca a rosa pálido. Floresce por um longo período na primavera.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "9po8ldwsd",
+      "name": "Prunus x cistena 'Newport'",
+      "scientificName": "Prunus x cistena 'Newport'",
+      "family": "Rosaceae",
+      "description": "Cultivar de ameixa-folha-roxa com folhagem mais escura e crescimento compacto, popular para pequenos jardins.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45000543/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "tl787tb82",
+      "name": "Prunus persica 'Redhaven'",
+      "scientificName": "Prunus persica 'Redhaven'",
+      "family": "Rosaceae",
+      "description": "Uma das variedades de pêssego mais cultivadas, conhecida por seus frutos de tamanho médio a grande, com polpa amarela e casca vermelha intensa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/188900677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "iy8aolwoz"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "y5bd0khwf",
+      "name": "Prunus serotina 'Autumn Brilliance'",
+      "scientificName": "Prunus serotina 'Autumn Brilliance'",
+      "family": "Rosaceae",
+      "description": "Cultivar de cerejeira-negra selecionada por sua excelente cor de folhagem no outono (vermelho-bronze) e frutos atrativos para a vida selvagem.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14006/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "88dot1zo6"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "3z1wewg63",
+      "name": "Prunus 'First Lady'",
+      "scientificName": "Prunus 'First Lady'",
+      "family": "Rosaceae",
+      "description": "Cerejeira ornamental híbrida conhecida por sua floração precoce de flores rosa intenso e colunas de flores densas.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/President_Joe_Biden_and_First_Lady_Jill_Biden_host_a_State_Dinner_for_President_Yoon_Suk_Yeol_of_the_Republic_of_Korea_and_Mrs._Kim_Keon_Hee_20230426_203934.jpg/500px-President_Joe_Biden_and_First_Lady_Jill_Biden_host_a_State_Dinner_for_President_Yoon_Suk_Yeol_of_the_Republic_of_Korea_and_Mrs._Kim_Keon_Hee_20230426_203934.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "mq0nzvhfh",
+      "name": "Prunus dulcis 'Carmel'",
+      "scientificName": "Prunus dulcis 'Carmel'",
+      "family": "Rosaceae",
+      "description": "Variedade de amendoeira com amêndoas de casca dura, cultivada por sua boa produção e adaptabilidade a diferentes condições.",
+      "imageUrl": "https://static.inaturalist.org/photos/113968708/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "4slsis2fi",
+      "name": "Prunus cerasus 'Montmorency'",
+      "scientificName": "Prunus cerasus 'Montmorency'",
+      "family": "Rosaceae",
+      "description": "Variedade de cerejeira-ácida muito popular, conhecida por seus frutos vermelhos brilhantes, ideais para tortas e sucos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/67740473/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "82uu26ry1",
+      "name": "Prunus salicina 'Santa Rosa'",
+      "scientificName": "Prunus salicina 'Santa Rosa'",
+      "family": "Rosaceae",
+      "description": "Uma das variedades mais cultivadas de ameixeira-japonesa, famosa por suas ameixas de polpa vermelha, suculentas e saborosas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/179593072/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "a0iuedsdi",
+      "name": "Prunus armeniaca 'Goldcot'",
+      "scientificName": "Prunus armeniaca 'Goldcot'",
+      "family": "Rosaceae",
+      "description": "Variedade de damasqueiro com frutos de cor dourada, firmes e saborosos, ideais para o consumo fresco e processamento.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340357219/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "eywzcupcq",
+      "name": "Prunus domestica 'Stanley'",
+      "scientificName": "Prunus domestica 'Stanley'",
+      "family": "Rosaceae",
+      "description": "Variedade de ameixeira-europeia conhecida por suas ameixas grandes, azul-escuras, de polpa amarela e sabor doce, ideais para consumo fresco e secagem.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340356965/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "ad9naz1ff"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "n4f1slr16",
+      "name": "Prunus serrulata 'Shirofugen'",
+      "scientificName": "Prunus serrulata 'Shirofugen'",
+      "family": "Rosaceae",
+      "description": "Cerejeira japonesa ornamental com grandes flores duplas que mudam de branco puro para rosa ao envelhecer. Floresce tarde na primavera.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/90432717/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "wbtus086y"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "vr0cx6erl",
+      "name": "Prunus 'Okame'",
+      "scientificName": "Prunus 'Okame'",
+      "family": "Rosaceae",
+      "description": "Cultivar popular de cerejeira ornamental, valorizada pela sua floração precoce e vibrante de flores rosa brilhantes, e boa cor de outono.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Prunus_incamp_cv_Okame.jpg/500px-Prunus_incamp_cv_Okame.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "pkjlgeetn",
+      "name": "Prunus subhirtella 'Pendula'",
+      "scientificName": "Prunus subhirtella 'Pendula'",
+      "family": "Rosaceae",
+      "description": "Uma das cerejeiras choronas mais conhecidas, com uma cascata de flores rosa pálido na primavera. Popular em paisagismo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/182922216/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "0ewbbnmfl"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "5v2s38e86",
+      "name": "Prunus sargentii 'Rancho'",
+      "scientificName": "Prunus sargentii 'Rancho'",
+      "family": "Rosaceae",
+      "description": "Cultivar da cerejeira-de-Sargent com uma forma mais colunar e ereta, ideal para espaços limitados, mantendo as flores rosa e boa cor de outono.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/196725442/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "arjktfxvg"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "71oo7p4sm"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "1c2rfkakz",
+      "name": "Prunus tenella 'Fire Hill'",
+      "scientificName": "Prunus tenella 'Fire Hill'",
+      "family": "Rosaceae",
+      "description": "Cultivar da amendoeira-anã-russa com flores rosa mais intensas e brilhantes, um arbusto compacto e resistente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/92591703/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "bvh6cd3pt"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "gcta0nzgf",
+      "name": "Prunus persica 'Contender'",
+      "scientificName": "Prunus persica 'Contender'",
+      "family": "Rosaceae",
+      "description": "Variedade de pêssego muito resistente ao frio, produzindo frutos grandes e doces com polpa amarela e casca vermelha.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/188900677/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "iy8aolwoz"
+        ],
+        "hlnd0osdj": [
+          "1jhosz1je"
+        ]
+      }
+    },
+    {
+      "id": "spgyx127i",
+      "name": "Prunus pumila 'Cistena'",
+      "scientificName": "Prunus pumila 'Cistena'",
+      "family": "Rosaceae",
+      "description": "Híbrido de Prunus pumila, conhecido pela folhagem vermelha-púrpura e flores rosadas. Frequentemente confundido com Prunus x cistena, mas geralmente um pouco menor.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/2241283/medium.JPG",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "0nd5r9p0x"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "ylt3d07oz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "691d4goju"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "7my1142ty",
+      "name": "Prunus dulcis 'Peerless'",
+      "scientificName": "Prunus dulcis 'Peerless'",
+      "family": "Rosaceae",
+      "description": "Variedade de amendoeira, importante para a indústria de amêndoas por sua alta produtividade e qualidade.",
+      "imageUrl": "https://static.inaturalist.org/photos/113968708/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "3yf6j3mej"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "y8zuqddsc"
+        ]
+      }
+    },
+    {
+      "id": "581zc6ets",
+      "name": "Prunus insititia 'Damson'",
+      "scientificName": "Prunus insititia 'Damson'",
+      "family": "Rosaceae",
+      "description": "Variedade de abrunheiro-bravo, conhecida por suas ameixas pequenas, azedas e escuras, ideais para geleias e conservas. Frequentemente espinhosa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/11530825/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "6n4g0gi42"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "3cny2rqio"
+        ],
+        "v5lsqq84o": [
+          "6g2bctytp"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "1iqxtvdp8"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "jbrxomels"
+        ],
+        "sk3jzvm13": [
+          "v99gznkuw"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "09w7a7rj6"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "73wushhtl",
+      "name": "Prunus nigra 'Canada Red'",
+      "scientificName": "Prunus nigra 'Canada Red'",
+      "family": "Rosaceae",
+      "description": "Cultivar da ameixa-negra com folhagem que emerge verde e amadurece para um tom vermelho-púrpura, mantendo as flores brancas e frutos escuros.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/17985242/medium.jpeg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "8x0boec9u"
+        ],
+        "v82j9gbzw": [
+          "6ysdgmnlj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "7otcz0ufz"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "7u7899gai"
+        ],
+        "ssfbpayre": [
+          "gwak88xj7"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "7fklmqqws"
+        ],
+        "qpyewrabs": [
+          "na16ywmg4"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    },
+    {
+      "id": "do2k1zoqc",
+      "name": "Prunus armeniaca 'Harcot'",
+      "scientificName": "Prunus armeniaca 'Harcot'",
+      "family": "Rosaceae",
+      "description": "Variedade de damasqueiro com boa resistência a doenças e frutos de tamanho médio, com casca lisa e polpa laranja.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/340357219/medium.jpg",
+      "links": [],
+      "traits": {
+        "m3lyiaquk": [
+          "b3n3pqxl1"
+        ],
+        "8er20kxq3": [
+          "m7hkvehh4"
+        ],
+        "v82j9gbzw": [
+          "evhkejcdj"
+        ],
+        "bvj9mdvrj": [
+          "pjnwy33r4"
+        ],
+        "v5lsqq84o": [
+          "ss545cawh"
+        ],
+        "e5x74hn99": [
+          "acrij2qit"
+        ],
+        "8f1hezgaq": [
+          "r4ti8ttai"
+        ],
+        "df0dzz4x2": [
+          "72g92reek"
+        ],
+        "ftv9gj7hs": [
+          "o6ektkisu"
+        ],
+        "ssfbpayre": [
+          "2nk0c7z1t"
+        ],
+        "et1zauzsv": [
+          "h358mf76w"
+        ],
+        "sk3jzvm13": [
+          "6sc82anhi"
+        ],
+        "qpsfsy9t8": [
+          "j9kwwvjgl"
+        ],
+        "qpyewrabs": [
+          "xkufwhwy3"
+        ],
+        "c4sr5xduv": [
+          "q7sxdzwz0"
+        ],
+        "hlnd0osdj": [
+          "jqky3yt0v"
+        ]
+      }
+    }
+  ]
+}

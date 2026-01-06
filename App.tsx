@@ -336,9 +336,9 @@ const App: React.FC = () => {
   if (view === 'PLAYER' && currentProject) {
     return (
       <>
-        <Player 
-          project={currentProject} 
-          onBack={() => setView('HOME')} 
+        <Player
+          project={currentProject}
+          onBack={() => setView('HOME')}
           language={language}
           onOpenSaved={() => setShowLoadModal(true)}
           onEditKey={() => setView('BUILDER')}
@@ -359,12 +359,11 @@ const App: React.FC = () => {
           language={language}
           defaultModel={aiModel}
           apiKey={apiKey}
+          openAiModalOnMount={openAiModalOnMount}
           onOpenSettings={(returnToAi) => {
             setReturnToAiModal(returnToAi || false);
             setShowSettingsModal(true);
           }}
-          reopenAiModal={(returnToAiModal && !showSettingsModal) || openAiModalOnMount}
-          onAiModalOpened={() => { setReturnToAiModal(false); setOpenAiModalOnMount(false); }}
           onProjectImported={(project) => {
             // Update savedProjects state so load modals show the imported project
             setSavedProjects(prev => [project, ...prev.filter(p => p.id !== project.id)]);
