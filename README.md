@@ -12,7 +12,7 @@ Usar em > https://djhandoom.github.io/Nozes/
 
 Ou seguir instruções abaixo para rodar offline.
 
-Impulsionado pelo **Google Gemini 2.5 Flash**, o NOZES permite que biólogos, taxonomistas, estudantes e entusiastas gerem chaves complexas de identificação de espécies em segundos, apenas descrevendo um tópico.
+Impulsionado por modelos de Inteligência Artificial de múltiplo espectro, o NOZES permite que biólogos, taxonomistas, estudantes e entusiastas gerem chaves complexas de identificação de espécies em segundos, apenas descrevendo um tópico.
 
 ---
 
