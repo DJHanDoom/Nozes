@@ -1,0 +1,179 @@
+{
+"projectName": "Chave de Identificação – Lagartos do Brasil",
+"description": "Chave interativa (matriz) para identificação de lagartos que ocorrem no Brasil, baseada em características zoológicas gerais de morfologia, comportamento e habitat. Indicada para estudantes e entusiastas.",
+"geography": "Brasil",
+"taxonomicScope": {
+"order": "Squamata"
+},
+"features": [
+{
+"id": "tamanho_corporal",
+"name": "Tamanho corporal",
+"description": "Comprimento total médio do corpo adulto.",
+"imageUrl": "",
+"states": ["pequeno (<10 cm)", "médio (10–40 cm)", "grande (>40 cm)"]
+},
+{
+"id": "desenvolvimento_membros",
+"name": "Desenvolvimento dos membros",
+"description": "Grau de desenvolvimento das pernas.",
+"imageUrl": "",
+"states": ["bem desenvolvidos", "reduzidos", "ausentes"]
+},
+{
+"id": "forma_corpo",
+"name": "Forma geral do corpo",
+"description": "Aspecto geral do corpo em vista lateral.",
+"imageUrl": "",
+"states": ["robusto", "esguio", "alongado/serpentiforme"]
+},
+{
+"id": "textura_escamas",
+"name": "Textura das escamas",
+"description": "Aspecto superficial predominante das escamas.",
+"imageUrl": "",
+"states": ["lisas", "quilhadas", "granulares"]
+},
+{
+"id": "crista_dorsal",
+"name": "Crista dorsal",
+"description": "Presença de crista ou fileira de escamas aumentadas no dorso.",
+"imageUrl": "",
+"states": ["ausente", "presente discreta", "presente evidente"]
+},
+{
+"id": "lamelas_digitais",
+"name": "Lamelas adesivas nos dedos",
+"description": "Estruturas aderentes que auxiliam na escalada.",
+"imageUrl": "",
+"states": ["ausentes", "pouco desenvolvidas", "bem desenvolvidas"]
+},
+{
+"id": "habitat_principal",
+"name": "Habitat principal",
+"description": "Ambiente onde a espécie é mais frequentemente encontrada.",
+"imageUrl": "",
+"states": ["florestal", "aberto/savana", "arenoso/restinga", "urbano/antrópico"]
+},
+{
+"id": "atividade",
+"name": "Período de atividade",
+"description": "Horário predominante de atividade.",
+"imageUrl": "",
+"states": ["diurno", "noturno", "crepuscular"]
+},
+{
+"id": "capacidade_escalar",
+"name": "Capacidade de escalar",
+"description": "Habilidade de subir em troncos, rochas ou paredes.",
+"imageUrl": "",
+"states": ["baixa", "moderada", "alta"]
+},
+{
+"id": "autotomia_caudal",
+"name": "Autotomia caudal",
+"description": "Capacidade de perder a cauda como defesa.",
+"imageUrl": "",
+"states": ["ausente", "presente"]
+},
+{
+"id": "poros_femorais",
+"name": "Poros femorais",
+"description": "Poros glandulares na face interna das coxas.",
+"imageUrl": "",
+"states": ["ausentes", "presentes"]
+},
+{
+"id": "abertura_ouvido",
+"name": "Abertura externa do ouvido",
+"description": "Visibilidade do ouvido externo.",
+"imageUrl": "",
+"states": ["invisível", "visível pequena", "visível grande"]
+},
+{
+"id": "padrao_coloracao",
+"name": "Padrão de coloração",
+"description": "Padrão visual predominante no corpo.",
+"imageUrl": "",
+"states": ["uniforme", "listrado", "manchado/moteado"]
+},
+{
+"id": "dimorfismo_sexual",
+"name": "Dimorfismo sexual evidente",
+"description": "Diferenças visíveis entre machos e fêmeas.",
+"imageUrl": "",
+"states": ["ausente", "presente"]
+},
+{
+"id": "tipo_reproducao",
+"name": "Tipo de reprodução",
+"description": "Modo reprodutivo predominante.",
+"imageUrl": "",
+"states": ["ovíparo", "vivíparo"]
+},
+{
+"id": "dieta_principal",
+"name": "Dieta principal",
+"description": "Tipo de alimento predominante.",
+"imageUrl": "",
+"states": ["insetívora", "onívora", "herbívora"]
+}
+],
+"entities": [
+{"id":"e1","scientificName":"Iguana iguana","family":"Iguanidae"},
+{"id":"e2","scientificName":"Salvator merianae","family":"Teiidae"},
+{"id":"e3","scientificName":"Salvator rufescens","family":"Teiidae"},
+{"id":"e4","scientificName":"Tropidurus torquatus","family":"Tropiduridae"},
+{"id":"e5","scientificName":"Tropidurus hispidus","family":"Tropiduridae"},
+{"id":"e6","scientificName":"Tropidurus semitaeniatus","family":"Tropiduridae"},
+{"id":"e7","scientificName":"Ameiva ameiva","family":"Teiidae"},
+{"id":"e8","scientificName":"Ameivula ocellifera","family":"Teiidae"},
+{"id":"e9","scientificName":"Kentropyx calcarata","family":"Teiidae"},
+{"id":"e10","scientificName":"Kentropyx striata","family":"Teiidae"},
+{"id":"e11","scientificName":"Polychrus marmoratus","family":"Polychrotidae"},
+{"id":"e12","scientificName":"Enyalius bilineatus","family":"Leiosauridae"},
+{"id":"e13","scientificName":"Enyalius perditus","family":"Leiosauridae"},
+{"id":"e14","scientificName":"Anolis punctatus","family":"Dactyloidae"},
+{"id":"e15","scientificName":"Anolis fuscoauratus","family":"Dactyloidae"},
+{"id":"e16","scientificName":"Anolis meridionalis","family":"Dactyloidae"},
+{"id":"e17","scientificName":"Hemidactylus mabouia","family":"Gekkonidae"},
+{"id":"e18","scientificName":"Phyllopezus pollicaris","family":"Phyllodactylidae"},
+{"id":"e19","scientificName":"Gymnodactylus geckoides","family":"Phyllodactylidae"},
+{"id":"e20","scientificName":"Coleodactylus meridionalis","family":"Sphaerodactylidae"},
+{"id":"e21","scientificName":"Coleodactylus amazonicus","family":"Sphaerodactylidae"},
+{"id":"e22","scientificName":"Cercosaura ocellata","family":"Gymnophthalmidae"},
+{"id":"e23","scientificName":"Cercosaura schreibersii","family":"Gymnophthalmidae"},
+{"id":"e24","scientificName":"Vanzosaura rubricauda","family":"Gymnophthalmidae"},
+{"id":"e25","scientificName":"Bachia flavescens","family":"Gymnophthalmidae"},
+{"id":"e26","scientificName":"Bachia bresslaui","family":"Gymnophthalmidae"},
+{"id":"e27","scientificName":"Ophiodes striatus","family":"Anguidae"},
+{"id":"e28","scientificName":"Diploglossus fasciatus","family":"Anguidae"},
+{"id":"e29","scientificName":"Mabuya dorsivittata","family":"Scincidae"},
+{"id":"e30","scientificName":"Mabuya macrorhyncha","family":"Scincidae"},
+{"id":"e31","scientificName":"Trachylepis atlantica","family":"Scincidae"},
+{"id":"e32","scientificName":"Stenocercus caducus","family":"Tropiduridae"},
+{"id":"e33","scientificName":"Stenocercus azureus","family":"Tropiduridae"},
+{"id":"e34","scientificName":"Liolaemus lutzae","family":"Liolaemidae"},
+{"id":"e35","scientificName":"Liolaemus occipitalis","family":"Liolaemidae"},
+{"id":"e36","scientificName":"Pholidobolus montium","family":"Gymnophthalmidae"},
+{"id":"e37","scientificName":"Micrablepharus maximiliani","family":"Gymnophthalmidae"},
+{"id":"e38","scientificName":"Micrablepharus atticolus","family":"Gymnophthalmidae"},
+{"id":"e39","scientificName":"Brasiliscincus heathi","family":"Scincidae"},
+{"id":"e40","scientificName":"Brasiliscincus agilis","family":"Scincidae"},
+{"id":"e41","scientificName":"Phyllopezus lutzae","family":"Phyllodactylidae"},
+{"id":"e42","scientificName":"Gymnodactylus darwinii","family":"Phyllodactylidae"},
+{"id":"e43","scientificName":"Anolis brasiliensis","family":"Dactyloidae"},
+{"id":"e44","scientificName":"Anolis nasofrontalis","family":"Dactyloidae"},
+{"id":"e45","scientificName":"Tropidurus itambere","family":"Tropiduridae"},
+{"id":"e46","scientificName":"Tropidurus oreadicus","family":"Tropiduridae"},
+{"id":"e47","scientificName":"Ameivula abaetensis","family":"Teiidae"},
+{"id":"e48","scientificName":"Kentropyx pelviceps","family":"Teiidae"},
+{"id":"e49","scientificName":"Cnemidophorus lemniscatus","family":"Teiidae"},
+{"id":"e50","scientificName":"Polychrus acutirostris","family":"Polychrotidae"}
+],
+"matrix": {
+"e1":{"tamanho_corporal":"grande (>40 cm)","desenvolvimento_membros":"bem desenvolvidos","forma_corpo":"robusto","textura_escamas":"granulares","crista_dorsal":"presente evidente","lamelas_digitais":"ausentes","habitat_principal":"florestal","atividade":"diurno","capacidade_escalar":"alta","autotomia_caudal":"presente","poros_femorais":"presentes","abertura_ouvido":"visível grande","padrao_coloracao":"uniforme","dimorfismo_sexual":"presente","tipo_reproducao":"ovíparo","dieta_principal":"herbívora"},
+"e2":{"tamanho_corporal":"grande (>40 cm)","desenvolvimento_membros":"bem desenvolvidos","forma_corpo":"robusto","textura_escamas":"lisas","crista_dorsal":"ausente","lamelas_digitais":"ausentes","habitat_principal":"aberto/savana","atividade":"diurno","capacidade_escalar":"baixa","autotomia_caudal":"presente","poros_femorais":"presentes","abertura_ouvido":"visível grande","padrao_coloracao":"manchado/moteado","dimorfismo_sexual":"presente","tipo_reproducao":"ovíparo","dieta_principal":"onívora"},
+"e27":{"tamanho_corporal":"médio (10–40 cm)","desenvolvimento_membros":"ausentes","forma_corpo":"alongado/serpentiforme","textura_escamas":"lisas","crista_dorsal":"ausente","lamelas_digitais":"ausentes","habitat_principal":"aberto/savana","atividade":"diurno","capacidade_escalar":"baixa","autotomia_caudal":"ausente","poros_femorais":"ausentes","abertura_ouvido":"invisível","padrao_coloracao":"listrado","dimorfismo_sexual":"ausente","tipo_reproducao":"vivíparo","dieta_principal":"insetívora"}
+}
+}

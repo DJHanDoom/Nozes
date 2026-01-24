@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Project, Entity, Feature, AIConfig, Language, FeatureFocus, ImportedFile } from '../types';
-import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, validateTaxonomy, fetchImagesForEntities, extractBinomial, convertDichotomousKey, generateEntityLinks } from '../services/geminiService';
+import { generateKeyFromTopic, buildPromptData, generateKeyFromCustomPrompt, refineExistingProject, validateTaxonomy, fetchImagesForEntities, extractBinomial, convertDichotomousKey, generateEntityLinks, fetchLinksWithGemini } from '../services/geminiService';
 import { Wand2, Plus, Trash2, Save, Grid, LayoutList, Box, Loader2, CheckSquare, X, Download, Upload, Image as ImageIcon, FolderOpen, Settings2, Brain, Microscope, Baby, GraduationCap, FileText, FileSearch, Copy, Link as LinkIcon, Edit3, ExternalLink, Menu, Play, FileSpreadsheet, Edit, ChevronLeft, ChevronRight, ChevronDown, RefreshCw, Sparkles, ListPlus, Eraser, Target, Layers, Combine, Camera, KeyRound, FileCode, Check, Globe, Leaf, ShieldCheck, List, Search } from 'lucide-react';
 import { utils, writeFile, read } from 'xlsx';
+import { generateStandaloneHTML } from '../services/htmlGenerator';
+import { generateOfflineZip } from '../services/offlineExportService';
 import { TypingTerminal, TypingTerminalRef } from './TypingTerminal';
 
 // Generate standalone HTML file with embedded player
-const generateStandaloneHTML = (project: Project, lang: Language): string => {
+const _deprecated_generateStandaloneHTML = (project: Project, lang: Language): string => {
   const projectJSON = JSON.stringify(project);
 
   return `<!DOCTYPE html>
@@ -290,6 +292,11 @@ type Tab = 'GENERAL' | 'FEATURES' | 'ENTITIES' | 'MATRIX';
 type AiMode = 'TOPIC' | 'IMPORT' | 'REFINE' | 'MERGE';
 type RefineAction = 'EXPAND' | 'REFINE' | 'CLEAN' | 'PHOTOS' | 'VALIDATE';
 
+// Helper to clean project before export (ensures pure JSON object without internal references)
+const cleanProjectForExport = (project: Project): Project => {
+  return JSON.parse(JSON.stringify(project));
+};
+
 const t = {
   en: {
     builder: "Builder",
@@ -298,9 +305,10 @@ const t = {
     exit: "Exit",
     save: "Save",
     open: "Open",
-    export: "Export Project",
-    exportXLSX: "Export XLSX",
+    export: "Export JSON",
+    exportXLSX: "Export Excel",
     exportHTML: "Export HTML",
+    exportOffline: "Export Offline (Images) (ZIP)",
     import: "Import Project",
     general: "General",
     features: "Features",
@@ -505,9 +513,10 @@ const t = {
     exit: "Sair",
     save: "Salvar",
     open: "Abrir",
-    export: "Exportar Projeto",
-    exportXLSX: "Exportar XLSX",
+    export: "Exportar JSON",
+    exportXLSX: "Exportar Excel",
     exportHTML: "Exportar HTML",
+    exportOffline: "Exportar Offline (Imagens) (ZIP)",
     import: "Importar Projeto",
     general: "Geral",
     features: "Características",
@@ -1314,6 +1323,11 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
   const [pendingImportProject, setPendingImportProject] = useState<Project | null>(null); // For confirming optimized imports
   const [pendingNervuraFile, setPendingNervuraFile] = useState<Project | null>(null); // For staging Nervura JSON before import
 
+  // Update model when defaultModel prop changes (e.g. from App Settings)
+  useEffect(() => {
+    setAiConfig(prev => ({ ...prev, model: defaultModel }));
+  }, [defaultModel]);
+
   // State Image Modal
   const [expandedStateImage, setExpandedStateImage] = useState<{ url: string, label: string, featureName: string } | null>(null);
 
@@ -1857,6 +1871,28 @@ export const Builder: React.FC<BuilderProps> = ({ initialProject, onSave, onCanc
     link.download = `${cleanedProject.name.replace(/\s+/g, '_')}.html`;
     link.click();
     URL.revokeObjectURL(url);
+  };
+
+  const [isExportingZip, setIsExportingZip] = useState(false);
+
+  const exportOffline = async () => {
+    try {
+      setIsExportingZip(true);
+      const cleaned = cleanProjectForExport(project);
+
+      const zipBlob = await generateOfflineZip(cleaned, language);
+      const url = URL.createObjectURL(zipBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${project.name.replace(/\s+/g, '_')}_offline.zip`;
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      alert(language === 'pt' ? "Erro ao exportar ZIP offline" : "Failed to export offline ZIP");
+    } finally {
+      setIsExportingZip(false);
+    }
   };
 
   const [optimizeNervura, setOptimizeNervura] = useState(false);
@@ -3914,14 +3950,48 @@ CRITICAL INSTRUCTIONS:
 
         if (refineOptions.fetchLinks) {
           setAiTypingText(prev => prev + (language === 'pt' ? "\n🔗 Gerando links..." : "\n🔗 Generating links..."));
+
+          let aiLinksMap = new Map();
+          // Check if we need AI generation (custom sources provided)
+          if (refineOptions.fetchLinksPrioritySources && refineOptions.fetchLinksPrioritySources.trim().length > 0) {
+            const sources = refineOptions.fetchLinksPrioritySources.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            if (sources.length > 0) {
+              const msg = language === 'pt' ? "\n🤖 Consultando IA para fontes prioritárias..." : "\n🤖 Consulting AI for priority sources...";
+              setAiTypingText(prev => prev + msg);
+
+              try {
+                aiLinksMap = await fetchLinksWithGemini(
+                  project.entities.map(e => ({ name: e.name, scientificName: (e as any).scientificName, family: (e as any).family })),
+                  sources,
+                  language,
+                  apiKey
+                );
+              } catch (err) {
+                console.error("Failed to fetch links with Gemini:", err);
+              }
+            }
+          }
+
           const minLinks = refineOptions.fetchLinksMinCount || 3;
           let linksCount = 0;
           updatedProject.entities = updatedProject.entities.map(entity => {
-            // Generate links for this entity - passing family to help specific DBs
-            const newLinks = generateEntityLinks(entity.scientificName || entity.name, entity.family || '', language);
+            // Generate links for this entity - passing family and category
+            const newLinks = generateEntityLinks(
+              entity.scientificName || entity.name,
+              entity.family || '',
+              language,
+              aiConfig.category || 'FLORA'
+            );
 
             // Filter/Sort by priority sources if provided
             let sortedLinks = [...newLinks];
+
+            // If we have AI results for this entity, merge them with high priority
+            if (aiLinksMap && aiLinksMap.has(entity.name)) {
+              const aiLinks = aiLinksMap.get(entity.name) || [];
+              sortedLinks = [...aiLinks, ...sortedLinks];
+            }
+
             if (refineOptions.fetchLinksPrioritySources && refineOptions.fetchLinksPrioritySources.trim().length > 0) {
               const priorities = refineOptions.fetchLinksPrioritySources
                 .toLowerCase()
@@ -4111,7 +4181,7 @@ CRITICAL INSTRUCTIONS:
       // ══════════════════════════════════════════════════════════════════════════════
 
       stopTypingEffect(resultProject);
-
+      setAiTypingCompleteState(true);
       const successMsg = language === 'pt'
         ? "\n\n✨ Processo Finalizado! Revise o resultado abaixo e clique em Confirmar."
         : "\n\n✨ Process Finished! Review the result below and click Confirm.";
@@ -4271,6 +4341,10 @@ CRITICAL INSTRUCTIONS:
             </button>
             <button onClick={exportHTML} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.exportHTML}>
               <FileCode size={14} /> <span className="hidden sm:inline">{strings.exportHTML}</span>
+            </button>
+            <button onClick={exportOffline} disabled={isExportingZip} className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white" title={strings.exportOffline}>
+              {isExportingZip ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+              <span className="hidden sm:inline">{strings.exportOffline}</span>
             </button>
             <label className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-700 rounded transition-colors text-slate-300 hover:text-white cursor-pointer" title={strings.import}>
               <Upload size={14} /> <span className="hidden sm:inline">{strings.import}</span>
@@ -7339,7 +7413,7 @@ CRITICAL INSTRUCTIONS:
                             typingTerminalRef.current.setText(
                               newShowRaw
                                 ? (rawOutput || "")
-                                : (aiTypingText || "")
+                                : (lastTextRef.current || "")
                             );
                           }
                         }}

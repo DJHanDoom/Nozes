@@ -3,6 +3,7 @@ import { ViewMode, Project, Language } from './types';
 import { Player } from './components/Player';
 import { Builder } from './components/Builder';
 import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2, FileCode, Wand2, AlertTriangle, Layers } from 'lucide-react';
+import { AVAILABLE_MODELS, PROVIDER_INFO, getProviderFromModel } from './services/modelConfig';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('HOME');
@@ -15,17 +16,36 @@ const App: React.FC = () => {
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [helpTab, setHelpTab] = useState<'ABOUT' | 'HELP'>('ABOUT');
   const [aiModel, setAiModel] = useState<string>("gemini-2.0-flash");
-  const [apiKey, setApiKey] = useState<string>("");
+
+  // SUPPORT MULTIPLE KEYS: Record<Provider, Key>
+  const [apiKeys, setApiKeys] = useState<Record<string, string>>({});
   const [openAiModalOnMount, setOpenAiModalOnMount] = useState(false);
 
   useEffect(() => {
     // Load settings on mount only
     const savedSettings = localStorage.getItem('nozesia_settings');
+    const savedKeys = localStorage.getItem('nozesia_api_keys');
+
+    // Load keys first
+    if (savedKeys) {
+      try {
+        setApiKeys(JSON.parse(savedKeys));
+      } catch (e) { console.error("Failed to load keys"); }
+    } else if (savedSettings) {
+      // Migration: check for legacy single key
+      try {
+        const settings = JSON.parse(savedSettings);
+        if (settings.apiKey && typeof settings.apiKey === 'string') {
+          // Assume legacy key was for Gemini
+          setApiKeys(prev => ({ ...prev, gemini: settings.apiKey }));
+        }
+      } catch (e) { }
+    }
+
     if (savedSettings) {
       try {
         const settings = JSON.parse(savedSettings);
         if (settings.model) setAiModel(settings.model);
-        if (settings.apiKey) setApiKey(settings.apiKey);
       } catch (e) { console.error("Failed to load settings"); }
     }
   }, []);
@@ -44,8 +64,13 @@ const App: React.FC = () => {
 
   const saveSettings = () => {
     const trimmedModel = aiModel.trim();
-    const trimmedKey = apiKey.trim();
-    localStorage.setItem('nozesia_settings', JSON.stringify({ model: trimmedModel, apiKey: trimmedKey }));
+
+    // Save model preference
+    localStorage.setItem('nozesia_settings', JSON.stringify({ model: trimmedModel }));
+
+    // Save all keys
+    localStorage.setItem('nozesia_api_keys', JSON.stringify(apiKeys));
+
     setShowSettingsModal(false);
     // returnToAiModal is handled automatically by the reopenAiModal prop
   };
@@ -81,10 +106,10 @@ const App: React.FC = () => {
       invalid: "Invalid project file.",
       settings: "Settings",
       aiModel: "AI Model",
-      apiKey: "Gemini API Key",
+      apiKey: "API Key",
       getKey: "Get Key",
       save: "Save",
-      apiKeyNotice: "Your API Key is stored locally in your browser and used only to communicate with Google.",
+      apiKeyNotice: "Your API Key is stored locally in your browser and used only to communicate with the provider.",
       help: "About & Help",
       helpContent: {
         intro: "NOZES is an intelligent platform for creating and using matrix identification keys, designed for biologists, students, and nature enthusiasts.",
@@ -118,10 +143,10 @@ const App: React.FC = () => {
       invalid: "Arquivo inválido.",
       settings: "Configurações",
       aiModel: "Modelo IA",
-      apiKey: "Chave API Gemini",
+      apiKey: "Chave API",
       getKey: "Obter Chave",
       save: "Salvar",
-      apiKeyNotice: "Sua API Key é salva localmente no navegador e usada apenas para comunicar com o Google.",
+      apiKeyNotice: "Sua API Key é salva localmente no navegador e usada apenas para comunicar com o provedor.",
       help: "Sobre e Ajuda",
       helpContent: {
         intro: "O NOZES é uma plataforma inteligente para criação e uso de chaves de identificação matriciais, projetada para biólogos, estudantes e entusiastas da natureza.",
@@ -209,75 +234,101 @@ const App: React.FC = () => {
   };
 
   // Render Settings Modal globally (available in all views)
-  const renderSettingsModal = () => showSettingsModal && (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <Settings className="text-emerald-600" size={20} />
-            {strings.settings}
-          </h3>
-          <button onClick={() => setShowSettingsModal(false)} className="text-slate-400 hover:text-slate-600 p-2">
-            <X size={24} />
+  const renderSettingsModal = () => {
+    if (!showSettingsModal) return null;
+
+    const currentProvider = getProviderFromModel(aiModel);
+    const providerInfo = PROVIDER_INFO[currentProvider];
+    const currentKey = apiKeys[currentProvider] || '';
+
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in fade-in zoom-in-95">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <Settings className="text-emerald-600" size={20} />
+              {strings.settings}
+            </h3>
+            <button onClick={() => setShowSettingsModal(false)} className="text-slate-400 hover:text-slate-600 p-2">
+              <X size={24} />
+            </button>
+          </div>
+
+          <div className="space-y-4 mb-6">
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">{strings.aiModel}</label>
+              <select
+                value={aiModel}
+                onChange={(e) => setAiModel(e.target.value)}
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white"
+              >
+                {Object.entries(PROVIDER_INFO).map(([providerKey, info]) => {
+                  const models = AVAILABLE_MODELS.filter(m => m.provider === providerKey);
+                  if (models.length === 0) return null;
+                  return (
+                    <optgroup key={providerKey} label={info.name}>
+                      {models.map(model => (
+                        <option key={model.id} value={model.id}>
+                          {model.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  );
+                })}
+              </select>
+              <p className="text-xs text-slate-400 mt-1">
+                {AVAILABLE_MODELS.find(m => m.id === aiModel)?.description || "Select a model"}
+              </p>
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-semibold text-slate-700">
+                  {strings.apiKey} ({providerInfo?.name || currentProvider})
+                </label>
+              </div>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-2.5 text-slate-400" size={16} />
+                <input
+                  type="password"
+                  value={currentKey}
+                  onChange={(e) => setApiKeys(prev => ({ ...prev, [currentProvider]: e.target.value }))}
+                  className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                  placeholder={`Key for ${providerInfo?.name || currentProvider}...`}
+                />
+              </div>
+              {/* Highlighted link to get API key */}
+              {providerInfo?.apiKeyUrl && (
+                <a
+                  href={providerInfo.apiKeyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-bold text-sm hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg"
+                >
+                  <ExternalLink size={16} />
+                  {strings.getKey} - {providerInfo.name}
+                </a>
+              )}
+            </div>
+
+            <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
+              <p className="text-xs text-amber-700">
+                {strings.apiKeyNotice}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={saveSettings}
+            className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2"
+          >
+            <Save size={16} /> {strings.save}
           </button>
         </div>
-
-        <div className="space-y-4 mb-6">
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <label className="block text-sm font-semibold text-slate-700">{strings.apiKey}</label>
-            </div>
-            <div className="relative">
-              <KeyRound className="absolute left-3 top-2.5 text-slate-400" size={16} />
-              <input
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
-                placeholder="AIzaSy..."
-              />
-            </div>
-            {/* Highlighted link to get API key */}
-            <a
-              href="https://aistudio.google.com/app/apikey"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-bold text-sm hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg"
-            >
-              <ExternalLink size={16} />
-              {strings.getKey} - Google AI Studio
-            </a>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">{strings.aiModel}</label>
-            <input
-              value={aiModel}
-              onChange={(e) => setAiModel(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
-              placeholder="gemini-2.0-flash"
-            />
-            <p className="text-xs text-slate-400 mt-1">
-              Default: gemini-2.0-flash
-            </p>
-          </div>
-
-          <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
-            <p className="text-xs text-amber-700">
-              {strings.apiKeyNotice}
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={saveSettings}
-          className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2"
-        >
-          <Save size={16} /> {strings.save}
-        </button>
       </div>
-    </div>
-  );
+    );
+  };
 
   // Render Load Modal globally (available in all views)
   const renderLoadModal = () => showLoadModal && (
@@ -358,7 +409,7 @@ const App: React.FC = () => {
           onCancel={() => setView('HOME')}
           language={language}
           defaultModel={aiModel}
-          apiKey={apiKey}
+          apiKey={apiKeys[getProviderFromModel(aiModel)] || ''}
           openAiModalOnMount={openAiModalOnMount}
           onOpenSettings={(returnToAi) => {
             setReturnToAiModal(returnToAi || false);
@@ -424,7 +475,7 @@ const App: React.FC = () => {
               {/* Settings Button */}
               <button
                 onClick={() => setShowSettingsModal(true)}
-                className={`bg-emerald-900/50 rounded-lg p-1.5 border backdrop-blur-sm transition-colors ${!apiKey ? 'border-amber-500 text-amber-500 animate-pulse' : 'border-emerald-500/30 text-emerald-400 hover:text-white hover:bg-emerald-800/50'}`}
+                className={`bg-emerald-900/50 rounded-lg p-1.5 border backdrop-blur-sm transition-colors ${!apiKeys[getProviderFromModel(aiModel)] ? 'border-amber-500 text-amber-500 animate-pulse' : 'border-emerald-500/30 text-emerald-400 hover:text-white hover:bg-emerald-800/50'}`}
                 title={strings.settings}
               >
                 <Settings size={20} />

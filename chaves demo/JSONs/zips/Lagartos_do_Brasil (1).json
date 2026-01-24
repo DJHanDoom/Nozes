@@ -1,0 +1,7065 @@
+{
+  "id": "w01que6yc",
+  "name": "Lagartos do Brasil",
+  "description": "Chave interativa (matriz) para identificação de lagartos que ocorrem no Brasil, baseada em características zoológicas gerais de morfologia, comportamento e habitat. Indicada para estudantes e entusiastas.",
+  "features": [
+    {
+      "id": "8q4t7temu",
+      "name": "Tamanho corporal",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "sfgbzharh",
+          "label": "pequeno (<10 cm)"
+        },
+        {
+          "id": "klqi9lw3v",
+          "label": "médio (10–40 cm)"
+        },
+        {
+          "id": "zsnmmjq5u",
+          "label": "grande (>40 cm)"
+        }
+      ]
+    },
+    {
+      "id": "do8mcjrwg",
+      "name": "Desenvolvimento dos membros",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "kmxrm0mk4",
+          "label": "bem desenvolvidos"
+        },
+        {
+          "id": "afsw4ptab",
+          "label": "reduzidos"
+        },
+        {
+          "id": "k5qm02wt9",
+          "label": "ausentes"
+        }
+      ]
+    },
+    {
+      "id": "zjwa6d22e",
+      "name": "Forma geral do corpo",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "qtaesu3ab",
+          "label": "robusto"
+        },
+        {
+          "id": "byvznbu7g",
+          "label": "esguio"
+        },
+        {
+          "id": "xjp2aj3ro",
+          "label": "alongado/serpentiforme"
+        }
+      ]
+    },
+    {
+      "id": "3wdalvsl8",
+      "name": "Textura das escamas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "622f4kbcm",
+          "label": "lisas"
+        },
+        {
+          "id": "qfc0wiiog",
+          "label": "quilhadas"
+        },
+        {
+          "id": "yg52gqahs",
+          "label": "granulares"
+        }
+      ]
+    },
+    {
+      "id": "1lt9hkkm7",
+      "name": "Crista dorsal",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "gps2q1ilp",
+          "label": "ausente"
+        },
+        {
+          "id": "mxi00f84e",
+          "label": "presente discreta"
+        },
+        {
+          "id": "wjeoxcjze",
+          "label": "presente evidente"
+        }
+      ]
+    },
+    {
+      "id": "3enxupw5u",
+      "name": "Lamelas adesivas nos dedos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xqrhwhpem",
+          "label": "ausentes"
+        },
+        {
+          "id": "1ksvzzar0",
+          "label": "pouco desenvolvidas"
+        },
+        {
+          "id": "e21hfcvn3",
+          "label": "bem desenvolvidas"
+        }
+      ]
+    },
+    {
+      "id": "c4vf2qbao",
+      "name": "Habitat principal",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "8hj9ps4ge",
+          "label": "florestal"
+        },
+        {
+          "id": "2uhl0tmq3",
+          "label": "aberto/savana"
+        },
+        {
+          "id": "eozydbzi8",
+          "label": "arenoso/restinga"
+        },
+        {
+          "id": "oyg17egmu",
+          "label": "urbano/antrópico"
+        }
+      ]
+    },
+    {
+      "id": "jr1mxhsub",
+      "name": "Período de atividade",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "2x79ae7g3",
+          "label": "diurno"
+        },
+        {
+          "id": "ml6c8g576",
+          "label": "noturno"
+        },
+        {
+          "id": "1uih4fpmq",
+          "label": "crepuscular"
+        }
+      ]
+    },
+    {
+      "id": "naenrg1cm",
+      "name": "Capacidade de escalar",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "uppk6asaq",
+          "label": "baixa"
+        },
+        {
+          "id": "3fk3urmkv",
+          "label": "moderada"
+        },
+        {
+          "id": "e4t2mf6ow",
+          "label": "alta"
+        }
+      ]
+    },
+    {
+      "id": "qzbogfm25",
+      "name": "Autotomia caudal",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "wfbcmktvg",
+          "label": "ausente"
+        },
+        {
+          "id": "v95xiah80",
+          "label": "presente"
+        }
+      ]
+    },
+    {
+      "id": "psubjkc93",
+      "name": "Poros femorais",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xss6zv2ho",
+          "label": "ausentes"
+        },
+        {
+          "id": "8czcdcd10",
+          "label": "presentes"
+        }
+      ]
+    },
+    {
+      "id": "055oihlaz",
+      "name": "Abertura externa do ouvido",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "t00bpzj6s",
+          "label": "invisível"
+        },
+        {
+          "id": "7lhznkn93",
+          "label": "visível pequena"
+        },
+        {
+          "id": "2iyl2vt3v",
+          "label": "visível grande"
+        }
+      ]
+    },
+    {
+      "id": "4jtepke2h",
+      "name": "Padrão de coloração",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "n4ktgqai7",
+          "label": "uniforme"
+        },
+        {
+          "id": "mzw2juvbo",
+          "label": "listrado"
+        },
+        {
+          "id": "ys1qrdzuj",
+          "label": "manchado/moteado"
+        }
+      ]
+    },
+    {
+      "id": "d98d1pfr9",
+      "name": "Dimorfismo sexual evidente",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jyi8qejo3",
+          "label": "ausente"
+        },
+        {
+          "id": "cs1o2kuq2",
+          "label": "presente"
+        }
+      ]
+    },
+    {
+      "id": "8htls9ru3",
+      "name": "Tipo de reprodução",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "qnvgzdzsq",
+          "label": "ovíparo"
+        },
+        {
+          "id": "98qy442mv",
+          "label": "vivíparo"
+        }
+      ]
+    },
+    {
+      "id": "qe39aano3",
+      "name": "Dieta principal",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "0fppdigrz",
+          "label": "insetívora"
+        },
+        {
+          "id": "qv2penrpf",
+          "label": "onívora"
+        },
+        {
+          "id": "wuxwlmlzh",
+          "label": "herbívora"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "c9qnn1jsj",
+      "name": "Iguana iguana",
+      "family": "Iguanidae",
+      "description": "A iguana-verde (Iguana iguana) é um grande lagarto arborícola nativo da América Central, América do Sul e algumas ilhas do Caribe. Conhecida por sua coloração verde vibrante, crista dorsal proeminente e papada gular, é um animal herbívoro, primariamente folívoro, que pode atingir mais de 1,5 metro de comprimento total. Possui uma cauda longa e forte que utiliza para equilíbrio e defesa. Vive principalmente em florestas tropicais, com alta capacidade de escalar árvores e se refugiar na água.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/38310918/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "wjeoxcjze"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "wuxwlmlzh"
+        ]
+      }
+    },
+    {
+      "id": "7gevg83u1",
+      "name": "Salvator merianae",
+      "family": "Teiidae",
+      "description": "O teiú ou lagarto-tigre (Salvator merianae) é um grande lagarto terrestre encontrado em grande parte da América do Sul, incluindo o Brasil. Caracteriza-se por seu corpo robusto, escamas lisas e um padrão de coloração marcante com manchas escuras sobre um fundo claro. É um animal onívoro e diurno, adaptado a habitats abertos como savanas e cerrados, com notável capacidade de escavação. Possui autotomia caudal e poros femorais bem desenvolvidos, sendo um dos maiores lagartos do continente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/55249908/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "q4me6wkvw",
+      "name": "Salvator rufescens",
+      "family": "Teiidae",
+      "description": "O teiú-vermelho ou lagarto-vermelho (Salvator rufescens) é uma espécie de teiú de grande porte, nativo da América do Sul, especialmente em regiões de cerrado e campos abertos. Distingue-se por sua coloração avermelhada ou alaranjada, que é mais intensa em indivíduos jovens. Assim como o Salvator merianae, é um lagarto terrestre, robusto, onívoro e diurno, com escamas lisas e autotomia caudal. Adapta-se bem a ambientes abertos e semiáridos, sendo um predador oportunista.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/105445864/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "631i52qup",
+      "name": "Tropidurus torquatus",
+      "family": "Tropiduridae",
+      "description": "O lagarto-papa-vento ou calango (Tropidurus torquatus) é uma espécie comum e amplamente distribuída no Brasil, encontrada em diversos habitats abertos, rochosos e até urbanos. É um lagarto de tamanho médio, com corpo robusto e escamas quilhadas, que se destaca pela sua capacidade de termorregulação e por um colar escuro na região do pescoço. Possui coloração variada, geralmente com padrões mosqueados ou listrados. É diurno, insetívoro e ovíparo, e exibe autotomia caudal. Frequentemente avistado em muros e pedras ao sol.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/167799747/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "olu449s0c",
+      "name": "Tropidurus hispidus",
+      "family": "Tropiduridae",
+      "description": "O lagarto-de-muro ou calango-de-parede (Tropidurus hispidus) é uma espécie comum de lagarto encontrada em ambientes abertos e rochosos, incluindo áreas urbanas, no nordeste do Brasil e outras partes da América do Sul. É um lagarto de tamanho médio, com corpo robusto e escamas quilhadas, frequentemente visto em muros e pedras, exibindo seu comportamento de 'lagartear'. É diurno, insetívoro e ovíparo, e, como outros Tropidurus, possui autotomia caudal e poros femorais. Sua coloração é críptica, variando com o substrato.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45669/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "jrj7luqkr",
+      "name": "Tropidurus semitaeniatus",
+      "family": "Tropiduridae",
+      "description": "O Tropidurus semitaeniatus é uma espécie de lagarto de tamanho médio, endêmica do bioma Caatinga no Brasil, sendo predominantemente encontrada em áreas rochosas. Este lagarto é caracterizado por seu corpo robusto e achatado dorsoventralmente, escamas quilhadas e uma coloração que pode variar, geralmente com padrões de faixas escuras. É diurno, insetívoro e ovíparo, e utiliza a autotomia caudal como mecanismo de defesa. Sua forma corporal achatada é uma notável adaptação para se esconder em frestas de rochas e fendas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/9787445/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "5810uagt7",
+      "name": "Ameiva ameiva",
+      "family": "Teiidae",
+      "description": "A Ameiva ameiva, conhecida popularmente como calango-verde, é um lagarto de tamanho médio a grande, ágil e terrestre, amplamente distribuído nas Américas Central e do Sul, incluindo o Brasil. Caracteriza-se por sua coloração vibrante, que pode variar do verde ao marrom, e frequentemente apresenta linhas longitudinais claras ou manchas. Possui escamas lisas, membros bem desenvolvidos, é diurno e habita principalmente áreas abertas, florestas degradadas e bordas de mata. É um predador voraz de insetos e pequenos invertebrados, e pratica a autotomia caudal como defesa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/2239851/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ellxwkd1r",
+      "name": "Ameivula ocellifera",
+      "family": "Teiidae",
+      "description": "A Ameivula ocellifera é um pequeno lagarto terrestre do gênero Ameivula, encontrado em diversas formações abertas do Brasil, como restingas e dunas costeiras. Caracteriza-se por seu corpo esguio e coloração com ocelos (manchas em forma de olhos) ao longo do corpo. É diurno, insetívoro e ovíparo, e, como outros teídeos, é ágil e rápido. Possui autotomia caudal e membros bem desenvolvidos. Prefere habitats com substrato arenoso e vegetação rasteira, onde caça ativamente pequenos invertebrados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/75641651/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "bny6u7mdo",
+      "name": "Kentropyx calcarata",
+      "family": "Teiidae",
+      "description": "Kentropyx calcarata é um lagarto terrestre de porte médio, encontrado em diversas regiões da América do Sul, incluindo o Brasil, especialmente em habitats florestais úmidos e bordas de floresta. Caracteriza-se por um corpo esguio e alongado, escamas lisas e uma coloração que geralmente inclui listras longitudinais. É diurno, insetívoro e ovíparo, possuindo membros bem desenvolvidos e autotomia caudal. É um animal ágil que se move rapidamente pela vegetação rasteira em busca de presas.",
+      "imageUrl": "https://static.inaturalist.org/photos/168699527/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "3eup2wf22",
+      "name": "Kentropyx striata",
+      "family": "Teiidae",
+      "description": "Kentropyx striata é um lagarto terrestre de porte médio, muito semelhante ao K. calcarata, encontrado em regiões de savanas e bordas de floresta na América do Sul, incluindo o Brasil. Caracteriza-se por seu corpo esguio com listras longitudinais proeminentes. É diurno, insetívoro e ovíparo, possui membros bem desenvolvidos e autotomia caudal. Prefere habitats com vegetação densa para forragear e se abrigar, sendo um predador ativo de pequenos invertebrados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/386612582/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "mydi0ghq3",
+      "name": "Polychrus marmoratus",
+      "family": "Polychrotidae",
+      "description": "Polychrus marmoratus, conhecido como lagarto-preguiça, é um lagarto arborícola de médio porte encontrado em florestas tropicais da América do Sul. Este lagarto é notável por sua capacidade de mudar de cor para se camuflar e por seus movimentos lentos e deliberados, assemelhando-se a um camaleão. Possui corpo esguio, membros bem desenvolvidos com dedos adaptados para agarrar galhos, e cauda preênsil. É diurno e insetívoro, caçando pacientemente na folhagem e no dossel da floresta, e não apresenta autotomia caudal.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/244097661/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "6fydi9eok",
+      "name": "Enyalius bilineatus",
+      "family": "Leiosauridae",
+      "description": "Enyalius bilineatus é um lagarto arborícola de porte médio, endêmico da Mata Atlântica no Brasil. Caracteriza-se por sua coloração críptica que se mescla bem com a folhagem, corpo esguio a robusto, escamas quilhadas e uma crista dorsal discreta. Possui membros bem desenvolvidos para escalada. É diurno, insetívoro e ovíparo, e habita a vegetação arbustiva e arbórea, onde se alimenta de insetos e outros artrópodes. Possui autotomia caudal como mecanismo de defesa.",
+      "imageUrl": "https://static.inaturalist.org/photos/162158516/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "7qgqzjtzk",
+      "name": "Enyalius perditus",
+      "family": "Leiosauridae",
+      "description": "Enyalius perditus é um lagarto arborícola de porte médio, endêmico do Brasil, ocorrendo principalmente em florestas úmidas. Possui corpo esguio, escamas quilhadas e uma crista dorsal discreta, semelhante a outras espécies de Enyalius. Sua coloração é tipicamente críptica, permitindo-lhe se camuflar na vegetação. É diurno, insetívoro e ovíparo, e utiliza seus membros bem desenvolvidos para escalar árvores e arbustos, sendo predominantemente arborícola. A autotomia caudal é uma característica presente nesta espécie.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60669407/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "l7mxbmu7p",
+      "name": "Anolis punctatus",
+      "family": "Dactyloidae",
+      "description": "Anolis punctatus, o anolis-pontilhado, é um lagarto arborícola de pequeno a médio porte, amplamente distribuído em florestas tropicais da América do Sul, incluindo o Brasil. Caracteriza-se por seu corpo esguio, uma coloração geralmente verde com pequenos pontos escuros (daí o nome), e a capacidade de estender uma papada gular colorida. Possui lamelas adesivas nos dedos, que lhe conferem alta capacidade de escalar. É diurno, insetívoro e ovíparo, e vive na vegetação arbórea, utilizando a autotomia caudal como defesa.",
+      "imageUrl": "https://static.inaturalist.org/photos/265914660/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "jxwkk1e5z",
+      "name": "Anolis fuscoauratus",
+      "family": "Dactyloidae",
+      "description": "Anolis fuscoauratus é um lagarto de pequeno a médio porte, arborícola, encontrado em florestas tropicais da América do Sul. Caracteriza-se por sua coloração geralmente marrom-escura a preta, corpo esguio e papada gular que pode variar de cor. Possui lamelas adesivas nos dedos para escalada eficiente. É diurno, insetívoro e ovíparo, e habita a vegetação arbórea, onde se alimenta de insetos e pequenos artrópodes. Possui autotomia caudal como uma forma de defesa contra predadores.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/71318292/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "9p0mez7bd",
+      "name": "Anolis meridionalis",
+      "family": "Dactyloidae",
+      "description": "Anolis meridionalis é um pequeno lagarto arborícola, encontrado em formações abertas e florestas de galeria no Brasil. Possui um corpo esguio, geralmente de coloração marrom ou cinza, com ou sem padrões de manchas. Como outros Anolis, tem a capacidade de exibir uma papada gular e possui lamelas adesivas nos dedos para auxiliar na escalada. É diurno, insetívoro e ovíparo, e habita árvores e arbustos. A autotomia caudal é um mecanismo de defesa presente na espécie.",
+      "imageUrl": "https://static.inaturalist.org/photos/168290011/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ds1yrm5rb",
+      "name": "Hemidactylus mabouia",
+      "family": "Gekkonidae",
+      "description": "A lagartixa-de-parede ou briba (Hemidactylus mabouia) é um gecko noturno e arborícola, amplamente distribuído no Brasil e em outras regiões tropicais, muitas vezes associado a ambientes urbanos. Possui corpo esguio e achatado, escamas granulares e olhos grandes sem pálpebras móveis. É famosa por suas lamelas adesivas altamente desenvolvidas nos dedos, que lhe permitem escalar superfícies verticais lisas. É insetívoro e ovíparo, e pode realizar autotomia caudal. É uma espécie exótica invasora no Brasil, adaptada à convivência com humanos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/148226455/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "r771w7tb4",
+      "name": "Phyllopezus pollicaris",
+      "family": "Phyllodactylidae",
+      "description": "Phyllopezus pollicaris, conhecido como lagartixa-de-casa-grande, é um gecko noturno e arborícola nativo do Brasil e outras partes da América do Sul. Possui corpo robusto, cabeça grande e escamas granulares, com um padrão de coloração que facilita a camuflagem em superfícies rochosas ou cascas de árvores. Destaca-se pelas suas lamelas adesivas especialmente grandes nos dedos, que o tornam um escalador excelente. É insetívoro e ovíparo, e exibe autotomia caudal. Prefere habitats rochosos e áreas de cerrado, buscando abrigo em fendas e ocos de árvores.",
+      "imageUrl": "https://static.inaturalist.org/photos/53935980/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "2og6pzqeu",
+      "name": "Gymnodactylus geckoides",
+      "family": "Phyllodactylidae",
+      "description": "Gymnodactylus geckoides é um gecko noturno e terrestre de pequeno porte, endêmico do Brasil, encontrado em áreas de cerrado e caatinga, frequentemente sob pedras ou detritos. Caracteriza-se por seu corpo esguio, escamas granulares e coloração críptica que imita o substrato. Diferente de muitos geckos, não possui lamelas adesivas nos dedos, o que o torna menos apto à escalada em superfícies lisas. É insetívoro e ovíparo, e pode autotomizar a cauda como defesa, escondendo-se durante o dia.",
+      "imageUrl": "https://static.inaturalist.org/photos/32237530/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "sul7s66xn",
+      "name": "Coleodactylus meridionalis",
+      "family": "Sphaerodactylidae",
+      "description": "Coleodactylus meridionalis é um dos menores lagartos do Brasil, um gecko diurno e terrestre, encontrado na Mata Atlântica e cerrado. Possui um corpo extremamente pequeno e esguio, escamas granulares e uma coloração que se mistura com a serapilheira. Seus membros são bem desenvolvidos, mas devido ao seu tamanho e habitat, tem baixa capacidade de escalar. É insetívoro e ovíparo, e pratica a autotomia caudal. Vive discretamente entre as folhas secas no solo da floresta.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/82197348/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "rujnu1ca6",
+      "name": "Coleodactylus amazonicus",
+      "family": "Sphaerodactylidae",
+      "description": "Coleodactylus amazonicus é um minúsculo gecko diurno e terrestre, encontrado na Amazônia brasileira. Como outros membros do gênero, possui um corpo esguio e pequeno, escamas granulares e uma coloração que se mistura com a serapilheira da floresta. Seus membros são bem desenvolvidos para seu tamanho, mas sua capacidade de escalada é limitada. É insetívoro e ovíparo, e a autotomia caudal é uma estratégia de defesa comum. É uma espécie críptica, difícil de ser observada em seu habitat natural.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/464801272/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ui207z1vp",
+      "name": "Cercosaura ocellata",
+      "family": "Gymnophthalmidae",
+      "description": "Cercosaura ocellata é um lagarto terrestre de pequeno porte, encontrado em uma variedade de habitats abertos e bordas de floresta na América do Sul, incluindo o Brasil. Caracteriza-se por seu corpo esguio, cauda longa, escamas lisas e padrões de ocelos ou manchas escuras no corpo. É diurno, insetívoro e ovíparo, e move-se rapidamente na vegetação rasteira. Possui autotomia caudal e membros bem desenvolvidos, sendo um predador ágil de pequenos invertebrados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/396345/medium.JPG",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ib52chm7j",
+      "name": "Cercosaura schreibersii",
+      "family": "Gymnophthalmidae",
+      "description": "Cercosaura schreibersii é um pequeno lagarto terrestre e diurno, encontrado no cerrado e caatinga do Brasil e outros países sul-americanos. Possui corpo esguio, cauda longa e escamas lisas, com uma coloração marrom que muitas vezes apresenta listras laterais claras e/ou manchas. É insetívoro e ovíparo, e utiliza a autotomia caudal como defesa. É um animal muito ágil, que se esconde rapidamente na vegetação rasteira ou sob rochas, caçando pequenos artrópodes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/6360638/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "kcweb53aa",
+      "name": "Vanzosaura rubricauda",
+      "family": "Gymnophthalmidae",
+      "description": "Vanzosaura rubricauda é um pequeno lagarto terrestre, encontrado em áreas abertas e semiáridas do nordeste do Brasil, como a Caatinga. Caracteriza-se por seu corpo esguio, cauda relativamente longa e coloração que pode incluir uma cauda avermelhada (daí o nome). Possui escamas lisas e membros bem desenvolvidos. É diurno, insetívoro e ovíparo, e é conhecido por sua agilidade e autotomia caudal. Adapta-se bem a substratos arenosos e rochosos, sendo um caçador ativo de insetos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/123892475/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "gfdzenk5b",
+      "name": "Bachia flavescens",
+      "family": "Gymnophthalmidae",
+      "description": "Bachia flavescens é um lagarto fossorial de pequeno porte, com corpo alongado e serpentiforme, encontrado em habitats abertos e bordas de floresta na América do Sul. Caracteriza-se pela redução ou ausência de membros, uma adaptação à vida subterrânea. Possui escamas lisas e uma coloração geralmente amarelada ou acastanhada. É insetívoro, ovíparo e passa a maior parte do tempo sob a serapilheira ou solo solto. Sua capacidade de autotomia caudal é presente, servindo como uma estratégia de defesa eficaz.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/261433/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "afsw4ptab"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "2mtzdg6qi",
+      "name": "Bachia bresslaui",
+      "family": "Gymnophthalmidae",
+      "description": "Bachia bresslaui é um lagarto fossorial de pequeno porte, endêmico do Brasil, com corpo alongado e serpentiforme, e membros reduzidos ou quase ausentes, uma adaptação à vida subterrânea. Habita florestas e cerrados, vivendo sob a serapilheira e no solo. Possui escamas lisas e uma coloração discreta. É diurno, insetívoro e ovíparo, e assim como outras espécies de Bachia, possui autotomia caudal. Passa a vida explorando o subsolo em busca de pequenos invertebrados.",
+      "imageUrl": "https://static.inaturalist.org/photos/268172106/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "afsw4ptab"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "olsa0amls",
+      "name": "Ophiodes striatus",
+      "family": "Anguidae",
+      "description": "Ophiodes striatus, conhecido como cobra-de-vidro ou quebra-quebra, é um lagarto ápode (sem membros visíveis) de corpo alongado e serpentiforme, encontrado em ambientes abertos e savanas no Brasil. Sua aparência lembra uma cobra, mas ele possui pálpebras móveis e aberturas auriculares, características de lagartos. Possui escamas lisas, é vivíparo e insetívoro. É notável por sua extrema autotomia caudal, onde a cauda pode se fragmentar em várias partes para escapar de predadores. Passa grande parte do tempo escondido na vegetação ou sob o solo, sendo ativo durante o dia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/177544466/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ukcg9689x",
+      "name": "Diploglossus fasciatus",
+      "family": "Anguidae",
+      "description": "Diploglossus fasciatus é um lagarto de tamanho médio, com corpo robusto e alongado, encontrado em florestas úmidas da América do Sul, incluindo o Brasil. Caracteriza-se por escamas lisas e brilhantes, e geralmente apresenta um padrão de listras escuras transversais sobre um fundo mais claro, o que lhe confere um aspecto anelado. É um lagarto semitérreo ou crepuscular/noturno, insetívoro, com membros bem desenvolvidos. Possui autotomia caudal e uma abertura externa do ouvido visível, vivendo frequentemente sob troncos e pedras.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/334001684/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "1uih4fpmq"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "a7h8sc54z",
+      "name": "Mabuya dorsivittata",
+      "family": "Scincidae",
+      "description": "Mabuya dorsivittata é um escinco de pequeno a médio porte, com corpo esguio e alongado, e escamas lisas e brilhantes que lhe dão um aspecto lustroso. É encontrado em diversos habitats abertos e florestais no Brasil. Caracteriza-se por uma listra escura que percorre o dorso e flancos claros. É diurno, insetívoro e vivíparo, e se move rapidamente sobre a serapilheira ou vegetação baixa. Possui autotomia caudal e membros bem desenvolvidos, sendo um lagarto muito ágil e discreto.",
+      "imageUrl": "https://static.inaturalist.org/photos/170660990/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ckobf8m2v",
+      "name": "Mabuya macrorhyncha",
+      "family": "Scincidae",
+      "description": "Mabuya macrorhyncha é um escinco de porte médio, com corpo esguio e focinho alongado (macrorhyncha = nariz grande). Encontrado em áreas abertas e florestas secas do Brasil. Possui escamas lisas e brilhantes, e uma coloração que varia do marrom ao cinza, muitas vezes com listras laterais. É diurno, insetívoro e vivíparo, sendo um lagarto rápido que se desloca tanto no solo quanto na vegetação rasteira. Apresenta autotomia caudal e membros bem desenvolvidos, adaptado para forragear ativamente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/164568375/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "lct75whym",
+      "name": "Trachylepis atlantica",
+      "family": "Scincidae",
+      "description": "Trachylepis atlantica é um escinco de porte médio, endêmico das ilhas do Arquipélago de Fernando de Noronha, Brasil. Possui corpo robusto, escamas quilhadas e uma coloração que varia do cinza ao marrom, muitas vezes com manchas escuras. É diurno e onívoro, alimentando-se de invertebrados e material vegetal. Este lagarto é notável por seu papel ecológico único na ilha e por sua capacidade de autotomia caudal. Seus membros são bem desenvolvidos e é terrestre, embora possa subir em rochas e árvores baixas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60022505/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "4ar2ql3r7",
+      "name": "Stenocercus caducus",
+      "family": "Tropiduridae",
+      "description": "Stenocercus caducus é um lagarto terrestre de porte médio, encontrado em florestas secas e áreas de cerrado na América do Sul. Possui corpo robusto, escamas quilhadas e uma coloração críptica, muitas vezes com padrões de manchas que o camuflam no ambiente. É diurno, insetívoro e ovíparo. Distingue-se por ter autotomia caudal e membros bem desenvolvidos, sendo um animal ágil no solo e sobre rochas. A crista dorsal pode ser discreta, e machos podem apresentar dimorfismo sexual.",
+      "imageUrl": "https://static.inaturalist.org/photos/51509886/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "vc1imlt81",
+      "name": "Stenocercus azureus",
+      "family": "Tropiduridae",
+      "description": "Stenocercus azureus é um lagarto terrestre de porte médio, encontrado em regiões de floresta e cerrado no Brasil. É notável por sua coloração azul vibrante em machos durante o período reprodutivo (daí o nome 'azureus'). Possui corpo robusto, escamas quilhadas e crista dorsal discreta. É diurno, insetívoro e ovíparo, e exibe autotomia caudal. Habita o solo e vegetação baixa, sendo um lagarto ágil que utiliza suas cores chamativas para display sexual e territorial.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/114983026/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "fyb8kqf5i",
+      "name": "Liolaemus lutzae",
+      "family": "Liolaemidae",
+      "description": "Liolaemus lutzae é um lagarto de pequeno porte, endêmico das restingas costeiras do Rio de Janeiro, Brasil. Este lagarto tem corpo robusto, escamas quilhadas e uma coloração que se camufla com a areia e vegetação da restinga, geralmente com padrões de manchas ou listras. É diurno, insetívoro e ovíparo. Possui membros bem desenvolvidos, autotomia caudal e poros femorais. É uma espécie adaptada a ambientes arenosos, com capacidade de escavação e termorregulação, frequentemente avistada em dunas e praias.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/146230715/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "toiure45o",
+      "name": "Liolaemus occipitalis",
+      "family": "Liolaemidae",
+      "description": "Liolaemus occipitalis é um lagarto de pequeno porte, também conhecido como lagartixa-das-dunas, endêmico das dunas costeiras do sul do Brasil. Este lagarto é altamente adaptado a ambientes arenosos, com coloração que se mistura perfeitamente com a areia e corpo ligeiramente achatado. Possui escamas quilhadas e é diurno, insetívoro e ovíparo. Seus membros são bem desenvolvidos, e pratica a autotomia caudal. Apresenta poros femorais e é um mestre em escavação em areia solta, sendo uma espécie altamente especializada ao seu habitat.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/28716711/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "iborww4i3",
+      "name": "Pholidobolus montium",
+      "family": "Gymnophthalmidae",
+      "description": "Pholidobolus montium é um pequeno lagarto terrestre e diurno, encontrado em ambientes montanhosos e florestais de alta altitude nos Andes e áreas adjacentes da América do Sul. Caracteriza-se por seu corpo esguio, escamas lisas e uma coloração que pode variar, geralmente com padrões de listras ou manchas. É insetívoro e ovíparo, e move-se rapidamente na vegetação rasteira. Possui membros bem desenvolvidos e autotomia caudal, sendo uma espécie adaptada a climas mais frios de montanha.",
+      "imageUrl": "https://static.inaturalist.org/photos/176669/medium.JPG",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "8o1ccuins",
+      "name": "Micrablepharus maximiliani",
+      "family": "Gymnophthalmidae",
+      "description": "Micrablepharus maximiliani é um lagarto terrestre e semifossorial de pequeno porte, encontrado em diversos biomas brasileiros, incluindo cerrado e Mata Atlântica. Possui corpo esguio e pequeno, escamas lisas e uma coloração discreta que facilita a camuflagem na serapilheira. Distingue-se por ter pálpebras fusionadas e transparentes, como lentes (óculos), o que lhe permite enxergar mesmo com os olhos fechados. É diurno, insetívoro e ovíparo, e pratica a autotomia caudal. É ágil e se esconde rapidamente sob folhas e detritos.",
+      "imageUrl": "https://static.inaturalist.org/photos/245992512/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "eh73a798l",
+      "name": "Micrablepharus atticolus",
+      "family": "Gymnophthalmidae",
+      "description": "Micrablepharus atticolus é um lagarto terrestre de pequeno porte, muito semelhante ao M. maximiliani, encontrado em áreas abertas e de cerrado no Brasil. Possui corpo esguio, escamas lisas e brilhantes, e pálpebras fusionadas e transparentes. Sua coloração é discreta, permitindo camuflagem na serapilheira e sob rochas. É diurno, insetívoro e ovíparo, com autotomia caudal. É um animal ágil que se alimenta de pequenos invertebrados, sendo adaptado para se movimentar entre a vegetação rasteira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/18795679/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "1tyjlghkj",
+      "name": "Brasiliscincus heathi",
+      "family": "Scincidae",
+      "description": "Brasiliscincus heathi é um escinco de pequeno a médio porte, terrestre, encontrado em áreas abertas e savanas do Brasil. Possui um corpo esguio, alongado, com escamas lisas e brilhantes que lhe dão um aspecto 'liso'. Sua coloração geralmente apresenta padrões de listras longitudinais. É diurno, insetívoro e vivíparo, e se move rapidamente sobre a vegetação rasteira ou sob a serapilheira. Apresenta membros bem desenvolvidos e autotomia caudal, sendo um predador ativo de pequenos invertebrados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/82199043/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "1tuuuuchc",
+      "name": "Brasiliscincus agilis",
+      "family": "Scincidae",
+      "description": "Brasiliscincus agilis é um escinco de pequeno a médio porte, terrestre, encontrado em áreas de Mata Atlântica e cerrado no Brasil. Possui um corpo esguio e alongado, com escamas lisas e brilhantes. Sua coloração é geralmente marrom, com padrões de listras longitudinais claras e escuras. Como o nome sugere, é um lagarto ágil, diurno e insetívoro. É vivíparo e apresenta autotomia caudal, além de membros bem desenvolvidos. Prefere se movimentar na serapilheira e em vegetação rasteira, onde caça pequenos invertebrados ativamente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/56920712/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "43hco8plb",
+      "name": "Phyllopezus lutzae",
+      "family": "Phyllodactylidae",
+      "description": "Phyllopezus lutzae é um gecko noturno e arborícola, encontrado em regiões costeiras e restingas do Brasil. É semelhante ao P. pollicaris, com corpo robusto, cabeça grande e escamas granulares. Sua coloração camufla-o em superfícies de árvores e rochas. Possui lamelas adesivas bem desenvolvidas nos dedos para escalada. É insetívoro e ovíparo, e pratica autotomia caudal. É uma espécie adaptada a ambientes secos e arenosos, frequentemente encontrado em construções humanas nas proximidades de áreas naturais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/262570392/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "bvzskdcnw",
+      "name": "Gymnodactylus darwinii",
+      "family": "Phyllodactylidae",
+      "description": "Gymnodactylus darwinii é um gecko noturno e terrestre de pequeno porte, encontrado em áreas de cerrado e florestas secas no Brasil. Semelhante ao G. geckoides, possui corpo esguio, escamas granulares e coloração críptica. Não possui lamelas adesivas nos dedos, o que o restringe a ambientes terrestres ou de baixa escalada. É insetívoro e ovíparo, e utiliza a autotomia caudal como defesa. Esconde-se sob pedras e troncos caídos durante o dia, emergindo à noite para forragear.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/114849568/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "o7xqu7xbe",
+      "name": "Anolis brasiliensis",
+      "family": "Dactyloidae",
+      "description": "Anolis brasiliensis é um lagarto arborícola de pequeno porte, endêmico do Brasil, encontrado em florestas e áreas de cerrado. Possui um corpo esguio, coloração variável que geralmente permite boa camuflagem, e uma papada gular que os machos exibem. Tem lamelas adesivas nos dedos para auxiliar na escalada. É diurno, insetívoro e ovíparo, vivendo na vegetação arbórea e arbustiva. Sua cauda pode ser autotomizada para escapar de predadores, sendo uma espécie bem adaptada a ambientes florestais.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/166138788/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "ygwxyibh5",
+      "name": "Anolis nasofrontalis",
+      "family": "Dactyloidae",
+      "description": "Anolis nasofrontalis é um lagarto arborícola de pequeno porte, encontrado em florestas e áreas de mata úmida no Brasil. Caracteriza-se por seu corpo esguio e focinho ligeiramente alongado, com coloração que varia para se camuflar na vegetação. Possui lamelas adesivas nos dedos, que lhe conferem excelente capacidade de escalada. É diurno, insetívoro e ovíparo, e os machos exibem uma papada gular. Habita o dossel e sub-bosque, sendo um predador ágil de insetos arbóreos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/251169499/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "kkytb0ib3",
+      "name": "Tropidurus itambere",
+      "family": "Tropiduridae",
+      "description": "Tropidurus itambere é uma espécie de lagarto de tamanho médio, endêmica do Brasil, encontrada em áreas de cerrado e campos rupestres, especialmente em regiões rochosas. Caracteriza-se por seu corpo robusto e escamas quilhadas, com coloração que se camufla bem no ambiente rochoso. É diurno, insetívoro e ovíparo, e como outros Tropidurus, exibe autotomia caudal e poros femorais. Sua capacidade de escalar rochas é moderada a alta, buscando o sol e forrageando em frestas e superfícies rochosas.",
+      "imageUrl": "https://static.inaturalist.org/photos/13549430/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "1ehp7koir",
+      "name": "Tropidurus oreadicus",
+      "family": "Tropiduridae",
+      "description": "Tropidurus oreadicus é um lagarto de tamanho médio, endêmico do planalto central do Brasil, encontrado em áreas de cerrado e campos rupestres. Caracteriza-se por seu corpo robusto e escamas quilhadas, com coloração variada que ajuda na camuflagem em ambientes rochosos. É diurno, insetívoro e ovíparo. Possui autotomia caudal e poros femorais. É uma espécie terrestre a saxícola (que vive em rochas), com boa capacidade de se abrigar em frestas de rochas, sendo um componente comum da fauna de répteis de sua região.",
+      "imageUrl": "https://static.inaturalist.org/photos/52597324/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "p64bxl8yz",
+      "name": "Ameivula abaetensis",
+      "family": "Teiidae",
+      "description": "Ameivula abaetensis é um pequeno lagarto terrestre do gênero Ameivula, endêmico das dunas e restingas da Bahia, Brasil. Caracteriza-se por seu corpo esguio e uma coloração que se camufla bem no substrato arenoso, muitas vezes com listras laterais claras e manchas. É diurno, insetívoro e ovíparo, e, como outros teídeos, é extremamente ágil. Possui membros bem desenvolvidos e autotomia caudal. É uma espécie adaptada a ambientes costeiros arenosos, onde forrageia ativamente sob o sol intenso.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/155121196/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "3277uz0ji",
+      "name": "Kentropyx pelviceps",
+      "family": "Teiidae",
+      "description": "Kentropyx pelviceps é um lagarto terrestre de porte médio a grande, encontrado em florestas úmidas da Amazônia e outras regiões da América do Sul. Caracteriza-se por um corpo esguio e uma coloração que pode incluir padrões de manchas ou listras, muitas vezes com tons de verde ou marrom. É diurno, insetívoro e ovíparo. Possui membros bem desenvolvidos e autotomia caudal. É um animal ágil que se move rapidamente pela serapilheira e vegetação rasteira da floresta, sendo um componente importante da herpetofauna amazônica.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/98218574/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "5ih77f0iu",
+      "name": "Cnemidophorus lemniscatus",
+      "family": "Teiidae",
+      "description": "Cnemidophorus lemniscatus, conhecido como calango-de-seis-listras, é um lagarto terrestre de tamanho médio, amplamente distribuído na América do Sul, incluindo o Brasil, em habitats abertos e ensolarados. Caracteriza-se por seu corpo esguio, escamas lisas e padrões de listras longitudinais distintas que lhe dão o nome popular. É diurno, insetívoro e ovíparo. Possui membros bem desenvolvidos e é extremamente rápido, fugindo de predadores com agilidade. A autotomia caudal é uma estratégia de defesa comum para esta espécie veloz.",
+      "imageUrl": "https://static.inaturalist.org/photos/4599603/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "o4daiwsrr",
+      "name": "Polychrus acutirostris",
+      "family": "Polychrotidae",
+      "description": "Polychrus acutirostris, semelhante ao P. marmoratus, é um lagarto arborícola de médio porte, encontrado em florestas secas, cerrados e caatingas da América do Sul, incluindo o Brasil. Caracteriza-se por seu corpo esguio, focinho pontiagudo (daí 'acutirostris') e sua notável capacidade de mudança de cor para camuflagem. Possui membros bem desenvolvidos com dedos adaptados para agarrar, e uma cauda preênsil. É diurno, insetívoro e ovíparo, com movimentos lentos e deliberados enquanto caça na vegetação, sem apresentar autotomia caudal.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/57785613/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "a2r3s4d5f",
+      "name": "Uranoscodon superciliosus",
+      "scientificName": "Uranoscodon superciliosus",
+      "family": "Iguanidae",
+      "description": "Uranoscodon superciliosus, o lagarto-lagarto-da-floresta, é uma espécie arborícola de porte médio, nativa da Amazônia e outras florestas úmidas da América do Sul, incluindo o Brasil. Caracteriza-se por um corpo robusto, escamas quilhadas e uma crista dorsal discreta. É diurno, insetívoro e ovíparo, com membros bem desenvolvidos para escalar árvores. Possui autotomia caudal e poros femorais, e se camufla bem na vegetação densa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/286485443/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "b3t5r7y9u",
+      "name": "Stenocercus dumerilii",
+      "scientificName": "Stenocercus dumerilii",
+      "family": "Iguanidae",
+      "description": "Stenocercus dumerilii é um lagarto terrestre de porte médio, encontrado em florestas secas e áreas de cerrado na América do Sul, incluindo o Brasil. Possui corpo robusto, escamas quilhadas e uma crista dorsal discreta, com coloração críptica. É diurno, insetívoro e ovíparo. Distingue-se por ter autotomia caudal e membros bem desenvolvidos, sendo um animal ágil no solo e sobre rochas. Machos podem apresentar dimorfismo sexual.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/450611801/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "c4e6r8t0i",
+      "name": "Stenocercus iridescens",
+      "scientificName": "Stenocercus iridescens",
+      "family": "Iguanidae",
+      "description": "Stenocercus iridescens é um lagarto terrestre de pequeno a médio porte, encontrado em florestas no Brasil. Possui corpo esguio a robusto, escamas quilhadas e uma crista dorsal discreta, com coloração que pode exibir iridescência. É diurno, insetívoro e ovíparo. Possui autotomia caudal e poros femorais, sendo um lagarto ágil que habita o solo e vegetação baixa.",
+      "imageUrl": "https://static.inaturalist.org/photos/679034/medium.JPG",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "d5f7h9j1k",
+      "name": "Enyalius catenatus",
+      "scientificName": "Enyalius catenatus",
+      "family": "Iguanidae",
+      "description": "Enyalius catenatus é um lagarto arborícola de porte médio, endêmico da Mata Atlântica do Brasil. Caracteriza-se por seu corpo esguio, escamas quilhadas e uma crista dorsal discreta, com coloração críptica. É diurno, insetívoro e ovíparo, e habita a vegetação arbustiva e arbórea. Possui autotomia caudal e membros bem desenvolvidos para escalada.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60639238/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "e6g8i0j2l",
+      "name": "Enyalius leechii",
+      "scientificName": "Enyalius leechii",
+      "family": "Iguanidae",
+      "description": "Enyalius leechii é um lagarto arborícola de porte médio, endêmico do Brasil, encontrado em florestas úmidas. Possui corpo esguio, escamas quilhadas e uma crista dorsal discreta, com coloração críptica. É diurno, insetívoro e ovíparo, utilizando seus membros bem desenvolvidos para escalar árvores e arbustos. A autotomia caudal é uma característica presente nesta espécie.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/174943700/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "f7i9k1l3m",
+      "name": "Thecadactylus rapicauda",
+      "scientificName": "Thecadactylus rapicauda",
+      "family": "Gekkonidae",
+      "description": "Thecadactylus rapicauda, a lagartixa-rabuda-amazônica, é um gecko noturno e arborícola de tamanho médio a grande, amplamente distribuído na América do Sul, incluindo o Brasil. Possui corpo robusto, escamas granulares e lamelas adesivas bem desenvolvidas nos dedos, permitindo alta capacidade de escalada. É insetívoro e ovíparo, e pode realizar autotomia caudal. Frequenta florestas e áreas urbanas, abrigando-se em ocos de árvores ou construções.",
+      "imageUrl": "https://static.inaturalist.org/photos/180794522/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v",
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "g8j0l2m4n",
+      "name": "Gonatodes humeralis",
+      "scientificName": "Gonatodes humeralis",
+      "family": "Gekkonidae",
+      "description": "Gonatodes humeralis, a lagartixa-pigmeia-amazônica, é um pequeno gecko diurno (ou crepuscular) e arborícola, comum na Amazônia. Possui corpo esguio, escamas granulares e lamelas adesivas pouco desenvolvidas, mas suficientes para escalar. É insetívoro e ovíparo, e pratica autotomia caudal. Habita troncos de árvores e folhagem baixa, com machos exibindo cores vibrantes na cabeça.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/114621968/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "1ksvzzar0"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3",
+          "1uih4fpmq"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "h9k1m3n5o",
+      "name": "Coleodactylus zygodactylus",
+      "scientificName": "Coleodactylus zygodactylus",
+      "family": "Sphaerodactylidae",
+      "description": "Coleodactylus zygodactylus é um minúsculo gecko diurno e terrestre, encontrado na Amazônia brasileira. Possui corpo esguio e pequeno, escamas granulares e uma coloração críptica. Membros bem desenvolvidos para seu tamanho, mas baixa capacidade de escalada. É insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira da floresta.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "i0l2n4o6p",
+      "name": "Lygodactylus klugei",
+      "scientificName": "Lygodactylus klugei",
+      "family": "Gekkonidae",
+      "description": "Lygodactylus klugei, a lagartixa-anã-do-cerrado, é um pequeno gecko diurno e arborícola, endêmico do cerrado brasileiro. Possui corpo esguio, escamas granulares e lamelas adesivas bem desenvolvidas, conferindo alta capacidade de escalada em árvores e rochas. É insetívoro e ovíparo, com autotomia caudal. Os machos exibem dimorfismo sexual na coloração.",
+      "imageUrl": "https://static.inaturalist.org/photos/57562658/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "j1m3o5p7q",
+      "name": "Phyllopezus periosus",
+      "scientificName": "Phyllopezus periosus",
+      "family": "Phyllodactylidae",
+      "description": "Phyllopezus periosus, a lagartixa-de-casa-grande-do-nordeste, é um gecko noturno e arborícola nativo do Nordeste brasileiro. Possui corpo robusto, cabeça grande e escamas granulares, com lamelas adesivas bem desenvolvidas para escalada. É insetívoro e ovíparo, e exibe autotomia caudal. Prefere habitats rochosos e áreas de cerrado, frequentemente encontrado em construções humanas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/133793736/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "k2n4p6q8r",
+      "name": "Phyllopezus rostratus",
+      "scientificName": "Phyllopezus rostratus",
+      "family": "Phyllodactylidae",
+      "description": "Phyllopezus rostratus, a lagartixa-de-focinho-comprido, é um gecko noturno e arborícola de porte médio, encontrado no cerrado e caatinga do Brasil. Caracteriza-se pelo corpo robusto, cabeça grande com focinho alongado, escamas granulares e lamelas adesivas. É insetívoro e ovíparo, com autotomia caudal. Abriga-se em frestas de rochas e ocos de árvores.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "l3o5q7r9s",
+      "name": "Anolis chrysolepis",
+      "scientificName": "Anolis chrysolepis",
+      "family": "Dactyloidae",
+      "description": "Anolis chrysolepis, o anolis-dourado, é um lagarto arborícola de porte médio, amplamente distribuído nas florestas tropicais da América do Sul, incluindo o Brasil. Possui corpo esguio, coloração geralmente verde ou marrom-dourada, e papada gular colorida. Com lamelas adesivas nos dedos, é um escalador eficiente. É diurno, insetívoro e ovíparo, utilizando a autotomia caudal como defesa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/76442985/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "m4p6r8t0u",
+      "name": "Anolis ortonii",
+      "scientificName": "Anolis ortonii",
+      "family": "Dactyloidae",
+      "description": "Anolis ortonii é um pequeno anolis arborícola, encontrado em florestas úmidas da Amazônia brasileira. Caracteriza-se pelo corpo esguio, coloração críptica com padrões manchados e papada gular. Possui lamelas adesivas nos dedos para escalada eficiente. É diurno, insetívoro e ovíparo, habitando a vegetação arbórea e arbustiva, utilizando autotomia caudal como defesa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/110233498/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "n5q7s9u1v",
+      "name": "Anolis planiceps",
+      "scientificName": "Anolis planiceps",
+      "family": "Dactyloidae",
+      "description": "Anolis planiceps é um pequeno lagarto arborícola, encontrado em florestas no Brasil. Possui corpo esguio, cabeça relativamente plana e coloração uniforme que permite camuflagem na vegetação. Possui lamelas adesivas nos dedos e é um escalador ágil. É diurno, insetívoro e ovíparo, com autotomia caudal, e vive em árvores e arbustos.",
+      "imageUrl": "https://static.inaturalist.org/photos/65400806/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "o6r8t0u2w",
+      "name": "Tupinambis teguixin",
+      "scientificName": "Tupinambis teguixin",
+      "family": "Teiidae",
+      "description": "Tupinambis teguixin, o teiú-comum, é um grande lagarto terrestre encontrado em diversos biomas da América do Sul, incluindo o Brasil. Caracteriza-se pelo corpo robusto, escamas lisas e padrão de coloração manchado. É diurno e onívoro, adaptado a habitats abertos e florestas degradadas. Possui autotomia caudal e poros femorais, sendo um predador oportunista.",
+      "imageUrl": "https://static.inaturalist.org/photos/111110040/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3",
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "p7s9u1v3x",
+      "name": "Kentropyx viridistriga",
+      "scientificName": "Kentropyx viridistriga",
+      "family": "Teiidae",
+      "description": "Kentropyx viridistriga, o lagarto-listrado-verde, é um lagarto terrestre de porte médio, encontrado em áreas abertas e savanas da América do Sul, incluindo o Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais distintas. É diurno, insetívoro e ovíparo, com membros bem desenvolvidos e autotomia caudal. É um animal ágil que se move rapidamente pela vegetação rasteira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/95289327/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "q8t0v2w4y",
+      "name": "Cnemidophorus littoralis",
+      "scientificName": "Cnemidophorus littoralis",
+      "family": "Teiidae",
+      "description": "Cnemidophorus littoralis, o calango-do-litoral, é um lagarto terrestre de pequeno a médio porte, endêmico das restingas costeiras do Brasil. Caracteriza-se pelo corpo esguio, escamas lisas e padrões de listras longitudinais. É diurno, insetívoro e ovíparo, com membros bem desenvolvidos e autotomia caudal. Adaptado a ambientes arenosos, é extremamente rápido e ágil.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/171092025/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "r9u1w3x5z",
+      "name": "Aspidoscelis maslini",
+      "scientificName": "Aspidoscelis maslini",
+      "family": "Teiidae",
+      "description": "Aspidoscelis maslini é um lagarto terrestre de porte médio, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais. É diurno, insetívoro e ovíparo, com membros bem desenvolvidos e autotomia caudal. É uma espécie ágil e rápida, adaptada a forragear em substratos abertos e ensolarados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/120519398/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "s0v2x4y6a",
+      "name": "Ameivula cipoensis",
+      "scientificName": "Ameivula cipoensis",
+      "family": "Teiidae",
+      "description": "Ameivula cipoensis é um pequeno lagarto terrestre, endêmico de áreas de campos rupestres e cerrado do Brasil. Caracteriza-se por seu corpo esguio, escamas lisas e coloração com manchas ou ocelos. É diurno, insetívoro e ovíparo, e é conhecido por sua agilidade. Possui autotomia caudal e membros bem desenvolvidos, forrageando ativamente em seu habitat rochoso e aberto.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/117709874/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "t1w3y5a7b",
+      "name": "Ameivula confusionis",
+      "scientificName": "Ameivula confusionis",
+      "family": "Teiidae",
+      "description": "Ameivula confusionis é um pequeno lagarto terrestre do gênero Ameivula, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, escamas lisas e uma coloração manchada, que oferece camuflagem. É diurno, insetívoro e ovíparo, e é caracterizado por sua rapidez e agilidade. Possui autotomia caudal e membros bem desenvolvidos, sendo um caçador ativo de pequenos invertebrados.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "u2x4z6b8c",
+      "name": "Notomabuya frenata",
+      "scientificName": "Notomabuya frenata",
+      "family": "Scincidae",
+      "description": "Notomabuya frenata, a mabuya-listrada, é um escinco de pequeno a médio porte, com corpo esguio e alongado, e escamas lisas e brilhantes. É encontrado em diversos habitats abertos e urbanos no Brasil. Caracteriza-se por listras escuras nos flancos. É diurno, insetívoro e vivíparo, e se move rapidamente sobre o solo ou vegetação baixa. Possui autotomia caudal e membros bem desenvolvidos.",
+      "imageUrl": "https://static.inaturalist.org/photos/154022189/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "v3y5a7c9d",
+      "name": "Copeoglossum nigropunctatum",
+      "scientificName": "Copeoglossum nigropunctatum",
+      "family": "Scincidae",
+      "description": "Copeoglossum nigropunctatum, o escinco-de-pontos-pretos, é um escinco de porte médio, com corpo esguio e escamas lisas e brilhantes. Encontrado em florestas úmidas do Brasil. Possui uma coloração marrom com pontos escuros. É diurno, insetívoro e vivíparo, movendo-se rapidamente na serapilheira e vegetação baixa. Apresenta autotomia caudal e membros bem desenvolvidos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/109193409/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "w4z6b8d0e",
+      "name": "Exila nigropalmata",
+      "scientificName": "Exila nigropalmata",
+      "family": "Scincidae",
+      "description": "Exila nigropalmata, o escinco-de-palmas-pretas, é um pequeno escinco terrestre, encontrado em áreas florestais e abertas do Brasil. Possui corpo esguio, escamas lisas e brilhantes, e coloração uniforme. É diurno, insetívoro e vivíparo, e se move rapidamente sobre a serapilheira. Apresenta autotomia caudal e membros bem desenvolvidos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/39084114/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "x5a7c9e1f",
+      "name": "Colobosaura kraepelini",
+      "scientificName": "Colobosaura kraepelini",
+      "family": "Gymnophthalmidae",
+      "description": "Colobosaura kraepelini é um pequeno lagarto terrestre e diurno, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, escamas lisas e coloração marrom com listras laterais. É insetívoro e ovíparo, utilizando a autotomia caudal como defesa. É um animal ágil que se esconde rapidamente na vegetação rasteira.",
+      "imageUrl": "https://static.inaturalist.org/photos/106603250/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "y6b8d0f2g",
+      "name": "Calyptommatus confusionis",
+      "scientificName": "Calyptommatus confusionis",
+      "family": "Gymnophthalmidae",
+      "description": "Calyptommatus confusionis, o lagarto-cego-confuso, é um pequeno lagarto fossorial com corpo alongado e serpentiforme, e membros reduzidos. Encontrado em ambientes arenosos do Brasil. Possui escamas lisas e coloração uniforme. É diurno, insetívoro e ovíparo, e vive sob a areia ou serapilheira. Autotomia caudal presente.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "afsw4ptab"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "z7c9e1g3h",
+      "name": "Calyptommatus sinebrachiatus",
+      "scientificName": "Calyptommatus sinebrachiatus",
+      "family": "Gymnophthalmidae",
+      "description": "Calyptommatus sinebrachiatus, o lagarto-cego-sem-braços, é um pequeno lagarto fossorial com corpo alongado e serpentiforme, e membros completamente ausentes. Endêmico de ambientes arenosos do Brasil. Possui escamas lisas e coloração uniforme. É diurno, insetívoro e ovíparo, vivendo subterraneamente. Autotomia caudal presente.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "a8d0f2h4i",
+      "name": "Gymnophthalmus rubricaudus",
+      "scientificName": "Gymnophthalmus rubricaudus",
+      "family": "Gymnophthalmidae",
+      "description": "Gymnophthalmus rubricaudus, a lagartixa-do-cerrado-de-cauda-vermelha, é um pequeno lagarto terrestre e diurno, encontrado no cerrado e caatinga do Brasil. Possui corpo esguio, escamas lisas e uma cauda frequentemente avermelhada. É insetívoro e ovíparo, utilizando a autotomia caudal como defesa. É um animal ágil que se esconde rapidamente na vegetação rasteira ou sob rochas.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "b9e1g3i5j",
+      "name": "Gymnophthalmus leucomystax",
+      "scientificName": "Gymnophthalmus leucomystax",
+      "family": "Gymnophthalmidae",
+      "description": "Gymnophthalmus leucomystax, a lagartixa-de-bigode-branco, é um pequeno lagarto terrestre e diurno, encontrado em florestas e áreas de cerrado no Brasil. Possui corpo esguio, escamas lisas e uma listra lateral clara que se estende até o focinho. É insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira e vegetação baixa, sendo ágil em sua busca por presas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/152747817/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "c0f2h4j6k",
+      "name": "Iphisa elegans",
+      "scientificName": "Iphisa elegans",
+      "family": "Gymnophthalmidae",
+      "description": "Iphisa elegans, o lagarto-cobra-amazônico, é um pequeno lagarto semi-fossorial com corpo alongado e serpentiforme, e membros reduzidos. Encontrado em florestas úmidas da Amazônia. Possui escamas lisas e coloração uniforme. É diurno, insetívoro e ovíparo, vivendo sob a serapilheira ou no solo solto. Autotomia caudal presente.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/179937957/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "afsw4ptab"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "d1g3i5k7l",
+      "name": "Procellosaurinus tetradactylus",
+      "scientificName": "Procellosaurinus tetradactylus",
+      "family": "Gymnophthalmidae",
+      "description": "Procellosaurinus tetradactylus, a lagartixa-de-quatro-dedos, é um pequeno lagarto terrestre e diurno, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais. É insetívoro e ovíparo, com autotomia caudal. É ágil e se move rapidamente na vegetação rasteira em busca de presas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/177735954/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "e2h4j6l8m",
+      "name": "Alopoglossus angulatus",
+      "scientificName": "Alopoglossus angulatus",
+      "family": "Gymnophthalmidae",
+      "description": "Alopoglossus angulatus, o lagarto-florestal-angular, é um lagarto terrestre de pequeno a médio porte, encontrado em florestas úmidas da Amazônia. Possui corpo esguio, escamas lisas e coloração manchada. É diurno, insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira e vegetação baixa, sendo um predador ativo de pequenos invertebrados.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/104172922/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "f3i5k7m9n",
+      "name": "Cercosaura quadrilineata",
+      "scientificName": "Cercosaura quadrilineata",
+      "family": "Gymnophthalmidae",
+      "description": "Cercosaura quadrilineata, a lagartixa-de-quatro-listras, é um pequeno lagarto terrestre e diurno, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, cauda longa, escamas lisas e quatro listras longitudinais. É insetívoro e ovíparo, e utiliza a autotomia caudal. É um animal ágil que se move rapidamente na vegetação rasteira.",
+      "imageUrl": "https://static.inaturalist.org/photos/213202489/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "g4j6l8n0p",
+      "name": "Ophiodes intermedius",
+      "scientificName": "Ophiodes intermedius",
+      "family": "Anguidae",
+      "description": "Ophiodes intermedius, a cobra-de-vidro-intermediária, é um lagarto ápode de corpo alongado e serpentiforme, encontrado em ambientes abertos e savanas do Brasil. Semelhante a uma cobra, mas com pálpebras móveis. Possui escamas lisas, é vivíparo e insetívoro. Conhecido por sua autotomia caudal. Ativo durante o dia, escondido na vegetação ou sob o solo.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/47994016/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "h5k7m9p1q",
+      "name": "Diploglossus lessonae",
+      "scientificName": "Diploglossus lessonae",
+      "family": "Anguidae",
+      "description": "Diploglossus lessonae, o lagarto-de-Lesson, é um lagarto de porte médio, com corpo robusto e alongado, encontrado em florestas úmidas do Brasil. Caracteriza-se por escamas lisas e brilhantes e um padrão de listras transversais. É crepuscular a noturno, insetívoro, com membros bem desenvolvidos. Possui autotomia caudal e uma abertura externa do ouvido visível, vivendo sob troncos e pedras.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/108112726/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "1uih4fpmq"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "i6l8n0q2r",
+      "name": "Boa constrictor",
+      "scientificName": "Boa constrictor",
+      "family": "Boidae",
+      "description": "Boa constrictor, a jiboia, é uma grande serpente não-venenosa, amplamente distribuída na América do Sul, incluindo o Brasil. Possui corpo robusto e alongado, escamas lisas e padrões de manchas complexos. É terrestre e arborícola, noturna ou crepuscular. Alimenta-se de pequenos vertebrados, sendo ovovivípara. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://static.inaturalist.org/photos/106355141/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576",
+          "1uih4fpmq"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "j7m9p1r3s",
+      "name": "Eunectes notaeus",
+      "scientificName": "Eunectes notaeus",
+      "family": "Boidae",
+      "description": "Eunectes notaeus, a sucuri-amarela, é uma grande serpente aquática da família Boidae, encontrada em pântanos e rios do centro-oeste do Brasil e regiões adjacentes. Possui corpo muito robusto e alongado, escamas lisas e coloração amarelada com manchas escuras. É vivípara e se alimenta de diversos vertebrados. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/221099607/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3",
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3",
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "k8n0q2s4t",
+      "name": "Corallus hortulanus",
+      "scientificName": "Corallus hortulanus",
+      "family": "Boidae",
+      "description": "Corallus hortulanus, a cobra-papagaio, é uma serpente arborícola de porte médio a grande, encontrada em florestas da América do Sul, incluindo o Brasil. Possui corpo esguio e alongado, escamas lisas e coloração variável, frequentemente com manchas. É noturna e ovípara, predando pequenos vertebrados. Sua alta capacidade de escalada a torna eficaz no dossel da floresta.",
+      "imageUrl": "https://static.inaturalist.org/photos/71052/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v",
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "l9p1r3t5u",
+      "name": "Epicrates cenchria",
+      "scientificName": "Epicrates cenchria",
+      "family": "Boidae",
+      "description": "Epicrates cenchria, a jiboia-arco-íris, é uma serpente de porte médio a grande, terrestre e arborícola, encontrada em florestas e áreas abertas do Brasil. Possui corpo alongado, escamas lisas e iridescentes, com padrões de manchas. É noturna e vivípara, predando pequenos vertebrados. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/98218837/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v",
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "m0q2s4u6v",
+      "name": "Sibynomorphus mikanii",
+      "scientificName": "Sibynomorphus mikanii",
+      "family": "Colubridae",
+      "description": "Sibynomorphus mikanii, a cobra-dormideira, é uma pequena a média serpente da família Colubridae, encontrada em florestas e áreas urbanas do Brasil. Possui corpo esguio e alongado, escamas lisas e padrões de manchas. É noturna e ovípara, especializada em predar lesmas e caracóis. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/60188061/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "n1r3s5v7w",
+      "name": "Oxyrhopus guibei",
+      "scientificName": "Oxyrhopus guibei",
+      "family": "Colubridae",
+      "description": "Oxyrhopus guibei, a falsa-coral-de-Guibé, é uma serpente de porte médio da família Colubridae, encontrada em florestas e áreas abertas do Brasil. Possui corpo esguio e alongado, escamas lisas e padrões de listras vermelhas, pretas e brancas (mimético). É noturna e ovípara, predando pequenos lagartos e roedores. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://static.inaturalist.org/photos/164624509/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "o2s4u6w8x",
+      "name": "Thamnodynastes strigatus",
+      "scientificName": "Thamnodynastes strigatus",
+      "family": "Colubridae",
+      "description": "Thamnodynastes strigatus, a cobra-corre-campo-listrada, é uma serpente de porte médio da família Colubridae, encontrada em áreas abertas e savanas do Brasil. Possui corpo esguio e alongado, escamas quilhadas e padrões de listras longitudinais. É diurna e vivípara, predando anfíbios e pequenos lagartos. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/32786141/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "p3u6w8x0y",
+      "name": "Chironius exoletus",
+      "scientificName": "Chironius exoletus",
+      "family": "Colubridae",
+      "description": "Chironius exoletus, a cobra-cipó-lisa, é uma serpente arborícola de porte médio a grande da família Colubridae, encontrada em florestas do Brasil. Possui corpo esguio e alongado, escamas lisas e coloração uniforme verde ou marrom. É diurna e ovípara, predando pequenos vertebrados. Sua alta capacidade de escalada a torna eficaz na vegetação.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/14065837/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v",
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "q4w8x0y2z",
+      "name": "Spilotes sulphureus",
+      "scientificName": "Spilotes sulphureus",
+      "family": "Colubridae",
+      "description": "Spilotes sulphureus, a cobra-tigre-amarela, é uma grande serpente arborícola e terrestre da família Colubridae, encontrada em florestas da Amazônia. Possui corpo robusto e alongado, escamas quilhadas e coloração amarelada com manchas pretas. É diurna e ovípara, predando ovos, aves e roedores. Sua alta capacidade de escalada a permite explorar diferentes estratos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/527550356/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "r5x0y2z4a",
+      "name": "Drymoluber dichrous",
+      "scientificName": "Drymoluber dichrous",
+      "family": "Colubridae",
+      "description": "Drymoluber dichrous, a cobra-preta-da-mata, é uma serpente de porte médio a grande da família Colubridae, encontrada em florestas do Brasil. Possui corpo esguio e alongado, escamas lisas e coloração uniforme preta ou marrom escura. É diurna e ovípara, predando pequenos vertebrados. Move-se agilmente no solo e na vegetação baixa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/270610750/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v",
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "s6y2z4a6b",
+      "name": "Leptophis ahaetulla",
+      "scientificName": "Leptophis ahaetulla",
+      "family": "Colubridae",
+      "description": "Leptophis ahaetulla, a cobra-cipó-verde, é uma serpente arborícola de porte médio da família Colubridae, encontrada em florestas da América do Sul, incluindo o Brasil. Possui corpo extremamente esguio e alongado, escamas lisas e coloração verde uniforme, mimetizando cipós. É diurna e ovípara, predando pequenos lagartos, aves e anfíbios. Sua alta capacidade de escalada a torna um predador eficaz no dossel.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/252508505/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "t7z4a6b8c",
+      "name": "Pseustes poecilostoma",
+      "scientificName": "Pseustes poecilostoma",
+      "family": "Colubridae",
+      "description": "Pseustes poecilostoma, a cobra-corredeira, é uma grande serpente terrestre e arborícola da família Colubridae, encontrada em florestas e áreas abertas do Brasil. Possui corpo robusto e alongado, escamas quilhadas e padrões de manchas. É diurna e ovípara, predando pequenos mamíferos, aves e anfíbios. Move-se rapidamente no solo e na vegetação.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Pseustes_sulphureus%2C_Atlantic_forest%2C_Bahia%2C_Brazil_%284872996211%29.jpg/500px-Pseustes_sulphureus%2C_Atlantic_forest%2C_Bahia%2C_Brazil_%284872996211%29.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "u8a6b8c0d",
+      "name": "Micrurus frontalis",
+      "scientificName": "Micrurus frontalis",
+      "family": "Elapidae",
+      "description": "Micrurus frontalis, a coral-verdadeira-do-cerrado, é uma serpente peçonhenta de pequeno a médio porte da família Elapidae, encontrada no cerrado e outras áreas abertas do Brasil. Possui corpo esguio e alongado, escamas lisas e padrões de anéis vermelhos, pretos e brancos/amarelos. É diurna e ovípara, predando outras serpentes e lagartos. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/65607875/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "v9b8c0d2e",
+      "name": "Micrurus lemniscatus",
+      "scientificName": "Micrurus lemniscatus",
+      "family": "Elapidae",
+      "description": "Micrurus lemniscatus, a coral-verdadeira-aquática, é uma serpente peçonhenta de porte médio da família Elapidae, encontrada em florestas e ambientes aquáticos do Brasil. Possui corpo esguio e alongado, escamas lisas e padrões de anéis vermelhos, pretos e brancos/amarelos. É diurna e ovípara, predando peixes, anfíbios e outras serpentes. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/61011435/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "w0c0d2e4f",
+      "name": "Bothrops atrox",
+      "scientificName": "Bothrops atrox",
+      "family": "Viperidae",
+      "description": "Bothrops atrox, a jararaca-comum, é uma grande serpente peçonhenta da família Viperidae, amplamente distribuída em florestas tropicais da América do Sul, incluindo o Brasil. Possui corpo robusto e alongado, escamas quilhadas e padrões de manchas que a camuflam na serapilheira. É noturna e vivípara, predando pequenos mamíferos, aves e anfíbios. Não possui autotomia caudal nem membros visíveis.",
+      "imageUrl": "https://static.inaturalist.org/photos/28285205/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "x1d2e4f6g",
+      "name": "Bothrops moojeni",
+      "scientificName": "Bothrops moojeni",
+      "family": "Viperidae",
+      "description": "Bothrops moojeni, a jararaca-do-cerrado, é uma grande serpente peçonhenta da família Viperidae, encontrada no cerrado brasileiro. Possui corpo robusto e alongado, escamas quilhadas e padrões de manchas crípticos. É noturna e vivípara, predando pequenos mamíferos e aves. Não possui autotomia caudal nem membros visíveis, adaptada a ambientes abertos e secos.",
+      "imageUrl": "https://static.inaturalist.org/photos/50006282/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "zsnmmjq5u"
+        ],
+        "do8mcjrwg": [
+          "k5qm02wt9"
+        ],
+        "zjwa6d22e": [
+          "xjp2aj3ro"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "wfbcmktvg"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "t00bpzj6s"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "98qy442mv"
+        ],
+        "qe39aano3": [
+          "qv2penrpf"
+        ]
+      }
+    },
+    {
+      "id": "y2e4f6g8h",
+      "name": "Bogertia lutzae",
+      "scientificName": "Bogertia lutzae",
+      "family": "Gekkonidae",
+      "description": "Bogertia lutzae, o gecko-de-folha-do-cerrado, é um pequeno gecko noturno e terrestre, encontrado em áreas de cerrado do Brasil. Possui corpo esguio, escamas granulares e coloração críptica, mimetizando folhas secas. Não possui lamelas adesivas nos dedos. É insetívoro e ovíparo, com autotomia caudal. Esconde-se na serapilheira durante o dia.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/262570392/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "z3f6g8h0i",
+      "name": "Hemidactylus agrius",
+      "scientificName": "Hemidactylus agrius",
+      "family": "Gekkonidae",
+      "description": "Hemidactylus agrius, a lagartixa-de-parede-do-agreste, é um pequeno gecko noturno e arborícola, encontrado em áreas abertas e urbanas do Nordeste brasileiro. Possui corpo esguio, escamas granulares e lamelas adesivas bem desenvolvidas nos dedos. É insetívoro e ovíparo, e pratica autotomia caudal. Frequentemente encontrado em paredes de construções e rochas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/45923826/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3",
+          "oyg17egmu"
+        ],
+        "jr1mxhsub": [
+          "ml6c8g576"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "7lhznkn93"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "a4g8h0i2j",
+      "name": "Anolis laeviventris",
+      "scientificName": "Anolis laeviventris",
+      "family": "Dactyloidae",
+      "description": "Anolis laeviventris, o anolis-de-ventre-liso, é um pequeno lagarto arborícola, encontrado em florestas do Brasil. Possui corpo esguio, coloração uniforme verde ou marrom, e papada gular. Com lamelas adesivas nos dedos, é um escalador ágil. É diurno, insetívoro e ovíparo, com autotomia caudal, e vive na vegetação arbórea.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/70080870/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "yg52gqahs"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "e21hfcvn3"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "b5h0i2j4k",
+      "name": "Eurolophosaurus nanuzae",
+      "scientificName": "Eurolophosaurus nanuzae",
+      "family": "Tropiduridae",
+      "description": "Eurolophosaurus nanuzae, o lagarto-da-serra-da-Nanuza, é um lagarto de pequeno a médio porte, endêmico de áreas de cerrado e campos rupestres do Brasil. Possui corpo robusto, escamas quilhadas e crista dorsal discreta. É diurno, insetívoro e ovíparo, com autotomia caudal e poros femorais. Adaptado a ambientes rochosos, camufla-se em seu entorno.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/169867250/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh",
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "c6i2j4k6l",
+      "name": "Tropidurus psammonastes",
+      "scientificName": "Tropidurus psammonastes",
+      "family": "Tropiduridae",
+      "description": "Tropidurus psammonastes, o calango-das-dunas-do-cerrado, é um lagarto de porte médio, endêmico de áreas arenosas e de cerrado no Brasil. Caracteriza-se por seu corpo robusto e escamas quilhadas, com crista dorsal discreta e coloração que se camufla na areia. É diurno, insetívoro e ovíparo, com autotomia caudal e poros femorais. É uma espécie terrestre, que vive em dunas e substratos arenosos.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/24275389/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "eozydbzi8",
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "d7j4k6l8m",
+      "name": "Kentropyx appianorum",
+      "scientificName": "Kentropyx appianorum",
+      "family": "Teiidae",
+      "description": "Kentropyx appianorum, o lagarto-da-savana-do-Appia, é um lagarto terrestre de porte médio, encontrado em savanas e áreas abertas do Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais. É diurno, insetívoro e ovíparo, com membros bem desenvolvidos e autotomia caudal. É um animal ágil que se move rapidamente pela vegetação rasteira.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "e8k6l8m0n",
+      "name": "Anotosaura vanzolinia",
+      "scientificName": "Anotosaura vanzolinia",
+      "family": "Gymnophthalmidae",
+      "description": "Anotosaura vanzolinia, a lagartixa-de-Vanzolini, é um pequeno lagarto terrestre e diurno, encontrado em florestas úmidas do Brasil. Possui corpo esguio, escamas lisas e coloração uniforme marrom. É insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira e vegetação baixa, sendo um animal discreto e ágil.",
+      "imageUrl": "https://static.inaturalist.org/photos/421598989/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "f9l8m0n2o",
+      "name": "Caparaonia splendidus",
+      "scientificName": "Caparaonia splendidus",
+      "family": "Gymnophthalmidae",
+      "description": "Caparaonia splendidus, o lagarto-esplêndido-da-Caparaó, é um pequeno lagarto terrestre e diurno, endêmico de florestas montanhosas do Brasil. Possui corpo esguio, escamas lisas e coloração manchada, frequentemente com brilho metálico. É insetívoro e ovíparo, com autotomia caudal. Habita a serapilheira e substratos rochosos em altitudes elevadas.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "g0m0n2o4p",
+      "name": "Dryadosaura nordestina",
+      "scientificName": "Dryadosaura nordestina",
+      "family": "Gymnophthalmidae",
+      "description": "Dryadosaura nordestina, a lagartixa-do-nordeste-da-mata, é um pequeno lagarto terrestre e diurno, encontrado em florestas do Nordeste brasileiro. Possui corpo esguio, escamas lisas e coloração uniforme marrom. É insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira e vegetação baixa, sendo um animal discreto e rápido.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/109193751/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "h1n2o4p6q",
+      "name": "Scriptosaura rondoniana",
+      "scientificName": "Scriptosaura rondoniana",
+      "family": "Gymnophthalmidae",
+      "description": "Scriptosaura rondoniana, a lagartixa-escrita-de-Rondônia, é um pequeno lagarto terrestre e diurno, encontrado em áreas abertas e savanas do Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais. É insetívoro e ovíparo, com autotomia caudal. É ágil e se move rapidamente na vegetação rasteira em busca de presas.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "i2o4p6q8r",
+      "name": "Hoplocercus spinosus",
+      "scientificName": "Hoplocercus spinosus",
+      "family": "Iguanidae",
+      "description": "Hoplocercus spinosus, o lagarto-armado-do-cerrado, é um lagarto terrestre de porte médio, encontrado no cerrado brasileiro. Caracteriza-se por seu corpo robusto, escamas quilhadas e uma crista evidente. É diurno e herbívoro (primariamente folívoro), com autotomia caudal e poros femorais. Habita o solo e vegetação baixa, utilizando sua armadura de espinhos como defesa.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/167190644/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "wjeoxcjze"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "wuxwlmlzh"
+        ]
+      }
+    },
+    {
+      "id": "j3p6q8r0s",
+      "name": "Tropidurus catalanensis",
+      "scientificName": "Tropidurus catalanensis",
+      "family": "Tropiduridae",
+      "description": "Tropidurus catalanensis, o calango-da-Catalana, é um lagarto de porte médio, endêmico do Brasil, encontrado em áreas de cerrado e campos rupestres. Possui corpo robusto e escamas quilhadas, com crista dorsal discreta e coloração que se camufla no ambiente. É diurno, insetívoro e ovíparo, com autotomia caudal e poros femorais. É uma espécie terrestre a saxícola, habitando rochas e vegetação baixa.",
+      "imageUrl": "https://static.inaturalist.org/photos/82569700/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "qtaesu3ab"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "3fk3urmkv"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "k4q8r0s2t",
+      "name": "Plica plica",
+      "scientificName": "Plica plica",
+      "family": "Tropiduridae",
+      "description": "Plica plica, o lagarto-anole-marrom, é um lagarto arborícola de porte médio, encontrado em florestas tropicais da América do Sul, incluindo o Brasil. Possui corpo esguio, escamas quilhadas e uma crista dorsal discreta, com coloração críptica. É diurno, insetívoro e ovíparo, com autotomia caudal. Seus membros bem desenvolvidos conferem alta capacidade de escalada na vegetação.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/7846522/medium.jpeg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "qfc0wiiog"
+        ],
+        "1lt9hkkm7": [
+          "mxi00f84e"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "e4t2mf6ow"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "ys1qrdzuj"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "l5r0s2t4u",
+      "name": "Ecpleopus gaudichaudii",
+      "scientificName": "Ecpleopus gaudichaudii",
+      "family": "Teiidae",
+      "description": "Ecpleopus gaudichaudii, a lagartixa-da-mata, é um pequeno lagarto terrestre e diurno, encontrado em florestas úmidas da América do Sul, incluindo o Brasil. Possui corpo esguio, escamas lisas e coloração uniforme marrom. É insetívoro e ovíparo, com autotomia caudal. Vive na serapilheira e vegetação baixa, sendo um animal discreto e ágil em seu habitat florestal.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/177233769/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "sfgbzharh"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "8hj9ps4ge"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "xss6zv2ho"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "n4ktgqai7"
+        ],
+        "d98d1pfr9": [
+          "jyi8qejo3"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    },
+    {
+      "id": "m6s2t4u6v",
+      "name": "Teius teyou",
+      "scientificName": "Teius teyou",
+      "family": "Teiidae",
+      "description": "Teius teyou, o teiú-argentino, é um lagarto terrestre de porte médio, encontrado em áreas abertas e savanas da América do Sul, incluindo o sul do Brasil. Possui corpo esguio, escamas lisas e padrões de listras longitudinais. É diurno, insetívoro e ovíparo, com autotomia caudal e poros femorais. É um predador ágil que se move rapidamente pela vegetação rasteira.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/176707584/medium.jpg",
+      "links": [],
+      "traits": {
+        "8q4t7temu": [
+          "klqi9lw3v"
+        ],
+        "do8mcjrwg": [
+          "kmxrm0mk4"
+        ],
+        "zjwa6d22e": [
+          "byvznbu7g"
+        ],
+        "3wdalvsl8": [
+          "622f4kbcm"
+        ],
+        "1lt9hkkm7": [
+          "gps2q1ilp"
+        ],
+        "3enxupw5u": [
+          "xqrhwhpem"
+        ],
+        "c4vf2qbao": [
+          "2uhl0tmq3"
+        ],
+        "jr1mxhsub": [
+          "2x79ae7g3"
+        ],
+        "naenrg1cm": [
+          "uppk6asaq"
+        ],
+        "qzbogfm25": [
+          "v95xiah80"
+        ],
+        "psubjkc93": [
+          "8czcdcd10"
+        ],
+        "055oihlaz": [
+          "2iyl2vt3v"
+        ],
+        "4jtepke2h": [
+          "mzw2juvbo"
+        ],
+        "d98d1pfr9": [
+          "cs1o2kuq2"
+        ],
+        "8htls9ru3": [
+          "qnvgzdzsq"
+        ],
+        "qe39aano3": [
+          "0fppdigrz"
+        ]
+      }
+    }
+  ]
+}

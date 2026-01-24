@@ -1,5 +1,7 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
-import { Project, Entity, Feature, AIConfig } from "../types";
+import { Project, Entity, Feature, AIConfig, AIProvider } from "../types";
+import { callOpenAI, callClaude, callHuggingFace, callMaritaca } from "./aiProviders";
+import { getProviderFromModel } from "./modelConfig";
 
 // Helper to generate IDs
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -953,7 +955,7 @@ function getPlaceholderImage(entityName: string): string {
  * Generate reliable reference links for a biological entity
  * Uses known URL patterns from reputable databases
  */
-export function generateEntityLinks(scientificName: string, family: string, language: string): Array<{ id: string; label: string; url: string }> {
+export function generateEntityLinks(scientificName: string, family: string, language: string, category: 'FLORA' | 'FAUNA' | 'OTHER' = 'FLORA'): Array<{ id: string; label: string; url: string }> {
   const links: Array<{ id: string; label: string; url: string }> = [];
 
   if (!scientificName || scientificName.length < 3) return links;
@@ -961,7 +963,7 @@ export function generateEntityLinks(scientificName: string, family: string, lang
   // Clean and encode the scientific name
   const cleanName = scientificName.trim();
   const encodedName = encodeURIComponent(cleanName);
-  const underscoreName = cleanName.replace(/\s+/g, '_');
+  const plusName = cleanName.replace(/\s+/g, '+');
 
   // 1. Wikipedia - always works as a search
   const wikiLang = language === 'pt' ? 'pt' : 'en';
@@ -985,17 +987,46 @@ export function generateEntityLinks(scientificName: string, family: string, lang
     url: `https://www.inaturalist.org/search?q=${encodedName}`
   });
 
-  // 4. Add Flora e Funga do Brasil for Portuguese/Brazilian species
-  if (language === 'pt') {
-    const plusName = cleanName.replace(/\s+/g, '+');
+  // 4. Flora Sources (Only for FLORA or OTHER)
+  if (category !== 'FAUNA') {
+    // Flora e Funga do Brasil for Portuguese/Brazilian species
+    if (language === 'pt') {
+      const longUrl = `https://floradobrasil.jbrj.gov.br/consulta/?grupo=6&familia=null&genero=&especie=&autor=&nomeVernaculo=&nomeCompleto=${plusName}&formaVida=null&substrato=null&ocorreBrasil=QUALQUER&ocorrencia=OCORRE&endemismo=TODOS&origem=TODOS&regiao=QUALQUER&ilhaOceanica=32767&estado=QUALQUER&domFitogeograficos=QUALQUER&vegetacao=TODOS&mostrarAte=SUBESP_VAR&opcoesBusca=TODOS_OS_NOMES&loginUsuario=Visitante&senhaUsuario=&contexto=consulta-publica&pagina=1#CondicaoTaxonCP`;
+
+      links.push({
+        id: generateId(),
+        label: 'Flora e Funga do Brasil',
+        url: longUrl
+      });
+    }
+
+    // SIDOL (Sistema de Identificação Dendrológica Online) - for Brazilian trees
+    if (language === 'pt') {
+      links.push({
+        id: generateId(),
+        label: 'SIDOL',
+        url: `https://www.sidol.com.br/busca?q=${encodedName}`
+      });
+    }
+
+    // Flora Digital UFSC - for Brazilian flora
+    if (language === 'pt') {
+      links.push({
+        id: generateId(),
+        label: 'Flora Digital UFSC',
+        url: `https://floradigital.ufsc.br/busca.php?q=${encodedName}`
+      });
+    }
+
+    // POWO (Plants of the World Online) - for plants
     links.push({
       id: generateId(),
-      label: 'Flora e Funga do Brasil',
-      url: `https://floradobrasil.jbrj.gov.br/consulta/?nomeCompleto=${plusName}`
+      label: 'POWO',
+      url: `https://powo.science.kew.org/results?q=${encodedName}`
     });
   }
 
-  // 5. Biodiversity4All for Portuguese content
+  // 5. Biodiversity4All for Portuguese content (General)
   if (language === 'pt') {
     links.push({
       id: generateId(),
@@ -1004,41 +1035,98 @@ export function generateEntityLinks(scientificName: string, family: string, lang
     });
   }
 
-  // 6. SIDOL (Sistema de Identificação Dendrológica Online) - for Brazilian trees
-  if (language === 'pt') {
-    links.push({
-      id: generateId(),
-      label: 'SIDOL',
-      url: `https://www.sidol.com.br/busca?q=${encodedName}`
-    });
-  }
-
-  // 7. Flora Digital UFSC - for Brazilian flora
-  if (language === 'pt') {
-    links.push({
-      id: generateId(),
-      label: 'Flora Digital UFSC',
-      url: `https://floradigital.ufsc.br/busca.php?q=${encodedName}`
-    });
-  }
-
-  // 8. Flickr - large public photo database
+  // 6. Flickr - large public photo database (General)
   links.push({
     id: generateId(),
     label: 'Flickr',
     url: `https://www.flickr.com/search/?text=${encodedName}`
   });
 
-  // 9. POWO (Plants of the World Online) - for plants
-  links.push({
-    id: generateId(),
-    label: 'POWO',
-    url: `https://powo.science.kew.org/results?q=${encodedName}`
-  });
-
-  // Limit to 5 most relevant links (increased from 4)
-  return links.slice(0, 5);
+  return links; // Return all relevant links, slicing might hide important specific sources
 }
+
+/**
+ * Uses Gemini to generate links for specific sources
+ * This is useful when the user provides custom/priority sources that are not covered by the script
+ */
+export async function fetchLinksWithGemini(
+  entities: { name: string; scientificName?: string; family?: string }[],
+  sources: string[],
+  language: string,
+  apiKey: string
+): Promise<Map<string, Array<{ label: string; url: string }>>> {
+
+  const entityMap = new Map<string, Array<{ label: string; url: string }>>();
+  if (!apiKey || entities.length === 0 || sources.length === 0) return entityMap;
+
+  // Process in batches of 10 to avoid token limits
+  const BATCH_SIZE = 10;
+
+  for (let i = 0; i < entities.length; i += BATCH_SIZE) {
+    const batch = entities.slice(i, i + BATCH_SIZE);
+
+    // Construct prompt
+    const prompt = `
+Task: Find valid URLs for the following biological entities, specifically for these sources:
+${sources.map(s => `- ${s}`).join('\n')}
+
+Entities:
+${batch.map(e => `- ${e.name} (Sci: ${e.scientificName || 'N/A'})`).join('\n')}
+
+Instructions:
+1. Return a JSON object with a "links" property.
+2. "links" should be an object where keys are the Entity Names provided.
+3. Values should be arrays of objects with "label" (Source Name) and "url" (Valid URL).
+4. If a source is a database, try to construct the direct search URL or species page URL.
+5. If unsure, prioritize high-quality search URLs.
+
+Example JSON:
+{
+  "links": {
+    "Entity Name": [
+      { "label": "Source", "url": "https://..." }
+    ]
+  }
+}
+`;
+
+    try {
+      const genAI = new GoogleGenAI({ apiKey: apiKey });
+      const response = await genAI.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: prompt,
+        config: { responseMimeType: "application/json" }
+      });
+
+      const responseText = response.text || "{}";
+      const responseData = JSON.parse(responseText);
+
+      if (responseData.links) {
+        Object.entries(responseData.links).forEach(([name, links]) => {
+          if (Array.isArray(links)) {
+            const validLinks = links.map((l: any) => ({
+              id: Math.random().toString(36).substr(2, 9),
+              label: l.label,
+              url: l.url
+            }));
+            entityMap.set(name, validLinks);
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching links with Gemini:", error);
+    }
+
+    // Small delay between batches
+    if (i + BATCH_SIZE < entities.length) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+
+  return entityMap;
+}
+
+
 
 /**
  * Try to extract scientific name from entity name
@@ -1284,7 +1372,7 @@ const generationSchema: Schema = {
           name: { type: Type.STRING, description: "Entity name (can be common name or scientific name)" },
           id: { type: Type.STRING, description: "Preserve original ID if available" },
           imageUrl: { type: Type.STRING, description: "Preserve original image URL if available" },
-          scientificName: { type: Type.STRING, description: "Scientific binomial name (e.g., 'Panthera leo'). REQUIRED for biological species." },
+          scientificName: { type: Type.STRING, description: "Scientific binomial name (e.g., 'Panthera leo'). MUST NOT BE EMPTY/NULL. If unknown, use entity name." },
           family: { type: Type.STRING, description: "Taxonomic family name (e.g., 'Felidae', 'Fabaceae'). REQUIRED for biological species." },
           description: { type: Type.STRING },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
@@ -1300,7 +1388,7 @@ const generationSchema: Schema = {
             }
           }
         },
-        required: ["name", "scientificName", "description", "traits"]
+        required: ["name", "scientificName", "family", "description", "traits"]
       }
     }
   },
@@ -1323,7 +1411,7 @@ const importSchema: Schema = {
         type: Type.OBJECT,
         properties: {
           name: { type: Type.STRING, description: "Entity name as found in document" },
-          scientificName: { type: Type.STRING, description: "Scientific binomial name if available (e.g., 'Panthera leo')" },
+          scientificName: { type: Type.STRING, description: "Scientific binomial name. MUST NOT BE EMPTY. If unknown, use name." },
           family: { type: Type.STRING, description: "Taxonomic family name if available (e.g., 'Felidae', 'Fabaceae')" },
           description: { type: Type.STRING },
           links: { type: Type.ARRAY, items: linkSchema, description: "External resources" },
@@ -1339,7 +1427,7 @@ const importSchema: Schema = {
             }
           }
         },
-        required: ["name", "scientificName", "description", "traits"]
+        required: ["name", "scientificName", "family", "description", "traits"]
       }
     }
   },
@@ -1492,7 +1580,7 @@ export const buildPromptData = (config: AIConfig): PromptData => {
     scientificNameInstruction = "For biological entities, ALWAYS provide: 1) the scientific binomial name (e.g., 'Panthera leo', 'Ara macao'), and 2) the taxonomic family (e.g., 'Felidae', 'Psittacidae'). Both are REQUIRED for accurate classification.";
   } else if (config.category === 'OTHER') {
     categoryInstruction = "Focus on the specific domain of the topic. Use appropriate terminology for the subject matter.";
-    scientificNameInstruction = "For non-biological entities, provide the most precise and standard name available. If applicable, provide the creator/author/origin in the description. Scientific name field can be used for original title or subtitle if applicable, or left empty.";
+    scientificNameInstruction = "For non-biological entities, the scientificName field MUST NOT be left empty. Use the most precise standard name, original title, formal designation, or if none apply, simply copy the entity name. This field is REQUIRED for all entities.";
   } else {
     // FLORA (Default)
     categoryInstruction = "Focus on botanical characteristics. Use appropriate terminology for plants.";
@@ -1722,7 +1810,7 @@ export const generateKeyFromTopic = async (
   const contents = parts ? parts : prompt;
 
   // Generate the key structure (without reliable images yet)
-  const project = await callGemini(ai, config.model, contents, systemInstruction, schema, config.language, config.includeLinks);
+  const project = await callAI(apiKey, config.model, contents, systemInstruction, schema, config.language, config.includeLinks);
 
   // CRITICAL: Ensure ALL required species are included in the project
   // Even if the AI didn't include them, we add them with empty traits
@@ -1798,15 +1886,14 @@ export const generateKeyFromTopic = async (
       config.category
     );
 
-    // Update entities with fetched images, remove temporary scientificName field
+    // Update entities with fetched images, PRESERVING scientificName
     project.entities = project.entities.map((entity, index) => {
-      const { scientificName, ...cleanEntity } = entity as any;
       // Only update image for entities we fetched (first MAX_IMAGE_FETCH)
       const imageUrl = index < MAX_IMAGE_FETCH
         ? (imageMap.get(entity.name) || getPlaceholderImage(entity.name))
         : getPlaceholderImage(entity.name);
       return {
-        ...cleanEntity,
+        ...entity,
         imageUrl
       };
     });
@@ -1872,7 +1959,7 @@ export const generateKeyFromCustomPrompt = async (
   // Use minimal system instruction as the user provides the full context
   const systemInstruction = `You are an expert biologist. Return ONLY valid JSON matching the schema. Do not include markdown code fences.`;
 
-  return await callGemini(ai, model, customPrompt, systemInstruction, generationSchema, language, true);
+  return await callAI(apiKey, model, customPrompt, systemInstruction, generationSchema, language, true);
 };
 
 /**
@@ -1926,7 +2013,7 @@ export const refineExistingProject = async (
       const batchPrompt = 'TASK: Fill traits. FEATURES: ' + featuresContext + ' ENTITIES: ' + JSON.stringify(batch.map(e => ({ id: e.id, name: e.name })));
 
       try {
-        const response = await callGeminiRaw(ai, model, batchPrompt, systemInstruction, fillGapsSchema);
+        const response = await callAIRaw(apiKey, model, batchPrompt, systemInstruction, fillGapsSchema);
         const data = repairTruncatedJson(response) || {};
         const filledEntities = data.filledEntities || [];
         for (const item of filledEntities) {
@@ -1968,7 +2055,7 @@ export const refineExistingProject = async (
 
     try {
       const firstBatch = entities.slice(0, BATCH_SIZE);
-      const response = await callGeminiRaw(ai, model, prompt + ' DATA: ' + JSON.stringify({ features: existingProject.features, entities: firstBatch }), systemInstruction, refineSchema);
+      const response = await callAIRaw(apiKey, model, prompt + ' DATA: ' + JSON.stringify({ features: existingProject.features, entities: firstBatch }), systemInstruction, refineSchema);
       const data = repairTruncatedJson(response) || {};
       if (data.features) allNewFeatures = data.features;
       if (data.entities) {
@@ -1992,7 +2079,7 @@ export const refineExistingProject = async (
       const batch = entities.slice(i, i + BATCH_SIZE);
       const batchPrompt = 'TASK: Refine. FEATURES: ' + featuresRef + ' ENTITIES: ' + JSON.stringify(batch);
       try {
-        const response = await callGeminiRaw(ai, model, batchPrompt, systemInstruction, refineSchema);
+        const response = await callAIRaw(apiKey, model, batchPrompt, systemInstruction, refineSchema);
         const data = repairTruncatedJson(response) || {};
         if (data.entities) {
           data.entities.forEach(item => {
@@ -2017,8 +2104,8 @@ export const refineExistingProject = async (
 
   try {
     const projectContext = JSON.stringify({ features: existingProject.features, entities: existingProject.entities });
-    if (mode === 'clean') return await callGemini(ai, model, prompt + ' DATA: ' + projectContext, systemInstruction, schema, language, true);
-    const response = await callGeminiRaw(ai, model, prompt + ' DATA: ' + projectContext, systemInstruction, schema);
+    if (mode === 'clean') return await callAI(apiKey, model, prompt + ' DATA: ' + projectContext, systemInstruction, schema, language, true);
+    const response = await callAIRaw(apiKey, model, prompt + ' DATA: ' + projectContext, systemInstruction, schema);
     const data = repairTruncatedJson(response) || {};
     const processedEntities = [];
     const seenIds = new Set();
@@ -2109,7 +2196,7 @@ Your task is to validate the scientific names and taxonomy of the provided entit
 7. Output must be a JSON object with 'validatedEntities' array.`;
 
   try {
-    const response = await callGeminiRaw(ai, model, fullPrompt, systemInstruction, validationResultSchema);
+    const response = await callAIRaw(apiKey, model, fullPrompt, systemInstruction, validationResultSchema);
 
     // Parse response safely
     let data: any = {};
@@ -2176,65 +2263,94 @@ Your task is to validate the scientific names and taxonomy of the provided entit
   }
 };
 
-// Raw Gemini call that returns text (used by refineExistingProject)
-async function callGeminiRaw(
-  ai: GoogleGenAI,
+// Raw AI Call function that returns text (used by refineExistingProject)
+async function callAIRaw(
+  apiKey: string,
   modelName: string,
   contents: string,
   systemInstruction: string,
   responseSchema: Schema
 ): Promise<string> {
-  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-  const fallbackModels = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+  const provider = getProviderFromModel(modelName);
 
-  const generate = async (model: string, retryCount: number = 0): Promise<string> => {
-    const maxRetries = 5; // Increased from 3 to 5 for better stability
-    try {
-      const response = await ai.models.generateContent({
-        model: model.trim(),
-        contents: contents,
-        config: {
-          systemInstruction,
-          responseMimeType: "application/json",
-          responseSchema,
-          maxOutputTokens: 65536,
+  // GEMINI Logic
+  if (provider === 'gemini') {
+    const ai = new GoogleGenAI({ apiKey: apiKey });
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    const fallbackModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+
+    const generate = async (model: string, retryCount: number = 0): Promise<string> => {
+      const maxRetries = 5; // Increased from 3 to 5 for better stability
+      try {
+        const response = await ai.models.generateContent({
+          model: model.trim(),
+          contents: contents,
+          config: {
+            systemInstruction,
+            responseMimeType: "application/json",
+            responseSchema,
+            maxOutputTokens: 65536,
+          }
+        });
+        return response.text || "{}";
+      } catch (error: any) {
+        const errorMessage = error.message || '';
+        const errorCode = error.status || 0;
+
+        // Handle 503/429 with retry
+        if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount < maxRetries) {
+          // Aggressive exponential backoff for batch processing
+          const waitTime = Math.pow(2, retryCount) * 5000; // 5s, 10s, 20s, 40s, 80s
+          console.warn(`Retrying ${model} in ${waitTime / 1000}s (attempt ${retryCount + 1})`);
+          await delay(waitTime);
+          return generate(model, retryCount + 1);
         }
-      });
-      return response.text || "{}";
-    } catch (error: any) {
-      const errorMessage = error.message || '';
-      const errorCode = error.status || 0;
 
-      // Handle 503/429 with retry
-      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount < maxRetries) {
-        // Aggressive exponential backoff for batch processing
-        const waitTime = Math.pow(2, retryCount) * 5000; // 5s, 10s, 20s, 40s, 80s
-        console.warn(`Retrying ${model} in ${waitTime / 1000}s (attempt ${retryCount + 1})`);
-        await delay(waitTime);
-        return generate(model, retryCount + 1);
+        // Try fallback model if max retries exceeded or for other errors
+        const currentIndex = fallbackModels.indexOf(model);
+        if (currentIndex < fallbackModels.length - 1) {
+          console.warn(`Falling back from ${model} to ${fallbackModels[currentIndex + 1]}`);
+          return generate(fallbackModels[currentIndex + 1], 0);
+        } else if (!fallbackModels.includes(model)) {
+          // If current model is not in fallback list (e.g. user defined "gemini-2.5-flash"), try first fallback
+          console.warn(`Model ${model} failed, falling back to standard ${fallbackModels[0]}`);
+          return generate(fallbackModels[0], 0);
+        }
+
+        throw error;
       }
+    };
 
-      // Try fallback model if max retries exceeded or for other errors
-      const currentIndex = fallbackModels.indexOf(model);
-      if (currentIndex < fallbackModels.length - 1) {
-        console.warn(`Falling back from ${model} to ${fallbackModels[currentIndex + 1]}`);
-        return generate(fallbackModels[currentIndex + 1], 0);
-      } else if (!fallbackModels.includes(model)) {
-        // If current model is not in fallback list (e.g. user defined "gemini-2.5-flash"), try first fallback
-        console.warn(`Model ${model} failed, falling back to standard ${fallbackModels[0]}`);
-        return generate(fallbackModels[0], 0);
-      }
+    return generate(modelName || "gemini-2.0-flash");
+  }
 
-      throw error;
-    }
-  };
+  // OTHER PROVIDERS
+  if (provider === 'maritaca') {
+    const response = await callMaritaca(apiKey, modelName, systemInstruction, contents);
+    return response.text;
+  }
 
-  return generate(modelName || "gemini-2.0-flash");
+  if (provider === 'openai') {
+    const response = await callOpenAI(apiKey, modelName, systemInstruction, contents);
+    return response.text;
+  }
+
+  if (provider === 'claude') {
+    const response = await callClaude(apiKey, modelName, systemInstruction, contents);
+    return response.text;
+  }
+
+  if (provider === 'huggingface') {
+    const response = await callHuggingFace(apiKey, modelName, systemInstruction, contents);
+    return response.text;
+  }
+
+  throw new Error(`Provider ${provider} not supported in callAIRaw`);
 }
 
-// Unified Gemini Call function with Schema support
-async function callGemini(
-  ai: GoogleGenAI,
+// Unified AI Call function with Schema support
+async function callAI(
+  apiKey: string,
   modelName: string,
   contents: any,
   systemInstruction: string,
@@ -2242,67 +2358,104 @@ async function callGemini(
   language: string = 'en',
   includeLinks: boolean = true
 ): Promise<Project> {
+  const provider = getProviderFromModel(modelName);
 
   // Helper to wait with exponential backoff
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-  const generateContentWithFallback = async (currentModel: string, retryCount: number = 0): Promise<any> => {
-    const maxRetries = 3;
-    const fallbackModels = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+  let responseText = "";
 
-    try {
-      return await ai.models.generateContent({
-        model: currentModel.trim(),
-        contents: contents,
-        config: {
-          systemInstruction: systemInstruction,
-          responseMimeType: "application/json",
-          responseSchema: responseSchema,
-          // CRITICAL FIX: Increase max output tokens to allow large JSON responses (e.g. 133 species)
-          maxOutputTokens: 65536,
+  if (provider === 'gemini') {
+    const ai = new GoogleGenAI({ apiKey });
+    const generateContentWithFallback = async (currentModel: string, retryCount: number = 0): Promise<any> => {
+      const maxRetries = 3;
+      const fallbackModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+
+      try {
+        return await ai.models.generateContent({
+          model: currentModel.trim(),
+          contents: contents,
+          config: {
+            systemInstruction: systemInstruction,
+            responseMimeType: "application/json",
+            responseSchema: responseSchema,
+            // CRITICAL FIX: Increase max output tokens to allow large JSON responses (e.g. 133 species)
+            maxOutputTokens: 65536,
+          }
+        });
+      } catch (error: any) {
+        const errorMessage = error.message || '';
+        const errorCode = error.status || (errorMessage.includes('503') ? 503 : errorMessage.includes('429') ? 429 : 0);
+
+        // Handle model not found - try fallback models
+        if (errorMessage.includes("404") || errorMessage.includes("NOT_FOUND")) {
+          const currentIndex = fallbackModels.indexOf(currentModel);
+          const nextModel = fallbackModels[currentIndex + 1] || fallbackModels[0];
+          if (nextModel !== currentModel) {
+            console.warn(`Model ${currentModel} not found, falling back to ${nextModel}`);
+            return await generateContentWithFallback(nextModel, 0);
+          }
         }
-      });
-    } catch (error: any) {
-      const errorMessage = error.message || '';
-      const errorCode = error.status || (errorMessage.includes('503') ? 503 : errorMessage.includes('429') ? 429 : 0);
 
-      // Handle model not found - try fallback models
-      if (errorMessage.includes("404") || errorMessage.includes("NOT_FOUND")) {
-        const currentIndex = fallbackModels.indexOf(currentModel);
-        const nextModel = fallbackModels[currentIndex + 1] || fallbackModels[0];
-        if (nextModel !== currentModel) {
-          console.warn(`Model ${currentModel} not found, falling back to ${nextModel}`);
-          return await generateContentWithFallback(nextModel, 0);
+        // Handle overloaded (503) or rate limit (429) - retry with exponential backoff
+        if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded') || errorMessage.includes('UNAVAILABLE')) && retryCount < maxRetries) {
+          const waitTime = Math.pow(2, retryCount) * 5000; // 5s, 10s, 20s
+          console.warn(`Model ${currentModel} is overloaded (attempt ${retryCount + 1}/${maxRetries}). Retrying in ${waitTime / 1000}s...`);
+          await delay(waitTime);
+          return await generateContentWithFallback(currentModel, retryCount + 1);
         }
-      }
 
-      // Handle overloaded (503) or rate limit (429) - retry with exponential backoff
-      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded') || errorMessage.includes('UNAVAILABLE')) && retryCount < maxRetries) {
-        const waitTime = Math.pow(2, retryCount) * 5000; // 5s, 10s, 20s
-        console.warn(`Model ${currentModel} is overloaded (attempt ${retryCount + 1}/${maxRetries}). Retrying in ${waitTime / 1000}s...`);
-        await delay(waitTime);
-        return await generateContentWithFallback(currentModel, retryCount + 1);
-      }
-
-      // If max retries exceeded for current model, try next fallback model
-      if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount >= maxRetries) {
-        const currentIndex = fallbackModels.indexOf(currentModel);
-        const nextModel = fallbackModels[currentIndex + 1];
-        if (nextModel) {
-          console.warn(`Model ${currentModel} still overloaded after ${maxRetries} retries. Trying ${nextModel}...`);
-          return await generateContentWithFallback(nextModel, 0);
+        // If max retries exceeded for current model, try next fallback model
+        if ((errorCode === 503 || errorCode === 429 || errorMessage.includes('overloaded')) && retryCount >= maxRetries) {
+          const currentIndex = fallbackModels.indexOf(currentModel);
+          const nextModel = fallbackModels[currentIndex + 1];
+          if (nextModel) {
+            console.warn(`Model ${currentModel} still overloaded after ${maxRetries} retries. Trying ${nextModel}...`);
+            return await generateContentWithFallback(nextModel, 0);
+          }
         }
+
+        throw error;
       }
+    };
 
-      throw error;
-    }
-  };
-
-  try {
     const modelToUse = modelName || "gemini-2.0-flash";
     const response = await generateContentWithFallback(modelToUse);
+    responseText = response.text || "{}";
+  } else {
+    // Other providers: Normalize contents to string prompt
+    let userPrompt = "";
+    if (typeof contents === 'string') {
+      userPrompt = contents;
+    } else if (Array.isArray(contents)) {
+      // Find text part
+      const textPart = contents.find((p: any) => p.text);
+      if (textPart) userPrompt = textPart.text;
+      else userPrompt = JSON.stringify(contents); // Fallback
+    } else {
+      userPrompt = JSON.stringify(contents);
+    }
+
+    if (provider === 'maritaca') {
+      const res = await callMaritaca(apiKey, modelName, systemInstruction, userPrompt);
+      responseText = res.text;
+    } else if (provider === 'openai') {
+      const res = await callOpenAI(apiKey, modelName, systemInstruction, userPrompt);
+      responseText = res.text;
+    } else if (provider === 'claude') {
+      const res = await callClaude(apiKey, modelName, systemInstruction, userPrompt);
+      responseText = res.text;
+    } else if (provider === 'huggingface') {
+      const res = await callHuggingFace(apiKey, modelName, systemInstruction, userPrompt);
+      responseText = res.text;
+    } else {
+      throw new Error(`Provider ${provider} not supported`);
+    }
+  }
+
+  try {
     // Use repair function instead of straight JSON.parse
-    const data = repairTruncatedJson(response.text || "{}");
+    const data = repairTruncatedJson(responseText);
 
     if (!data.projectName) throw new Error("Invalid AI response: missing projectName");
     if (!data.features || !Array.isArray(data.features)) {
@@ -2399,7 +2552,8 @@ async function callGemini(
       // If e.traits is undefined or null, entityTraits remains empty {}
 
       // scientificName and family for taxonomy/image fetching
-      let scientificName = e.scientificName || extractScientificName(e.name);
+      // CRITICAL: scientificName must NEVER be empty
+      let scientificName = e.scientificName?.trim() || extractScientificName(e.name) || e.name;
       // Sanity check: if scientificName is exactly the same as name, and name is simple (one word), it's likely a common name copied over
       // But if it allows binomials, we keep it. 
       // Better to rely on extractBinomial or just leave it if it came from AI.
@@ -2436,7 +2590,7 @@ async function callGemini(
     };
 
   } catch (error) {
-    console.error("Gemini Generation Error:", error);
+    console.error("AI Generation Error:", error);
     throw error;
   }
 }
@@ -2577,7 +2731,7 @@ IMPORTANT:
       required: ['projectName', 'features', 'entities']
     };
 
-    const project = await callGemini(ai, "gemini-2.0-flash-exp", prompt, "", schema, language, false);
+    const project = await callAI(apiKey, "gemini-2.5-flash", prompt, "", schema, language, false);
 
     // Return the project directly since callGemini already structures it correctly
     return project;

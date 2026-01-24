@@ -1,0 +1,223 @@
+Perplexity:
+
+# FORMULÁRIO SEIVA • ANÁLISE PARA CRÉDITOS DE CARBONO
+
+Objetivo: coletar, em campo, todos os dados necessários para análise técnica de elegibilidade, quantificação preliminar de carbono e monitoramento de áreas/projetos candidatos a créditos de carbono (REDD/ARR/SAF/restauração). [web:169][web:170][web:175]
+
+---
+
+## 1. METADADOS DO PROJETO
+
+**ID do Projeto de Carbono:** [AUTO_ID *]  
+**Tipo de projeto:** [SINGLE_SELECT *: REDD / Restauração (ARR) / SAF / ILPF / Outro → TEXT_INPUT]  
+**Metodologia de referência:** [SINGLE_SELECT: VCS VM0007 / Gold Standard A/R / Metodologia PSA própria / Outra → TEXT_INPUT] [web:170][web:175]  
+**Programa/Registro alvo:** [SINGLE_SELECT: VERRA / Gold Standard / PSA estadual / Mercado voluntário outro]  
+
+**Responsável técnico:** [TEXT_INPUT *]  
+**Organização:** [TEXT_INPUT *]  
+
+**Data/Hora da visita:** [DATETIME_PICKER *]  
+**Modo de visita:** [SINGLE_SELECT: Diagnóstico inicial / Monitoramento periódico / Verificação independente]  
+
+---
+
+## 2. LOCALIZAÇÃO E DELIMITAÇÃO DA ÁREA
+
+**Nome da propriedade / área:** [TEXT_INPUT *]  
+**Município / UF:** [TEXT_INPUT *]  
+
+**Coordenada GPS ponto central:** [GPS_CAPTURE *]  
+**📍 Polígono da área do projeto:** [GPS_POLYGON_CAPTURE *]  
+
+**Área total do projeto (ha):** [NUMBER_INPUT *]  
+**Área elegível para crédito (ha):** [NUMBER_INPUT *]  
+
+**Situação fundiária:** [SINGLE_SELECT *: Título individual / Posse / Assentamento / Terra indígena / UC / Outro]  
+→ **Documentos anexos:** [FILE_UPLOAD: CAR / matrícula / contrato etc.] [web:168][web:171]  
+
+---
+
+## 3. HISTÓRICO E LINHA DE BASE (BASELINE)
+
+**Uso do solo anterior (últimos 10 anos):** [MULTI_SELECT *]  
+- Pastagem degradada  
+- Agricultura anual  
+- Floresta secundária  
+- Floresta primária  
+- Mosaico uso antrópico  
+- Outro → [TEXT_INPUT] [web:169][web:171]
+
+**Ano de início do uso atual:** [NUMBER_INPUT]  
+
+**Evidências da linha de base:**  
+- Imagens de satélite/ortofotos anexadas? [SIM/NAO *]  
+- Documentos/relatórios anteriores? [SIM/NAO]  
+→ [FILE_UPLOAD: mapas, relatórios] [web:175][web:178]  
+
+**📸 Fotos de referência do estado atual da área (4 pontos cardeais):** [PHOTO_GALLERY_MIN: 4 *]
+
+---
+
+## 4. ESTRATIFICAÇÃO E PARCELAS DE CARBONO
+
+> Compatível com protocolos de inventário florestal e inventário de carbono (parcelas permanentes, estratos por fitofisionomia/uso). [web:27][web:171][web:178]
+
+**4.1 Estratos definidos na área do projeto:**  
+[TABLE_EDITABLE *]  
+- ID do estrato  
+- Descrição (ex.: Floresta secundária densa, SAF cacau, pastagem degradada)  
+- Fitofisionomia/Bioma (Mata Atlântica / Cerrado / Amazônia / etc.)  
+- Área do estrato (ha)  
+
+**4.2 Cadastro da parcela de campo (um formulário por parcela):**  
+- ID da parcela: [AUTO_ID *]  
+- Estrato vinculado: [DROPDOWN from 4.1 *]  
+- Tipo de parcela: [SINGLE_SELECT *: Permanente / Temporária]  
+- Tamanho: [SINGLE_SELECT: 10x10 m / 20x20 m / 50x20 m / Outro → TEXT_INPUT] [web:27][web:178]  
+- Coordenada GPS centro da parcela: [GPS_CAPTURE *]  
+- Azimute de referência e distância do ponto base: [NUMBER_INPUT opcional]
+
+---
+
+## 5. DADOS DE ARBÓREAS (ACIMA DO SOLO)
+
+> Estrutura simplificada para captura de dados compatíveis com equações de biomassa e protocolos de inventário. [web:27][web:171][web:178]
+
+**5.1 Medição de árvores na parcela**  
+[TABLE_EDITABLE *]  
+Colunas (por árvore):  
+- Nº da árvore  
+- Espécie (nome científico/comum)  
+- DAP (cm) [NUMBER_INPUT *]  
+- Altura total estimada (m) [NUMBER_INPUT]  
+- Classe de qualidade do fuste: [SINGLE_SELECT: Boa / Média / Ruim]  
+- Condição: [SINGLE_SELECT: Viva / Morta em pé / Toco / Caída]  
+- Observações: [TEXT_AREA_CURTA]
+
+**5.2 Necromassa em pé / caída**  
+[TABLE_EDITABLE]  
+- Tipo: [SINGLE_SELECT: Tronco caído / Galho grosso / Toco morto]  
+- Diâmetro/Classe de diâmetro  
+- Comprimento estimado  
+- Estado de decomposição: [1–5] [web:171][web:178]  
+
+---
+
+## 6. SOLO, SERAPILHEIRA E OUTROS POÇOS DE CARBONO
+
+> Campos opcionais, mas recomendados se a metodologia contabilizar solo, serapilheira ou raízes. [web:171][web:177][web:178]
+
+**6.1 Coleta de solo (se realizada)**  
+- Profundidade(s) amostrada(s): [MULTI_SELECT: 0–10 / 10–30 / 30–60 / >60 cm]  
+- Nº de amostras compostas por estrato: [NUMBER_INPUT]  
+- ID das amostras enviadas ao laboratório: [TEXT_INPUT]  
+
+**6.2 Serapilheira e liteira**  
+- Quadrats instalados (nº/estrato): [NUMBER_INPUT]  
+- Massa fresca por quadrat (kg): [NUMBER_INPUT_LIST]  
+- Observações (umidade, contaminação): [TEXT_AREA_CURTA]  
+
+**6.3 Outros componentes relevantes:**  
+[MULTI_CHECKBOX]  
+- ☐ Raízes expostas/biomassa abaixo do solo estimada  
+- ☐ Biomassa de culturas agrícolas permanentes (SAF/ILPF)  
+- ☐ Outras fontes (ex.: carvão biochar, resíduos lenhosos empilhados)  
+
+---
+
+## 7. ATIVIDADES DO PROJETO E ADICIONALIDADE
+
+> Parte qualitativa para análise de elegibilidade segundo metodologias de créditos de carbono. [web:169][web:170][web:175]
+
+**7.1 Práticas implementadas no projeto:** [MULTI_CHECKBOX *]  
+- ☐ Restauração florestal com espécies nativas  
+- ☐ Sistemas agroflorestais (SAF)  
+- ☐ Manejo florestal sustentável / REDD  
+- ☐ Recuperação de pastagens degradadas  
+- ☐ ILPF  
+- ☐ Outra(s): [TEXT_INPUT]  
+
+**7.2 Situação sem o projeto (cenário de linha de base):**  
+[TEXT_AREA *] (ex.: continuação da pastagem degradada, avanço de desmatamento etc.) [web:169][web:175]  
+
+**7.3 Evidências de adicionalidade econômica/institucional:**  
+[MULTI_CHECKBOX]  
+- ☐ Projeto depende de receita de carbono para ser viável  
+- ☐ Não há obrigação legal de restaurar toda a área  
+- ☐ Ações excedem o mínimo exigido pelo código florestal/termo de compromisso  
+- ☐ Outro: [TEXT_INPUT]  
+
+---
+
+## 8. RISCO, FUGA E SALVAGUARDAS
+
+> Módulo para avaliar riscos de reversão e fuga, conforme metodologias internacionais. [web:175][web:174]
+
+**8.1 Riscos de reversão (incêndio, desmatamento futuro):**  
+[SINGLE_SELECT: Baixo / Médio / Alto *]  
+→ Justificativa: [TEXT_AREA *]  
+
+**8.2 Medidas de mitigação de risco:**  
+[MULTI_CHECKBOX]  
+- ☐ Brigada de incêndio  
+- ☐ Aceiros e manejo de combustível  
+- ☐ Acordos comunitários / governança local  
+- ☐ Monitoramento por satélite/drones  
+- ☐ Seguro ou buffer de crédito interno  
+
+**8.3 Risco de fuga (emissões deslocadas para fora da área):**  
+[SINGLE_SELECT: Baixo / Médio / Alto]  
+→ Descrição de possíveis fugas e medidas de controle: [TEXT_AREA]  
+
+**8.4 Salvaguardas socioambientais:**  
+- Impactos sociais positivos/negativos identificados: [TEXT_AREA]  
+- Consultas à comunidade documentadas? [SIM/NAO] → anexar ata/fotos [FILE_UPLOAD] [web:166][web:169]
+
+---
+
+## 9. RESUMO AUTOMÁTICO PARA ANÁLISE DE CRÉDITOS
+
+> Campos calculados no back-end a partir dos dados coletados (não editáveis em campo).
+
+- Estoque de carbono acima do solo (tCO₂e/ha) por estrato  
+- Estoque de carbono no solo (opcional)  
+- Emissões evitadas/removidas estimadas (tCO₂e/ano)  
+- Incerteza amostral (%)  
+- Sinalização automática: **Viável / Requer mais dados / Não elegível** [web:171][web:174][web:178]
+
+---
+
+## 10. ASSINATURAS E EVIDÊNCIAS FINAIS
+
+**Assinatura do responsável técnico:** [SIGNATURE_PAD *]  
+**Assinatura do proprietário/representante:** [SIGNATURE_PAD]  
+
+**📸 Foto final da equipe e da área monitorada:** [PHOTO_CAPTURE *]  
+**GPS final da visita:** [GPS_FINAL_CAPTURE *]
+
+---
+
+## CONFIGURAÇÕES TÉCNICAS PARA DESENVOLVEDOR (SEIVA DIGITAL)
+
+### Lógica dinâmica
+- Um formulário **por parcela**; vinculação ao **ID do projeto de carbono** e ao **ID do estrato**.  
+- Campos obrigatórios marcados com `*`.  
+- Se `Tipo de projeto = REDD` → destacar seções 3 (baseline), 7 (atividades) e 8 (risco/fuga).  
+- Se `Projeto = Restauração/SAF` → destacar seções 4–6 e regeneração.  
+
+### GPS, fotos e exportação
+- GPS obrigatório: ponto central, polígonos de área e centroides de parcelas.  
+- Mínimo de 4 fotos por visita (geral, detalhes de vegetação, solo e evidência social). [web:166][web:171]  
+- Exportações:  
+  - **Excel/CSV** por parcela + resumo por estrato/projeto  
+  - **GeoJSON/Shapefile** (parcelas, polígonos, pontos)  
+  - **PDF de visita** com mapa, fotos, assinaturas e principais números. [web:171][web:174]
+
+---
+
+## TAREFAS PARA IMPLEMENTAÇÃO
+
+1. Modelar o formulário acima em JSON (`field_id`, `type`, `required`, `options`, `conditional_on`).  
+2. Conectar com módulos existentes de inventário do Seiva (DAP/altura/parcelas).  
+3. Criar rotinas de cálculo de biomassa/carbono por estrato usando equações regionais e protocolos de inventário. [web:27][web:171][web:178]  
+4. Preparar templates de exportação para **auditoria de créditos de carbono** (VERRA/Gold Standard/PSA). [web:170][web:175]

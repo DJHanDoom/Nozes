@@ -1,7 +1,7 @@
 export type Language = 'en' | 'pt';
 
 // AI Provider types for multi-provider model selection
-export type AIProvider = 'gemini' | 'openai' | 'claude' | 'huggingface';
+export type AIProvider = 'gemini' | 'openai' | 'claude' | 'huggingface' | 'maritaca';
 
 export interface ModelOption {
   id: string;

@@ -122,4 +122,39 @@ async function callHuggingFace(
     return { text: data.choices[0].message.content };
 }
 
-export { callOpenAI, callClaude, callHuggingFace };
+/**
+ * Call Maritaca AI (Sabia)
+ */
+async function callMaritaca(
+    apiKey: string,
+    model: string,
+    systemInstruction: string,
+    userPrompt: string
+): Promise<AIResponse> {
+    const response = await fetch('https://chat.maritaca.ai/api/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+            model: model,
+            messages: [
+                { role: 'system', content: systemInstruction },
+                { role: 'user', content: userPrompt }
+            ],
+            temperature: 0.7,
+            max_tokens: 16000
+        })
+    });
+
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Maritaca API Error (${response.status}): ${error}`);
+    }
+
+    const data = await response.json();
+    return { text: data.choices[0].message.content };
+}
+
+export { callOpenAI, callClaude, callHuggingFace, callMaritaca };

@@ -65,6 +65,20 @@ export const AVAILABLE_MODELS: ModelOption[] = [
     // OPENAI MODELS (Actual API names from api.openai.com)
     // ═══════════════════════════════════════════════════════════════════════════
     {
+        id: 'gpt-5.2',
+        name: 'GPT-5.2',
+        provider: 'openai',
+        description: 'Next-gen reasoning & speed',
+        contextWindow: 200000
+    },
+    {
+        id: 'gpt-5.1',
+        name: 'GPT-5.1',
+        provider: 'openai',
+        description: 'Advanced multimodal capabilities',
+        contextWindow: 200000
+    },
+    {
         id: 'gpt-4o',
         name: 'GPT-4o',
         provider: 'openai',
@@ -100,6 +114,28 @@ export const AVAILABLE_MODELS: ModelOption[] = [
     // CLAUDE MODELS (Anthropic - Actual API names from api.anthropic.com)
     // ═══════════════════════════════════════════════════════════════════════════
     {
+        id: 'claude-4-5-sonnet-20251022',
+        name: 'Claude 4.5 Sonnet',
+        provider: 'claude',
+        description: 'Latest Sonnet generation',
+        contextWindow: 500000,
+        isRecommended: true
+    },
+    {
+        id: 'claude-4-sonnet-20250620',
+        name: 'Claude 4.0 Sonnet',
+        provider: 'claude',
+        description: 'Previous gen high-performance',
+        contextWindow: 500000
+    },
+    {
+        id: 'claude-4-opus-20250229',
+        name: 'Claude 4 Opus',
+        provider: 'claude',
+        description: 'Maximum intelligence & reasoning',
+        contextWindow: 500000
+    },
+    {
         id: 'claude-3-5-sonnet-20241022',
         name: 'Claude 3.5 Sonnet',
         provider: 'claude',
@@ -130,6 +166,18 @@ export const AVAILABLE_MODELS: ModelOption[] = [
     },
 
     // ═══════════════════════════════════════════════════════════════════════════
+    // MARITACA AI (Brazilian Model - sabia-3.1)
+    // ═══════════════════════════════════════════════════════════════════════════
+    {
+        id: 'sabia-3.1',
+        name: 'Sabia 3.1 (Maritaca)',
+        provider: 'maritaca',
+        description: 'Brazilian LLM specialized in PT-BR',
+        contextWindow: 128000,
+        isRecommended: true
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════════
     // HUGGINGFACE MODELS (Open Source via Inference API)
     // Note: These require a backend proxy due to CORS restrictions
     // ═══════════════════════════════════════════════════════════════════════════
@@ -138,8 +186,7 @@ export const AVAILABLE_MODELS: ModelOption[] = [
         name: 'Llama 3.3 70B',
         provider: 'huggingface',
         description: 'Meta - 128K context (via API)',
-        contextWindow: 128000,
-        isRecommended: true
+        contextWindow: 128000
     },
     {
         id: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
@@ -161,6 +208,11 @@ export const PROVIDER_INFO: Record<AIProvider, ProviderConfig> = {
         name: 'Google Gemini',
         apiKeyUrl: 'https://aistudio.google.com/app/apikey',
         icon: '🔷'
+    },
+    maritaca: {
+        name: 'Maritaca AI',
+        apiKeyUrl: 'https://chat.maritaca.ai/',
+        icon: '🦜'
     },
     openai: {
         name: 'OpenAI',
