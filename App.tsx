@@ -3,6 +3,7 @@ import { ViewMode, Project, Language } from './types';
 import { Player } from './components/Player';
 import { Builder } from './components/Builder';
 import { Hammer, Play, Bug, Upload, FolderOpen, Globe, Leaf, Sprout, Flower2, Settings, X, Save, Brain, HelpCircle, Info, KeyRound, ExternalLink, Trash2, FileCode, Wand2, AlertTriangle, Layers } from 'lucide-react';
+import arvoretaIcon from './assets/arvoretaPNG.png';
 import { AVAILABLE_MODELS, PROVIDER_INFO, getProviderFromModel } from './services/modelConfig';
 
 const App: React.FC = () => {
@@ -543,7 +544,34 @@ const App: React.FC = () => {
         </div>
 
         {/* Right Visual (Abstract Card) - Hidden on Mobile, Visible on Large Screens */}
-        <div className="relative hidden lg:block transform perspective-1000 hover:rotate-y-2 transition-transform duration-700">
+        <div className="relative hidden lg:block space-y-4 transform perspective-1000 hover:rotate-y-2 transition-transform duration-700">
+
+          {/* Arvoreta Mini-Card for Home (Top Right) */}
+          <a
+            href="https://arvoreta.web.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 transition-all group active:scale-95 backdrop-blur-sm"
+          >
+            <div className="w-14 h-14 bg-white/10 rounded-xl p-1.5 group-hover:bg-white/20 transition-colors shrink-0">
+              <img src={arvoretaIcon} alt="Arvoreta" className="w-full h-full object-contain" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="mb-1.5">
+                <span className="text-xs font-black text-white uppercase tracking-wider">Arvoreta</span>
+                <span className="mx-2 text-white/30">|</span>
+                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-tighter">Ecossistema Digital</span>
+              </div>
+              <div className="space-y-1">
+                <div className="text-[10px] text-white/90 leading-tight font-medium">
+                  Acesse cursos e aplicativos poderosos para Identificação Botânica, Inventário Florestal e Análise Ambiental assistida por Inteligência Artificial.
+                </div>
+                <div className="text-[10px] text-emerald-300 font-bold">arvoreta.web.app</div>
+              </div>
+            </div>
+            <ExternalLink size={16} className="text-white/30 group-hover:text-white" />
+          </a>
+
           <div className="relative bg-gradient-to-br from-emerald-900/80 to-teal-900/80 backdrop-blur-md border border-emerald-500/20 p-8 rounded-3xl shadow-2xl">
             <div className="absolute -top-10 -right-10 text-emerald-400/10">
               <Flower2 size={200} />
@@ -640,6 +668,36 @@ const App: React.FC = () => {
 
                     <h4 className="text-lg font-bold text-slate-800 mt-8 border-t pt-4">🔗 Links e Contatos</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                      {/* Arvoreta Card */}
+                      <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-4 rounded-xl border border-emerald-500 shadow-lg hover:shadow-emerald-900/20 transition-all col-span-full group">
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-white/20 rounded-lg p-1 backdrop-blur-md">
+                              <img src={arvoretaIcon} alt="Arvoreta" className="w-full h-full object-contain" />
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-black text-white leading-none">Arvoreta</h3>
+                              <strong className="block text-[10px] text-emerald-100 font-bold uppercase tracking-widest mt-0.5">Ecossistema Digital</strong>
+                            </div>
+                          </div>
+                          <ExternalLink size={16} className="text-white/50 group-hover:text-white transition-colors" />
+                        </div>
+                        <p className="text-emerald-100/90 text-xs font-bold leading-relaxed mb-2 italic">
+                          Acesse cursos e aplicativos poderosos para Identificação Botânica, Inventário Florestal e Análise Ambiental assistida por Inteligência Artificial
+                        </p>
+                        <p className="text-emerald-50 text-sm leading-relaxed mb-3">
+                          Cursos e Apps para Botânica, Inventário Florestal e Análise Ambiental.
+                        </p>
+                        <a
+                          href="https://arvoreta.web.app"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg text-sm font-bold backdrop-blur-sm transition-all"
+                        >
+                          arvoreta.web.app
+                        </a>
+                      </div>
                       <div className="bg-slate-800 p-3 rounded-lg border border-slate-700 hover:border-emerald-400 transition-colors col-span-full">
                         <strong className="block text-sm text-emerald-400 mb-1">🐙 Projeto no GitHub</strong>
                         <a href="https://github.com/DJHanDoom/Nozes" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-300 font-medium flex items-center gap-2">

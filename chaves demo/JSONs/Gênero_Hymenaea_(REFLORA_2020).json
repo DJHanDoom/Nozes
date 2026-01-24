@@ -1,0 +1,2128 @@
+{
+  "id": "gysou8ink",
+  "name": "Gênero Hymenaea (REFLORA 2020)",
+  "description": "Esta chave de identificação taxonômica abrange diversas espécies do gênero Hymenaea, detalhando suas características morfológicas distintivas de caule, folhas (incluindo consistência, forma, tamanho, superfície, margem, ápice, coloração quando seco e venação dos folíolos), inflorescências, flores (botão floral, sépalas, pétalas, ovário e número de óvulos) e frutos (cor, epicarpo, formato, câmaras de semente e ápice), além de sementes. Inclui também informações sobre forma de vida, substrato, endemismo e distribuição geográfica para cada entidade. A chave visa auxiliar na identificação das espécies, muitas das quais são nativas e endêmicas do Brasil, com ocorrência em diversos biomas como Amazônia, Mata Atlântica, Cerrado e Caatinga.",
+  "features": [
+    {
+      "id": "jqp4i88t2",
+      "name": "Forma de Vida",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "v7irulxdg",
+          "label": "Árvore"
+        },
+        {
+          "id": "8nz2vtnos",
+          "label": "Arbusto"
+        }
+      ]
+    },
+    {
+      "id": "f1r5drwxb",
+      "name": "Caule: Casca",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "llc2cuivv",
+          "label": "em escama(s)"
+        },
+        {
+          "id": "s0xtc64fe",
+          "label": "fissurada(s)"
+        },
+        {
+          "id": "rqttu1hp1",
+          "label": "descascando"
+        }
+      ]
+    },
+    {
+      "id": "se5u9ct9y",
+      "name": "Folíolo: Consistência",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "k4624qsjy",
+          "label": "membranáceo(s)"
+        },
+        {
+          "id": "62ezkzv81",
+          "label": "cartáceo(s)"
+        },
+        {
+          "id": "tgrx0afto",
+          "label": "coriáceo(s)"
+        },
+        {
+          "id": "fgmi3ngri",
+          "label": "coriáceo(s) a cartáceo(s)"
+        }
+      ]
+    },
+    {
+      "id": "uz0n0vqeg",
+      "name": "Folíolo: Forma",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "02vuqgvq0",
+          "label": "elíptico(s)"
+        },
+        {
+          "id": "hmvkqx4s7",
+          "label": "largamente elíptico(s)"
+        },
+        {
+          "id": "9v5cyxord",
+          "label": "oblongo(s)"
+        },
+        {
+          "id": "2imjxpfb9",
+          "label": "ovado(s)"
+        },
+        {
+          "id": "d6ify3ime",
+          "label": "oblongo(s) a longo-elíptico(s)"
+        },
+        {
+          "id": "al2at8bf3",
+          "label": "falcado(s)"
+        },
+        {
+          "id": "xk5ndlgrz",
+          "label": "ovado(s) a largamente elíptico(s)"
+        },
+        {
+          "id": "tk5hn3lgd",
+          "label": "ovado(s), obovado(s) ou rotundiforme(s)"
+        }
+      ]
+    },
+    {
+      "id": "s2ohzl9nu",
+      "name": "Folíolo: Tamanho (cm)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "l99k3lp5r",
+          "label": "5.5–9 × 2.5–5"
+        },
+        {
+          "id": "vh7qsvyn6",
+          "label": "10–19 × 3–7"
+        },
+        {
+          "id": "9aqphs88y",
+          "label": "5–11 × 3–5"
+        },
+        {
+          "id": "2ldaug9zj",
+          "label": "5–11 × 2–5"
+        },
+        {
+          "id": "h6zxutfe9",
+          "label": "5–7 × 2.5–4"
+        },
+        {
+          "id": "hhl7vsm0o",
+          "label": "8–20 × 4–10.5"
+        }
+      ]
+    },
+    {
+      "id": "k8118mk6d",
+      "name": "Folíolo: Superfície",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "76zgz0en4",
+          "label": "lustroso(s)/glabro(s) ou glabrescente(s)"
+        },
+        {
+          "id": "fk03ro1sr",
+          "label": "lustroso(s)/pubescente(s) na(s) face(s) abaxial e adaxial"
+        },
+        {
+          "id": "66yaa5ucc",
+          "label": "lustroso(s)/pubescente(s) na(s) face(s) abaxial"
+        },
+        {
+          "id": "6ypvl3afr",
+          "label": "opaco(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s)"
+        },
+        {
+          "id": "3gc9cdawv",
+          "label": "sempre glabro(s)"
+        },
+        {
+          "id": "8wqbax891",
+          "label": "glabro(s) ou coberto(s) por tricomas dourados abaxialmente"
+        },
+        {
+          "id": "fb3s0edq0",
+          "label": "glabro(s) a densamente tomentoso(s) abaxialmente"
+        },
+        {
+          "id": "epoolowpx",
+          "label": "às vezes coberto(s) por tricomas abaxialmente"
+        }
+      ]
+    },
+    {
+      "id": "hze4uajp9",
+      "name": "Folíolo: Margem",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "eqepkbmqq",
+          "label": "não revoluta"
+        },
+        {
+          "id": "o5ipsdr5q",
+          "label": "revoluta"
+        },
+        {
+          "id": "42e7s168o",
+          "label": "ligeiramente revoluta"
+        },
+        {
+          "id": "8m3znnu6v",
+          "label": "fortemente revoluta"
+        }
+      ]
+    },
+    {
+      "id": "jhg7fpdhd",
+      "name": "Folíolo: Ápice",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "o024jcy68",
+          "label": "arredondado"
+        },
+        {
+          "id": "2wgj1z04r",
+          "label": "agudo a acuminado"
+        },
+        {
+          "id": "9pj14tnvf",
+          "label": "acuminado a cuspidado"
+        },
+        {
+          "id": "s89d6vx1p",
+          "label": "retuso a arredondado"
+        },
+        {
+          "id": "sgfpb0i1z",
+          "label": "obtuso (raramente retuso)"
+        }
+      ]
+    },
+    {
+      "id": "rvqrpng4l",
+      "name": "Folíolo: Coloração (seco)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9nblztb62",
+          "label": "discóloro(s)"
+        },
+        {
+          "id": "ctxnehp0n",
+          "label": "concolor(es)"
+        }
+      ]
+    },
+    {
+      "id": "n7t6cg7va",
+      "name": "Folíolo: Venação",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "o6mi9nrcq",
+          "label": "inconspícua(s) na(s) face(s) abaxial/conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial"
+        },
+        {
+          "id": "vflmaxn3g",
+          "label": "conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial"
+        },
+        {
+          "id": "rtya45hnq",
+          "label": "conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial"
+        },
+        {
+          "id": "jh1vok7q8",
+          "label": "fortemente reticulada com veias terciárias e quaternárias conspícuas"
+        },
+        {
+          "id": "4yxmbvl99",
+          "label": "com veias terciárias e quaternárias inconspícuas e não reticulada"
+        },
+        {
+          "id": "mf2o5ktud",
+          "label": "inconspícua"
+        }
+      ]
+    },
+    {
+      "id": "3t6h9gzg5",
+      "name": "Inflorescência: Tipo de Eixos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "9p2ie8euv",
+          "label": "eixos secundários e terciários longos (racemosa, paniculada)"
+        },
+        {
+          "id": "wqygcy1rf",
+          "label": "eixos secundários e terciários curtos (racemosa, corimbiforme)"
+        }
+      ]
+    },
+    {
+      "id": "23qs5mkso",
+      "name": "Botão Floral: Cor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "mwru3rvlk",
+          "label": "acinzentado"
+        },
+        {
+          "id": "2z1r7hq7d",
+          "label": "dourado"
+        },
+        {
+          "id": "hpqr7snri",
+          "label": "dourado/cor castanha"
+        },
+        {
+          "id": "54a7f3giq",
+          "label": "amarelado"
+        },
+        {
+          "id": "y40sp0bbc",
+          "label": "amarelado/cor castanha"
+        },
+        {
+          "id": "v7jcali3y",
+          "label": "cor castanha"
+        },
+        {
+          "id": "vc9t8k656",
+          "label": "acinzentado/cor castanha"
+        }
+      ]
+    },
+    {
+      "id": "azyovm0iq",
+      "name": "Botão Floral: Tamanho",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vi2gu5qer",
+          "label": "até 8.5 × 6.5 mm"
+        },
+        {
+          "id": "vae1psx9y",
+          "label": "9–14 × 6.5–8 mm"
+        },
+        {
+          "id": "kfdfggkx5",
+          "label": "6–6.5 × 6–6.5 mm"
+        },
+        {
+          "id": "ehdd5tyl2",
+          "label": "7.5–11 × 6–8.5 mm"
+        },
+        {
+          "id": "5m6o1tpl7",
+          "label": "8–10 × 7.5–9.5 mm"
+        },
+        {
+          "id": "5azt045nz",
+          "label": "17–29 × 10–14 mm"
+        }
+      ]
+    },
+    {
+      "id": "ozpavgiyu",
+      "name": "Botão Floral: Tricomas",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "dkxpc310q",
+          "label": "coberto(s) por tricomas pálidos"
+        },
+        {
+          "id": "aru3il1hp",
+          "label": "coberto(s) por tricomas marrom-dourado escuro"
+        }
+      ]
+    },
+    {
+      "id": "3f9okaak9",
+      "name": "Sépala: Posição",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "e96vjn6e9",
+          "label": "não reflexa(s)"
+        },
+        {
+          "id": "4nx3b8f52",
+          "label": "reflexa(s)"
+        }
+      ]
+    },
+    {
+      "id": "sotrf8es0",
+      "name": "Sépala: Superfície (face adaxial)",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "xhyezjigd",
+          "label": "glabra(s)"
+        },
+        {
+          "id": "enh9p2uws",
+          "label": "pubescente(s)"
+        }
+      ]
+    },
+    {
+      "id": "4vgrgblfz",
+      "name": "Pétala: Cor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "cwi9sg2ri",
+          "label": "branca"
+        },
+        {
+          "id": "vcmmlobao",
+          "label": "vermelha (raramente branca)"
+        }
+      ]
+    },
+    {
+      "id": "hhh3uq5bm",
+      "name": "Pétala: Superfície",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "bqza4b2op",
+          "label": "glabra(s)"
+        },
+        {
+          "id": "tlgemsjik",
+          "label": "pubescente(s)"
+        },
+        {
+          "id": "nne2mvvkv",
+          "label": "internamente serícea(s)"
+        }
+      ]
+    },
+    {
+      "id": "lsvvjdytx",
+      "name": "Pétala: Unguículo",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "abc7os21g",
+          "label": "unguiculada(s) (garra até 9 mm de comprimento)"
+        },
+        {
+          "id": "i1rvyb261",
+          "label": "não unguiculada(s) ou garra pouco desenvolvida (até 4 mm de comprimento)"
+        },
+        {
+          "id": "cd417egq1",
+          "label": "unguiculada(s)"
+        },
+        {
+          "id": "yhn2rof9w",
+          "label": "sésseis(s)"
+        },
+        {
+          "id": "bfmnk0ee4",
+          "label": "ligeiramente unguiculada(s)"
+        }
+      ]
+    },
+    {
+      "id": "2tba6h2uu",
+      "name": "Ovário: Pubescência",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "5n20my6wj",
+          "label": "glabro(s)"
+        },
+        {
+          "id": "aeoq42iy2",
+          "label": "totalmente pubescente(s)"
+        },
+        {
+          "id": "ass2o9k9p",
+          "label": "parcialmente pubescente(s)"
+        },
+        {
+          "id": "h3ogo9ogd",
+          "label": "glabro(s)/totalmente pubescente(s)"
+        },
+        {
+          "id": "zme9z7zvq",
+          "label": "com tricomas"
+        }
+      ]
+    },
+    {
+      "id": "yt0g39egw",
+      "name": "Ovário: Número de Óvulos",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "q9rrhlaba",
+          "label": "10–11"
+        },
+        {
+          "id": "qs4tom72p",
+          "label": "menos de 8 ou mais de 14"
+        },
+        {
+          "id": "xw6xt28k2",
+          "label": "5–8"
+        },
+        {
+          "id": "9yj9ouob3",
+          "label": "14–18"
+        },
+        {
+          "id": "f0bwlu2wj",
+          "label": "ca. 7"
+        },
+        {
+          "id": "ypmllrs8z",
+          "label": "ca. 12"
+        },
+        {
+          "id": "3an04jvux",
+          "label": "ca. 13"
+        },
+        {
+          "id": "xa9zwqu3d",
+          "label": "5-8"
+        }
+      ]
+    },
+    {
+      "id": "s87iajz9n",
+      "name": "Ovário: Formato",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "ofvcd7q54",
+          "label": "arcuate-elíptico"
+        },
+        {
+          "id": "w438q4tg0",
+          "label": "arcuate-deltoide/oblongo"
+        },
+        {
+          "id": "j17zyxx79",
+          "label": "arcuate-deltoide"
+        },
+        {
+          "id": "ashqycr98",
+          "label": "arcuate-oblongo"
+        },
+        {
+          "id": "pldf1852g",
+          "label": "oblongo ou ligeiramente arcuate-elíptico"
+        }
+      ]
+    },
+    {
+      "id": "sq60upkxz",
+      "name": "Fruto: Cor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "k18abzmy1",
+          "label": "cor castanha escura"
+        },
+        {
+          "id": "los5y9694",
+          "label": "preto"
+        },
+        {
+          "id": "89b7y62sl",
+          "label": "avermelhado"
+        },
+        {
+          "id": "lgn16kvan",
+          "label": "amarelado"
+        },
+        {
+          "id": "y3np6qhco",
+          "label": "cor castanha escura/preto"
+        },
+        {
+          "id": "83bjt24y2",
+          "label": "marrom"
+        },
+        {
+          "id": "yk0wkioos",
+          "label": "marrom-claro a avermelhado (cor de tijolo)"
+        },
+        {
+          "id": "kxsap5eu7",
+          "label": "marrom-claro"
+        }
+      ]
+    },
+    {
+      "id": "sfim233yf",
+      "name": "Fruto: Epicarpo",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "vyzu0z47p",
+          "label": "fortemente verrucoso(s)/opaco(s)"
+        },
+        {
+          "id": "qlxm66uc3",
+          "label": "levemente verrucoso(s)/opaco(s)"
+        },
+        {
+          "id": "u2q6uu8o9",
+          "label": "liso(s)/lustrosa(s)"
+        },
+        {
+          "id": "n5jcx663i",
+          "label": "levemente verrucoso(s)/liso(s)/lustrosa(s)"
+        },
+        {
+          "id": "7rywtojta",
+          "label": "liso(s)/opaco(s)"
+        },
+        {
+          "id": "y5vzc5w2u",
+          "label": "liso ou totalmente verrucoso"
+        },
+        {
+          "id": "4o784m7i6",
+          "label": "com crista transversal evidente"
+        },
+        {
+          "id": "ur2p5j159",
+          "label": "relativamente liso"
+        },
+        {
+          "id": "9fjw84ol3",
+          "label": "opaco, verrucoso, lateralmente comprimido"
+        },
+        {
+          "id": "uv4mnoxub",
+          "label": "brilhante, liso, cilíndrico"
+        }
+      ]
+    },
+    {
+      "id": "344vjmro7",
+      "name": "Fruto: Formato",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "tc98jbl70",
+          "label": "globoso(s)"
+        },
+        {
+          "id": "qvqtu1v2k",
+          "label": "oblongo(s) com crista transversal evidente"
+        },
+        {
+          "id": "k0szso5iz",
+          "label": "oblongo(s)"
+        },
+        {
+          "id": "i4uibl23v",
+          "label": "obovado(s) a deltoide(s)"
+        },
+        {
+          "id": "b2m8e6j99",
+          "label": "deltoide(s) ou ovoide(s) a elipsoide(s)"
+        },
+        {
+          "id": "wiy4t9xcq",
+          "label": "ovoide(s) a elipsoide(s)"
+        },
+        {
+          "id": "wxi1d6ko1",
+          "label": "cilíndrico(s)"
+        }
+      ]
+    },
+    {
+      "id": "uvqj18su7",
+      "name": "Fruto: Câmaras de Semente",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "kg3yykfih",
+          "label": "evidentes"
+        },
+        {
+          "id": "j2qnm855d",
+          "label": "não evidentes"
+        },
+        {
+          "id": "nja75p6km",
+          "label": "ligeiramente evidentes"
+        },
+        {
+          "id": "rar6ro53z",
+          "label": "marcando a região onde se encontram as sementes"
+        }
+      ]
+    },
+    {
+      "id": "u6wvsyqwj",
+      "name": "Fruto: Ápice",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "51wr37gxd",
+          "label": "distendido para o ápice, ligeiramente truncado"
+        },
+        {
+          "id": "2p4ytop4k",
+          "label": "não distendido para o ápice, arredondado no ápice"
+        }
+      ]
+    },
+    {
+      "id": "6ywv85igg",
+      "name": "Semente: Cor",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "f2t1471c1",
+          "label": "castanha escura"
+        },
+        {
+          "id": "594wju4jy",
+          "label": "preta"
+        },
+        {
+          "id": "mugka6fio",
+          "label": "castanha escura/preta"
+        }
+      ]
+    },
+    {
+      "id": "2oj86kghc",
+      "name": "Semente: Número",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "a6m9g87en",
+          "label": "3 a(s) 7"
+        },
+        {
+          "id": "4yl5v2dxf",
+          "label": "1 ou 2"
+        },
+        {
+          "id": "1m1joimwk",
+          "label": "1–3"
+        },
+        {
+          "id": "yku249q49",
+          "label": "5–8"
+        },
+        {
+          "id": "o2f3ipenm",
+          "label": "4–5"
+        },
+        {
+          "id": "wfzscpidy",
+          "label": "1–2(–3)"
+        },
+        {
+          "id": "psdu54kzw",
+          "label": "5–7"
+        },
+        {
+          "id": "eu5wp37po",
+          "label": "3–6"
+        }
+      ]
+    },
+    {
+      "id": "w80mlz3ae",
+      "name": "Habitat",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "sbonvlaqh",
+          "label": "floresta úmida"
+        },
+        {
+          "id": "1853d8tgh",
+          "label": "Cerrado e Caatinga (ambientes secos)"
+        },
+        {
+          "id": "8nu0tcft1",
+          "label": "floresta Amazônica"
+        },
+        {
+          "id": "td534qj0g",
+          "label": "ambientes costeiros brasileiros e Chaco Boliviano"
+        },
+        {
+          "id": "ycb5832ok",
+          "label": "Restinga costeira brasileira"
+        },
+        {
+          "id": "9fhp7wgsj",
+          "label": "Floresta Atlântica"
+        },
+        {
+          "id": "aag0w444d",
+          "label": "Floresta Ombrófila (Floresta Pluvial)"
+        },
+        {
+          "id": "f8xfi6wc0",
+          "label": "Floresta de Terra Firme"
+        },
+        {
+          "id": "w456tgyj7",
+          "label": "Caatinga (stricto sensu)"
+        },
+        {
+          "id": "ugv1l7onr",
+          "label": "Cerrado (lato sensu)"
+        },
+        {
+          "id": "ioc6go7z4",
+          "label": "Floresta de Igapó"
+        },
+        {
+          "id": "td26bb316",
+          "label": "Floresta de Várzea"
+        }
+      ]
+    },
+    {
+      "id": "ggm2gchfg",
+      "name": "Endemismo no Brasil",
+      "imageUrl": "",
+      "states": [
+        {
+          "id": "jdptkqbd2",
+          "label": "é endêmica do Brasil"
+        },
+        {
+          "id": "6gdnzfnrm",
+          "label": "não é endêmica do Brasil"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "drjrjir6z",
+      "name": "Hymenaea altissima Ducke",
+      "scientificName": "Hymenaea altissima",
+      "family": "Fabaceae",
+      "description": "Árvores de até 30m. Caule: casca em escama(s). Folha: consistência do folíolo(s) membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial glabra(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo fortemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Esta é uma espécie bastante semelhante com Hymenaea courbaril. Ocorre majoritariamente na Mata Atlântica dos estados de Rio de Janeiro e São Paulo. Seus folíolos e flores são geralmente menores. Os frutos são mais opacos e verrucosos e geralmente a superfície do epicarpo é ondulada, marcando a região onde se encontram as sementes dentro do fruto. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Folíolos falcados, ápice acuminado a cuspidado; frutos não distendidos para o ápice, arredondados no ápice. Botões florais 6–6.5 × 6–6.5 mm; frutos marrons, opacos, verrucosos, lateralmente comprimidos, mas com câmaras de semente evidentes.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Hymenaea_stigonocarpa.jpg/400px-Hymenaea_stigonocarpa.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "k4624qsjy"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0",
+          "al2at8bf3"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4"
+        ],
+        "jhg7fpdhd": [
+          "9pj14tnvf"
+        ],
+        "n7t6cg7va": [
+          "o6mi9nrcq"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "mwru3rvlk"
+        ],
+        "azyovm0iq": [
+          "kfdfggkx5"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "xhyezjigd"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "bfmnk0ee4"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1",
+          "83bjt24y2"
+        ],
+        "sfim233yf": [
+          "vyzu0z47p",
+          "9fjw84ol3"
+        ],
+        "uvqj18su7": [
+          "kg3yykfih"
+        ],
+        "u6wvsyqwj": [
+          "2p4ytop4k"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en"
+        ],
+        "w80mlz3ae": [
+          "aag0w444d",
+          "9fhp7wgsj"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "k9fak2se5",
+      "name": "Hymenaea aurea Y.T.Lee & Langenh.",
+      "scientificName": "Hymenaea aurea",
+      "family": "Fabaceae",
+      "description": "Tree up to 30 m; bark rough, usually peeling; branchlets 0.6-1 cm thick, glabrous to lanate when near the leaves. Petioles terete, basally and apically enlarged, 0.4-0.7 cm long, lanate; petiolules twisted, 3-5 mm long, lanate; leaflet blades coriaceous, oblong to obvate, sometimes elliptic, usually two times longer than wide, 5-11 × 3-5 cm, the base rounded asymmetric, the apex usually obtuse (rarely retuse), the abaxial surface densely golden lanate, the adaxial surface lustrous, sparsely lanulose, venation reticulate, the midrib and secundary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with short axes and a corimbiform aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular in cross section, 1.7-3.7 mm wide, densely lanate; bracts early caducous. Pedicels rectangular in cross section, 5.8-7.5 × 1.6-2.1 mm, densely lanate; bracteoles paired, subopposite, located at the apex of the pedicel, obovate, 8.1-9 × 6.5-9.5 mm, densely golden sericeous externally and glabrous internally, caducous; hypanthium with a distension on the apex and an elongated base, the distension 4.4-4.6 mm wide, the elongation 7-8.7 mm long; flower buds golden, elliptic to ovate, 7.8-13.8 × 7-7.2 mm, densely sericeous. Calyx golden, densely sericeous externally and internally, the segments 4, subequal, elliptic to ovate, 13.5-14.5 × 8.3-11.8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, glabrous or with very few sparsely hairs, caducous, the blade clawed, elliptic, the claw 3.5-5.2 mm long, the blade 11.8-14.8 × 4.8-6.7 mm. Stamens 10, glabrous, the filaments white to cream, 25-28 mm long, the anthers cream to yellow, oblong, 6.3-6.8 × 1.3-1.8 mm, glabrous. Gynoecium densely golden lanate; the stipe terete in cross section, 2-2.4 mm long, glabrous, the ovary oblong or slightly arcuate-elliptic, 8.7-9.6 × 4-4.5 mm, densely golden lanate, ovules ca. 12, the style terete in cross section, 22-27 mm long, glabrous, the stigma punctiform. Fruits light brown, opaque, relatively smooth, laterally compressed slightly evidencing seed chambers, sparsely lanate when immature and glabrescent when mature, the body oblong to slightly arcuate, 9-15 × 7-10 cm. Seeds 5-8 per fruit. Descrição com campos controlados: Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial e adaxial; venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s)/totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Árvores até 40m. Folíolos cobertos por pelos abaxialmente. Casca relativamente lisa. Folíolos oblongos ou elípticos, 5–11 × 2–5 cm. Botões florais até 15 × 8 cm. Folíolos coriáceos, margem ligeiramente revoluta; pétalas unguiculadas; frutos marrom-claro, lateralmente comprimidos com as câmaras de semente ligeiramente evidentes; da Floresta Atlântica.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/348275815/medium.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv",
+          "rqttu1hp1"
+        ],
+        "se5u9ct9y": [
+          "tgrx0afto",
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "9v5cyxord",
+          "hmvkqx4s7",
+          "02vuqgvq0"
+        ],
+        "s2ohzl9nu": [
+          "9aqphs88y",
+          "2ldaug9zj"
+        ],
+        "k8118mk6d": [
+          "fk03ro1sr"
+        ],
+        "hze4uajp9": [
+          "42e7s168o"
+        ],
+        "jhg7fpdhd": [
+          "sgfpb0i1z"
+        ],
+        "n7t6cg7va": [
+          "vflmaxn3g"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "hpqr7snri"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "cd417egq1"
+        ],
+        "2tba6h2uu": [
+          "h3ogo9ogd"
+        ],
+        "yt0g39egw": [
+          "ypmllrs8z"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1",
+          "kxsap5eu7"
+        ],
+        "sfim233yf": [
+          "qlxm66uc3"
+        ],
+        "uvqj18su7": [
+          "nja75p6km"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en",
+          "yku249q49"
+        ],
+        "w80mlz3ae": [
+          "aag0w444d",
+          "9fhp7wgsj"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "ymu7s9drc",
+      "name": "Hymenaea cangaceira R.B.Pinto, Mansano & A.M.G.Azevedo",
+      "scientificName": "Hymenaea cangaceira",
+      "family": "Fabaceae",
+      "description": "Trees to c. 10 m, rarely taller; bark striate, light to dark brown, with lenticels; exudate not observed; branchlets terete in cross section, 5 – 9 mm thick, glabrescent. Stipules caducous. Petioles terete, basally and apically enlarged, 8 – 15 mm long, glabrous, rarely sparsely pubescent; petiolules twisted, 2.7 – 5.9 mm long, glabrous, rarely sparsely pubescent; leaflet blades chartaceous, ovate to broadly-elliptic, c. 2× longer than wide, 5.1 – 6.8 × 2.9 – 4 cm, glabrous, the base rounded, asymmetric, the apex usually retuse to rounded, rarely slightly acuminate, the adaxial surface lustrous, the midrib and secondary veins saliente abaxially and inconspicuous adaxially. Inflorescences cymose, terminal, with corymbiform aspect, with three orders of branching, the flowers c. 7 – 18 per axis, spirally arranged on the axis, the axis rectangular, 2.3 – 3 mm wide, velutinous; bracts early caducous. Pedicels rectangular in cross section, 4.1 – 5.9 × 1.9 – 3.1 mm, velutinous; bracteoles paired, opposite, inserted at apex of pedicel, obovate, 5.7 – 7.6 × 4 – 5.8 mm, densely tomentose abaxially and glabrous adaxially, caducous; hypanthium 4.1 – 5.8 × 5 – 7 mm; flowerbuds light brown to golden, ellipsoid, 8.3 – 9.7 × 7.5 – 9.1 mm, tomentose. Calyx light brown to golden, densely tomentose abaxially and sericeous adaxially, the segments 4, subequal, elliptic to ovate, 14 – 15.6 × 8 – 12.4 mm. Corolla pentamerous, the petals subequal, white, membranaceous, glabrous, caducuous, the blade slightly clawed, elliptic, 12.4 – 13.2 × 6.5 – 8 mm, the claw c. 1.8 mm long. Stamens 10, glabrous, the filaments white, gland-dotted on the surface, 20 – 27.5 mm long, the anthers cream to yellow, oblong to elliptic, 6.6 – 6.8 × 1.3 – 1.5 mm, glabrous. Gynoecium cream-yellowish, reddish when fertilised, glabrous; the stipe terete in cross section, 1.8 – 2.5 mm long, glabrous, the ovary oblong or slightly arcuate-elliptic, 6.9 – 7.2 × 3.3 – 3.5 mm, glabrous or rarely with very few hairs at the base, ovules c. 13, the style terete in cross section, 12 – 14.5 mm long, glabrous, the stigma punctiform. Fruit camara type, brown, relatively smooth, glabrous, the body usually cylindrical or slightly laterally compressed, 7.5 – 10 × 3.8 – 4.5 cm. Seeds c. 3 – 6 per fruit, brown, irregularly circular, c.a. 2.5 × 1.5 cm. Descrição com campos controlados: Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo liso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Árvores até 40m. Folíolos glabros. Folíolos ovados a largamente elípticos. Folíolos 5–7 × 2.5–4 cm; botões florais 8–10 × 7.5–9.5 mm; pétalas ligeiramente unguiculadas (garra 2 mm de comprimento); frutos 7.5–10 × 3.5–4.5 cm.",
+      "imageUrl": "https://static.inaturalist.org/photos/356032985/medium.jpeg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "2imjxpfb9",
+          "xk5ndlgrz"
+        ],
+        "s2ohzl9nu": [
+          "h6zxutfe9"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4"
+        ],
+        "jhg7fpdhd": [
+          "s89d6vx1p"
+        ],
+        "n7t6cg7va": [
+          "rtya45hnq"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "vc9t8k656"
+        ],
+        "azyovm0iq": [
+          "5m6o1tpl7"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "bfmnk0ee4"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "yt0g39egw": [
+          "3an04jvux"
+        ],
+        "s87iajz9n": [
+          "pldf1852g"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "sfim233yf": [
+          "u2q6uu8o9",
+          "ur2p5j159"
+        ],
+        "344vjmro7": [
+          "wxi1d6ko1"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en",
+          "eu5wp37po"
+        ],
+        "w80mlz3ae": [
+          "w456tgyj7"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "m0siz0lqb",
+      "name": "Hymenaea courbaril L.",
+      "scientificName": "Hymenaea courbaril",
+      "family": "Fabaceae",
+      "description": "Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura/preto; epicarpo levemente verrucoso(s)/liso(s)/lustrosa(s). Semente: cor castanha escura/preta; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Plantas da floresta Amazônica. Folíolos concolores quando secos, venação com veias terciárias e quaternárias inconspícuas. Folíolos geralmente com ápice agudo a acuminado; ovário arcuate-elíptico; frutos oblongos, marrom brilhante, ca. 13–15 × 5–6 cm, com 5–7 sementes. Botões florais 7.5–11 × 6–8.5 mm; frutos brilhantes, marrons, relativamente lisos, cilíndricos, câmaras de semente não evidentes.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/456165450/medium.jpeg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0"
+        ],
+        "jhg7fpdhd": [
+          "2wgj1z04r"
+        ],
+        "rvqrpng4l": [
+          "ctxnehp0n"
+        ],
+        "n7t6cg7va": [
+          "o6mi9nrcq",
+          "4yxmbvl99"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "azyovm0iq": [
+          "ehdd5tyl2"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "s87iajz9n": [
+          "ofvcd7q54"
+        ],
+        "sq60upkxz": [
+          "y3np6qhco",
+          "83bjt24y2"
+        ],
+        "sfim233yf": [
+          "n5jcx663i",
+          "uv4mnoxub"
+        ],
+        "344vjmro7": [
+          "k0szso5iz"
+        ],
+        "uvqj18su7": [
+          "j2qnm855d"
+        ],
+        "6ywv85igg": [
+          "mugka6fio"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en",
+          "psdu54kzw"
+        ],
+        "w80mlz3ae": [
+          "8nu0tcft1",
+          "aag0w444d"
+        ],
+        "ggm2gchfg": [
+          "6gdnzfnrm"
+        ]
+      }
+    },
+    {
+      "id": "gyvm0a9bm",
+      "name": "Hymenaea eriogyne Benth.",
+      "scientificName": "Hymenaea eriogyne",
+      "family": "Fabaceae",
+      "description": "Caule: casca em escama(s). Folha: consistência do folíolo(s) coriáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial e adaxial/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/amarelado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) pubescente(s); ovário(s) totalmente pubescente(s). Fruto: cor amarelado; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Arbustos ou pequenas árvores até 5 m. Pétalas conspicuamente unguiculadas (garra até 9 mm de comprimento); ovário total ou parcialmente coberto por tricomas de cor dourada. Ovário totalmente coberto por tricomas dourados.",
+      "imageUrl": "https://static.inaturalist.org/photos/412664005/medium.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "8nz2vtnos",
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "tgrx0afto"
+        ],
+        "n7t6cg7va": [
+          "vflmaxn3g"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "tlgemsjik"
+        ],
+        "lsvvjdytx": [
+          "abc7os21g"
+        ],
+        "2tba6h2uu": [
+          "aeoq42iy2"
+        ],
+        "sq60upkxz": [
+          "lgn16kvan"
+        ],
+        "sfim233yf": [
+          "qlxm66uc3"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en"
+        ],
+        "w80mlz3ae": [
+          "w456tgyj7",
+          "ugv1l7onr"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "oz2tu36xw",
+      "name": "Hymenaea erythrocarpa R.B Pinto, Mansano & A.M.G. Azevedo",
+      "scientificName": "Hymenaea erythrocarpa",
+      "family": "Fabaceae",
+      "description": "Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor avermelhado; epicarpo liso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Plantas da floresta Amazônica. Folíolos discóloros quando secos, frutos com epicarpio liso. Folíolos com venação com veias terciárias e quaternárias inconspícuas, não reticulada; frutos obovados a deltoides, 4–5.5 × 3–4.5 cm, marrom-claro a avermelhado (cor de tijolo); 1–2(–3) sementes por fruto.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "s0xtc64fe"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4"
+        ],
+        "rvqrpng4l": [
+          "9nblztb62"
+        ],
+        "n7t6cg7va": [
+          "rtya45hnq",
+          "4yxmbvl99"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "vc9t8k656"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "sq60upkxz": [
+          "89b7y62sl",
+          "yk0wkioos"
+        ],
+        "sfim233yf": [
+          "7rywtojta"
+        ],
+        "344vjmro7": [
+          "i4uibl23v"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "4yl5v2dxf",
+          "wfzscpidy"
+        ],
+        "w80mlz3ae": [
+          "8nu0tcft1",
+          "f8xfi6wc0"
+        ],
+        "ggm2gchfg": [
+          "6gdnzfnrm"
+        ]
+      }
+    },
+    {
+      "id": "onef9587s",
+      "name": "Hymenaea fariana R.D. Ribeiro, D.B.O.S. Cardoso & H.C. Lima",
+      "scientificName": "Hymenaea fariana",
+      "family": "Fabaceae",
+      "description": "Shrub to small tree 1-10 m (rarely large tree up to 20 m); bark rough, gray to light brown; branchlets 0.5-1 cm thick, glabrous. Petioles terete, basally and apically enlarged, 1-2 cm long, glabrous; petiolules twisted, 2-5 mm long, glabrous; leaflet blades chartaceous, ovate, usually two times longer than wide, 2-6 × 1.5-3 cm, the base obliquely rounded, asymmetric, the apex acuminate, the abaxial surface glabrous, the adaxial surface glabrous, lustrous, venation reticulate, midrib and secondary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with short axes and a corimbiform aspect aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular in cross section, 2-3.5 mm wide, puberulent; bracts early caducous; Pedicels rectangular in cross section, 3-5 × 1.5-1.7 mm, puberulent; bracteoles paired, subopposite, located at the apex of the pedicel, circular, 3.5-4.2 × 3.5-4.2 mm, pubeulent externally and glabrous internally, caducous; hypanthum with a distension on the apex and an elongated base, the distension 4-5 × 4.5-5 mm, the elongation 4.8-6.2 × 1.5-1.8 mm; flower buds light brown, ovate to elliptic, 7-9 × 5.7-7.7 mm, puberulent. Calyx golden greenish, puberulent externally and sericeous internally, the segments 4, subequal, elliptic to ovate, 10-15 × 5-8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, glabrous, caducous, the blade sligthly clawed, elliptic, the claw 3-4 mm long, the blade 13-18 × 3-5 mm. Stamens 10, glabrous, the filaments white to cream, 25-30 mm long, the anthers cream to yellow, oblong, 3-5 × 1-2 mm, glabrous. Gynoecium glabrous; the stipe terete in cross section, 2-3 mm long, the ovary oblong or slightly arcuate-elliptic, 7-8.5 × 2.5-3.5 mm, ovules 5-8, the style terete in cross section, 2-3 cm long, the stigma punctiform. Fruit slightly brown, opaque, usually strongly verrucose, the body oblong, laterally compressed evidencing seed chambers, 5-12 × 4-5 cm. Seeds 3-6 per fruit, brown. Descrição com campos controlados: Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo fortemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Arbustos ou pequenas árvores até 5 m. Pétalas não unguiculadas ou garra pouco desenvolvida (até 4 mm de comprimento); ovário glabro; de ambientes costeiros brasileiros e Chaco Boliviano. Pétalas elípticas; ovário com 5–8 óvulos; câmaras de semente evidentes em fruto maduro; da Restinga costeira brasileira. Folíolos cartáceos, sempre glabros, margem nunca revoluta; pétalas brancas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/354210904/medium.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "8nz2vtnos",
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0",
+          "2imjxpfb9"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4",
+          "3gc9cdawv"
+        ],
+        "hze4uajp9": [
+          "eqepkbmqq"
+        ],
+        "n7t6cg7va": [
+          "rtya45hnq"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "vc9t8k656"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "i1rvyb261",
+          "bfmnk0ee4"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "yt0g39egw": [
+          "xw6xt28k2"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "sfim233yf": [
+          "vyzu0z47p"
+        ],
+        "uvqj18su7": [
+          "kg3yykfih"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en",
+          "eu5wp37po"
+        ],
+        "w80mlz3ae": [
+          "ycb5832ok",
+          "aag0w444d"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "u8k68k8cd",
+      "name": "Hymenaea intermedia Ducke",
+      "scientificName": "Hymenaea intermedia",
+      "family": "Fabaceae",
+      "description": "Tree up to ca. 40 m; bark smooth, or slightly striate, gray; exudate translucid yellowish; branchlets terete in cross section, 0.4-1.0cm thick, glabrescent. Petioles terete, basally and apically enlarged, 0.7-1.8 cm long, tomentose to glabrescent; petiolules twisted, 3.1-5.9 mm long, tomentose to glabrescent. Leaflet blades chartaceous to coriaceous, elliptic to oblong or ovate, two to three times longer than wide, 5.8-12 × 2.9-4.1 cm, the base obliquely rounded, asymmetric, the apex acuminate to cuspidate or rounded, the abaxial surface glabrous to densely tomentose, the adaxial surface glabrous to sparsely hispidulous, the midrib and secondary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with shortened secondary and tertiary axis, giving a corimbiform aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular, 1.6-2.3 mm wide, tomentose to minutely tomentose; bracts early caducous. Pedicels rectangular to terete in cross section, 2.4-6 × 1.2-1.4 mm, sericeous; bracteoles, early caducous; hypanthium 3-4.1 × 3.3-3.8 mm; flower buds light brown to golden, elliptic to globular, 5.6-8.5 × 4.6-5.6 mm, tomentose. Calyx light brown to golden, densely tomentose abaxially and sericeous adaxially, the segments 4, subequal, elliptic to ovate, 6.9-8.5 × 3.4-6.8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, usually totally glabrous or with few, sparsely hair adaxially, caducous, the blade slightly clawed, elliptic, claw ca. 1 mm long, blade 5.7-6.3 × 1.8-2.2 mm. Stamens 10 glabrous, the filaments white, with glands on the surface, 8.7-11 mm long, the anthers cream to yellow, oblong to elliptic, 2.2-2.8 × 1.2-1.5 mm, glabrous. Gynoecium cream-yellowish, reddish when fecundated, glabrous; the stipe terete in cross section, 2.1-2.5 mm long, glabrous, the ovary arcuate-deltoid, 3.3-4.5 × 2.1-3 mm, glabrous (rarely with few in one side, at the base), ovules ca. 7, the style terete in cross section, ca. 18 mm long, glabrous, the stigma punctiform. Fruits opaque light-brown, usually smooth with small resin pockets, glabrous, arcuate-deltoid, 4.5-6.5 × 3-4 cm. Seeds ca. 1-3 per fruit. Descrição com campos controlados: Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo liso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Plantas da floresta Amazônica. Folíolos concolores quando secos, venação com veias terciárias e quaternárias inconspícuas. Folíolos geralmente com ápice arredondado; ovário arcuate-deltoide/oblongo; frutos deltoides ou ovoides a elipsoides, marrom-claro opaco, até 7.5 × 4.5 cm, com 1–3 sementes. Folíolos abaxialmente glabros a densamente tomentosos; ovário e frutos arcuate-deltoides.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/420104685/medium.jpeg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0",
+          "9v5cyxord",
+          "2imjxpfb9"
+        ],
+        "k8118mk6d": [
+          "fb3s0edq0"
+        ],
+        "jhg7fpdhd": [
+          "9pj14tnvf",
+          "o024jcy68"
+        ],
+        "rvqrpng4l": [
+          "ctxnehp0n"
+        ],
+        "n7t6cg7va": [
+          "rtya45hnq",
+          "4yxmbvl99"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "v7jcali3y"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "bfmnk0ee4"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "yt0g39egw": [
+          "f0bwlu2wj"
+        ],
+        "s87iajz9n": [
+          "w438q4tg0",
+          "j17zyxx79"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1",
+          "kxsap5eu7"
+        ],
+        "sfim233yf": [
+          "7rywtojta"
+        ],
+        "344vjmro7": [
+          "b2m8e6j99"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en",
+          "1m1joimwk"
+        ],
+        "w80mlz3ae": [
+          "8nu0tcft1"
+        ],
+        "ggm2gchfg": [
+          "6gdnzfnrm"
+        ]
+      }
+    },
+    {
+      "id": "3glfib9my",
+      "name": "Hymenaea jeaniana R.B. Pinto, Mansano & A.M.G. Azevedo",
+      "scientificName": "Hymenaea jeaniana",
+      "family": "Fabaceae",
+      "description": "Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s)/totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/liso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Plantas da floresta Amazônica. Folíolos concolores quando secos, venação com veias terciárias e quaternárias inconspícuas. Folíolos geralmente com ápice arredondado; ovário arcuate-deltoide/oblongo; frutos deltoides ou ovoides a elipsoides, marrom-claro opaco, até 7.5 × 4.5 cm, com 1–3 sementes. Folíolos sempre glabros adaxialmente; ovário arcuate-oblongo; fruto ovoide a elipsoide.",
+      "imageUrl": "",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "s0xtc64fe"
+        ],
+        "uz0n0vqeg": [
+          "2imjxpfb9"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4"
+        ],
+        "jhg7fpdhd": [
+          "o024jcy68"
+        ],
+        "rvqrpng4l": [
+          "ctxnehp0n"
+        ],
+        "n7t6cg7va": [
+          "4yxmbvl99"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "mwru3rvlk"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "2tba6h2uu": [
+          "h3ogo9ogd",
+          "5n20my6wj"
+        ],
+        "s87iajz9n": [
+          "w438q4tg0",
+          "ashqycr98"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "344vjmro7": [
+          "b2m8e6j99",
+          "wiy4t9xcq"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "4yl5v2dxf",
+          "1m1joimwk"
+        ],
+        "w80mlz3ae": [
+          "8nu0tcft1",
+          "f8xfi6wc0"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "6lareb2r5",
+      "name": "Hymenaea longifolia (Benth.) I.M.Souza, Funch & L.P.Queiroz",
+      "scientificName": "Hymenaea longifolia",
+      "family": "Fabaceae",
+      "description": "Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial glabra(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/liso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Árvores até 40m. Folíolos glabros. Folíolos oblongos a longo-elípticos, ápice arredondado; frutos distendidos para o ápice, ligeiramente truncados no ápice.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/584555015/medium.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "uz0n0vqeg": [
+          "d6ify3ime"
+        ],
+        "k8118mk6d": [
+          "76zgz0en4"
+        ],
+        "jhg7fpdhd": [
+          "o024jcy68"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "vc9t8k656"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "xhyezjigd"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "sfim233yf": [
+          "n5jcx663i"
+        ],
+        "u6wvsyqwj": [
+          "51wr37gxd"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en"
+        ],
+        "w80mlz3ae": [
+          "w456tgyj7",
+          "ugv1l7onr"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "7f240y9xb",
+      "name": "Hymenaea maranhensis Lee & Lang.",
+      "scientificName": "Hymenaea maranhensis",
+      "family": "Fabaceae",
+      "description": "Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) opaco(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral amarelado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) parcialmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Arbustos ou pequenas árvores até 5 m. Pétalas conspicuamente unguiculadas (garra até 9 mm de comprimento); ovário total ou parcialmente coberto por tricomas de cor dourada. Ovário parcialmente coberto por tricomas dourados (na base e ao longo da margem).",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/4c5ce1bc42f4bb31960fa4c755e53dde.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "s0xtc64fe"
+        ],
+        "uz0n0vqeg": [
+          "2imjxpfb9"
+        ],
+        "k8118mk6d": [
+          "6ypvl3afr"
+        ],
+        "n7t6cg7va": [
+          "vflmaxn3g"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "y40sp0bbc"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "lsvvjdytx": [
+          "abc7os21g"
+        ],
+        "2tba6h2uu": [
+          "ass2o9k9p"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "sfim233yf": [
+          "qlxm66uc3"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en"
+        ],
+        "w80mlz3ae": [
+          "ugv1l7onr"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "3w09odn0v",
+      "name": "Hymenaea martiana Hayne",
+      "scientificName": "Hymenaea martiana",
+      "family": "Fabaceae",
+      "description": "Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) opaco(s)/pubescente(s) na(s) face(s) abaxial e adaxial/pubescente(s) na(s) face(s) abaxial; venação inconspícua(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) pubescente(s); ovário(s) parcialmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7. Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Árvores até 40m. Folíolos cobertos por pelos abaxialmente. Casca relativamente lisa. Folíolos oblongos ou elípticos, 5–11 × 2–5 cm. Botões florais até 15 × 8 cm. Folíolos cartáceos (raramente subcoriáceos), margem não revoluta; pétalas sésseis; frutos marrons a marrom-escuros; cilíndricos com as câmaras de semente não evidentes; do Cerrado.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/149291154/medium.jpeg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "9v5cyxord",
+          "02vuqgvq0"
+        ],
+        "s2ohzl9nu": [
+          "2ldaug9zj"
+        ],
+        "hze4uajp9": [
+          "eqepkbmqq"
+        ],
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "23qs5mkso": [
+          "vc9t8k656"
+        ],
+        "3f9okaak9": [
+          "e96vjn6e9"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "tlgemsjik"
+        ],
+        "lsvvjdytx": [
+          "yhn2rof9w"
+        ],
+        "2tba6h2uu": [
+          "ass2o9k9p"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1",
+          "83bjt24y2"
+        ],
+        "344vjmro7": [
+          "wxi1d6ko1"
+        ],
+        "uvqj18su7": [
+          "j2qnm855d"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "a6m9g87en"
+        ],
+        "w80mlz3ae": [
+          "w456tgyj7",
+          "ugv1l7onr",
+          "aag0w444d"
+        ],
+        "ggm2gchfg": [
+          "6gdnzfnrm"
+        ]
+      }
+    },
+    {
+      "id": "roixm0iil",
+      "name": "Hymenaea oblongifolia Huber",
+      "scientificName": "Hymenaea oblongifolia",
+      "family": "Fabaceae",
+      "description": "Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/coriáceo(s); forma do folíolo(s) elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo racemo(s). Flor: botão-floral amarelado/cor castanha; posição das sépala(s) reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2. A variedade oblongifolia diferencia-se das demais variedades por possuir folíolos totalmente glabros ou esparsamente pubescente na face abaxial. Na chave de identificação: Inflorescências racemosas, paniculadas, com eixos secundários e terciários longos. Botões florais até 8.5 × 6.5 mm, cobertos por tricomas pálidos; ovário com tricomas; frutos globosos (lisos ou totalmente verrucosos), com 1–3 sementes; espécie de floresta úmida. Folíolos coriáceos a cartáceos, margem não revoluta, oblongos a longo-elípticos, principalmente três vezes mais longos que largos, 10–19 × 3–7 cm, superfície abaxial glabra ou coberta por tricomas dourados; pétalas glabras.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/323921695/medium.jpg",
+      "links": [],
+      "traits": {
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "llc2cuivv"
+        ],
+        "se5u9ct9y": [
+          "fgmi3ngri"
+        ],
+        "uz0n0vqeg": [
+          "d6ify3ime"
+        ],
+        "s2ohzl9nu": [
+          "vh7qsvyn6"
+        ],
+        "k8118mk6d": [
+          "8wqbax891"
+        ],
+        "hze4uajp9": [
+          "eqepkbmqq"
+        ],
+        "n7t6cg7va": [
+          "rtya45hnq"
+        ],
+        "3t6h9gzg5": [
+          "9p2ie8euv"
+        ],
+        "23qs5mkso": [
+          "y40sp0bbc"
+        ],
+        "azyovm0iq": [
+          "vi2gu5qer"
+        ],
+        "ozpavgiyu": [
+          "dkxpc310q"
+        ],
+        "3f9okaak9": [
+          "4nx3b8f52"
+        ],
+        "sotrf8es0": [
+          "enh9p2uws"
+        ],
+        "4vgrgblfz": [
+          "cwi9sg2ri"
+        ],
+        "hhh3uq5bm": [
+          "bqza4b2op"
+        ],
+        "2tba6h2uu": [
+          "aeoq42iy2",
+          "zme9z7zvq"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "sfim233yf": [
+          "qlxm66uc3",
+          "y5vzc5w2u"
+        ],
+        "344vjmro7": [
+          "tc98jbl70"
+        ],
+        "6ywv85igg": [
+          "f2t1471c1"
+        ],
+        "2oj86kghc": [
+          "4yl5v2dxf",
+          "1m1joimwk"
+        ],
+        "w80mlz3ae": [
+          "sbonvlaqh",
+          "ioc6go7z4",
+          "f8xfi6wc0",
+          "td26bb316",
+          "aag0w444d"
+        ],
+        "ggm2gchfg": [
+          "jdptkqbd2"
+        ]
+      }
+    },
+    {
+      "id": "xtmuy9g61",
+      "name": "Hymenaea parvifolia Huber",
+      "scientificName": "Hymenaea parvifolia",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, paniculadas, com eixos secundários e terciários longos. Botões florais até 8.5 × 6.5 mm, cobertos por tricomas pálidos; ovário com tricomas; frutos globosos (lisos ou totalmente verrucosos), com 1–3 sementes; espécie de floresta úmida. Folíolos cartáceos, elípticos com margem revoluta, aproximadamente duas vezes mais longos que largos, 5.5–9 × 2.5–5 cm, superfície abaxial sempre glabra; pétalas internamente seríceas.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/145144039/medium.jpeg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "9p2ie8euv"
+        ],
+        "azyovm0iq": [
+          "vi2gu5qer"
+        ],
+        "ozpavgiyu": [
+          "dkxpc310q"
+        ],
+        "2tba6h2uu": [
+          "zme9z7zvq"
+        ],
+        "344vjmro7": [
+          "tc98jbl70"
+        ],
+        "sfim233yf": [
+          "y5vzc5w2u"
+        ],
+        "2oj86kghc": [
+          "1m1joimwk"
+        ],
+        "w80mlz3ae": [
+          "sbonvlaqh"
+        ],
+        "se5u9ct9y": [
+          "62ezkzv81"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0"
+        ],
+        "hze4uajp9": [
+          "o5ipsdr5q"
+        ],
+        "s2ohzl9nu": [
+          "l99k3lp5r"
+        ],
+        "hhh3uq5bm": [
+          "nne2mvvkv"
+        ]
+      }
+    },
+    {
+      "id": "0l1swok5n",
+      "name": "Hymenaea velutina Ducke",
+      "scientificName": "Hymenaea velutina",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, paniculadas, com eixos secundários e terciários longos. Botões florais 9–14 × 6.5–8 mm, cobertos por tricomas marrom-dourado escuro; ovário glabro; frutos oblongos com crista transversal evidente na superfície, com 5–8 sementes; de Cerrado e Caatinga (ambientes secos).",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/451382913/medium.jpeg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "9p2ie8euv"
+        ],
+        "azyovm0iq": [
+          "vae1psx9y"
+        ],
+        "ozpavgiyu": [
+          "aru3il1hp"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "344vjmro7": [
+          "qvqtu1v2k"
+        ],
+        "sfim233yf": [
+          "4o784m7i6"
+        ],
+        "2oj86kghc": [
+          "yku249q49"
+        ],
+        "w80mlz3ae": [
+          "1853d8tgh"
+        ]
+      }
+    },
+    {
+      "id": "x57h9gu9f",
+      "name": "Hymenaea reticulata Ducke",
+      "scientificName": "Hymenaea reticulata",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Plantas da floresta Amazônica. Folíolos discóloros quando secos, frutos com epicarpio liso. Folíolos com venação fortemente reticulada com veias terciárias e quaternárias conspícuas; frutos oblongos, ca. 11 × 5.5 cm, marrom-escuro; 4–5 sementes por fruto.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/d06d22b0f378de0422895aa52003b973.jpg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "w80mlz3ae": [
+          "8nu0tcft1"
+        ],
+        "rvqrpng4l": [
+          "9nblztb62"
+        ],
+        "n7t6cg7va": [
+          "jh1vok7q8"
+        ],
+        "344vjmro7": [
+          "k0szso5iz"
+        ],
+        "sq60upkxz": [
+          "k18abzmy1"
+        ],
+        "2oj86kghc": [
+          "o2f3ipenm"
+        ]
+      }
+    },
+    {
+      "id": "uzjf1qsnm",
+      "name": "Hymenaea travassosii R.D. Ribeiro & L.P. Queiroz",
+      "scientificName": "Hymenaea travassosii",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Arbustos ou pequenas árvores até 5 m. Pétalas não unguiculadas ou garra pouco desenvolvida (até 4 mm de comprimento); ovário glabro; de ambientes costeiros brasileiros e Chaco Boliviano. Pétalas ovadas (às vezes largamente elípticas); ovário com 10–11 óvulos; câmaras de semente evidentes em fruto maduro; do Chaco Boliviano.",
+      "imageUrl": "//d2seqvvyy3b8p2.cloudfront.net/54c777836d6fadb3d159059160eb02ba.jpg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "jqp4i88t2": [
+          "8nz2vtnos",
+          "v7irulxdg"
+        ],
+        "lsvvjdytx": [
+          "i1rvyb261"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "w80mlz3ae": [
+          "td534qj0g"
+        ],
+        "uz0n0vqeg": [
+          "2imjxpfb9",
+          "hmvkqx4s7"
+        ],
+        "yt0g39egw": [
+          "q9rrhlaba"
+        ],
+        "uvqj18su7": [
+          "kg3yykfih"
+        ]
+      }
+    },
+    {
+      "id": "vqcggbv9s",
+      "name": "Hymenaea rubriflora Ducke",
+      "scientificName": "Hymenaea rubriflora",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Arbustos ou pequenas árvores até 5 m. Pétalas não unguiculadas ou garra pouco desenvolvida (até 4 mm de comprimento); ovário glabro; de ambientes costeiros brasileiros e Chaco Boliviano. Pétalas elípticas; ovário com 14–18 óvulos; câmaras de semente evidentes em fruto maduro; da Restinga costeira brasileira. Folíolos coriáceos (raramente cartáceos), às vezes cobertos por tricomas abaxialmente, margem fortemente revoluta; pétalas vermelhas (raramente brancas).",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/116696739/medium.jpeg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "jqp4i88t2": [
+          "8nz2vtnos",
+          "v7irulxdg"
+        ],
+        "lsvvjdytx": [
+          "i1rvyb261"
+        ],
+        "2tba6h2uu": [
+          "5n20my6wj"
+        ],
+        "w80mlz3ae": [
+          "td534qj0g",
+          "ycb5832ok"
+        ],
+        "uz0n0vqeg": [
+          "02vuqgvq0"
+        ],
+        "yt0g39egw": [
+          "9yj9ouob3"
+        ],
+        "uvqj18su7": [
+          "kg3yykfih"
+        ],
+        "k8118mk6d": [
+          "epoolowpx"
+        ],
+        "hze4uajp9": [
+          "8m3znnu6v"
+        ],
+        "4vgrgblfz": [
+          "vcmmlobao"
+        ]
+      }
+    },
+    {
+      "id": "anzda3i2r",
+      "name": "Hymenaea stigonocarpa Mart. ex Hayne",
+      "scientificName": "Hymenaea stigonocarpa",
+      "family": "Fabaceae",
+      "description": "Na chave de identificação: Inflorescências racemosas, corimbiformes, com eixos secundários e terciários curtos. Árvores até 40m. Folíolos cobertos por pelos abaxialmente. Casca descascando, particularmente perto dos ápices dos ramos; folíolos ovados, obovados ou rotundiformes, 8–20 × 4–10.5 cm; botões florais 17–29 × 10–14 mm. Folíolos glabros. Folíolos ovados a largamente elípticos. Folíolos 8–20 × 4–10.5 cm; botões florais 17–29 × 10–14 mm; pétalas sésseis; frutos 10–17 × 4–7 cm.",
+      "imageUrl": "https://inaturalist-open-data.s3.amazonaws.com/photos/120822986/medium.jpeg",
+      "links": [],
+      "traits": {
+        "3t6h9gzg5": [
+          "wqygcy1rf"
+        ],
+        "jqp4i88t2": [
+          "v7irulxdg"
+        ],
+        "f1r5drwxb": [
+          "rqttu1hp1"
+        ],
+        "uz0n0vqeg": [
+          "tk5hn3lgd",
+          "xk5ndlgrz"
+        ],
+        "s2ohzl9nu": [
+          "hhl7vsm0o"
+        ],
+        "azyovm0iq": [
+          "5azt045nz"
+        ],
+        "lsvvjdytx": [
+          "yhn2rof9w"
+        ]
+      }
+    }
+  ]
+}

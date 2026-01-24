@@ -1,0 +1,1255 @@
+	
+Hymenaea brevipetiolata (N.F.Mattos) R.B.Pinto, R.S.Braga & Mansano. 
+
+CEN 98775 Coleta: Gustavo Martinelli 16862 04/12/2010.
+Loc: Estrada na borda do Parque Nacional da Serra da Bodoquena, entre as Fazendas Alto Salobra e Sta Terezinha., BONITO, MS, Brasil
+Coord. orig.: [lat: -20.879166 long: -56.95 WGS84] 
+Tipo de preparação: Exsicatas Número de indivíduos: 1
+Notas: Folhas verdes levemente discolores; flores em botões verde-argenteos. Doação Jardim Botânico do Rio de Janeiro - RB 450567
+Base do registro: PreservedSpecimen	CEN00098775
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+
+Uso e cobertura da terra - MapBiomas Brasil Col. 10 (1985-2024)
+Histórico ambiental
+1	CEN - Herbário da Embrapa Recursos Genéticos e Biotecnologia detalhesnova anotação
+	Plantae Fabaceae Caesalp.
+
+CEN 98771 Coleta: Gustavo Martinelli 16690 30/11/2010.
+Loc: RPPN Penha, Rio Moquem., CORUMBA, MS, Brasil
+Coord. orig.: [lat: -19.025812 long: -57.632907 WGS84] 
+Tipo de preparação: Exsicatas Número de indivíduos: 1
+Notas: Folhas verdes concolores com nervuras alvacentas, flores em botões verde-argenteo, ramos terminais castanho-ferrugíneo. Doação Jardim Botânico do Rio de Janeiro RB nº 455936.
+Base do registro: PreservedSpecimen	CEN00098771
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+
+Uso e cobertura da terra - MapBiomas Brasil Col. 10 (1985-2024)
+Histórico ambiental
+2	CEN - Herbário da Embrapa Recursos Genéticos e Biotecnologia detalhesnova anotação
+	Plantae Fabaceae Caesalp.
+
+CEN 1384 Coleta: Antônio Costa Allem 1184 13/11/1977.
+Loc: Fazenda Sant\'Ana., CORUMBA, MS, Brasil
+Coord. munic.: [lat: -19.009199 long: -57.653301 err: ±295160 WGS84] 
+Tipo de preparação: Exsicatas Número de indivíduos: 2
+Notas: Junto ás pastagens de campos finos. Flores grandes. Botões florais presentes. Ás vezes, invade patagens.
+Base do registro: PreservedSpecimen	CEN00001384
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+3	CEN - Herbário da Embrapa Recursos Genéticos e Biotecnologia detalhesnova anotação
+	Plantae Fabaceae Caesalp.
+
+CEN 69075 Coleta: Roberto Fontes Vieira 1961 09/07/1994.
+Loc: Comunidade Cedro, Quilombo cerca 5 km da cidade, cerca de 5 km à frente da residência do Sr. João Raposo., MINEIROS, GO, Brasil
+Coord. munic.: [lat: -17.569401 long: -52.551102 err: ±100343 WGS84]  Altitude: 750m.
+Tipo de preparação: Exsicatas Número de indivíduos: 2
+Base do registro: PreservedSpecimen	CEN00069075
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+4	CEN - Herbário da Embrapa Recursos Genéticos e Biotecnologia detalhesnova anotação
+	Plantae Fabaceae Caesalp.
+
+CEN 24398 Coleta: Glocimar Pereira-Silva 2101 12/12/1993.
+Loc: Fazenda Jacuba., CALDAS NOVAS, GO, Brasil
+Coord. orig.: [lat: -17.83333 long: -48.58333 WGS84]  Altitude: 600m.
+Tipo de preparação: Exsicatas Número de indivíduos: 4
+Base do registro: PreservedSpecimen	CEN00024398
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+
+Uso e cobertura da terra - MapBiomas Brasil Col. 10 (1985-2024)
+Histórico ambiental
+5	CEN - Herbário da Embrapa Recursos Genéticos e Biotecnologia detalhesnova anotação
+	Plantae Fabaceae Caesalp.
+
+CEN 4245 Coleta: Antônio Costa Allem 2550 05/10/1979.
+Loc: Fazenda Santa Lúcia., BARAO DE MELGACO, MT, Brasil
+Tipo de preparação: Exsicatas Número de indivíduos: 1
+Notas: Estéril. Frequente na savana.
+Base do registro: PreservedSpecimen	CEN00004245
+
+• Status taxonômico: aceito, Flora e Funga do Brasil .
+• Nome encontrado com autor
+• Na Flora e Funga do Brasil
+•• Endemismo: É endêmica do Brasil• Origem: nativa• Forma de vida: Árvore
+
+
+
+
+
+Hymenaea altissima Ducke Ícone WFO lc Link UCSFB78708 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea altissima Ducke
+
+Sinônimos Relevantes
+Tem Como Sinônimo
+basiônimo
+Hymenaea
+courbaril
+var.
+altissima
+(Ducke) Y.T.Lee & Langenh.
+
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial glabra(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo fortemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Descrição livre
+PT
+Árvores de até 30m.
+
+Comentários
+PT
+Esta é uma espécie bastante semelhante com Hymenaea courbaril. Entretanto a sua ocorrência é majoritariamente na Mata Atlântica dos estados de Rio de Janeiro e São Paulo. Seus folíolos e flores são geralmente menores. Os frutos são mais opacos e verrucosos e geralmente a superfície do epicarpo é ondulada, marcando a região onde se encontram as sementes dentro do fruto.
+
+Vouchers
+Hoehne, W., s.n., ESA, (SP)
+Kuhlmann, J.G., s/n, RB 25423 , (RJ), Typus
+H.C.de Lima, 3510, RB 287043 , (RJ)
+Ícone Herbário Virtual
+image of Kuhlmann, J.G. s/n RB
+Ícone Herbário Virtual
+image of H.C.de Lima 3510 RB
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Sudeste (Espírito Santo, Rio de Janeiro, São Paulo)
+Domínios Fitogeográficos 
+Mata Atlântica
+Tipo de Vegetação 
+Floresta Ombrófila (Floresta Pluvial)
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá	Brasil	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_altissima
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB78708)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB78708).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB78708>. Acesso em: 24 jan. 2026
+
+
+Hymenaea aurea Y.T.Lee & Langenh. lc Link UCSFB83196 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea aurea Y.T.Lee & Langenh.
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial e adaxial; venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s)/totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Descrição livre
+PT
+Tree up to 30 m; bark rough, usually peeling; branchlets 0.6-1 cm thick, glabrous to lanate when near the leaves. Petioles terete, basally and apically enlarged, 0.4-0.7 cm long, lanate; petiolules twisted, 3-5 mm long, lanate; leaflet blades coriaceous, oblong to obvate, sometimes elliptic, usually two times longer than wide, 5-11 × 3-5 cm, the base rounded asymmetric, the apex usually obtuse (rarely retuse), the abaxial surface densely golden lanate, the adaxial surface lustrous, sparsely lanulose, venation reticulate, the midrib and secundary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with short axes and a corimbiform aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular in cross section, 1.7-3.7 mm wide, densely lanate; bracts early caducous. Pedicels rectangular in cross section, 5.8-7.5 × 1.6-2.1 mm, densely lanate; bracteoles paired, subopposite, located at the apex of the pedicel, obovate, 8.1-9 × 6.5-9.5 mm, densely golden sericeous externally and glabrous internally, caducous; hypanthium with a distension on the apex and an elongated base, the distension 4.4-4.6 mm wide, the elongation 7-8.7 mm long; flower buds golden, elliptic to ovate, 7.8-13.8 × 7-7.2 mm, densely sericeous. Calyx golden, densely sericeous externally and internally, the segments 4, subequal, elliptic to ovate, 13.5-14.5 × 8.3-11.8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, glabrous or with very few sparsely hairs, caducous, the blade clawed, elliptic, the claw 3.5-5.2 mm long, the blade 11.8-14.8 × 4.8-6.7 mm. Stamens 10, glabrous, the filaments white to cream, 25-28 mm long, the anthers cream to yellow, oblong, 6.3-6.8 × 1.3-1.8 mm, glabrous. Gynoecium densely golden lanate; the stipe terete in cross section, 2-2.4 mm long, glabrous, the ovary oblong or slightly arcuate-elliptic, 8.7-9.6 × 4-4.5 mm, densely golden lanate, ovules ca. 12, the style terete in cross section, 22-27 mm long, glabrous, the stigma punctiform. Fruits light brown, opaque, relatively smooth, laterally compressed slightly evidencing seed chambers, sparsely lanate when immature and glabrescent when mature, the body oblong to slightly arcuate, 9-15 × 7-10 cm. Seeds 5-8 per fruit.
+
+
+Vouchers
+Jean H. Langenheim, 5644, UC
+
+Referências
+Lee & Langenheim, Systematics of the Genus Hymenaea L. (Leguminosae, Caesalpinioideae, Detarieae), 69, 1975.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Nordeste (Bahia)
+Sudeste (Espírito Santo, Rio de Janeiro)
+Domínios Fitogeográficos 
+Mata Atlântica
+Tipo de Vegetação 
+Floresta Ombrófila (Floresta Pluvial)
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá-piloso	Nordeste	Português
+jatobá-verdadeiro	Nordeste	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_aurea
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB83196)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB83196).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+J. Arnold Arbor. 54(1): 96 (1973).
+
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB83196>. Acesso em: 24 jan. 2026
+
+Hymenaea cangaceira R.B.Pinto, Mansano & A.M.G.Azevedo ntFB604374 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea cangaceira R.B.Pinto, Mansano & A.M.G.Azevedo
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo liso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Descrição livre
+EN
+Trees to c. 10 m, rarely taller; bark striate, light to dark brown, with lenticels; exudate not observed; branchlets terete in cross section, 5 – 9 mm thick, glabrescent. Stipules caducous. Petioles terete, basally and apically enlarged, 8 – 15 mm long, glabrous, rarely sparsely pubescent; petiolules twisted, 2.7 – 5.9 mm long, glabrous, rarely sparsely pubescent; leaflet blades chartaceous, ovate to broadly-elliptic, c. 2× longer than wide, 5.1 – 6.8 × 2.9 – 4 cm, glabrous, the base rounded, asymmetric, the apex usually retuse to rounded, rarely slightly acuminate, the adaxial surface lustrous, the midrib and secondary veins saliente abaxially and inconspicuous adaxially. Inflorescences cymose, terminal, with corymbiform aspect, with three orders of branching, the flowers c. 7 – 18 per axis, spirally arranged on the axis, the axis rectangular, 2.3 – 3 mm wide, velutinous; bracts early caducous. Pedicels rectangular in cross section, 4.1 – 5.9 × 1.9 – 3.1 mm, velutinous; bracteoles paired, opposite, inserted at apex of pedicel, obovate, 5.7 – 7.6 × 4 – 5.8 mm, densely tomentose abaxially and glabrous adaxially, caducous; hypanthium 4.1 – 5.8 × 5 – 7 mm; flowerbuds light brown to golden, ellipsoid, 8.3 – 9.7 × 7.5 – 9.1 mm, tomentose. Calyx light brown to golden, densely tomentose abaxially and sericeous adaxially, the segments 4, subequal, elliptic to ovate, 14 – 15.6 × 8 – 12.4 mm. Corolla pentamerous, the petals subequal, white, membranaceous, glabrous, caducuous, the blade slightly clawed, elliptic, 12.4 – 13.2 × 6.5 – 8 mm, the claw c. 1.8 mm long. Stamens 10, glabrous, the filaments white, gland-dotted on the surface, 20 – 27.5 mm long, the anthers cream to yellow, oblong to elliptic, 6.6 – 6.8 × 1.3 – 1.5 mm, glabrous. Gynoecium cream-yellowish, reddish when fertilised, glabrous; the stipe terete in cross section, 1.8 – 2.5 mm long, glabrous, the ovary oblong or slightly arcuate-elliptic, 6.9 – 7.2 × 3.3 – 3.5 mm, glabrous or rarely with very few hairs at the base, ovules c. 13, the style terete in cross section, 12 – 14.5 mm long, glabrous, the stigma punctiform. Fruit camara type, brown, relatively smooth, glabrous, the body usually cylindrical or slightly laterally compressed, 7.5 – 10 × 3.8 – 4.5 cm. Seeds c. 3 – 6 per fruit, brown, irregularly circular, c.a. 2.5 × 1.5 cm.
+
+Vouchers
+R.M. Harley, 16752, RB, (BA), Typus
+J.G. Carvalho-Sobrinho, 1930, HVASF, (CE), Typus
+
+Referências
+R.B. Pinto, V.F. Mansano, B.M. Torke & A.M.G.A. Tozzi, Kew Bull., 72/42, 2017. Obra Original
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Nordeste (Bahia, Ceará, Paraíba, Pernambuco)
+Domínios Fitogeográficos 
+Caatinga
+Tipo de Vegetação 
+Caatinga (stricto sensu)
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá-do-cangaço	Nordeste do Brasil	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_cangaceira
+
+Bibliografia Referência
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB604374).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB604374>. Acesso em: 24 jan. 2026
+
+
+
+Hymenaea courbaril L. Ícone WFO lc Link UCSFB22972 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea courbaril L.
+
+Sinônimos Relevantes
+Tem Como Sinônimo
+basiônimo
+Hymenaea courbaril
+L.
+var.
+courbaril
+
+heterotípico
+Hymenaea
+courbaril
+var.
+stilbocarpa
+(Hayne) Y.T. Lee & Langenh.
+
+heterotípico
+Hymenaea
+courbaril
+var.
+subsessilis
+Ducke
+
+heterotípico
+Hymenaea
+courbaril
+var.
+villosa
+Y.T.Lee & Langenh.
+
+heterotípico
+Hymenaea stilbocarpa
+Hayne
+
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura/preto; epicarpo levemente verrucoso(s)/liso(s)/lustrosa(s). Semente: cor castanha escura/preta; número 3 a(s) 7.
+
+Vouchers
+W.A. Archer, 7559, K , (PA)
+Hage, J.L., 21634, K 
+B.M.T. Walter, 2515, CEN , (GO)
+Suffredini, I.B., 143, UNIP, (AM)
+Ícone Herbário Virtual
+image of W.A. Archer 7559 K
+Ícone Herbário Virtual
+image of Hage, J.L. 21634 K
+Ícone Herbário Virtual
+image of B.M.T. Walter 2515 CEN
+
+Origem
+Nativa
+
+Endemismo
+não é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Acre, Amazonas, Amapá, Pará, Rondônia, Roraima, Tocantins)
+Nordeste (Alagoas, Bahia, Ceará, Maranhão, Paraíba, Pernambuco, Piauí, Rio Grande do Norte, Sergipe)
+Centro-Oeste (Distrito Federal, Goiás, Mato Grosso do Sul, Mato Grosso)
+Sudeste (Espírito Santo, Minas Gerais, Rio de Janeiro, São Paulo)
+Sul (Paraná)
+Domínios Fitogeográficos 
+Amazônia, Caatinga, Cerrado, Mata Atlântica, Pantanal
+Tipo de Vegetação 
+Área Antrópica, Cerrado (lato sensu), Floresta Ciliar ou Galeria, Floresta de Terra Firme, Floresta Ombrófila (Floresta Pluvial), Restinga
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá	Acre	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_courbaril
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB22972)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB22972).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB22972>. Acesso em: 24 jan. 2026
+
+
+
+
+Hymenaea eriogyne Benth. Ícone WFO okFB28134 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea eriogyne Benth.
+
+Forma de Vida e Substrato
+Forma de Vida
+Arbusto, Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) coriáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial e adaxial/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral dourado/amarelado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) pubescente(s); ovário(s) totalmente pubescente(s). Fruto: cor amarelado; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Vouchers
+G. Martinelli, 17975, RB , (PI)
+Prata, AP, 1973, ASE, (BA)
+Lúcia Helena Soares e Silva, 974, CEN , (TO)
+Ícone Herbário Virtual
+image of G. Martinelli 17975 RB
+Ícone Herbário Virtual
+image of Lúcia Helena Soares e Silva 974 CEN
+
+Referências
+Lee & Langenheim, Systematics of the Genus Hymenaea L. (Leguminosae, Caesalpinioideae, Detarieae), 69, 1975.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Tocantins)
+Nordeste (Bahia, Ceará, Pernambuco, Piauí, Rio Grande do Norte)
+Centro-Oeste (Goiás)
+Sudeste (Minas Gerais)
+Domínios Fitogeográficos 
+Caatinga, Cerrado
+Tipo de Vegetação 
+Caatinga (stricto sensu), Cerrado (lato sensu)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_eriogyne
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB28134)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB28134).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+ 
+
+
+
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB28134>. Acesso em: 24 jan. 2026
+
+
+Hymenaea erythrocarpa R.B Pinto, Mansano & A.M.G. Azevedo okFB611395 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea erythrocarpa R.B Pinto, Mansano & A.M.G. Azevedo
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) elíptico(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor avermelhado; epicarpo liso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2.
+
+Vouchers
+M. Silva, 982, INPA, (AM)
+B.A. Krukoff, 8632, K , (AM)
+Ícone Herbário Virtual
+image of B.A. Krukoff 8632 K
+
+Referências
+R.B. Pinto, F.J. Kochanoviski, A.M.G.A. Tozzi & V.F. Mansano, Estudios en Leguminosas Colombianas III, 37/77, 2019. Obra Original
+
+Origem
+Nativa
+
+Endemismo
+não é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Amazonas)
+Domínios Fitogeográficos 
+Amazônia
+Tipo de Vegetação 
+Floresta de Terra Firme
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá	Amazonas	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_erythrocarpa
+
+Bibliografia Referência
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB611395).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB611395>. Acesso em: 24 jan. 2026
+
+Hymenaea fariana R.D. Ribeiro, D.B.O.S. Cardoso & H.C. Lima nt Link UCSFB582263 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea fariana R.D. Ribeiro, D.B.O.S. Cardoso & H.C. Lima
+
+Imagens de campo
+Imagem de campo 1
+Publicado por: Rafael Barbosa Pinto
+Autor da Imagem: Domingos Cardoso
+Data de inclusão: 07/03/2024 - 12:09:25
+
+Forma de Vida e Substrato
+Forma de Vida
+Arbusto, Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo fortemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Descrição livre
+PT
+Shrub to small tree 1-10 m (rarely large tree up to 20 m); bark rough, gray to light brown; branchlets 0.5-1 cm thick, glabrous. Petioles terete, basally and apically enlarged, 1-2 cm long, glabrous; petiolules twisted, 2-5 mm long, glabrous; leaflet blades chartaceous, ovate, usually two times longer than wide, 2-6 × 1.5-3 cm, the base obliquely rounded, asymmetric, the apex acuminate, the abaxial surface glabrous, the adaxial surface glabrous, lustrous, venation reticulate, midrib and secondary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with short axes and a corimbiform aspect aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular in cross section, 2-3.5 mm wide, puberulent; bracts early caducous; Pedicels rectangular in cross section, 3-5 × 1.5-1.7 mm, puberulent; bracteoles paired, subopposite, located at the apex of the pedicel, circular, 3.5-4.2 × 3.5-4.2 mm, pubeulent externally and glabrous internally, caducous; hypanthum with a distension on the apex and an elongated base, the distension 4-5 × 4.5-5 mm, the elongation 4.8-6.2 × 1.5-1.8 mm; flower buds light brown, ovate to elliptic, 7-9 × 5.7-7.7 mm, puberulent. Calyx golden greenish, puberulent externally and sericeous internally, the segments 4, subequal, elliptic to ovate, 10-15 × 5-8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, glabrous, caducous, the blade sligthly clawed, elliptic, the claw 3-4 mm long, the blade 13-18 × 3-5 mm. Stamens 10, glabrous, the filaments white to cream, 25-30 mm long, the anthers cream to yellow, oblong, 3-5 × 1-2 mm, glabrous. Gynoecium glabrous; the stipe terete in cross section, 2-3 mm long, the ovary oblong or slightly arcuate-elliptic, 7-8.5 × 2.5-3.5 mm, ovules 5-8, the style terete in cross section, 2-3 cm long, the stigma punctiform. Fruit slightly brown, opaque, usually strongly verrucose, the body oblong, laterally compressed evidencing seed chambers, 5-12 × 4-5 cm. Seeds 3-6 per fruit, brown.
+
+
+Referências
+Ribeiro, R.D., Cardoso, D.B.O.S. & Lima, H.C., Systematic Botany, 40(1): 151-156, 2015. Obra Original
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Nordeste (Sergipe)
+Sudeste (Espírito Santo)
+Domínios Fitogeográficos 
+Mata Atlântica
+Tipo de Vegetação 
+Floresta Ombrófila (Floresta Pluvial), Restinga
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_fariana
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB582263)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB582263).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB582263>. Acesso em: 24 jan. 2026
+
+Hymenaea longifolia (Benth.) I.M.Souza, Funch & L.P.Queiroz lc Link UCSFB132728 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea longifolia (Benth.) I.M.Souza, Funch & L.P.Queiroz
+
+Imagens de campo
+Imagem de campo 1
+Publicado por: Rafael Barbosa Pinto
+Autor da Imagem: Rafael B Pinto
+Data de inclusão: 07/03/2024 - 15:38:29
+
+Sinônimos Relevantes
+Tem Como Sinônimo
+basiônimo
+Hymenaea
+courbaril
+var.
+longifolia
+(Benth.) Y.T.Lee & Andrade-Lima
+
+Hymenaea
+splendida
+var.
+longifolia
+Benth.
+
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial glabra(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/liso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Vouchers
+G. Gardner, 1938, K 
+Blanchet, J.S., 3135, K , Typus
+Ícone Herbário Virtual
+image of G. Gardner 1938 K
+Ícone Herbário Virtual
+image of Blanchet, J.S. 3135 K
+
+Referências
+I.M. Souza, L.S. Funch, L.P. Queiroz, Phytokeys, 38/101-118, 2014.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Tocantins)
+Nordeste (Bahia, Ceará, Maranhão, Pernambuco, Piauí)
+Centro-Oeste (Goiás)
+Domínios Fitogeográficos 
+Caatinga, Cerrado
+Tipo de Vegetação 
+Caatinga (stricto sensu), Cerrado (lato sensu)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_longifolia
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB132728)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB132728).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB132728>. Acesso em: 24 jan. 2026
+
+
+
+
+
+Hymenaea intermedia Ducke Ícone WFO ok Link UCSFB22973 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea intermedia Ducke
+
+Imagens de campo
+Imagem de campo 1
+Publicado por: Rafael Barbosa Pinto
+Autor da Imagem: Rafael B Pinto
+Data de inclusão: 07/03/2024 - 13:17:15
+
+Sinônimos Relevantes
+Tem Como Sinônimo
+basiônimo
+Hymenaea intermedia
+Ducke
+var.
+intermedia
+
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo liso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Descrição livre
+PT
+Tree up to ca. 40 m; bark smooth, or slightly striate, gray; exudate translucid yellowish; branchlets terete in cross section, 0.4-1.0cm thick, glabrescent. Petioles terete, basally and apically enlarged, 0.7-1.8 cm long, tomentose to glabrescent; petiolules twisted, 3.1-5.9 mm long, tomentose to glabrescent. Leaflet blades chartaceous to coriaceous, elliptic to oblong or ovate, two to three times longer than wide, 5.8-12 × 2.9-4.1 cm, the base obliquely rounded, asymmetric, the apex acuminate to cuspidate or rounded, the abaxial surface glabrous to densely tomentose, the adaxial surface glabrous to sparsely hispidulous, the midrib and secondary veins salient abaxially and inconspicuous adaxially. Inflorescences racemose with shortened secondary and tertiary axis, giving a corimbiform aspect, terminal, the flowers spirally arranged on the axis, the axis rectangular, 1.6-2.3 mm wide, tomentose to minutely tomentose; bracts early caducous. Pedicels rectangular to terete in cross section, 2.4-6 × 1.2-1.4 mm, sericeous; bracteoles, early caducous; hypanthium 3-4.1 × 3.3-3.8 mm; flower buds light brown to golden, elliptic to globular, 5.6-8.5 × 4.6-5.6 mm, tomentose. Calyx light brown to golden, densely tomentose abaxially and sericeous adaxially, the segments 4, subequal, elliptic to ovate, 6.9-8.5 × 3.4-6.8 mm. Corolla pentamerous, the petals subequals, white, membranaceous, usually totally glabrous or with few, sparsely hair adaxially, caducous, the blade slightly clawed, elliptic, claw ca. 1 mm long, blade 5.7-6.3 × 1.8-2.2 mm. Stamens 10 glabrous, the filaments white, with glands on the surface, 8.7-11 mm long, the anthers cream to yellow, oblong to elliptic, 2.2-2.8 × 1.2-1.5 mm, glabrous. Gynoecium cream-yellowish, reddish when fecundated, glabrous; the stipe terete in cross section, 2.1-2.5 mm long, glabrous, the ovary arcuate-deltoid, 3.3-4.5 × 2.1-3 mm, glabrous (rarely with few in one side, at the base), ovules ca. 7, the style terete in cross section, ca. 18 mm long, glabrous, the stigma punctiform. Fruits opaque light-brown, usually smooth with small resin pockets, glabrous, arcuate-deltoid, 4.5-6.5 × 3-4 cm. Seeds ca. 1-3 per fruit.
+
+
+Vouchers
+M. Pacheco, 210, NY  , (AM)
+A. A. de Oliveira, 104, NY , (AM)
+A. P. da Silva, s.n., NY , (AM)
+E. Palheta, s.n., NY , (AM)
+Oliveira, A.A., 104, UNIP, (AM)
+Ícone Herbário Virtual
+image of M. Pacheco 210 NY
+Ícone Herbário Virtual
+image of M. Pacheco 210 NY
+Ícone Herbário Virtual
+image of A. A. de Oliveira 104 NY
+Ver mais imagens
+
+Origem
+Nativa
+
+Endemismo
+não é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Acre, Amazonas, Amapá, Pará, Rondônia, Roraima, Tocantins)
+Centro-Oeste (Mato Grosso)
+Domínios Fitogeográficos 
+Amazônia
+Tipo de Vegetação 
+Floresta de Igapó, Floresta de Terra Firme, Floresta Ombrófila (Floresta Pluvial)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_intermedia
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB22973)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB22973).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB22973>. Acesso em: 24 jan. 2026
+
+
+
+Hymenaea jeaniana R.B. Pinto, Mansano & A.M.G. Azevedo okFB611394 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea jeaniana R.B. Pinto, Mansano & A.M.G. Azevedo
+
+Imagens de campo
+Imagem de campo 1
+Publicado por: Rafael Barbosa Pinto
+Autor da Imagem: Rafael B Pinto
+Data de inclusão: 07/03/2024 - 13:32:03
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s)/totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/liso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2.
+
+Vouchers
+J.R. Nascimento, 660, RB, (AM), Typus
+
+Referências
+R.B. Pinto, M.J. da Silva, A.M.G.A. Tozzi & V.F. Mansano, Systematic Botany, 45/85, 2020. Obra Original
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Amazonas)
+Domínios Fitogeográficos 
+Amazônia
+Tipo de Vegetação 
+Floresta de Terra Firme
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jatobá	Amazonas	Português
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_jeaniana
+
+Bibliografia Referência
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB611394).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB611394>. Acesso em: 24 jan. 2026
+
+
+
+Hymenaea longifolia (Benth.) I.M.Souza, Funch & L.P.Queiroz lc Link UCSFB132728 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea longifolia (Benth.) I.M.Souza, Funch & L.P.Queiroz
+
+Imagens de campo
+Imagem de campo 1
+Publicado por: Rafael Barbosa Pinto
+Autor da Imagem: Rafael B Pinto
+Data de inclusão: 07/03/2024 - 15:38:29
+
+Sinônimos Relevantes
+Tem Como Sinônimo
+basiônimo
+Hymenaea
+courbaril
+var.
+longifolia
+(Benth.) Y.T.Lee & Andrade-Lima
+
+Hymenaea
+splendida
+var.
+longifolia
+Benth.
+
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/glabro(s) ou glabrescente(s); venação inconspícua(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial glabra(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) glabro(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/liso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Vouchers
+G. Gardner, 1938, K 
+Blanchet, J.S., 3135, K , Typus
+Ícone Herbário Virtual
+image of G. Gardner 1938 K
+Ícone Herbário Virtual
+image of Blanchet, J.S. 3135 K
+
+Referências
+I.M. Souza, L.S. Funch, L.P. Queiroz, Phytokeys, 38/101-118, 2014.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Tocantins)
+Nordeste (Bahia, Ceará, Maranhão, Pernambuco, Piauí)
+Centro-Oeste (Goiás)
+Domínios Fitogeográficos 
+Caatinga, Cerrado
+Tipo de Vegetação 
+Caatinga (stricto sensu), Cerrado (lato sensu)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_longifolia
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB132728)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB132728).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB132728>. Acesso em: 24 jan. 2026
+
+
+Hymenaea maranhensis Lee & Lang. lcFB83202 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea maranhensis Lee & Lang.
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca fissurada(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) ovado(s); superfície(s) do folíolo(s) opaco(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral amarelado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) parcialmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Vouchers
+A.M. Carvalho, 2087, RB
+George Eiten, 10460, RB , (MA), Typus
+Ícone Herbário Virtual
+image of George Eiten 10460 RB
+
+Referências
+Lee & Langenheim, Systematics of the Genus Hymenaea L. (Leguminosae, Caesalpinioideae, Detarieae), 69, 1975.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Tocantins)
+Nordeste (Maranhão)
+Domínios Fitogeográficos 
+Cerrado
+Tipo de Vegetação 
+Cerrado (lato sensu)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_maranhensis
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB83202)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB83202).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB83202>. Acesso em: 24 jan. 2026
+
+
+Hymenaea martiana Hayne lcFB83203 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea martiana Hayne
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/membranáceo(s); forma do folíolo(s) largamente elíptico(s)/ovado(s); superfície(s) do folíolo(s) opaco(s)/pubescente(s) na(s) face(s) abaxial e adaxial/pubescente(s) na(s) face(s) abaxial; venação inconspícua(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo cimeira(s) dicasial ou corimbiforme(s). Flor: botão-floral acinzentado/cor castanha; posição das sépala(s) não reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) pubescente(s); ovário(s) parcialmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/lustrosa(s). Semente: cor castanha escura; número 3 a(s) 7.
+
+Vouchers
+W.J. Burchell, 5720, K 
+M.L.S. Guedes, 23578, ALCB, (BA)
+Glocimar Pereira-Silva, 11943, CEN , (TO)
+Ícone Herbário Virtual
+image of W.J. Burchell 5720 K
+Ícone Herbário Virtual
+image of Glocimar Pereira-Silva 11943 CEN
+
+Referências
+Lee & Langenheim, Systematics of the Genus Hymenaea L. (Leguminosae, Caesalpinioideae, Detarieae), 69, 1975.
+
+Origem
+Nativa
+
+Endemismo
+não é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Tocantins)
+Nordeste (Alagoas, Bahia, Ceará, Maranhão, Paraíba, Pernambuco, Piauí)
+Centro-Oeste (Distrito Federal, Goiás, Mato Grosso do Sul, Mato Grosso)
+Sudeste (Minas Gerais, São Paulo)
+Domínios Fitogeográficos 
+Caatinga, Cerrado, Mata Atlântica
+Tipo de Vegetação 
+Área Antrópica, Caatinga (stricto sensu), Cerrado (lato sensu), Floresta Ombrófila (Floresta Pluvial)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_martiana
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB83203)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB83203).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Arzneigew. 11: t. 15.
+
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB83203>. Acesso em: 24 jan. 2026
+
+
+
+Hymenaea oblongifolia Huber Ícone WFO lc Link UCSFB22974 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea oblongifolia Huber
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição com campos controlados
+Caule: casca em escama(s). Folha: consistência do folíolo(s) cartáceo(s)/coriáceo(s); forma do folíolo(s) elíptico(s)/oblongo(s); superfície(s) do folíolo(s) lustroso(s)/pubescente(s) na(s) face(s) abaxial/glabro(s) ou glabrescente(s); venação conspícuo(s) na(s) face(s) abaxial/não depressa(s) na(s) face(s) adaxial. Inflorescência: tipo racemo(s). Flor: botão-floral amarelado/cor castanha; posição das sépala(s) reflexa(s); superfície(s) das sépala(s) face(s) adaxial pubescente(s); cor das pétala(s) branca; superfície(s) das pétala(s) glabra(s); ovário(s) totalmente pubescente(s). Fruto: cor cor castanha escura; epicarpo levemente verrucoso(s)/opaco(s). Semente: cor castanha escura; número 1 ou 2.
+
+Origem
+Nativa
+
+Endemismo
+é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Acre, Amazonas, Amapá, Pará, Rondônia)
+Nordeste (Bahia, Pernambuco)
+Domínios Fitogeográficos 
+Amazônia, Mata Atlântica
+Tipo de Vegetação 
+Floresta de Igapó, Floresta de Terra Firme, Floresta de Várzea, Floresta Ombrófila (Floresta Pluvial)
+
+
+Link para este táxon
+http://servicos.jbrj.gov.br/flora/search/Hymenaea_oblongifolia
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB22974)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB22974).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB22974>. Acesso em: 24 jan. 2026
+
+
+Hymenaea oblongifolia Huber var. oblongifolia Ícone WFO ok Link UCSFB22975 
+Nome aceito, Nome correto
+
+Hierarquia Taxonômica
+Flora e Funga →Angiospermas → Fabaceae Lindl. →  Hymenaea L. →  Hymenaea oblongifolia Huber →  Hymenaea oblongifolia Huber var. oblongifolia
+
+Forma de Vida e Substrato
+Forma de Vida
+Árvore
+Substrato
+Terrícola
+
+Descrição livre
+PT
+Diferencia-se das demais variedades por possuir folíolos totalmente glabros ou esparsamente pubescente na face abaxial.
+
+Vouchers
+A. Ducke, s.n., MG 9037
+Pires, JM, 5520, IAN , (PA)
+Ícone Herbário Virtual
+image of Pires, JM 5520 IAN
+
+Referências
+Lee & Langenheim, Systematics of the Genus Hymenaea L. (Leguminosae, Caesalpinioideae, Detarieae), 69, 1975.
+
+Origem
+Nativa
+
+Endemismo
+não é endêmica do Brasil
+
+Distribuição
+Distribuição Geográfica
+Ocorrências confirmadas:
+
+Norte (Acre, Amazonas, Pará, Rondônia)
+Domínios Fitogeográficos 
+Amazônia
+Tipo de Vegetação 
+Floresta de Terra Firme, Floresta de Várzea
+
+
+Nomes Vernáculos
+Nome	Região	Língua
+jutaí	Acre	Português
+
+Bibliografia Referência
+Lima, H.C. de,Pinto, R.B. 2015. Hymenaea in Lista de Espécies da Flora do Brasil. Jardim Botânico do Rio de Janeiro. (http://floradobrasil2015.jbrj.gov.br/FB22975)
+
+Pinto, R.B., Tozzi, A.M.G.A., Mansano, V.F. 2020. Hymenaea in Flora do Brasil 2020. Jardim Botânico do Rio de Janeiro. (https://floradobrasil2020.jbrj.gov.br/FB22975).
+
+BFG. Growing knowledge: an overview of Seed Plant diversity in Brazil. Rodriguésia, v.66, n.4, p.1085-1113. 2015. (https://doi.org/10.1590/2175-7860201566411).
+
+BFG. Brazilian Flora 2020: Innovation and collaboration to meet Target 1 of the Global Strategy for Plant Conservation (GSPC). Rodriguésia, v.69, n.4, p.1513-1527. 2018. (https://doi.org/10.1590/2175-7860201869402).
+
+BFG. Brazilian Flora 2020: Leveraging the power of a collaborative scientific network. Taxon. 2021. (https://doi.org/10.1002/tax.12640).
+
+Citação
+Hymenaea in Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Disponível em: <https://floradobrasil.jbrj.gov.br/FB22975>. Acesso em: 24 jan. 2026
+
+
+
+
+1. Individual inflorescences racemose, paniculate, with long secondary and tertiary axes
+
+2. Flower buds up to 8.5 × 6.5 mm, covered in pale trichomes; ovary with trichomes; fruits globose (smooth or entirely verrucose), 1–3 seeded; rain forest species
+
+3. Leaflet blades coriaceous to chartaceous, margin not revolute, oblong to long-elliptic, mostly three times longer than wide, 10–19 × 3–7 cm, abaxial surface glabrous or covered in golden trichomes; petals glabrous...................................................................................................H. oblongifolia
+
+3. Leaflet blades chartaceous, elliptic with a revolute margin, approximately two times longer than wide, 5.5–9 × 2.5–5 cm, abaxial surface always glabrous; petals internally sericeous ..............................................................................................................................................................H. parvifolia
+
+2. Flower buds 9–14 × 6.5–8 mm, covered by dark golden-brownish trichomes; ovary glabrous; fruits oblong with an evident transversal ridge on its surface, 5–8-seeded; from Cerrado and Caatinga (dry environments)..................................................................................................................... H. velutina
+
+1. Individual inflorescences racemose, corymbiform, with short secondary and tertiary axes
+
+4. Plants from Amazonian forest
+
+5. Leaflets discolorous when dry, fruits with a smooth epicarp
+
+6. Leaflets with venation strongly reticulate with tertiary and quaternary veins conspicuous; fruits oblong, ca. 11 × 5.5 cm, dark brown; seeds 4–5 per fruit.............................................. .......................................................................................................................................................H. reticulata
+
+6. Leaflets with venation with tertiary and quaternary veins inconspicuous, not reticulate; fruits obovate to deltoid, 4–5.5 × 3–4.5 cm, light-brown to reddish (brick colored); seeds 1–2(–3) per fruit .............................................................................................................. ................H. erythrocarpa
+
+5. Leaflets concolorous when dry, venation with tertiary and quaternary veins inconspicuous
+
+7. Leaflets usually with an acute to acuminate apex; ovary arcuate-elliptic; fruits oblong, shiny brown, ca. 13–15 × 5–6 cm, 5–7-seeded ................................................................................................................................................................................................................... H. courbaril
+
+7. Leaflets usually with a rounded apex; ovary arcuate-deltoid/oblong; fruits deltoid or ovoid to ellipsoid, opaque light brown, up to 7.5 × 4.5 cm, 1–3-seeded
+
+8. Leaflets abaxially glabrous to densely tomentose; ovary and fruits arcuate-deltoid; fruit arcuate-deltoid................................................................................................................................................................................................. H. intermedia
+
+8. Leaflets always glabrous adaxially; ovary arcuate-oblong; fruit ovoid to ellipsoid...................................................................... H. jeaniana
+
+ 4. Plants not from Amazonian forest
+
+9. Shrubs or small trees up to 5 m
+
+10. Petals conspicuously unguiculate (claw up to 9 mm long); ovary totally or partially covered by golden coloured trichomes; from Cerrado and Caatinga
+
+11. Ovary totally covered by golden trichomes.................................................................................................................................... H. eriogyne
+
+11. Ovary partially covered by golden trichomes (at its base and along the margin) H. maranhensis
+
+10. Petals not unguiculate or claw poorly developed (up to 4 mm long); ovary glabrous; from Brazilian coastal environments and the Bolivian Chaco
+
+
+
+12. Petals elliptic; ovary with less than 8 or more than 14 ovules; seed chambers evident in mature fruit; from Brazilian coastal Restinga
+
+13. Leaflets chartaceous, always glabrous, margin never revolute; petals white; ovary with 5–8 ovules.................................................................................................................................................................................................. H. fariana
+
+13. Leaflets coriaceous (rarely chartaceous), sometimes covered by trichomes abaxially, margin strongly revolute; petals red (rarely white); ovary with 14–18 ovules.............................................................................................................................................................. H. rubriflora
+
+9. Trees up to 40 m
+
+14. Leaflets covered by hairs abaxially
+
+15. Bark peeling-off, particularly near the branch apices; leaflets ovate, obovate or rotundiform, 8–20 × 4–10.5 cm; flower buds 17–29 × 10–14 mm............................................................................................................................................................................................. H. stigonocarpa
+
+15. Bark relatively smooth; leaflets oblong or elliptic, 5–11 × 2–5 cm; flower buds up to 15 × 8 cm
+
+16. Leaflets coriaceous, margin slightly revolute; petals unguiculate; fruits light brown, laterally compressed with the seed chambers slightly evident; from Atlantic Forest…………. ..........................................................................................................................................H. aurea
+
+16. Leaflets chartaceous (rarely subcoriaceous), margin not revolute; petals sessile; fruits brown to dark brown; cylindrical with the seed chambers not evident; from Cerrado.......................................................................................................................................... H. martiana
+
+14. Leaflets glabrous
+
+17. Leaflets ovate to broadly elliptic
+
+18. Leaflets 5–7 × 2.5–4 cm; flower buds 8–10 × 7.5–9.5 mm; petals slightly clawed (claw 2 mm long); fruits 7.5–10 × 3.5–4.5 cm ..................................................................................................................................................................................................... H. cangaceira
+
+18. Leaflets 8–20 × 4–10.5 cm; flower buds 17–29 × 10–14 mm; petals sessile; fruits 10–17 × 4–7 cm............................................................................................................................................................................................. H. stigonocarpa
+
+17. Leaflets lanceolate or oblong to long-elliptic
+
+19. Leaflets oblong to long-elliptic, apex rounded; fruits distended towards the apex, slightly truncate at the apex.............................................................................................................................................................................................. H. longifolia
+
+19. Leaflets falcate, apex acuminate to cuspidate; fruits not distended towards the apex, rounded at the apex
+
+20. Flower buds 6–6.5 × 6–6.5 mm; fruits brown, opaque, verrucose, laterally compressed, but with seed chambers evident .................................................................................................................................................................................................... H. altissima
+
+20. Flower buds 7.5–11 × 6–8.5 mm; fruits shiny, brown, relatively smooth, cylindrical, seed chambers not evident...................................................................................................................................................................................... H. courbaril
